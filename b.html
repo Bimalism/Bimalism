@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="33MVfLbupQdh7gMotWJ0SIXwX93Su6FDIqm04Y64qtg" />
+    <meta name="description" content="Bimalism - Premier NEET and JEE coaching institute with expert faculty, comprehensive study materials, and proven results.">
+    <meta name="keywords" content="Bimalism, NEET coaching, JEE coaching, medical entrance, engineering entrance, NEET preparation, JEE preparation">
+    <meta name="author" content="Bimalism Education">
+    <title>Bimalism - NEET & JEE Coaching</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --accent: #ec4899;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --neet: #3b82f6;
+            --jee: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f9fafb;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #be185d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-neet {
+            background-color: var(--neet);
+        }
+        
+        .btn-neet:hover {
+            background-color: #2563eb;
+        }
+        
+        .btn-jee {
+            background-color: var(--jee);
+        }
+        
+        .btn-jee:hover {
+            background-color: #dc2626;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><rect fill="%232563eb" width="800" height="400"/><path fill="%233b82f6" fill-opacity="0.2" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Exam Sections */
+        .exams {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .exam-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .exam-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .exam-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .neet-header {
+            background: linear-gradient(135deg, var(--neet), #1d4ed8);
+        }
+        
+        .jee-header {
+            background: linear-gradient(135deg, var(--jee), #b91c1c);
+        }
+        
+        .exam-body {
+            padding: 2rem;
+        }
+        
+        .exam-body ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .exam-body ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .exam-body ul li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+        
+        .exam-advantages {
+            margin: 1.5rem 0;
+        }
+        
+        /* Results Section */
+        .results {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--light);
+        }
+        
+        .result-card i {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .result-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #374151;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid,
+            .testimonial-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exam-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeIn 1s ease-out;
+            animation-play-state: paused;
+        }
+
+        /* === SUPREME SNOW EFFECT === */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .snowflakes.active {
+            opacity: 1;
+        }
+
+        .snowflake {
+            color: #fff;
+            font-size: 1.5em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            position: absolute;
+            top: -10px;
+            animation: fall linear infinite;
+            user-select: none;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+            font-weight: bold;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Individual snowflake variations */
+        .snowflake:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; font-size: 1.8em; }
+        .snowflake:nth-child(2) { left: 15%; animation-duration: 10s; animation-delay: 1s; font-size: 1.2em; }
+        .snowflake:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; font-size: 2em; }
+        .snowflake:nth-child(4) { left: 35%; animation-duration: 9s; animation-delay: 0.5s; font-size: 1.5em; }
+        .snowflake:nth-child(5) { left: 45%; animation-duration: 11s; animation-delay: 1.5s; font-size: 1.7em; }
+        .snowflake:nth-child(6) { left: 55%; animation-duration: 8s; animation-delay: 3s; font-size: 1.3em; }
+        .snowflake:nth-child(7) { left: 65%; animation-duration: 10s; animation-delay: 2.5s; font-size: 1.9em; }
+        .snowflake:nth-child(8) { left: 75%; animation-duration: 7s; animation-delay: 1s; font-size: 1.6em; }
+        .snowflake:nth-child(9) { left: 85%; animation-duration: 9s; animation-delay: 0s; font-size: 1.8em; }
+        .snowflake:nth-child(10) { left: 95%; animation-duration: 12s; animation-delay: 2s; font-size: 1.4em; }
+        .snowflake:nth-child(11) { left: 10%; animation-duration: 9s; animation-delay: 1.8s; font-size: 1.7em; }
+        .snowflake:nth-child(12) { left: 20%; animation-duration: 10s; animation-delay: 0.7s; font-size: 1.3em; }
+        .snowflake:nth-child(13) { left: 30%; animation-duration: 8s; animation-delay: 2.2s; font-size: 2.1em; }
+        .snowflake:nth-child(14) { left: 40%; animation-duration: 11s; animation-delay: 1.3s; font-size: 1.5em; }
+        .snowflake:nth-child(15) { left: 50%; animation-duration: 7s; animation-delay: 0.9s; font-size: 1.8em; }
+        .snowflake:nth-child(16) { left: 60%; animation-duration: 9s; animation-delay: 2.8s; font-size: 1.6em; }
+        .snowflake:nth-child(17) { left: 70%; animation-duration: 10s; animation-delay: 1.2s; font-size: 1.9em; }
+        .snowflake:nth-child(18) { left: 80%; animation-duration: 8s; animation-delay: 0.3s; font-size: 1.4em; }
+        .snowflake:nth-child(19) { left: 90%; animation-duration: 12s; animation-delay: 2.5s; font-size: 1.7em; }
+        .snowflake:nth-child(20) { left: 3%; animation-duration: 9s; animation-delay: 1.5s; font-size: 1.6em; }
+
+        /* === MERRY CHRISTMAS MESSAGE === */
+        .christmas-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10000;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .christmas-message.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .merry-christmas {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #e53e3e;
+            text-shadow: 
+                0 0 10px #fff,
+                0 0 20px #ff0000,
+                0 0 30px #ff0000,
+                0 0 40px #ff0000;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .to-all {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #38a169;
+            text-shadow: 
+                0 0 10px #fff,
+                0 0 20px #38a169,
+                0 0 30px #38a169;
+            animation: glow-green 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    0 0 10px #fff,
+                    0 0 20px #ff0000,
+                    0 0 30px #ff0000,
+                    0 0 40px #ff0000;
+            }
+            to {
+                text-shadow: 
+                    0 0 20px #fff,
+                    0 0 30px #ff6b6b,
+                    0 0 40px #ff6b6b,
+                    0 0 50px #ff6b6b,
+                    0 0 60px #ff6b6b;
+            }
+        }
+
+        @keyframes glow-green {
+            from {
+                text-shadow: 
+                    0 0 10px #fff,
+                    0 0 20px #38a169,
+                    0 0 30px #38a169;
+            }
+            to {
+                text-shadow: 
+                    0 0 20px #fff,
+                    0 0 30px #68d391,
+                    0 0 40px #68d391,
+                    0 0 50px #68d391;
+            }
+        }
+
+        /* Christmas decorations */
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .decoration:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .decoration:nth-child(2) { top: 15%; right: 15%; animation-delay: 0.5s; }
+        .decoration:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 1s; }
+        .decoration:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Snowflakes (Hidden by default) -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <!-- Christmas Message (Hidden by default) -->
+    <div class="christmas-message">
+        <div class="decoration">🎄</div>
+        <div class="decoration">🎁</div>
+        <div class="decoration">⭐</div>
+        <div class="decoration">🔔</div>
+        <div class="merry-christmas">Merry Christmas</div>
+        <div class="to-all">Not To You!</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Bimalism</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="d.html">Bio data</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="d.html">NEET</a></li>
+                    <li><a href="d.html">JEE</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact" class="btn">Contact Us</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bimalism NEET & JEE Coaching</h1>
+            <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
+            <div class="hero-buttons">
+                <a href="d.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
+                <a href="d.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
+                <a href="d.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
+                <a href="d.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
+                <a href="d.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Bimalism?</h2>
+                <p>Our proven methodology and expert faculty have helped thousands of students achieve their dreams</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animated">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Expert Faculty</h3>
+                    <p>Learn from experienced educators with a track record of success in NEET and JEE.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-book"></i>
+                    <h3>Comprehensive Study Material</h3>
+                    <p>Curated content designed to cover all topics with practice questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exam Sections -->
+    <section class="exams" id="exams">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Programs</h2>
+                <p>Specialized coaching programs designed for maximum effectiveness</p>
+            </div>
+            <div class="exam-container">
+                <div class="exam-card">
+                    <div class="exam-header neet-header">
+                        <h3>NEET Coaching</h3>
+                        <p>National Eligibility cum Entrance Test</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>Comprehensive program for medical aspirants targeting top medical colleges</p>
+                        <div class="exam-advantages">
+                            <h4>Key Advantages:</h4>
+                            <ul>
+                                <li>Biology-focused curriculum with NCERT alignment</li>
+                                <li>Expert faculty from medical background</li>
+                                <li>Regular mock tests based on latest pattern</li>
+                                <li>Dedicated doubt clearing sessions</li>
+                                <li>Previous year question analysis</li>
+                            </ul>
+                        </div>
+                        <a href="d.html" class="btn btn-neet">Explore NEET Program</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-header jee-header">
+                        <h3>JEE Coaching</h3>
+                        <p>Joint Entrance Examination</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>Rigorous training program for engineering aspirants targeting IITs and NITs</p>
+                        <div class="exam-advantages">
+                            <h4>Key Advantages:</h4>
+                            <ul>
+                                <li>Focus on Physics, Chemistry & Mathematics</li>
+                                <li>IIT alumni faculty with proven track record</li>
+                                <li>Problem-solving techniques and shortcuts</li>
+                                <li>Chapter-wise practice problems</li>
+                                <li>Full-length mock test series</li>
+                            </ul>
+                        </div>
+                        <a href="d.html" class="btn btn-jee">Explore JEE Program</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Results</h2>
+                <p>Consistent excellence year after year</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card animated">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="number">2500+</div>
+                    <p>Selections in NEET</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-medal"></i>
+                    <div class="number">1200+</div>
+                    <p>Selections in JEE</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-award"></i>
+                    <div class="number">98%</div>
+                    <p>Success Rate</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-star"></i>
+                    <div class="number">150+</div>
+                    <p>Top 100 Rankers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Success Stories</h2>
+                <p>Hear from our students who achieved their dream ranks</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "Bimalism's NEET program helped me secure AIR 124. Their study material and test series were exactly what I needed to crack the exam."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PA</div>
+                        <div>
+                            <h4>Priya Agarwal</h4>
+                            <p>NEET AIR 124</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "The JEE coaching at Bimalism transformed my preparation. The faculty's approach to problem solving helped me secure a seat at IIT Bombay."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div>
+                            <h4>Rahul Sharma</h4>
+                            <p>IIT Bombay</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "The regular tests and detailed performance analysis helped me identify my weak areas and improve my score significantly."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div>
+                            <h4>Anjali Singh</h4>
+                            <p>NEET AIR 89</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Begin Your Journey to Success</h2>
+            <p>Join thousands of students who have achieved their dreams with Bimalism</p>
+            <div class="hero-buttons">
+                <a href="d.html" class="btn btn-neet">Start NEET Preparation</a>
+                <a href="d.html" class="btn btn-jee">Start JEE Preparation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Bimalism Education</h3>
+                    <p>Premier coaching institute for NEET and JEE preparations with a proven track record of success.</p>
+                    <div class="social-links">
+                        <a href="d.html"><i class="fab fa-facebook-f"></i></a>
+                        <a href="d.html"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#exams">Programs</a></li>
+                        <li><a href="#results">Results</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> Contact us at bimalism01@gmail.com</li>
+                        <li>Created by Aalif and Dharunesh of Achariya 9th</li>
+                        <li>Inspired by our class teacher Mr. Kagesararao Sir</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Bimalism Education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Add animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // === SUPREME SNOW EFFECT: Every 20 seconds for 3 seconds ===
+        function triggerSnow() {
+            const snowflakes = document.querySelector('.snowflakes');
+            const christmasMessage = document.querySelector('.christmas-message');
+            
+            if (snowflakes && christmasMessage) {
+                // Activate snow and message
+                snowflakes.classList.add('active');
+                christmasMessage.classList.add('active');
+
+                // Deactivate after 3 seconds
+                setTimeout(() => {
+                    snowflakes.classList.remove('active');
+                    christmasMessage.classList.remove('active');
+                }, 3000); // Lasts 3 seconds
+            }
+        }
+
+        // Run every 20 seconds
+        setInterval(triggerSnow, 20000);
+
+        // Start after 2 seconds on page load
+        setTimeout(triggerSnow, 2000);
+    </script>
+</body>
+</html>
