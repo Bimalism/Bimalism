@@ -12,14 +12,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #4f46e5;
-            --accent: #ec4899;
-            --light: #f3f4f6;
-            --dark: #1f2937;
-            --success: #10b981;
-            --neet: #3b82f6;
-            --jee: #ef4444;
+            --primary: #8B4513;
+            --secondary: #D2691E;
+            --accent: #FF8C00;
+            --light: #2F1B1B;
+            --dark: #1A0F0F;
+            --success: #32CD32;
+            --neet: #8B4513;
+            --jee: #D2691E;
+            --halloween-orange: #FF8C00;
+            --halloween-purple: #8A2BE2;
+            --spooky-green: #228B22;
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
         }
         
         * {
@@ -30,9 +35,14 @@
         }
         
         body {
-            background-color: #f9fafb;
-            color: var(--dark);
+            background-color: #1A0F0F;
+            color: var(--text-light);
             line-height: 1.6;
+            background-image: 
+                linear-gradient(rgba(26, 15, 15, 0.9), rgba(26, 15, 15, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23228B22" opacity="0.05" d="M30,10 C40,0 60,0 70,10 C80,20 80,40 70,50 C60,60 40,60 30,50 C20,40 20,20 30,10 Z M25,25 C15,25 5,35 5,45 C-5,55 -5,75 5,85 C15,95 35,95 45,85 C55,75 55,55 45,45 C45,35 35,25 25,25 Z M65,25 C75,25 85,35 85,45 C95,55 95,75 85,85 C75,95 55,95 45,85 C35,75 35,55 45,45 C45,35 55,25 65,25 Z"/></svg>');
+            position: relative;
+            overflow-x: hidden;
         }
         
         .container {
@@ -40,6 +50,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
         
         /* Header Styles */
@@ -50,7 +62,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--halloween-orange);
         }
         
         nav {
@@ -68,7 +81,7 @@
         
         .logo i {
             margin-right: 10px;
-            color: #ffd700;
+            color: var(--halloween-orange);
         }
         
         .nav-links {
@@ -84,11 +97,28 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--halloween-orange);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
         
         .nav-links a:hover {
-            color: #ffd700;
+            color: var(--halloween-orange);
         }
         
         .btn {
@@ -102,12 +132,13 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         
         .btn:hover {
-            background-color: #be185d;
+            background-color: #e67e00;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
         
         .btn-neet {
@@ -115,7 +146,7 @@
         }
         
         .btn-neet:hover {
-            background-color: #2563eb;
+            background-color: #A0522D;
         }
         
         .btn-jee {
@@ -123,27 +154,46 @@
         }
         
         .btn-jee:hover {
-            background-color: #dc2626;
+            background-color: #CD853F;
         }
         
         /* Hero Section */
         .hero {
             padding: 5rem 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><rect fill="%232563eb" width="800" height="400"/><path fill="%233b82f6" fill-opacity="0.2" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.9));
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><path fill="%23FF8C00" fill-opacity="0.1" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') bottom/cover no-repeat;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
         }
         
         .hero p {
             font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
         
         .hero-buttons {
@@ -157,7 +207,8 @@
         /* Features Section */
         .features {
             padding: 5rem 0;
-            background-color: white;
+            background-color: var(--light);
+            position: relative;
         }
         
         .section-title {
@@ -167,12 +218,12 @@
         
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: var(--halloween-orange);
             margin-bottom: 1rem;
         }
         
         .section-title p {
-            color: var(--dark);
+            color: var(--text-light);
             max-width: 700px;
             margin: 0 auto;
         }
@@ -184,34 +235,37 @@
         }
         
         .feature-card {
-            background-color: var(--light);
+            background-color: rgba(47, 27, 27, 0.8);
             border-radius: 10px;
             padding: 2rem;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
         }
         
         .feature-card i {
             font-size: 3rem;
-            color: var(--primary);
+            color: var(--halloween-orange);
             margin-bottom: 1.5rem;
         }
         
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--dark);
+            color: var(--text-light);
         }
         
         /* Exam Sections */
         .exams {
             padding: 5rem 0;
-            background-color: var(--light);
+            background-color: var(--dark);
+            position: relative;
         }
         
         .exam-container {
@@ -224,10 +278,16 @@
         .exam-card {
             flex: 1;
             min-width: 300px;
-            background: white;
+            background: rgba(47, 27, 27, 0.8);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--halloween-orange);
+            transition: transform 0.3s;
+        }
+        
+        .exam-card:hover {
+            transform: translateY(-5px);
         }
         
         .exam-header {
@@ -237,11 +297,11 @@
         }
         
         .neet-header {
-            background: linear-gradient(135deg, var(--neet), #1d4ed8);
+            background: linear-gradient(135deg, var(--neet), var(--halloween-orange));
         }
         
         .jee-header {
-            background: linear-gradient(135deg, var(--jee), #b91c1c);
+            background: linear-gradient(135deg, var(--jee), var(--halloween-purple));
         }
         
         .exam-body {
@@ -264,6 +324,7 @@
             color: var(--success);
             position: absolute;
             left: 0;
+            font-weight: bold;
         }
         
         .exam-advantages {
@@ -273,7 +334,8 @@
         /* Results Section */
         .results {
             padding: 5rem 0;
-            background-color: white;
+            background-color: var(--light);
+            position: relative;
         }
         
         .results-grid {
@@ -287,7 +349,14 @@
             text-align: center;
             padding: 2rem;
             border-radius: 10px;
-            background-color: var(--light);
+            background-color: rgba(47, 27, 27, 0.8);
+            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
         }
         
         .result-card i {
@@ -299,14 +368,15 @@
         .result-card .number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--halloween-orange);
             margin: 1rem 0;
         }
         
         /* Testimonials */
         .testimonials {
             padding: 5rem 0;
-            background-color: var(--light);
+            background-color: var(--dark);
+            position: relative;
         }
         
         .testimonial-grid {
@@ -316,15 +386,24 @@
         }
         
         .testimonial-card {
-            background-color: white;
+            background-color: rgba(47, 27, 27, 0.8);
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--halloween-orange);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
         }
         
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
         
         .testimonial-author {
@@ -336,7 +415,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--halloween-orange), var(--halloween-purple));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -351,6 +430,8 @@
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .cta h2 {
@@ -369,6 +450,7 @@
             background-color: var(--dark);
             color: white;
             padding: 3rem 0 1rem;
+            border-top: 2px solid var(--halloween-orange);
         }
         
         .footer-content {
@@ -383,6 +465,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
+            color: var(--halloween-orange);
         }
         
         .footer-column h3::after {
@@ -392,7 +475,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--accent);
+            background-color: var(--halloween-orange);
         }
         
         .footer-column ul {
@@ -404,13 +487,13 @@
         }
         
         .footer-column a {
-            color: #d1d5db;
+            color: var(--text-muted);
             text-decoration: none;
             transition: color 0.3s;
         }
         
         .footer-column a:hover {
-            color: white;
+            color: var(--halloween-orange);
         }
         
         .social-links {
@@ -431,14 +514,14 @@
         }
         
         .social-links a:hover {
-            background-color: var(--accent);
+            background-color: var(--halloween-orange);
         }
         
         .copyright {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid #374151;
-            color: #9ca3af;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
         
@@ -463,7 +546,7 @@
                 width: 100%;
                 background: linear-gradient(135deg, var(--primary), var(--secondary));
                 padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
             }
             
             .nav-links.active {
@@ -518,6 +601,24 @@
         .animated {
             animation: fadeIn 1s ease-out;
         }
+        
+        /* Halloween theme elements */
+        .halloween-theme {
+            position: relative;
+        }
+        
+        .halloween-theme::before {
+            content: "🎃";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .spooky-text {
+            color: var(--halloween-orange);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -525,7 +626,7 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
+                <div class="logo halloween-theme">
                     <i class="fas fa-graduation-cap"></i>
                     <span>Bimalism</span>
                 </div>
@@ -548,15 +649,17 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Bimalism NEET & JEE Coaching</h1>
-            <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
-            <div class="hero-buttons">
-                <a href="neet.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
-                <a href="jee.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
-                <a href="settings.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
-                <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
-                <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
-                <a href="calculator.html" class="btn btn-jee">Calculator <i class="fas fa-file-alt"></i></a>
+            <div class="hero-content">
+                <h1>Bimalism <span class="spooky-text">NEET & JEE</span> Coaching</h1>
+                <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
+                <div class="hero-buttons">
+                    <a href="neet.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
+                    <a href="jee.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
+                    <a href="settings.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
+                    <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
+                    <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
+                    <a href="calculator.html" class="btn btn-jee">Calculator <i class="fas fa-file-alt"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -565,11 +668,10 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose Bimalism?</h2>
+                <h2>Why Choose <span class="spooky-text">Bimalism</span>?</h2>
                 <p>Our proven methodology and expert faculty have helped thousands of students achieve their dreams</p>
             </div>
             <div class="features-grid">
-                 <div class="features-grid">
                 <div class="feature-card animated">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <h3>Expert Faculty</h3>
@@ -579,7 +681,7 @@
                     <i class="fas fa-book"></i>
                     <h3>Comprehensive Study Material</h3>
                     <p>Curated content designed to cover all topics with practice questions.</p>
-                </div
+                </div>
             </div>
         </div>
     </section>
@@ -588,7 +690,7 @@
     <section class="exams" id="exams">
         <div class="container">
             <div class="section-title">
-                <h2>Our Programs</h2>
+                <h2>Our <span class="spooky-text">Programs</span></h2>
                 <p>Specialized coaching programs designed for maximum effectiveness</p>
             </div>
             <div class="exam-container">
@@ -640,7 +742,7 @@
     <section class="results" id="results">
         <div class="container">
             <div class="section-title">
-                <h2>Our Results</h2>
+                <h2>Our <span class="spooky-text">Results</span></h2>
                 <p>Consistent excellence year after year</p>
             </div>
             <div class="results-grid">
@@ -672,7 +774,7 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Student Success Stories</h2>
+                <h2>Student <span class="spooky-text">Success Stories</span></h2>
                 <p>Hear from our students who achieved their dream ranks</p>
             </div>
             <div class="testimonial-grid">
@@ -719,7 +821,7 @@
     <!-- CTA Section -->
     <section class="cta" id="contact">
         <div class="container">
-            <h2>Begin Your Journey to Success</h2>
+            <h2>Begin Your Journey to <span class="spooky-text">Success</span></h2>
             <p>Join thousands of students who have achieved their dreams with Bimalism</p>
             <div class="hero-buttons">
                 <a href="neet.html" class="btn btn-neet">Start NEET Preparation</a>
@@ -800,6 +902,3 @@
     </script>
 </body>
 </html>
-
-
-
