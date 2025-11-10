@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="33MVfLbupQdh7gMotWJ0SIXwX93Su6FDIqm04Y64qtg" />
+    <meta name="description" content="பிமலிசம் - முதன்மை NEET மற்றும் JEE பயிற்சி நிறுவனம், நிபுணர் ஆசிரியர்கள், விரிவான பாடத்திட்டங்கள், நிரூபிக்கப்பட்ட முடிவுகள்.">
+    <meta name="keywords" content="பிமலிசம், NEET பயிற்சி, JEE பயிற்சி, மருத்துவ நுழைவு, பொறியியல் நுழைவு, NEET தயாரிப்பு, JEE தயாரிப்பு">
+    <meta name="author" content="பிமலிசம் கல்வி">
+    <title>பிமலிசம் - NEET & JEE பயிற்சி</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #8B4513;
+            --secondary: #D2691E;
+            --accent: #FF8C00;
+            --light: #2F1B1B;
+            --dark: #1A0F0F;
+            --success: #32CD32;
+            --neet: #8B4513;
+            --jee: #D2691E;
+            --halloween-orange: #FF8C00;
+            --halloween-purple: #8A2BE2;
+            --spooky-green: #228B22;
+            --text-light: #F5F5F5;
+            --text-muted: #A0A0A0;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
+        }
+       
+        body {
+            background-color: #1A0F0F;
+            color: var(--text-light);
+            line-height: 1.8;
+            direction: ltr;
+            background-image:
+                linear-gradient(rgba(26, 15, 15, 0.9), rgba(26, 15, 15, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23228B22" opacity="0.05" d="M30,10 C40,0 60,0 70,10 C80,20 80,40 70,50 C60,60 40,60 30,50 C20,40 20,20 30,10 Z M25,25 C15,25 5,35 5,45 C-5,55 -5,75 5,85 C15,95 35,95 45,85 C55,75 55,55 45,45 C45,35 35,25 25,25 Z M65,25 C75,25 85,35 85,45 C95,55 95,75 85,85 C75,95 55,95 45,85 C35,75 35,55 45,45 C45,35 55,25 65,25 Z"/></svg>');
+            position: relative;
+            overflow-x: hidden;
+        }
+       
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+       
+        /* தலைப்பு பாணிகள் */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--halloween-orange);
+        }
+       
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+       
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+       
+        .logo i {
+            margin-right: 10px;
+            color: var(--halloween-orange);
+        }
+       
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+       
+        .nav-links li {
+            margin-left: 2rem;
+        }
+       
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+       
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--halloween-orange);
+            transition: width 0.3s;
+        }
+       
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+       
+        .nav-links a:hover {
+            color: var(--halloween-orange);
+        }
+       
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+       
+        .btn:hover {
+            background-color: #e67e00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+       
+        .btn-neet {
+            background-color: var(--neet);
+        }
+       
+        .btn-neet:hover {
+            background-color: #A0522D;
+        }
+       
+        .btn-jee {
+            background-color: var(--jee);
+        }
+       
+        .btn-jee:hover {
+            background-color: #CD853F;
+        }
+
+        /* மொழி மாற்றி பாணிகள் */
+        .language-switcher {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .language-btn {
+            background: rgba(255, 140, 0, 0.2);
+            border: 1px solid var(--halloween-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 140, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--light);
+            border: 1px solid var(--halloween-orange);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .language-dropdown.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .language-option {
+            padding: 0.8rem 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 140, 0, 0.2);
+            color: var(--halloween-orange);
+        }
+
+        .language-option.active {
+            background: rgba(255, 140, 0, 0.3);
+            color: var(--halloween-orange);
+            font-weight: 600;
+        }
+
+        .flag-icon {
+            font-size: 1.2rem;
+        }
+       
+        /* ஹீரோ பகுதி */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.9));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><path fill="%23FF8C00" fill-opacity="0.1" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') bottom/cover no-repeat;
+        }
+       
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+       
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
+        }
+       
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+       
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+       
+        /* அம்சங்கள் பகுதி */
+        .features {
+            padding: 5rem 0;
+            background-color: var(--light);
+            position: relative;
+        }
+       
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+       
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--halloween-orange);
+            margin-bottom: 1rem;
+        }
+       
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+       
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+       
+        .feature-card {
+            background-color: rgba(47, 27, 27, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+       
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+        }
+       
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--halloween-orange);
+            margin-bottom: 1.5rem;
+        }
+       
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+       
+        /* தேர்வு பகுதிகள் */
+        .exams {
+            padding: 5rem 0;
+            background-color: var(--dark);
+            position: relative;
+        }
+       
+        .exam-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+       
+        .exam-card {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(47, 27, 27, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--halloween-orange);
+            transition: transform 0.3s;
+        }
+       
+        .exam-card:hover {
+            transform: translateY(-5px);
+        }
+       
+        .exam-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+       
+        .neet-header {
+            background: linear-gradient(135deg, var(--neet), var(--halloween-orange));
+        }
+       
+        .jee-header {
+            background: linear-gradient(135deg, var(--jee), var(--halloween-purple));
+        }
+       
+        .exam-body {
+            padding: 2rem;
+        }
+       
+        .exam-body ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+       
+        .exam-body ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+       
+        .exam-body ul li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+       
+        .exam-advantages {
+            margin: 1.5rem 0;
+        }
+       
+        /* முடிவுகள் பகுதி */
+        .results {
+            padding: 5rem 0;
+            background-color: var(--light);
+            position: relative;
+        }
+       
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+       
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: rgba(47, 27, 27, 0.8);
+            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+       
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+       
+        .result-card i {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+       
+        .result-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--halloween-orange);
+            margin: 1rem 0;
+        }
+       
+        /* சான்றிதழ்கள் */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--dark);
+            position: relative;
+        }
+       
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+       
+        .testimonial-card {
+            background-color: rgba(47, 27, 27, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--halloween-orange);
+            transition: transform 0.3s;
+            position: relative;
+        }
+       
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+       
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+       
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+       
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--halloween-orange), var(--halloween-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+       
+        /* செயலுக்கு அழைப்பு */
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+       
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+       
+        /* அடிக்குறிப்பு */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            border-top: 2px solid var(--halloween-orange);
+        }
+       
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+       
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--halloween-orange);
+        }
+       
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--halloween-orange);
+        }
+       
+        .footer-column ul {
+            list-style: none;
+        }
+       
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+       
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+       
+        .footer-column a:hover {
+            color: var(--halloween-orange);
+        }
+       
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+       
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #374151;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+       
+        .social-links a:hover {
+            background-color: var(--halloween-orange);
+        }
+       
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+       
+        /* மொபைல் மெனு */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+       
+        /* பதிலளிக்கும் வடிவமைப்பு */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            }
+           
+            .nav-links.active {
+                display: flex;
+            }
+           
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .language-switcher {
+                margin: 0.5rem 0;
+            }
+
+            .language-dropdown {
+                position: static;
+                margin-top: 0.5rem;
+                box-shadow: none;
+                border: 1px solid rgba(255, 140, 0, 0.5);
+            }
+           
+            .mobile-menu-btn {
+                display: block;
+            }
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+           
+            .hero p {
+                font-size: 1.2rem;
+            }
+           
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+           
+            .features-grid,
+            .testimonial-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .exam-container {
+                flex-direction: column;
+            }
+        }
+       
+        /* அனிமேஷன் */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+       
+        .animated {
+            animation: fadeIn 1s ease-out;
+        }
+       
+        /* ஹாலோவீன் தீம் */
+        .halloween-theme {
+            position: relative;
+        }
+       
+        .halloween-theme::before {
+            content: "🎃";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 1.5rem;
+        }
+       
+        .spooky-text {
+            color: var(--halloween-orange);
+            font-weight: 600;
+        }
+
+        /* ஏற்றும் சுழலி */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            background: rgba(0,0,0,0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            color: var(--halloween-orange);
+            font-weight: bold;
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- ஏற்றும் சுழலி -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <i class="fas fa-spinner fa-spin"></i> திருப்பி அனுப்பப்படுகிறது...
+    </div>
+
+    <!-- தலைப்பு -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo halloween-theme">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>பிமலிசம்</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="bio-data-pop-up.html">பயோ டேட்டா</a></li>
+                    <li><a href="#features">அம்சங்கள்</a></li>
+                    <li><a href="neet.html">NEET</a></li>
+                    <li><a href="jee.html">JEE</a></li>
+                    <li><a href="#results">முடிவுகள்</a></li>
+                    <li><a href="#testimonials">சான்றிதழ்கள்</a></li>
+                    <li><a href="#contact" class="btn">தொடர்பு கொள்ள</a></li>
+                    <li class="language-switcher">
+                        <button class="language-btn">
+                            <i class="fas fa-globe"></i>
+                            <span>தமிழ்</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown">
+                            <button class="language-option" data-lang="en" data-page="index.html">
+                                <span class="flag-icon">🇺🇸</span>
+                                English
+                            </button>
+                            <button class="language-option" data-lang="hi" data-page="h.html">
+                                <span class="flag-icon">🇮🇳</span>
+                                हिंदी
+                            </button>
+                            <button class="language-option active" data-lang="ta" data-page="t.html">
+                                <span class="flag-icon">🇮🇳</span>
+                                தமிழ்
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ஹீரோ பகுதி -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>பிமலிசம் <span class="spooky-text">NEET & JEE</span> பயிற்சி</h1>
+                <p>உங்கள் கனவுகளை உண்மையாக்குங்கள் - இந்தியாவின் முதன்மை NEET மற்றும் JEE பயிற்சி நிறுவனம்</p>
+                <p>குறிப்பு: மொழிபெயர்ப்பு டாஷ்போர்டில் மட்டுமே கிடைக்கிறது</p>
+                <div class="hero-buttons">
+                    <a href="neet.html" class="btn btn-neet">NEET தொடங்கு <i class="fas fa-arrow-right"></i></a>
+                    <a href="jee.html" class="btn btn-jee">JEE தொடங்கு <i class="fas fa-arrow-right"></i></a>
+                    <a href="settings.html" class="btn btn-neet">அமைப்புகள் <i class="fas fa-cog"></i></a>
+                    <a href="tips.html" class="btn btn-neet">ஊக்கமும் குறிப்புகளும் <i class="fas fa-lightbulb"></i></a>
+                    <a href="table.html" class="btn btn-jee">வினாத்தாள்கள் & ஆதாரங்கள் <i class="fas fa-file-alt"></i></a>
+                    <a href="calculator.html" class="btn btn-jee">கால்குலேட்டர் <i class="fas fa-calculator"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- அம்சங்கள் பகுதி -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>பிமலிசத்தை <span class="spooky-text">ஏன் தேர்வு செய்ய வேண்டும்</span>?</h2>
+                <p>எங்கள் நிரூபிக்கப்பட்ட முறையும் நிபுணர் ஆசிரியர்களும் ஆயிரக்கணக்கான மாணவர்களுக்கு உதவியுள்ளனர்</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animated">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>நிபுணர் ஆசிரியர்கள்</h3>
+                    <p>NEET மற்றும் JEEயில் வெற்றி பெற்ற அனுபவமிக்க கல்வியாளர்களிடம் பயிலுங்கள்.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-book"></i>
+                    <h3>விரிவான பாடத்திட்டங்கள்</h3>
+                    <p>அனைத்து தலைப்புகளையும் உள்ளடக்கிய பயிற்சி வினாக்களுடன் தயாரிக்கப்பட்ட உள்ளடக்கம்.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- தேர்வு பகுதிகள் -->
+    <section class="exams" id="exams">
+        <div class="container">
+            <div class="section-title">
+                <h2>எங்கள் <span class="spooky-text">திட்டங்கள்</span></h2>
+                <p>அதிகபட்ச செயல்திறனுக்காக வடிவமைக்கப்பட்ட சிறப்பு பயிற்சி திட்டங்கள்</p>
+            </div>
+            <div class="exam-container">
+                <div class="exam-card">
+                    <div class="exam-header neet-header">
+                        <h3>NEET பயிற்சி</h3>
+                        <p>தேசிய தகுதி மற்றும் நுழைவு தேர்வு</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>முதன்மை மருத்துவ கல்லூரிகளை இலக்காகக் கொண்ட மருத்துவ ஆர்வலர்களுக்கான விரிவான திட்டம்</p>
+                        <div class="exam-advantages">
+                            <h4>முக்கிய நன்மைகள்:</h4>
+                            <ul>
+                                <li>NCERT உடன் ஒத்திசைவான உயிரியல் மைய பாடத்திட்டம்</li>
+                                <li>மருத்துவ பின்னணியில் இருந்து நிபுணர் ஆசிரியர்கள்</li>
+                                <li>சமீபத்திய வடிவத்தின் அடிப்படையில் வழக்கமான மாதிரி தேர்வுகள்</li>
+                                <li>சந்தேகங்களை தீர்க்கும் சிறப்பு அமர்வுகள்</li>
+                                <li>முந்தைய ஆண்டு வினாக்களின் பகுப்பாய்வு</li>
+                            </ul>
+                        </div>
+                        <a href="neet.html" class="btn btn-neet">NEET திட்டத்தை ஆராயுங்கள்</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-header jee-header">
+                        <h3>JEE பயிற்சி</h3>
+                        <p>கூட்டு நுழைவு தேர்வு</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>IITகள் மற்றும் NITகளை இலக்காகக் கொண்ட பொறியியல் ஆர்வலர்களுக்கான கடுமையான பயிற்சி திட்டம்</p>
+                        <div class="exam-advantages">
+                            <h4>முக்கிய நன்மைகள்:</h4>
+                            <ul>
+                                <li>பௌதிகம், வேதியியல் & கணிதத்தில் கவனம்</li>
+                                <li>நிரூபிக்கப்பட்ட சாதனையுடன் IIT முன்னாள் மாணவர்கள்</li>
+                                <li>பிரச்சனை தீர்க்கும் நுட்பங்கள் மற்றும் குறுக்குவழிகள்</li>
+                                <li>அத்தியாய வாரியான பயிற்சி பிரச்சனைகள்</li>
+                                <li>முழு நீள மாதிரி தேர்வு தொடர்</li>
+                            </ul>
+                        </div>
+                        <a href="jee.html" class="btn btn-jee">JEE திட்டத்தை ஆராயுங்கள்</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- முடிவுகள் பகுதி -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="section-title">
+                <h2>எங்கள் <span class="spooky-text">முடிவுகள்</span></h2>
+                <p>ஒவ்வொரு ஆண்டும் தொடர்ச்சியான சிறப்பு</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card animated">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="number">2500+</div>
+                    <p>NEET தேர்வு</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-medal"></i>
+                    <div class="number">1200+</div>
+                    <p>JEE தேர்வு</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-award"></i>
+                    <div class="number">98%</div>
+                    <p>வெற்றி விகிதம்</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-star"></i>
+                    <div class="number">150+</div>
+                    <p>முதல் 100 ரேங்கர்கள்</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- சான்றிதழ்கள் -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>மாணவர் <span class="spooky-text">வெற்றி கதைகள்</span></h2>
+                <p>எங்கள் மாணவர்களிடம் இருந்து கேளுங்கள் - அவர்கள் தங்கள் கனவு ரேங்கை அடைந்தனர்</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "பிமலிசத்தின் NEET திட்டம் எனக்கு AIR 124 பெற உதவியது. அவர்களின் பாடத்திட்டங்கள் மற்றும் மாதிரி தேர்வுகள் தேர்வை வெல்ல தேவையானவை."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PA</div>
+                        <div>
+                            <h4>பிரியா அகர்வால்</h4>
+                            <p>NEET AIR 124</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "பிமலிசத்தில் JEE பயிற்சி என் தயாரிப்பை மாற்றியது. ஆசிரியர்களின் பிரச்சனை தீர்க்கும் அணுகுமுறை எனக்கு IIT பாம்பேயில் இடம் பெற உதவியது."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div>
+                            <h4>ராகுல் ஷர்மா</h4>
+                            <p>IIT பாம்பே</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "வழக்கமான தேர்வுகளும் விரிவான செயல்திறன் பகுப்பாய்வும் என் பலவீனங்களை கண்டறிந்து மதிப்பெண்ணை பெரிதும் மேம்படுத்த உதவியது."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div>
+                            <h4>அஞ்சலி சிங்</h4>
+                            <p>NEET AIR 89</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- செயலுக்கு அழைப்பு -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>உங்கள் <span class="spooky-text">வெற்றி</span> பயணத்தை தொடங்குங்கள்</h2>
+            <p>பிமலிசத்துடன் தங்கள் கனவுகளை அடைந்த ஆயிரக்கணக்கான மாணவர்களுடன் சேருங்கள்</p>
+            <div class="hero-buttons">
+                <a href="neet.html" class="btn btn-neet">NEET தயாரிப்பை தொடங்கு</a>
+                <a href="jee.html" class="btn btn-jee">JEE தயாரிப்பை தொடங்கு</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- அடிக்குறிப்பு -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>பிமலிசம் கல்வி</h3>
+                    <p>NEET மற்றும் JEE தயாரிப்புக்கான முதன்மை பயிற்சி நிறுவனம், வெற்றியின் நிரூபிக்கப்பட்ட பதிவு.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61580274216320"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/aali.fif7271/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>விரைவு இணைப்புகள்</h3>
+                    <ul>
+                        <li><a href="#features">அம்சங்கள்</a></li>
+                        <li><a href="#exams">திட்டங்கள்</a></li>
+                        <li><a href="#results">முடிவுகள்</a></li>
+                        <li><a href="#testimonials">சான்றிதழ்கள்</a></li>
+                        <li><a href="#contact">தொடர்பு கொள்ள</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>தொடர்பு கொள்ளுங்கள்</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> bimalism01@gmail.com இல் தொடர்பு கொள்ளுங்கள்</li>
+                        <li>ஆசாரியா 9ஆம் வகுப்பு ஆலிஃப் மற்றும் தருணேஷ் உருவாக்கியது</li>
+                        <li>எங்கள் வகுப்பு ஆசிரியர் திரு. காகேசரராவ் சார் அவர்களால் ஊக்கமளிக்கப்பட்டது</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 பிமலிசம் கல்வி. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // மொபைல் மெனு மாற்றம்
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // இணைப்பில் கிளிக் செய்யும் போது மொபைல் மெனுவை மூடு
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // மொழி மாற்றி செயல்பாடு
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const languageText = document.querySelector('.language-btn span');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // மொழி டிராப்படவுனை மாற்று
+        languageBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+        });
+
+        // வெளியே கிளிக் செய்யும் போது டிராப்படவுனை மூடு
+        document.addEventListener('click', function() {
+            languageDropdown.classList.remove('active');
+        });
+
+        // மொழி தேர்வு - உடனடியாக திருப்பி அனுப்பு
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                const selectedPage = this.getAttribute('data-page');
+                const selectedText = this.textContent.trim();
+                
+                // ஏற்றும் சுழலியை காட்டு
+                loadingSpinner.classList.add('active');
+                
+                // செயலில் உள்ள நிலையை புதுப்பிக்கவும்
+                languageOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // பொத்தான் உரையை புதுப்பிக்கவும்
+                languageText.textContent = selectedText.split(' ')[0];
+                
+                // டிராப்படவுனை மூடு
+                languageDropdown.classList.remove('active');
+                
+                // உடனடியாக திருப்பி அனுப்பு
+                setTimeout(() => {
+                    window.location.href = selectedPage;
+                }, 300);
+            });
+        });
+
+        // ஸ்க்ரோல் செய்யும் போது அனிமேஷன் சேர்க்கவும்
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+           
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+           
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
