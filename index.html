@@ -42,6 +42,26 @@
             padding: 0 20px;
         }
         
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            background: rgba(0,0,0,0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+        
         /* Name Verification Modal */
         .modal-overlay {
             position: fixed;
@@ -234,10 +254,11 @@
         .nav-links {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         .nav-links li {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
         }
         
         .nav-links a {
@@ -249,6 +270,81 @@
         
         .nav-links a:hover {
             color: #ffd700;
+        }
+        
+        /* Language Switcher Styles */
+        .language-switcher {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .language-dropdown.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .language-option {
+            padding: 0.8rem 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .language-option:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .language-option.active {
+            background: var(--light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .flag-icon {
+            font-size: 1.2rem;
         }
         
         .btn {
@@ -634,6 +730,17 @@
                 margin: 0.5rem 0;
                 text-align: center;
             }
+
+            .language-switcher {
+                margin: 0.5rem 0;
+            }
+
+            .language-dropdown {
+                position: static;
+                margin-top: 0.5rem;
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
             
             .mobile-menu-btn {
                 display: block;
@@ -690,6 +797,12 @@
     </style>
 </head>
 <body>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+        <p>Redirecting to language page...</p>
+    </div>
+
     <!-- Name Verification Modal -->
     <div class="modal-overlay" id="nameModal">
         <div class="verification-modal">
@@ -736,6 +849,27 @@
                     <li><a href="#results">Results</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact" class="btn">Contact Us</a></li>
+                    <li class="language-switcher">
+                        <button class="language-btn">
+                            <i class="fas fa-globe"></i>
+                            <span>English</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown">
+                            <button class="language-option active" data-lang="en" data-page="index.html">
+                                <span class="flag-icon">🇺🇸</span>
+                                English
+                            </button>
+                            <button class="language-option" data-lang="hi" data-page="h.html">
+                                <span class="flag-icon">🇮🇳</span>
+                                हिंदी
+                            </button>
+                            <button class="language-option" data-lang="ta" data-page="t.html">
+                                <span class="flag-icon">🇮🇳</span>
+                                தமிழ்
+                            </button>
+                        </div>
+                    </li>
                 </ul>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -766,10 +900,26 @@
                 <h2>Why Choose Bimalism?</h2>
                 <p>Our proven methodology and expert faculty have helped thousands of students achieve their dreams</p>
             </div>
+            <div class="features-grid">
+                <div class="feature-card animated">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Expert Faculty</h3>
+                    <p>Learn from experienced educators with a track record of success in NEET and JEE.</p>
+                </div>
                 <div class="feature-card animated">
                     <i class="fas fa-book"></i>
                     <h3>Comprehensive Study Material</h3>
                     <p>Curated content designed to cover all topics with practice questions.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Regular Assessments</h3>
+                    <p>Weekly tests and performance analysis to track your progress.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-users"></i>
+                    <h3>Personalized Attention</h3>
+                    <p>Small batch sizes to ensure individual attention for every student.</p>
                 </div>
             </div>
         </div>
@@ -945,7 +1095,7 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> info@bimalism01@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i>Contact us by bimalism01@gmail.com</li>
                         <li>Created by Aalif and Dharunesh of Achariya 9th</li>
                         <li>Inspired by our class teacher Mr. Khageswararao Sir</li>
                     </ul>
@@ -965,6 +1115,7 @@
             const nameInput = document.getElementById('name');
             const messageDiv = document.getElementById('modalMessage');
             const closeBtn = document.getElementById('closeModal');
+            const loadingSpinner = document.getElementById('loadingSpinner');
             
             // Check if user has already entered their name
             const userName = localStorage.getItem('bimalismUserName');
@@ -973,10 +1124,10 @@
                 // User has already entered name, don't show modal
                 console.log(`Welcome back, ${userName}!`);
             } else {
-                // Show modal after 3 seconds
+                // Show modal after 2 seconds
                 setTimeout(() => {
                     modal.classList.add('active');
-                }, 3000);
+                }, 2000);
             }
             
             // Close modal when X button is clicked
@@ -1019,6 +1170,53 @@
                 messageDiv.className = `modal-message ${type}`;
                 messageDiv.style.display = 'block';
             }
+            
+            // Language Switcher Functionality
+            const languageBtn = document.querySelector('.language-btn');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageOptions = document.querySelectorAll('.language-option');
+            const languageText = document.querySelector('.language-btn span');
+            
+            // Toggle language dropdown
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                languageDropdown.classList.remove('active');
+            });
+            
+            // Language selection with redirection
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedLang = this.getAttribute('data-lang');
+                    const selectedPage = this.getAttribute('data-page');
+                    const selectedText = this.textContent.trim();
+                    
+                    // Show loading spinner
+                    loadingSpinner.classList.add('active');
+                    
+                    // Update active state
+                    languageOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update button text
+                    languageText.textContent = selectedText.split(' ')[0];
+                    
+                    // Close dropdown
+                    languageDropdown.classList.remove('active');
+                    
+                    // Store language preference
+                    localStorage.setItem('bimalismLanguage', selectedLang);
+                    
+                    // Redirect to the selected language page after a short delay
+                    setTimeout(() => {
+                        window.location.href = selectedPage;
+                    }, 1000);
+                });
+            });
             
             // Mobile menu toggle
             document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
