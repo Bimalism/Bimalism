@@ -12,48 +12,196 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
-            --primary: #8B4513;
-            --secondary: #D2691E;
-            --accent: #FF8C00;
-            --light: #2F1B1B;
-            --dark: #1A0F0F;
-            --success: #32CD32;
-            --neet: #8B4513;
-            --jee: #D2691E;
-            --halloween-orange: #FF8C00;
-            --halloween-purple: #8A2BE2;
-            --spooky-green: #228B22;
-            --text-light: #F5F5F5;
-            --text-muted: #A0A0A0;
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --accent: #ec4899;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --neet: #3b82f6;
+            --jee: #ef4444;
         }
-      
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-      
+        
         body {
-            background-color: #1A0F0F;
-            color: var(--text-light);
+            background-color: #f9fafb;
+            color: var(--dark);
             line-height: 1.6;
-            background-image:
-                linear-gradient(rgba(26, 15, 15, 0.9), rgba(26, 15, 15, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23228B22" opacity="0.05" d="M30,10 C40,0 60,0 70,10 C80,20 80,40 70,50 C60,60 40,60 30,50 C20,40 20,20 30,10 Z M25,25 C15,25 5,35 5,45 C-5,55 -5,75 5,85 C15,95 35,95 45,85 C55,75 55,55 45,45 C45,35 35,25 25,25 Z M65,25 C75,25 85,35 85,45 C95,55 95,75 85,85 C75,95 55,95 45,85 C35,75 35,55 45,45 C45,35 55,25 65,25 Z"/></svg>');
-            position: relative;
-            overflow-x: hidden;
         }
-      
+        
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 2;
         }
-      
+        
+        /* Name Verification Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .verification-modal {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            color: var(--dark);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .verification-modal {
+            transform: translateY(0);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
+        }
+        
+        .modal-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .modal-logo i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .modal-text {
+            margin-bottom: 30px;
+            color: #6b7280;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .modal-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .modal-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .modal-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .modal-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
         /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -62,66 +210,47 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            border-bottom: 2px solid var(--halloween-orange);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-      
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-      
+        
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
         }
-      
+        
         .logo i {
             margin-right: 10px;
-            color: var(--halloween-orange);
+            color: #ffd700;
         }
-      
+        
         .nav-links {
             display: flex;
             list-style: none;
-            align-items: center;
         }
-      
+        
         .nav-links li {
             margin-left: 2rem;
         }
-      
+        
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
+            transition: color 0.3s;
         }
-      
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--halloween-orange);
-            transition: width 0.3s;
-        }
-      
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-      
+        
         .nav-links a:hover {
-            color: var(--halloween-orange);
+            color: #ffd700;
         }
-      
+        
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
@@ -133,145 +262,50 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
-      
+        
         .btn:hover {
-            background-color: #e67e00;
+            background-color: #be185d;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-      
+        
         .btn-neet {
             background-color: var(--neet);
         }
-      
+        
         .btn-neet:hover {
-            background-color: #A0522D;
+            background-color: #2563eb;
         }
-      
+        
         .btn-jee {
             background-color: var(--jee);
         }
-      
+        
         .btn-jee:hover {
-            background-color: #CD853F;
+            background-color: #dc2626;
         }
-
-        /* Language Switcher Styles */
-        .language-switcher {
-            position: relative;
-            margin-left: 1rem;
-        }
-
-        .language-btn {
-            background: rgba(255, 140, 0, 0.2);
-            border: 1px solid var(--halloween-orange);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .language-btn:hover {
-            background: rgba(255, 140, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--light);
-            border: 1px solid var(--halloween-orange);
-            border-radius: 10px;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-            min-width: 150px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1000;
-        }
-
-        .language-dropdown.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .language-option {
-            padding: 0.8rem 1rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .language-option:hover {
-            background: rgba(255, 140, 0, 0.2);
-            color: var(--halloween-orange);
-        }
-
-        .language-option.active {
-            background: rgba(255, 140, 0, 0.3);
-            color: var(--halloween-orange);
-            font-weight: 600;
-        }
-
-        .flag-icon {
-            font-size: 1.2rem;
-        }
-      
+        
         /* Hero Section */
         .hero {
             padding: 5rem 0;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.9));
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><rect fill="%232563eb" width="800" height="400"/><path fill="%233b82f6" fill-opacity="0.2" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') center/cover no-repeat;
             color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-      
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><path fill="%23FF8C00" fill-opacity="0.1" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') bottom/cover no-repeat;
-        }
-      
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-      
+        
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-      
+        
         .hero p {
             font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
-      
+        
         .hero-buttons {
             display: flex;
             justify-content: center;
@@ -279,219 +313,190 @@
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-      
+        
         /* Features Section */
         .features {
             padding: 5rem 0;
-            background-color: var(--light);
-            position: relative;
+            background-color: white;
         }
-      
+        
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
         }
-      
+        
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--halloween-orange);
+            color: var(--primary);
             margin-bottom: 1rem;
         }
-      
+        
         .section-title p {
-            color: var(--text-light);
+            color: var(--dark);
             max-width: 700px;
             margin: 0 auto;
         }
-      
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-      
+        
         .feature-card {
-            background-color: rgba(47, 27, 27, 0.8);
+            background-color: var(--light);
             border-radius: 10px;
             padding: 2rem;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid var(--halloween-orange);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-      
+        
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-      
+        
         .feature-card i {
             font-size: 3rem;
-            color: var(--halloween-orange);
+            color: var(--primary);
             margin-bottom: 1.5rem;
         }
-      
+        
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--text-light);
+            color: var(--dark);
         }
-      
+        
         /* Exam Sections */
         .exams {
             padding: 5rem 0;
-            background-color: var(--dark);
-            position: relative;
+            background-color: var(--light);
         }
-      
+        
         .exam-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin-top: 2rem;
         }
-      
+        
         .exam-card {
             flex: 1;
             min-width: 300px;
-            background: rgba(47, 27, 27, 0.8);
+            background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--halloween-orange);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-      
-        .exam-card:hover {
-            transform: translateY(-5px);
-        }
-      
+        
         .exam-header {
             padding: 1.5rem;
             color: white;
             text-align: center;
         }
-      
+        
         .neet-header {
-            background: linear-gradient(135deg, var(--neet), var(--halloween-orange));
+            background: linear-gradient(135deg, var(--neet), #1d4ed8);
         }
-      
+        
         .jee-header {
-            background: linear-gradient(135deg, var(--jee), var(--halloween-purple));
+            background: linear-gradient(135deg, var(--jee), #b91c1c);
         }
-      
+        
         .exam-body {
             padding: 2rem;
         }
-      
+        
         .exam-body ul {
             list-style: none;
             margin: 1.5rem 0;
         }
-      
+        
         .exam-body ul li {
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
         }
-      
+        
         .exam-body ul li:before {
             content: "✓";
             color: var(--success);
             position: absolute;
             left: 0;
-            font-weight: bold;
         }
-      
+        
         .exam-advantages {
             margin: 1.5rem 0;
         }
-      
+        
         /* Results Section */
         .results {
             padding: 5rem 0;
-            background-color: var(--light);
-            position: relative;
+            background-color: white;
         }
-      
+        
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-      
+        
         .result-card {
             text-align: center;
             padding: 2rem;
             border-radius: 10px;
-            background-color: rgba(47, 27, 27, 0.8);
-            border: 1px solid var(--halloween-orange);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
+            background-color: var(--light);
         }
-      
-        .result-card:hover {
-            transform: translateY(-5px);
-        }
-      
+        
         .result-card i {
             font-size: 3rem;
             color: var(--success);
             margin-bottom: 1rem;
         }
-      
+        
         .result-card .number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--halloween-orange);
+            color: var(--primary);
             margin: 1rem 0;
         }
-      
+        
         /* Testimonials */
         .testimonials {
             padding: 5rem 0;
-            background-color: var(--dark);
-            position: relative;
+            background-color: var(--light);
         }
-      
+        
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-      
+        
         .testimonial-card {
-            background-color: rgba(47, 27, 27, 0.8);
+            background-color: white;
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--halloween-orange);
-            transition: transform 0.3s;
-            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-      
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
-      
+        
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
         }
-      
+        
         .testimonial-author {
             display: flex;
             align-items: center;
         }
-      
+        
         .author-avatar {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--halloween-orange), var(--halloween-purple));
+            background-color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -499,51 +504,47 @@
             font-weight: bold;
             margin-right: 1rem;
         }
-      
+        
         /* CTA Section */
         .cta {
             padding: 5rem 0;
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-      
+        
         .cta h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-      
+        
         .cta p {
             max-width: 700px;
             margin: 0 auto 2rem;
             font-size: 1.2rem;
         }
-      
+        
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
             padding: 3rem 0 1rem;
-            border-top: 2px solid var(--halloween-orange);
         }
-      
+        
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-      
+        
         .footer-column h3 {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
-            color: var(--halloween-orange);
         }
-      
+        
         .footer-column h3::after {
             content: '';
             position: absolute;
@@ -551,33 +552,33 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--halloween-orange);
+            background-color: var(--accent);
         }
-      
+        
         .footer-column ul {
             list-style: none;
         }
-      
+        
         .footer-column ul li {
             margin-bottom: 0.8rem;
         }
-      
+        
         .footer-column a {
-            color: var(--text-muted);
+            color: #d1d5db;
             text-decoration: none;
             transition: color 0.3s;
         }
-      
+        
         .footer-column a:hover {
-            color: var(--halloween-orange);
+            color: white;
         }
-      
+        
         .social-links {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
         }
-      
+        
         .social-links a {
             display: inline-flex;
             align-items: center;
@@ -588,19 +589,19 @@
             border-radius: 50%;
             transition: background-color 0.3s;
         }
-      
+        
         .social-links a:hover {
-            background-color: var(--halloween-orange);
+            background-color: var(--accent);
         }
-      
+        
         .copyright {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid #374151;
-            color: var(--text-muted);
+            color: #9ca3af;
             font-size: 0.9rem;
         }
-      
+        
         /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
@@ -610,7 +611,7 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-      
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -622,57 +623,55 @@
                 width: 100%;
                 background: linear-gradient(135deg, var(--primary), var(--secondary));
                 padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-          
+            
             .nav-links.active {
                 display: flex;
             }
-          
+            
             .nav-links li {
                 margin: 0.5rem 0;
                 text-align: center;
             }
-
-            .language-switcher {
-                margin: 0.5rem 0;
-            }
-
-            .language-dropdown {
-                position: static;
-                margin-top: 0.5rem;
-                box-shadow: none;
-                border: 1px solid rgba(255, 140, 0, 0.5);
-            }
-          
+            
             .mobile-menu-btn {
                 display: block;
             }
-          
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
-          
+            
             .hero p {
                 font-size: 1.2rem;
             }
-          
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-          
+            
             .features-grid,
             .testimonial-grid,
             .results-grid {
                 grid-template-columns: 1fr;
             }
-          
+            
             .exam-container {
                 flex-direction: column;
             }
+            
+            .verification-modal {
+                padding: 30px 20px;
+                margin: 0 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.7rem;
+            }
         }
-      
+        
         /* Animation */
         @keyframes fadeIn {
             from {
@@ -684,60 +683,48 @@
                 transform: translateY(0);
             }
         }
-      
+        
         .animated {
             animation: fadeIn 1s ease-out;
-        }
-      
-        /* Halloween theme elements */
-        .halloween-theme {
-            position: relative;
-        }
-      
-        .halloween-theme::before {
-            content: "🎃";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            font-size: 1.5rem;
-        }
-      
-        .spooky-text {
-            color: var(--halloween-orange);
-            font-weight: 600;
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            background: rgba(0,0,0,0.8);
-            padding: 2rem;
-            border-radius: 10px;
-            color: var(--halloween-orange);
-            font-weight: bold;
-        }
-
-        .loading-spinner.active {
-            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Loading Spinner -->
-    <div class="loading-spinner" id="loadingSpinner">
-        <i class="fas fa-spinner fa-spin"></i> Redirecting...
+    <!-- Name Verification Modal -->
+    <div class="modal-overlay" id="nameModal">
+        <div class="verification-modal">
+            <button class="close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Bimalism</span>
+            </div>
+            
+            <h2 class="modal-title">Welcome to Bimalism</h2>
+            <p class="modal-text">Please enter your name to personalize your experience</p>
+            
+            <form id="nameForm">
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                
+                <button type="submit" class="modal-btn">
+                    <i class="fas fa-check-circle"></i> Continue
+                </button>
+            </form>
+            
+            <div id="modalMessage" class="modal-message"></div>
+        </div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
-                <div class="logo halloween-theme">
+                <div class="logo">
                     <i class="fas fa-graduation-cap"></i>
                     <span>Bimalism</span>
                 </div>
@@ -749,27 +736,6 @@
                     <li><a href="#results">Results</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact" class="btn">Contact Us</a></li>
-                    <li class="language-switcher">
-                        <button class="language-btn">
-                            <i class="fas fa-globe"></i>
-                            <span>English</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="language-dropdown">
-                            <button class="language-option active" data-lang="en" data-page="index.html">
-                                <span class="flag-icon">🇺🇸</span>
-                                English
-                            </button>
-                            <button class="language-option" data-lang="hi" data-page="h.html">
-                                <span class="flag-icon">🇮🇳</span>
-                                हिंदी
-                            </button>
-                            <button class="language-option" data-lang="ta" data-page="t.html">
-                                <span class="flag-icon">🇮🇳</span>
-                                தமிழ்
-                            </button>
-                        </div>
-                    </li>
                 </ul>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -781,17 +747,14 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Bimalism <span class="spooky-text">NEET & JEE</span> Coaching</h1>
-                <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
-                <div class="hero-buttons">
-                    <a href="neet.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
-                    <a href="jee.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
-                    <a href="settings.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
-                    <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
-                    <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
-                    <a href="calculator.html" class="btn btn-jee">Calculator <i class="fas fa-file-alt"></i></a>
-                </div>
+            <h1>Bimalism NEET & JEE Coaching</h1>
+            <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
+            <div class="hero-buttons">
+                <a href="neet.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
+                <a href="jee.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
+                <a href="settings.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
+                <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
+                <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
             </div>
         </div>
     </section>
@@ -800,15 +763,9 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose <span class="spooky-text">Bimalism</span>?</h2>
+                <h2>Why Choose Bimalism?</h2>
                 <p>Our proven methodology and expert faculty have helped thousands of students achieve their dreams</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card animated">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3>Expert Faculty</h3>
-                    <p>Learn from experienced educators with a track record of success in NEET and JEE.</p>
-                </div>
                 <div class="feature-card animated">
                     <i class="fas fa-book"></i>
                     <h3>Comprehensive Study Material</h3>
@@ -822,7 +779,7 @@
     <section class="exams" id="exams">
         <div class="container">
             <div class="section-title">
-                <h2>Our <span class="spooky-text">Programs</span></h2>
+                <h2>Our Programs</h2>
                 <p>Specialized coaching programs designed for maximum effectiveness</p>
             </div>
             <div class="exam-container">
@@ -874,7 +831,7 @@
     <section class="results" id="results">
         <div class="container">
             <div class="section-title">
-                <h2>Our <span class="spooky-text">Results</span></h2>
+                <h2>Our Results</h2>
                 <p>Consistent excellence year after year</p>
             </div>
             <div class="results-grid">
@@ -906,7 +863,7 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Student <span class="spooky-text">Success Stories</span></h2>
+                <h2>Student Success Stories</h2>
                 <p>Hear from our students who achieved their dream ranks</p>
             </div>
             <div class="testimonial-grid">
@@ -953,7 +910,7 @@
     <!-- CTA Section -->
     <section class="cta" id="contact">
         <div class="container">
-            <h2>Begin Your Journey to <span class="spooky-text">Success</span></h2>
+            <h2>Begin Your Journey to Success</h2>
             <p>Join thousands of students who have achieved their dreams with Bimalism</p>
             <div class="hero-buttons">
                 <a href="neet.html" class="btn btn-neet">Start NEET Preparation</a>
@@ -984,13 +941,13 @@
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
-              
+                
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> Contact us at bimalism01@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> info@bimalism01@gmail.com</li>
                         <li>Created by Aalif and Dharunesh of Achariya 9th</li>
-                        <li>Inspired by our class teacher Mr. Kagesararao Sir</li>
+                        <li>Inspired by our class teacher Mr. Khageswararao Sir</li>
                     </ul>
                 </div>
             </div>
@@ -1001,67 +958,83 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
-
-        // Language switcher functionality
-        const languageBtn = document.querySelector('.language-btn');
-        const languageDropdown = document.querySelector('.language-dropdown');
-        const languageOptions = document.querySelectorAll('.language-option');
-        const languageText = document.querySelector('.language-btn span');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-
-        // Toggle language dropdown
-        languageBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            languageDropdown.classList.toggle('active');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            languageDropdown.classList.remove('active');
-        });
-
-        // Language selection with immediate redirect
-        languageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
-                const selectedPage = this.getAttribute('data-page');
-                const selectedText = this.textContent.trim();
-                
-                // Show loading spinner
-                loadingSpinner.classList.add('active');
-                
-                // Update active state
-                languageOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Update button text
-                languageText.textContent = selectedText.split(' ')[0];
-                
-                // Close dropdown
-                languageDropdown.classList.remove('active');
-                
-                // Redirect immediately after a very short delay for smooth UX
-                setTimeout(() => {
-                    window.location.href = selectedPage;
-                }, 300);
-            });
-        });
-
-        // Add animation on scroll
+        // Name Verification System
         document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('nameModal');
+            const form = document.getElementById('nameForm');
+            const nameInput = document.getElementById('name');
+            const messageDiv = document.getElementById('modalMessage');
+            const closeBtn = document.getElementById('closeModal');
+            
+            // Check if user has already entered their name
+            const userName = localStorage.getItem('bimalismUserName');
+            
+            if (userName) {
+                // User has already entered name, don't show modal
+                console.log(`Welcome back, ${userName}!`);
+            } else {
+                // Show modal after 3 seconds
+                setTimeout(() => {
+                    modal.classList.add('active');
+                }, 3000);
+            }
+            
+            // Close modal when X button is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                // Store a flag to not show the modal again
+                localStorage.setItem('bimalismModalClosed', 'true');
+            });
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const enteredName = nameInput.value.trim();
+                
+                // Clear previous message
+                messageDiv.style.display = 'none';
+                messageDiv.className = 'modal-message';
+                
+                if (!enteredName) {
+                    showMessage('Please enter your name', 'modal-error');
+                    nameInput.classList.add('shake');
+                    setTimeout(() => nameInput.classList.remove('shake'), 500);
+                    return;
+                }
+                
+                // Store the name in localStorage
+                localStorage.setItem('bimalismUserName', enteredName);
+                
+                // All names are accepted
+                showMessage(`Welcome ${enteredName}! Redirecting to settings...`, 'modal-success');
+                
+                // Redirect to settings.html after a short delay
+                setTimeout(() => {
+                    window.location.href = 'settings.html';
+                }, 1500);
+            });
+            
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = `modal-message ${type}`;
+                messageDiv.style.display = 'block';
+            }
+            
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.querySelector('.nav-links').classList.remove('active');
+                });
+            });
+
+            // Add animation on scroll
             const animatedElements = document.querySelectorAll('.animated');
-          
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1070,7 +1043,7 @@
                     }
                 });
             }, { threshold: 0.1 });
-          
+            
             animatedElements.forEach(el => {
                 el.style.animationPlayState = 'paused';
                 observer.observe(el);
