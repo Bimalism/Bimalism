@@ -12,19 +12,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
     <style>
         :root {
-            --primary: #8B4513;
-            --secondary: #D2691E;
-            --accent: #FF8C00;
-            --light: #2F1B1B;
-            --dark: #1A0F0F;
-            --success: #32CD32;
-            --neet: #8B4513;
-            --jee: #D2691E;
-            --halloween-orange: #FF8C00;
-            --halloween-purple: #8A2BE2;
-            --spooky-green: #228B22;
-            --text-light: #F5F5F5;
-            --text-muted: #A0A0A0;
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #2563eb;
+            --light: #1e40af;
+            --dark: #1e3a8a;
+            --success: #10b981;
+            --neet: #1e40af;
+            --jee: #3b82f6;
+            --blue-accent: #60a5fa;
+            --blue-light: #dbeafe;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
         }
        
         * {
@@ -35,13 +34,9 @@
         }
        
         body {
-            background-color: #1A0F0F;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             color: var(--text-light);
-            line-height: 1.8;
-            direction: ltr;
-            background-image:
-                linear-gradient(rgba(26, 15, 15, 0.9), rgba(26, 15, 15, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23228B22" opacity="0.05" d="M30,10 C40,0 60,0 70,10 C80,20 80,40 70,50 C60,60 40,60 30,50 C20,40 20,20 30,10 Z M25,25 C15,25 5,35 5,45 C-5,55 -5,75 5,85 C15,95 35,95 45,85 C55,75 55,55 45,45 C45,35 35,25 25,25 Z M65,25 C75,25 85,35 85,45 C95,55 95,75 85,85 C75,95 55,95 45,85 C35,75 35,55 45,45 C45,35 55,25 65,25 Z"/></svg>');
+            line-height: 1.6;
             position: relative;
             overflow-x: hidden;
         }
@@ -63,8 +58,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            border-bottom: 2px solid var(--halloween-orange);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid var(--blue-accent);
         }
        
         nav {
@@ -82,7 +77,7 @@
        
         .logo i {
             margin-right: 10px;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
         }
        
         .nav-links {
@@ -111,7 +106,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--halloween-orange);
+            background-color: var(--blue-accent);
             transition: width 0.3s;
         }
        
@@ -120,7 +115,7 @@
         }
        
         .nav-links a:hover {
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
         }
        
         .btn {
@@ -134,13 +129,13 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
        
         .btn:hover {
-            background-color: #e67e00;
+            background-color: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
        
         .btn-neet {
@@ -148,7 +143,7 @@
         }
        
         .btn-neet:hover {
-            background-color: #A0522D;
+            background-color: #1e40af;
         }
        
         .btn-jee {
@@ -156,7 +151,7 @@
         }
        
         .btn-jee:hover {
-            background-color: #CD853F;
+            background-color: #2563eb;
         }
 
         /* भाषा स्विचर स्टाइल्स */
@@ -166,8 +161,8 @@
         }
 
         .language-btn {
-            background: rgba(255, 140, 0, 0.2);
-            border: 1px solid var(--halloween-orange);
+            background: rgba(96, 165, 250, 0.2);
+            border: 1px solid var(--blue-accent);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -180,7 +175,7 @@
         }
 
         .language-btn:hover {
-            background: rgba(255, 140, 0, 0.4);
+            background: rgba(96, 165, 250, 0.4);
             transform: translateY(-2px);
         }
 
@@ -189,12 +184,12 @@
             top: 100%;
             right: 0;
             background: var(--light);
-            border: 1px solid var(--halloween-orange);
+            border: 1px solid var(--blue-accent);
             border-radius: 10px;
             padding: 0.5rem 0;
             margin-top: 0.5rem;
             min-width: 150px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             display: none;
             z-index: 1000;
         }
@@ -220,13 +215,13 @@
         }
 
         .language-option:hover {
-            background: rgba(255, 140, 0, 0.2);
-            color: var(--halloween-orange);
+            background: rgba(96, 165, 250, 0.2);
+            color: var(--blue-accent);
         }
 
         .language-option.active {
-            background: rgba(255, 140, 0, 0.3);
-            color: var(--halloween-orange);
+            background: rgba(96, 165, 250, 0.3);
+            color: var(--blue-accent);
             font-weight: 600;
         }
 
@@ -237,7 +232,7 @@
         /* हीरो सेक्शन */
         .hero {
             padding: 5rem 0;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.9));
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9));
             color: white;
             text-align: center;
             position: relative;
@@ -251,7 +246,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><path fill="%23FF8C00" fill-opacity="0.1" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') bottom/cover no-repeat;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><path fill="%2360a5fa" fill-opacity="0.1" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') bottom/cover no-repeat;
         }
        
         .hero-content {
@@ -262,7 +257,7 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             color: var(--text-light);
         }
        
@@ -270,7 +265,7 @@
             font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
        
         .hero-buttons {
@@ -295,7 +290,7 @@
        
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
             margin-bottom: 1rem;
         }
        
@@ -312,23 +307,23 @@
         }
        
         .feature-card {
-            background-color: rgba(47, 27, 27, 0.8);
+            background-color: rgba(30, 64, 175, 0.8);
             border-radius: 10px;
             padding: 2rem;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid var(--halloween-orange);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--blue-accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
        
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(96, 165, 250, 0.3);
         }
        
         .feature-card i {
             font-size: 3rem;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
             margin-bottom: 1.5rem;
         }
        
@@ -355,11 +350,11 @@
         .exam-card {
             flex: 1;
             min-width: 300px;
-            background: rgba(47, 27, 27, 0.8);
+            background: rgba(30, 64, 175, 0.8);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--blue-accent);
             transition: transform 0.3s;
         }
        
@@ -374,11 +369,11 @@
         }
        
         .neet-header {
-            background: linear-gradient(135deg, var(--neet), var(--halloween-orange));
+            background: linear-gradient(135deg, var(--neet), var(--blue-accent));
         }
        
         .jee-header {
-            background: linear-gradient(135deg, var(--jee), var(--halloween-purple));
+            background: linear-gradient(135deg, var(--jee), var(--secondary));
         }
        
         .exam-body {
@@ -426,9 +421,9 @@
             text-align: center;
             padding: 2rem;
             border-radius: 10px;
-            background-color: rgba(47, 27, 27, 0.8);
-            border: 1px solid var(--halloween-orange);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background-color: rgba(30, 64, 175, 0.8);
+            border: 1px solid var(--blue-accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
        
@@ -445,7 +440,7 @@
         .result-card .number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
             margin: 1rem 0;
         }
        
@@ -463,11 +458,11 @@
         }
        
         .testimonial-card {
-            background-color: rgba(47, 27, 27, 0.8);
+            background-color: rgba(30, 64, 175, 0.8);
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--halloween-orange);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--blue-accent);
             transition: transform 0.3s;
             position: relative;
         }
@@ -492,7 +487,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--halloween-orange), var(--halloween-purple));
+            background: linear-gradient(135deg, var(--blue-accent), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -527,7 +522,7 @@
             background-color: var(--dark);
             color: white;
             padding: 3rem 0 1rem;
-            border-top: 2px solid var(--halloween-orange);
+            border-top: 2px solid var(--blue-accent);
         }
        
         .footer-content {
@@ -542,7 +537,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
         }
        
         .footer-column h3::after {
@@ -552,7 +547,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--halloween-orange);
+            background-color: var(--blue-accent);
         }
        
         .footer-column ul {
@@ -570,7 +565,7 @@
         }
        
         .footer-column a:hover {
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
         }
        
         .social-links {
@@ -591,7 +586,7 @@
         }
        
         .social-links a:hover {
-            background-color: var(--halloween-orange);
+            background-color: var(--blue-accent);
         }
        
         .copyright {
@@ -623,7 +618,7 @@
                 width: 100%;
                 background: linear-gradient(135deg, var(--primary), var(--secondary));
                 padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             }
            
             .nav-links.active {
@@ -643,7 +638,7 @@
                 position: static;
                 margin-top: 0.5rem;
                 box-shadow: none;
-                border: 1px solid rgba(255, 140, 0, 0.5);
+                border: 1px solid rgba(96, 165, 250, 0.5);
             }
            
             .mobile-menu-btn {
@@ -689,24 +684,6 @@
         .animated {
             animation: fadeIn 1s ease-out;
         }
-       
-        /* हैलोवीन थीम */
-        .halloween-theme {
-            position: relative;
-        }
-       
-        .halloween-theme::before {
-            content: "🎃";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            font-size: 1.5rem;
-        }
-       
-        .spooky-text {
-            color: var(--halloween-orange);
-            font-weight: 600;
-        }
 
         /* लोडिंग स्पिनर */
         .loading-spinner {
@@ -719,7 +696,7 @@
             background: rgba(0,0,0,0.8);
             padding: 2rem;
             border-radius: 10px;
-            color: var(--halloween-orange);
+            color: var(--blue-accent);
             font-weight: bold;
         }
 
@@ -738,7 +715,7 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo halloween-theme">
+                <div class="logo">
                     <i class="fas fa-graduation-cap"></i>
                     <span>बिमलिज़्म</span>
                 </div>
@@ -783,9 +760,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>बिमलिज़्म <span class="spooky-text">NEET & JEE</span> कोचिंग</h1>
+                <h1>बिमलिज़्म NEET & JEE कोचिंग</h1>
                 <p>अपने सपनों को हकीकत में बदलें - भारत का प्रमुख NEET और JEE कोचिंग संस्थान</p>
-                <p>कृपया ध्यान दें कि अनुवाद केवल डैशबोर्ड में उपलब्ध है</p>
                 <div class="hero-buttons">
                     <a href="neet.html" class="btn btn-neet">NEET शुरू करें <i class="fas fa-arrow-right"></i></a>
                     <a href="jee.html" class="btn btn-jee">JEE शुरू करें <i class="fas fa-arrow-right"></i></a>
@@ -802,7 +778,7 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>बिमलिज़्म <span class="spooky-text">क्यों चुनें</span>?</h2>
+                <h2>बिमलिज़्म क्यों चुनें?</h2>
                 <p>हमारी सिद्ध पद्धति और विशेषज्ञ फैकल्टी ने हजारों छात्रों को उनके सपने पूरे करने में मदद की है</p>
             </div>
             <div class="features-grid">
@@ -824,7 +800,7 @@
     <section class="exams" id="exams">
         <div class="container">
             <div class="section-title">
-                <h2>हमारे <span class="spooky-text">प्रोग्राम</span></h2>
+                <h2>हमारे प्रोग्राम</h2>
                 <p>अधिकतम प्रभावशीलता के लिए डिज़ाइन किए गए विशेष कोचिंग प्रोग्राम</p>
             </div>
             <div class="exam-container">
@@ -876,7 +852,7 @@
     <section class="results" id="results">
         <div class="container">
             <div class="section-title">
-                <h2>हमारे <span class="spooky-text">परिणाम</span></h2>
+                <h2>हमारे परिणाम</h2>
                 <p>हर साल निरंतर उत्कृष्टता</p>
             </div>
             <div class="results-grid">
@@ -908,7 +884,7 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>छात्र <span class="spooky-text">सफलता की कहानियाँ</span></h2>
+                <h2>छात्र सफलता की कहानियाँ</h2>
                 <p>उन छात्रों से सुनें जिन्होंने अपने सपनों की रैंक हासिल की</p>
             </div>
             <div class="testimonial-grid">
@@ -955,7 +931,7 @@
     <!-- कॉल टू एक्शन -->
     <section class="cta" id="contact">
         <div class="container">
-            <h2>अपनी <span class="spooky-text">सफलता</span> की यात्रा शुरू करें</h2>
+            <h2>अपनी सफलता की यात्रा शुरू करें</h2>
             <p>हजारों छात्रों के साथ जुड़ें जिन्होंने बिमलिज़्म के साथ अपने सपने पूरे किए</p>
             <div class="hero-buttons">
                 <a href="neet.html" class="btn btn-neet">NEET तैयारी शुरू करें</a>
