@@ -128,98 +128,16 @@
             color: var(--primary);
         }
         
-        .modal-logo i {
-            margin-right: 10px;
-            color: #ffd700;
+        .modal-logo .logo-img {
+            height: 60px;
+            margin-right: 12px;
         }
         
-        .modal-title {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .modal-text {
-            margin-bottom: 30px;
-            color: #6b7280;
-        }
-        
-        .input-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .modal-btn {
-            display: inline-block;
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        
-        .modal-btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .modal-success {
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        
-        .modal-error {
-            background-color: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        
-        .shake {
-            animation: shake 0.5s;
+        /* NEW: Logo image styling */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            vertical-align: middle;
         }
         
         /* Header Styles */
@@ -244,11 +162,6 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-            color: #ffd700;
         }
         
         .nav-links {
@@ -810,8 +723,9 @@
                 <i class="fas fa-times"></i>
             </button>
             
+            <!-- LOGO WITH PNG -->
             <div class="modal-logo">
-                <i class="fas fa-graduation-cap"></i>
+                <img src="logo.png" alt="Bimalism Logo" class="logo-img">
                 <span>Bimalism</span>
             </div>
             
@@ -837,8 +751,9 @@
     <header>
         <div class="container">
             <nav>
+                <!-- LOGO WITH PNG -->
                 <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
+                    <img src="logo.png" alt="Bimalism Logo" class="logo-img">
                     <span>Bimalism</span>
                 </div>
                 <ul class="nav-links">
@@ -857,15 +772,15 @@
                         </button>
                         <div class="language-dropdown">
                             <button class="language-option active" data-lang="en" data-page="index.html">
-                                <span class="flag-icon">🇺🇸</span>
+                                <span class="flag-icon">USA</span>
                                 English
                             </button>
                             <button class="language-option" data-lang="hi" data-page="h.html">
-                                <span class="flag-icon">🇮🇳</span>
+                                <span class="flag-icon">India</span>
                                 हिंदी
                             </button>
                             <button class="language-option" data-lang="ta" data-page="t.html">
-                                <span class="flag-icon">🇮🇳</span>
+                                <span class="flag-icon">India</span>
                                 தமிழ்
                             </button>
                         </div>
@@ -1095,7 +1010,7 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i>Contact us by bimalism01@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> bimalism01@gmail.com</li>
                         <li>Created by Aalif and Dharunesh of Achariya 9th</li>
                         <li>Inspired by our class teacher Mr. Khageswararao Sir</li>
                     </ul>
@@ -1121,10 +1036,8 @@
             const userName = localStorage.getItem('bimalismUserName');
             
             if (userName) {
-                // User has already entered name, don't show modal
                 console.log(`Welcome back, ${userName}!`);
             } else {
-                // Show modal after 2 seconds
                 setTimeout(() => {
                     modal.classList.add('active');
                 }, 2000);
@@ -1133,7 +1046,6 @@
             // Close modal when X button is clicked
             closeBtn.addEventListener('click', function() {
                 modal.classList.remove('active');
-                // Store a flag to not show the modal again
                 localStorage.setItem('bimalismModalClosed', 'true');
             });
             
