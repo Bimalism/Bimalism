@@ -3,116 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Syllabus - Halloween Edition</title>
+    <title>NEET Syllabus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --physics: #3498db;
+            --chemistry: #e74c3c;
+            --biology: #2ecc71;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #000;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
             line-height: 1.6;
-            overflow-x: hidden;
+            padding-bottom: 60px;
         }
 
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header Styles */
         header {
-            background: #000;
+            background: var(--primary);
             color: white;
-            padding: 1rem 0;
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            border-bottom: 2px solid #FF8C00;
+            box-shadow: var(--shadow);
         }
-        
-        nav {
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
-            font-size: 1.8rem;
+            font-size: 24px;
             font-weight: 700;
             display: flex;
             align-items: center;
         }
-        
+
         .logo i {
             margin-right: 10px;
-            color: #FF8C00;
+            color: var(--accent);
         }
-        
-        .pumpkin {
-            margin-left: 10px;
-            font-size: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .nav-links {
+
+        nav ul {
             display: flex;
             list-style: none;
         }
-        
-        .nav-links li {
-            margin-left: 2rem;
+
+        nav li {
+            margin-left: 25px;
         }
-        
-        .nav-links a {
+
+        nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #FF8C00;
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .nav-links a:hover {
-            color: #FF8C00;
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .back-btn {
-            background: #FF8C00;
-            color: #000;
+            background: var(--accent);
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 50px;
@@ -120,8 +101,8 @@
             font-weight: 600;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
         }
 
         .back-btn i {
@@ -129,123 +110,64 @@
         }
 
         .back-btn:hover {
-            background: #ff8c42;
+            background: #c0392b;
             transform: translateY(-2px);
         }
 
-        /* Hero Section */
         .hero {
-            padding: 5rem 0;
-            background: #000;
-            color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 40px 0;
+            background: white;
             margin: 20px 0;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border: 2px solid #FF8C00;
+            box-shadow: var(--shadow);
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
+
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #fff;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
-        
+
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            color: #7f8c8d;
             max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: #FF8C00;
-            color: #000;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn:hover {
-            background-color: #ff8c42;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .download-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .download-btn {
-            background: #FF8C00;
-            color: #000;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-        }
-
-        .download-btn:hover {
-            background: #ff8c42;
-            transform: translateY(-3px);
+            margin: 0 auto;
         }
 
         .subject {
-            background: #000;
+            background: white;
             border-radius: 10px;
             overflow: hidden;
             margin: 30px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
         .subject:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
-        }
-
-        .physics {
-            border-color: #3498db;
-        }
-
-        .chemistry {
-            border-color: #e74c3c;
-        }
-
-        .biology {
-            border-color: #2ecc71;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .subject-header {
             padding: 20px;
-            color: #fff;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .physics-header {
-            background: linear-gradient(135deg, #3498db 0%, #8A2BE2 100%);
+            background: var(--physics);
         }
 
         .chemistry-header {
-            background: linear-gradient(135deg, #e74c3c 0%, #FF8C00 100%);
+            background: var(--chemistry);
         }
 
         .biology-header {
-            background: linear-gradient(135deg, #2ecc71 0%, #228B22 100%);
+            background: var(--biology);
         }
 
         .subject-header h2 {
@@ -264,29 +186,23 @@
 
         .chapter {
             margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #eee;
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .chapter:hover {
-            border-color: #FF8C00;
-            transform: translateY(-2px);
         }
 
         .chapter-header {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f8f9fa;
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .chapter-header:hover {
-            background: rgba(255, 117, 24, 0.1);
+            background: #e9ecef;
         }
 
         .chapter-title {
@@ -307,7 +223,7 @@
         }
 
         .chapter-summary {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -319,9 +235,41 @@
             flex-wrap: wrap;
         }
 
-        .btn-sm {
-            padding: 8px 15px;
-            font-size: 0.9rem;
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
         }
 
         .subject-actions {
@@ -335,8 +283,8 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #FF8C00;
-            color: #000;
+            background: var(--primary);
+            color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -344,8 +292,8 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
             z-index: 99;
             opacity: 0;
             visibility: hidden;
@@ -357,30 +305,46 @@
         }
 
         .back-to-top:hover {
-            background: #ff8c42;
+            background: var(--secondary);
             transform: translateY(-5px);
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        .download-btn:hover {
+            background: #1a252f;
+            transform: translateY(-3px);
         }
 
         .pdf-section {
             margin: 40px auto;
-            background: #000;
+            background: #fff;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow);
             text-align: center;
-            border: 2px solid #FF8C00;
         }
 
         .pdf-section h2 {
             margin-bottom: 20px;
-            color: #FF8C00;
+            color: var(--primary);
         }
 
         .pdf-section iframe {
             width: 100%;
             height: 600px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow);
         }
 
         .pdf-actions {
@@ -394,102 +358,38 @@
             text-align: center;
             padding: 20px;
             margin-top: 40px;
-            color: #fff;
-            background: #000;
-            border-top: 2px solid #FF8C00;
+            color: #7f8c8d;
         }
 
-        .halloween-message {
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255, 117, 24, 0.1);
-            border-radius: 10px;
-            border: 2px solid #FF8C00;
-        }
-
-        .halloween-message h3 {
-            color: #FF8C00;
-            margin-bottom: 10px;
-        }
-
-        .spooky-text {
-            color: #FF8C00;
-            font-weight: 600;
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animated {
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .header-content {
                 flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #000;
-                padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-                border-bottom: 2px solid #FF8C00;
+                gap: 15px;
             }
-            
-            .nav-links.active {
-                display: flex;
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            
-            .nav-links li {
-                margin: 0.5rem 0;
-                text-align: center;
+
+            nav li {
+                margin: 5px 10px;
             }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
+
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
+
             .subject-header {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
-            
+
             .chapter-actions {
                 flex-direction: column;
             }
-            
+
             .subject-actions {
                 flex-direction: column;
             }
@@ -498,62 +398,51 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i> NEET Syllabus
+            </div>
             <nav>
-                <div class="logo">
-                    <i class="fas fa-graduation-cap"></i> NEET Syllabus <span class="pumpkin">🎃</span>
-                </div>
-                <ul class="nav-links">
+                <ul>
                     <li><a href="#physics"><i class="fas fa-atom"></i> Physics</a></li>
                     <li><a href="#chemistry"><i class="fas fa-flask"></i> Chemistry</a></li>
                     <li><a href="#biology"><i class="fas fa-leaf"></i> Biology</a></li>
-                    <li><a href="pi.html">NEET 2024 Paper</a></li>
+                    <li><a href="pi.html">NEET 2024 R1 question Paper</a></li>
                 </ul>
-                <button class="back-btn" onclick="history.back()">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </button>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
             </nav>
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
         </div>
     </header>
 
     <div id="content">
         <div class="container">
-            <div class="halloween-message animated">
-                <h3><i class="fas fa-ghost"></i> Happy Halloween! <i class="fas fa-ghost"></i></h3>
-                <p>Study hard, but don't let the spooky subjects scare you! 🎃👻</p>
+            <div class="hero">
+                <h1>NEET Syllabus</h1>
+                <p>Your comprehensive guide to the Physics, Chemistry, and Biology syllabi for the NEET examination. Access chapter summaries and quizzes for each topic.</p>
             </div>
 
-            <div class="hero animated">
-                <div class="hero-content">
-                    <h1>NEET Syllabus - <span class="spooky-text">Halloween Edition</span></h1>
-                    <p>Your comprehensive guide to the Physics, Chemistry, and Biology syllabi for the NEET examination. Access chapter summaries and quizzes for each topic.</p>
-                </div>
-            </div>
-
-            <div class="download-section animated">
+            <div class="download-section">
                 <button class="btn download-btn" onclick="downloadPDF()">
                     <i class="fas fa-download"></i> Download Full Syllabus as PDF
                 </button>
             </div>
 
             <!-- Physics Section -->
-            <div class="subject physics animated" id="physics">
+            <div class="subject" id="physics">
                 <div class="subject-header physics-header">
                     <h2><i class="fas fa-atom"></i> Physics</h2>
                     <div class="subject-actions">
-                        <button class="btn btn-sm" onclick="location.href='physics-summary.html'">
+                        <button class="btn btn-primary" onclick="location.href='physics-summary.html'">
                             <i class="fas fa-file-alt"></i> Full Summary
                         </button>
-                        <button class="btn btn-sm" onclick="location.href='py-py-ln1-quiz.html'">
+                        <button class="btn btn-success" onclick="location.href='py-py-ln1-quiz.html'">
                             <i class="fas fa-brain"></i> Physics Quiz
                         </button>
                     </div>
                 </div>
                 <div class="subject-content">
-                    <!-- Physics chapters -->
                     <div class="chapter">
                         <div class="chapter-header" onclick="toggleChapter(this)">
                             <span class="chapter-title">Ch 1: Physical World</span>
@@ -564,10 +453,10 @@
                                 Scope, laws, applications of physics.
                             </div>
                             <div class="chapter-actions">
-                                <button class="btn btn-sm" onclick="location.href='neet-summary.html'">
+                                <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-sm" onclick="location.href='py-ln1-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln1-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -586,7 +475,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln2-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -605,7 +494,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln3-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -624,7 +513,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln4-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -643,7 +532,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln5-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -662,7 +551,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln6-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -681,7 +570,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln7-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -700,7 +589,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln8.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -716,10 +605,10 @@
                                 Stress, strain, elastic modulus, Hooke's law.
                             </div>
                             <div class="chapter-actions">
-                                <button class="btn btn-primary btn-sm" onclick="location.href='neet-ln9-summary.html'">
+                                <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln9-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -738,7 +627,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln10-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -757,7 +646,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln11-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -776,7 +665,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln12-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -795,7 +684,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln13-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -814,7 +703,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln14-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -833,7 +722,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln15-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -852,7 +741,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-16-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -871,7 +760,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln17-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -890,7 +779,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln18-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -909,7 +798,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln19-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -928,7 +817,7 @@
                                 <button class="btn btn-primary btn-sm" onclick="location.href='neet-summary.html'">
                                     <i class="fas fa-book"></i> Summary
                                 </button>
-                                <button class="btn btn-success btn-sm" onclick="location.href='py-ln20-quiz.html'">
+                                <button class="btn btn-success btn-sm" onclick="location.href='py-quiz.html'">
                                     <i class="fas fa-question-circle"></i> Quiz
                                 </button>
                             </div>
@@ -945,27 +834,26 @@
                                         <i class="fas fa-download"></i> Download PDF
                                     </button>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <!-- Chemistry Section -->
-            <div class="subject chemistry animated" id="chemistry">
+            <div class="subject" id="chemistry">
                 <div class="subject-header chemistry-header">
                     <h2><i class="fas fa-flask"></i> Chemistry</h2>
                     <div class="subject-actions">
-                        <button class="btn btn-sm" onclick="location.href='chem-summary.html'">
+                        <button class="btn btn-primary" onclick="location.href='chem-summary.html'">
                             <i class="fas fa-file-alt"></i> Full Summary
                         </button>
-                        <button class="btn btn-sm" onclick="location.href='chem-quiz.html'">
+                        <button class="btn btn-success" onclick="location.href='chem-quiz.html'">
                             <i class="fas fa-brain"></i> Chemistry Quiz
                         </button>
                     </div>
                 </div>
                 <div class="subject-content">
-                    <!-- Chemistry chapters -->
-              <div class="subject-content">
                     <div class="chapter">
                         <div class="chapter-header" onclick="toggleChapter(this)">
                             <span class="chapter-title">Ch 1: Some Basic Concepts</span>
@@ -1363,16 +1251,15 @@
                 </div>
             </div>
 
-
             <!-- Biology Section -->
-            <div class="subject biology animated" id="biology">
+            <div class="subject" id="biology">
                 <div class="subject-header biology-header">
                     <h2><i class="fas fa-dna"></i> Biology</h2>
                     <div class="subject-actions">
-                        <button class="btn btn-sm" onclick="location.href='bio-summary.html'">
+                        <button class="btn btn-primary" onclick="location.href='bio-summary.html'">
                             <i class="fas fa-file-alt"></i> Full Summary
                         </button>
-                        <button class="btn btn-sm" onclick="location.href='bio-quiz.html'">
+                        <button class="btn btn-success" onclick="location.href='bio-quiz.html'">
                             <i class="fas fa-brain"></i> Biology Quiz
                         </button>
                     </div>
@@ -1861,31 +1748,19 @@
     </div>
     
 
-
     <div class="back-to-top" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </div>
+                            
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 NEET Prep. All rights reserved. <span class="spooky-text">Happy Halloween! 🎃</span></p>
+            <p>&copy; 2025 NEET Prep. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
-
         // Toggle chapter content
         function toggleChapter(element) {
             const content = element.nextElementSibling;
@@ -1961,16 +1836,14 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
 
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
