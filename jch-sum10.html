@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermodynamics and Thermochemistry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+      
+        .section:last-child {
+            border-bottom: none;
+        }
+      
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+      
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+      
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+      
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+      
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+      
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+      
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+      
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+      
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+      
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+      
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+      
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+      
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+      
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+      
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+      
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+      
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+      
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+      
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+      
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+      
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+      
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+          
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+          
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+      
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+      
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+      
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+      
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+      
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+      
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+      
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+      
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+      
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+      
+        .model-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+      
+        .model-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+      
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+      
+        .bond-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+      
+        @media (max-width: 768px) {
+            .bond-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .objective-questions {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+      
+        .question {
+            margin-bottom: 15px;
+        }
+      
+        .options {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 10</div>
+            <h1>Thermodynamics and Thermochemistry</h1>
+            <p class="subtitle">Systems, Laws, Energy, Enthalpy, Entropy, Free Energy, Heats of Reaction, Hess's Law, Bond Energies</p>
+            <div class="importance">High Weightage in JEE Main</div>
+        </header>
+      
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> Introduction & Basic Concepts</h2>
+                <p>Thermodynamics studies energy forms and transformations. Based on empirical laws: Zeroth, First, Second, Third.</p>
+              
+                <div class="definition">
+                    <p><strong>System</strong>: Observed part of universe. <strong>Surroundings</strong>: Rest. <strong>Boundary</strong>: Separator.</p>
+                </div>
+              
+                <h3><i class="fas fa-box"></i> System Types</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-lock"></i> Isolated</div>
+                        <div class="topic-item">No matter/energy exchange (e.g., thermos flask)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Closed</div>
+                        <div class="topic-item">Energy only (e.g., pressure cooker)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-door-open"></i> Open</div>
+                        <div class="topic-item">Matter & energy (e.g., open beaker)</div>
+                    </div>
+                </div>
+              
+                <h3><i class="fas fa-layer-group"></i> Homogeneous/Heterogeneous</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-equals"></i> Homogeneous</div>
+                        <div class="topic-item">One phase (e.g., solution)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-th-large"></i> Heterogeneous</div>
+                        <div class="topic-item">Multiple phases (e.g., ice-water)</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-ruler"></i> Properties & State Functions</h2>
+                <h3><i class="fas fa-balance-scale"></i> Intensive/Extensive</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-weight-hanging"></i> Intensive</div>
+                        <div class="topic-item">Size-independent (T, P, density)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cubes"></i> Extensive</div>
+                        <div class="topic-item">Size-dependent (V, E, H, S)</div>
+                    </div>
+                </div>
+                <div class="formula">Extensive/mole → Intensive</div>
+              
+                <h3><i class="fas fa-exchange-alt"></i> Processes & Equilibrium</h3>
+                <table>
+                    <thead><tr><th>Process</th><th>Condition</th><th>Key Relation</th></tr></thead>
+                    <tbody>
+                        <tr><td>Isothermal</td><td>ΔT=0</td><td>ΔE=0</td></tr>
+                        <tr><td>Adiabatic</td><td>q=0</td><td>ΔE=w</td></tr>
+                        <tr><td>Isobaric</td><td>ΔP=0</td><td>ΔH=q</td></tr>
+                        <tr><td>Isochoric</td><td>ΔV=0</td><td>ΔE=q</td></tr>
+                        <tr><td>Cyclic</td><td>Initial→Final</td><td>ΔE=ΔH=0</td></tr>
+                        <tr><td>Reversible</td><td>Infinitesimal</td><td>Max work</td></tr>
+                        <tr><td>Irreversible</td><td>Finite step</td><td>ΔS_univ >0</td></tr>
+                    </tbody>
+                </table>
+                <p>Equilibrium: Chemical (fixed comp.), Mechanical (const. P), Thermal (const. T).</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-bolt"></i> Internal Energy (E) & First Law</h2>
+                <div class="formula">E = E_trans + E_rot + E_vib + E_elec + E_nuc</div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-check"></i> Properties</div>
+                        <div class="topic-item">Extensive, state function, ΔE path-independent</div>
+                        <div class="topic-item">Ideal gas: f(T) only</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-shield-alt"></i> First Law</div>
+                        <div class="topic-item">ΔE = q + w (w on system)</div>
+                        <div class="topic-item">Or ΔE = q - w (w by system)</div>
+                    </div>
+                </div>
+                <div class="formula">Units: 1 J = 10^7 erg = 0.239 cal</div>
+                <h3><i class="fas fa-fire"></i> Heat (q) & Work (w)</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus"></i> q</div>
+                        <div class="topic-item">Absorbed: +q (endothermic)</div>
+                        <div class="topic-item">Evolved: -q (exothermic)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus"></i> w</div>
+                        <div class="topic-item">On system: +w</div>
+                        <div class="topic-item">By system: -w (expansion)</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-thermometer"></i> Zeroth & Heat Capacities</h2>
+                <p><strong>Zeroth Law</strong>: Basis of temperature; thermal equilibrium transitive.</p>
+                <h3><i class="fas fa-chart-line"></i> Cp & Cv</h3>
+                <div class="formula">Cp - Cv = R (gases); γ = Cp/Cv</div>
+                <table>
+                    <thead><tr><th>Gas Type</th><th>Cv</th><th>Cp</th><th>γ</th></tr></thead>
+                    <tbody>
+                        <tr><td>Monoatomic</td><td>3/2 R</td><td>5/2 R</td><td>1.67</td></tr>
+                        <tr><td>Diatomic</td><td>5/2 R</td><td>7/2 R</td><td>1.40</td></tr>
+                        <tr><td>Polyatomic</td><td>3R</td><td>4R</td><td>1.33</td></tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-compress-arrows-alt"></i> Enthalpy & Expansion</h2>
+                <div class="formula">H = E + PV; ΔH = ΔE + Δn_g RT</div>
+                <p>Solids/liquids: ΔH ≈ ΔE</p>
+                <h3><i class="fas fa-equals"></i> Isothermal Expansion (ΔT=0)</h3>
+                <div class="formula">Reversible: w = -nRT ln(V2/V1) = 2.303 nRT log(V1/V2)</div>
+                <div class="formula">Irreversible: w = -P_ext (V2 - V1)</div>
+                <h3><i class="fas fa-snowflake"></i> Adiabatic Expansion (q=0)</h3>
+                <div class="formula">PV^γ = const; TV^{γ-1} = const; TP^{(1-γ)/γ} = const</div>
+                <div class="formula">w = ΔE = n Cv ΔT</div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-arrow-right"></i> Spontaneity & Second Law</h2>
+                <p>Spontaneous: Occurs without work (e.g., diffusion, heat flow hot→cold).</p>
+                <h3><i class="fas fa-ban"></i> Second Law Statements</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-snowflake"></i> Kelvin</div>
+                        <div class="topic-item">No perpetual motion; can't convert heat fully to work</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Clausius</div>
+                        <div class="topic-item">Heat cold→hot requires work</div>
+                    </div>
+                </div>
+                <div class="formula">Efficiency = 1 - T_low/T_high <1</div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-random"></i> Entropy (S)</h2>
+                <div class="definition">
+                    <p><strong>Entropy</strong>: Measure of disorder/randomness. ΔS = q_rev / T</p>
+                </div>
+                <div class="formula">ΔS_univ = ΔS_sys + ΔS_surr >0 (spontaneous); =0 (eq.); <0 (non-spont.)</div>
+                <h3><i class="fas fa-exchange-alt"></i> Changes</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Exothermic</div>
+                        <div class="topic-item">ΔS_surr >0</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-snowflake"></i> Endothermic</div>
+                        <div class="topic-item">ΔS_surr <0</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Phase Transition</div>
+                        <div class="topic-item">ΔS_fus = ΔH_fus / T_fus; ΔS_vap = ΔH_vap / T_boil</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gas-pump"></i> Ideal Gas</div>
+                        <div class="topic-item">ΔS = n Cv ln(T2/T1) + n R ln(V2/V1)</div>
+                    </div>
+                </div>
+                <div class="formula">Adiabatic reversible: ΔS=0 (isoentropic)</div>
+                <p>Units: J/K or cal/K; S = k ln W (Boltzmann)</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Free Energy & Third Law</h2>
+                <div class="formula">G = H - TS; ΔG = ΔH - T ΔS</div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-check"></i> Properties</div>
+                        <div class="topic-item">State function; ΔG=0 (eq.); <0 (spont.); >0 (non-spont.)</div>
+                        <div class="topic-item">ΔG° = -2.303 RT log K</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Spontaneity Criteria</div>
+                        <div class="topic-item">ΔH<0, ΔS>0: Always spont.</div>
+                        <div class="topic-item">ΔH>0, ΔS<0: Never spont.</div>
+                        <div class="topic-item">ΔH<0, ΔS<0: Low T spont.</div>
+                        <div class="topic-item">ΔH>0, ΔS>0: High T spont.</div>
+                    </div>
+                </div>
+                <table>
+                    <thead><tr><th>ΔH</th><th>ΔS</th><th>ΔG</th><th>Spontaneity</th><th>Example</th></tr></thead>
+                    <tbody>
+                        <tr><td>-</td><td>+</td><td>Always -</td><td>All T</td><td>2O3(g) → 3O2(g)</td></tr>
+                        <tr><td>+</td><td>-</td><td>Always +</td><td>No T</td><td>3O2(g) → 2O3(g)</td></tr>
+                        <tr><td>-</td><td>-</td><td>Low T -</td><td>Low T</td><td>CaCO3(s) → CaO(s) + CO2(g)</td></tr>
+                        <tr><td>+</td><td>+</td><td>High T -</td><td>High T</td><td>CaO(s) + CO2(g) → CaCO3(s)</td></tr>
+                    </tbody>
+                </table>
+                <h3><i class="fas fa-snowflake"></i> Third Law</h3>
+                <p>Perfect crystal entropy S=0 at 0 K. Absolute S calculable: S = 2.303 Cp log T</p>
+                <p>Limitations: Glasses, isotopes, disordered crystals (e.g., CO, N2O) have S>0 at 0 K.</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Thermochemistry</h2>
+                <p>Energy changes in reactions. Exothermic (ΔH<0, heat evolved); Endothermic (ΔH>0, heat absorbed).</p>
+                <div class="formula">ΔH_rxn = Σ ΔH_f(products) - Σ ΔH_f(reactants)</div>
+                <h3><i class="fas fa-fire"></i> Factors Affecting ΔH</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-layer-group"></i> Physical State</div>
+                        <div class="topic-item">Gas vs liquid changes ΔH (e.g., H2O(g) vs l)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Allotropes</div>
+                        <div class="topic-item">C(diamond) vs C(graphite)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Temperature</div>
+                        <div class="topic-item">Kirchhoff: ΔH_T2 = ΔH_T1 + ΔCp (T2 - T1)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-balance-scale"></i> P vs V</div>
+                        <div class="topic-item">ΔH = ΔE + Δn_g RT</div>
+                    </div>
+                </div>
+                <h3><i class="fas fa-calculator"></i> Types of Heats</h3>
+                <table>
+                    <thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead>
+                    <tbody>
+                        <tr><td>Formation (ΔH_f°)</td><td>1 mol from elements (25°C, 1 atm)</td><td>NH3(g): -11 kcal/mol</td></tr>
+                        <tr><td>Combustion</td><td>1 mol complete burn in O2</td><td>CH4(g): -192 kcal/mol</td></tr>
+                        <tr><td>Neutralization</td><td>1 eq acid + base (dil. soln.)</td><td>Strong acid+base: -13.7 kcal/eq</td></tr>
+                        <tr><td>Solution</td><td>1 mol solute in excess solvent</td><td>NH4Cl(s): +3.90 kcal/mol</td></tr>
+                        <tr><td>Hydration</td><td>Anhyd. salt + H2O → hydrate</td><td>CuSO4·5H2O: -18.69 kcal/mol</td></tr>
+                        <tr><td>Vaporization</td><td>Liquid → gas</td><td>H2O(l): +10.5 kcal/mol</td></tr>
+                        <tr><td>Fusion</td><td>Solid → liquid</td><td>Ice: +1.44 kcal/mol</td></tr>
+                        <tr><td>Sublimation</td><td>Solid → gas</td><td>I2(s): +14.8 kcal/mol</td></tr>
+                        <tr><td>Precipitation</td><td>Electrolytes → sparingly sol. salt</td><td>BaSO4: -4.66 kcal/mol</td></tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-link"></i> Hess's Law & Calorimetry</h2>
+                <div class="definition">
+                    <p><strong>Hess's Law</strong>: ΔH independent of path; total ΔH = sum of steps.</p>
+                </div>
+                <p>Applications: ΔH_f from combustion; slow reactions; allotropes; bond energies; resonance; lattice energy.</p>
+                <h3><i class="fas fa-flask"></i> Calorimetry</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Bomb (Const. V)</div>
+                        <div class="topic-item">ΔE = [(m s + W)(T2 - T1)] / wt</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Combustion</div>
+                        <div class="topic-item">Organic compounds</div>
+                    </div>
+                </div>
+                <div class="formula">Levoissier-Laplace: ΔH_decomp = - ΔH_form</div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-link"></i> Bond Energies</h2>
+                <div class="definition">
+                    <p><strong>Bond Energy</strong>: Avg. energy to break 1 mol bonds in gas phase (kJ/mol).</p>
+                </div>
+                <div class="formula">ΔH_rxn = Σ BE(reactants) - Σ BE(products)</div>
+                <p>Examples: H-H: 433; Cl-Cl: 242; H-Cl: 431 kJ/mol</p>
+                <h3><i class="fas fa-random"></i> Resonance Energy</h3>
+                <div class="formula">RE = Exp. ΔH_f - Calc. ΔH_f (from BE)</div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points & Tips</h2>
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key JEE Points</h4>
+                    <ul>
+                        <li>ΔE = q + w; ΔH = ΔE + ΔnRT</li>
+                        <li>Reversible work max; ΔS_univ >0 spontaneous</li>
+                        <li>Cp = Cv + R; γ mono=5/3</li>
+                        <li>Hess: Path independent; Bond E for ΔH calc.</li>
+                        <li>ΔG = -RT ln K; Third Law: S=0 at 0K</li>
+                        <li>Neutralization strong: -57 kJ/mol (H+ + OH- → H2O)</li>
+                    </ul>
+                </div>
+              
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Use Kirchhoff for ΔT effects</div>
+                        <div class="topic-item">Apply Hess for indirect ΔH</div>
+                        <div class="topic-item">Sign conv.: q in +, w on +</div>
+                        <div class="topic-item">Δn_g for gases only</div>
+                    </div>
+                  
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Forget state in ΔH (gas/liquid)</div>
+                        <div class="topic-item">Use BE for solids</div>
+                        <div class="topic-item">Ignore ΔS in spontaneity</div>
+                        <div class="topic-item">Confuse ΔE & ΔH</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-question-circle"></i> Objective Questions</h2>
+                <div class="objective-questions">
+                    <div class="question">
+                        <p>1. Internal energy of ideal gas depends on:</p>
+                        <div class="options">
+                            <p>(a) Volume (b) <strong>Temperature</strong> (c) Pressure (d) None</p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. Series returning to initial state:</p>
+                        <div class="options">
+                            <p>(a) Boyle's (b) Reversible (c) Adiabatic (d) <strong>Cyclic</strong></p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>3. 1 cal = ? J [CPMT 1988]</p>
+                        <div class="options">
+                            <p>(a) 0.4184 (b) <strong>4.184</strong> (c) 41.84 (d) 418.4</p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>4. ΔE for reversible isothermal cycle:</p>
+                        <div class="options">
+                            <p>(a) 100 cal/° (b) Negative (c) <strong>0</strong> (d) Positive</p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>5. Thermos with ice: [AIIMS 1992]</p>
+                        <div class="options">
+                            <p>(a) Closed (b) Open (c) <strong>Isolated</strong> (d) Non-thermo</p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>6. Intensive quantity: [IIT JEE 1993]</p>
+                        <div class="options">
+                            <p>(a) Enthalpy, T (b) V, T (c) Enthalpy, V (d) <strong>T, Refractive index</strong></p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>7. Largest energy unit: [CPMT 1989]</p>
+                        <div class="options">
+                            <p>(a) eV (b) Erg (c) <strong>Joule</strong> (d) Calorie</p>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>8. Order: 1 erg, 1 J, 1 cal [NCERT 1980]</p>
+                        <div class="options">
+                            <p>(a) cal > J > erg (b) J > cal > erg (c) <strong>cal > J > erg</strong> (d) erg > cal > J</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically <span class="highlight">3-4 questions</span>. Focus: Laws, ΔH/ΔE calcs, Hess, spontaneity, bond E.</p>
+              
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 85%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>Very High</span>
+                </div>
+            </section>
+        </div>
+      
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - Thermodynamics & Thermochemistry Full Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+          
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

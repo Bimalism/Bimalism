@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Kinetics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+       
+        header {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+       
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+       
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+       
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+       
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+       
+        .content {
+            padding: 40px;
+        }
+       
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+       
+        .section:last-child {
+            border-bottom: none;
+        }
+       
+        h2 {
+            color: #0d47a1;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0d47a1;
+            display: flex;
+            align-items: center;
+        }
+       
+        h2 i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 50%;
+        }
+       
+        h3 {
+            color: #1565c0;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+       
+        h3 i {
+            margin-right: 10px;
+            color: #1976d2;
+        }
+       
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+       
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #0d47a1;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+       
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e3f2fd;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1565c0;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+       
+        th {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+       
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+       
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+       
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+       
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+       
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .topic-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+       
+        .topic-title i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 50%;
+        }
+       
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+       
+        .important-points {
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            border-left: 4px solid #1976d2;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        .important-points h4 {
+            color: #0d47a1;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+       
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+       
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            margin-top: 40px;
+        }
+       
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+       
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+       
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+       
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+           
+            h1 {
+                font-size: 2rem;
+            }
+           
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+           
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+       
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+       
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+       
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+       
+        .topic-item:before {
+            content: "•";
+            color: #0d47a1;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+       
+        .weightage-bar {
+            height: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+       
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1976d2, #0d47a1);
+            border-radius: 5px;
+        }
+       
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+       
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #e3f2fd 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .reaction {
+            font-family: 'Cambria Math', serif;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 11</div>
+            <h1>Chemical Kinetics</h1>
+            <p class="subtitle">Reaction Rates, Mechanisms, and Factors Affecting Rates</p>
+            <div class="importance">Fundamental Chapter in Physical Chemistry</div>
+        </header>
+       
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Introduction to Chemical Kinetics</h2>
+                <p><strong>Chemical Kinetics</strong> is the branch of physical chemistry which deals with the rate at which chemical reactions occur, the mechanism by which chemical reactions take place, and the influence of various factors such as concentration, temperature, pressure, catalyst, etc., on the reaction rates.</p>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-bolt"></i> Types of Chemical Reactions</h2>
+                <p>On the basis of reaction rates, chemical reactions have been classified into three types:</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-running"></i> Very Fast or Instantaneous Reactions</div>
+                        <div class="topic-item">Occur at very fast rate</div>
+                        <div class="topic-item">Involve ionic species</div>
+                        <div class="topic-item">Known as ionic reactions</div>
+                        <div class="topic-item">Almost impossible to determine rates</div>
+                        
+                        <div class="example-box">
+                            <div class="example-title">Examples:</div>
+                            <div class="reaction">AgNO₃ + NaCl → AgCl + NaNO₃ (Precipitation)</div>
+                            <div class="reaction">HCl + NaOH → NaCl + H₂O (Neutralization)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tachometer-alt"></i> Moderate Reactions</div>
+                        <div class="topic-item">Proceed with measurable rates at normal temperature</div>
+                        <div class="topic-item">Studied in chemical kinetics</div>
+                        <div class="topic-item">Mostly molecular in nature</div>
+                        
+                        <div class="example-box">
+                            <div class="example-title">Examples:</div>
+                            <div class="reaction">2H₂O₂ → 2H₂O + O₂ (Decomposition)</div>
+                            <div class="reaction">2N₂O₅ → 2N₂O₄ + O₂ (Decomposition)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-hourglass-half"></i> Very Slow Reactions</div>
+                        <div class="topic-item">Extremely slow</div>
+                        <div class="topic-item">Take months to show measurable change</div>
+                        
+                        <div class="example-box">
+                            <div class="example-title">Examples:</div>
+                            <div class="reaction">Fe₂O₃ + xH₂O → Fe₂O₃·xH₂O (Rusting of iron)</div>
+                            <div class="reaction">2H₂ + O₂ → 2H₂O (At room temperature)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Rate of a Reaction</h2>
+                <p>The rate (speed or velocity) of a reaction is the change in concentration per unit time.</p>
+                
+                <div class="formula">
+                    Rate = Δx/Δt or dx/dt = (x₂ - x₁)/(t₂ - t₁)
+                </div>
+                
+                <p>where Δx or dx is the concentration change in the time interval Δt or dt.</p>
+                
+                <div class="definition">
+                    <p>Concentration is generally expressed in active mass, i.e., mole L⁻¹. The rate measured over a long time interval is called average rate and the rate measured for an infinitesimally small time interval is called instantaneous rate.</p>
+                </div>
+                
+                <h3><i class="fas fa-calculator"></i> Rate Expressions for Reactions</h3>
+                <p>For the reaction: aA + bB → cC + dD</p>
+                
+                <div class="formula">
+                    -d[A]/dt = Rate of disappearance of A<br>
+                    -d[B]/dt = Rate of disappearance of B<br>
+                    d[C]/dt = Rate of formation of C<br>
+                    d[D]/dt = Rate of formation of D
+                </div>
+                
+                <div class="formula">
+                    dx/dt = -1/a · d[A]/dt = -1/b · d[B]/dt = 1/c · d[C]/dt = 1/d · d[D]/dt
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Important Points</h4>
+                    <ul>
+                        <li>The rate of reaction is always positive</li>
+                        <li>The rate of chemical reaction decreases as the reaction proceeds</li>
+                        <li>Unit of rate = mole L⁻¹ time⁻¹ (for gaseous reactions: atm time⁻¹)</li>
+                        <li>Rate in atm time⁻¹ = Rate in mole L⁻¹ × RT</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sliders-h"></i> Factors Affecting Rate of a Reaction</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Nature of Reactants</div>
+                        <div class="topic-item">Physical state: Gaseous > Liquid > Solid</div>
+                        <div class="topic-item">Physical size: Rate increases with decrease in particle size</div>
+                        <div class="topic-item">Chemical nature: Ionic reactions are fast, bond rearrangement reactions are slow</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Effect of Temperature</div>
+                        <div class="topic-item">Rate generally increases with temperature</div>
+                        <div class="topic-item">Rate doubles or triples for every 10°C rise</div>
+                        <div class="topic-item">Temperature coefficient μ = k<sub>(t+10°C)</sub>/k<sub>t°C</sub></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Concentration of Reactants</div>
+                        <div class="topic-item">Rate is directly proportional to concentration</div>
+                        <div class="topic-item">Rate decreases with decrease in concentration</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-magic"></i> Presence of Catalyst</div>
+                        <div class="topic-item">Lowers activation energy</div>
+                        <div class="topic-item">Greater decrease in E<sub>a</sub> → higher reaction rate</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-sun"></i> Effect of Sunlight</div>
+                        <div class="topic-item">Photochemical reactions influenced by UV/visible light</div>
+                        <div class="topic-item">Examples: Photosynthesis, Photography</div>
+                        <div class="topic-item">Radiant energy supplies activation energy</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Law of Mass Action and Rate Constant</h2>
+                <p>The rate at which a substance reacts is directly proportional to its active mass and the rate at which a reaction proceeds is proportional to the product of the active masses of the reacting substances.</p>
+                
+                <div class="formula">
+                    For aA + bB → product: Rate = dx/dt = k[A]ᵃ[B]ᵇ
+                </div>
+                
+                <div class="definition">
+                    <p>When [A] = [B] = 1 mol/litre, then dx/dt = k. Thus, rate constant k is also called specific reaction rate.</p>
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Important Points</h4>
+                    <ul>
+                        <li>Value of k depends on nature of reactant, temperature, and catalyst</li>
+                        <li>k is independent of concentration of reactants</li>
+                        <li>Unit of k = [mol/litre]¹⁻ⁿ × sec⁻¹ where n = order of reaction</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sitemap"></i> Rate Law: Molecularity and Order of Reaction</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-molecule"></i> Molecularity</h3>
+                        <div class="topic-item">Sum of molecules of reactants in balanced equation</div>
+                        <div class="topic-item">Derived from reaction mechanism</div>
+                        <div class="topic-item">Cannot be zero, negative, or fractional</div>
+                        <div class="topic-item">Cannot be greater than 3</div>
+                        
+                        <div class="example-box">
+                            <div class="example-title">Examples:</div>
+                            <div class="reaction">NH₄NO₂ → N₂ + 2H₂O (Unimolecular)</div>
+                            <div class="reaction">NO + O₃ → NO₂ + O₂ (Bimolecular)</div>
+                            <div class="reaction">2NO + O₂ → 2NO₂ (Trimolecular)</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-sort-numeric-up"></i> Order of Reaction</h3>
+                        <div class="topic-item">Sum of exponents in rate law</div>
+                        <div class="topic-item">Determined by slowest step in mechanism</div>
+                        <div class="topic-item">Can be zero, negative, positive, fractional</div>
+                        <div class="topic-item">Can be greater than 3</div>
+                        
+                        <div class="example-box">
+                            <div class="example-title">Example:</div>
+                            <p>For Rate = k[A]ˣ[B]ʸ</p>
+                            <p>Overall order = x + y</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-table"></i> Order and Molecularity of Some Reactions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Chemical Equation</th>
+                            <th>Molecularity</th>
+                            <th>Rate Law</th>
+                            <th>Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aA + bB → product</td>
+                            <td>a + b</td>
+                            <td>dx/dt = k[A]ᵃ[B]ᵇ</td>
+                            <td>a + b</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>2H₂O₂ → 2H₂O + O₂</td>
+                            <td>2 (Bimolecular)</td>
+                            <td>dx/dt = k[H₂O₂]</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>CH₃Cl + OH⁻ → CH₃OH + Cl⁻</td>
+                            <td>2 (Bimolecular)</td>
+                            <td>dx/dt = k[CH₃Cl][OH⁻]</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>CH₃CHO → CH₄ + CO</td>
+                            <td>1 (Unimolecular)</td>
+                            <td>dx/dt = k[CH₃CHO]³/²</td>
+                            <td>1.5</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>2O₃ → 3O₂</td>
+                            <td>2</td>
+                            <td>dx/dt = k[O₃]²[O₂]⁻¹</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> Rate Constants and Half-Life Periods</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Rate Constant</th>
+                            <th>Unit</th>
+                            <th>Effect on Rate (m times conc.)</th>
+                            <th>Half-Life (T₅₀)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>k₀ = x/t</td>
+                            <td>conc. time⁻¹</td>
+                            <td>No change</td>
+                            <td>a/(2k₀)</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>k₁ = (2.303/t) log(a/(a-x))</td>
+                            <td>time⁻¹ (s⁻¹)</td>
+                            <td>m times</td>
+                            <td>0.693/k₁</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>k₂ = (1/t)[1/(a-x) - 1/a]</td>
+                            <td>conc⁻¹ time⁻¹</td>
+                            <td>m² times</td>
+                            <td>1/(k₂a)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>k₃ = (1/2t)[1/(a-x)² - 1/a²]</td>
+                            <td>conc⁻² time⁻¹</td>
+                            <td>m³ times</td>
+                            <td>3/(2k₃a²)</td>
+                        </tr>
+                        <tr>
+                            <td>n</td>
+                            <td>kₙ = 1/((n-1)t)[1/(a-x)ⁿ⁻¹ - 1/aⁿ⁻¹]</td>
+                            <td>conc¹⁻ⁿ time⁻¹</td>
+                            <td>mⁿ times</td>
+                            <td>(2ⁿ⁻¹ - 1)/((n-1)kₙaⁿ⁻¹)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-search"></i> Methods for Determination of Order</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-dice"></i> Integration Method</div>
+                        <div class="topic-item">Uses integrated rate equations</div>
+                        <div class="topic-item">Value of k determined for all sets</div>
+                        <div class="topic-item">Constant k value gives order</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-hourglass-half"></i> Half-Life Method</div>
+                        <div class="topic-item">t₁/₂ ∝ a¹⁻ⁿ</div>
+                        <div class="topic-item">Plot log t₁/₂ vs log a gives slope (1-n)</div>
+                        <div class="topic-item">n = 1 + [log(t₁/₂)₁ - log(t₁/₂)₂] / [log a₂ - log a₁]</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Graphical Method</div>
+                        <div class="topic-item">Plot log(a-x) vs t → straight line for 1st order</div>
+                        <div class="topic-item">Plot 1/(a-x) vs t → straight line for 2nd order</div>
+                        <div class="topic-item">Plot 1/(a-x)² vs t → straight line for 3rd order</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-calculator"></i> Van't Hoff Differential Method</div>
+                        <div class="topic-item">Rate = kCⁿ</div>
+                        <div class="topic-item">n = [log(-dC₁/dt) - log(-dC₂/dt)] / [log C₁ - log C₂]</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Ostwald's Isolation Method</div>
+                        <div class="topic-item">Initial rate method</div>
+                        <div class="topic-item">Vary one reactant at a time</div>
+                        <div class="topic-item">Determine order with respect to each reactant</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Theories of Reaction Rate</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-bullseye"></i> Collision Theory</h3>
+                        <div class="topic-item">Basic requirement: collision between reacting species</div>
+                        <div class="topic-item">Collision frequency (Z): collisions per second per unit volume</div>
+                        <div class="topic-item">Effective collisions produce chemical change</div>
+                        <div class="topic-item">Two barriers: Energy barrier and Orientation barrier</div>
+                        <div class="topic-item">Rate = f × Z (f = fraction of effective collisions)</div>
+                        <div class="topic-item">k = PZ<sub>AB</sub>e⁻ᴱᵃ/ᴿᵀ (P = orientation factor)</div>
+                        
+                        <div class="definition">
+                            <p><strong>Activation Energy (Eₐ)</strong> = Threshold Energy - Average Kinetic Energy of Reacting Molecules</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-exchange-alt"></i> Transition State Theory</h3>
+                        <div class="topic-item">Activated complex in equilibrium with reactants</div>
+                        <div class="topic-item">Transition state can form products or return to reactants</div>
+                        <div class="topic-item">Rate ∝ concentration of transition state</div>
+                        <div class="topic-item">ΔH = Eₐ(forward) - Eₐ(reverse)</div>
+                        <div class="topic-item">Endothermic: Eₐ(forward) < Eₐ(reverse)</div>
+                        <div class="topic-item">Exothermic: Eₐ(forward) > Eₐ(reverse)</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-equation"></i> Arrhenius Equation</h3>
+                <div class="formula">
+                    k = Ae⁻ᴱᵃ/ᴿᵀ
+                </div>
+                <div class="formula">
+                    log k = log A - Eₐ/(2.303RT)
+                </div>
+                <div class="formula">
+                    log(k₂/k₁) = Eₐ/(2.303R) × [1/T₁ - 1/T₂]
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Important Points</h4>
+                    <ul>
+                        <li>A = frequency factor, Eₐ = activation energy</li>
+                        <li>Plot of log k vs 1/T gives straight line</li>
+                        <li>Slope = -Eₐ/(2.303R)</li>
+                        <li>Intercept = log A</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> Mechanism of Reactions</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-forward"></i> First Order Consecutive Reactions</div>
+                        <div class="topic-item">R → I → P (two steps, both first order)</div>
+                        <div class="topic-item">I produced by step I, consumed by step II</div>
+                        <div class="topic-item">Each stage has own rate and rate constant</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tachometer-alt"></i> Reactions with Slow Step</div>
+                        <div class="topic-item">Rate determined by slowest step</div>
+                        <div class="topic-item">If k₁ << k₂: -d[R]/dt = d[P]/dt = k₁[R]</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-code-branch"></i> Parallel Reactions</div>
+                        <div class="topic-item">Reactants consumed in multiple reactions</div>
+                        <div class="topic-item">Rate of disappearance = sum of rates of all reactions</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sun"></i> Photochemical Reactions</h2>
+                <p>Chemical reactions initiated by absorption of light. Absorbed energy activates reactant molecules to cross energy barrier.</p>
+                
+                <h3><i class="fas fa-list-alt"></i> Characteristics</h3>
+                <div class="topic-item">Each molecule absorbs only one photon (Einstein's law)</div>
+                <div class="topic-item">Do not occur in dark</div>
+                <div class="topic-item">Require definite energy (specific wavelength)</div>
+                <div class="topic-item">Rate depends on intensity of radiation</div>
+                <div class="topic-item">ΔG may or may not be negative</div>
+                <div class="topic-item">Temperature has little effect on rate</div>
+                
+                <h3><i class="fas fa-exchange-alt"></i> Mechanism of H₂ + Cl₂ Reaction</h3>
+                <div class="topic-item">Chain reaction producing 10⁶-10⁸ HCl molecules per photon</div>
+                <div class="topic-item">Light absorption: Cl₂ + hν → Cl₂*</div>
+                <div class="topic-item">Chain initiation: Cl₂* → Cl• + Cl•</div>
+                <div class="topic-item">Chain propagation: Cl• + H₂ → HCl + H•; H• + Cl₂ → HCl + Cl•</div>
+                <div class="topic-item">Chain termination: Cl• + Cl• → Cl₂</div>
+                
+                <h3><i class="fas fa-calculator"></i> Quantum Yield (φ)</h3>
+                <div class="formula">
+                    φ = (Number of molecules reacted or product formed) / (Number of photons absorbed)
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Applications of Photochemistry</h4>
+                    <ul>
+                        <li>Photosynthesis in plants</li>
+                        <li>Photography</li>
+                        <li>Formation and destruction of ozone layer</li>
+                        <li>Photoetching in electronic industry</li>
+                        <li>Polymerization reactions</li>
+                        <li>Modern printing technology</li>
+                        <li>Free radical combinations</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-tips"></i> Tips & Tricks</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Different reactions have different rates due to different activation energies</li>
+                        <li>Reaction NO + ½O₂ → NO₂ has negative temperature coefficient</li>
+                        <li>Fuels need activation energy (provided by flame) to initiate reaction</li>
+                        <li>Quantum efficiency: H₂ + Cl₂ → 2HCl (φ = 10⁶-10⁸); H₂ + Br₂ → 2HBr (φ = 0.01)</li>
+                        <li>For zero order: t₀.₇₅ = 1.5 × t₀.₅; t₀.₅₀ = 2 × t₀.₂₅</li>
+                        <li>For first order: t₀.₇₅ = 2 × t₀.₅; t₀.₅₀ = 2 × t₀.₂₅</li>
+                        <li>For second order: t₀.₇₅ = 3 × t₀.₅; t₀.₅₀ = 3 × t₀.₂₅</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Understand difference between order and molecularity</div>
+                        <div class="topic-item">Practice integrated rate equations</div>
+                        <div class="topic-item">Learn to determine order from experimental data</div>
+                        <div class="topic-item">Remember Arrhenius equation applications</div>
+                    </div>
+                   
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Don't confuse order with molecularity</div>
+                        <div class="topic-item">Don't forget units of rate constants</div>
+                        <div class="topic-item">Don't mix up half-life formulas</div>
+                        <div class="topic-item">Don't ignore temperature effects on rate</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+               
+                <p>This chapter typically carries <span class="highlight">2-3 questions</span> in JEE Main, covering rate laws, order of reactions, Arrhenius equation, and reaction mechanisms.</p>
+               
+                <div class="weightage-item">
+                    <h4>Chapter Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 70%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>Medium (2-3 questions)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+       
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Physical Chemistry - Chemical Kinetics Summary</div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+           
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+           
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Principles of Extraction of Metals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+      
+        .section:last-child {
+            border-bottom: none;
+        }
+      
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+      
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+      
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+      
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+      
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+      
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+      
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+      
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+      
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+      
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+      
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+      
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+      
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+      
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+      
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+      
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+      
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+      
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+      
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+      
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+      
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+          
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+          
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+      
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+      
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+      
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+      
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+      
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+      
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+      
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+      
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+      
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 16</div>
+            <h1>General Principles of Extraction of Metals</h1>
+            <p class="subtitle">Occurrence, Ores, Minerals, Metallurgy, Concentration, Reduction, Refining, Furnaces, Alloys</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+      
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-globe"></i> Occurrence of Metals</h2>
+                <p>All the materials found in the earth are composed of elements. There are about 112 elements known which constitute the entire matter on the earth. Therefore, the elements are regarded as the building blocks of the universe. These are distributed in all the three main parts of the earth; atmosphere and lithosphere. Among these, lithosphere constitutes the main source of most of the elements. The elements have been broadly divided into metals and non-metals on the basis of their physical and chemical properties.</p>
+                <p>Element which have low chemical reactivity generally occur native or free or metallic state. e.g. Au, Ag, Pt, noble gas etc. Element which are chemically reactive, generally occur in the combined state. e.g. halogens, chalcogens etc. The natural materials in which the metals occur in the earth are called minerals. The mineral from which the metal is conveniently and economically extracted is called an ore. All the ores are minerals but all minerals cannot be ores. Ores may be divided into four groups.</p>
+                <p>(1) Metallic core (siderophile) of the earth crust contains (Mn, Fe, Co, Ni, Cu, Ru, Rh, Pd, Ag, Re, Os, Ir, Pt, Au). Entire composition of metals in earth crust may be given as, Al (8.3%); Ca(3.6%); Na (2.8%); K (2.6%); Mg (2.1%); Ti (0.4%); Mn (0.1%); Fe (5.1%) other metals (0.1%).</p>
+                <h3><i class="fas fa-gem"></i> Types of Ores</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cube"></i> Native Ores</div>
+                        <p>These ores contain metals in free state, e.g., silver, gold, platinum, mercury, copper, etc. These are found usually associated with rock or alluvial materials like clay, sand, etc. sometimes lumps of pure metals are also found. These are termed nuggets. Iron is found in free state as meteorites which also have 20 to 30% nickel.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Sulphurised and Arsenical Ores</div>
+                        <p>These ores consist of sulphides and arsenides in simple and complex forms of metals. Important ores of this group are</p>
+                        <table>
+                            <tr><th>Metal</th><th>Name of the ore</th><th>Composition</th></tr>
+                            <tr><td>Pb</td><td>Galena</td><td>PbS</td></tr>
+                            <tr><td>Zn</td><td>Zinc blende</td><td>ZnS</td></tr>
+                            <tr><td>Hg</td><td>Cinnabar</td><td>HgS</td></tr>
+                            <tr><td>Ag</td><td>Argentite or silver glance</td><td>Ag₂S</td></tr>
+                            <tr><td>Ag</td><td>Pyrargyrite or ruby silver</td><td>3Ag₂S.Sb₂S₃</td></tr>
+                            <tr><td>Fe</td><td>Iron pyrites</td><td>FeS₂</td></tr>
+                            <tr><td>Ni</td><td>Kupfer nickel</td><td>NiAs</td></tr>
+                            <tr><td>Cu</td><td>Copper pyrites</td><td>CuFeS₂</td></tr>
+                            <tr><td>Cu</td><td>Chalcocite or Copper glance</td><td>Cu₂S</td></tr>
+                        </table>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Oxidised Ores</div>
+                        <p>In these ores, metals are present as their oxides or oxysalts such as carbonates, nitrates, sulphates, phosphates, silicates, etc. Important ores of this group are listed below</p>
+                        <h4>Oxides</h4>
+                        <table>
+                            <tr><th>Ore</th><th>Composition</th></tr>
+                            <tr><td>Haematite</td><td>Fe₂O₃</td></tr>
+                            <tr><td>Magnetite</td><td>Fe₃O₄</td></tr>
+                            <tr><td>Limonite</td><td>Fe₂O₃.3H₂O</td></tr>
+                            <tr><td>Bauxite</td><td>Al₂O₃.2H₂O</td></tr>
+                            <tr><td>Corundum</td><td>Al₂O₃</td></tr>
+                            <tr><td>Diaspore</td><td>Al₂O₃.H₂O</td></tr>
+                            <tr><td>Chromite</td><td>FeO.Cr₂O₃</td></tr>
+                            <tr><td>Chromeochre</td><td>Cr₂O₃</td></tr>
+                            <tr><td>Tinstone (Cassiterite)</td><td>SnO₂</td></tr>
+                            <tr><td>Chrysoberyl</td><td>BeO.Al₂O₃</td></tr>
+                            <tr><td>Cuprite (Ruby copper)</td><td>Cu₂O</td></tr>
+                            <tr><td>Pyrolusite</td><td>MnO₂</td></tr>
+                            <tr><td>Zincite</td><td>ZnO</td></tr>
+                            <tr><td>Rutile</td><td>TiO₂</td></tr>
+                            <tr><td>Ilmenite</td><td>FeO.TiO₂</td></tr>
+                        </table>
+                        <h4>Carbonates</h4>
+                        <table>
+                            <tr><th>Ore</th><th>Composition</th></tr>
+                            <tr><td>Magnesite</td><td>MgCO₃</td></tr>
+                            <tr><td>Lime stone</td><td>CaCO₃</td></tr>
+                            <tr><td>Dolomite</td><td>CaCO₃.MgCO₃</td></tr>
+                            <tr><td>Calamine</td><td>ZnCO₃</td></tr>
+                            <tr><td>Malachite</td><td>CuCO₃.Cu(OH)₂</td></tr>
+                            <tr><td>Azurite</td><td>Cu(OH)₂.2CuCO₃</td></tr>
+                            <tr><td>Cerussite</td><td>PbCO₃</td></tr>
+                            <tr><td>Siderite</td><td>FeCO₃</td></tr>
+                        </table>
+                        <h4>Nitrates</h4>
+                        <table>
+                            <tr><th>Ore</th><th>Composition</th></tr>
+                            <tr><td>Chile saltpetre</td><td>NaNO₃</td></tr>
+                            <tr><td>Salt petre</td><td>KNO₃</td></tr>
+                        </table>
+                        <h4>Sulphates</h4>
+                        <table>
+                            <tr><th>Ore</th><th>Composition</th></tr>
+                            <tr><td>Epsom salt</td><td>MgSO₄.7H₂O</td></tr>
+                            <tr><td>Barytes</td><td>BaSO₄</td></tr>
+                            <tr><td>Gypsum</td><td>CaSO₄.2H₂O</td></tr>
+                            <tr><td>Glauber’s salt</td><td>Na₂SO₄.10H₂O</td></tr>
+                            <tr><td>Anglesite</td><td>PbSO₄</td></tr>
+                            <tr><td>Kainite</td><td>KCl.MgSO₄.3H₂O</td></tr>
+                            <tr><td>Schonite</td><td>K₂SO₄.MgSO₄.6H₂O</td></tr>
+                            <tr><td>Polyhalite</td><td>K₂SO₄.MgSO₄.CaSO₄.2H₂O</td></tr>
+                        </table>
+                        <h4>Phosphates and Silicates</h4>
+                        <table>
+                            <tr><th>Ore</th><th>Composition</th></tr>
+                            <tr><td>Lepidolite (an ore of lithium)</td><td>(Li, Na, K)₂ Al₂(SiO₃)₃ (F,OH)₂</td></tr>
+                            <tr><td>Petalite (an ore of lithium)</td><td>LiAl(Si₂O₅)₂</td></tr>
+                            <tr><td>Triphylite (an ore of lithium)</td><td>(Li, Na)₃PO₄, (Fe, Mn)₃ (PO₄)₂</td></tr>
+                            <tr><td>Beryl (an ore of beryllium)</td><td>3BeO. Al₂O₃.6SiO₂</td></tr>
+                            <tr><td>Willemite</td><td>Zn₂SiO₄</td></tr>
+                            <tr><td>China clay</td><td>Al₂O₃.2SiO₂.2H₂O</td></tr>
+                            <tr><td>Chlor-apatite</td><td>3Ca₃(PO₄)₂.CaCl₂</td></tr>
+                            <tr><td>Mica</td><td>K₂O.3Al₂O₃.6SiO₂.2H₂O</td></tr>
+                            <tr><td>Fluor-apatite</td><td>3Ca₃(PO₄)₂.CaF₂</td></tr>
+                            <tr><td>Felspar</td><td>KAlSi₃O₈</td></tr>
+                            <tr><td>Talc</td><td>Mg₂(Si₂O₅).Mg(OH)₂</td></tr>
+                            <tr><td>Asbestos</td><td>CaMg₃.(SiO₃)₄</td></tr>
+                        </table>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-snowflake"></i> Halide Ores</div>
+                        <p>Metallic halides are very few in nature. Chlorides are most common. For example. Common salt NaCl; Horn silver AgCl; Carnallite KCl.MgCl₂.6H₂O. The important fluoride ores are Fluorspar CaF₂; Cryolite Na₃AlF₆.</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-heart"></i> Metals in Biology</h3>
+                <p>Metals are also found in living organisms, e.g., (1) Magnesium is found in chlorophyll. (2) Potassium is present in plant roots. (3) Manganese, Iron and copper are present in chloroplast. (4) Zinc is present in eyes of cats and cows. (5) Iron is present in haemoglobin. (6) Calcium is present in bones. (7) Vanadium is present in cucumbers. (8) Chromium is present in prawn.</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-industry"></i> Extraction of Metals: Metallurgy</h2>
+                <p>The extraction of a pure metal from its ore is called metallurgy. In order to extract the metal from ores, several physical and chemical methods are used. The method used depending upon chemical properties and nature of the ore from which it is to be extracted. It involves four main steps, (1) Crushing and grinding of the ore. (2) Concentration or dressing of the ore. (3) Reduction to free metal. (4) Purification or refining of the metal.</p>
+                <h3><i class="fas fa-hammer"></i> Crushing and Grinding of the Ore</h3>
+                <p>Those ores occur in nature as huge lumps. They are broken to small pieces with the help of crushers or grinders. These pieces are then reduced to fine powder with the help of a ball mill or stamp mill. This process is called pulverisation.</p>
+                <h3><i class="fas fa-filter"></i> Concentration or Dressing of the Ore</h3>
+                <p>The ore are usually obtained from the ground and therefore contained large amount of unwanted impurities, e.g., earth particles, rocky matter, sand, limestone etc. These impurities are known collectively as gangue or matrix. It is essential to separate the large bulk of these impurities from the ore to avoid bulk handling and in subsequent fuel costs. The removal of these impurities from the ores is known as concentration. The concentration is done by physical as well as chemical methods.</p>
+                <h4>Physical Methods</h4>
+                <p>(i) Gravity Separation or levigation: This process of concentration is based on the difference in the specific gravity of the ore and gangue. The sieved ore is either subjected to dry centrifugal separation or is placed in big shallow tanks in which a strong current of water blows. Heavy ore particles settle down to the bottom of the tanks while lighter gangue particles are carried away by the current of water. The process removes most of the soluble and insoluble impurities. For this purpose wilfley table and hydraulic classifier are widely used. The method is particularly suitable for heavy oxide and carbonate ores like Cassiterite (SnO₂) and haematite.</p>
+                <p>(ii) Froth floatation process : In some cases for example, sulphides ores of copper, zinc and lead concentration is brought by this method. In this method advantage is taken of the preferential wetting of the ore by an oil. The finely ground ore is taken in a tank containing water and 1% of pine oil or turpentine oil. A strong current of air is blown through the suspension, producing a heavy froth or foam on the surface. The metal sulphide is wetted by the oil but the gangue is not and the sulphide-oil mixture is carried to the surface by films of oil The froth is skimmed off, the gangue settles down on the bottom or remains underneath the froth. By this floatation method it is possible to concentrate over 90% of a sulphite ore to 1/10 of its original bulk.</p>
+                <p>(ii) Activators and Depressants : During the floatation process of some ores, these substances are added which activate or depress the floatation property of the minerals and thus help in the separation of minerals present in the ore. For instance, galena (PbS) is usually associated with sphalerite (ZnS) and pyrites (FeS₂). Concentration of galena is carried out by passing potassium ethyl xanthate (Collector) along with sodium cyanide and alkali (depressants) where by the floatation property of ZnS and FeS₂ is depressed. Mainly PbS passes into the froth when air current is flown in, which is collected. After PbS is removed with the froth, same CuSO₄ (activator) is added and air is blown. The floatation property of ZnS is increased which is now removed with the froth. The slurry is acidified and process is repeated when FeS₂ passed into the froth and is collected.</p>
+                <p>(iii) Electromagnetic separation : If the mineral and not gangue is attracted by a magnet, it can be concentrated by magnetic separation. For example chromite ore, FeCr₂O₄ being magnetic can be separated from non-magnetic silicious impurities by this method. Sometimes two minerals occur together, in which one happens to be magnetic. By magnetic separation method the nonmagnetic mineral is separated from the magnetic mineral. For example tin-stone or cassiterite, SnO₂ (non-magnetic) containing wolfram, FeWO₄ (magnetic) is separated by this method. In this method a thin layer of finely ground ore is spread over a rubber belt carried over a pulley in a magnetic field. The gangue particles or the particles of non-magnetic mineral fall off as the belt becomes vertical, and the magnetic particles collect.</p>
+                <h4>Chemical Methods</h4>
+                <p>(i) Calcination : In this process the concentrated ore is heated in a suitable furnace generally in reveratory furnace much below its melting point in absence of air. As a result of which the ore dries up and moisture and volatile impurities are driven off and carbonates are converted into oxides and the ore becomes porous. For example,</p>
+                <div class="formula">Al₂O₃.2H₂O → Al₂O₃ + 2H₂O</div>
+                <div class="formula">2Fe₂O₃.3H₂O → 2Fe₂O₃ + 3H₂O</div>
+                <div class="formula">ZnCO₃ → ZnO + CO₂</div>
+                <div class="formula">CaCO₃ → CaO + CO₂</div>
+                <div class="formula">CuCO₃.Cu(OH)₂ → 2CuO + CO₂ + H₂O</div>
+                <p>(ii) Roasting : The process of heating the ores strongly in presence of air with or without certain substances, below its melting point is termed as roasting. It differs from calcination in the respect that heating is done in presence of air and at a higher temperature. In this process the impurities of sulphur and arsenic etc. are volatilized away as oxides and the ore is converted into oxide. For example zinc oxide is formed by the oxidation of zinc blende, 2ZnS + 3O₂ → 2ZnO + 2SO₂.</p>
+                <p>(iii) Leaching : It involves the treatment of the ore with a suitable reagent as to make it soluble while impurities remain insoluble. The ore is recovered from the solution by suitable chemical method. For example, the chief ore of aluminium, bauxite (Al₂O₃.2H₂O) contains varying amounts of ferric oxides, titanium oxide and silica. Since alumina is amphoteric, it can be separated from the other two oxides. Finely powdered bauxite is digested with caustic soda solution at 150–170°C under pressure for some hours. Alumina dissolves forming soluble sodium aluminate. Al₂O₃. 2H₂O + 2NaOH → 2NaAlO₂ + 3H₂O. The impurities remain unaffected and separated as insoluble red mud which is filtered off. The filtrate is diluted and some freshly precipitated aluminium hydroxide is added when Al(OH)₃ is precipitated as follows, NaAlO₂ + 2H₂O → NaOH + Al(OH)₃. The precipitated hydroxide is filtered off and calcined to get highly pure aluminium oxide (alumina). 2Al(OH)₃ → Al₂O₃ + 3H₂O. Gold and silver are also extracted from their native ores by Leaching (Mac-Arthur forest cyanide process).</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-compress"></i> Reduction to Free Metal</h2>
+                <p>Some of the methods commonly used to get free metal from the concentrated ore are given below,</p>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Smelting</div>
+                        <p>The process of extracting a metal in the state of fusion is called smelting. In this process the ore is mixed with carbon, obtained after the above reactions and heated in suitable furnace. A suitable flux is added during the operation to convert the non–fusible gangue to fusible slag. The metallic oxide is reduced by carbon and the metal may be obtained in the molten state or as vapours which are condensed. Metals like tin, zinc or lead are obtained by this process. SnO₂ + 2C → Sn + 2CO; ZnO + C → Zn + CO; 2Fe₂O₃ + 3C → 4Fe + 3CO₂.</p>
+                        <p>Flux and slag : Flux is a substance that is added during smelting to convert infusible silicious or earthy impurities into fusible material known as slag. Impurities + Flux = Slag. The slag is immiscible with the metal and has a low melting point and density. The slag floats on the metal and protects it from oxidation. It is removed from the furnace through the slag hole. If the impurities in the ore are acidic (SiO₂) in nature, a basic flux e.g., CaO, MgO, FeO etc. are added; and if the impurities are basic (CaO, FeO, etc.) then an acidic flux (SiO₂) is used. The gangue or matrix present in the ore is refractory or non–fusible in nature but it reacts with the flux forming fusible slag which does not mix with the molten metal and forms the upper layer. Slag are usually silicates. CaO + SiO₂ → CaSiO₃ Slag; FeO + SiO₂ → FeSiO₃ Slag.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Reduction by Aluminium (Gold-Schmidt Alumino Thermic Process)</div>
+                        <p>The process of reduction is used in the case of those oxides which can not be easily reduced by carbon. In this process, metallic oxides ore are mixed with aluminium powder commonly called as thermite and placed in a steel crucible lined inside with a refractory material and ignited by magnesium ribbon. By the use of this process a number of metals such as chromium and manganese are obtained on a commercial scale in highly pure state. Cr₂O₃ + 2Al → Al₂O₃ + 2Cr; 3MnO₂ + 4Al → 2Al₂O₃ + 3Mn. Large amount of heat energy is released during reduction, which fuses both the alumina and the metal.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-recycle"></i> Self Reduction Process</div>
+                        <p>This process is also called autoreduction process or air reduction process. The sulphide ores of less electropositive metals like Hg, Pb, Cu etc., are heated in air as to convert part of the ore into oxide or sulphate which then reacts with the remaining sulphide ore to give the metal and sulphur dioxide. No external reducing agent is used in this process.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plug"></i> Electrolytic Reduction Process</div>
+                        <p>This process is used in the extraction of the alkali and alkaline earth metals, zinc and aluminium. The material from which a metal to be obtained is first smelted by heating and then electrolysed. Sometimes, some other salt is mixed to lower the melting point of the substance taken. For example, NaCl → Na⁺ + Cl⁻. At anode (Oxidation) : Cl⁻ → Cl + e⁻; Cl + Cl → Cl₂, At cathode (Reduction) : Na⁺ + e⁻ → Na.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Precipitation or Metal Displacement Method (Hydrometallurgy)</div>
+                        <p>This method is used for extraction of metals such as cadmium, copper, gold and silver. A metal having higher electrode potential is added into the solution of a metal of lower electrode potential with the result that the latter is displaced or precipitated. CuSO₄ + Fe → FeSO₄ + Cu; CdSO₄ + Zn → ZnSO₄ + Cd; 2K[Ag(CN)₂] + Zn → K₂[Zn(CN)₄] + 2Ag; 2K[Au(CN)₂] + Zn → K₂[Zn(CN)₄] + 2Au.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-water"></i> Amalgamation Process</div>
+                        <p>This method is used for the extraction of noble metals like gold, silver, etc., from the native ores. The finely powdered ore is brought in contact with mercury which combines with the particles of the metal present in the ore and form amalgam. The metal recovered from the amalgam by subjecting it to distillation, where the mercury distills over leaving behind the metal.</p>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-spa"></i> Purification or Refining of Metals</h2>
+                <p>Metals obtained as above are usually impure and need purification. Some of the methods used in the refining of metals are given below,</p>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-wind"></i> By Poling</div>
+                        <p>The molten metals is stirred with green wood poles. Wood at the high temperature of the molten metals form hydrocarbons like methane which bring about the reduction of any oxide present in the metal e.g., copper oxide present in the blister copper. In the case of the tin the impurities are oxidised and float on the molten metal as scum which is removed.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> By Cupellation</div>
+                        <p>In this method the impure metal is heated in a blast of air when impurities are oxidised and blown away. For example, when impure silver is heated in air, lead present in it is oxidised to litharge (PbO) and blown away leaving a shining of silver.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> By Liquation</div>
+                        <p>This process is used for refining easily fusible metals like lead and tin. The impure metal is heated on the sloping hearth of a reverberatory furnace. The metal melts and flows down leaving the impurities.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cloud"></i> By Distillation</div>
+                        <p>Some metals have very low melting point and soon vaporize on heating, while the associated impurities remain in the solid state. Zinc, mercury and arsenic are purified by this method. Vacuum distillation gives very pure product and is used in the refining of the metals of IA and IIA Groups.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-filter"></i> By Fractional Distillation</div>
+                        <p>This process is applied for the separation of cadmium from zinc. In the metallurgy of zinc, the metal is invariably associated with cadmium. The impure zinc is mixed with powdered coke and heated when the first portion of the condensate contain cadmium while zinc is obtained in the subsequent portions.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cog"></i> By Thermal Dissociation</div>
+                        <p>In this process the metal is first converted into some compound which is then decomposed into pure metal by heating. For example, impure nickel is heated with carbon monoxide at 60°C to form nickel carbonyl Ni(CO)₄ which is then decomposed at higher temperature, 150-180°C to give very pure nickel. Sometimes iron is also purified by this method.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plug"></i> By Electrolytic Refining</div>
+                        <p>Most of the metals such as copper, silver, gold, zinc, nickel, and chromium are refined electrolytically. The impure metal is made the anode and a thin sheet of the pure metal the cathode in a suitable electrolytic bath. On passing current the metal from the anode passes in the solution and pure metal from the electrolyte is deposited on the cathode. The electrolyte used in the bath is usually a complex salt of the metal to enable the smooth deposition of pure metal on the cathode.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cogs"></i> Special Methods</div>
+                        <p>(a) Mond's process : Nickel is purified by this method. Impure nickel is treated with carbon monoxide at 60-80°C when volatile compound, nickel carbonyl, is formed. Nickel carbonyl decomposes at 180°C to form pure nickel and carbon monoxide which can again be used.</p>
+                        <p>(b) Van Arkel process : This method is generally applied for obtaining ultrapure metals. The impure metal is converted into a volatile compound while the impurities are not affected. The volatile compound is then decomposed electrically to get the pure metal. Ti, Zr, Hf, Si etc., have been refined by this method.</p>
+                        <p>(c) Zone refining or fractional crystallisation : Elements such as Si, Ge, Ga, etc., which are used as semiconductors are refined by this method. Highly pure metals are obtained. The method is based on the difference in solubility of impurities in molten and solid state of the metals. A movable heater is fitted around a rod of the metal. The heater is slowly moved across the rod. The metal melts at the point of heating and as the heater moves on from one end of the rod to the other end, the pure metal crystallises while the impurities pass on the adjacent melted zone.</p>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-table"></i> Summary of the Extraction of Metals</h2>
+                <table>
+                    <thead><tr><th>Metal</th><th>Main Occurrence</th><th>Main method of Extraction</th></tr></thead>
+                    <tbody>
+                        <tr><td>Sodium</td><td>Common Salt, NaCl</td><td>Electrolysis of fused NaCl with CaCl₂</td></tr>
+                        <tr><td>Magnesium</td><td>Carnallite, KCl.MgCl₂.6H₂O Magnesite MgCO₃</td><td>Electrolysis of fused MgCl₂ with KCl</td></tr>
+                        <tr><td>Calcium</td><td>Lime stone, CaCO₃ Gypsum, CaSO₄.2H₂O</td><td>Electrolysis of fused CaCl₂ and CaF₂</td></tr>
+                        <tr><td>Aluminium</td><td>Bauxite, Al₂O₃.2H₂O</td><td>Electrolysis of Al₂O₃ in molten Na₃AlF₆ (cryolite)</td></tr>
+                        <tr><td>Copper</td><td>Copper pyrites, CuFeS₂ Cuprite, Cu₂O</td><td>Partial oxidation of sulphide ore (2Cu₂S + 3O₂ → 2Cu₂O + 2SO₂) (6Cu₂O + Cu₂S → 6Cu + SO₂)</td></tr>
+                        <tr><td>Silver</td><td>Argentite, Ag₂S Native silver</td><td>Hydrometallurgy 4NaCN + 2Ag₂S → 2Na[Ag(CN)₂] + Na₂S 2Na[Ag(CN)₂] + Zn → Na₂[Zn(CN)₄] + 2Ag</td></tr>
+                        <tr><td>Zinc</td><td>Zinc Blende, ZnS Calamine, ZnCO₃</td><td>Reduction of ZnO with carbon or electrolysis of ZnSO₄ ZnO + C → Zn + CO</td></tr>
+                        <tr><td>Lead</td><td>Galena, PbS</td><td>Reduction of PbO with carbon PbO + C → Pb + CO</td></tr>
+                        <tr><td>Tin</td><td>Cassiterite, SnO₂</td><td>Reduction of SnO₂ with carbon SnO₂ + 2C → Sn + 2CO</td></tr>
+                        <tr><td>Iron</td><td>Haematite, Fe₂O₃ Magnetite, Fe₃O₄</td><td>Reduction of oxide with carbon monoxide Fe₂O₃ + 3CO → 2Fe + 3CO₂</td></tr>
+                        <tr><td>Chromium</td><td>Chromite, FeO.Cr₂O₃</td><td>Reduction of Cr₂O₃ with Al Cr₂O₃ + 2Al → Al₂O₃ + 2Cr</td></tr>
+                        <tr><td>Nickel</td><td>Millerite, NiS</td><td>Reduction of NiO with CO NiO + CO → Ni + CO; Ni + 4CO → Ni(CO)₄ → Ni + 4CO</td></tr>
+                        <tr><td>Mercury</td><td>Cinnabar, HgS</td><td>Direct reduction of HgS by heat alone HgS + O₂ → Hg + SO₂</td></tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-fire-burner"></i> Main Types of Metallurgical Processes</h2>
+                <p>Different metallurgical processes can be broadly divided into three main types</p>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> (1) Pyrometallurgy</div>
+                        <p>Extraction is done using heat energy. The metals like Cu, Fe, Zn, Pb, Sn, Ni, Cr, Hg, which are found in the nature in the form of oxides, carbonates, sulphides are extracted by this process.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> (2) Hydrometallurgy</div>
+                        <p>Extraction of metals involving aqueous solution is known as hydrometallurgy. Silver, gold etc are extracted by this process.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plug"></i> (3) Electrometallurgy</div>
+                        <p>Extraction of highly reactive metals such as Na, K, Ca, Mg, Al, by carrying electrolysis of one of the suitable compound in fused or molten state.</p>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-industry"></i> Furnaces</h2>
+                <p>In the extraction of metal different types of furnaces are used. Each furnace has its own characteristics. Some principal furnaces have been described below,</p>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-industry"></i> (1) Blast Furnace</div>
+                        <p>It is a special type of tall cylindrical furnace, about 100 feet high with a diameter of 15-28 feet. It is made of steel sheets lined inside with fire-proof bricks. The charge is added through a cup and cone arrangement at the top. At the upper part of the furnace there is a hole for the escape of the waste gases of the furnace. There are two outlets in the hearth of the furnace, one for tapping the molten metal and the other above it for the slag. The waste gases are heated and a hot air blast under pressure is blown into the furnace by means of bellows or fans through water cooled nozzles or tuyers. The temperature of the furnace varies from 250°C to 1500°C. Thus the charge descends slowly into zone of increasing temperatures. The blast furnace is used for the extraction of metal like copper and iron.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> (2) Reverberatory Furnace</div>
+                        <p>In this furnace fuel burns in a separate part and does not mix with the charge. The furnace may be divided into 3 parts, (i) Fire Grate : It is on one side where the fuel burns. (ii) Flue or Chimney : It is on the other side of the fire grate. The waste gases escape through it. (iii) Hearth : It is the middle part of the furnace where the charge is heated with the flames and hot gases. The material to be heated is placed on the hearth or bed of the furnace and is heated by the hot gases or flames produced by the burning of fuel. The waste gases escape out of the chimney. Since the fuel does not come in contact with the charge, the furnace is very suitable for calcination and roasting and is employed for both oxidising and reducing purposes. For oxidation, the material is heated by the current of hot air while for reduction the material is mixed with coke and heated. The furnace finds wide application in the extractive metallurgy.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> (3) Electric Furnace</div>
+                        <p>The fuel burnt furnaces described in this chapter produce temperature in the range of 1000-1500°C. Although these furnaces have the great utility in the extraction of metals yet these are unsuitable where higher temperatures are needed. One commonly used electric furnace is Heroult’s furnace. It consists of a steel shell lined inside with dolomite or magnesite. It is provided with movable water jacketed electrodes suspended from the roof or from the sides. Heat is generated by striking an arc between the electrodes, thereby, a temperature of over 3000°C may be reached. The charge melts and the impurities e.g., Si, Mn, P and S etc. present in the ore combine with the basic lining to form slag, which is free from sulphur or gas bubbles. Steel of very fine quality is prepared by this method. Electric furnaces are largely used where, (i) Cheap power supply is available. (ii) High temperatures are required. (iii) Pure products are required. As such they find wide applicability in a number of industries such as metallurgy, ceramics, plastics, chemical and also in the research laboratories. These furnaces are easily operated and involve the problem of the storage of fuel and disposal of fuel waste.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-box"></i> (4) Muffle Furnace</div>
+                        <p>In this furnace the material to be heated does not come in the contact with the fuel or flames. A muffle is a chamber made of refractory material and is surrounded by flames and hot gases on all sides. The products of combustion are removed through a door provided in the furnace. Muffle furnace is used for the extraction of zinc, preparation of red lead, Pb₃O₄ and for testing the purity of precious metals like silver and gold. In an electric muffle furnace the chamber is surrounded by resistance coils.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cog"></i> (5) Bessemer Converter</div>
+                        <p>A Bessemer converter is a pear-shaped 10 or more feet high, open at the top, lined with a refractory material such as silica or magnesia which also acts as a flux. The converter is mounted on trunnions, so that it can be tilted to collect the products formed. There is an arrangement of introducing a hot blast of air from a number of small openings in the bottom of the furnace. The converter is used mostly for manufacturing of copper or steel from pig iron. Passing a current of hot air into the molten metal taken in the converter, the impurities are oxidised and escaped as gases or form slag. The Bessemer process is a rapid one and does not take more than 15 minutes in the production of one batch.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-recycle"></i> (6) Regenerative Furnace</div>
+                        <p>These are furnaces in which the heat of the gases escaping out from the chimney is utilized. Most of the furnaces particularly blast furnaces are fitted up with regenerative system which means an economy of the fuel. A flowing column of air is heated by the hot flue gases, it is then brought back to the fire and returned to the furnace. This furnace is largely used in the production of steel.</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-shield-alt"></i> Refractory Materials</h3>
+                <p>The materials which can withstand very high temperatures without melting or becoming soft are known as refractory materials. These are not affected by slags formed during the extraction of metals. These are used in the form of bricks for the internal linings of furnaces. Refractory materials used are of three types, (1) Acid refractories : Silica, quartz, silicious sand stones, etc., are the examples. (2) Basic refractories : Lime, dolomite, magnesite, etc., are the examples. (3) Neutral refractories : Graphite, chromite, bone ash, etc., are the examples. Silica (92% SiO₂, 2.7% Al₂O₃) and quartz, can tolerate temperatures upto about 1750°C, bauxite upto 1800°C, alumina upto 2000°C and magnesite, chromite, etc., upto 2200°C. Some carbides such as silicon carbide is used as refractory for special purposes.</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-link"></i> Alloys</h2>
+                <p>A metallic product containing two or more metals or sometimes one of the ingredients a non-metal provided that the mixture is homogenous and possesses metallic properties, is known as an alloy. Alloys are usually prepared by melting two or more metals together in the proportions and then allowing the melt to solidify. If one of the metals is mercury the alloy is known as amalgam.</p>
+                <p>Alloys are prepared with a view to impart some desirable properties which the individual metals do not possess. These are, (1) Change in the chemical reactivity : Sodium acts vigorously with water, but Na–Hg amalgam reacts slowly to suit the requirement of a number of chemical reactions. (2) Hardness : Silver, gold and soft metals but become hard when alloyed with copper. (3) Melting Points : Melting points of an alloy may be higher or lower than any of its components. Wood-metal, which is an alloy of Bi, Pb, Sn and Cd fuses at 60.5°C, while none of these metals fuses at this low temperature. (4) Change of colour : Aluminium bronze is an alloy of aluminium and copper. It is of golden, yellow colour and is used in making decoration articles, jewellery and coins while the colour of aluminium is white and that of copper is red. (5) Corrosion resistance : Iron gets corroded soon whereas stainless Steel, an alloy of iron and chromium, resists corrosion. (6) Casting : An alloy of lead and antimony is known as type metal is used for casting type required in printing works.</p>
+                <h3><i class="fas fa-table"></i> Alloys of Al</h3>
+                <table>
+                    <thead><tr><th>Alloy</th><th>Percentage</th><th>Important Properties</th><th>Uses</th></tr></thead>
+                    <tbody>
+                        <tr><td>Aluminium bronze</td><td>Al 95% Cu 5%</td><td>Light, strong alloy with golden lustre, resistant to corrosion</td><td>Coins, utensils, jewellery picture frames etc.</td></tr>
+                        <tr><td>Magnalium</td><td>Al 95% Mg 5%</td><td>Light, tough and strong</td><td>Light instruments, balance beam, pressure cookers etc.</td></tr>
+                        <tr><td>Duralumin</td><td>Al 95% Cu 4% Mg 0.5% Mn 0.5%</td><td>Light, tough, ductile, resistant to corrosive action</td><td>Making aeroplanes automobile parts pressure cookers etc.</td></tr>
+                    </tbody>
+                </table>
+                <h3>Alloys of Ag</h3>
+                <table>
+                    <thead><tr><th>Alloy</th><th>Percentage composition</th><th>Uses</th></tr></thead>
+                    <tbody>
+                        <tr><td>Coinage silver</td><td>Ag = 90, Cu = 10</td><td>For making silver coins.</td></tr>
+                        <tr><td>Silver solder</td><td>Ag = 63, Cu = 30, Zn = 7</td><td>For soldering and joining metals</td></tr>
+                        <tr><td>Dental alloy</td><td>Ag = 33, Hg = 52, Sn = 12.5, Cu = 2.0, Zn = 0.5</td><td>For filling teeth</td></tr>
+                        <tr><td>Silver palladium</td><td>Ag = 40, Pd = 60</td><td>Potentiometers and winding of some special instruments.</td></tr>
+                    </tbody>
+                </table>
+                <h3>Alloys of Pb and Sn</h3>
+                <table>
+                    <thead><tr><th>Alloy</th><th>Percentage Composition</th><th>Uses</th></tr></thead>
+                    <tbody>
+                        <tr><td>Solder</td><td>Pb = 50, Sn = 50</td><td>For soldering.</td></tr>
+                        <tr><td>Pewter</td><td>Pb = 20, Sn = 80</td><td>In making cups, mugs and other utensils.</td></tr>
+                        <tr><td>Type metal</td><td>Pb = 70, Sb = 20 and Sn = 10</td><td>For making printing type.</td></tr>
+                        <tr><td>Rose metal</td><td>Pb = 22, Sn = 28, Bi = 50</td><td>For making electric fuses.</td></tr>
+                        <tr><td>Britannia metals</td><td>Sn = 90, Sb = 8, Cu = 2</td><td>For making table wares.</td></tr>
+                    </tbody>
+                </table>
+                <h3>Alloys of Copper</h3>
+                <table>
+                    <thead><tr><th>Alloy</th><th>Percentage Composition</th><th>Uses</th></tr></thead>
+                    <tbody>
+                        <tr><td>Brass</td><td>Cu = 80, Zn = 20</td><td>For making utensils, condenser tubes, wires parts of machinery etc.</td></tr>
+                        <tr><td>Bronze or Copper bronze</td><td>Cu = 80, Zn = 10, Sn = 10</td><td>For making cooking utensils, statues, coins etc.</td></tr>
+                        <tr><td>Aluminium bronze</td><td>Al = 95, Cu = 5</td><td>Coins, picture frames, cheap jewellery</td></tr>
+                        <tr><td>Gun metal</td><td>Cu = 90, Sn = 10</td><td>For making gun barrels.</td></tr>
+                        <tr><td>Bell metal</td><td>Cu = 90, Sn = 20</td><td>For making bells, gongs etc.</td></tr>
+                        <tr><td>Constantan</td><td>Cu = 60, Ni = 40</td><td>For electrical apparatus</td></tr>
+                        <tr><td>German silver</td><td>Cu = 60, Zn = 20, Ni = 20</td><td>For making silver wire, resistance wires etc.</td></tr>
+                        <tr><td>Monel metal</td><td>Cu = 30, Ni = 67, Fe and Mn = 3</td><td>For making acid pumps and acid containers.</td></tr>
+                        <tr><td>Phosphor bronze</td><td>Cu = 95, Sn = 4.8, P = 0.2</td><td>For making springs, electrical equipment</td></tr>
+                        <tr><td>Gold-copper alloy</td><td>Au = 90, Cu = 10</td><td>For making gold coins, jewellery, watch cases, spectacle rims etc.</td></tr>
+                    </tbody>
+                </table>
+                <h3>Alloys of Iron</h3>
+                <table>
+                    <thead><tr><th>Name</th><th>Percentage</th><th>Properties</th><th>Uses</th></tr></thead>
+                    <tbody>
+                        <tr><td>Stainless steel</td><td>Fe = 73%, Cr = 18%, Ni = 8% and carbon</td><td>Resists corrosion</td><td>For making utensils, cutlery and ornamental pieces.</td></tr>
+                        <tr><td>Manganese steel</td><td>Fe = 86%, Mn = 13% and carbon</td><td>Very hard, resistant to wear and tear.</td><td>For Making rock drills, safes etc.</td></tr>
+                        <tr><td>Tungsten steel</td><td>Fe = 94%, W = 5% and carbon</td><td>Retains hardness even at high temperatures</td><td>For making high speed cutting tools.</td></tr>
+                        <tr><td>Invar</td><td>Fe = 64%, Ni = 36%</td><td>Practically no coefficient of expansion.</td><td>For making watches, meter scales, pendulum rods etc.</td></tr>
+                        <tr><td>Nickel steel</td><td>Fe = 98–96%, Ni = 2–4%</td><td>Resistant to corrosion, hard and elastic.</td><td>For making wire cables, gears, drive shafts etc.</td></tr>
+                        <tr><td>Permalloy</td><td>Fe = 21%, Ni = 78% and carbon</td><td>Strongly magnetised by electric current, loses magnetism when current is cut off.</td><td>For making electromagnets, ocean cables etc.</td></tr>
+                        <tr><td>Chrome steel</td><td>Fe = 98–96%, Cr = 2–4%</td><td>High tensile strength</td><td>For making axles, ball bearings and cutting tools such as files.</td></tr>
+                        <tr><td>Alnico</td><td>Fe = 60%, Al =12%, Ni = 20%, Co = 8%</td><td>Highly magnetic</td><td>For making permanent magnets.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points & Tips</h2>
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key JEE/NEET Points</h4>
+                    <ul>
+                        <li>Froth floatation for sulphide ores</li>
+                        <li>Calcination: absence of air; Roasting: presence of air</li>
+                        <li>Flux for gangue removal</li>
+                        <li>Self reduction for Cu, Pb</li>
+                        <li>Electrolytic for reactive metals</li>
+                        <li>Zone refining for semiconductors</li>
+                        <li>Alloys properties and uses</li>
+                    </ul>
+                </div>
+              
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Identify ore type for method</div>
+                        <div class="topic-item">Calculate slag formation</div>
+                        <div class="topic-item">Recall furnace types</div>
+                    </div>
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Confuse calcination/roasting</div>
+                        <div class="topic-item">Forget biological metals</div>
+                        <div class="topic-item">Ignore alloy percentages</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically 2-3 questions. Focus on extraction processes, ores, refining methods.</p>
+              
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 75%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>Medium-High</span>
+                </div>
+            </section>
+        </div>
+      
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main/NEET Chemistry - General Principles of Extraction of Metals Full Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+          
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

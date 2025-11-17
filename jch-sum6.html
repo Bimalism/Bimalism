@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaseous State - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+        
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+        
+        .model-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .model-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+        
+        .bond-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bond-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .law-card {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #1E88E5;
+        }
+        
+        .law-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .constant-table {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .constant-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Physical Chemistry</div>
+            <h1>Gaseous State</h1>
+            <p class="subtitle">Gas Laws, Kinetic Theory, and Real Gases</p>
+            <div class="importance">High Weightage in JEE Main</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction</h2>
+                <p>The gaseous state is the simplest state of matter where molecular forces of attraction between particles are minimum. Gases show great uniformity in behavior and have several characteristic properties.</p>
+                
+                <div class="definition">
+                    <p><strong>Gaseous State</strong> is characterized by minimum intermolecular forces, infinite expansibility, high compressibility, and random molecular motion with high kinetic energy.</p>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Characteristics of Gases</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compress-arrows-alt"></i> Compressibility</div>
+                        <div class="topic-item">High compressibility due to large intermolecular spaces</div>
+                        <div class="topic-item">Infinite expansibility</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tachometer-alt"></i> Pressure</div>
+                        <div class="topic-item">Exert pressure on container walls</div>
+                        <div class="topic-item">Pressure ∝ Temperature</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-expand-arrows-alt"></i> Diffusion</div>
+                        <div class="topic-item">High diffusibility</div>
+                        <div class="topic-item">Mix spontaneously</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-shapes"></i> Shape & Volume</div>
+                        <div class="topic-item">No definite shape</div>
+                        <div class="topic-item">No definite volume</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-ruler"></i> Measurable Properties of Gases</h2>
+                
+                <p>Gases are described by four measurable properties: Volume (V), Pressure (P), Temperature (T), and Amount (mass or moles).</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrows-alt-v"></i> Volume</div>
+                        <div class="topic-item">Units: L, mL, cm³, m³</div>
+                        <div class="topic-item">1 L = 1000 mL = 1 dm³ = 10⁻³ m³</div>
+                        <div class="topic-item">1 m³ = 10³ L = 10⁶ mL</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-weight"></i> Mass</div>
+                        <div class="topic-item">Moles (n) = Mass / Molar mass</div>
+                        <div class="topic-item">n = m/M</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Temperature</div>
+                        <div class="topic-item">K = °C + 273</div>
+                        <div class="topic-item">°C/5 = (F° - 32)/9</div>
+                        <div class="topic-item">SI unit: Kelvin (K)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compress-alt"></i> Pressure</div>
+                        <div class="topic-item">P = Force/Area</div>
+                        <div class="topic-item">SI unit: Pascal (Pa)</div>
+                        <div class="topic-item">1 atm = 1.01325 × 10⁵ Pa</div>
+                        <div class="topic-item">1 bar = 10⁵ Pa</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-tachometer-alt"></i> Pressure Units Conversion</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Symbol</th>
+                            <th>Value in Pa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bar</td>
+                            <td>bar</td>
+                            <td>1 bar = 10⁵ Pa</td>
+                        </tr>
+                        <tr>
+                            <td>Atmosphere</td>
+                            <td>atm</td>
+                            <td>1 atm = 1.01325 × 10⁵ Pa</td>
+                        </tr>
+                        <tr>
+                            <td>Torr</td>
+                            <td>Torr</td>
+                            <td>1 Torr = 133.322 Pa</td>
+                        </tr>
+                        <tr>
+                            <td>mm of Hg</td>
+                            <td>mm Hg</td>
+                            <td>1 mm Hg = 133.322 Pa</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="formula">
+                    Absolute Pressure = Gauge Pressure + Atmospheric Pressure
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Gas Laws</h2>
+                
+                <div class="law-card">
+                    <div class="law-title">Boyle's Law</div>
+                    <p>At constant temperature, the volume of a fixed amount of gas is inversely proportional to its pressure.</p>
+                    <div class="formula">P ∝ 1/V or PV = constant or P₁V₁ = P₂V₂</div>
+                    <p>Graph between P and V at constant temperature is an isotherm (rectangular hyperbola).</p>
+                </div>
+                
+                <div class="law-card">
+                    <div class="law-title">Charles' Law</div>
+                    <p>At constant pressure, the volume of a fixed amount of gas is directly proportional to its absolute temperature.</p>
+                    <div class="formula">V ∝ T or V/T = constant or V₁/T₁ = V₂/T₂</div>
+                    <p>Volume coefficient: αᵥ = 1/273.15 = 3.661 × 10⁻³ °C⁻¹</p>
+                </div>
+                
+                <div class="law-card">
+                    <div class="law-title">Gay-Lussac's Law</div>
+                    <p>At constant volume, the pressure of a fixed amount of gas is directly proportional to its absolute temperature.</p>
+                    <div class="formula">P ∝ T or P/T = constant or P₁/T₁ = P₂/T₂</div>
+                    <p>Pressure coefficient: αₚ = 1/273.15 = 3.661 × 10⁻³ °C⁻¹</p>
+                </div>
+                
+                <div class="law-card">
+                    <div class="law-title">Avogadro's Law</div>
+                    <p>Equal volumes of all gases at the same temperature and pressure contain equal number of molecules.</p>
+                    <div class="formula">V ∝ n or V/n = constant or V₁/n₁ = V₂/n₂</div>
+                    <p>Molar volume at STP = 22.414 L mol⁻¹</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> Ideal Gas Equation</h2>
+                
+                <div class="definition">
+                    <p><strong>Ideal Gas Equation</strong> combines Boyle's, Charles', and Avogadro's laws: PV = nRT</p>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Gas Constant (R) Values</h3>
+                <div class="constant-table">
+                    <div class="constant-title">Values of Gas Constant R</div>
+                    <div class="topic-item">R = 0.0821 L atm mol⁻¹ K⁻¹</div>
+                    <div class="topic-item">R = 8.314 J mol⁻¹ K⁻¹ (SI unit)</div>
+                    <div class="topic-item">R = 8.314 × 10⁷ erg mol⁻¹ K⁻¹</div>
+                    <div class="topic-item">R = 1.987 cal mol⁻¹ K⁻¹</div>
+                </div>
+                
+                <h3><i class="fas fa-atom"></i> Boltzmann Constant</h3>
+                <div class="formula">
+                    k = R/N₀ = 1.38 × 10⁻²³ J K⁻¹ (per molecule)
+                </div>
+                
+                <h3><i class="fas fa-weight"></i> Gas Density Calculations</h3>
+                <div class="formula">
+                    M = mRT/PV (Molecular weight from gas equation)
+                </div>
+                <div class="formula">
+                    d = PM/RT (Gas density)
+                </div>
+                <div class="formula">
+                    d₁T₁/P₁ = d₂T₂/P₂ (For different conditions)
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-layer-group"></i> Dalton's Law of Partial Pressures</h2>
+                
+                <div class="definition">
+                    <p><strong>Dalton's Law</strong> states that the total pressure exerted by a mixture of non-reacting gases is equal to the sum of the partial pressures of individual gases.</p>
+                </div>
+                
+                <div class="formula">
+                    P<sub>total</sub> = P₁ + P₂ + P₃ + ...
+                </div>
+                <div class="formula">
+                    P₁ = (n₁/n<sub>total</sub>) × P<sub>total</sub> = X₁ × P<sub>total</sub>
+                </div>
+                
+                <h3><i class="fas fa-tint"></i> Applications</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-percentage"></i> Mole Fraction</div>
+                        <div class="topic-item">X₁ = P₁/P<sub>total</sub></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cloud"></i> Dry Gas Pressure</div>
+                        <div class="topic-item">P<sub>dry gas</sub> = P<sub>moist gas</sub> - Aqueous tension</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cloud-rain"></i> Relative Humidity</div>
+                        <div class="topic-item">RH = (Partial pressure of water/Vapor pressure of water) × 100</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-wind"></i> Graham's Law of Diffusion</h2>
+                
+                <div class="definition">
+                    <p><strong>Graham's Law</strong> states that at constant temperature and pressure, the rate of diffusion or effusion of a gas is inversely proportional to the square root of its density or molar mass.</p>
+                </div>
+                
+                <div class="formula">
+                    r ∝ 1/√d or r₁/r₂ = √(d₂/d₁) = √(M₂/M₁)
+                </div>
+                
+                <h3><i class="fas fa-exchange-alt"></i> Diffusion vs Effusion</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-expand-arrows-alt"></i> Diffusion</div>
+                        <div class="topic-item">Spontaneous mixing of gases</div>
+                        <div class="topic-item">Through entire volume</div>
+                        <div class="topic-item">Example: Perfume spreading in room</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compress-arrows-alt"></i> Effusion</div>
+                        <div class="topic-item">Escape through small opening</div>
+                        <div class="topic-item">Through pinhole</div>
+                        <div class="topic-item">Example: Gas escaping from balloon</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-calculator"></i> Rate of Diffusion</h3>
+                <div class="formula">
+                    r₁/r₂ = V₁/V₂ (when time is constant)
+                </div>
+                <div class="formula">
+                    r₁/r₂ = t₂/t₁ (when volume is constant)
+                </div>
+                <div class="formula">
+                    r ∝ P/√M (when pressure is not constant)
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-molecule"></i> Kinetic Theory of Gases</h2>
+                
+                <div class="definition">
+                    <p><strong>Kinetic Theory</strong> explains gas behavior in terms of molecular motion. It's based on several postulates about gas molecules.</p>
+                </div>
+                
+                <h3><i class="fas fa-list-ol"></i> Postulates of Kinetic Theory</h3>
+                <div class="topic-item">Gas molecules are in continuous random motion</div>
+                <div class="topic-item">Volume of molecules is negligible compared to container volume</div>
+                <div class="topic-item">Molecular collisions are perfectly elastic</div>
+                <div class="topic-item">No intermolecular forces except during collisions</div>
+                <div class="topic-item">Average kinetic energy ∝ Absolute temperature</div>
+                
+                <h3><i class="fas fa-calculator"></i> Kinetic Gas Equation</h3>
+                <div class="formula">
+                    PV = (1/3) mnu²
+                </div>
+                <p>Where m = mass of molecule, n = number of molecules, u = root mean square velocity</p>
+                
+                <h3><i class="fas fa-bolt"></i> Kinetic Energy Calculation</h3>
+                <div class="formula">
+                    Average KE per mole = (3/2) RT
+                </div>
+                <div class="formula">
+                    Average KE per molecule = (3/2) kT
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-tachometer-alt"></i> Molecular Speeds</h2>
+                
+                <p>Gas molecules have different speeds described by Maxwell-Boltzmann distribution.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-calculator"></i> RMS Velocity</div>
+                        <div class="topic-item">u<sub>rms</sub> = √(3RT/M) = √(3P/d)</div>
+                        <div class="topic-item">u₁/u₂ = √(T₁/T₂) = √(M₂/M₁)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Average Velocity</div>
+                        <div class="topic-item">v<sub>av</sub> = √(8RT/πM)</div>
+                        <div class="topic-item">v<sub>av</sub> = 0.9213 × u<sub>rms</sub></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-bar"></i> Most Probable Velocity</div>
+                        <div class="topic-item">α<sub>mp</sub> = √(2RT/M)</div>
+                        <div class="topic-item">α<sub>mp</sub> = 0.816 × u<sub>rms</sub></div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-sort-amount-up"></i> Relationship Between Velocities</h3>
+                <div class="formula">
+                    α<sub>mp</sub> : v<sub>av</sub> : u<sub>rms</sub> = 1 : 1.128 : 1.224
+                </div>
+                <div class="formula">
+                    α<sub>mp</sub> < v<sub>av</sub> < u<sub>rms</sub>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Real Gases and Deviations</h2>
+                
+                <div class="definition">
+                    <p><strong>Real gases</strong> deviate from ideal behavior due to intermolecular forces and molecular volume. These deviations increase at high pressures and low temperatures.</p>
+                </div>
+                
+                <h3><i class="fas fa-chart-line"></i> Compressibility Factor (Z)</h3>
+                <div class="formula">
+                    Z = PV/nRT = PV<sub>m</sub>/RT
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-equals"></i> Z = 1</div>
+                        <div class="topic-item">Ideal gas behavior</div>
+                        <div class="topic-item">At Boyle temperature</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-greater-than"></i> Z > 1</div>
+                        <div class="topic-item">Positive deviation</div>
+                        <div class="topic-item">Less compressible</div>
+                        <div class="topic-item">Repulsive forces dominant</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-less-than"></i> Z < 1</div>
+                        <div class="topic-item">Negative deviation</div>
+                        <div class="topic-item">More compressible</div>
+                        <div class="topic-item">Attractive forces dominant</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-equation"></i> Van der Waals Equation</h2>
+                
+                <div class="definition">
+                    <p><strong>Van der Waals equation</strong> modifies the ideal gas equation to account for molecular volume and intermolecular attractions.</p>
+                </div>
+                
+                <div class="formula">
+                    (P + an²/V²)(V - nb) = nRT
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Van der Waals Constants</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-magnet"></i> Constant 'a'</div>
+                        <div class="topic-item">Measure of intermolecular attraction</div>
+                        <div class="topic-item">Units: atm L² mol⁻²</div>
+                        <div class="topic-item">Higher for easily liquefiable gases</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vector-square"></i> Constant 'b'</div>
+                        <div class="topic-item">Excluded volume</div>
+                        <div class="topic-item">Units: L mol⁻¹</div>
+                        <div class="topic-item">b = 4N₀ × (4/3)πr³</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-temperature-high"></i> Critical Constants</h3>
+                <div class="formula">
+                    T<sub>c</sub> = 8a/(27Rb) (Critical temperature)
+                </div>
+                <div class="formula">
+                    P<sub>c</sub> = a/(27b²) (Critical pressure)
+                </div>
+                <div class="formula">
+                    V<sub>c</sub> = 3b (Critical volume)
+                </div>
+                <div class="formula">
+                    Z<sub>c</sub> = P<sub>c</sub>V<sub>c</sub>/RT<sub>c</sub> = 3/8 = 0.375
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points to Remember</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Ideal gases obey PV = nRT at all temperatures and pressures</li>
+                        <li>Real gases show deviations at high pressures and low temperatures</li>
+                        <li>RMS velocity is the highest, most probable velocity is the lowest</li>
+                        <li>Average kinetic energy depends only on temperature, not on nature of gas</li>
+                        <li>Van der Waals equation accounts for molecular size and attractions</li>
+                        <li>Critical temperature is the temperature above which gas cannot be liquefied</li>
+                        <li>Diffusion rate is inversely proportional to square root of molar mass</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Memorize values of R in different units</div>
+                        <div class="topic-item">Practice gas law numerical problems</div>
+                        <div class="topic-item">Understand the concept of partial pressures</div>
+                        <div class="topic-item">Learn to calculate molecular speeds</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Don't confuse different molecular speeds</div>
+                        <div class="topic-item">Don't forget units in calculations</div>
+                        <div class="topic-item">Don't apply ideal gas equation to real gases without corrections</div>
+                        <div class="topic-item">Don't mix up diffusion and effusion</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                
+                <p>This chapter typically carries <span class="highlight">2-3 questions</span> in JEE Main, making it a high-weightage chapter. Questions often focus on gas laws, kinetic theory, molecular speeds, and real gas behavior.</p>
+                
+                <div class="weightage-item">
+                    <h4>Chapter Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 80%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>High (2-3 questions)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - Gaseous State Summary</div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

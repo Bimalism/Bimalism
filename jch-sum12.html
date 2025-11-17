@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrochemistry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+       
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+       
+        header {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+       
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+       
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+       
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+       
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+       
+        .content {
+            padding: 40px;
+        }
+       
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+       
+        .section:last-child {
+            border-bottom: none;
+        }
+       
+        h2 {
+            color: #1B5E20;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1B5E20;
+            display: flex;
+            align-items: center;
+        }
+       
+        h2 i {
+            margin-right: 10px;
+            background: #E8F5E9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+       
+        h3 {
+            color: #2E7D32;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+       
+        h3 i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+       
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+       
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1B5E20;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+       
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1B5E20, #4CAF50);
+        }
+       
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E8F5E9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2E7D32;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+       
+        th {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+       
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+       
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+       
+        tr:hover {
+            background-color: #E8F5E9;
+        }
+       
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+       
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1B5E20, #4CAF50);
+        }
+       
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .topic-title {
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+       
+        .topic-title i {
+            margin-right: 10px;
+            background: #E8F5E9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+       
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+       
+        .important-points {
+            background: linear-gradient(to right, #E8F5E9, #DCEDC8);
+            border-left: 4px solid #689F38;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        .important-points h4 {
+            color: #33691E;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+       
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+       
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            margin-top: 40px;
+        }
+       
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+       
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+       
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+       
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+           
+            h1 {
+                font-size: 2rem;
+            }
+           
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+           
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+       
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+       
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+       
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+       
+        .topic-item:before {
+            content: "•";
+            color: #1B5E20;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+       
+        .weightage-bar {
+            height: 10px;
+            background-color: #E8F5E9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+       
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #1B5E20);
+            border-radius: 5px;
+        }
+       
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+       
+        .highlight {
+            background: linear-gradient(120deg, #E8F5E9 0%, #E8F5E9 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .electrolysis-table {
+            font-size: 0.85rem;
+        }
+        
+        .electrolysis-table th, .electrolysis-table td {
+            padding: 10px;
+        }
+        
+        .series-table {
+            font-size: 0.8rem;
+        }
+        
+        .series-table th, .series-table td {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 12</div>
+            <h1>Electrochemistry</h1>
+            <p class="subtitle">Electrical Energy, Chemical Changes, and Redox Reactions</p>
+            <div class="importance">Fundamental Chapter in Physical Chemistry</div>
+        </header>
+       
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction to Electrochemistry</h2>
+                <p><strong>Electrochemistry</strong> is the branch of physical chemistry which deals with the relationship between electrical energy and chemical changes taking place in redox reactions.</p>
+               
+                <div class="definition">
+                    <p><strong>Electrolytes</strong> are substances whose aqueous solution undergo decomposition into ions when electric current is passed through them. The whole process is known as <strong>electrolysis</strong> or <strong>electrolytic decomposition</strong>.</p>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Electrolytes</div>
+                        <div class="topic-item">Solutions of acids, bases, salts in water</div>
+                        <div class="topic-item">Fused salts</div>
+                        <div class="topic-item">May be weak or strong</div>
+                        <div class="topic-item">Examples: HCl, NaOH, NaCl</div>
+                    </div>
+                   
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-ban"></i> Non-Electrolytes</div>
+                        <div class="topic-item">Do not conduct electricity in solution</div>
+                        <div class="topic-item">Examples: Cane sugar, glycerine, alcohol</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-battery-full"></i> Electrolytic Cell (Voltameter)</h2>
+                <p>The device in which the process of electrolysis or electrolytic decomposition is carried out is known as an <strong>electrolytic cell</strong> or <strong>voltameter</strong>.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Key Features</div>
+                        <div class="topic-item">Converts electrical energy into chemical energy</div>
+                        <div class="topic-item">E<sub>cell</sub> = -ve, ΔG = +ve</div>
+                        <div class="topic-item">Electrons flow from anode to cathode (outside electrolyte)</div>
+                        <div class="topic-item">Current flows from cathode to anode</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electrodes</div>
+                        <div class="topic-item"><strong>Anode (+ve pole)</strong>: Oxidation occurs</div>
+                        <div class="topic-item"><strong>Cathode (-ve pole)</strong>: Reduction occurs</div>
+                        <div class="topic-item">Cations discharged at cathode</div>
+                        <div class="topic-item">Anions discharged at anode</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-recycle"></i> Electrode Reactions</h3>
+                <div class="two-column">
+                    <div class="formula">
+                        At anode: A<sup>-</sup> → A + e<sup>-</sup> (Oxidation)
+                    </div>
+                    <div class="formula">
+                        At cathode: B<sup>+</sup> + e<sup>-</sup> → B (Reduction)
+                    </div>
+                </div>
+                
+                <p><strong>Primary products</strong> are formed directly from electrode reactions. These may undergo further changes to form <strong>secondary products</strong>.</p>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sort-amount-down"></i> Preferential Discharge Theory</h2>
+                <div class="definition">
+                    <p>If more than one type of ion is attracted towards a particular electrode, then the ion is discharged which requires least energy or ions with lower discharge potential or which occur low in the electrochemical series.</p>
+                </div>
+                
+                <p>The potential at which the ion is discharged or deposited on the appropriate electrode is termed the <strong>discharge</strong> or <strong>deposition potential</strong> (D.P.).</p>
+                
+                <h3><i class="fas fa-list-ol"></i> Discharge Potential Order</h3>
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus-circle"></i> Cations</div>
+                        <div class="topic-item">Li<sup>+</sup>, K<sup>+</sup>, Na<sup>+</sup>, Ca<sup>2+</sup>, Mg<sup>2+</sup>, Al<sup>3+</sup>, Zn<sup>2+</sup></div>
+                        <div class="topic-item">Fe<sup>2+</sup>, Ni<sup>2+</sup>, H<sup>+</sup>, Cu<sup>2+</sup>, Hg<sup>2+</sup>, Ag<sup>+</sup>, Au<sup>3+</sup></div>
+                        <div class="topic-item">Increasing discharge potential</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus-circle"></i> Anions</div>
+                        <div class="topic-item">SO<sub>4</sub><sup>2-</sup>, NO<sub>3</sub><sup>-</sup>, OH<sup>-</sup>, Cl<sup>-</sup>, Br<sup>-</sup>, I<sup>-</sup></div>
+                        <div class="topic-item">Increasing discharge potential</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-table"></i> Products of Electrolysis</h3>
+                <table class="electrolysis-table">
+                    <thead>
+                        <tr>
+                            <th>Electrolyte</th>
+                            <th>Electrode</th>
+                            <th>Product at Cathode</th>
+                            <th>Product at Anode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aqueous NaOH</td>
+                            <td>Pt or Graphite</td>
+                            <td>H<sub>2</sub></td>
+                            <td>O<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Fused NaOH</td>
+                            <td>Pt or Graphite</td>
+                            <td>Na</td>
+                            <td>O<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Aqueous NaCl</td>
+                            <td>Pt or Graphite</td>
+                            <td>H<sub>2</sub></td>
+                            <td>Cl<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Fused NaCl</td>
+                            <td>Pt or Graphite</td>
+                            <td>Na</td>
+                            <td>Cl<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Aqueous CuSO<sub>4</sub></td>
+                            <td>Pt or Graphite</td>
+                            <td>Cu</td>
+                            <td>O<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Aqueous CuSO<sub>4</sub></td>
+                            <td>Cu electrode</td>
+                            <td>Cu</td>
+                            <td>Cu oxidized to Cu<sup>2+</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Dilute H<sub>2</sub>SO<sub>4</sub></td>
+                            <td>Pt electrode</td>
+                            <td>H<sub>2</sub></td>
+                            <td>O<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Aqueous AgNO<sub>3</sub></td>
+                            <td>Pt electrode</td>
+                            <td>Ag</td>
+                            <td>O<sub>2</sub></td>
+                        </tr>
+                        <tr>
+                            <td>Aqueous AgNO<sub>3</sub></td>
+                            <td>Ag electrode</td>
+                            <td>Ag</td>
+                            <td>Ag oxidized to Ag<sup>+</sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-industry"></i> Applications of Electrolysis</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-water"></i> Production of Elements</div>
+                        <div class="topic-item">Hydrogen by electrolysis of water</div>
+                        <div class="topic-item">Heavy water (D<sub>2</sub>O)</div>
+                        <div class="topic-item">Metals: Na, K, Mg, Al from fused electrolytes</div>
+                        <div class="topic-item">Non-metals: H<sub>2</sub>, F<sub>2</sub>, Cl<sub>2</sub></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Synthesis</div>
+                        <div class="topic-item">NaOH, KOH, Na<sub>2</sub>CO<sub>3</sub></div>
+                        <div class="topic-item">KClO<sub>3</sub>, white lead, KMnO<sub>4</sub></div>
+                        <div class="topic-item">By electrosynthesis method</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-shield-alt"></i> Electroplating</div>
+                        <div class="topic-item">Coating inferior metal with superior metal</div>
+                        <div class="topic-item">Prevents corrosion, improves appearance</div>
+                        <div class="topic-item">Object to be plated made cathode</div>
+                        <div class="topic-item">Contains solution of ions of metal to be deposited</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-ruler"></i> Thickness of Coated Layer</h3>
+                <div class="formula">
+                    Volume of coated layer = a × b × c (cm<sup>3</sup>)<br>
+                    Mass of deposited substance = density × volume = d × a × b × c<br>
+                    Using Faraday's law: d × a × b × c = (I × t × E) / 96500
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Faraday's Laws of Electrolysis</h2>
+                <p>Given by <strong>Michael Faraday in 1833</strong>, these laws govern the deposition of substances on electrodes during electrolysis.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-weight"></i> First Law</div>
+                        <div class="topic-item">Mass of substance deposited ∝ quantity of electricity passed</div>
+                        <div class="topic-item">W ∝ Q or W ∝ I × t</div>
+                        <div class="topic-item">W = Z × I × t</div>
+                        <div class="topic-item">Z = electrochemical equivalent (ECE)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Second Law</div>
+                        <div class="topic-item">Same electricity → masses liberated ∝ chemical equivalents</div>
+                        <div class="topic-item">W<sub>1</sub>/W<sub>2</sub> = E<sub>1</sub>/E<sub>2</sub></div>
+                        <div class="topic-item">Z<sub>1</sub>/Z<sub>2</sub> = E<sub>1</sub>/E<sub>2</sub></div>
+                        <div class="topic-item">E = FZ or E = 96500 × Z</div>
+                    </div>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Electrochemical Equivalent (ECE)</strong>: The mass of the ion deposited by passing a current of one Ampere for one second (by passing 1 Coulomb of electricity). Unit: gram per coulomb.</p>
+                </div>
+                
+                <div class="formula">
+                    1 Faraday = 1F = 96500 C = Charge on 1 mole of electrons<br>
+                    1 Coulomb = 6.28 × 10<sup>18</sup> electrons<br>
+                    1 electronic charge = 1.6 × 10<sup>-19</sup> Coulomb
+                </div>
+                
+                <h3><i class="fas fa-wind"></i> For Gaseous Electrolyte Product</h3>
+                <div class="formula">
+                    V = (I × t × V<sub>e</sub>) / 96500<br>
+                    Where V = Volume of gas evolved at STP<br>
+                    V<sub>e</sub> = Equivalent volume
+                </div>
+                
+                <h3><i class="fas fa-calculator"></i> Quantitative Aspects</h3>
+                <div class="formula">
+                    Q = nF = n × 96,500 C<br>
+                    1 Faraday will reduce:<br>
+                    • 1 mole of monovalent cation<br>
+                    • 1/2 mole of divalent cation<br>
+                    • 1/3 mole of trivalent cation<br>
+                    • 1/n mole of n-valent cations
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-bolt"></i> Conductors and Conductivity</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-metal"></i> Metallic Conductors</div>
+                        <div class="topic-item">Due to flow of electrons</div>
+                        <div class="topic-item">No decomposition of substance</div>
+                        <div class="topic-item">No transfer of matter</div>
+                        <div class="topic-item">Conductivity decreases with temperature</div>
+                        <div class="topic-item">Examples: Cu, Ag, Sn</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Electrolytic Conductors</div>
+                        <div class="topic-item">Due to flow of ions</div>
+                        <div class="topic-item">Accompanied by decomposition</div>
+                        <div class="topic-item">Transfer of matter as ions</div>
+                        <div class="topic-item">Conductivity increases with temperature</div>
+                        <div class="topic-item">Examples: Acid, base, salt solutions</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-tachometer-alt"></i> Conductivity Terms</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-ban"></i> Resistance (R)</div>
+                        <div class="topic-item">R = ρ × (l/a)</div>
+                        <div class="topic-item">Unit: Ohm (Ω)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Conductance (G)</div>
+                        <div class="topic-item">G = 1/R</div>
+                        <div class="topic-item">Unit: Ohm<sup>-1</sup> or mho or Siemens (S)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-ruler"></i> Resistivity (ρ)</div>
+                        <div class="topic-item">ρ = R × (a/l)</div>
+                        <div class="topic-item">Unit: Ohm cm</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tachometer-alt"></i> Conductivity (κ)</div>
+                        <div class="topic-item">κ = 1/ρ</div>
+                        <div class="topic-item">Unit: Ohm<sup>-1</sup> cm<sup>-1</sup> or S cm<sup>-1</sup></div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-chart-line"></i> Molar Conductivity (Λ)</h3>
+                <div class="formula">
+                    Λ = κ / M (if M in mol/cm<sup>3</sup>)<br>
+                    Λ = (κ × 1000) / M (if M in mol/L)<br>
+                    Unit: S cm<sup>2</sup> mol<sup>-1</sup>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Equivalent Conductivity (Λ<sub>e</sub>)</h3>
+                <div class="formula">
+                    Λ<sub>e</sub> = (κ × 1000) / C<br>
+                    Where C is concentration in gram equivalent per litre<br>
+                    Unit: Ohm<sup>-1</sup> cm<sup>2</sup> (gm equiv<sup>-1</sup>)
+                </div>
+                
+                <h3><i class="fas fa-flask"></i> Experimental Measurement</h3>
+                <div class="formula">
+                    κ = G × (l/a) = G × Cell constant<br>
+                    Cell constant = l/a (in cm<sup>-1</sup>)
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Factors Affecting Electrolytic Conductance</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Nature of Electrolyte</div>
+                        <div class="topic-item">Strong electrolytes: Completely dissociated</div>
+                        <div class="topic-item">Weak electrolytes: Partially dissociated</div>
+                        <div class="topic-item">More ions → higher conductance</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-bar"></i> Concentration</div>
+                        <div class="topic-item">Molar conductance increases with dilution</div>
+                        <div class="topic-item">For weak electrolytes: Due to increased dissociation</div>
+                        <div class="topic-item">For strong electrolytes: Due to decreased inter-ionic attraction</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Temperature</div>
+                        <div class="topic-item">Conductivity increases with temperature</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-calculator"></i> Degree of Dissociation (α)</h3>
+                <div class="formula">
+                    α = Λ<sup>c</sup> / Λ<sup>0</sup><br>
+                    Where Λ<sup>c</sup> = molar conductance at concentration C<br>
+                    Λ<sup>0</sup> = molar conductance at infinite dilution
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-exchange-alt"></i> Migration of Ions and Transport Number</h2>
+                
+                <div class="definition">
+                    <p>Electricity is carried through electrolyte solution by <strong>migration of ions</strong>.</p>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-running"></i> Migration Facts</div>
+                        <div class="topic-item">Ions move toward oppositely charged electrodes</div>
+                        <div class="topic-item">Different ions have different speeds</div>
+                        <div class="topic-item">Ions discharged in equivalent amounts</div>
+                        <div class="topic-item">Concentration changes around electrodes</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-calculator"></i> Transport Number</div>
+                        <div class="topic-item">Fraction of total current carried by an ion</div>
+                        <div class="topic-item">t<sub>a</sub> = Current by anion / Total current</div>
+                        <div class="topic-item">t<sub>c</sub> = Current by cation / Total current</div>
+                        <div class="topic-item">t<sub>a</sub> + t<sub>c</sub> = 1</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-tachometer-alt"></i> Ionic Mobility</h3>
+                <div class="formula">
+                    Ionic mobility ∝ speed of ions<br>
+                    Unit: Ohm<sup>-1</sup> cm<sup>2</sup> or V<sup>-1</sup> S<sup>-1</sup> cm<sup>2</sup><br>
+                    λ<sub>a</sub> or λ<sub>c</sub> = t<sub>a</sub> or t<sub>c</sub> × λ<sub>0</sub><br>
+                    Absolute ionic mobility = Ionic mobility / 96,500 (Unit: cm sec<sup>-1</sup>)
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-law"></i> Kohlrausch's Law</h2>
+                
+                <div class="definition">
+                    <p>At infinite dilution, the molar conductivity of an electrolyte can be expressed as the sum of the contributions from its individual ions.</p>
+                </div>
+                
+                <div class="formula">
+                    Λ<sub>m</sub><sup>∞</sup> = ν<sub>+</sub>λ<sub>+</sub><sup>∞</sup> + ν<sub>-</sub>λ<sub>-</sub><sup>∞</sup><br>
+                    Where ν<sub>+</sub>, ν<sub>-</sub> = number of cations and anions<br>
+                    λ<sub>+</sub><sup>∞</sup>, λ<sub>-</sub><sup>∞</sup> = molar conductivities at infinite dilution
+                </div>
+                
+                <div class="formula">
+                    Example: Λ<sub>HCl</sub><sup>∞</sup> = λ<sub>H+</sub><sup>∞</sup> + λ<sub>Cl-</sub><sup>∞</sup>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Applications</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-calculator"></i> Weak Electrolytes</div>
+                        <div class="topic-item">Determine Λ<sub>m</sub><sup>∞</sup> for weak electrolytes</div>
+                        <div class="topic-item">Example: Λ<sub>CH3COOH</sub><sup>∞</sup> = Λ<sub>CH3COONa</sub><sup>∞</sup> + Λ<sub>HCl</sub><sup>∞</sup> - Λ<sub>NaCl</sub><sup>∞</sup></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Degree of Ionisation</div>
+                        <div class="topic-item">α<sub>c</sub> = Λ<sub>m</sub><sup>c</sup> / Λ<sub>m</sub><sup>∞</sup></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-balance-scale"></i> Ionisation Constant</div>
+                        <div class="topic-item">K = Cα<sup>2</sup> / (1-α)</div>
+                        <div class="topic-item">K = C(Λ<sub>m</sub><sup>c</sup>)<sup>2</sup> / [Λ<sub>m</sub><sup>∞</sup>(Λ<sub>m</sub><sup>∞</sup> - Λ<sub>m</sub><sup>c</sup>)]</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Solubility of Sparingly Soluble Salts</div>
+                        <div class="topic-item">S = (κ × 1000) / Λ<sub>m</sub><sup>∞</sup></div>
+                        <div class="topic-item">K<sub>sp</sub> = S<sup>2</sup> (for 1:1 electrolyte)</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-battery-three-quarters"></i> Galvanic Cell</h2>
+                
+                <div class="definition">
+                    <p>A <strong>galvanic cell</strong> or <strong>voltaic cell</strong> is a device in which chemical energy is converted into electrical energy by a spontaneous redox reaction.</p>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Key Features</div>
+                        <div class="topic-item">Converts chemical energy to electrical energy</div>
+                        <div class="topic-item">E<sub>cell</sub> = +ve, ΔG = -ve</div>
+                        <div class="topic-item">Electrons flow from anode to cathode (external circuit)</div>
+                        <div class="topic-item">Current flows from cathode to anode</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electrodes</div>
+                        <div class="topic-item"><strong>Anode (-ve pole)</strong>: Oxidation occurs</div>
+                        <div class="topic-item"><strong>Cathode (+ve pole)</strong>: Reduction occurs</div>
+                        <div class="topic-item">Electrons flow from anode to cathode</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-recycle"></i> Electrode Reactions</h3>
+                <div class="two-column">
+                    <div class="formula">
+                        At anode: Zn → Zn<sup>2+</sup> + 2e<sup>-</sup> (Oxidation)
+                    </div>
+                    <div class="formula">
+                        At cathode: Cu<sup>2+</sup> + 2e<sup>-</sup> → Cu (Reduction)
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-battery-half"></i> Daniell Cell</h3>
+                <div class="formula">
+                    Zn | ZnSO<sub>4</sub> || CuSO<sub>4</sub> | Cu<br>
+                    Anode: Zn → Zn<sup>2+</sup> + 2e<sup>-</sup><br>
+                    Cathode: Cu<sup>2+</sup> + 2e<sup>-</sup> → Cu<br>
+                    Overall: Zn + Cu<sup>2+</sup> → Zn<sup>2+</sup> + Cu
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-ruler"></i> Standard Electrode Potential</h2>
+                
+                <div class="definition">
+                    <p>The <strong>electrode potential</strong> is the potential difference set up between the electrode and its electrolyte. The <strong>standard electrode potential</strong> (E°) is measured at 25°C with 1M solution and 1 atm pressure.</p>
+                </div>
+                
+                <h3><i class="fas fa-flask"></i> Standard Hydrogen Electrode (SHE)</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Construction</div>
+                        <div class="topic-item">Platinum foil coated with platinum black</div>
+                        <div class="topic-item">1M HCl solution</div>
+                        <div class="topic-item">H<sub>2</sub> gas at 1 atm pressure</div>
+                        <div class="topic-item">Temperature 25°C</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Reaction</div>
+                        <div class="topic-item">2H<sup>+</sup> (1M) + 2e<sup>-</sup> ⇌ H<sub>2</sub> (1 atm)</div>
+                        <div class="topic-item">E° = 0.00 V (by convention)</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-sort-amount-down"></i> Electrochemical Series</h3>
+                <table class="series-table">
+                    <thead>
+                        <tr>
+                            <th>Electrode Reaction</th>
+                            <th>E° (V)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Li<sup>+</sup> + e<sup>-</sup> ⇌ Li</td>
+                            <td>-3.05</td>
+                        </tr>
+                        <tr>
+                            <td>K<sup>+</sup> + e<sup>-</sup> ⇌ K</td>
+                            <td>-2.93</td>
+                        </tr>
+                        <tr>
+                            <td>Ca<sup>2+</sup> + 2e<sup>-</sup> ⇌ Ca</td>
+                            <td>-2.87</td>
+                        </tr>
+                        <tr>
+                            <td>Na<sup>+</sup> + e<sup>-</sup> ⇌ Na</td>
+                            <td>-2.71</td>
+                        </tr>
+                        <tr>
+                            <td>Mg<sup>2+</sup> + 2e<sup>-</sup> ⇌ Mg</td>
+                            <td>-2.37</td>
+                        </tr>
+                        <tr>
+                            <td>Al<sup>3+</sup> + 3e<sup>-</sup> ⇌ Al</td>
+                            <td>-1.66</td>
+                        </tr>
+                        <tr>
+                            <td>Zn<sup>2+</sup> + 2e<sup>-</sup> ⇌ Zn</td>
+                            <td>-0.76</td>
+                        </tr>
+                        <tr>
+                            <td>Fe<sup>2+</sup> + 2e<sup>-</sup> ⇌ Fe</td>
+                            <td>-0.44</td>
+                        </tr>
+                        <tr>
+                            <td>Ni<sup>2+</sup> + 2e<sup>-</sup> ⇌ Ni</td>
+                            <td>-0.25</td>
+                        </tr>
+                        <tr>
+                            <td>Sn<sup>2+</sup> + 2e<sup>-</sup> ⇌ Sn</td>
+                            <td>-0.14</td>
+                        </tr>
+                        <tr>
+                            <td>Pb<sup>2+</sup> + 2e<sup>-</sup> ⇌ Pb</td>
+                            <td>-0.13</td>
+                        </tr>
+                        <tr>
+                            <td>2H<sup>+</sup> + 2e<sup>-</sup> ⇌ H<sub>2</sub></td>
+                            <td>0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Cu<sup>2+</sup> + 2e<sup>-</sup> ⇌ Cu</td>
+                            <td>+0.34</td>
+                        </tr>
+                        <tr>
+                            <td>Ag<sup>+</sup> + e<sup>-</sup> ⇌ Ag</td>
+                            <td>+0.80</td>
+                        </tr>
+                        <tr>
+                            <td>Hg<sup>2+</sup> + 2e<sup>-</sup> ⇌ Hg</td>
+                            <td>+0.85</td>
+                        </tr>
+                        <tr>
+                            <td>Br<sub>2</sub> + 2e<sup>-</sup> ⇌ 2Br<sup>-</sup></td>
+                            <td>+1.08</td>
+                        </tr>
+                        <tr>
+                            <td>Cl<sub>2</sub> + 2e<sup>-</sup> ⇌ 2Cl<sup>-</sup></td>
+                            <td>+1.36</td>
+                        </tr>
+                        <tr>
+                            <td>Au<sup>3+</sup> + 3e<sup>-</sup> ⇌ Au</td>
+                            <td>+1.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> Nernst Equation</h2>
+                
+                <div class="definition">
+                    <p>The <strong>Nernst equation</strong> gives the relationship between electrode potential and the concentration of ions in solution.</p>
+                </div>
+                
+                <div class="formula">
+                    E = E° - (RT/nF) ln Q<br>
+                    E = E° - (0.0591/n) log Q (at 25°C)<br>
+                    Where Q = reaction quotient
+                </div>
+                
+                <h3><i class="fas fa-bolt"></i> For Electrode Reaction</h3>
+                <div class="formula">
+                    M<sup>n+</sup> + ne<sup>-</sup> ⇌ M<br>
+                    E = E° - (0.0591/n) log (1/[M<sup>n+</sup>])<br>
+                    E = E° + (0.0591/n) log [M<sup>n+</sup>]
+                </div>
+                
+                <h3><i class="fas fa-battery-full"></i> For Cell Reaction</h3>
+                <div class="formula">
+                    aA + bB ⇌ cC + dD<br>
+                    E<sub>cell</sub> = E°<sub>cell</sub> - (0.0591/n) log ([C]<sup>c</sup>[D]<sup>d</sup> / [A]<sup>a</sup>[B]<sup>b</sup>)
+                </div>
+                
+                <h3><i class="fas fa-balance-scale"></i> Applications</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-calculator"></i> Equilibrium Constant</div>
+                        <div class="topic-item">At equilibrium: E<sub>cell</sub> = 0</div>
+                        <div class="topic-item">E°<sub>cell</sub> = (0.0591/n) log K</div>
+                        <div class="topic-item">K = 10<sup>(nE°<sub>cell</sub>/0.0591)</sup></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> pH Measurement</div>
+                        <div class="topic-item">For hydrogen electrode: E = -0.0591 pH</div>
+                        <div class="topic-item">pH = -log [H<sup>+</sup>]</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-balance-scale"></i> Solubility Product</div>
+                        <div class="topic-item">K<sub>sp</sub> = [M<sup>n+</sup>][A<sup>n-</sup>]</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Important Points to Remember</h2>
+               
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Electrolytic cell: Electrical → Chemical energy, E<sub>cell</sub> = -ve, ΔG = +ve</li>
+                        <li>Galvanic cell: Chemical → Electrical energy, E<sub>cell</sub> = +ve, ΔG = -ve</li>
+                        <li>Faraday's first law: W = Z × I × t</li>
+                        <li>Faraday's second law: W<sub>1</sub>/W<sub>2</sub> = E<sub>1</sub>/E<sub>2</sub></li>
+                        <li>1 Faraday = 96500 C = Charge on 1 mole of electrons</li>
+                        <li>Kohlrausch's law: Λ<sub>m</sub><sup>∞</sup> = ν<sub>+</sub>λ<sub>+</sub><sup>∞</sup> + ν<sub>-</sub>λ<sub>-</sub><sup>∞</sup></li>
+                        <li>Nernst equation: E = E° - (0.0591/n) log Q</li>
+                        <li>Standard hydrogen electrode potential = 0.00 V</li>
+                        <li>Electrochemical series: Lower E° → stronger reducing agent</li>
+                        <li>Higher E° → stronger oxidizing agent</li>
+                    </ul>
+                </div>
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Identify electrode types correctly (anode/cathode)</div>
+                        <div class="topic-item">Apply Faraday's laws for electrolysis calculations</div>
+                        <div class="topic-item">Use Nernst equation for concentration cells</div>
+                        <div class="topic-item">Remember standard electrode potentials</div>
+                        <div class="topic-item">Apply Kohlrausch's law for weak electrolytes</div>
+                    </div>
+                   
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Don't confuse electrolytic and galvanic cells</div>
+                        <div class="topic-item">Don't mix up anode and cathode in different cells</div>
+                        <div class="topic-item">Don't forget units in conductivity calculations</div>
+                        <div class="topic-item">Don't ignore temperature in Nernst equation</div>
+                        <div class="topic-item">Don't confuse E° with E</div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+               
+                <p>This chapter typically carries <span class="highlight">2-3 questions</span> in JEE Main, covering electrolysis, conductance, electrochemical cells, and Nernst equation applications.</p>
+               
+                <div class="weightage-item">
+                    <h4>Chapter Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 70%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>Medium (2-3 questions)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+       
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Physical Chemistry - Electrochemistry Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+           
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+           
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

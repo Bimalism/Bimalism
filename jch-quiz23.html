@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Organic Chemistry Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32, #4caf50);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-tube-animation {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-tube {
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            border: 2px solid #333;
+            animation: bubble 2s ease-in-out infinite;
+        }
+        
+        .test-tube::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 2s ease-in-out infinite;
+        }
+        
+        .bubble:nth-child(2) {
+            animation-delay: 0.5s;
+            left: 15px;
+        }
+        
+        .bubble:nth-child(3) {
+            animation-delay: 1s;
+            left: 20px;
+        }
+        
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        @keyframes bubble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #1b5e20;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #e8f5e9;
+            border-color: #1b5e20;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #1b5e20;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #1b5e20;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1b5e20;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .test-tube-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="test-tube-animation">
+                <div class="test-tube">
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                </div>
+            </div>
+            <h1>Chapter 23: General Organic Chemistry</h1>
+            <div class="subtitle">Test your knowledge of hybridisation, effects, reactions, and isomerism</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
+                    <span>Score: <span id="score">0</span>/20</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: General Organic Chemistry</div>
+                    <div>Level: Advanced</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/20</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gocQuiz = [
+            {
+                q: "The geometry for sp³ hybridisation is:",
+                o: ["Linear", "Trigonal planar", "Tetrahedral", "Octahedral"],
+                a: 2,
+                exp: "sp³ hybridisation involves 1s + 3p orbitals, leading to tetrahedral geometry with bond angle 109.5°."
+            },
+            {
+                q: "The % s-character in sp² hybridisation is:",
+                o: ["25%", "33.33%", "50%", "75%"],
+                a: 1,
+                exp: "sp² = 1s + 2p, so s-character = 1/3 ≈ 33.33%."
+            },
+            {
+                q: "Number of π-bonds in a molecule determines hybridisation. For 1 π-bond, it is:",
+                o: ["sp³", "sp²", "sp", "sp³d"],
+                a: 1,
+                exp: "0 π = sp³ (alkanes), 1 π = sp² (alkenes), 2 π = sp (alkynes)."
+            },
+            {
+                q: "In electron pair method, ep = 3 indicates:",
+                o: ["sp³", "sp²", "sp", "sp³d"],
+                a: 1,
+                exp: "ep = bp + lp; ep=2: sp, 3: sp², 4: sp³."
+            },
+            {
+                q: "Size of hybrid orbitals decreases as:",
+                o: ["s-character increases", "p-character increases", "d-character increases", "Bond angle decreases"],
+                a: 0,
+                exp: "Higher s-character means smaller orbital size: sp (50%) < sp² (33.3%) < sp³ (25%)."
+            },
+            {
+                q: "Electronegativity of hybrid orbitals follows:",
+                o: ["sp > sp² > sp³", "sp³ > sp² > sp", "sp² > sp > sp³", "sp³ > sp > sp²"],
+                a: 0,
+                exp: "Electronegativity ∝ % s-character: sp (50%) > sp² (33.3%) > sp³ (25%)."
+            },
+            {
+                q: "Bond length in C-H bonds is shortest in:",
+                o: ["Alkanes", "Alkenes", "Alkynes", "Aromatics"],
+                a: 2,
+                exp: "C-H (sp): 1.08Å (alkynes) < sp²: 1.103Å (alkenes) < sp³: 1.112Å (alkanes)."
+            },
+            {
+                q: "Acidity of hydrocarbons follows:",
+                o: ["Alkynes > Alkenes > Alkanes", "Alkanes > Alkenes > Alkynes", "Alkenes > Alkynes > Alkanes", "Alkynes > Alkanes > Alkenes"],
+                a: 0,
+                exp: "Acidity ∝ % s-character: HC≡CH (pKa 25) > CH2=CH2 (44) > CH3-CH3 (50)."
+            },
+            {
+                q: "Steric effect causes:",
+                o: ["Hindrance in reaction due to bulky groups", "Increase in reaction rate", "No effect on resonance", "Decrease in bond length"],
+                a: 0,
+                exp: "Bulkier groups cause mechanical interference, slowing reactions; also inhibits resonance."
+            },
+            {
+                q: "Inductive effect is:",
+                o: ["Permanent polarisation due to electronegativity difference", "Temporary electron shift", "Conjugation of π-electrons", "σ-π conjugation"],
+                a: 0,
+                exp: "Inductive effect is permanent displacement of σ-electrons towards more electronegative atom."
+            },
+            {
+                q: "Groups with +I effect:",
+                o: ["Increase electron density", "Decrease electron density", "No effect", "Only affect π-bonds"],
+                a: 0,
+                exp: "+I groups (e.g., alkyl) donate electrons, making carbocations stable."
+            },
+            {
+                q: "Mesomeric effect involves:",
+                o: ["Delocalisation of π-electrons", "σ-electron shift", "Temporary shift", "No-bond resonance"],
+                a: 0,
+                exp: "Mesomeric (resonance) effect is permanent transfer of π or lone pair electrons in conjugated systems."
+            },
+            {
+                q: "Hyperconjugation is:",
+                o: ["No-bond resonance between σ (C-H) and π bonds", "π-π conjugation", "Inductive effect", "Electromeric effect"],
+                a: 0,
+                exp: "Hyperconjugation stabilises carbocations/alkenes via σ-π overlap; no. of structures = α-H + 1."
+            },
+            {
+                q: "Electromeric effect is:",
+                o: ["Temporary shift of π-electrons towards electrophile", "Permanent π-shift", "σ-shift", "Lone pair delocalisation"],
+                a: 0,
+                exp: "Electromeric is temporary, occurs on demand of reagent; +E towards electrophile, -E away."
+            },
+            {
+                q: "Reaction intermediates include:",
+                o: ["Carbocation, carbanion, free radical, carbene", "Only ions", "Only radicals", "Only stable compounds"],
+                a: 0,
+                exp: "Short-lived species: carbocation (sp², planar), carbanion (sp³/pyramidal), radical (sp², planar)."
+            },
+            {
+                q: "Electrophiles are:",
+                o: ["Electron-deficient species", "Electron-rich species", "Neutral molecules only", "Always negative"],
+                a: 0,
+                exp: "Electrophiles (Lewis acids) accept electrons, e.g., BF₃, AlCl₃, NO₂⁺."
+            },
+            {
+                q: "Nucleophiles are:",
+                o: ["Electron-rich species", "Electron-deficient", "Always positive", "Radicals"],
+                a: 0,
+                exp: "Nucleophiles (Lewis bases) donate electrons, e.g., OH⁻, NH₃, CN⁻."
+            },
+            {
+                q: "In SN2 reactions, stereochemistry is:",
+                o: ["Inversion of configuration", "Retention", "Racemisation", "No change"],
+                a: 0,
+                exp: "SN2 is bimolecular, backside attack, leading to inversion (walden inversion)."
+            },
+            {
+                q: "Isomerism where compounds differ in carbon chain is:",
+                o: ["Chain isomerism", "Position isomerism", "Functional isomerism", "Tautomerism"],
+                a: 0,
+                exp: "Chain isomers: n-pentane and isopentane differ in carbon skeleton."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(gocQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = gocQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = gocQuiz[currentQuestion];
+            questionText.textContent = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / gocQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                // If user has already selected this option
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    
+                    // Show if correct/incorrect after answer
+                    if (userAnswers[currentQuestion] !== null) {
+                        if (index === question.a) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if answer has been selected
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === gocQuiz.length - 1) {
+                nextBtn.textContent = 'Finish';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+            
+            // Update score
+            scoreEl.textContent = score;
+        }
+        
+        // Select an option
+        function selectOption(index) {
+            // If already answered, don't allow changing
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            // Mark selected option
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = index;
+            
+            // Check if correct
+            const question = gocQuiz[currentQuestion];
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                options[index].classList.add('incorrect');
+                // Also show correct answer
+                options[question.a].classList.add('correct');
+            }
+            
+            // Show explanation
+            explanation.style.display = 'block';
+            explanationText.textContent = question.exp;
+        }
+        
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < gocQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        // Show final results
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            finalScore.textContent = `${score}/${gocQuiz.length}`;
+            
+            // Set score message
+            if (score === gocQuiz.length) {
+                scoreText.textContent = "Perfect! You're a GOC expert!";
+            } else if (score >= gocQuiz.length * 0.8) {
+                scoreText.textContent = "Excellent! Strong grasp of hybridisation and effects.";
+            } else if (score >= gocQuiz.length * 0.6) {
+                scoreText.textContent = "Good job! Solid understanding of isomerism.";
+            } else if (score >= gocQuiz.length * 0.4) {
+                scoreText.textContent = "Not bad! Practice more on reaction intermediates.";
+            } else {
+                scoreText.textContent = "Keep studying! GOC is key for JEE/NEET!";
+            }
+        }
+        
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(gocQuiz.length).fill(null);
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            loadQuestion();
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

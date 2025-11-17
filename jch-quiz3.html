@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonding Quiz </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #1565C0;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 1.2rem;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #f0f7ff;
+            border-color: #90caf9;
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #1565C0;
+        }
+        
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .option input {
+            margin-right: 15px;
+        }
+        
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .explanation.show {
+            display: block;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #1565C0;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0D47A1;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #bdbdbd;
+        }
+        
+        .btn-success {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #388e3c;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 20px 0;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #1565C0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(21, 101, 192, 0.3);
+        }
+        
+        .performance {
+            margin: 30px 0;
+        }
+        
+        .performance-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .performance-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+        
+        .performance-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+            
+            .actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+        
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+        
+        .progress-container {
+            margin: 20px 0;
+            background: #f5f5f5;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 10px;
+            width: 5%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 3</div>
+            <h1>Chemical Bonding Quiz</h1>
+            <p class="subtitle">20 Questions - Test Your Knowledge</p>
+            
+            <div class="quiz-info">
+                <div class="info-item">
+                    <div class="info-label">Questions</div>
+                    <div class="info-value">20</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Time</div>
+                    <div class="info-value">30 min</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Difficulty</div>
+                    <div class="info-value">Medium/Hard</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="progress-text" id="progress-text">Question 1 of 20</div>
+            
+            <div id="quiz-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="actions">
+                <button class="btn-secondary" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn-primary" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn-success" id="submit-btn" style="display: none;">
+                    Submit Quiz
+                </button>
+            </div>
+            
+            <div class="results" id="results">
+                <h2><i class="fas fa-trophy"></i> Quiz Results</h2>
+                <div class="score-circle" id="score-circle">0%</div>
+                <div class="score" id="score-text">You scored 0 out of 20</div>
+                
+                <div class="performance">
+                    <h3>Performance Summary</h3>
+                    <div class="performance-item">
+                        <div class="performance-label">
+                            <span>Correct Answers</span>
+                            <span id="correct-count">0</span>
+                        </div>
+                        <div class="performance-bar">
+                            <div class="performance-fill" id="correct-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="performance-item">
+                        <div class="performance-label">
+                            <span>Incorrect Answers</span>
+                            <span id="incorrect-count">0</span>
+                        </div>
+                        <div class="performance-bar">
+                            <div class="performance-fill" id="incorrect-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="performance-item">
+                        <div class="performance-label">
+                            <span>Skipped Questions</span>
+                            <span id="skipped-count">20</span>
+                        </div>
+                        <div class="performance-bar">
+                            <div class="performance-fill" id="skipped-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" id="retry-btn">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <div>Chemical Bonding Quiz - JEE Main Chemistry Preparation</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz questions data
+            const questions = [
+                {
+                    question: "Which of the following compounds has the highest ionic character?",
+                    options: ["HCl", "HBr", "HF", "HI"],
+                    correct: 2,
+                    explanation: "HF has the highest ionic character because fluorine is the most electronegative element, creating the largest electronegativity difference with hydrogen."
+                },
+                {
+                    question: "Which hybridisation is found in the central atom of SF₆?",
+                    options: ["sp³", "sp³d", "sp³d²", "dsp²"],
+                    correct: 2,
+                    explanation: "In SF₆, sulfur is surrounded by 6 bond pairs. Using the formula H = ½(V + M - C + A), we get H = 6, which corresponds to sp³d² hybridization."
+                },
+                {
+                    question: "Which of the following molecules has a dipole moment of zero?",
+                    options: ["NH₃", "BF₃", "H₂O", "CHCl₃"],
+                    correct: 1,
+                    explanation: "BF₃ has a trigonal planar geometry with symmetric charge distribution, resulting in a net dipole moment of zero. The bond dipoles cancel each other out."
+                },
+                {
+                    question: "According to Fajan's rule, covalent character is favored by:",
+                    options: ["Small cation and large anion", "Large cation and small anion", "Small cation and small anion", "Large cation and large anion"],
+                    correct: 0,
+                    explanation: "According to Fajan's rule, covalent character is favored by small cation size (high polarizing power) and large anion size (high polarizability)."
+                },
+                {
+                    question: "Which of the following does NOT show resonance?",
+                    options: ["O₃", "CO₃²⁻", "Benzene", "H₂O"],
+                    correct: 3,
+                    explanation: "H₂O does not show resonance as it has a fixed structure with no delocalization of electrons. O₃, CO₃²⁻, and benzene all exhibit resonance."
+                },
+                {
+                    question: "The bond order in O₂²⁻ (peroxide ion) is:",
+                    options: ["1", "1.5", "2", "2.5"],
+                    correct: 0,
+                    explanation: "Using molecular orbital theory, O₂ has 16 electrons and bond order of 2. O₂²⁻ has 18 electrons with configuration: σ1s², σ*1s², σ2s², σ*2s², σ2pz², π2px², π2py², π*2px², π*2py². Bond order = (10-8)/2 = 1."
+                },
+                {
+                    question: "Which of the following has the highest bond energy?",
+                    options: ["F₂", "N₂", "O₂", "Cl₂"],
+                    correct: 1,
+                    explanation: "N₂ has a triple bond with bond energy of 945 kJ/mol, which is higher than F₂ (155 kJ/mol), O₂ (498 kJ/mol), and Cl₂ (242 kJ/mol)."
+                },
+                {
+                    question: "The geometry of XeF₄ is:",
+                    options: ["Tetrahedral", "Square pyramidal", "Square planar", "Trigonal bipyramidal"],
+                    correct: 2,
+                    explanation: "XeF₄ has 4 bond pairs and 2 lone pairs. According to VSEPR theory, this leads to an octahedral electron pair geometry and square planar molecular geometry."
+                },
+                {
+                    question: "Which of the following exhibits both covalent and coordinate bonding?",
+                    options: ["NaCl", "CH₄", "NH₄⁺", "MgCl₂"],
+                    correct: 2,
+                    explanation: "In NH₄⁺, three N-H bonds are covalent, while the fourth is a coordinate bond where nitrogen donates its lone pair to H⁺."
+                },
+                {
+                    question: "The bond angle in H₂O is less than that in CH₄ because:",
+                    options: ["Oxygen is more electronegative than carbon", "Water has a linear structure", "Lone pair-bond pair repulsion is greater than bond pair-bond pair repulsion", "Hydrogen bonding in water"],
+                    correct: 2,
+                    explanation: "In H₂O, there are two lone pairs on oxygen. According to VSEPR theory, lone pair-lone pair repulsion > lone pair-bond pair repulsion > bond pair-bond pair repulsion, which compresses the bond angle from the ideal tetrahedral angle of 109.5° to 104.5°."
+                },
+                {
+                    question: "Which of the following is an example of a polar covalent compound?",
+                    options: ["Cl₂", "HCl", "NaCl", "MgO"],
+                    correct: 1,
+                    explanation: "HCl is a polar covalent compound due to the difference in electronegativity between H and Cl atoms, creating a dipole moment."
+                },
+                {
+                    question: "The number of sigma and pi bonds in C₂H₂ is:",
+                    options: ["3σ, 2π", "2σ, 3π", "3σ, 0π", "5σ, 0π"],
+                    correct: 0,
+                    explanation: "C₂H₂ (acetylene) has a triple bond between carbon atoms, which consists of 1 sigma and 2 pi bonds, plus 2 C-H sigma bonds, totaling 3 sigma and 2 pi bonds."
+                },
+                {
+                    question: "Which of the following has the shortest bond length?",
+                    options: ["N₂", "O₂", "F₂", "Cl₂"],
+                    correct: 0,
+                    explanation: "N₂ has a triple bond with bond length of 1.10 Å, which is shorter than O₂ (1.21 Å, double bond), F₂ (1.42 Å, single bond), and Cl₂ (1.99 Å, single bond)."
+                },
+                {
+                    question: "The correct order of increasing bond angle is:",
+                    options: ["NH₃ < H₂O < CH₄", "H₂O < NH₃ < CH₄", "CH₄ < NH₃ < H₂O", "H₂O < CH₄ < NH₃"],
+                    correct: 1,
+                    explanation: "Bond angles: H₂O (104.5°) < NH₃ (107°) < CH₄ (109.5°). This is due to increasing lone pair repulsion from 0 in CH₄ to 1 in NH₃ to 2 in H₂O."
+                },
+                {
+                    question: "Which of the following molecules has the highest boiling point?",
+                    options: ["CH₄", "NH₃", "H₂O", "HF"],
+                    correct: 2,
+                    explanation: "H₂O has the highest boiling point due to extensive hydrogen bonding, which requires more energy to break compared to the other molecules."
+                },
+                {
+                    question: "The hybridization of carbon in CO₂ is:",
+                    options: ["sp", "sp²", "sp³", "sp³d"],
+                    correct: 0,
+                    explanation: "In CO₂, carbon forms two double bonds with oxygen atoms. The linear geometry indicates sp hybridization."
+                },
+                {
+                    question: "Which of the following is NOT an example of intramolecular hydrogen bonding?",
+                    options: ["o-nitrophenol", "o-nitrobenzoic acid", "Water", "Salicylaldehyde"],
+                    correct: 2,
+                    explanation: "Water exhibits intermolecular hydrogen bonding, not intramolecular. Intramolecular hydrogen bonding occurs within the same molecule, as in o-nitrophenol, o-nitrobenzoic acid, and salicylaldehyde."
+                },
+                {
+                    question: "The bond order of NO⁺ is:",
+                    options: ["2", "2.5", "3", "3.5"],
+                    correct: 2,
+                    explanation: "NO has 15 electrons with bond order of 2.5. NO⁺ has 14 electrons with configuration similar to CO, giving a bond order of 3."
+                },
+                {
+                    question: "Which of the following has a linear shape?",
+                    options: ["SO₂", "CO₂", "O₃", "H₂O"],
+                    correct: 1,
+                    explanation: "CO₂ has a linear shape due to sp hybridization of the carbon atom. SO₂ and O₃ are bent, and H₂O is also bent."
+                },
+                {
+                    question: "The percentage ionic character in a bond can be calculated using:",
+                    options: ["Fajan's rule", "Born-Haber cycle", "Hund's rule", "Mulliken's equation"],
+                    correct: 3,
+                    explanation: "Mulliken's equation relates the percentage ionic character to the electronegativity difference between atoms: % ionic character = 16|Δχ| + 3.5|Δχ|²."
+                }
+            ];
+
+            const quizContainer = document.getElementById('quiz-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const retryBtn = document.getElementById('retry-btn');
+            const resultsContainer = document.getElementById('results');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            let currentQuestion = 0;
+            const userAnswers = new Array(questions.length).fill(null);
+            
+            // Initialize quiz
+            initializeQuiz();
+            
+            // Next button event
+            nextBtn.addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                } else {
+                    showResults();
+                }
+            });
+            
+            // Previous button event
+            prevBtn.addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            });
+            
+            // Submit button event
+            submitBtn.addEventListener('click', showResults);
+            
+            // Retry button event
+            retryBtn.addEventListener('click', function() {
+                currentQuestion = 0;
+                userAnswers.fill(null);
+                initializeQuiz();
+                resultsContainer.classList.remove('show');
+                quizContainer.style.display = 'block';
+            });
+            
+            function initializeQuiz() {
+                // Create question elements
+                quizContainer.innerHTML = '';
+                
+                questions.forEach((q, index) => {
+                    const questionEl = document.createElement('div');
+                    questionEl.className = 'question';
+                    questionEl.style.display = index === 0 ? 'block' : 'none';
+                    
+                    questionEl.innerHTML = `
+                        <div class="question-header">
+                            <div class="question-number">Question ${index + 1} of ${questions.length}</div>
+                            <div class="question-points">Points: 1</div>
+                        </div>
+                        <div class="question-text">${q.question}</div>
+                        <div class="options">
+                            ${q.options.map((option, optIndex) => `
+                                <div class="option" data-index="${optIndex}">
+                                    <input type="radio" name="q${index}" id="q${index}o${optIndex}">
+                                    <label for="q${index}o${optIndex}">${option}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="explanation">
+                            <strong>Explanation:</strong> ${q.explanation}
+                        </div>
+                    `;
+                    
+                    quizContainer.appendChild(questionEl);
+                    
+                    // Add event listeners to options
+                    const options = questionEl.querySelectorAll('.option');
+                    options.forEach(option => {
+                        option.addEventListener('click', function() {
+                            // Remove selected class from all options in this question
+                            options.forEach(opt => opt.classList.remove('selected'));
+                            
+                            // Add selected class to clicked option
+                            this.classList.add('selected');
+                            
+                            // Store user's answer
+                            userAnswers[index] = parseInt(this.getAttribute('data-index'));
+                            
+                            // Show explanation
+                            const explanation = questionEl.querySelector('.explanation');
+                            explanation.classList.add('show');
+                            
+                            // Update button text if it's the last question
+                            if (index === questions.length - 1) {
+                                nextBtn.style.display = 'none';
+                                submitBtn.style.display = 'block';
+                            }
+                        });
+                    });
+                });
+                
+                showQuestion(currentQuestion);
+            }
+            
+            function showQuestion(index) {
+                // Hide all questions
+                const allQuestions = document.querySelectorAll('.question');
+                allQuestions.forEach(question => {
+                    question.style.display = 'none';
+                });
+                
+                // Show current question
+                allQuestions[index].style.display = 'block';
+                
+                // Update button states
+                prevBtn.disabled = index === 0;
+                
+                if (index === questions.length - 1) {
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'block';
+                } else {
+                    nextBtn.style.display = 'block';
+                    submitBtn.style.display = 'none';
+                }
+                
+                // Update progress
+                const progress = ((index + 1) / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Question ${index + 1} of ${questions.length}`;
+                
+                // Restore user's selection if exists
+                if (userAnswers[index] !== null) {
+                    const options = allQuestions[index].querySelectorAll('.option');
+                    options.forEach(option => {
+                        if (parseInt(option.getAttribute('data-index')) === userAnswers[index]) {
+                            option.classList.add('selected');
+                        }
+                    });
+                    
+                    // Show explanation if answered
+                    const explanation = allQuestions[index].querySelector('.explanation');
+                    explanation.classList.add('show');
+                }
+            }
+            
+            function showResults() {
+                // Calculate score
+                let correctCount = 0;
+                let incorrectCount = 0;
+                let skippedCount = 0;
+                
+                userAnswers.forEach((answer, index) => {
+                    if (answer === questions[index].correct) {
+                        correctCount++;
+                    } else if (answer !== null) {
+                        incorrectCount++;
+                    } else {
+                        skippedCount++;
+                    }
+                });
+                
+                const score = (correctCount / questions.length) * 100;
+                
+                // Update results display
+                document.getElementById('score-circle').textContent = `${Math.round(score)}%`;
+                document.getElementById('score-text').textContent = `You scored ${correctCount} out of ${questions.length}`;
+                document.getElementById('correct-count').textContent = correctCount;
+                document.getElementById('incorrect-count').textContent = incorrectCount;
+                document.getElementById('skipped-count').textContent = skippedCount;
+                
+                document.getElementById('correct-bar').style.width = `${(correctCount / questions.length) * 100}%`;
+                document.getElementById('incorrect-bar').style.width = `${(incorrectCount / questions.length) * 100}%`;
+                document.getElementById('skipped-bar').style.width = `${(skippedCount / questions.length) * 100}%`;
+                
+                // Show results, hide quiz
+                quizContainer.style.display = 'none';
+                document.querySelector('.actions').style.display = 'none';
+                resultsContainer.classList.add('show');
+                
+                // Show correct/incorrect for each question
+                const allQuestions = document.querySelectorAll('.question');
+                allQuestions.forEach((question, index) => {
+                    const options = question.querySelectorAll('.option');
+                    options.forEach(option => {
+                        if (parseInt(option.getAttribute('data-index')) === questions[index].correct) {
+                            option.classList.add('correct');
+                        } else if (userAnswers[index] !== null && 
+                                   parseInt(option.getAttribute('data-index')) === userAnswers[index] && 
+                                   userAnswers[index] !== questions[index].correct) {
+                            option.classList.add('incorrect');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

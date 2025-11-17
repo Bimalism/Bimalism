@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+        
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+        
+        .model-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .model-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+        
+        .bond-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bond-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 3</div>
+            <h1>Chemical Bonding</h1>
+            <p class="subtitle">Electrovalent, Covalent, and Coordinate Bonds with Molecular Orbital Theory</p>
+            <div class="importance">High Weightage in JEE Main</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-link"></i> Introduction</h2>
+                <p>Chemical bonding is the process by which atoms combine to form molecules. The force that holds atoms or ions together within a molecule is called a chemical bond. Atoms combine to achieve a state of minimum energy and maximum stability, acquiring the stable electron configuration of the nearest noble gas.</p>
+                
+                <div class="definition">
+                    <p><strong>Chemical Bond</strong> is the force that holds atoms or ions together within a molecule. The process of their combination is called Chemical Bonding.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Types of Chemical Bonds</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Electrovalent (Ionic) Bond</div>
+                        <div class="topic-item">Formed by complete electron transfer</div>
+                        <div class="topic-item">Between metal and non-metal</div>
+                        <div class="topic-item">High electronegativity difference (~2)</div>
+                        <div class="topic-item">Examples: NaCl, MgCl₂, CaO</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-share-alt"></i> Covalent Bond</div>
+                        <div class="topic-item">Formed by electron sharing</div>
+                        <div class="topic-item">Between non-metals</div>
+                        <div class="topic-item">Small electronegativity difference</div>
+                        <div class="topic-item">Examples: H₂, Cl₂, H₂O, NH₃</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Coordinate Bond</div>
+                        <div class="topic-item">Special covalent bond</div>
+                        <div class="topic-item">One atom donates both electrons</div>
+                        <div class="topic-item">Between Lewis acid and base</div>
+                        <div class="topic-item">Examples: NH₃ → BF₃, H₃O⁺</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-table"></i> Bond Formation Based on Atom Types</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Atoms Involved</th>
+                            <th>Bond Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>A + B (Metal + Non-metal)</td>
+                            <td>Electrovalent</td>
+                        </tr>
+                        <tr>
+                            <td>B + B (Non-metal + Non-metal)</td>
+                            <td>Covalent</td>
+                        </tr>
+                        <tr>
+                            <td>A + A (Metal + Metal)</td>
+                            <td>Metallic</td>
+                        </tr>
+                        <tr>
+                            <td>Lewis acid + Lewis base</td>
+                            <td>Coordinate/Hydrogen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-bolt"></i> Electrovalent (Ionic) Bond</h2>
+                
+                <h3><i class="fas fa-cogs"></i> Formation Conditions</h3>
+                <div class="topic-item">Cation should have 1, 2, or 3 valence electrons</div>
+                <div class="topic-item">Anion should have 5, 6, or 7 valence electrons</div>
+                <div class="topic-item">High electronegativity difference (~2)</div>
+                <div class="topic-item">Low ionization potential (cation)</div>
+                <div class="topic-item">High electron affinity (anion)</div>
+                <div class="topic-item">High lattice energy</div>
+                
+                <div class="formula">
+                    Lattice Energy: U = K / (r⁺ + r⁻)
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Characteristics of Ionic Compounds</h3>
+                <div class="topic-item">Crystalline nature with regular lattice</div>
+                <div class="topic-item">High melting and boiling points</div>
+                <div class="topic-item">Hard and brittle</div>
+                <div class="topic-item">Conduct electricity in molten state or solution</div>
+                <div class="topic-item">Soluble in polar solvents, insoluble in non-polar</div>
+                <div class="topic-item">Non-rigid and non-directional bonds</div>
+                <div class="topic-item">Fast ionic reactions</div>
+                <div class="topic-item">Show isomorphism</div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-share-alt"></i> Covalent Bond</h2>
+                
+                <h3><i class="fas fa-cogs"></i> Formation Conditions</h3>
+                <div class="topic-item">Atoms short by 1, 2, or 3 electrons for noble gas configuration</div>
+                <div class="topic-item">Zero or small electronegativity difference</div>
+                <div class="topic-item">Approach accompanied by decrease in energy</div>
+                
+                <h3><i class="fas fa-vial"></i> Characteristics of Covalent Compounds</h3>
+                <div class="topic-item">Exist as gases, liquids, or soft solids</div>
+                <div class="topic-item">Generally low melting and boiling points</div>
+                <div class="topic-item">Poor conductors of electricity</div>
+                <div class="topic-item">Insoluble in polar solvents, soluble in non-polar</div>
+                <div class="topic-item">Rigid and directional bonds</div>
+                <div class="topic-item">Show isomerism</div>
+                <div class="topic-item">Slow molecular reactions</div>
+                
+                <div class="key-concept">
+                    <h4>Variable Covalency</h4>
+                    <p>Elements like P, S, Cl, Br, I show variable covalency due to vacant d-orbitals. Elements H, N, O, F do not have d-orbitals and thus don't show variable valency.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-arrows-alt-h"></i> Sigma (σ) vs Pi (π) Bonds</h2>
+                
+                <div class="bond-comparison">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus"></i> Sigma (σ) Bond</div>
+                        <div class="topic-item">End-to-end overlapping</div>
+                        <div class="topic-item">Stronger (80 kcal/mol)</div>
+                        <div class="topic-item">More stable</div>
+                        <div class="topic-item">Less reactive</div>
+                        <div class="topic-item">Can exist independently</div>
+                        <div class="topic-item">Electron cloud symmetrical about internuclear axis</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-align-justify"></i> Pi (π) Bond</div>
+                        <div class="topic-item">Sidewise (lateral) overlapping</div>
+                        <div class="topic-item">Weaker (65 kcal/mol)</div>
+                        <div class="topic-item">Less stable</div>
+                        <div class="topic-item">More reactive</div>
+                        <div class="topic-item">Always exists with σ-bond</div>
+                        <div class="topic-item">Electron cloud above and below internuclear axis</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-dna"></i> Hybridization</h2>
+                
+                <p>Hybridization is the intermixing of dissimilar orbitals of the same atom having slightly different energies to form new orbitals of equal energies and identical shapes.</p>
+                
+                <h3><i class="fas fa-list"></i> Characteristics</h3>
+                <div class="topic-item">Only orbitals of similar energies undergo hybridization</div>
+                <div class="topic-item">Number of hybrid orbitals = number of pure orbitals mixed</div>
+                <div class="topic-item">Hybrid orbitals form only sigma bonds</div>
+                <div class="topic-item">Orbitals in π-bond don't participate in hybridization</div>
+                <div class="topic-item">Hybrid orbitals possess lower energy</div>
+                
+                <h3><i class="fas fa-calculator"></i> Determining Hybridization</h3>
+                <div class="formula">
+                    H = ½ (V + M - C + A)
+                </div>
+                <p>Where:<br>
+                <span class="variable">H</span> = Number of orbitals in hybridization<br>
+                <span class="variable">V</span> = Valence electrons of central atom<br>
+                <span class="variable">M</span> = Number of monovalent atoms<br>
+                <span class="variable">C</span> = Charge on cation<br>
+                <span class="variable">A</span> = Charge on anion</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>H Value</th>
+                            <th>Hybridization</th>
+                            <th>Geometry</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2</td>
+                            <td>sp</td>
+                            <td>Linear</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>sp²</td>
+                            <td>Trigonal planar</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>sp³</td>
+                            <td>Tetrahedral</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>sp³d</td>
+                            <td>Trigonal bipyramidal</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>sp³d²</td>
+                            <td>Octahedral</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-magnet"></i> VSEPR Theory</h2>
+                
+                <p>Valence Shell Electron Pair Repulsion theory states that electron pairs (bonded or lone) around a central atom arrange themselves to minimize repulsion.</p>
+                
+                <div class="definition">
+                    <p><strong>Repulsion order:</strong> lp-lp > lp-bp > bp-bp (where lp = lone pair, bp = bond pair)</p>
+                </div>
+                
+                <h3><i class="fas fa-table"></i> Molecular Geometry</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Bond Pairs</th>
+                            <th>Lone Pairs</th>
+                            <th>Geometry</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AX₂</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>Linear</td>
+                            <td>CO₂, BeCl₂</td>
+                        </tr>
+                        <tr>
+                            <td>AX₃</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>Trigonal planar</td>
+                            <td>BF₃, SO₃</td>
+                        </tr>
+                        <tr>
+                            <td>AX₂E</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>Bent</td>
+                            <td>SO₂, SnCl₂</td>
+                        </tr>
+                        <tr>
+                            <td>AX₄</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>Tetrahedral</td>
+                            <td>CH₄, CCl₄</td>
+                        </tr>
+                        <tr>
+                            <td>AX₃E</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>Trigonal pyramidal</td>
+                            <td>NH₃, PCl₃</td>
+                        </tr>
+                        <tr>
+                            <td>AX₂E₂</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>Bent</td>
+                            <td>H₂O, H₂S</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points to Remember</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Ionic compounds conduct electricity only in molten state or solution</li>
+                        <li>Covalent bonds are directional while ionic bonds are non-directional</li>
+                        <li>Bond strength: Triple > Double > Single</li>
+                        <li>Bond length: Single > Double > Triple</li>
+                        <li>Dipole moment helps determine molecular polarity and geometry</li>
+                        <li>Resonance increases stability and makes bond lengths equal</li>
+                        <li>Hydrogen bonding explains abnormal properties of H₂O, HF, NH₃</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Practice drawing Lewis structures</div>
+                        <div class="topic-item">Memorize VSEPR geometries</div>
+                        <div class="topic-item">Understand hybridization concepts</div>
+                        <div class="topic-item">Learn to calculate bond order</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Don't confuse ionic and covalent bonds</div>
+                        <div class="topic-item">Don't ignore lone pair effects in VSEPR</div>
+                        <div class="topic-item">Don't forget exceptions to octet rule</div>
+                        <div class="topic-item">Don't neglect hydrogen bonding effects</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                
+                <p>This chapter typically carries <span class="highlight">3-4 questions</span> in JEE Main, making it a very high-weightage chapter. Questions often focus on bond types, VSEPR theory, hybridization, and molecular orbital theory.</p>
+                
+                <div class="weightage-item">
+                    <h4>Chapter 3 Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 90%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>Very High (3-4 questions)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - Chapter 3 Summary: Chemical Bonding</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

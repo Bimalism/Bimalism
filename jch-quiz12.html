@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrochemistry Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .quiz-info {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+      
+        .question {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #2E7D32;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+      
+        .question:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+      
+        .question-number {
+            display: inline-block;
+            background: #1B5E20;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+      
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #1B5E20;
+            font-weight: 600;
+        }
+      
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+      
+        .option {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+      
+        .option:hover {
+            border-color: #4CAF50;
+            background: #f8fff8;
+            transform: translateX(5px);
+        }
+      
+        .option input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+      
+        .option-label {
+            cursor: pointer;
+            flex: 1;
+            font-weight: 500;
+        }
+      
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+            color: #1B5E20;
+        }
+      
+        .option.wrong {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+      
+        .feedback {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            display: none;
+        }
+      
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #1B5E20;
+            border-left: 4px solid #4CAF50;
+        }
+      
+        .feedback.wrong {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+      
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(27, 94, 32, 0.3);
+        }
+      
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(27, 94, 32, 0.4);
+        }
+      
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+      
+        .result {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(to right, #E8F5E9, #DCEDC8);
+            border-radius: 12px;
+            margin: 30px 0;
+            display: none;
+        }
+      
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+      
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+      
+        .retry-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+      
+        .progress-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+      
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+      
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #1B5E20);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+      
+        .progress-text {
+            font-weight: 600;
+            color: #1B5E20;
+        }
+      
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            margin-top: 40px;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .question {
+                padding: 20px;
+            }
+          
+            .option {
+                padding: 12px 15px;
+            }
+        }
+      
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E8F5E9;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2E7D32;
+            font-size: 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 12</div>
+            <h1>Electrochemistry Quiz</h1>
+            <p class="subtitle">Test Your Knowledge</p>
+            <div class="quiz-info">20 Questions • Multiple Choice • Instant Feedback</div>
+        </header>
+      
+        <div class="content">
+            <div class="quiz-container">
+                <div class="progress-container">
+                    <div class="progress-text">Question <span id="current-q">1</span> of <span id="total-q">20</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text"><span id="progress-percent">0%</span> Complete</div>
+                </div>
+
+                <form id="quiz-form">
+                    <!-- Question 1 -->
+                    <div class="question">
+                        <div class="question-number">1</div>
+                        <div class="question-text">Electrochemistry is the branch of physical chemistry which deals with the relationship between:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q1" value="a">
+                                <span class="option-label">Electrical energy and chemical changes in redox reactions</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="b">
+                                <span class="option-label">Thermal energy and chemical reactions</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="c">
+                                <span class="option-label">Mechanical energy and ionic movement</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="d">
+                                <span class="option-label">Nuclear energy and electrolysis</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback1"></div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question">
+                        <div class="question-number">2</div>
+                        <div class="question-text">The electrode on which oxidation takes place is called:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q2" value="a">
+                                <span class="option-label">Cathode</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="b">
+                                <span class="option-label">Anode</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="c">
+                                <span class="option-label">Both</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="d">
+                                <span class="option-label">Neither</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback2"></div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question">
+                        <div class="question-number">3</div>
+                        <div class="question-text">In a voltameter, for the cell: E<sub>cell</sub> = ___ and ΔG = ___</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q3" value="a">
+                                <span class="option-label">+ve, +ve</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="b">
+                                <span class="option-label">+ve, –ve</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="c">
+                                <span class="option-label">–ve, +ve</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="d">
+                                <span class="option-label">–ve, –ve</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback3"></div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question">
+                        <div class="question-number">4</div>
+                        <div class="question-text">According to preferential discharge theory, which ion is discharged first?</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q4" value="a">
+                                <span class="option-label">Ion with highest discharge potential</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="b">
+                                <span class="option-label">Ion with lowest discharge potential</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="c">
+                                <span class="option-label">Ion with highest concentration</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="d">
+                                <span class="option-label">Ion with largest size</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback4"></div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question">
+                        <div class="question-number">5</div>
+                        <div class="question-text">In electrolysis of aqueous NaCl with Pt electrodes, the product at cathode is:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q5" value="a">
+                                <span class="option-label">Na</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="b">
+                                <span class="option-label">Cl₂</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="c">
+                                <span class="option-label">H₂</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="d">
+                                <span class="option-label">O₂</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback5"></div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="question">
+                        <div class="question-number">6</div>
+                        <div class="question-text">Faraday's first law states that mass deposited is proportional to:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q6" value="a">
+                                <span class="option-label">1/I</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="b">
+                                <span class="option-label">1/t</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="c">
+                                <span class="option-label">Q (It)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q6" value="d">
+                                <span class="option-label">1/Q</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback6"></div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="question">
+                        <div class="question-number">7</div>
+                        <div class="question-text">1 Faraday is equal to:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q7" value="a">
+                                <span class="option-label">965 C</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="b">
+                                <span class="option-label">96,500 C</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="c">
+                                <span class="option-label">9,650 C</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q7" value="d">
+                                <span class="option-label">96,500,000 C</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback7"></div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="question">
+                        <div class="question-number">8</div>
+                        <div class="question-text">Electrochemical equivalent Z =</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q8" value="a">
+                                <span class="option-label">E/F</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="b">
+                                <span class="option-label">F/E</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="c">
+                                <span class="option-label">E×F</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q8" value="d">
+                                <span class="option-label">F-E</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback8"></div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="question">
+                        <div class="question-number">9</div>
+                        <div class="question-text">In metallic conduction, conductivity ___ with increase in temperature.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q9" value="a">
+                                <span class="option-label">Increases</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="b">
+                                <span class="option-label">Decreases</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="c">
+                                <span class="option-label">Remains same</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q9" value="d">
+                                <span class="option-label">First increases then decreases</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback9"></div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="question">
+                        <div class="question-number">10</div>
+                        <div class="question-text">Unit of molar conductivity is:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q10" value="a">
+                                <span class="option-label">S cm⁻¹</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q10" value="b">
+                                <span class="option-label">S cm² mol⁻¹</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q10" value="c">
+                                <span class="option-label">S⁻¹ cm² mol</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q10" value="d">
+                                <span class="option-label">Ohm cm</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback10"></div>
+                    </div>
+
+                    <!-- Question 11 -->
+                    <div class="question">
+                        <div class="question-number">11</div>
+                        <div class="question-text">For strong electrolytes, molar conductivity ___ with dilution.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q11" value="a">
+                                <span class="option-label">Decreases sharply</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="b">
+                                <span class="option-label">Increases slightly</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="c">
+                                <span class="option-label">Remains constant</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q11" value="d">
+                                <span class="option-label">First increases then decreases</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback11"></div>
+                    </div>
+
+                    <!-- Question 12 -->
+                    <div class="question">
+                        <div class="question-number">12</div>
+                        <div class="question-text">Transport number of an ion is:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q12" value="a">
+                                <span class="option-label">Total current / Current by ion</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="b">
+                                <span class="option-label">Current by ion / Total current</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="c">
+                                <span class="option-label">Speed of ion / Total speed</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q12" value="d">
+                                <span class="option-label">Mass of ion / Total mass</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback12"></div>
+                    </div>
+
+                    <!-- Question 13 -->
+                    <div class="question">
+                        <div class="question-number">13</div>
+                        <div class="question-text">Kohlrausch's law is applicable at:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q13" value="a">
+                                <span class="option-label">High concentration</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q13" value="b">
+                                <span class="option-label">Infinite dilution</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q13" value="c">
+                                <span class="option-label">Moderate concentration</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q13" value="d">
+                                <span class="option-label">Zero concentration</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback13"></div>
+                    </div>
+
+                    <!-- Question 14 -->
+                    <div class="question">
+                        <div class="question-number">14</div>
+                        <div class="question-text">In electrolysis of aqueous CuSO₄ with Cu electrodes, anode undergoes:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q14" value="a">
+                                <span class="option-label">Reduction</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q14" value="b">
+                                <span class="option-label">Oxidation to Cu²⁺</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q14" value="c">
+                                <span class="option-label">No change</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q14" value="d">
+                                <span class="option-label">Deposition of Cu</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback14"></div>
+                    </div>
+
+                    <!-- Question 15 -->
+                    <div class="question">
+                        <div class="question-number">15</div>
+                        <div class="question-text">The process of coating inferior metal with superior metal by electrolysis is:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q15" value="a">
+                                <span class="option-label">Electrorefining</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q15" value="b">
+                                <span class="option-label">Electrosynthesis</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q15" value="c">
+                                <span class="option-label">Electroplating</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q15" value="d">
+                                <span class="option-label">Electrometallurgy</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback15"></div>
+                    </div>
+
+                    <!-- Question 16 -->
+                    <div class="question">
+                        <div class="question-number">16</div>
+                        <div class="question-text">1 Faraday reduces how many moles of monovalent cation?</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q16" value="a">
+                                <span class="option-label">1/2 mole</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q16" value="b">
+                                <span class="option-label">1 mole</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q16" value="c">
+                                <span class="option-label">2 moles</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q16" value="d">
+                                <span class="option-label">1/96500 mole</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback16"></div>
+                    </div>
+
+                    <!-- Question 17 -->
+                    <div class="question">
+                        <div class="question-number">17</div>
+                        <div class="question-text">Conductance is measured in:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q17" value="a">
+                                <span class="option-label">Ohm</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q17" value="b">
+                                <span class="option-label">Siemens</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q17" value="c">
+                                <span class="option-label">Farad</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q17" value="d">
+                                <span class="option-label">Coulomb</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback17"></div>
+                    </div>
+
+                    <!-- Question 18 -->
+                    <div class="question">
+                        <div class="question-number">18</div>
+                        <div class="question-text">For weak electrolytes, degree of dissociation α =</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q18" value="a">
+                                <span class="option-label">Λ / Λ°</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q18" value="b">
+                                <span class="option-label">Λ° / Λ</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q18" value="c">
+                                <span class="option-label">Λ × Λ°</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q18" value="d">
+                                <span class="option-label">1/Λ</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback18"></div>
+                    </div>
+
+                    <!-- Question 19 -->
+                    <div class="question">
+                        <div class="question-number">19</div>
+                        <div class="question-text">In electrolytic conduction, transfer of matter occurs in the form of:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q19" value="a">
+                                <span class="option-label">Electrons</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q19" value="b">
+                                <span class="option-label">Ions</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q19" value="c">
+                                <span class="option-label">Atoms</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q19" value="d">
+                                <span class="option-label">Molecules</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback19"></div>
+                    </div>
+
+                    <!-- Question 20 -->
+                    <div class="question">
+                        <div class="question-number">20</div>
+                        <div class="question-text">The sum of transport numbers of cation and anion is:</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q20" value="a">
+                                <span class="option-label">0</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q20" value="b">
+                                <span class="option-label">1</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q20" value="c">
+                                <span class="option-label">0.5</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q20" value="d">
+                                <span class="option-label">2</span>
+                            </label>
+                        </div>
+                        <div class="feedback" id="feedback20"></div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Quiz</button>
+                </form>
+
+                <div class="result" id="result">
+                    <div class="score" id="score">0/20</div>
+                    <div class="result-message" id="result-message"></div>
+                    <button class="retry-btn" id="retry-btn">Try Again</button>
+                </div>
+            </div>
+        </div>
+      
+        <footer>
+            <div>JEE Main Physical Chemistry - Electrochemistry Quiz</div>
+        </footer>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'a', q2: 'b', q3: 'c', q4: 'b', q5: 'c',
+            q6: 'c', q7: 'b', q8: 'a', q9: 'b', q10: 'b',
+            q11: 'b', q12: 'b', q13: 'b', q14: 'b', q15: 'c',
+            q16: 'b', q17: 'b', q18: 'a', q19: 'b', q20: 'b'
+        };
+
+        const explanations = {
+            q1: 'Electrochemistry deals with the relationship between electrical energy and chemical changes in redox reactions.',
+            q2: 'Anode is the electrode where oxidation takes place.',
+            q3: 'In electrolytic cell (voltameter), E_cell is negative and ΔG is positive.',
+            q4: 'Ion with lower discharge potential is discharged first.',
+            q5: 'In aqueous NaCl, H⁺ from water is discharged at cathode producing H₂ gas.',
+            q6: 'W ∝ Q = It, so mass is proportional to quantity of electricity.',
+            q7: '1 Faraday = 96,500 Coulombs.',
+            q8: 'Z = E/F, where E is equivalent weight and F is Faraday constant.',
+            q9: 'In metallic conduction, resistance increases with temperature, so conductivity decreases.',
+            q10: 'Molar conductivity Λ = κ × 1000 / M, unit is S cm² mol⁻¹.',
+            q11: 'For strong electrolytes, inter-ionic forces decrease with dilution, so Λ increases slightly.',
+            q12: 'Transport number = Current carried by ion / Total current.',
+            q13: "Kohlrausch's law applies at infinite dilution.",
+            q14: 'Cu anode dissolves: Cu → Cu²⁺ + 2e⁻.',
+            q15: 'Electroplating is coating by electrolysis.',
+            q16: '1 Faraday reduces 1 mole of monovalent cation.',
+            q17: 'Conductance G = 1/R, unit is Siemens (S).',
+            q18: 'α = Λ_c / Λ° for weak electrolytes.',
+            q19: 'Electrolytic conduction involves movement of ions.',
+            q20: 't₊ + t₋ = 1 always.'
+        };
+
+        const totalQuestions = 20;
+        let currentScore = 0;
+        let answered = 0;
+
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            checkAnswers();
+        });
+
+        document.getElementById('retry-btn').addEventListener('click', function() {
+            location.reload();
+        });
+
+        // Real-time checking
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const name = this.name;
+                const selected = this.value;
+                const questionNum = name.replace('q', '');
+                const feedback = document.getElementById(`feedback${questionNum}`);
+                
+                if (selected === correctAnswers[name]) {
+                    this.parentElement.classList.add('correct');
+                    feedback.textContent = `Correct! ${explanations[name]}`;
+                    feedback.classList.add('correct');
+                    feedback.style.display = 'block';
+                } else {
+                    this.parentElement.classList.add('wrong');
+                    feedback.textContent = `Wrong. ${explanations[name]}`;
+                    feedback.classList.add('wrong');
+                    feedback.style.display = 'block';
+                }
+                
+                updateProgress();
+            });
+        });
+
+        function checkAnswers() {
+            currentScore = 0;
+            answered = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedback = document.getElementById(`feedback${i}`);
+                
+                if (selected) {
+                    answered++;
+                    if (selected.value === correctAnswers[`q${i}`]) {
+                        currentScore++;
+                        selected.parentElement.classList.add('correct');
+                        feedback.textContent = `Correct! ${explanations[`q${i}`]}`;
+                        feedback.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong');
+                        feedback.textContent = `Wrong. ${explanations[`q${i}`]}`;
+                        feedback.classList.add('wrong');
+                    }
+                    feedback.style.display = 'block';
+                }
+            }
+            
+            showResult();
+        }
+
+        function updateProgress() {
+            const checked = document.querySelectorAll('input[type="radio"]:checked').length;
+            const percent = (checked / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-percent').textContent = Math.round(percent) + '%';
+            document.getElementById('current-q').textContent = checked;
+        }
+
+        function showResult() {
+            document.getElementById('score').textContent = `${currentScore}/${totalQuestions}`;
+            const percentage = (currentScore / totalQuestions) * 100;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Outstanding! You have mastered Electrochemistry!';
+            } else if (percentage >= 75) {
+                message = 'Excellent! Very strong understanding!';
+            } else if (percentage >= 60) {
+                message = 'Good job! Keep practicing!';
+            } else if (percentage >= 40) {
+                message = 'Fair. Review the concepts again.';
+            } else {
+                message = 'Needs improvement. Study the chapter thoroughly.';
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            document.getElementById('result').style.display = 'block';
+            document.querySelector('.submit-btn').disabled = true;
+        }
+
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>

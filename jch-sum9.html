@@ -1,0 +1,827 @@
+<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Ionic Equilibrium</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <style> * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        color: #333;
+        line-height: 1.7;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    header {
+        background: linear-gradient(to right, #1565c0, #1976d2);
+        color: white;
+        padding: 30px 40px;
+        text-align: center;
+        position: relative;
+    }
+    
+    .chapter-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        backdrop-filter: blur(5px);
+    }
+    
+    h1 {
+        font-size: 2.4rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 15px;
+    }
+    
+    .importance {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 15px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+    
+    .content {
+        padding: 40px;
+    }
+    
+    .section {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px dashed #e0e0e0;
+    }
+    
+    .section:last-child {
+        border-bottom: none;
+    }
+    
+    h2 {
+        color: #1565c0;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #1565c0;
+        display: flex;
+        align-items: center;
+    }
+    
+    h2 i {
+        margin-right: 10px;
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 50%;
+    }
+    
+    h3 {
+        color: #1976d2;
+        font-size: 1.4rem;
+        margin: 25px 0 15px;
+        display: flex;
+        align-items: center;
+    }
+    
+    h3 i {
+        margin-right: 10px;
+        color: #42a5f5;
+    }
+    
+    p {
+        margin-bottom: 15px;
+        text-align: justify;
+    }
+    
+    .definition {
+        background-color: #f5faff;
+        border-left: 4px solid #1565c0;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        position: relative;
+    }
+    
+    .definition:before {
+        content: "";
+        position: absolute;
+        left: -4px;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #1565c0, #42a5f5);
+    }
+    
+    .formula {
+        font-family: 'Cambria Math', serif;
+        background-color: #e3f2fd;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border-left: 4px solid #1976d2;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    th {
+        background: linear-gradient(to right, #1565c0, #1976d2);
+        color: white;
+        text-align: left;
+        padding: 15px;
+        font-weight: 600;
+    }
+    
+    td {
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f8fbff;
+    }
+    
+    tr:hover {
+        background-color: #e3f2fd;
+    }
+    
+    .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+    }
+    
+    .topic-card {
+        background: linear-gradient(to bottom right, #ffffff, #f5faff);
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .topic-card:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, #1565c0, #42a5f5);
+    }
+    
+    .topic-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .topic-title {
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .topic-title i {
+        margin-right: 10px;
+        background: #e3f2fd;
+        padding: 8px;
+        border-radius: 50%;
+    }
+    
+    .important-points {
+        background: linear-gradient(to right, #e3f2fd, #bbdefb);
+        border-left: 4px solid #1976d2;
+        padding: 20px;
+        margin: 25px 0;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .important-points h4 {
+        color: #0d47a1;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    .important-points h4 i {
+        margin-right: 10px;
+    }
+    
+    footer {
+        text-align: center;
+        padding: 25px;
+        background: linear-gradient(to right, #1565c0, #1976d2);
+        color: white;
+        margin-top: 40px;
+    }
+    
+    .weightage-bar {
+        height: 10px;
+        background-color: #e3f2fd;
+        border-radius: 5px;
+        margin: 10px 0;
+        overflow: hidden;
+    }
+    
+    .weightage-fill {
+        height: 100%;
+        background: linear-gradient(to right, #42a5f5, #1565c0);
+        border-radius: 5px;
+    }
+    
+    .weightage-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+    
+    @media (max-width: 768px) {
+        .content {
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        .topic-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .chapter-badge {
+            position: static;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+    }
+    
+    .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    @media (max-width: 992px) {
+        .two-column {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .topic-item {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
+    
+    .topic-item:before {
+        content: "•";
+        color: #1565c0;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    
+    .highlight {
+        background: linear-gradient(120deg, #e3f2fd 0%, #e3f2fd 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 40%;
+        background-position: 0 90%;
+    }
+</style>
+</head> <body> <div class="container"> <header> <div class="chapter-badge">Chapter 9</div> <h1>Ionic Equilibrium</h1> <p class="subtitle">Equilibrium Involving Ions in Aqueous Solution</p> <div class="importance">Most Important Chapter for JEE Main & NEET (4–6 Questions)</div> </header>
+    <div class="content">
+        <section class="section">
+            <h2><i class="fas fa-bolt"></i> Introduction</h2>
+            <p>In chemical equilibrium we studied reaction involving molecules only but in ionic equilibrium we will study reversible reactions involving formation of ions in water. When solute is polar covalent compound then it reacts with water to form ions.</p>
+            
+            <div class="definition">
+                <p>At moderate concentrations, there exists an equilibrium between the ions and undissociated molecules. This equilibrium state is called ionic equilibrium.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-plug"></i> Electrical Conductors & Electrolytes</h2>
+            <p>Substances, which allow electric current to pass through them, are known as conductors or electrical conductors.</p>
+            
+            <h3><i class="fas fa-trophy"></i> Types of Conductors</h3>
+            <table>
+                <tr><th>Type</th><th>Characteristics</th><th>Examples</th></tr>
+                <tr><td><strong>Metallic/Electronic Conductors</strong></td><td>Conduct electricity without undergoing any chemical change</td><td>Metals</td></tr>
+                <tr><td><strong>Electrolytic Conductors</strong></td><td>Undergo decomposition (chemical change) when electric current passed</td><td>Electrolytes</td></tr>
+            </table>
+            
+            <h3><i class="fas fa-battery-full"></i> Types of Electrolytes</h3>
+            <table>
+                <tr><th>Type</th><th>Degree of Ionisation (α)</th><th>Examples</th></tr>
+                <tr><td><strong>Strong</strong></td><td>α ≈ 1</td><td>HCl, H₂SO₄, NaCl, HNO₃, KOH, NaOH, AgNO₃, CuSO₄, all strong acids/bases/salts</td></tr>
+                <tr><td><strong>Weak</strong></td><td>α << 1</td><td>CH₃COOH, NH₄OH, HCN, H₂O, Liq. SO₂, HCOOH, weak acids/bases</td></tr>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-user-graduate"></i> Arrhenius Theory of Electrolytic Dissociation</h2>
+            <div class="definition">
+                <p><strong>Postulates:</strong> (i) In aqueous solution, molecules of electrolyte undergo spontaneous dissociation to form positive and negative ions. (ii) Degree of ionization (α) = Number of dissociated molecules / Total number of molecules before dissociation. (iii) At moderate concentrations, equilibrium exists between ions and undissociated molecules. (iv) Each ion behaves osmotically as a molecule.</p>
+            </div>
+            
+            <h3><i class="fas fa-cog"></i> Factors Affecting Degree of Ionisation (α)</h3>
+            <div class="topic-grid">
+                <div class="topic-card">
+                    <div class="topic-title"><i class="fas fa-vial"></i> Nature of Electrolyte</div>
+                    <p>Strong electrolytes: α ≈ 1; Weak electrolytes: α << 1</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title"><i class="fas fa-tint"></i> Solvent</div>
+                    <p>Higher dielectric constant → higher ionising power; Water has highest dielectric constant</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title"><i class="fas fa-flask"></i> Dilution/Concentration</div>
+                    <p>α ∝ 1/Concentration ∝ 1/Weight of solution ∝ Dilution ∝ Amount of solvent</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title"><i class="fas fa-thermometer-half"></i> Temperature</div>
+                    <p>Degree of ionisation increases with rise in temperature</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title"><i class="fas fa-plus-square"></i> Common Ion</div>
+                    <p>Degree of ionisation decreases in presence of strong electrolyte having common ion</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-calculator"></i> Ostwald's Dilution Law</h2>
+            <p>The strength of an acid or base is measured by its dissociation constant. For acetic acid:</p>
+            <div class="formula">
+                CH₃COOH + H₂O ⇌ CH₃COO⁻ + H₃O⁺<br>
+                Kₐ = [CH₃COO⁻][H₃O⁺] / [CH₃COOH]<br>
+                For weak electrolytes: Kₐ = Cα²/(1-α) ≈ Cα²<br>
+                α = √(Kₐ/C) = √(KₐV)
+            </div>
+            <p>Similarly for weak base NH₄OH: α = √(K_b/C) = √(K_bV)</p>
+            <div class="definition">
+                <p><strong>Ostwald's Dilution Law:</strong> For a weak electrolyte, the degree of ionisation is inversely proportional to the square root of molar concentration or directly proportional to the square root of volume containing one mole of the solute.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-flask"></i> Dissociation Constants (K_a, K_b)</h2>
+            <h3>For Weak Acid HA</h3>
+            <div class="formula">
+                HA ⇌ H⁺ + A⁻<br>
+                Kₐ = [H⁺][A⁻] / [HA]
+            </div>
+            
+            <h3>For Polybasic Acids</h3>
+            <p>Stepwise dissociation with K₁ > K₂ > K₃</p>
+            <div class="formula">
+                H₃PO₄ ⇌ H⁺ + H₂PO₄⁻ (K₁)<br>
+                H₂PO₄⁻ ⇌ H⁺ + HPO₄²⁻ (K₂)<br>
+                HPO₄²⁻ ⇌ H⁺ + PO₄³⁻ (K₃)<br>
+                Overall K = K₁ × K₂ × K₃
+            </div>
+            
+            <h3>For Weak Base BOH</h3>
+            <div class="formula">
+                NH₄OH ⇌ NH₄⁺ + OH⁻<br>
+                K_b = [NH₄⁺][OH⁻] / [NH₄OH]
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-arrows-alt-h"></i> Common Ion Effect</h2>
+            <div class="definition">
+                <p>The degree of dissociation of an electrolyte (weak) is suppressed by the addition of another electrolyte (strong) containing a common ion.</p>
+            </div>
+            <div class="formula">
+                CH₃COOH ⇌ CH₃COO⁻ + H⁺<br>
+                Add CH₃COONa → CH₃COONa → CH₃COO⁻ + Na⁺<br>
+                [CH₃COO⁻] increases, equilibrium shifts left
+            </div>
+            <p>Applications: Qualitative analysis to adjust S²⁻ concentration in second group and OH⁻ concentration in third group.</p>
+            
+            <h3>Isohydric Solutions</h3>
+            <p>Solutions with same common ion concentration show no change in degree of dissociation when mixed.</p>
+            <div class="formula">
+                For isohydric acids HA₁ and HA₂: α₁/V₁ = α₂/V₂
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-balance-scale"></i> Solubility Product (K_sp)</h2>
+            <div class="definition">
+                <p>Product of concentrations of ions raised to a power equal to the number of times the ions occur in the equation representing dissociation of electrolyte at given temperature when solution is saturated.</p>
+            </div>
+            <div class="formula">
+                For AₓB_y ⇌ xAʸ⁺ + yBˣ⁻<br>
+                K_sp = [Aʸ⁺]ˣ [Bˣ⁻]ʸ
+            </div>
+            
+            <h3>Difference: Ionic Product vs Solubility Product</h3>
+            <table>
+                <tr><th>Ionic Product</th><th>Solubility Product</th></tr>
+                <tr><td>Applicable to all solutions (unsaturated/saturated)</td><td>Applied only to saturated solutions</td></tr>
+                <tr><td>Varies with concentration</td><td>Constant at given temperature</td></tr>
+                <tr><td>Broad meaning</td><td>Specific to saturated equilibrium</td></tr>
+            </table>
+            
+            <h3>Expressions for Different Salt Types</h3>
+            <table>
+                <tr><th>Salt Type</th><th>Example</th><th>K_sp Expression</th><th>Solubility (x)</th></tr>
+                <tr><td>AB (1:1)</td><td>AgCl, BaSO₄</td><td>K_sp = x²</td><td>x = √K_sp</td></tr>
+                <tr><td>AB₂ (1:2)</td><td>PbCl₂, CaF₂</td><td>K_sp = 4x³</td><td>x = ³√(K_sp/4)</td></tr>
+                <tr><td>A₂B (2:1)</td><td>Ag₂CrO₄</td><td>K_sp = 4x³</td><td>x = ³√(K_sp/4)</td></tr>
+                <tr><td>A₂B₃ (2:3)</td><td>As₂S₃, Sb₂S₃</td><td>K_sp = 108x⁵</td><td>x = ⁵√(K_sp/108)</td></tr>
+                <tr><td>AB₃ (1:3)</td><td>AlCl₃, Fe(OH)₃</td><td>K_sp = 27x⁴</td><td>x = ⁴√(K_sp/27)</td></tr>
+            </table>
+            
+            <h3>Precipitation Criteria</h3>
+            <table>
+                <tr><th>Case</th><th>Condition</th><th>Result</th></tr>
+                <tr><td>I</td><td>IP < K_sp</td><td>Unsaturated, no precipitation</td></tr>
+                <tr><td>II</td><td>IP = K_sp</td><td>Saturated, no precipitation</td></tr>
+                <tr><td>III</td><td>IP > K_sp</td><td>Supersaturated, precipitation occurs</td></tr>
+            </table>
+            
+            <h3>Applications of Solubility Product</h3>
+            <div class="topic-grid">
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-tint"></i> Precipitation Prediction</div><p>IP > K_sp → precipitation</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-calculator"></i> Solubility Calculation</div><p>Knowing K_sp to find solubility</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-snowflake"></i> Purification of Common Salt</div><p>HCl gas through NaCl solution precipitates pure NaCl</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-bath"></i> Soap Salting Out</div><p>Concentrated NaCl precipitates soap</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-flask"></i> Qualitative Analysis</div><p>Group separation based on K_sp and common ion effect</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-calculator"></i> Remaining Concentration</div><p>After precipitation if ion in excess</p></div>
+                <div class="topic-card"><div class="topic-title"><i class="fas fa-balance-scale"></i> Simultaneous Solubility</div><p>Two electrolytes with common ion in same solution</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-vial"></i> Acids and Bases</h2>
+            
+            <h3><i class="fas fa-book"></i> Arrhenius Concept</h3>
+            <p>Acids give H⁺ ions in water; Bases give OH⁻ ions in water.</p>
+            <div class="definition">
+                <p><strong>Limitations:</strong> Requires water, doesn't explain non-aqueous behavior, limited neutralization concept, can't explain acidic character of salts like AlCl₃.</p>
+            </div>
+            
+            <h3><i class="fas fa-exchange-alt"></i> Bronsted-Lowry Concept</h3>
+            <p>Acid: Proton donor; Base: Proton acceptor.</p>
+            <div class="formula">
+                HCl + H₂O ⇌ H₃O⁺ + Cl⁻<br>
+                Acid Base Conjugate Conjugate<br>
+                acid base
+            </div>
+            <p><strong>Conjugate pairs:</strong> HCl/Cl⁻ and H₃O⁺/H₂O</p>
+            <p><strong>Utility:</strong> Includes ionic species, explains basic character of Na₂CO₃, NH₃, explains non-aqueous reactions.</p>
+            <div class="definition">
+                <p><strong>Limitations:</strong> Can't explain reactions in non-protonic solvents, acid-base oxide reactions without proton transfer, behavior of BF₃, AlCl₃ as acids.</p>
+            </div>
+            
+            <h3><i class="fas fa-atom"></i> Lewis Concept</h3>
+            <p>Acid: Electron pair acceptor; Base: Electron pair donor.</p>
+            <p><strong>Types of Lewis Acids:</strong> Molecules with incomplete octet (BF₃, AlCl₃), all cations, molecules with empty d-orbitals (SiF₄, SnCl₄), molecules with multiple bond between atoms of dissimilar electronegativity (CO₂, SO₂).</p>
+            <p><strong>Types of Lewis Bases:</strong> Neutral species with lone pair (NH₃, R-OH), negatively charged species/anions.</p>
+            
+            <h4>Hard and Soft Acids and Bases (HSAB)</h4>
+            <table>
+                <tr><th>Type</th><th>Characteristics</th><th>Examples</th></tr>
+                <tr><td>Hard Acids</td><td>Small size, high positive charge, not easily polarized</td><td>Li⁺, Na⁺, Be²⁺, Mg²⁺, Al³⁺, BF₃, SO₃</td></tr>
+                <tr><td>Soft Acids</td><td>Large size, low positive charge, easily polarized</td><td>Pb²⁺, Cd²⁺, Pt²⁺, Hg²⁺, I₂</td></tr>
+                <tr><td>Hard Bases</td><td>Hold electrons strongly</td><td>OH⁻, F⁻, H₂O, NH₃, CH₃OCH₃</td></tr>
+                <tr><td>Soft Bases</td><td>Electrons easily polarized/removed</td><td>I⁻, CO, CH₃S⁻, (CH₃)₃P</td></tr>
+            </table>
+            <p><strong>Principle:</strong> Hard acids prefer hard bases (ionic bonding); Soft acids prefer soft bases (covalent bonding).</p>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-chart-line"></i> Relative Strength of Acids and Bases</h2>
+            
+            <h3>Relative Strength Formulas</h3>
+            <div class="formula">
+                For weak acids HA₁ and HA₂: Strength ratio = √(Kₐ₁/Kₐ₂)<br>
+                For weak bases BOH₁ and BOH₂: Strength ratio = √(K_b₁/K_b₂)
+            </div>
+            
+            <h3>Inorganic Acids</h3>
+            <table>
+                <tr><th>Type</th><th>Order</th><th>Basis</th></tr>
+                <tr><td>Hydrides</td><td>HF > H₂O > NH₃ > CH₄<br>HCl > H₂S > PH₃ > SiH₄</td><td>Electronegativity</td></tr>
+                <tr><td>Hydrides</td><td>HF < HCl < HBr < HI<br>H₂O < H₂S < H₂Se < H₂Te</td><td>Atomic size</td></tr>
+                <tr><td>Oxyacids</td><td>HOI < HOBr < HOCl<br>HIO₄ < HBrO₄ < HClO₄</td><td>Electronegativity</td></tr>
+                <tr><td>Oxyacids (same element)</td><td>HOCl < HClO₂ < HClO₃ < HClO₄<br>H₂SO₃ < H₂SO₄<br>HNO₂ < HNO₃</td><td>Oxidation number</td></tr>
+                <tr><td>Oxyacids (across period)</td><td>H₄SiO₄ < H₃PO₄ < H₂SO₄ < HClO₄</td><td>Left to right</td></tr>
+                <tr><td>Oxyacids (same oxidation state)</td><td>HNO₃ > HPO₃; H₃PO₄ > H₃AsO₄; HClO₄ > HBrO₄ > HIO₄</td><td>Size of central atom</td></tr>
+            </table>
+            
+            <h3>Organic Acids</h3>
+            <p>Compound acidic if conjugate base stabilized through resonance. Phenol acidic (C₆H₅O⁻ stabilized), ethanol neutral (C₂H₅O⁻ not stabilized).</p>
+            <div class="formula">
+                Acidity: HC≡CH > CH₂=CH₂ > CH₃-CH₃<br>
+                (sp > sp² > sp³ hybridization)
+            </div>
+            
+            <h3>Inorganic Bases</h3>
+            <table>
+                <tr><th>Factor</th><th>Effect</th><th>Example</th></tr>
+                <tr><td>Electronegativity</td><td>Basicity decreases with increase</td><td>NH₃ > H₂O > HF</td></tr>
+                <tr><td>Atomic size</td><td>Larger size → lesser availability</td><td>F⁻ > Cl⁻ > Br⁻ > I⁻; O²⁻ > S²⁻</td></tr>
+                <tr><td>Charge</td><td>Negative charge increases basicity; Positive decreases</td><td>OH⁻ > H₂O > H₃O⁺</td></tr>
+                <tr><td>Alkali hydroxides</td><td>Increases down group</td><td>LiOH < NaOH < KOH < RbOH < CsOH</td></tr>
+                <tr><td>Alkaline earth hydroxides</td><td>Increases down group</td><td>Be(OH)₂ < Mg(OH)₂ < Ca(OH)₂ < Sr(OH)₂ < Ba(OH)₂</td></tr>
+                <tr><td>Group 15 hydrides</td><td>Decreases down group</td><td>NH₃ > PH₃ > AsH₃ > SbH₃ > BiH₃</td></tr>
+            </table>
+            
+            <h3>Organic Bases</h3>
+            <p>Higher electron density on nitrogen → more basic. Guanidine strong base due to resonance-stabilized conjugate acid.</p>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-handshake"></i> Acid-Base Neutralisation & Salts</h2>
+            <p>Acid + Base → Salt + Water. Nature of resulting solution depends on particular acid and base.</p>
+            
+            <h3>Classification of Salts</h3>
+            <table>
+                <tr><th>Type</th><th>Characteristics</th><th>Examples</th></tr>
+                <tr><td>Simple Salts</td><td>Formed by acid-base interaction</td><td>-</td></tr>
+                <tr><td>Normal Salts</td><td>No replaceable H or OH</td><td>NaCl, NaNO₃, K₂SO₄, Ca₃(PO₄)₂</td></tr>
+                <tr><td>Acidic Salts</td><td>Incomplete neutralization of polybasic acids</td><td>NaHCO₃, NaHSO₄, NaH₂PO₄</td></tr>
+                <tr><td>Basic Salts</td><td>Incomplete neutralization of polyacidic bases</td><td>Zn(OH)Cl, Mg(OH)Cl, Fe(OH)₂Cl</td></tr>
+                <tr><td>Double Salts</td><td>Combination of two simple salts</td><td>Ferrous ammonium sulphate, Potash alum</td></tr>
+                <tr><td>Complex Salts</td><td>Combination of simple salts/molecular compounds</td><td>K₄[Fe(CN)₆]</td></tr>
+                <tr><td>Mixed Salts</td><td>Furnishes more than one cation/anion</td><td>Ca(OCl)Cl, NaNH₄HPO₄</td></tr>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-tint-slash"></i> Salt Hydrolysis</h2>
+            <p>Reaction of cation or anion or both ions of salt with water to produce acidic or basic solution. Reverse of neutralization.</p>
+            
+            <table>
+                <tr><th>Salt Type</th><th>Hydrolysis</th><th>Solution</th><th>K_h Expression</th><th>h Expression</th><th>pH Expression</th></tr>
+                <tr><td>Weak acid + Strong base</td><td>Anionic</td><td>Basic</td><td>K_h = K_w/K_a</td><td>h = √(K_h/C)</td><td>pH = 7 + ½pK_a + ½logC</td></tr>
+                <tr><td>Strong acid + Weak base</td><td>Cationic</td><td>Acidic</td><td>K_h = K_w/K_b</td><td>h = √(K_h/C)</td><td>pH = 7 - ½pK_b - ½logC</td></tr>
+                <tr><td>Weak acid + Weak base</td><td>Both</td><td>Depends on K_a, K_b</td><td>K_h = K_w/(K_aK_b)</td><td>h = √(K_h)</td><td>pH = 7 + ½pK_a - ½pK_b</td></tr>
+                <tr><td>Strong acid + Strong base</td><td>None</td><td>Neutral</td><td>-</td><td>-</td><td>7</td></tr>
+            </table>
+            
+            <div class="formula">
+                Hydrolysis constant: K_h = [HA][BOH] / [BA] = K_w / (K_a or K_b)<br>
+                Degree of hydrolysis: h = (moles hydrolysed) / (total moles taken)
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-tint"></i> Ionic Product of Water</h2>
+            <div class="formula">
+                H₂O ⇌ H⁺ + OH⁻<br>
+                K_w = [H⁺][OH⁻] = 10⁻¹⁴ at 25°C<br>
+                [H⁺] = [OH⁻] = 10⁻⁷ M in pure water<br>
+                ΔH = +57.3 kJ mol⁻¹ (endothermic)
+            </div>
+            <p>K_w increases with temperature. At 25°C: Neutral [H⁺] = [OH⁻] = 10⁻⁷; Acidic [H⁺] > [OH⁻]; Basic [H⁺] < [OH⁻].</p>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-ruler"></i> pH Scale</h2>
+            <div class="formula">
+                pH = -log[H⁺] = log(1/[H⁺])<br>
+                pOH = -log[OH⁻]<br>
+                pH + pOH = pK_w = 14
+            </div>
+            
+            <table>
+                <tr><th>Solution</th><th>[H⁺]</th><th>[OH⁻]</th><th>pH</th><th>pOH</th></tr>
+                <tr><td>Acidic</td><td>>10⁻⁷</td><td><10⁻⁷</td><td><7</td><td>>7</td></tr>
+                <tr><td>Neutral</td><td>10⁻⁷</td><td>10⁻⁷</td><td>7</td><td>7</td></tr>
+                <tr><td>Basic</td><td><10⁻⁷</td><td>>10⁻⁷</td><td>>7</td><td><7</td></tr>
+            </table>
+            
+            <h3>pH of Common Materials</h3>
+            <table>
+                <tr><th>Material</th><th>pH</th><th>Material</th><th>pH</th></tr>
+                <tr><td>Gastric juice</td><td>1.4</td><td>Rain water</td><td>6.5</td></tr>
+                <tr><td>Lemon juice</td><td>2.1</td><td>Pure water</td><td>7.0</td></tr>
+                <tr><td>Vinegar</td><td>2.9</td><td>Human saliva</td><td>7.0</td></tr>
+                <tr><td>Soft drinks</td><td>3.0</td><td>Blood plasma</td><td>7.4</td></tr>
+                <tr><td>Beer</td><td>4.5</td><td>Tears</td><td>7.4</td></tr>
+                <tr><td>Black coffee</td><td>5.0</td><td>Egg</td><td>7.8</td></tr>
+                <tr><td>Cow's milk</td><td>6.5</td><td>Household ammonia</td><td>11.9</td></tr>
+            </table>
+            
+            <h3>Limitations of pH Scale</h3>
+            <ul>
+                <li>Doesn't give immediate idea of relative strengths</li>
+                <li>pH can be zero or negative for concentrated solutions</li>
+                <li>Very dilute acid (10⁻⁸ M) cannot have pH > 7</li>
+            </ul>
+            
+            <h3>pK Value</h3>
+            <div class="formula">
+                pKₐ = -log Kₐ; pK_b = -log K_b<br>
+                For conjugate pair: Kₐ × K_b = K_w; pKₐ + pK_b = pK_w = 14
+            </div>
+            <p>Weak acids have higher pKₐ; Weak bases have higher pK_b.</p>
+            
+            <h3>pH of Very Dilute Solutions</h3>
+            <div class="formula">
+                For 10⁻⁸ M HCl: [H⁺] = 10⁻⁸ + 10⁻⁷ = 1.1×10⁻⁷; pH = 6.96<br>
+                For 10⁻⁸ M NaOH: [OH⁻] = 10⁻⁸ + 10⁻⁷ = 1.1×10⁻⁷; pOH = 6.96; pH = 7.04
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-shield-alt"></i> Buffer Solutions</h2>
+            <div class="definition">
+                <p>Solution whose pH is not altered greatly by addition of small quantities of strong acid or base. Solution of reserve acidity or alkalinity that resists pH change.</p>
+            </div>
+            
+            <h3>Types of Buffer Solutions</h3>
+            <table>
+                <tr><th>Type</th><th>Composition</th><th>Examples</th></tr>
+                <tr><td>Single Substance</td><td>Salt of weak acid and weak base</td><td>CH₃COONH₄, NH₄CN</td></tr>
+                <tr><td>Acidic Buffer</td><td>Weak acid + Salt with strong base</td><td>CH₃COOH + CH₃COONa</td></tr>
+                <tr><td>Basic Buffer</td><td>Weak base + Salt with strong acid</td><td>NH₄OH + NH₄Cl</td></tr>
+            </table>
+            
+            <h3>Buffer Action</h3>
+            <p>Reserved base neutralizes added H⁺ ions; Reserved acid neutralizes added OH⁻ ions.</p>
+            
+            <h3>Examples of Buffer Systems</h3>
+            <ul>
+                <li>Phthalic acid + Potassium hydrogen phthalate</li>
+                <li>Citric acid + Sodium citrate</li>
+                <li>Boric acid + Borax</li>
+                <li>Carbonic acid + Sodium hydrogen carbonate (blood, pH 7.4)</li>
+                <li>NaH₂PO₄ + Na₃PO₄ or Na₂HPO₄</li>
+                <li>Glycerine + HCl</li>
+                <li>Gastric juice (pH 1.6-1.7)</li>
+            </ul>
+            
+            <h3>Henderson-Hasselbalch Equation</h3>
+            <div class="formula">
+                Acidic buffers: pH = pKₐ + log([salt]/[acid])<br>
+                Basic buffers: pOH = pK_b + log([salt]/[base])
+            </div>
+            <p>When [salt]/[acid] = 10: pH = pKₐ + 1; When [salt]/[acid] = 1/10: pH = pKₐ - 1</p>
+            <p>Weak acid can prepare buffers with pH range pKₐ ± 1.</p>
+            <p>pH doesn't change with dilution but varies with temperature due to K_w change.</p>
+            
+            <h3>Buffer Capacity</h3>
+            <div class="formula">
+                φ = (moles acid/base added to 1L) / (change in pH)
+            </div>
+            <p>Maximum when [salt] = [acid] or pH = pKₐ or pOH = pK_b.</p>
+            
+            <h3>Significance of Buffer Solutions</h3>
+            <ul>
+                <li>Colorimetric comparison of [H⁺]</li>
+                <li>Removal of phosphate radical in qualitative analysis</li>
+                <li>Precipitation of hydroxides in third group analysis</li>
+                <li>Industrial applications: fermentation (pH 5-6.5), tanning, electroplating, sugar/paper manufacturing</li>
+                <li>Bacteriological research</li>
+                <li>Biological systems (blood pH 7.4)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-eye-dropper"></i> Indicators</h2>
+            <p>Substances used to determine end point in titration. Weak acids/bases that change color in certain pH range.</p>
+            
+            <table>
+                <tr><th>Indicator</th><th>pH Range</th><th>Acid Color</th><th>Base Color</th></tr>
+                <tr><td>Cresol red</td><td>1.2-1.8</td><td>Red</td><td>Yellow</td></tr>
+                <tr><td>Thymol blue</td><td>1.2-2.8</td><td>Red</td><td>Yellow</td></tr>
+                <tr><td>Methyl yellow</td><td>2.9-4.0</td><td>Red</td><td>Yellow</td></tr>
+                <tr><td>Methyl orange</td><td>3.1-4.4</td><td>Pink</td><td>Yellow</td></tr>
+                <tr><td>Methyl red</td><td>4.2-6.3</td><td>Red</td><td>Yellow</td></tr>
+                <tr><td>Litmus</td><td>5.0-8.0</td><td>Red</td><td>Blue</td></tr>
+                <tr><td>Bromothymol blue</td><td>6.0-7.6</td><td>Yellow</td><td>Blue</td></tr>
+                <tr><td>Phenol red</td><td>6.4-8.2</td><td>Yellow</td><td>Red</td></tr>
+                <tr><td>Thymol blue</td><td>8.1-9.6</td><td>Yellow</td><td>Blue</td></tr>
+                <tr><td>Phenolphthalein</td><td>8.3-10.0</td><td>Colorless</td><td>Pink</td></tr>
+                <tr><td>Thymolphthalein</td><td>8.3-10.5</td><td>Colorless</td><td>Blue</td></tr>
+                <tr><td>Alizarin yellow R</td><td>10.1-12.0</td><td>Blue</td><td>Yellow</td></tr>
+                <tr><td>Nitramine</td><td>10.8-13.0</td><td>Colorless</td><td>Orange/Brown</td></tr>
+            </table>
+            
+            <h3>Theories of Indicators</h3>
+            <p>Ostwald's Theory and Quinonoid Theory</p>
+            
+            <h3>Selection of Suitable Indicator</h3>
+            <table>
+                <tr><th>Titration Type</th><th>Suitable Indicators</th></tr>
+                <tr><td>Strong acid vs Strong base</td><td>Phenolphthalein, Methyl red, Methyl orange</td></tr>
+                <tr><td>Weak acid vs Strong base</td><td>Phenolphthalein</td></tr>
+                <tr><td>Strong acid vs Weak base</td><td>Methyl red, Methyl orange</td></tr>
+                <tr><td>Weak acid vs Weak base</td><td>No suitable indicator</td></tr>
+            </table>
+            
+            <h3>Color Change Mechanism</h3>
+            <div class="formula">
+                HIn ⇌ H⁺ + In⁻<br>
+                K_in = [H⁺][In⁻] / [HIn]<br>
+                [HIn]/[In⁻] = [H⁺]/K_in
+            </div>
+            <p>Color visible when ratio [HIn]/[In⁻]:</p>
+            <ul>
+                <li>= 10: Acid color (pH = pK_in - 1)</li>
+                <li>= 1: Intermediate (pH = pK_in)</li>
+                <li>= 0.1: Base color (pH = pK_in + 1)</li>
+            </ul>
+            <p>Effective pH range: pK_in ± 1</p>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Important Points for JEE Main / NEET</h2>
+            
+            <div class="important-points">
+                <h4><i class="fas fa-lightbulb"></i> Key Points</h4>
+                <ul>
+                    <li>Strong electrolytes: α≈1; Weak: α<<1; All salts are strong electrolytes</li>
+                    <li>Ostwald's Law: α = √(Kₐ/C) for weak acids</li>
+                    <li>Common ion effect suppresses dissociation of weak electrolytes</li>
+                    <li>Solubility Product: IP > K_sp → precipitation occurs</li>
+                    <li>Acid strength increases with oxidation number and electronegativity; decreases down group</li>
+                    <li>Hydrolysis: Weak acid + Strong base → basic solution; Strong acid + Weak base → acidic solution</li>
+                    <li>K_w = 10⁻¹⁴ at 25°C; pH + pOH = 14</li>
+                    <li>Buffers resist pH change; effective range pH = pKₐ ± 1</li>
+                    <li>Indicators change color at pH = pK_in ± 1</li>
+                    <li>pH of boiling water = 6.5625 (still neutral)</li>
+                    <li>At 37°C, pH of neutral solution = 6.8</li>
+                    <li>Buffer capacity maximum when [salt] = [acid]</li>
+                    <li>Buffers cannot withstand large amounts of acid/base (~0.1 mol/L maximum)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-chart-bar"></i> JEE Main & NEET Weightage</h2>
+            <p>High weightage: Ionic equilibrium + acids/bases + buffers + hydrolysis + K_sp → 4-6 questions.</p>
+            
+            <div class="weightage-bar">
+                <div class="weightage-fill" style="width: 95%"></div>
+            </div>
+            <div class="weightage-label">
+                <span>Weightage</span>
+                <span>Very High (4-6 questions)</span>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div> Ionic Equilibrium </div>
+    </footer>
+</div>
+
+<script>
+    // Simple animation for topic cards on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const topicCards = document.querySelectorAll('.topic-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        topicCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+    });
+</script>
+</body> </html>

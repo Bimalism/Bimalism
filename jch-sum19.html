@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s and p-Block Elements - Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+     
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+     
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+     
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+     
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+     
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+     
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+     
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+     
+        .content {
+            padding: 40px;
+        }
+     
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+     
+        .section:last-child {
+            border-bottom: none;
+        }
+     
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+     
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+     
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+     
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+     
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+     
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+     
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+     
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+     
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+     
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+     
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+     
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+     
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+     
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+     
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+     
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+     
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+     
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+     
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+     
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+     
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+     
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+     
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+     
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+     
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+     
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+     
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+         
+            h1 {
+                font-size: 2rem;
+            }
+         
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+         
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+         
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+     
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+     
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+     
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+     
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+     
+        .weightage-bar {
+            height: 10px;
+            background-color: #E0E0E0;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+     
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+     
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+     
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+     
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+     
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 18</div>
+            <h1>s and p-Block Elements</h1>
+            <p class="subtitle">Alkali Metals, Alkaline Earth Metals, Boron, Carbon, Nitrogen, Oxygen, Halogens, Noble Gases</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+     
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Alkali Metals (Group 1)</h2>
+                <p>Group 1 elements: Li, Na, K, Rb, Cs, Fr. Fr is radioactive (longest isotope Fr-223, half-life 21 min). Hydroxides form strong bases (alkalies).</p>
+                <h3><i class="fas fa-table"></i> Electronic Configuration & Discovery</h3>
+                <table>
+                    <tr><th>Element</th><th>Discovery</th><th>Configuration</th></tr>
+                    <tr><td>Li</td><td>Arfvedson (1817)</td><td>[He]2s¹</td></tr>
+                    <tr><td>Na</td><td>Davy (1807)</td><td>[Ne]3s¹</td></tr>
+                    <tr><td>K</td><td>Davy (1807)</td><td>[Ar]4s¹</td></tr>
+                    <tr><td>Rb</td><td>Bunsen (1861)</td><td>[Kr]5s¹</td></tr>
+                    <tr><td>Cs</td><td>Bunsen (1860)</td><td>[Xe]6s¹</td></tr>
+                    <tr><td>Fr</td><td>Perey (1939)</td><td>[Rn]7s¹</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Lithium</div>
+                        <p>Triphylite, Petalite, Lepidolite, Spodumene [LiAl(SiO₃)₂], Amblygonite [Li(AlF)PO₄]</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Sodium</div>
+                        <p>Chile saltpetre (NaNO₃), NaCl, Na₂SO₄, Borax (Na₂B₄O₇·10H₂O), Glauber's salt (Na₂SO₄·10H₂O)</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Potassium</div>
+                        <p>Sylvine (KCl), Carnallite (KCl·MgCl₂·6H₂O), Felspar (K₂O·Al₂O₃·6SiO₂)</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Rubidium</div>
+                        <p>Lepidolite, triphylite contain 0.7-3% Rb₂O</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Caesium</div>
+                        <p>Lepidolite, Pollucite contain 0.2-7% Cs₂O</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>Alkali metals are strong reducing agents, extracted by electrolysis of fused chlorides (e.g., Downs cell for Na from fused NaCl + CaCl₂).</p>
+                <div class="formula">
+                    NaCl → Na⁺ + Cl⁻<br>
+                    Cathode: Na⁺ + e⁻ → Na<br>
+                    Anode: 2Cl⁻ → Cl₂ + 2e⁻
+                </div>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <table>
+                    <tr><th>Property</th><th>Li</th><th>Na</th><th>K</th><th>Rb</th><th>Cs</th></tr>
+                    <tr><td>Atomic Radius (pm)</td><td>152</td><td>186</td><td>227</td><td>248</td><td>265</td></tr>
+                    <tr><td>Ionic Radius M⁺ (pm)</td><td>60</td><td>95</td><td>133</td><td>148</td><td>169</td></tr>
+                    <tr><td>Density (g/cm³)</td><td>0.534</td><td>0.97</td><td>0.86</td><td>1.53</td><td>1.87</td></tr>
+                    <tr><td>Melting Point (K)</td><td>453.5</td><td>370.8</td><td>336.2</td><td>312</td><td>301.5</td></tr>
+                    <tr><td>Boiling Point (K)</td><td>1620</td><td>1154.4</td><td>1038.5</td><td>961</td><td>978</td></tr>
+                    <tr><td>IE1 (kJ/mol)</td><td>520</td><td>495</td><td>418</td><td>403</td><td>376</td></tr>
+                    <tr><td>Electronegativity</td><td>0.98</td><td>0.93</td><td>0.82</td><td>0.82</td><td>0.79</td></tr>
+                </table>
+                <p>Trends: Atomic/ionic radii ↑, density ↑ (K < Na due to larger size), m.p./b.p. ↓, IE ↓, electronegativity ↓, electropositive character ↑ down the group.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> With Air/Oxygen</div>
+                        <p>Li → Li₂O (oxide)<br>Na → Na₂O₂ (peroxide)<br>K, Rb, Cs → MO₂ (superoxide)<br>Basic character ↑ down group.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> With Water</div>
+                        <p>2M + 2H₂O → 2MOH + H₂↑<br>Reactivity: Cs > Rb > K > Na > Li</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-burn"></i> With Halogens</div>
+                        <p>2M + X₂ → 2MX<br>Covalent character in Li halides due to small Li⁺.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> With Nitrogen</div>
+                        <p>Only Li forms Li₃N: 6Li + N₂ → 2Li₃N</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-link"></i> Hydrides, Oxides, Hydroxides</h3>
+                <p>Hydrides (MH): Ionic, stability ↓ from LiH to CsH.<br>Oxides: Li₂O, Na₂O₂, KO₂ etc.<br>Hydroxides (MOH): Strong bases, solubility ↑ down group.</p>
+                <h3><i class="fas fa-cubes"></i> Carbonates & Bicarbonates</h3>
+                <p>Li₂CO₃ decomposes on heating; others stable. Solubility ↑ down group.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Lithium</h3>
+                <ul>
+                    <li>Small size, high charge density → covalent compounds.</li>
+                    <li>Li₂CO₃, LiOH, LiF less soluble.</li>
+                    <li>Forms Li₃N, Li₂O (not peroxide).</li>
+                    <li>Hardest among alkali metals.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: Li & Mg</h3>
+                <p>Similar EN, hardness, decompose carbonates/nitrates, form monoxides, etc.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of Na & K</h3>
+                <p>NaCl, NaOH (caustic soda), Na₂CO₃ (soda ash), NaHCO₃ (baking soda), Na₂SO₄, microcosmic salt (NaNH₄HPO₄·4H₂O).</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Alkaline Earth Metals (Group 2)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>Be</td><td>[He]2s²</td></tr>
+                    <tr><td>Mg</td><td>[Ne]3s²</td></tr>
+                    <tr><td>Ca</td><td>[Ar]4s²</td></tr>
+                    <tr><td>Sr</td><td>[Kr]5s²</td></tr>
+                    <tr><td>Ba</td><td>[Xe]6s²</td></tr>
+                    <tr><td>Ra</td><td>[Rn]7s²</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Beryllium</div>
+                        <p>Beryl (3BeO·Al₂O₃·6SiO₂), Phenacite (Be₂SiO₄)</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Magnesium</div>
+                        <p>Magnesite (MgCO₃), Dolomite (CaCO₃·MgCO₃), Epsomite (MgSO₄·7H₂O)</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Calcium</div>
+                        <p>Limestone (CaCO₃), Gypsum (CaSO₄·2H₂O)</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-gem"></i> Barium</div>
+                        <p>Barytes (BaSO₄), Witherite (BaCO₃)</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>Be, Mg by reducing oxides with C. Others by electrolysis of fused salts.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <table>
+                    <tr><th>Property</th><th>Be</th><th>Mg</th><th>Ca</th><th>Sr</th><th>Ba</th></tr>
+                    <tr><td>Atomic Radius (pm)</td><td>112</td><td>160</td><td>197</td><td>215</td><td>222</td></tr>
+                    <tr><td>Density (g/cm³)</td><td>1.84</td><td>1.74</td><td>1.55</td><td>2.54</td><td>3.75</td></tr>
+                    <tr><td>Melting Point (K)</td><td>1560</td><td>920</td><td>1112</td><td>1041</td><td>1000</td></tr>
+                    <tr><td>IE1 (kJ/mol)</td><td>899</td><td>737</td><td>590</td><td>549</td><td>503</td></tr>
+                    <tr><td>Electronegativity</td><td>1.57</td><td>1.31</td><td>1.00</td><td>0.95</td><td>0.89</td></tr>
+                </table>
+                <p>Trends: Radii ↑, density irregular (↓ to Ca, then ↑), m.p./b.p. irregular, IE ↓, electropositive ↑ down group.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> With Air/Oxygen</div>
+                        <p>Be, Mg form oxides (MO); Ca, Sr, Ba form peroxides (MO₂).</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> With Water</div>
+                        <p>Be no reaction; Mg with hot water; Ca, Sr, Ba with cold water.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-link"></i> Hydrides</div>
+                        <p>MH₂; BeH₂, MgH₂ covalent, others ionic.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cubes"></i> Carbonates</div>
+                        <p>MCO₃; solubility ↑ down group, thermal stability ↑.</p>
+                    </div>
+                </div>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Beryllium</h3>
+                <ul>
+                    <li>Small size, high IE → covalent compounds.</li>
+                    <li>BeO amphoteric; Be(OH)₂ amphoteric.</li>
+                    <li>No reaction with water/acids.</li>
+                    <li>Forms Be₂C (methanide).</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: Be & Al</h3>
+                <p>Similar properties: amphoteric oxides, form complexes, chlorides polymeric.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of Mg & Ca</h3>
+                <p>MgO (magnesia cement), Mg(OH)₂ (milk of magnesia), MgSO₄ (Epsom salt), CaO (quicklime), Ca(OH)₂ (slaked lime), CaOCl₂ (bleaching powder), CaSO₄·½H₂O (plaster of Paris), Ca₃(PO₄)₂ (phosphorite).</p>
+                <p>Cement: Mixture of CaO (50-60%), SiO₂ (20-25%), Al₂O₃ (5-10%), etc.</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Boron Family (Group 13)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>B</td><td>[He]2s²2p¹</td></tr>
+                    <tr><td>Al</td><td>[Ne]3s²3p¹</td></tr>
+                    <tr><td>Ga</td><td>[Ar]3d¹⁰4s²4p¹</td></tr>
+                    <tr><td>In</td><td>[Kr]4d¹⁰5s²5p¹</td></tr>
+                    <tr><td>Tl</td><td>[Xe]4f¹⁴5d¹⁰6s²6p¹</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <p>B: Borax (Na₂B₄O₇·10H₂O), Colemanite (Ca₂B₆O₁₁·5H₂O).</p>
+                <p>Al: Bauxite (Al₂O₃·2H₂O), Cryolite (Na₃AlF₆).</p>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>B by reducing B₂O₃ with Mg/Na. Al by Hall-Heroult process (electrolysis of Al₂O₃ in cryolite).</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Atomic radii ↑, IE ↓ (Ga > Al due to d-block contraction), EN ↓, density ↑.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Hydrides: Boranes (B₂H₆ electron deficient). Oxides: B₂O₃ acidic, Al₂O₃ amphoteric, others basic.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Boron</h3>
+                <ul>
+                    <li>Non-metal, covalent compounds, acidic oxide.</li>
+                    <li>Forms BF₃ (Lewis acid), no dimer like AlCl₃.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: B & Si</h3>
+                <p>Both non-metals, form covalent compounds, acidic oxides, hydrides hydrolysed, form esters with alcohols.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of Boron & Al</h3>
+                <p>Boranes (B₂H₆), Borax (bead test), Boric acid (H₃BO₃), Al₂O₃ (corundum), AlCl₃ (dimer), Thermite (Al + Fe₂O₃).</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Carbon Family (Group 14)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>C</td><td>[He]2s²2p²</td></tr>
+                    <tr><td>Si</td><td>[Ne]3s²3p²</td></tr>
+                    <tr><td>Ge</td><td>[Ar]3d¹⁰4s²4p²</td></tr>
+                    <tr><td>Sn</td><td>[Kr]4d¹⁰5s²5p²</td></tr>
+                    <tr><td>Pb</td><td>[Xe]4f¹⁴5d¹⁰6s²6p²</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <p>C: Coal, petroleum, natural gas, carbonates.</p>
+                <p>Si: Silica (SiO₂), silicates.</p>
+                <p>Sn: Cassiterite (SnO₂).</p>
+                <p>Pb: Galena (PbS).</p>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>C not extracted. Si by reducing SiO₂ with C. Sn/Pb from ores by roasting and reduction.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Allotropy: C (diamond, graphite), Si, Ge, Sn (white, gray), Pb no.</p>
+                <p>Trends: Radii ↑, density ↑, m.p./b.p. ↓ then ↑, IE ↓, EN ↓, catenation C >> Si > Ge ≈ Sn > Pb.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Hydrides: CH₄ stable, silanes less, catenation in C hydrides.</p>
+                <p>Oxides: CO neutral, CO₂ acidic, SiO₂ acidic, others amphoteric/basic.</p>
+                <p>Halides: CCl₄, SiCl₄ hydrolysed, stability ↓ down group.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Carbon</h3>
+                <ul>
+                    <li>High m.p./b.p., catenation, pπ-pπ bonds.</li>
+                    <li>CO gas, others solids; C neutral hydride, others acidic.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: C & Si</h3>
+                <p>Both non-metals, form covalent compounds, acidic oxides, hydrides hydrolysed.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of C & Si</h3>
+                <p>CO, CO₂, CS₂, SiO₂ (silica gel, silicates), Silicones (polymers), Glass (varieties).</p>
+                <p>Tin: SnO, SnO₂, SnCl₂, SnCl₄.</p>
+                <p>Lead: PbO (litharge), Pb3O4 (red lead), PbCl2, PbCl4.</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Nitrogen Family (Group 15)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>N</td><td>[He]2s²2p³</td></tr>
+                    <tr><td>P</td><td>[Ne]3s²3p³</td></tr>
+                    <tr><td>As</td><td>[Ar]3d¹⁰4s²4p³</td></tr>
+                    <tr><td>Sb</td><td>[Kr]4d¹⁰5s²5p³</td></tr>
+                    <tr><td>Bi</td><td>[Xe]4f¹⁴5d¹⁰6s²6p³</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <p>N: Air (78%), nitrates. P: Phosphorite (Ca3(PO4)2), bones.</p>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>N from air fractionation. P from bones or phosphorite.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Allotropy: N (diatomic), P (white, red, black), As, Sb, Bi solids.</p>
+                <p>Trends: Radii ↑, IE ↓, EN ↓, metallic character ↑.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Hydrides: NH3, PH3, etc., basicity ↓, stability ↓ down group.</p>
+                <p>Halides: NX3, NX5; stability ↓ down group.</p>
+                <p>Oxides: N2O, NO, N2O3, NO2, N2O5; acidic character ↑ with O content.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Nitrogen</h3>
+                <ul>
+                    <li>Gas, diatomic, no pentahalides, pπ-pπ bonds.</li>
+                    <li>NH3 basic with H-bonding, others not.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: N & Si</h3>
+                <p>Both form hydrides, oxides acidic, halides hydrolysed.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of N & P</h3>
+                <p>NH3 (Haber process), oxides of N, HNO3 (Ostwald), P allotropes, phosphine (PH3), PCl3, PCl5, oxyacids (H3PO3, H3PO4, etc.).</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Oxygen Family (Group 16)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>O</td><td>[He]2s²2p⁴</td></tr>
+                    <tr><td>S</td><td>[Ne]3s²3p⁴</td></tr>
+                    <tr><td>Se</td><td>[Ar]3d¹⁰4s²4p⁴</td></tr>
+                    <tr><td>Te</td><td>[Kr]4d¹⁰5s²5p⁴</td></tr>
+                    <tr><td>Po</td><td>[Xe]4f¹⁴5d¹⁰6s²6p⁴</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <p>O: Air (21%), water. S: Gypsum (CaSO4·2H2O), Epsom (MgSO4·7H2O).</p>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>O from air or water electrolysis. S from Frasch process.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Allotropy: O (O2, O3), S (rhombic, monoclinic, plastic), Se, Te.</p>
+                <p>Trends: Radii ↑, IE ↓, EN ↓, metallic ↑, m.p./b.p. ↑.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Hydrides: H2O, H2S, etc., acidity ↑, stability ↓ down group.</p>
+                <p>Oxides: SO2 acidic, SO3 acidic.</p>
+                <p>Oxyacids: H2SO3, H2SO4, etc.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Oxygen</h3>
+                <ul>
+                    <li>Gas, diatomic, max covalency 2, H-bonding in H2O.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: O & S</h3>
+                <p>Both form hydrides, oxides, catenation in S.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of O & S</h3>
+                <p>O3 (ozone), H2S, SO2, SO3, H2SO4 (contact process), Na2S2O3 (hypo).</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Halogen Family (Group 17)</h2>
+                <table>
+                    <tr><th>Element</th><th>Configuration</th></tr>
+                    <tr><td>F</td><td>[He]2s²2p⁵</td></tr>
+                    <tr><td>Cl</td><td>[Ne]3s²3p⁵</td></tr>
+                    <tr><td>Br</td><td>[Ar]3d¹⁰4s²4p⁵</td></tr>
+                    <tr><td>I</td><td>[Kr]4d¹⁰5s²5p⁵</td></tr>
+                    <tr><td>At</td><td>[Xe]4f¹⁴5d¹⁰6s²6p⁵</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence & Ores</h3>
+                <p>F: Fluorspar (CaF2), Cryolite (Na3AlF6).</p>
+                <p>Cl: NaCl, Carnallite.</p>
+                <p>Br: Sea water, KBr.</p>
+                <p>I: Sea weeds, NaIO3 in Chile saltpetre.</p>
+                <h3><i class="fas fa-tools"></i> Extraction</h3>
+                <p>F by electrolysis of KHF2 in HF. Cl from brine. Br, I from sea water/mother liquor.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Coloured gases/liquids/solids. Radii ↑, IE ↓, EN ↓, EA Cl > F > Br > I, O.S. -1 (F only), others +1 to +7.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Hydrides: HF > HCl > HBr > HI (acidity ↑, stability ↓).</p>
+                <p>Oxides: Unstable, acidic.</p>
+                <p>Oxyacids: HOCl, HClO2, HClO3, HClO4 (strength ↑ with O).</p>
+                <p>Interhalogens: AB, AB3, AB5, AB7.</p>
+                <p>Polyhalides: I3⁻, etc.</p>
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behaviour of Fluorine</h3>
+                <ul>
+                    <li>Low bond energy, high EN, no d-orbitals → only -1 O.S., HF H-bonding.</li>
+                    <li>Strongest oxidant, etches glass.</li>
+                </ul>
+                <h3><i class="fas fa-project-diagram"></i> Diagonal Relationship: F & O</h3>
+                <p>Both small, high EN, form H-bonding, gaseous hydrides.</p>
+                <h3><i class="fas fa-flask"></i> Compounds of Halogens</h3>
+                <p>HF, HCl, HBr, HI, Bleaching powder (CaOCl2), I2 (tincture).</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Noble Gases (Group 18)</h2>
+                <table>
+                    <tr><th>Element</th><th>Discovery</th><th>Configuration</th></tr>
+                    <tr><td>He</td><td>Lockyer/Janssen (1868)</td><td>1s²</td></tr>
+                    <tr><td>Ne</td><td>Ramsay</td><td>[He]2s²2p⁶</td></tr>
+                    <tr><td>Ar</td><td>Rayleigh/Ramsay (1894)</td><td>[Ne]3s²3p⁶</td></tr>
+                    <tr><td>Kr</td><td>Ramsay/Travers (1898)</td><td>[Ar]3d¹⁰4s²4p⁶</td></tr>
+                    <tr><td>Xe</td><td>Ramsay/Travers (1898)</td><td>[Kr]4d¹⁰5s²5p⁶</td></tr>
+                    <tr><td>Rn</td><td>Dorn (1900)</td><td>[Xe]4f¹⁴5d¹⁰6s²6p⁶</td></tr>
+                </table>
+                <h3><i class="fas fa-globe"></i> Occurrence</h3>
+                <p>Air: He 5.2×10⁻⁴%, Ne 1.8×10⁻³%, Ar 0.93%, Kr 1.1×10⁻⁴%, Xe 8.7×10⁻⁶%.</p>
+                <h3><i class="fas fa-tools"></i> Isolation</h3>
+                <p>From air by fractional distillation. He from natural gas, Rn from Ra decay.</p>
+                <h3><i class="fas fa-ruler"></i> Physical Properties</h3>
+                <p>Monoatomic gases, low m.p./b.p. ↑ down group, adsorption ↑ on charcoal.</p>
+                <h3><i class="fas fa-flask"></i> Chemical Properties</h3>
+                <p>Inert due to stable configuration. Xe forms compounds with F, O: XeF2, XeF4, XeF6, XeO3, XeO4, XeOF4, XeO2F2.</p>
+                <h3><i class="fas fa-flask"></i> Uses</h3>
+                <p>He: Balloons, diving mix. Ne: Signs. Ar: Welding. Kr/Xe: Lamps. Rn: Therapy.</p>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points & Tips</h2>
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key JEE/NEET Points</h4>
+                    <ul>
+                        <li>Trends in properties down groups.</li>
+                        <li>Anomalous behaviours and diagonal relationships.</li>
+                        <li>Preparation, properties, uses of key compounds.</li>
+                        <li>Allotropy, catenation, inert pair effect.</li>
+                        <li>Oxyacids and halides structures.</li>
+                    </ul>
+                </div>
+             
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Recall stability trends.</div>
+                        <div class="topic-item">Distinguish ionic/covalent nature.</div>
+                        <div class="topic-item">Understand disproportionation.</div>
+                    </div>
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Confuse oxidation states.</div>
+                        <div class="topic-item">Ignore anomalous elements.</div>
+                        <div class="topic-item">Forget extraction processes.</div>
+                    </div>
+                </div>
+            </section>
+         
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically 4-6 questions. Focus on properties, trends, compounds, anomalies.</p>
+             
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 80%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>High</span>
+                </div>
+            </section>
+        </div>
+     
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main/NEET Chemistry - s and p-Block Elements Full Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+         
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

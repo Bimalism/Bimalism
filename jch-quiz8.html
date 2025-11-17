@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Equilibrium Quiz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #1565C0, #1E88E5, #42A5F5); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.95); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
+        header { background: linear-gradient(to right, #1565C0, #1E88E5); color: white; padding: 25px 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .timer-container { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 50px; font-size: 1.4rem; font-weight: bold; }
+        .nav-buttons { display: flex; justify-content: space-between; padding: 20px 30px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; }
+        .btn { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-home { background: #4caf50; color: white; }
+        .btn-home:hover { background: #388e3c; }
+        .btn-submit { background: #2196f3; color: white; }
+        .btn-submit:hover { background: #1976d2; }
+        .btn-reset { background: #ff9800; color: white; }
+        .btn-reset:hover { background: #f57c00; }
+        .progress-container { padding: 15px 30px; background: #e3f2fd; border-bottom: 1px solid #bbdefb; }
+        .progress-bar { height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+        .progress { height: 100%; background: #4caf50; width: 5%; transition: width 0.5s; }
+        .progress-text { display: flex; justify-content: space-between; margin-top: 8px; font-weight: 500; }
+        .quiz-container { padding: 30px; }
+        .question { margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 10px; border-left: 5px solid #1565C0; }
+        .question-number { font-size: 1.1rem; font-weight: 600; color: #1565C0; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+        .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .option { padding: 15px; background: white; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #1565C0; background: #f0f4ff; }
+        .option.selected { border-color: #1565C0; background: #e3f2fd; }
+        .option input { transform: scale(1.2); }
+        .result-container { display: none; padding: 40px; text-align: center; }
+        .result-title { font-size: 2rem; color: #1565C0; margin-bottom: 20px; }
+        .score { font-size: 3rem; font-weight: bold; color: #4caf50; margin: 20px 0; }
+        .result-details { margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .detail-item { padding: 15px; background: #f5f5f5; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; }
+        .correct { border-left: 5px solid #4caf50; }
+        .incorrect { border-left: 5px solid #f44336; }
+        .review-btn { background: #9c27b0; color: white; margin-top: 20px; }
+        .review-btn:hover { background: #7b1fa2; }
+        @media (max-width: 768px) { .timer-container { position: static; transform: none; margin-top: 15px; display: inline-block; } .nav-buttons { flex-direction: column; gap: 10px; } .btn { justify-content: center; } }
+        .formula { font-family: 'Cambria Math', serif; background: #f0f4ff; padding: 10px 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1E88E5; font-size: 1rem; display: inline-block; }
+        .navigation-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+        .formula-block { font-family: 'Cambria Math', serif; background: #f0f4ff; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #1E88E5; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chemical Equilibrium Quiz</h1>
+            <p class="subtitle">Test your knowledge of Reversible Reactions, Equilibrium Constants, and Le Chatelier's Principle</p>
+            <div class="timer-container">
+                Time Left: <span id="timer">15:00</span>
+            </div>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="goToHome()">← Back to Summary</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Answers</button>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"><div class="progress" id="quiz-progress"></div></div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">1</span>/20</span>
+                <span id="answered-count">0 questions answered</span>
+            </div>
+        </div>
+        
+        <div class="quiz-container" id="quiz-content"></div>
+        
+        <div class="result-container" id="result-content">
+            <h2 class="result-title">Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="result-message"></p>
+            <div class="result-details" id="result-details"></div>
+            <button class="btn btn-home" onclick="goToHome()">← Back to Summary</button>
+            <button class="btn review-btn" onclick="resetQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "Which of the following is NOT a characteristic of a reversible reaction?",
+                options: [
+                    "Can be started from either side",
+                    "Never goes to completion",
+                    "Has a tendency to attain equilibrium",
+                    "ΔG < 0 at equilibrium"
+                ],
+                correct: 3,
+                explanation: "At equilibrium, ΔG = 0, not ΔG < 0. ΔG < 0 indicates a spontaneous reaction that can proceed to completion."
+            },
+            {
+                question: "For the reaction: N₂(g) + 3H₂(g) ⇌ 2NH₃(g), the equilibrium constant Kp is given by:",
+                options: [
+                    "Kp = [NH₃]² / [N₂][H₂]³",
+                    "Kp = P(NH₃)² / P(N₂)P(H₂)³",
+                    "Kp = [N₂][H₂]³ / [NH₃]²",
+                    "Kp = P(N₂)P(H₂)³ / P(NH₃)²"
+                ],
+                correct: 1,
+                explanation: "For gaseous reactions, Kp is expressed in terms of partial pressures: Kp = (P(NH₃))² / (P(N₂) × (P(H₂))³"
+            },
+            {
+                question: "According to Le Chatelier's principle, if the concentration of reactants is increased in an equilibrium system:",
+                options: [
+                    "Equilibrium shifts to favor product formation",
+                    "Equilibrium shifts to favor reactant formation",
+                    "Equilibrium constant increases",
+                    "Equilibrium constant decreases"
+                ],
+                correct: 0,
+                explanation: "Increasing reactant concentration shifts equilibrium to the right (toward products) to consume the added reactants."
+            },
+            {
+                question: "The relationship between Kp and Kc for a reaction is given by:",
+                options: [
+                    "Kp = Kc(RT)",
+                    "Kp = Kc/(RT)",
+                    "Kp = Kc(RT)^Δn",
+                    "Kp = Kc/(RT)^Δn"
+                ],
+                correct: 2,
+                explanation: "Kp = Kc(RT)^Δn, where Δn = (moles of gaseous products) - (moles of gaseous reactants)"
+            },
+            {
+                question: "For the reaction: PCl₅(g) ⇌ PCl₃(g) + Cl₂(g), if pressure is increased at constant temperature:",
+                options: [
+                    "Equilibrium shifts to the right",
+                    "Equilibrium shifts to the left",
+                    "No effect on equilibrium position",
+                    "Equilibrium constant increases"
+                ],
+                correct: 1,
+                explanation: "Increasing pressure favors the side with fewer moles of gas. Here, left side has 1 mole, right side has 2 moles, so equilibrium shifts left."
+            },
+            {
+                question: "Which of the following is an example of a heterogeneous equilibrium?",
+                options: [
+                    "N₂(g) + 3H₂(g) ⇌ 2NH₃(g)",
+                    "CH₃COOH(l) + C₂H₅OH(l) ⇌ CH₃COOC₂H₅(l) + H₂O(l)",
+                    "CaCO₃(s) ⇌ CaO(s) + CO₂(g)",
+                    "2SO₂(g) + O₂(g) ⇌ 2SO₃(g)"
+                ],
+                correct: 2,
+                explanation: "Heterogeneous equilibrium involves substances in different phases. CaCO₃(s) ⇌ CaO(s) + CO₂(g) has solid and gas phases."
+            },
+            {
+                question: "For an exothermic reaction, if temperature is increased:",
+                options: [
+                    "Equilibrium constant increases",
+                    "Equilibrium constant decreases",
+                    "Equilibrium constant remains unchanged",
+                    "Reaction rate decreases"
+                ],
+                correct: 1,
+                explanation: "For exothermic reactions (ΔH < 0), increasing temperature decreases the equilibrium constant (K) according to Van't Hoff equation."
+            },
+            {
+                question: "The equilibrium constant for the reverse reaction is related to that of the forward reaction by:",
+                options: [
+                    "Kreverse = Kforward",
+                    "Kreverse = 1/Kforward",
+                    "Kreverse = (Kforward)²",
+                    "Kreverse = √Kforward"
+                ],
+                correct: 1,
+                explanation: "The equilibrium constant for the reverse reaction is the reciprocal of the equilibrium constant for the forward reaction."
+            },
+            {
+                question: "In the Haber process for ammonia synthesis (N₂ + 3H₂ ⇌ 2NH₃, ΔH = -92 kJ), optimum conditions are:",
+                options: [
+                    "High temperature and high pressure",
+                    "Low temperature and low pressure",
+                    "High temperature and low pressure",
+                    "Low temperature and high pressure"
+                ],
+                correct: 3,
+                explanation: "Low temperature favors the exothermic forward reaction, and high pressure favors the side with fewer moles of gas (2 moles vs 4 moles)."
+            },
+            {
+                question: "For a reaction at equilibrium, if Q (reaction quotient) is less than K (equilibrium constant):",
+                options: [
+                    "The reaction will proceed in the forward direction",
+                    "The reaction will proceed in the reverse direction",
+                    "The reaction is at equilibrium",
+                    "The equilibrium constant will change"
+                ],
+                correct: 0,
+                explanation: "When Q < K, the reaction will proceed in the forward direction to reach equilibrium."
+            },
+            {
+                question: "Which of the following is NOT included in the equilibrium constant expression?",
+                options: [
+                    "Gaseous reactants",
+                    "Aqueous solutions",
+                    "Pure solids",
+                    "Dissolved species"
+                ],
+                correct: 2,
+                explanation: "The concentrations of pure solids are not included in the equilibrium constant expression as their activity is taken as 1."
+            },
+            {
+                question: "For the reaction: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g), if the volume of the container is reduced:",
+                options: [
+                    "Equilibrium shifts to the right",
+                    "Equilibrium shifts to the left",
+                    "No effect on equilibrium",
+                    "Equilibrium constant increases"
+                ],
+                correct: 0,
+                explanation: "Reducing volume increases pressure, which favors the side with fewer moles of gas (right side: 2 moles vs left side: 3 moles)."
+            },
+            {
+                question: "The Van't Hoff equation relates the equilibrium constant with:",
+                options: [
+                    "Pressure",
+                    "Volume",
+                    "Temperature",
+                    "Concentration"
+                ],
+                correct: 2,
+                explanation: "The Van't Hoff equation describes how the equilibrium constant changes with temperature: ln(K₂/K₁) = -ΔH/R (1/T₂ - 1/T₁)"
+            },
+            {
+                question: "For the dissociation of PCl₅: PCl₅(g) ⇌ PCl₃(g) + Cl₂(g), if degree of dissociation is α, then total moles at equilibrium are:",
+                options: [
+                    "1 + α",
+                    "1 - α",
+                    "1 + 2α",
+                    "1"
+                ],
+                correct: 0,
+                explanation: "Initial: 1 mole PCl₅; At equilibrium: (1-α) moles PCl₅ + α moles PCl₃ + α moles Cl₂ = 1 + α total moles"
+            },
+            {
+                question: "Which factor does NOT affect the equilibrium constant?",
+                options: [
+                    "Temperature",
+                    "Catalyst",
+                    "Change in concentration",
+                    "Change in pressure"
+                ],
+                correct: 1,
+                explanation: "A catalyst speeds up the attainment of equilibrium but does not change the value of the equilibrium constant."
+            },
+            {
+                question: "For the reaction: H₂(g) + I₂(g) ⇌ 2HI(g), if Kc = 50 at 25°C, what is Kc for 2HI(g) ⇌ H₂(g) + I₂(g)?",
+                options: [
+                    "50",
+                    "0.02",
+                    "25",
+                    "0.04"
+                ],
+                correct: 1,
+                explanation: "For the reverse reaction, Kc(reverse) = 1/Kc(forward) = 1/50 = 0.02"
+            },
+            {
+                question: "In the equilibrium: CaCO₃(s) ⇌ CaO(s) + CO₂(g), the equilibrium constant Kp is equal to:",
+                options: [
+                    "[CaO][CO₂]/[CaCO₃]",
+                    "P(CO₂)",
+                    "[CO₂]",
+                    "1/P(CO₂)"
+                ],
+                correct: 1,
+                explanation: "For heterogeneous equilibria involving solids and gases, Kp includes only the gaseous components. Here, Kp = P(CO₂)"
+            },
+            {
+                question: "If for a reaction ΔG° = -RT lnK, what is the value of ΔG at equilibrium?",
+                options: [
+                    "ΔG°",
+                    "0",
+                    "-RT",
+                    "RT"
+                ],
+                correct: 1,
+                explanation: "At equilibrium, ΔG = 0, not ΔG°. ΔG° is the standard free energy change, while ΔG is the actual free energy change."
+            },
+            {
+                question: "For an endothermic reaction, if temperature is increased:",
+                options: [
+                    "Both equilibrium constant and rate of reaction increase",
+                    "Equilibrium constant increases but rate decreases",
+                    "Equilibrium constant decreases but rate increases",
+                    "Both equilibrium constant and rate decrease"
+                ],
+                correct: 0,
+                explanation: "For endothermic reactions, increasing temperature increases both the equilibrium constant and the rate of reaction."
+            },
+            {
+                question: "The relationship between vapour density (D) before dissociation and vapour density (d) after dissociation for PCl₅ ⇌ PCl₃ + Cl₂ is:",
+                options: [
+                    "D = d(1 + α)",
+                    "d = D(1 + α)",
+                    "D = d/(1 + α)",
+                    "d = D/(1 + α)"
+                ],
+                correct: 0,
+                explanation: "For PCl₅ dissociation, D/d = 1 + α, where α is the degree of dissociation. Therefore, D = d(1 + α)"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let timeLeft = 15 * 60;
+        let timerInterval;
+        let quizSubmitted = false;
+
+        function initializeQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        function displayQuestion() {
+            const q = quizQuestions[currentQuestion];
+            let opts = '';
+            q.options.forEach((o, i) => {
+                const checked = userAnswers[currentQuestion] === i ? 'checked' : '';
+                opts += `<label class="option ${checked ? 'selected' : ''}">
+                    <input type="radio" name="answer" value="${i}" ${checked} onchange="selectAnswer(${i})">${o}
+                </label>`;
+            });
+            
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>← Previous</button>
+                    <button class="btn btn-submit" onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? 'Finish' : 'Next'} →</button>
+                </div>`;
+        }
+
+        function selectAnswer(i) {
+            userAnswers[currentQuestion] = i;
+            displayQuestion();
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const answered = userAnswers.filter(a => a !== null).length;
+            const progress = (answered / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = answered;
+            document.getElementById('answered-count').textContent = `${answered} of ${quizQuestions.length} questions answered`;
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const seconds = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+            if (timeLeft < 300) {
+                document.getElementById('timer').style.color = '#ff5252';
+            }
+        }
+
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            quizSubmitted = true;
+            clearInterval(timerInterval);
+            
+            let score = 0;
+            let details = '';
+            
+            quizQuestions.forEach((q, i) => {
+                const userAnswer = userAnswers[i];
+                const isCorrect = userAnswer === q.correct;
+                if (isCorrect) score++;
+                
+                details += `<div class="detail-item ${isCorrect ? 'correct' : 'incorrect'}">
+                    <div>
+                        <strong>Q${i+1}:</strong> ${q.question}<br>
+                        <span>Your answer: ${userAnswer !== null ? q.options[userAnswer] : 'Not answered'}</span><br>
+                        <span>Correct answer: ${q.options[q.correct]}</span><br>
+                        <em>${q.explanation}</em>
+                    </div>
+                    <div>${isCorrect ? '✓' : '✗'}</div>
+                </div>`;
+            });
+            
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-details').innerHTML = details;
+            
+            let message = '';
+            if (score >= 17) message = 'Excellent! You have mastered Chemical Equilibrium concepts.';
+            else if (score >= 14) message = 'Great job! You have a good understanding of equilibrium principles.';
+            else if (score >= 11) message = 'Good effort! Review the concepts to improve your understanding.';
+            else message = 'Keep studying! Focus on equilibrium constants, Le Chatelier\'s principle, and reaction quotients.';
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers.fill(null);
+            timeLeft = 15 * 60;
+            quizSubmitted = false;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            clearInterval(timerInterval);
+            initializeQuiz();
+        }
+
+        function goToHome() {
+            alert('This would navigate to the Chemical Equilibrium summary page');
+            // In a real implementation, this would redirect to the summary page
+            // window.location.href = 'chemical-equilibrium-summary.html';
+        }
+
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionic Equilibrium Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-content {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 25px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .question-container {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        
+        .option:hover {
+            background-color: #f0f8ff;
+            border-color: #42A5F5;
+        }
+        
+        .option.selected {
+            background-color: #E3F2FD;
+            border-color: #1565C0;
+        }
+        
+        .option.correct {
+            background-color: #E8F5E9;
+            border-color: #4CAF50;
+        }
+        
+        .option.incorrect {
+            background-color: #FFEBEE;
+            border-color: #F44336;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-prev {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .btn-prev:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+        
+        .btn-next {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+        }
+        
+        .btn-next:hover:not(:disabled) {
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        .btn-restart {
+            background: linear-gradient(to right, #4CAF50, #66BB6A);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-restart:hover {
+            background: linear-gradient(to right, #388E3C, #4CAF50);
+        }
+        
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            border-left: 4px solid #1565C0;
+            display: none;
+        }
+        
+        .explanation-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1565C0;
+        }
+        
+        .timer {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1565C0;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                margin: 10px;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Ionic Equilibrium Quiz</h1>
+            <p class="quiz-description">Test your knowledge of electrolytes, pH, buffers, and solubility</p>
+        </div>
+        
+        <div class="quiz-content">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of 10</span>
+                    <span id="timer" class="timer">Time: 10:00</span>
+                </div>
+            </div>
+            
+            <div id="question-container">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="explanation" id="explanation">
+                <div class="explanation-title">Explanation:</div>
+                <div id="explanation-text"></div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions data
+        const quizData = [
+            {
+                question: "Which of the following is a strong electrolyte?",
+                options: [
+                    "CH₃COOH",
+                    "NH₄OH", 
+                    "NaCl",
+                    "H₂CO₃"
+                ],
+                correct: 2,
+                explanation: "NaCl is a strong electrolyte because it completely dissociates into ions in aqueous solution. CH₃COOH, NH₄OH, and H₂CO₃ are weak electrolytes as they only partially dissociate."
+            },
+            {
+                question: "According to Ostwald's dilution law, for a weak electrolyte:",
+                options: [
+                    "α ∝ C",
+                    "α ∝ 1/C",
+                    "α ∝ √C",
+                    "α ∝ 1/√C"
+                ],
+                correct: 3,
+                explanation: "For weak electrolytes, the degree of dissociation (α) is inversely proportional to the square root of concentration (α ∝ 1/√C), according to Ostwald's dilution law: α = √(K/C)."
+            },
+            {
+                question: "What is the pH of a 0.001 M HCl solution?",
+                options: [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                correct: 2,
+                explanation: "HCl is a strong acid that completely dissociates, so [H⁺] = 0.001 M = 10⁻³ M. pH = -log[H⁺] = -log(10⁻³) = 3."
+            },
+            {
+                question: "Which of the following will act as a buffer solution?",
+                options: [
+                    "NaCl + HCl",
+                    "CH₃COOH + CH₃COONa",
+                    "NaOH + NaCl",
+                    "HCl + NaOH"
+                ],
+                correct: 1,
+                explanation: "CH₃COOH + CH₃COONa forms an acidic buffer. It contains a weak acid (CH₃COOH) and its salt with a strong base (CH₃COONa), which allows it to resist pH changes."
+            },
+            {
+                question: "The solubility product (Ksp) of AgCl is 1.8 × 10⁻¹⁰. What is its solubility in mol/L?",
+                options: [
+                    "1.8 × 10⁻¹⁰",
+                    "9.0 × 10⁻¹¹",
+                    "1.34 × 10⁻⁵",
+                    "3.6 × 10⁻¹⁰"
+                ],
+                correct: 2,
+                explanation: "For AgCl (AB type salt), Ksp = s². So s = √Ksp = √(1.8 × 10⁻¹⁰) = 1.34 × 10⁻⁵ mol/L."
+            },
+            {
+                question: "According to Bronsted-Lowry theory, a base is defined as:",
+                options: [
+                    "A proton donor",
+                    "An electron pair acceptor",
+                    "A proton acceptor",
+                    "A substance that produces OH⁻ ions"
+                ],
+                correct: 2,
+                explanation: "In the Bronsted-Lowry theory, an acid is a proton donor and a base is a proton acceptor. This is a broader definition than Arrhenius theory which limits bases to OH⁻ producers."
+            },
+            {
+                question: "What is the pH of a solution with [H⁺] = 3.2 × 10⁻⁵ M?",
+                options: [
+                    "4.49",
+                    "4.50",
+                    "4.51",
+                    "4.52"
+                ],
+                correct: 0,
+                explanation: "pH = -log[H⁺] = -log(3.2 × 10⁻⁵) = -[log(3.2) + log(10⁻⁵)] = -[0.505 - 5] = -[-4.495] = 4.495 ≈ 4.50"
+            },
+            {
+                question: "The common ion effect:",
+                options: [
+                    "Increases the dissociation of weak electrolytes",
+                    "Decreases the dissociation of weak electrolytes",
+                    "Has no effect on dissociation",
+                    "Only affects strong electrolytes"
+                ],
+                correct: 1,
+                explanation: "The common ion effect suppresses the dissociation of weak electrolytes. When a common ion is added, the equilibrium shifts to reduce dissociation according to Le Chatelier's principle."
+            },
+            {
+                question: "Which indicator would be most suitable for titrating a weak acid with a strong base?",
+                options: [
+                    "Methyl orange (pH range 3.1-4.4)",
+                    "Methyl red (pH range 4.2-6.3)",
+                    "Phenolphthalein (pH range 8.3-10.0)",
+                    "Litmus (pH range 5.0-8.0)"
+                ],
+                correct: 2,
+                explanation: "Phenolphthalein is suitable for weak acid-strong base titrations because the equivalence point occurs in the basic pH range (pH > 7), which falls within phenolphthalein's color change range."
+            },
+            {
+                question: "For a salt of weak acid and strong base, the hydrolysis constant (Kh) is given by:",
+                options: [
+                    "Kh = Kw/Ka",
+                    "Kh = Kw/Kb",
+                    "Kh = Ka × Kb",
+                    "Kh = Kw/(Ka × Kb)"
+                ],
+                correct: 0,
+                explanation: "For a salt of weak acid and strong base (e.g., CH₃COONa), the hydrolysis constant Kh = Kw/Ka, where Kw is the ionic product of water and Ka is the acid dissociation constant."
+            }
+        ];
+
+        // DOM elements
+        const questionContainer = document.getElementById('question-container');
+        const progressBar = document.getElementById('progress');
+        const currentQuestionElement = document.getElementById('current-question');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
+        const explanationDiv = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const timerElement = document.getElementById('timer');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let score = 0;
+        let timeLeft = 600; // 10 minutes in seconds
+        let timerInterval;
+
+        // Initialize the quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = quizData[currentQuestion];
+            
+            // Update progress
+            progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+            currentQuestionElement.textContent = currentQuestion + 1;
+            
+            // Create question HTML
+            let questionHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+            `;
+            
+            question.options.forEach((option, index) => {
+                let optionClass = "option";
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += " selected";
+                }
+                
+                questionHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            questionHTML += `</div></div>`;
+            questionContainer.innerHTML = questionHTML;
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevButton.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === quizData.length - 1) {
+                nextButton.textContent = "Finish";
+            } else {
+                nextButton.textContent = "Next";
+            }
+            
+            // Hide explanation initially
+            explanationDiv.style.display = 'none';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.getAttribute('data-index'));
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            selectedOption.classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = selectedIndex;
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === null) {
+                alert("Please select an answer before proceeding.");
+                return;
+            }
+            
+            // Show explanation
+            showExplanation();
+            
+            // If it's the last question, finish the quiz
+            if (currentQuestion === quizData.length - 1) {
+                finishQuiz();
+                return;
+            }
+            
+            // Move to next question after a delay
+            setTimeout(() => {
+                currentQuestion++;
+                displayQuestion();
+            }, 2000);
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            currentQuestion--;
+            displayQuestion();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = quizData[currentQuestion];
+            const userAnswer = userAnswers[currentQuestion];
+            
+            explanationText.textContent = question.explanation;
+            explanationDiv.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            document.querySelectorAll('.option').forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswer && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Finish the quiz and show results
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            score = 0;
+            quizData.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    score++;
+                }
+            });
+            
+            // Display results
+            questionContainer.innerHTML = `
+                <div class="results-container">
+                    <h2>Quiz Completed!</h2>
+                    <div class="score">${score}/${quizData.length}</div>
+                    <div class="score-text">You scored ${(score/quizData.length*100).toFixed(1)}%</div>
+                    <button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+                </div>
+            `;
+            
+            // Hide navigation buttons
+            prevButton.style.display = 'none';
+            nextButton.style.display = 'none';
+            explanationDiv.style.display = 'none';
+        }
+
+        // Restart the quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            score = 0;
+            timeLeft = 600;
+            
+            // Reset UI
+            prevButton.style.display = 'block';
+            nextButton.style.display = 'block';
+            nextButton.textContent = "Next";
+            
+            initQuiz();
+        }
+
+        // Timer function
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Event listeners
+        prevButton.addEventListener('click', prevQuestion);
+        nextButton.addEventListener('click', nextQuestion);
+
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

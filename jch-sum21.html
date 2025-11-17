@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #388e3c;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #66bb6a;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e8f5e9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #388e3c;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f1f8e9);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            border-left: 4px solid #66bb6a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #2e7d32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #4caf50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #66bb6a, #4caf50);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .key-concept {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #388e3c;
+        }
+        
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .reaction {
+            background-color: #e8f5e9;
+            padding: 12px 18px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2e7d32;
+            font-family: 'Cambria Math', serif;
+            font-size: 1rem;
+        }
+
+        .gas-name {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .test-result {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Inorganic Chemistry</div>
+            <h1>Chemical Analysis</h1>
+            <p class="subtitle">Qualitative & Quantitative Analysis of Inorganic Salts</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Introduction to Analytical Chemistry</h2>
+                <p>Analytical chemistry deals with qualitative and quantitative analysis of substances.</p>
+                
+                <div class="definition">
+                    <p><strong>Qualitative analysis</strong>: A salt consists of two parts known as radicals. The positively charged part of a salt (cation) which has been derived from a base is termed as basic radical and the negatively charged part of salt (anion) which has been derived from an acid is termed as acidic radical. In qualitative inorganic analysis, the given compound is analysed for the basic and acid radicals (i.e., the cations and the anions), that it contains. For example zinc blende is analysed for the Zn²⁺ and S²⁻ ions that it contains.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-burn"></i> Test for Different Gases</h2>
+                
+                <h3><i class="fas fa-eye"></i> (1) Colourless gases</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cloud"></i> Tests for CO₂</div>
+                        <p>It is colourless and odourless gas. It gives white ppt. with lime water which dissolves on passing excess of CO₂.</p>
+                        <div class="reaction">Ca(OH)₂ + CO₂ → CaCO₃↓ (White ppt.) + H₂O</div>
+                        <div class="reaction">CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂ (Soluble, Excess)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Test for CO</div>
+                        <p>It is colourless and odourless gas. It burns with a blue flame.</p>
+                        <div class="reaction">2CO + O₂ → 2CO₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-lightbulb"></i> Test for O₂</div>
+                        <p>It is colourless and odourless gas. It rekindles a glowing splinter.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-egg"></i> Tests for H₂S</div>
+                        <p>It is a colourless gas with a smell of rotten eggs. It turns moist lead acetate paper black.</p>
+                        <div class="reaction">(CH₃COO)₂Pb + H₂S → PbS↓ (Black) + 2CH₃COOH</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-smog"></i> Tests for SO₂</div>
+                        <p>It is a colourless gas with a suffocating odour of burning sulphur. It turns acidified K₂Cr₂O₇ solution green.</p>
+                        <div class="reaction">3SO₂ + K₂Cr₂O₇ + 2H₂SO₄ → K₂SO₄ + Cr₂(SO₄)₃ (Green) + 2H₂O</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Tests for NH₃</div>
+                        <p>It is a colourless gas with a characteristic ammonical smell. It gives white fumes of NH₄Cl with HCl, with Nessler’s reagents, it gives brown ppt.</p>
+                        <div class="reaction">NH₃ + HCl → NH₄Cl (White fumes)</div>
+                        <div class="reaction">2K₂[HgI₄] + NH₃ + 3KOH → Hg₂NI↓ (Brown ppt.) + 7KI + 2H₂O (Nessler’s reagent)</div>
+                        <p>It gives deep blue colour with CuSO₄ solution, NH₃ dissolves in water to give NH₄OH, which being basic, turns red litmus blue.</p>
+                        <div class="reaction">CuSO₄ + 4NH₃ → [Cu(NH₃)₄]SO₄ (Deep blue)</div>
+                        <div class="reaction">NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-skull-crossbones"></i> Tests for HCl gas</div>
+                        <p>It is colourless gas with a pungent irritating smell. It turns moist blue litmus paper red i.e., it is acidic in nature. It gives white ppt. with AgNO₃ solution. This white ppt. is soluble in NH₄OH.</p>
+                        <div class="reaction">AgNO₃ + HCl → AgCl↓ (White ppt.) + HNO₃</div>
+                        <div class="reaction">AgCl + 2NH₄OH → [Ag(NH₃)₂]Cl (Soluble) + 2H₂O</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-wine-bottle"></i> Test for CH₃COOH vapours</div>
+                        <p>These vapours are colourless with a vinegar like smell.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-palette"></i> (2) Coloured gases</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Tests for Cl₂</div>
+                        <p>It is a greenish yellow gas with a pungent smell. In small quantity it appears almost colourless. It bleaches a moist litmus paper, Blue litmus paper first turns red and then becomes colourless.</p>
+                        <div class="reaction">Cl₂ + H₂O → HCl + HOCl; HOCl + Colour → Colourless</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Tests for Br₂</div>
+                        <p>Brown vapours with a pungent smell. It turns moist starch paper yellow.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Tests for I₂</div>
+                        <p>Violet vapours with a pungent smell. It turns moist starch paper blue.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-smog"></i> Tests for NO₂</div>
+                        <p>Brown coloured pungent smelling gas. It turns moist starch KI paper blue. It turns ferrous sulphate solution black.</p>
+                        <div class="reaction">2KI + 2NO₂ → 2KNO₂ + I₂; I₂ + Starch → Blue colour</div>
+                        <div class="reaction">3FeSO₄ + NO₂ + H₂SO₄ → Fe₂(SO₄)₃ (Black) + NO + H₂O</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-search"></i> Systematic Procedure for Qualitative Analysis of Inorganic Salts</h2>
+                <p>It involves the following steps : (1) Preliminary tests (2) Wet tests for acid radicals and (3) Wet tests for basic radicals.</p>
+                
+                <h3><i class="fas fa-eye"></i> (1) Preliminary tests</h3>
+                
+                <h3>(i) Physical examination</h3>
+                <p>It involves the study of colour, smell, density etc.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Colour</th>
+                            <th>Salt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Black</td><td>Oxides : MnO₂, FeO, CuO, Co₃O₄, NiO, Sulphides : CuS, Cu₂S, Ag₂S, PbS, HgS, Bi₂S₃ (blackish brown), NiS, CoS, FeS</td></tr>
+                        <tr><td>Blue</td><td>Hydrated CuSO₄, anhydrous CoSO₄</td></tr>
+                        <tr><td>Orange</td><td>K₂Cr₂O₇, some dichromate (K₂Cr₂O₇), Sb₂S₅, ferricyanides</td></tr>
+                        <tr><td>Green</td><td>Nickel salts, hydrated ferrous salts, potassium permanganate (KMnO₄), some copper (II) salts</td></tr>
+                        <tr><td>Brownish yellow</td><td>SnS</td></tr>
+                        <tr><td>Dark brown</td><td>FeCl₃, CuCrO₄, Ag₂O, PbO₂, CdO, Fe₂O₃ (but yellow in aq. solution)</td></tr>
+                        <tr><td>Pale brown</td><td>MnCO₃</td></tr>
+                        <tr><td>Light pink</td><td>Hydrated manganese salts</td></tr>
+                        <tr><td>Reddish pink</td><td>Hydrated cobalt (II) salts</td></tr>
+                        <tr><td>Red</td><td>Pb₃O₄, HgI₂</td></tr>
+                        <tr><td>Yellow</td><td>AgI, AgBr, PbI₂, CdS, chromates</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>(ii) Dry heating</h3>
+                <p>Substance is heated in a dry test tube.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Observation</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>(a) A gas or vapour is evolved.</td><td>Compounds with water of crystallisation</td></tr>
+                        <tr><td>Vapour, evolved, test with litmus paper.</td><td>Ammonium salts, acid salts, and hydroxides. (usually accompanied by change of colour)</td></tr>
+                        <tr><td>The vapour is alkaline.</td><td>Ammonium salts.</td></tr>
+                        <tr><td>The vapour is acidic.</td><td>Readily decomposable salts of strong acids.</td></tr>
+                        <tr><td>Oxygen is evolved</td><td>Nitrates, chlorates and certain oxides.</td></tr>
+                        <tr><td>Dinitrogen oxide</td><td>Ammonium nitrate or nitrate mixed with an ammonium salt.</td></tr>
+                        <tr><td>Dark-brown or reddish fumes (oxides of nitrogen), acidic in reaction.</td><td>Nitrates and nitrites of heavy metals.</td></tr>
+                        <tr><td>CO₂ is evolved, lime water becomes turbid.</td><td>Carbonates or hydrogen carbonates.</td></tr>
+                        <tr><td>NH₃ is evolved which turns red litmus blue.</td><td>Ammonium salts.</td></tr>
+                        <tr><td>SO₂ is evolved, which turns acidified K₂Cr₂O₇ green, decolourises fuschin colour.</td><td>Sulphates and thiosulphates.</td></tr>
+                        <tr><td>H₂S is evolved, turns lead acetate paper black, or cadmium acetate yellow.</td><td>Hydrates, sulphides or sulphides in the presence of water.</td></tr>
+                        <tr><td>Cl₂ is evolved, yellowish green gas, bleaches litmus paper, turns KI – starch blue, poisonous.</td><td>Unstable chlorides e.g., copper chlorides in the presence of oxidising agents.</td></tr>
+                        <tr><td>Br₂ is evolved (reddish brown, turns fluorescent paper red).</td><td>Bromides in the presence of oxidising agents.</td></tr>
+                        <tr><td>I₂ is evolved, violet vapours condensing to black crystals</td><td>Free iodine and certain iodides</td></tr>
+                        <tr><td>(b) A sublimate is formed</td><td>Ammonium and mercury salts.</td></tr>
+                        <tr><td>White sublimate</td><td>As₂O₃, Sb₂O₃</td></tr>
+                        <tr><td>Grey sublimate</td><td>Hg</td></tr>
+                        <tr><td>Steel grey, garlic odour</td><td>As</td></tr>
+                        <tr><td>Yellow sublimate</td><td>As₂S₃, HgI₂ (Red)</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="key-concept">
+                    <h4>Action of heat on different compounds</h4>
+                    <p>Many inorganic salts decomposes on heating, liberating characteristic gases. A few such reactions are tabulated as follows,</p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reaction</th>
+                            <th>Observation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2HgO → 2Hg + O₂ (Red)</td><td>Silvery deposit</td></tr>
+                        <tr><td>2Pb₃O₄ → 6PbO + O₂ (Red)</td><td>Yellow</td></tr>
+                        <tr><td>PbO₂ → PbO + ½O₂</td><td>Brown</td></tr>
+                        <tr><td>CuCO₃ → CuO + CO₂</td><td>Green</td></tr>
+                        <tr><td>ZnCO₃ → ZnO + CO₂ (White cold, Yellow hot)</td><td>White</td></tr>
+                        <tr><td>CuSO₄·5H₂O → CuSO₄ + 5H₂O</td><td>Blue to White</td></tr>
+                        <tr><td>CuSO₄ → CuO + SO₃</td><td></td></tr>
+                        <tr><td>2FeSO₄ → Fe₂O₃ + SO₂ + SO₃</td><td></td></tr>
+                        <tr><td>2AgNO₃ → 2Ag + O₂ + 2NO₂ (450°C)</td><td></td></tr>
+                        <tr><td>Zn(NO₃)₂ → ZnO + 2NO₂ + ½O₂</td><td>White, Brown</td></tr>
+                        <tr><td>2Ag₂CO₃ → 4Ag + 2CO₂ + O₂</td><td></td></tr>
+                        <tr><td>2Pb(NO₃)₂ → 2PbO + 4NO₂ + O₂</td><td></td></tr>
+                        <tr><td>Cr₂O₃ + 3C + 2N₂ → 2Cr + 3CO (Green, Orange)</td><td></td></tr>
+                        <tr><td>2NaHCO₃ → Na₂CO₃ + H₂O + CO₂</td><td></td></tr>
+                        <tr><td>NH₄HCO₃ → NH₃ + H₂O + CO₂</td><td></td></tr>
+                        <tr><td>CaCO₃ → CaO + CO₂</td><td></td></tr>
+                        <tr><td>NaNO₂ → NaNO₃ + ½O₂</td><td></td></tr>
+                        <tr><td>MgCO₃ → MgO + CO₂</td><td></td></tr>
+                        <tr><td>NH₃ + hot Red → N₂ + 3H₂</td><td></td></tr>
+                        <tr><td>Mg(NO₃)₂ → MgO + 2NO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>Ca(NO₃)₂ → CaO + 2NO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>Al₂(SO₄)₃ → Al₂O₃ + 3SO₃ (hot Red)</td><td></td></tr>
+                        <tr><td>CaSO₄·2H₂O → CaSO₄·½H₂O + 1½H₂O (Plaster of Paris)</td><td></td></tr>
+                        <tr><td>AlCl₃·6H₂O → Al₂O₃ + 6HCl + 9H₂O</td><td></td></tr>
+                        <tr><td>BeSO₄ → BeO + SO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>AgNO₃ → AgNO₂ + ½O₂ (350°C)</td><td></td></tr>
+                        <tr><td>MgSO₄ → MgO + SO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>ZnSO₄ → ZnO + SO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>Sn(COO)₂ → SnO + CO + CO₂</td><td></td></tr>
+                        <tr><td>CaC₂O₄ → CaCO₃ + CO</td><td></td></tr>
+                        <tr><td>NH₄NO₂ → N₂ + 2H₂O</td><td></td></tr>
+                        <tr><td>NH₄NO₃ → N₂O + 2H₂O</td><td></td></tr>
+                        <tr><td>2KClO₃ → 2KCl + 3O₂</td><td></td></tr>
+                        <tr><td>2FeCl₃ → 2FeCl₂ + Cl₂</td><td></td></tr>
+                        <tr><td>Li₂CO₃ → Li₂O + CO₂</td><td></td></tr>
+                        <tr><td>Fe(COO)₂ → FeO + CO + CO₂</td><td></td></tr>
+                        <tr><td>2KMnO₄ → K₂MnO₄ + MnO₂ + O₂</td><td></td></tr>
+                        <tr><td>HgCl₂ + Mg → Hg + MgCl₂</td><td></td></tr>
+                        <tr><td>NH₄Cl → NH₃ + HCl</td><td></td></tr>
+                        <tr><td>2LiNO₃ → Li₂O + 2NO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>Hg(NO₃)₂ → Hg + 2NO₂ + O₂</td><td></td></tr>
+                        <tr><td>2CuCl₂ → 2CuCl + Cl₂</td><td></td></tr>
+                        <tr><td>Co(NO₃)₂ → CoO + 2NO₂ + ½O₂</td><td></td></tr>
+                        <tr><td>2K₂Cr₂O₇ → 2K₂CrO₄ + Cr₂O₃ + ½O₂</td><td></td></tr>
+                        <tr><td>MgNH₄PO₄ → Mg₂P₂O₇ + 2NH₃ + H₂O</td><td></td></tr>
+                        <tr><td>ZnNH₄PO₄ → Zn₂P₂O₇ + 2NH₃ + H₂O</td><td></td></tr>
+                        <tr><td>K₄[Fe(CN)₆] → 4KCN + (CN)₂ + Fe + N₂</td><td></td></tr>
+                        <tr><td>ZnCl₂·6H₂O → ZnCl₂ + 6H₂O</td><td></td></tr>
+                        <tr><td>ZnCl₂·2H₂O → ZnOCl₂ + 2H₂O</td><td></td></tr>
+                        <tr><td>FeCl₃·6H₂O → Fe₂O₃ + 6HCl + 9H₂O</td><td></td></tr>
+                        <tr><td>ZnSO₄ → ZnO + SO₂ + ½O₂ (800°C, Glassy bead)</td><td></td></tr>
+                        <tr><td>Na₂B₄O₇·10H₂O → Na₂B₄O₇ → 2NaBO₂ + B₂O₃ (hot Red)</td><td></td></tr>
+                        <tr><td>ZnSO₄·7H₂O → ZnSO₄·6H₂O → ZnSO₄·H₂O → ZnSO₄ (450-700°C) → ZnO + SO₂ + ½O₂ (100-160°C)</td><td></td></tr>
+                    </tbody>
+                </table>
+
+                <h3>(iii) Flame test</h3>
+                <p>Characteristic flame colour : Certain metals and their salts impart specific colours to Bunsen burner flame.</p>
+                <ul>
+                    <li>(a) Pb imparts pale greenish colour to the flame.</li>
+                    <li>(b) Cu and Cu salts impart blue or green colour to the flame.</li>
+                    <li>(c) Borates also impart green colour to the flame.</li>
+                    <li>(d) Ba and its salts impart apple green colour to the flame.</li>
+                    <li>(e) Sr imparts crimson red colour to the flame.</li>
+                    <li>(f) Ca imparts brick red colour to the flame.</li>
+                    <li>(g) Na imparts yellow colour to the flame.</li>
+                    <li>(h) K imparts pink-violet (Lilac) colour to the flame.</li>
+                    <li>(i) Li imparts crimson-red, Rb imparts violet and Cs imparts violet colours to the flame.</li>
+                    <li>(j) Livid-blue flame is given by As, Sb and Bi.</li>
+                </ul>
+
+                <h3>(iv) Borax bead test</h3>
+                <p>The transparent glassy bead (NaBO₂ + B₂O₃) when heated with inorganic salt and the colour produced gives some idea of cation present in it.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Colour of bead in oxidising flame</th>
+                            <th>Colour of bead in reducing flame</th>
+                            <th>Basic radical present</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Greenish when hot, blue in cold.</td><td>Red and opaque</td><td>Cu</td></tr>
+                        <tr><td>Dark green in hot and cold</td><td>Same</td><td>Cr</td></tr>
+                        <tr><td>Deep – blue</td><td>Deep blue</td><td>Co</td></tr>
+                        <tr><td>Yellow when hot</td><td>Green</td><td>Fe</td></tr>
+                        <tr><td>Violet in hot and cold</td><td>Colourless</td><td>Mn</td></tr>
+                        <tr><td>Brown in cold</td><td>Grey or black or opaque</td><td>Ni</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Microcosmic salt bead test</h3>
+                <p>Microcosmic salt, Na(NH₄)HPO₄·4H₂O is also used to identify certain cations just like borax. When microcosmic salt is heated in a loop of platinum wire, a colourless transparent bead of sodium metaphosphate is formed.</p>
+                <div class="reaction">Na(NH₄)HPO₄·4H₂O → NaNH₄HPO₄ + 4H₂O</div>
+                <div class="reaction">NaNH₄HPO₄ → NaPO₃ + NH₃ + H₂O</div>
+                <p>Now NaPO₃ reacts with metallic oxides to give coloured orthophosphates.</p>
+                <div class="reaction">NaPO₃ + CuO → NaCuPO₄ (Blue)</div>
+                <div class="reaction">NaPO₃ + CoO → NaCoPO₄ (Blue)</div>
+                <div class="reaction">NaPO₃ + ½Cr₂O₃ → NaCrPO₄ (Green)</div>
+
+                <h3>(v) Charcoal cavity test</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>(a) Compound fused in cavity directly</th>
+                            <th>Nature and colour of bead</th>
+                            <th>Cation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td>Yellow, brittle bead</td><td>Bi³⁺</td></tr>
+                        <tr><td></td><td>Yellow, soft bead which marks on paper</td><td>Pb²⁺</td></tr>
+                        <tr><td></td><td>White, brittle</td><td>Sb³⁺</td></tr>
+                        <tr><td></td><td>White yellow when hot</td><td>ZnO</td></tr>
+                        <tr><td></td><td>White garlic odour</td><td>As₂O₃</td></tr>
+                        <tr><td></td><td>Brown</td><td>CdO</td></tr>
+                        <tr><td></td><td>Grey metallic particles attracted by magnet</td><td>Fe, Ni, Co</td></tr>
+                        <tr><td></td><td>Maleable beads</td><td>Ag and Sn (White), Cu (Red flakes)</td></tr>
+                    </tbody>
+                </table>
+                <p>(b) Compound mixed with Na₂CO₃ Crystalline Salts, NaCl, KCl; Decrepitates</p>
+                <p>Substance; Oxidising agents like NO₃⁻, NO₂⁻ deflagrate</p>
+                <p>Substance infusible, perform test (a)</p>
+
+                <h3>(vi) Cobalt Nitrate test</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Colour</th>
+                            <th>Composition</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Blue residue</td><td>CoO·Al₂O₃</td><td>Al</td></tr>
+                        <tr><td>Green residue</td><td>CoO·ZnO</td><td>ZnO</td></tr>
+                        <tr><td>Pink dirty residue</td><td>CoO·MgO</td><td>MgO</td></tr>
+                        <tr><td>Blue residue</td><td>NaCoPO₄</td><td>PO₄³⁻ in absence of Al.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-vial"></i> (2) Wet tests for acid radicals</h2>
+                <p>Salt or mixture is treated with dil. H₂SO₄ and also with conc. H₂SO₄ separately and by observing the types of gases evolved. Confirmatory tests of anions are performed.</p>
+                
+                <h3>Table : 21.7 Observations with Dilute H₂SO₄</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Observations</th>
+                            <th>Acid Radical</th>
+                            <th>Confirmatory test</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Brisk effervescence with evolution of colourless and odourless gas.</td><td>CO₃²⁻ (carbonate)</td><td>Gas turns lime water milky but milkyness disappears on passing gas in excess, Na₂CO₃ + H₂SO₄ → Na₂SO₄ + H₂O + CO₂↑, Ca(OH)₂ + CO₂ → CaCO₃↓ (milky) + H₂O, CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂ (soluble)</td></tr>
+                        <tr><td>Brown fumes</td><td>NO₂⁻ (Nitrite)</td><td>Add KI and starch solution blue colour, 2NaNO₂ + H₂SO₄ → Na₂SO₄ + 2HNO₂; HNO₂ → NO (colourless); 2NO + O₂ (air) → 2NO₂ (brown), 2KI + H₂SO₄ + 2HNO₂ → K₂SO₄ + 2H₂O + 2NO + I₂, I₂ + starch → blue colour</td></tr>
+                        <tr><td>Smell of rotten eggs (H₂S smell) on heating</td><td>S²⁻ (sulphide)</td><td>Gas turn lead acetate paper black, Sodium carbonate extract (SE)* + sodium nitroprusside – purple colour, Na₂S + H₂SO₄ → 2NaHSO₄ + H₂S↑, (CH₃COO)₂Pb + H₂S → PbS↓ (black) + 2CH₃COOH, Na₂S + Na₂[Fe(CN)₅NO] → Na₄[Fe(CN)₅NOS] (purple)</td></tr>
+                        <tr><td>Colourless gas with pungent smell of burning sulphur</td><td>SO₃²⁻ (sulphite)</td><td>Gas turns acidified K₂Cr₂O₇ solution green [different from CO₃²⁻] since gas also turns lime water milky, Na₂SO₃ + H₂SO₄ → Na₂SO₄ + H₂O + SO₂↑, Cr₂O₇²⁻ + 3SO₂ + 2H⁺ → 2Cr³⁺ (green) + 3SO₄²⁻ + H₂O, Ca(OH)₂ + SO₂ → CaSO₃↓ (milky) + H₂O</td></tr>
+                        <tr><td>Solution gives smell of vinegar</td><td>CH₃COO⁻ (acetate)</td><td>Aq. Solution + neutral FeCl₃ → blood red colour, 3CH₃COONa + FeCl₃ → Fe(CH₃COO)₃ (red) + 3NaCl (neutral)</td></tr>
+                        <tr><td>White or yellowish white turbidity on warming</td><td>S₂O₃²⁻ (thiosulphate)</td><td>Aq. Solution + AgNO₃ → white ppt. changing to black (viii) on warming, Na₂S₂O₃ + 2AgNO₃ → Ag₂S₂O₃↓ (white) + 2NaNO₃, Ag₂S₂O₃ + H₂O → Ag₂S↓ (black) + H₂SO₄</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Table : 21.8 Observation with concentrated H₂SO₄</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Observation</th>
+                            <th>Acid Radical</th>
+                            <th>Confiramatory Test</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Colourless pungent gas giving white fumes with aq. NH₄OH</td><td>Cl⁻ (chloride)</td><td>Add MnO₂ in the same test tube and heat–pale green Cl₂ gas (i), S.E.+ AgNO₃ + HNO₃ solution –white ppt. soluble in aq. NH₃ (ii), Chromyl chloride test (iii)</td></tr>
+                        <tr><td>Reddish brown fumes</td><td>Br⁻ (bromide)</td><td>Add MnO₂ and heat –yellowish brown Br₂ gas (iv), S.E.+ AgNO₃ + HNO₃ solution –pale yellow ppt. partially soluble aq. NH₃ (v), Layer test (vi)</td></tr>
+                        <tr><td>Violet pungent vapours turning starch paper blue.</td><td>I⁻ (iodide)</td><td>S.E.+ AgNO₃ + HNO₃ → yellow ppt. insoluble in aq. NH₃ (vii), Layer test (vi)</td></tr>
+                        <tr><td>Brown pungent fumes intensified by the addition of Cu- turnigs.</td><td>NO₃⁻ (nitrate)</td><td>Ring test (viii)</td></tr>
+                        <tr><td>Colourless gases turning lime water milky and burning with blue flame.</td><td>C₂O₄²⁻ (oxalate)</td><td>Acidified KMnO₄ solution is decolorised (ix), S.E.+ CH₃COOH + CaCl₂ white ppt. decolorising acidified KMnO₄ solution (x)</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Reactions</h3>
+                
+                <div class="key-concept">
+                    <h4>Chloride</h4>
+                    <div class="reaction">KCl + conc. H₂SO₄ → KHSO₄ + HCl (white fumes), NH₃ + HCl → NH₄Cl</div>
+                    <div class="reaction">4HCl + MnO₂ → MnCl₂ + Cl₂ + 2H₂O (Δ), Cl₂ pale green</div>
+                    <div class="reaction">KCl + AgNO₃ → AgCl↓ (white ppt.) + KNO₃, AgCl + 2NH₃ (aq.) → [Ag(NH₃)₂]Cl (soluble)</div>
+                    <h4>(iii) Chromyl-chloride test</h4>
+                    <p>Chloride + conc. H₂SO₄ (solid) + K₂Cr₂O₇ heat → reddish brown vapours of chromyl-chloride (CrO₂Cl₂). Pass these vapours into NaOH, when yellow Na₂CrO₄ solution is formed. On adding CH₃COOH and (CH₃COO)₂Pb, yellow ppt. of lead chromate (PbCrO₄) is formed.</p>
+                    <div class="reaction">KCl + conc. H₂SO₄ → KHSO₄ + HCl (Δ); K₂Cr₂O₇ + 3H₂SO₄ (conc.) + 4HCl → K₂SO₄ + 2CrO₂Cl₂ + 3H₂O + 2H₂O (Δ)</div>
+                    <div class="reaction">CrO₂Cl₂ + 2HCl → CrO₃ + 2HCl + H₂O; CrO₂Cl₂ + 4NaOH → 2NaCl + Na₂CrO₄ + 2H₂O</div>
+                    <div class="reaction">Na₂CrO₄ + (CH₃COO)₂Pb → PbCrO₄↓ (yellow ppt.) + 2CH₃COONa</div>
+                </div>
+
+                <div class="key-concept">
+                    <h4>Bromide</h4>
+                    <div class="reaction">KBr + conc. H₂SO₄ → KHSO₄ + HBr (Δ); 2HBr + MnO₂ → MnBr₂ + Br₂ + H₂O (Δ)</div>
+                    <div class="reaction">NaBr + AgNO₃ → AgBr↓ (pale yellow ppt.) + NaNO₃, AgBr + 2NH₃ (aq.) → [Ag(NH₃)₂]Br (partially soluble)</div>
+                    <h4>(vi) Layer Test</h4>
+                    <p>S.E. + Cl₂ water + CHCl₃ shake → yellowish orange colour in CHCl₃ layer (CS₂ or CCl₄ can be taken instead of CHCl₃); Br₂ soluble orange yellow in CHCl₃, 2NaBr + Cl₂ → 2NaCl + Br₂ (orange yellow in CHCl₃)</p>
+                    <p>In case of I⁻, violet colour of I₂ in CHCl₃ layer, 2NaI + Cl₂ → 2NaCl + I₂ (violet)</p>
+                </div>
+
+                <div class="key-concept">
+                    <h4>Iodide</h4>
+                    <div class="reaction">KI + conc. H₂SO₄ → KHSO₄ + HI (Δ); 2HI + H₂SO₄ → I₂ + SO₂ + 2H₂O; I₂ + SO₂ + 2H₂O → H₂SO₄ + 2HI</div>
+                </div>
+
+                <div class="key-concept">
+                    <h4>Nitrate</h4>
+                    <div class="reaction">NaNO₃ + NaHSO₄ → Na₂SO₄ + HNO₃; 2HNO₃ → H₂O + 2NO + [O]; 4HNO₃ + Cu → Cu(NO₃)₂ + 2NO₂ + 2H₂O + [O] (brown fumes)</div>
+                    <h4>(viii) Ring test</h4>
+                    <p>To water extract (all NO₃⁻ are water soluble) add freshly prepared FeSO₄ solution and then conc. H₂SO₄ carefully by the side of the test-tube. A dark brown ring of [Fe(H₂O)₅NO]²⁺ SO₄²⁻ at the interface between the two liquids is formed.</p>
+                    <div class="reaction">NaNO₃ + H₂SO₄ → 2NaHSO₄ + 2HNO₃; 3FeSO₄ + 2HNO₃ + H₂SO₄ → Fe₂(SO₄)₃ + 2NO + 2H₂O; FeSO₄ + NO + 5H₂O → [Fe(H₂O)₅NO]SO₄ (dark brown ring)</div>
+                </div>
+
+                <div class="key-concept">
+                    <h4>Oxalate</h4>
+                    <div class="reaction">Na₂C₂O₄ + H₂SO₄ → Na₂SO₄ + H₂O + CO + CO₂; CO burns with blue flame and CO₂ turns lime water milky.</div>
+                    <div class="reaction">5C₂O₄²⁻ + 2MnO₄⁻ + 16H⁺ → 10CO₂ + 2Mn²⁺ + 8H₂O (ix) (colourless, violet to colourless)</div>
+                    <div class="reaction">CaCl₂ + Na₂C₂O₄ → CaC₂O₄↓ (white ppt.) + 2NaCl (x), CaC₂O₄ decolourises acidified KMnO₄</div>
+                </div>
+
+                <h3>Specific test in solution</h3>
+                <p>(i) Sulphate : S.E. add dil. (to decompose CO₃²⁻ until reaction ceases). Add BaCl₂ solution. White ppt. insoluble in conc. HNO₃, BaCl₂ + Na₂SO₄ → BaSO₄↓ (white ppt.) + 2NaCl</p>
+                <p>(ii) Borate : Ignite the mixture containing borate, conc. H₂SO₄. And ethanol in a china-dish with a burning splinter –green edged flame of ethyl borate.</p>
+                <div class="reaction">Na₂BO₃ + H₂SO₄ (conc.) → 2HBO₃ + Na₂SO₄; HBO₃ + 3C₂H₅OH → (C₂H₅)₃BO₃ (volatile) + 3H₂O (burns with green flame)</div>
+                <p>In presence of Cu²⁺, perform this test in a test tube since Cu²⁺ salts are not volatile.</p>
+                <p>(iii) Phosphate : S.E. + HNO₃ + ammonium molybdate solution. Heat, yellow crystalline ppt. confirms PO₄³⁻</p>
+                <div class="reaction">PO₄³⁻ + 12(NH₄)₂MoO₄ + 24HNO₃ → (NH₄)₃[PMo₁₂O₄₀]·12H₂O (yellow ppt.) + 21NH₄NO₃ + 12H₂O</div>
+                <p>Arsenic also gives this test. Hence presence of phosphate should also be checked after group II.</p>
+                <p>(iv) Fluoride : Sand + salt (F⁻) + conc. H₂SO₄; heat and bring a water wetted rod in contact with vapours at the mouth of the test tube. A white deposit on the rod shows the presence to F⁻</p>
+                <div class="reaction">NaF + H₂SO₄ → NaHSO₄ + HF (Δ), SiO₂ + 4HF → SiF₄ + 2H₂O (Δ), 3SiF₄ + 2H₂O → 2H₂SiF₆ + SiO₂·4H₂O (white)</div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> (3) Wet tests for basic radicals</h2>
+                <p>Analysis of Basic Radicals</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Basic radicals</th>
+                            <th>Group reagent</th>
+                            <th>Ppt. as</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>I</td><td>Ag⁺, Hg₂²⁺, Pb²⁺ (I)</td><td>dil HCl</td><td>Chloride (AgCl, Hg₂Cl₂, PbCl₂)</td><td>Ksp values of chlorides are low, hence precipitated. Others have higher Ksp values hence not precipitated.</td></tr>
+                        <tr><td>II</td><td>Pb²⁺, Cd²⁺, Cu²⁺, Hg²⁺ (II), Bi³⁺, As³⁺, Sb³⁺, Sn²⁺</td><td>H₂S gas in presence of dil. HCl</td><td>Sulphides (CuS, As₂S₃ etc.)</td><td>Ksp values of sulphides are low hence precipitated by low [S²⁻] ion. HCl (with common H⁺ ion) decreases ionization of H₂S which gives low [S²⁻]. Hence II group is precipitated. Others with higher Ksp values not precipitated.</td></tr>
+                        <tr><td>III</td><td>Al³⁺, Cr³⁺, Fe³⁺</td><td>NH₄OH in presence of NH₄Cl</td><td>Hydroxide, Al(OH)₃ etc.</td><td>Ksp values of Al(OH)₃ etc. are low. NH₄Cl (with common NH₄⁺ ion) decreases ionization of NH₄OH giving low [OH⁻]. Hence group III is precipitated.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically <strong>2-3 questions</strong> from Qualitative Analysis. Focus on gas tests, radical identification, and confirmatory tests.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 80%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>High (2-3 Qs)</span>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div>JEE Main & NEET Chemistry - Chemical Analysis Summary</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

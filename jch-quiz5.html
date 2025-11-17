@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solid State</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #1565C0, #1E88E5, #42A5F5); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.95); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
+        header { background: linear-gradient(to right, #1565C0, #1E88E5); color: white; padding: 25px 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .timer-container { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 50px; font-size: 1.4rem; font-weight: bold; }
+        .nav-buttons { display: flex; justify-content: space-between; padding: 20px 30px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; }
+        .btn { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-home { background: #4caf50; color: white; }
+        .btn-home:hover { background: #388e3c; }
+        .btn-submit { background: #2196f3; color: white; }
+        .btn-submit:hover { background: #1976d2; }
+        .btn-reset { background: #ff9800; color: white; }
+        .btn-reset:hover { background: #f57c00; }
+        .progress-container { padding: 15px 30px; background: #e3f2fd; border-bottom: 1px solid #bbdefb; }
+        .progress-bar { height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+        .progress { height: 100%; background: #4caf50; width: 5%; transition: width 0.5s; }
+        .progress-text { display: flex; justify-content: space-between; margin-top: 8px; font-weight: 500; }
+        .quiz-container { padding: 30px; }
+        .question { margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 10px; border-left: 5px solid #1565C0; }
+        .question-number { font-size: 1.1rem; font-weight: 600; color: #1565C0; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+        .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .option { padding: 15px; background: white; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #1565C0; background: #f0f4ff; }
+        .option.selected { border-color: #1565C0; background: #e3f2fd; }
+        .option input { transform: scale(1.2); }
+        .result-container { display: none; padding: 40px; text-align: center; }
+        .result-title { font-size: 2rem; color: #1565C0; margin-bottom: 20px; }
+        .score { font-size: 3rem; font-weight: bold; color: #4caf50; margin: 20px 0; }
+        .result-details { margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .detail-item { padding: 15px; background: #f5f5f5; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; }
+        .correct { border-left: 5px solid #4caf50; }
+        .incorrect { border-left: 5px solid #f44336; }
+        .review-btn { background: #9c27b0; color: white; margin-top: 20px; }
+        .review-btn:hover { background: #7b1fa2; }
+        @media (max-width: 768px) { .timer-container { position: static; transform: none; margin-top: 15px; display: inline-block; } .nav-buttons { flex-direction: column; gap: 10px; } .btn { justify-content: center; } }
+        .formula { font-family: 'Cambria Math', serif; background: #f0f4ff; padding: 10px 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1E88E5; font-size: 1rem; display: inline-block; }
+        .navigation-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Solid State Quiz</h1>
+            <p class="subtitle">Test your knowledge of Crystalline Solids, Packing, and Crystal Systems</p>
+            <div class="timer-container">
+                Time Left: <span id="timer">15:00</span>
+            </div>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="goToHome()">← Back to Home</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Answers</button>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"><div class="progress" id="quiz-progress"></div></div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">1</span>/20</span>
+                <span id="answered-count">0 questions answered</span>
+            </div>
+        </div>
+        
+        <div class="quiz-container" id="quiz-content"></div>
+        
+        <div class="result-container" id="result-content">
+            <h2 class="result-title">Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="result-message"></p>
+            <div class="result-details" id="result-details"></div>
+            <button class="btn btn-home" onclick="goToHome()">← Back to Home</button>
+            <button class="btn review-btn" onclick="resetQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            { question: "Crystalline solids are:", options: ["Isotropic", "Anisotropic", "Amorphous", "Gaseous"], correct: 1, explanation: "Crystalline solids are anisotropic due to long-range order." },
+            { question: "Amorphous solids have:", options: ["Sharp melting point", "No definite heat of fusion", "Plane cleavage", "Long-range order"], correct: 1, explanation: "Amorphous solids lack sharp MP and definite heat of fusion." },
+            { question: "Diamond is a:", options: ["Ionic solid", "Covalent solid", "Metallic solid", "Molecular solid"], correct: 1, explanation: "Diamond has covalent network bonding." },
+            { question: "Graphite conducts electricity due to:", options: ["Delocalized electrons", "Ionic bonds", "Van der Waals", "Hydrogen bonds"], correct: 0, explanation: "Delocalized π-electrons in layers." },
+            { question: "Number of Bravais lattices:", options: ["7", "14", "23", "32"], correct: 1, explanation: "14 Bravais lattices from 7 crystal systems." },
+            { question: "FCC has coordination number:", options: ["6", "8", "12", "4"], correct: 2, explanation: "FCC: 12 nearest neighbors." },
+            { question: "Packing efficiency of FCC:", options: ["52%", "68%", "74%", "100%"], correct: 2, explanation: "FCC and HCP both 74%." },
+            { question: "Bragg's equation:", options: ["nλ = 2d sinθ", "nλ = d sinθ", "λ = 2d sinθ", "nλ = d/ sinθ"], correct: 0, explanation: "nλ = 2d sinθ for diffraction." },
+            { question: "HCP arrangement:", options: ["ABCABC", "ABABAB", "ABCD", "AAAA"], correct: 1, explanation: "HCP: ABABAB packing." },
+            { question: "BCC atoms per unit cell:", options: ["1", "2", "4", "8"], correct: 1, explanation: "BCC: 1 corner + 1 body = 2." },
+            { question: "Simple cubic packing efficiency:", options: ["52%", "68%", "74%", "32%"], correct: 0, explanation: "SC: π/6 ≈ 52%." },
+            { question: "Void radius in close packing (r/R):", options: ["0.155", "0.225", "0.414", "0.732"], correct: 1, explanation: "Tetrahedral void: 0.225, octahedral: 0.414." },
+            { question: "Cubic system symmetry elements:", options: ["13", "23", "32", "9"], correct: 1, explanation: "Cube has 23 symmetry elements." },
+            { question: "Miller indices for plane parallel to y,z:", options: ["(100)", "(010)", "(001)", "(111)"], correct: 0, explanation: "Intercept ∞,∞,a → (100)." },
+            { question: "Density formula:", options: ["Z M / N_a a^3", "M / Z N_a a^3", "N_a a^3 / Z M", "Z / M N_a a^3"], correct: 0, explanation: "ρ = Z M / (N₀ a³)." },
+            { question: "Metallic solids are:", options: ["Brittle", "Ductile", "Soft", "Insulator"], correct: 1, explanation: "Metals are ductile and malleable." },
+            { question: "Quartz is:", options: ["Amorphous", "Crystalline", "Gas", "Liquid"], correct: 1, explanation: "Quartz is crystalline SiO₂." },
+            { question: "Number of crystal systems:", options: ["4", "7", "14", "23"], correct: 1, explanation: "7 primitive crystal systems." },
+            { question: "CCP is same as:", options: ["HCP", "BCC", "FCC", "SC"], correct: 2, explanation: "Cubic close packing = FCC." },
+            { question: "Ionic solids conduct in:", options: ["Solid state", "Molten state", "Never", "Gas phase"], correct: 1, explanation: "Ionic solids conduct when molten." }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let timeLeft = 15 * 60;
+        let timerInterval;
+        let quizSubmitted = false;
+
+        function initializeQuiz() { displayQuestion(); startTimer(); updateProgress(); }
+
+        function displayQuestion() {
+            const q = quizQuestions[currentQuestion];
+            let opts = '';
+            q.options.forEach((o, i) => {
+                const checked = userAnswers[currentQuestion] === i ? 'checked' : '';
+                opts += `<label class="option ${checked ? 'selected' : ''}">
+                    <input type="radio" name="answer" value="${i}" ${checked} onchange="selectAnswer(${i})">${o}
+                </label>`;
+            });
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>← Previous</button>
+                    <button class="btn btn-submit" onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? 'Finish' : 'Next'} →</button>
+                </div>`;
+        }
+
+        function selectAnswer(i) { userAnswers[currentQuestion] = i; displayQuestion(); updateProgress(); }
+
+        function nextQuestion() { if (currentQuestion < quizQuestions.length - 1) { currentQuestion++; displayQuestion(); } else submitQuiz(); }
+
+        function previousQuestion() { if (currentQuestion > 0) { currentQuestion--; displayQuestion(); } }
+
+        function updateProgress() {
+            const ans = userAnswers.filter(a => a !== null).length;
+            const prog = (ans / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${prog}%`;
+            document.getElementById('progress-text').textContent = ans;
+            document.getElementById('answered-count').textContent = `${ans} of ${quizQuestions.length} questions answered`;
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) { clearInterval(timerInterval); submitQuiz(); }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const s = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${m}:${s}`;
+            if (timeLeft < 300) document.getElementById('timer').style.color = '#ff5252';
+        }
+
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            quizSubmitted = true; clearInterval(timerInterval);
+            let score = 0; let details = '';
+            quizQuestions.forEach((q, i) => {
+                const ua = userAnswers[i];
+                const correct = ua === q.correct;
+                if (correct) score++;
+                details += `<div class="detail-item ${correct ? 'correct' : 'incorrect'}">
+                    <div><strong>Q${i+1}:</strong> ${q.question}<br>
+                    <span>Your: ${ua !== null ? q.options[ua] : 'None'}</span><br>
+                    <span>Correct: ${q.options[q.correct]}</span><br>
+                    <em>${q.explanation}</em></div>
+                    <div>${correct ? '✓' : '✗'}</div>
+                </div>`;
+            });
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-details').innerHTML = details;
+            const msg = score >= 17 ? 'Excellent!' : score >= 14 ? 'Great!' : score >= 11 ? 'Good!' : 'Study more!';
+            document.getElementById('result-message').textContent = msg;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0; userAnswers.fill(null); timeLeft = 15*60; quizSubmitted = false;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            clearInterval(timerInterval); initializeQuiz();
+        }
+
+        function goToHome() { alert('Navigates to Solid State summary'); }
+
+        // window.location.href = "jch-sum5.html";
+
+        // Initialize the quiz when the page loads
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

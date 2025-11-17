@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaseous State Quiz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #1565C0, #1E88E5, #42A5F5); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.95); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
+        header { background: linear-gradient(to right, #1565C0, #1E88E5); color: white; padding: 25px 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .timer-container { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 50px; font-size: 1.4rem; font-weight: bold; }
+        .nav-buttons { display: flex; justify-content: space-between; padding: 20px 30px; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; }
+        .btn { padding: 12px 25px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-home { background: #4caf50; color: white; }
+        .btn-home:hover { background: #388e3c; }
+        .btn-submit { background: #2196f3; color: white; }
+        .btn-submit:hover { background: #1976d2; }
+        .btn-reset { background: #ff9800; color: white; }
+        .btn-reset:hover { background: #f57c00; }
+        .progress-container { padding: 15px 30px; background: #e3f2fd; border-bottom: 1px solid #bbdefb; }
+        .progress-bar { height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+        .progress { height: 100%; background: #4caf50; width: 5%; transition: width 0.5s; }
+        .progress-text { display: flex; justify-content: space-between; margin-top: 8px; font-weight: 500; }
+        .quiz-container { padding: 30px; }
+        .question { margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 10px; border-left: 5px solid #1565C0; }
+        .question-number { font-size: 1.1rem; font-weight: 600; color: #1565C0; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+        .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .option { padding: 15px; background: white; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #1565C0; background: #f0f4ff; }
+        .option.selected { border-color: #1565C0; background: #e3f2fd; }
+        .option input { transform: scale(1.2); }
+        .result-container { display: none; padding: 40px; text-align: center; }
+        .result-title { font-size: 2rem; color: #1565C0; margin-bottom: 20px; }
+        .score { font-size: 3rem; font-weight: bold; color: #4caf50; margin: 20px 0; }
+        .result-details { margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .detail-item { padding: 15px; background: #f5f5f5; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; }
+        .correct { border-left: 5px solid #4caf50; }
+        .incorrect { border-left: 5px solid #f44336; }
+        .review-btn { background: #9c27b0; color: white; margin-top: 20px; }
+        .review-btn:hover { background: #7b1fa2; }
+        @media (max-width: 768px) { .timer-container { position: static; transform: none; margin-top: 15px; display: inline-block; } .nav-buttons { flex-direction: column; gap: 10px; } .btn { justify-content: center; } }
+        .formula { font-family: 'Cambria Math', serif; background: #f0f4ff; padding: 10px 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #1E88E5; font-size: 1rem; display: inline-block; }
+        .navigation-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+        .formula-block { font-family: 'Cambria Math', serif; background: #f0f4ff; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #1E88E5; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gaseous State Quiz</h1>
+            <p class="subtitle">Test your knowledge of Gas Laws, Kinetic Theory, and Real Gases</p>
+            <div class="timer-container">
+                Time Left: <span id="timer">15:00</span>
+            </div>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="goToHome()">← Back to Summary</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Answers</button>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"><div class="progress" id="quiz-progress"></div></div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">1</span>/20</span>
+                <span id="answered-count">0 questions answered</span>
+            </div>
+        </div>
+        
+        <div class="quiz-container" id="quiz-content"></div>
+        
+        <div class="result-container" id="result-content">
+            <h2 class="result-title">Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="result-message"></p>
+            <div class="result-details" id="result-details"></div>
+            <button class="btn btn-home" onclick="goToHome()">← Back to Summary</button>
+            <button class="btn review-btn" onclick="resetQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "Which of the following is NOT a characteristic of gases?",
+                options: [
+                    "High compressibility",
+                    "Definite shape and volume",
+                    "Exert pressure on container walls",
+                    "Infinite expansibility"
+                ],
+                correct: 1,
+                explanation: "Gases do NOT have definite shape and volume - they take the shape and volume of their container."
+            },
+            {
+                question: "According to Boyle's Law, at constant temperature:",
+                options: [
+                    "P ∝ V",
+                    "P ∝ 1/V",
+                    "V ∝ T",
+                    "P ∝ T"
+                ],
+                correct: 1,
+                explanation: "Boyle's Law states that pressure is inversely proportional to volume at constant temperature: P ∝ 1/V."
+            },
+            {
+                question: "The SI unit of pressure is:",
+                options: [
+                    "Atmosphere",
+                    "Pascal",
+                    "Bar",
+                    "Torr"
+                ],
+                correct: 1,
+                explanation: "The SI unit of pressure is Pascal (Pa), where 1 Pa = 1 N/m²."
+            },
+            {
+                question: "Which gas law states that volume is directly proportional to temperature at constant pressure?",
+                options: [
+                    "Boyle's Law",
+                    "Charles' Law",
+                    "Gay-Lussac's Law",
+                    "Avogadro's Law"
+                ],
+                correct: 1,
+                explanation: "Charles' Law states that volume is directly proportional to absolute temperature at constant pressure: V ∝ T."
+            },
+            {
+                question: "The value of universal gas constant R in L·atm·mol⁻¹·K⁻¹ is:",
+                options: [
+                    "8.314",
+                    "0.0821",
+                    "1.987",
+                    "62.36"
+                ],
+                correct: 1,
+                explanation: "The value of R is 0.0821 L·atm·mol⁻¹·K⁻¹."
+            },
+            {
+                question: "According to Avogadro's Law:",
+                options: [
+                    "V ∝ 1/n at constant T and P",
+                    "V ∝ n at constant T and P",
+                    "V ∝ T at constant n and P",
+                    "V ∝ P at constant n and T"
+                ],
+                correct: 1,
+                explanation: "Avogadro's Law states that volume is directly proportional to the number of moles at constant temperature and pressure: V ∝ n."
+            },
+            {
+                question: "The ideal gas equation is:",
+                options: [
+                    "PV = nRT",
+                    "P/V = nRT",
+                    "PT = nRV",
+                    "VT = nRP"
+                ],
+                correct: 0,
+                explanation: "The ideal gas equation is PV = nRT, combining Boyle's, Charles', and Avogadro's laws."
+            },
+            {
+                question: "According to Dalton's Law of Partial Pressures:",
+                options: [
+                    "P<sub>total</sub> = P₁ + P₂ + P₃ + ...",
+                    "P<sub>total</sub> = P₁ × P₂ × P₃ × ...",
+                    "P<sub>total</sub> = (P₁ + P₂ + P₃ + ...)/n",
+                    "P<sub>total</sub> = √(P₁² + P₂² + P₃² + ...)"
+                ],
+                correct: 0,
+                explanation: "Dalton's Law states that the total pressure of a gas mixture is equal to the sum of the partial pressures of individual gases."
+            },
+            {
+                question: "Graham's Law of Diffusion states that the rate of diffusion is:",
+                options: [
+                    "Directly proportional to molar mass",
+                    "Inversely proportional to square root of molar mass",
+                    "Directly proportional to square root of molar mass",
+                    "Inversely proportional to molar mass"
+                ],
+                correct: 1,
+                explanation: "Graham's Law: r ∝ 1/√M, where r is rate of diffusion and M is molar mass."
+            },
+            {
+                question: "The root mean square velocity of gas molecules is given by:",
+                options: [
+                    "u<sub>rms</sub> = √(2RT/M)",
+                    "u<sub>rms</sub> = √(3RT/M)",
+                    "u<sub>rms</sub> = √(8RT/πM)",
+                    "u<sub>rms</sub> = √(RT/M)"
+                ],
+                correct: 1,
+                explanation: "The RMS velocity is u<sub>rms</sub> = √(3RT/M), where R is gas constant, T is temperature, and M is molar mass."
+            },
+            {
+                question: "Which of the following molecular speeds is the highest?",
+                options: [
+                    "Most probable speed",
+                    "Average speed",
+                    "Root mean square speed",
+                    "They are all equal"
+                ],
+                correct: 2,
+                explanation: "u<sub>rms</sub> > v<sub>av</sub> > α<sub>mp</sub>. The RMS speed is always the highest."
+            },
+            {
+                question: "The average kinetic energy of gas molecules is directly proportional to:",
+                options: [
+                    "Pressure",
+                    "Volume",
+                    "Absolute temperature",
+                    "Number of moles"
+                ],
+                correct: 2,
+                explanation: "Average KE = (3/2)kT, so it's directly proportional to absolute temperature."
+            },
+            {
+                question: "Real gases deviate from ideal behavior because:",
+                options: [
+                    "Molecules have negligible volume",
+                    "There are no intermolecular forces",
+                    "Molecules have volume and exert forces on each other",
+                    "Molecular collisions are inelastic"
+                ],
+                correct: 2,
+                explanation: "Real gases deviate because molecules have finite volume and exert attractive/repulsive forces on each other."
+            },
+            {
+                question: "The Van der Waals equation for one mole of gas is:",
+                options: [
+                    "(P + a/V²)(V - b) = RT",
+                    "(P - a/V²)(V + b) = RT",
+                    "(P + a/V)(V - b) = RT",
+                    "(P - a/V)(V + b) = RT"
+                ],
+                correct: 0,
+                explanation: "Van der Waals equation: (P + a/V²)(V - b) = RT, where a corrects for intermolecular forces and b for molecular volume."
+            },
+            {
+                question: "The compressibility factor Z is defined as:",
+                options: [
+                    "Z = PV/nRT",
+                    "Z = nRT/PV",
+                    "Z = P/nRTV",
+                    "Z = nRTV/P"
+                ],
+                correct: 0,
+                explanation: "Compressibility factor Z = PV/nRT. For ideal gases, Z = 1 at all temperatures and pressures."
+            },
+            {
+                question: "Which of the following shows positive deviation from ideal behavior (Z > 1)?",
+                options: [
+                    "NH₃ at low temperature",
+                    "CO₂ at high pressure",
+                    "H₂ at room temperature",
+                    "SO₂ at low pressure"
+                ],
+                correct: 2,
+                explanation: "H₂ and He typically show positive deviation (Z > 1) at room temperature due to weak intermolecular forces."
+            },
+            {
+                question: "The critical temperature of a gas is:",
+                options: [
+                    "The temperature at which it solidifies",
+                    "The temperature above which it cannot be liquefied",
+                    "The temperature at which it behaves ideally",
+                    "The temperature at which its density is maximum"
+                ],
+                correct: 1,
+                explanation: "Critical temperature is the temperature above which a gas cannot be liquefied, no matter how much pressure is applied."
+            },
+            {
+                question: "The relationship between most probable speed (α<sub>mp</sub>), average speed (v<sub>av</sub>), and RMS speed (u<sub>rms</sub>) is:",
+                options: [
+                    "α<sub>mp</sub> < v<sub>av</sub> < u<sub>rms</sub>",
+                    "v<sub>av</sub> < α<sub>mp</sub> < u<sub>rms</sub>",
+                    "u<sub>rms</sub> < v<sub>av</sub> < α<sub>mp</sub>",
+                    "α<sub>mp</sub> = v<sub>av</sub> = u<sub>rms</sub>"
+                ],
+                correct: 0,
+                explanation: "α<sub>mp</sub> : v<sub>av</sub> : u<sub>rms</sub> = 1 : 1.128 : 1.224, so α<sub>mp</sub> < v<sub>av</sub> < u<sub>rms</sub>."
+            },
+            {
+                question: "The mean free path of gas molecules:",
+                options: [
+                    "Increases with pressure",
+                    "Decreases with temperature",
+                    "Increases with molecular size",
+                    "Decreases with pressure"
+                ],
+                correct: 3,
+                explanation: "Mean free path λ ∝ 1/P, so it decreases with increasing pressure as molecules collide more frequently."
+            },
+            {
+                question: "Which of the following has the highest rate of diffusion at the same temperature and pressure?",
+                options: [
+                    "O₂ (M = 32 g/mol)",
+                    "N₂ (M = 28 g/mol)",
+                    "H₂ (M = 2 g/mol)",
+                    "CO₂ (M = 44 g/mol)"
+                ],
+                correct: 2,
+                explanation: "According to Graham's Law, r ∝ 1/√M, so H₂ with the smallest molar mass will diffuse fastest."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let timeLeft = 15 * 60;
+        let timerInterval;
+        let quizSubmitted = false;
+
+        function initializeQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        function displayQuestion() {
+            const q = quizQuestions[currentQuestion];
+            let opts = '';
+            q.options.forEach((o, i) => {
+                const checked = userAnswers[currentQuestion] === i ? 'checked' : '';
+                opts += `<label class="option ${checked ? 'selected' : ''}">
+                    <input type="radio" name="answer" value="${i}" ${checked} onchange="selectAnswer(${i})">${o}
+                </label>`;
+            });
+            
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>← Previous</button>
+                    <button class="btn btn-submit" onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? 'Finish' : 'Next'} →</button>
+                </div>`;
+        }
+
+        function selectAnswer(i) {
+            userAnswers[currentQuestion] = i;
+            displayQuestion();
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const answered = userAnswers.filter(a => a !== null).length;
+            const progress = (answered / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = answered;
+            document.getElementById('answered-count').textContent = `${answered} of ${quizQuestions.length} questions answered`;
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const seconds = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+            if (timeLeft < 300) {
+                document.getElementById('timer').style.color = '#ff5252';
+            }
+        }
+
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            quizSubmitted = true;
+            clearInterval(timerInterval);
+            
+            let score = 0;
+            let details = '';
+            
+            quizQuestions.forEach((q, i) => {
+                const userAnswer = userAnswers[i];
+                const isCorrect = userAnswer === q.correct;
+                if (isCorrect) score++;
+                
+                details += `<div class="detail-item ${isCorrect ? 'correct' : 'incorrect'}">
+                    <div>
+                        <strong>Q${i+1}:</strong> ${q.question}<br>
+                        <span>Your answer: ${userAnswer !== null ? q.options[userAnswer] : 'Not answered'}</span><br>
+                        <span>Correct answer: ${q.options[q.correct]}</span><br>
+                        <em>${q.explanation}</em>
+                    </div>
+                    <div>${isCorrect ? '✓' : '✗'}</div>
+                </div>`;
+            });
+            
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-details').innerHTML = details;
+            
+            let message = '';
+            if (score >= 17) message = 'Excellent! You have mastered the Gaseous State concepts.';
+            else if (score >= 14) message = 'Great job! You have a good understanding of gas laws and kinetic theory.';
+            else if (score >= 11) message = 'Good effort! Review the concepts to improve your understanding.';
+            else message = 'Keep studying! Focus on gas laws, kinetic theory, and real gas behavior.';
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers.fill(null);
+            timeLeft = 15 * 60;
+            quizSubmitted = false;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            clearInterval(timerInterval);
+            initializeQuiz();
+        }
+
+        function goToHome() {
+            alert('This would navigate to the Gaseous State summary page');
+            // In a real implementation, this would redirect to the summary page
+            // window.location.href = 'gaseous-state-summary.html';
+        }
+
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

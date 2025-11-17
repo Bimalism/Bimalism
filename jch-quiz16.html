@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Principles of Extraction of Metals - Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+      
+        .timer-container {
+            background: #E3F2FD;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #1565C0;
+        }
+      
+        .timer {
+            font-size: 1.5rem;
+            color: #D32F2F;
+        }
+      
+        .progress-bar {
+            height: 10px;
+            background-color: #E0E0E0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+      
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            width: 0%;
+            transition: width 0.3s;
+        }
+      
+        .question-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border-left: 5px solid #1565C0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+      
+        .question-number {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+      
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+      
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+      
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+      
+        .option:hover {
+            border-color: #42A5F5;
+            background: #E3F2FD;
+        }
+      
+        .option input {
+            margin-right: 12px;
+        }
+      
+        .option.selected {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+            color: #2E7D32;
+        }
+      
+        .option.correct {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+            color: #2E7D32;
+        }
+      
+        .option.incorrect {
+            background: #FFEBEE;
+            border-color: #F44336;
+            color: #C62828;
+        }
+      
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px 0;
+        }
+      
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+      
+        .btn-primary {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+        }
+      
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
+        }
+      
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+      
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+      
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+      
+        .result-container {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+      
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 20px 0;
+        }
+      
+        .result-message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            color: #333;
+        }
+      
+        .hidden {
+            display: none;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .timer-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+          
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+          
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 16</div>
+            <h1>General Principles of Extraction of Metals</h1>
+            <p class="subtitle">20-Question Timed Quiz</p>
+            <div class="importance">20 Minutes | 20 MCQs | JEE/NEET Level</div>
+        </header>
+      
+        <div class="content">
+            <div class="quiz-header">
+                <h2>Metallurgy Mastery Quiz</h2>
+                <p>Test your understanding of ore types, extraction methods, furnaces, and alloys.</p>
+            </div>
+          
+            <div class="timer-container">
+                <div>Time Remaining: <span id="timer" class="timer">20:00</span></div>
+                <div>Question <span id="current-q">1</span> of 20</div>
+            </div>
+          
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          
+            <div id="quiz-content">
+                <!-- Questions will be injected here by JavaScript -->
+            </div>
+          
+            <div id="result-screen" class="hidden">
+                <div class="result-container">
+                    <h2>Quiz Complete!</h2>
+                    <div class="score" id="final-score">0/20</div>
+                    <div class="result-message" id="result-message"></div>
+                    <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+                </div>
+            </div>
+          
+            <div class="navigation">
+                <button id="prev-btn" class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()">Next</button>
+                <button id="submit-btn" class="btn btn-primary hidden" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data - 20 Questions
+        const quizData = [
+            {
+                question: "Which of the following is NOT an ore of iron?",
+                options: ["Haematite", "Magnetite", "Siderite", "Galena"],
+                answer: 3
+            },
+            {
+                question: "The process of heating ore in absence of air below its melting point is called:",
+                options: ["Roasting", "Calcination", "Smelting", "Leaching"],
+                answer: 1
+            },
+            {
+                question: "Froth flotation process is used for concentration of:",
+                options: ["Oxide ores", "Carbonate ores", "Sulphide ores", "Halide ores"],
+                answer: 2
+            },
+            {
+                question: "Which method is used to extract aluminium from bauxite?",
+                options: ["Carbon reduction", "Self reduction", "Electrolytic reduction", "Alumino-thermic process"],
+                answer: 2
+            },
+            {
+                question: "In the extraction of copper, the reaction 2Cu₂S + 3O₂ → 2Cu₂O + 2SO₂ represents:",
+                options: ["Roasting", "Smelting", "Bessemerisation", "Calcination"],
+                answer: 0
+            },
+            {
+                question: "The slag formed in the blast furnace during iron extraction is:",
+                options: ["CaSiO₃", "FeSiO₃", "Al₂O₃", "MgSiO₃"],
+                answer: 0
+            },
+            {
+                question: "Which of the following is a basic flux?",
+                options: ["SiO₂", "CaCO₃", "Al₂O₃", "Na₂CO₃"],
+                answer: 1
+            },
+            {
+                question: "Zone refining is used for purification of:",
+                options: ["Copper", "Iron", "Silicon", "Aluminium"],
+                answer: 2
+            },
+            {
+                question: "The Mond process is used for refining:",
+                options: ["Nickel", "Zinc", "Copper", "Iron"],
+                answer: 0
+            },
+            {
+                question: "Which furnace is used for the production of steel from pig iron?",
+                options: ["Blast furnace", "Reverberatory furnace", "Bessemer converter", "Electric furnace"],
+                answer: 2
+            },
+            {
+                question: "The ore of aluminium is:",
+                options: ["Bauxite", "Haematite", "Galena", "Cinnabar"],
+                answer: 0
+            },
+            {
+                question: "In electrolytic refining, the impure metal is made:",
+                options: ["Cathode", "Anode", "Electrolyte", "None of these"],
+                answer: 1
+            },
+            {
+                question: "Which of the following metals is extracted by self-reduction?",
+                options: ["Al", "Fe", "Cu", "Na"],
+                answer: 2
+            },
+            {
+                question: "The activator used in froth flotation of ZnS is:",
+                options: ["NaCN", "CuSO₄", "Pine oil", "K-ethyl xanthate"],
+                answer: 1
+            },
+            {
+                question: "Cassiterite is an ore of:",
+                options: ["Tin", "Lead", "Zinc", "Iron"],
+                answer: 0
+            },
+            {
+                question: "Which alloy contains 95% Al and 5% Cu?",
+                options: ["Duralumin", "Magnalium", "Aluminium bronze", "Brass"],
+                answer: 2
+            },
+            {
+                question: "The process used for extraction of gold from low-grade ore is:",
+                options: ["Amalgamation", "Cyanide process", "Electrolytic refining", "Both A and B"],
+                answer: 3
+            },
+            {
+                question: "In the thermite process, the reducing agent is:",
+                options: ["Carbon", "Aluminium", "Hydrogen", "Sodium"],
+                answer: 1
+            },
+            {
+                question: "Which of the following is a carbonate ore?",
+                options: ["Zincite", "Calamine", "Bauxite", "Cassiterite"],
+                answer: 1
+            },
+            {
+                question: "The temperature at the bottom of the blast furnace is approximately:",
+                options: ["400°C", "800°C", "1500°C", "2000°C"],
+                answer: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        let timerId = null;
+
+        // DOM Elements
+        const quizContent = document.getElementById('quiz-content');
+        const progressFill = document.getElementById('progress-fill');
+        const timerDisplay = document.getElementById('timer');
+        const currentQDisplay = document.getElementById('current-q');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScore = document.getElementById('final-score');
+        const resultMessage = document.getElementById('result-message');
+
+        // Initialize Quiz
+        function initQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            timeLeft = 20 * 60;
+            renderQuestion();
+            updateNavigation();
+            startTimer();
+        }
+
+        // Render Current Question
+        function renderQuestion() {
+            const q = quizData[currentQuestion];
+            const answered = userAnswers[currentQuestion] !== null;
+            
+            let optionsHTML = '';
+            q.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                const isCorrect = index === q.answer;
+                let optionClass = 'option';
+                
+                if (answered) {
+                    if (isCorrect) optionClass += ' correct';
+                    else if (isSelected) optionClass += ' incorrect';
+                } else if (isSelected) {
+                    optionClass += ' selected';
+                }
+                
+                optionsHTML += `
+                    <label class="${optionClass}">
+                        <input type="radio" name="q${currentQuestion}" value="${index}" 
+                               ${isSelected ? 'checked' : ''} 
+                               ${answered ? 'disabled' : ''} 
+                               onchange="selectAnswer(${index})">
+                        <span>${String.fromCharCode(65 + index)}. ${option}</span>
+                    </label>
+                `;
+            });
+
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+            `;
+
+            currentQDisplay.textContent = currentQuestion + 1;
+            updateProgress();
+        }
+
+        // Select Answer
+        function selectAnswer(answerIndex) {
+            userAnswers[currentQuestion] = answerIndex;
+            renderQuestion();
+        }
+
+        // Update Progress Bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Navigation
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                updateNavigation();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                updateNavigation();
+            }
+        }
+
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Review' : 'Next';
+            
+            const allAnswered = userAnswers.every(ans => ans !== null);
+            if (currentQuestion === quizData.length - 1 && allAnswered) {
+                submitBtn.classList.remove('hidden');
+                nextBtn.classList.add('hidden');
+            } else {
+                submitBtn.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+            }
+        }
+
+        // Timer
+        function startTimer() {
+            if (timerId) clearInterval(timerId);
+            
+            timerId = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit Quiz
+        function submitQuiz() {
+            clearInterval(timerId);
+            
+            let correct = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].answer) correct++;
+            });
+            
+            const percentage = Math.round((correct / quizData.length) * 100);
+            
+            finalScore.textContent = `${correct}/20`;
+            
+            if (percentage >= 90) {
+                resultMessage.textContent = "Outstanding! You're a metallurgy master!";
+            } else if (percentage >= 75) {
+                resultMessage.textContent = "Excellent work! Strong grasp of concepts.";
+            } else if (percentage >= 60) {
+                resultMessage.textContent = "Good effort! Review the key processes.";
+            } else if (percentage >= 40) {
+                resultMessage.textContent = "Fair attempt. Focus on extraction methods.";
+            } else {
+                resultMessage.textContent = "Keep practicing! Review ores, furnaces, and alloys.";
+            }
+            
+            quizContent.classList.add('hidden');
+            document.querySelector('.navigation').classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            resultScreen.classList.add('hidden');
+            quizContent.classList.remove('hidden');
+            document.querySelector('.navigation').classList.remove('hidden');
+            initQuiz();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

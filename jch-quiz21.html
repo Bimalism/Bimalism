@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Analysis Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32, #4caf50);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-tube-animation {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-tube {
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            border: 2px solid #333;
+            animation: bubble 2s ease-in-out infinite;
+        }
+        
+        .test-tube::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 2s ease-in-out infinite;
+        }
+        
+        .bubble:nth-child(2) {
+            animation-delay: 0.5s;
+            left: 15px;
+        }
+        
+        .bubble:nth-child(3) {
+            animation-delay: 1s;
+            left: 20px;
+        }
+        
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        @keyframes bubble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #1b5e20;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #e8f5e9;
+            border-color: #1b5e20;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #1b5e20;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #1b5e20;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1b5e20;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .formula-highlight {
+            background-color: #e8f5e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .test-reaction {
+            background-color: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #1976d2;
+            font-style: italic;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .test-tube-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="test-tube-animation">
+                <div class="test-tube">
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                </div>
+            </div>
+            <h1>Chapter : 21 Chemical Analysis</h1>
+            <div class="subtitle">Test your knowledge of qualitative inorganic analysis and radical tests</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
+                    <span>Score: <span id="score">0</span>/20</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: Qualitative Analysis</div>
+                    <div>Level: Advanced</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/20</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chemicalQuiz = [
+            {
+                q: "Qualitative analysis in inorganic chemistry identifies:",
+                o: ["Basic and acidic radicals in salts", "Only molecular weight", "Quantitative composition", "Organic functional groups"],
+                a: 0,
+                exp: "Qualitative analysis identifies cations (basic radicals) and anions (acidic radicals) in inorganic salts, e.g., Zn²⁺ and S²⁻ in zinc blende."
+            },
+            {
+                q: "The test for CO₂ gas involves:",
+                o: ["White ppt with lime water that dissolves in excess", "Rekindling glowing splinter", "Brown ppt with K₂Cr₂O₇", "Blue color with CuSO₄"],
+                a: 0,
+                exp: "CO₂ + Ca(OH)₂ → CaCO₃↓ (white ppt); excess CO₂ + CaCO₃ + H₂O → Ca(HCO₃)₂ (soluble)."
+            },
+            {
+                q: "NH₃ gas test gives white fumes with:",
+                o: ["HCl", "SO₂", "O₂", "Cl₂"],
+                a: 0,
+                exp: "NH₃ + HCl → NH₄Cl (white fumes). Also, brown ppt with Nessler's reagent and deep blue with CuSO₄."
+            },
+            {
+                q: "Cl₂ gas bleaches litmus paper by forming:",
+                o: ["HCl and HOCl", "H₂S", "SO₂", "NO₂"],
+                a: 0,
+                exp: "Cl₂ + H₂O → HCl + HOCl; HOCl oxidizes the color to colorless. Blue litmus turns red then bleaches."
+            },
+            {
+                q: "The color of hydrated CuSO₄ is:",
+                o: ["Blue", "Green", "Yellow", "Red"],
+                a: 0,
+                exp: "Hydrated CuSO₄ is blue; anhydrous is white. From Table 21.1."
+            },
+            {
+                q: "Flame test for Na imparts:",
+                o: ["Yellow color", "Brick red", "Lilac", "Crimson red"],
+                a: 0,
+                exp: "Na imparts yellow color to Bunsen flame due to D-line emission."
+            },
+            {
+                q: "Borax bead test for Cu gives color in oxidizing flame:",
+                o: ["Greenish hot, blue cold", "Yellow hot, green cold", "Violet hot and cold", "Brown cold"],
+                a: 0,
+                exp: "Cu: Greenish when hot, blue in cold (oxidizing flame); red opaque (reducing)."
+            },
+            {
+                q: "Charcoal cavity test for Pb²⁺ shows:",
+                o: ["Yellow soft bead marking paper", "White brittle bead", "Grey metallic particles", "Brown residue"],
+                a: 0,
+                exp: "Pb²⁺: Yellow, soft bead which marks on paper. From Table 21.5."
+            },
+            {
+                q: "Dry heating for carbonates evolves:",
+                o: ["CO₂, lime water turbid", "NH₃, turns red litmus blue", "SO₂, turns K₂Cr₂O₇ green", "Cl₂, bleaches litmus"],
+                a: 0,
+                exp: "Carbonates: CO₂ evolved, lime water becomes turbid. From Table 21.2."
+            },
+            {
+                q: "Dil. H₂SO₄ test for CO₃²⁻ shows:",
+                o: ["Brisk effervescence, colorless odorless gas", "Brown fumes", "Smell of rotten eggs", "Pungent smell of burning sulfur"],
+                a: 0,
+                exp: "Na₂CO₃ + H₂SO₄ → Na₂SO₄ + H₂O + CO₂↑ (brisk effervescence). Lime water milky, soluble in excess."
+            },
+            {
+                q: "Conc. H₂SO₄ test for Cl⁻ evolves:",
+                o: ["Colorless pungent gas with white fumes", "Reddish brown fumes", "Violet vapors", "Brown fumes with Cu turnings"],
+                a: 0,
+                exp: "KCl + conc. H₂SO₄ → KHSO₄ + HCl (colorless pungent, white fumes with NH₄OH)."
+            },
+            {
+                q: "Chromyl chloride test is confirmatory for:",
+                o: ["Cl⁻", "Br⁻", "I⁻", "NO₃⁻"],
+                a: 0,
+                exp: "Cl⁻ + K₂Cr₂O₇ + conc. H₂SO₄ → CrO₂Cl₂ (reddish brown vapors) → Na₂CrO₄ (yellow) → PbCrO₄ (yellow ppt)."
+            },
+            {
+                q: "Ring test with brown ring confirms:",
+                o: ["NO₃⁻", "SO₄²⁻", "PO₄³⁻", "F⁻"],
+                a: 0,
+                exp: "FeSO₄ + NO₃⁻ + conc. H₂SO₄ → [Fe(H₂O)₅NO]SO₄ (dark brown ring at interface)."
+            },
+            {
+                q: "Test for SO₄²⁻ involves white ppt insoluble in:",
+                o: ["Conc. HNO₃", "Dil. HCl", "NH₄OH", "NaOH"],
+                a: 0,
+                exp: "BaCl₂ + Na₂SO₄ → BaSO₄↓ (white ppt., insoluble in conc. HNO₃)."
+            },
+            {
+                q: "Group I basic radicals precipitate as:",
+                o: ["Chlorides with dil. HCl", "Sulphides with H₂S", "Hydroxides with NH₄OH", "Carbonates with Na₂CO₃"],
+                a: 0,
+                exp: "Group I: Ag⁺, Hg₂²⁺, Pb²⁺ as AgCl, Hg₂Cl₂, PbCl₂ (low Ksp chlorides)."
+            },
+            {
+                q: "Group II reagent is:",
+                o: ["H₂S in dil. HCl", "NH₄OH in NH₄Cl", "Dil. HCl", "(NH₄)₂CO₃ in NH₄Cl"],
+                a: 0,
+                exp: "H₂S in acidic medium (dil. HCl) precipitates sulphides like CuS, As₂S₃ (low [S²⁻] due to H⁺)."
+            },
+            {
+                q: "Group III basic radicals precipitate in presence of:",
+                o: ["NH₄Cl and NH₄OH", "H₂S and HCl", "Dil. HCl", "NaOH"],
+                a: 0,
+                exp: "Al³⁺, Fe³⁺, Cr³⁺ as hydroxides; NH₄Cl suppresses [OH⁻] for selective precipitation."
+            },
+            {
+                q: "Borate test shows green edged flame due to:",
+                o: ["Ethyl borate", "Methyl borate", "Sodium borate", "Boric acid"],
+                a: 0,
+                exp: "Na₂B₄O₇ + H₂SO₄ + C₂H₅OH → (C₂H₅)₃BO₃ (volatile, green flame)."
+            },
+            {
+                q: "Phosphate confirmatory test is:",
+                o: ["Yellow crystalline ppt with ammonium molybdate", "White ppt with BaCl₂", "Brown ring", "Green flame"],
+                a: 0,
+                exp: "PO₄³⁻ + (NH₄)₂MoO₄ + HNO₃ → (NH₄)₃[PMo₁₂O₄₀] (yellow ppt)."
+            },
+            {
+                q: "Fluoride test with sand and conc. H₂SO₄ shows:",
+                o: ["White deposit on wet glass rod", "Violet vapors", "Yellow ppt", "Black stain"],
+                a: 0,
+                exp: "NaF + H₂SO₄ → HF; SiO₂ + 4HF → SiF₄ + 2H₂O; SiF₄ + 2H₂O → H₂SiF₆ + SiO₂·4H₂O (white deposit)."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(chemicalQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = chemicalQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = chemicalQuiz[currentQuestion];
+            questionText.textContent = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / chemicalQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                // If user has already selected this option
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    
+                    // Show if correct/incorrect after answer
+                    if (userAnswers[currentQuestion] !== null) {
+                        if (index === question.a) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if answer has been selected
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === chemicalQuiz.length - 1) {
+                nextBtn.textContent = 'Finish';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+            
+            // Update score
+            scoreEl.textContent = score;
+        }
+        
+        // Select an option
+        function selectOption(index) {
+            // If already answered, don't allow changing
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            // Mark selected option
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = index;
+            
+            // Check if correct
+            const question = chemicalQuiz[currentQuestion];
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                options[index].classList.add('incorrect');
+                // Also show correct answer
+                options[question.a].classList.add('correct');
+            }
+            
+            // Show explanation
+            explanation.style.display = 'block';
+            explanationText.textContent = question.exp;
+        }
+        
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < chemicalQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        // Show final results
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            finalScore.textContent = `${score}/${chemicalQuiz.length}`;
+            
+            // Set score message
+            if (score === chemicalQuiz.length) {
+                scoreText.textContent = "Perfect! You're an expert in qualitative analysis!";
+            } else if (score >= chemicalQuiz.length * 0.8) {
+                scoreText.textContent = "Excellent! You master radical identification!";
+            } else if (score >= chemicalQuiz.length * 0.6) {
+                scoreText.textContent = "Good job! Solid understanding of gas and wet tests!";
+            } else if (score >= chemicalQuiz.length * 0.4) {
+                scoreText.textContent = "Not bad! Practice more on confirmatory tests!";
+            } else {
+                scoreText.textContent = "Keep studying! Qualitative analysis is key for JEE/NEET!";
+            }
+            
+            // Update progress bar to 100%
+            progress.style.width = '100%';
+        }
+        
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(chemicalQuiz.length).fill(null);
+            
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            loadQuestion();
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

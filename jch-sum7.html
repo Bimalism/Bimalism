@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuclear Chemistry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+      
+        .section:last-child {
+            border-bottom: none;
+        }
+      
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+      
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+      
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+      
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+      
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+      
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+      
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+      
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+      
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+      
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+      
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+      
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+      
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+      
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+      
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+      
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+      
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+      
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+      
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+      
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+      
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+      
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+      
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+          
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+          
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+      
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+      
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+      
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+      
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+      
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+      
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+      
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+      
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+      
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+      
+        .model-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+      
+        .model-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+      
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+      
+        .bond-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+      
+        @media (max-width: 768px) {
+            .bond-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .objective-questions {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+      
+        .question {
+            margin-bottom: 15px;
+        }
+      
+        .options {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 7</div>
+            <h1>Nuclear Chemistry</h1>
+            <p class="subtitle">Radioactivity, Nuclear Reactions, Fission & Fusion, Applications</p>
+            <div class="importance">High Weightage in JEE Main</div>
+        </header>
+      
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction</h2>
+                <p>Nuclear chemistry deals with the study of the composition of atomic nucleus and nuclear transformations. It includes processes like radioactivity, artificial transmutations, nuclear fission and nuclear fusion. The energies involved in nuclear processes are millions of times greater than those in ordinary chemical reactions.</p>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-radiation"></i> Radioactivity</h2>
+                <div class="definition">
+                    <p>Radioactivity is a process in which nuclei of certain elements undergo spontaneous disintegration without excitation by any external means. Elements whose atoms disintegrate and emit radiations are called radioactive elements.</p>
+                </div>
+                
+                <h3><i class="fas fa-history"></i> Historical Background</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-user"></i> Henry Becquerel (1891)</div>
+                        <div class="topic-item">Discovered radioactivity from potassium uranyl sulphate</div>
+                        <div class="topic-item">Observed spontaneous emission of invisible, penetrating rays</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-users"></i> Marie & Pierre Curie</div>
+                        <div class="topic-item">Named the phenomenon "Radioactivity"</div>
+                        <div class="topic-item">Discovered Radium from pitchblende (3 million times more radioactive than uranium)</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-sort"></i> Types of Radioactivity</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-leaf"></i> Natural Radioactivity</div>
+                        <div class="topic-item">Substance emits radiations by itself</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Artificial Radioactivity</div>
+                        <div class="topic-item">Substance starts emitting radiations on exposure to rays from natural radioactive substances</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-wave-square"></i> Types of Radioactive Rays</h2>
+                <p>When radioactive emissions are subjected to electric or magnetic fields, they split into three types: α, β and γ-rays.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Characteristic</th>
+                            <th>α-Ray</th>
+                            <th>β-Ray</th>
+                            <th>γ-Ray</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Charge & Mass</td>
+                            <td>+2 charge, 4 unit mass</td>
+                            <td>-1 charge, negligible mass</td>
+                            <td>No charge, negligible mass</td>
+                        </tr>
+                        <tr>
+                            <td>Identity</td>
+                            <td>Helium nuclei (₂He⁴)</td>
+                            <td>Electron (₋₁e⁰)</td>
+                            <td>High energy photons</td>
+                        </tr>
+                        <tr>
+                            <td>Magnetic Field</td>
+                            <td>Deflected towards cathode</td>
+                            <td>Deflected towards anode</td>
+                            <td>Not deflected</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity</td>
+                            <td>1/10 of light</td>
+                            <td>Same as light</td>
+                            <td>Same as light</td>
+                        </tr>
+                        <tr>
+                            <td>Ionizing Power</td>
+                            <td>Very high (100× β-rays)</td>
+                            <td>Low (100× γ-rays)</td>
+                            <td>Very low</td>
+                        </tr>
+                        <tr>
+                            <td>Penetrating Power</td>
+                            <td>Low</td>
+                            <td>100× α-particles</td>
+                            <td>10× β-particles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> Theory of Radioactive Disintegration</h2>
+                <p>Rutherford and Soddy (1903) postulated that radioactivity is a nuclear phenomenon and all radioactive changes occur in the atomic nucleus.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-check-circle"></i> Main Points</div>
+                        <div class="topic-item">Atomic nuclei of radioactive elements are unstable</div>
+                        <div class="topic-item">Disintegration is spontaneous and constant</div>
+                        <div class="topic-item">Rate unaffected by temperature, pressure, chemical combination</div>
+                        <div class="topic-item">During disintegration, atoms of new elements (daughter elements) are formed</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-arrow-right"></i> Types of Disintegration</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-down"></i> α-particle Emission</div>
+                        <div class="topic-item">Mass decreases by 4 units</div>
+                        <div class="topic-item">Atomic number decreases by 2 units</div>
+                        <div class="formula">ᴡZᴬ → ᴡ⁻⁴Z⁻²ᴬ + ₂He⁴</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> β-particle Emission</div>
+                        <div class="topic-item">Mass remains same</div>
+                        <div class="topic-item">Atomic number increases by 1 unit</div>
+                        <div class="topic-item">Due to neutron decay: n → p + e⁻</div>
+                        <div class="formula">ᴡZᴬ → ᴡZ⁺¹ᴬ + ₋₁e⁰</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-sun"></i> γ-ray Emission</div>
+                        <div class="topic-item">No change in mass or atomic number</div>
+                        <div class="topic-item">Excess energy released as electromagnetic radiation</div>
+                        <div class="topic-item">Does not produce new element</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Group Displacement Law</h2>
+                <p>Soddy, Fajans and Russell (1911-1913) observed patterns in element displacement during radioactive decay.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-left"></i> α-particle Emission</div>
+                        <div class="topic-item">New element displaced two positions left in periodic table</div>
+                        <div class="topic-item">Atomic number decreases by 2</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> β-particle Emission</div>
+                        <div class="topic-item">New element displaced one position right in periodic table</div>
+                        <div class="topic-item">Atomic number increases by 1</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-left"></i> Positron Emission</div>
+                        <div class="topic-item">New element displaced one position left in periodic table</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Radioactive Disintegration Series</h2>
+                <p>Natural radioactivity continues until stable nuclei are formed. All nuclei from initial to final stable element constitute a disintegration series.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Series</th>
+                            <th>Formula</th>
+                            <th>Parent</th>
+                            <th>Half-life (yrs)</th>
+                            <th>End Product</th>
+                            <th>Lost Particles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Thorium (Natural)</td>
+                            <td>4n</td>
+                            <td>²³²₉₀Th</td>
+                            <td>1.39×10¹⁰</td>
+                            <td>²⁰⁸₈₂Pb</td>
+                            <td>6α, 4β</td>
+                        </tr>
+                        <tr>
+                            <td>Neptunium (Artificial)</td>
+                            <td>4n+1</td>
+                            <td>²⁴¹₉₄Pu</td>
+                            <td>2.2×10⁶</td>
+                            <td>²⁰⁹₈₃Bi</td>
+                            <td>8α, 5β</td>
+                        </tr>
+                        <tr>
+                            <td>Uranium (Natural)</td>
+                            <td>4n+2</td>
+                            <td>²³⁸₉₂U</td>
+                            <td>4.5×10⁹</td>
+                            <td>²⁰⁶₈₂Pb</td>
+                            <td>8α, 6β</td>
+                        </tr>
+                        <tr>
+                            <td>Actinium (Natural)</td>
+                            <td>4n+3</td>
+                            <td>²³⁵₉₂U</td>
+                            <td>7.07×10⁸</td>
+                            <td>²⁰⁷₈₂Pb</td>
+                            <td>7α, 4β</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-magnet"></i> Nuclear Structure and Forces</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Nuclear Composition</div>
+                        <div class="topic-item">Nucleus composed of protons and neutrons (nucleons)</div>
+                        <div class="topic-item">Nuclear forces hold nucleons together</div>
+                        <div class="topic-item">10²¹ times stronger than electrostatic forces</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-ruler"></i> Nuclear Forces</div>
+                        <div class="topic-item">Short-range forces (operate within ~10⁻¹⁵ m)</div>
+                        <div class="topic-item">Drop rapidly to zero at ~10⁻¹³ cm</div>
+                        <div class="topic-item">Not governed by inverse square law</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Yukawa's Theory</div>
+                        <div class="topic-item">Nucleons held together by rapid exchange of π-mesons</div>
+                        <div class="topic-item">π-mesons: mass = 275×electron, charge = +1, 0, -1</div>
+                        <div class="topic-item">These forces called exchange forces</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-shield-alt"></i> Nuclear Stability</h2>
+                <p>Nuclides can be grouped as stable or unstable based on nuclear stability factors.</p>
+                
+                <h3><i class="fas fa-balance-scale"></i> Factors Affecting Stability</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Binding Energy</div>
+                        <div class="topic-item">Mass defect = Total mass of nucleons - Observed atomic mass</div>
+                        <div class="topic-item">Binding energy = Mass defect × 931 MeV</div>
+                        <div class="topic-item">Maximum for iron (8.7 MeV/nucleon)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-box"></i> Packing Fraction</div>
+                        <div class="topic-item">= (Actual isotopic mass - Mass number)/Mass number × 10⁴</div>
+                        <div class="topic-item">Negative value indicates stability</div>
+                        <div class="topic-item">Least for Fe (negative), highest for H (~78)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-magic"></i> Magic Numbers</div>
+                        <div class="topic-item">Protons: 2, 8, 20, 28, 50, 82, 114</div>
+                        <div class="topic-item">Neutrons: 2, 8, 20, 28, 50, 126, 184, 196</div>
+                        <div class="topic-item">Nuclei with magic numbers are particularly stable</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-bar"></i> Neutron-Proton Ratio</div>
+                        <div class="topic-item">Close to 1 for low Z elements</div>
+                        <div class="topic-item">>1 for higher Z elements</div>
+                        <div class="topic-item">Nuclei outside stability belt are unstable</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-tachometer-alt"></i> Rate of Radioactive Decay</h2>
+                <div class="definition">
+                    <p>"The quantity of a radioelement which disappears in unit time (rate of disintegration) is directly proportional to the amount present."</p>
+                </div>
+                
+                <div class="formula">-dN/dt = λN</div>
+                <div class="formula">Nₜ = N₀e^(-λt)</div>
+                <div class="formula">log(N₀/Nₜ) = λt/2.303</div>
+                <div class="formula">λ = 2.303/t × log(N₀/Nₜ)</div>
+                
+                <h3><i class="fas fa-clock"></i> Important Time Periods</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-hourglass-half"></i> Half-life (t₁/₂)</div>
+                        <div class="topic-item">Time for half of radioactive material to decay</div>
+                        <div class="formula">t₁/₂ = 0.693/λ</div>
+                        <div class="topic-item">Independent of amount of radioelement</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Average Life (T)</div>
+                        <div class="topic-item">Sum of lives of nuclei / Total number of nuclei</div>
+                        <div class="formula">T = 1/λ = t₁/₂/0.693 = 1.44 × t₁/₂</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Activity and Units</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Specific Activity</div>
+                        <div class="topic-item">Rate of decay per gram of radioactive isotope</div>
+                        <div class="formula">= λN/m</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-ruler"></i> Units of Radioactivity</div>
+                        <div class="topic-item">Curie (Ci): 3.7×10¹⁰ dps</div>
+                        <div class="topic-item">Rutherford (rd): 10⁶ dps</div>
+                        <div class="topic-item">Becquerel (Bq): 1 dps</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-exchange-alt"></i> Artificial Transmutation</h2>
+                <div class="definition">
+                    <p>Conversion of one element into another by artificial means, i.e., by bombarding with fundamental particles.</p>
+                </div>
+                
+                <h3><i class="fas fa-meteor"></i> Projectiles Used</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> α-particle</div>
+                        <div class="topic-item">₂He⁴</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Proton</div>
+                        <div class="topic-item">₁H¹</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Deutron</div>
+                        <div class="topic-item">₁H² or ₁D²</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Neutron</div>
+                        <div class="topic-item">₀n¹ (best projectile - no charge)</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-flask"></i> Types of Nuclear Reactions</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> By α-particles</div>
+                        <div class="topic-item">(α, n) type: ₄Be⁹ + ₂He⁴ → ₆C¹² + ₀n¹</div>
+                        <div class="topic-item">(α, p) type: ₉F¹⁹ + ₂He⁴ → ₁₀Ne²² + ₁H¹</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> By Protons</div>
+                        <div class="topic-item">(p, n) type: ₁₅P³¹ + ₁H¹ → ₁₆S³¹ + ₀n¹</div>
+                        <div class="topic-item">(p, γ) type: ₆C¹² + ₁H¹ → ₇N¹³ + γ</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> By Neutrons</div>
+                        <div class="topic-item">(n, p) type: ₁₃Al²⁷ + ₀n¹ → ₁₂Mg²⁷ + ₁H¹</div>
+                        <div class="topic-item">(n, γ) type: ₉₂U²³⁸ + ₀n¹ → ₉₂U²³⁹ + γ</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-bomb"></i> Nuclear Fission and Fusion</h2>
+                
+                <div class="bond-comparison">
+                    <div>
+                        <h3><i class="fas fa-breakpoint"></i> Nuclear Fission</h3>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-info-circle"></i> Definition</div>
+                            <div class="topic-item">Splitting of heavier atom into smaller fragments</div>
+                            <div class="topic-item">Discovered by Hahn and Strassman</div>
+                            <div class="formula">₉₂U²³⁵ + ₀n¹ → ₅₆Ba¹⁴⁰ + ₃₆Kr⁹³ + 3₀n¹</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-cog"></i> Applications</div>
+                            <div class="topic-item">Atomic bomb</div>
+                            <div class="topic-item">Nuclear reactors</div>
+                            <div class="topic-item">Energy production</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-sun"></i> Nuclear Fusion</h3>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-info-circle"></i> Definition</div>
+                            <div class="topic-item">Lighter nuclei fuse to form heavier nuclei</div>
+                            <div class="topic-item">Requires very high temperatures (millions of degrees)</div>
+                            <div class="formula">4₁H¹ → ₂He⁴ + 2₊₁e⁰ + Energy</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-cog"></i> Applications</div>
+                            <div class="topic-item">Hydrogen bomb</div>
+                            <div class="topic-item">Stellar energy (sun)</div>
+                            <div class="topic-item">Potential future energy source</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Nuclear Fission</th>
+                            <th>Nuclear Fusion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Elements</td>
+                            <td>Heavy elements</td>
+                            <td>Light elements</td>
+                        </tr>
+                        <tr>
+                            <td>Process</td>
+                            <td>Splitting of heavy nucleus</td>
+                            <td>Fusion of lighter nuclei</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            <td>Ordinary temperature</td>
+                            <td>Very high (10⁸ °C)</td>
+                        </tr>
+                        <tr>
+                            <td>Energy per reaction</td>
+                            <td>200 MeV per fission</td>
+                            <td>3-24 MeV per fusion</td>
+                        </tr>
+                        <tr>
+                            <td>Efficiency</td>
+                            <td>Comparatively less</td>
+                            <td>High (4× fission)</td>
+                        </tr>
+                        <tr>
+                            <td>Control</td>
+                            <td>Can be controlled</td>
+                            <td>Cannot be controlled</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Applications of Radioactivity</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Medical Applications</div>
+                        <div class="topic-item">Cancer treatment (Radiotherapy)</div>
+                        <div class="topic-item">Sterilization of medical equipment</div>
+                        <div class="topic-item">Tracer studies in metabolic processes</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-industry"></i> Industrial Applications</div>
+                        <div class="topic-item">Thickness measurement of sheets</div>
+                        <div class="topic-item">Detection of flaws in metal castings</div>
+                        <div class="topic-item">Food preservation</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-leaf"></i> Agricultural Applications</div>
+                        <div class="topic-item">Pest control</div>
+                        <div class="topic-item">Genetic improvements in crops</div>
+                        <div class="topic-item">Fertilizer uptake studies</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-clock"></i> Archaeological Applications</div>
+                        <div class="topic-item">Carbon dating (¹⁴C)</div>
+                        <div class="topic-item">Potassium-argon dating</div>
+                        <div class="topic-item">Uranium-lead dating</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points to Remember</h2>
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Radioactivity: Spontaneous nuclear disintegration</li>
+                        <li>α-particles: ₂He⁴, +2 charge, low penetration</li>
+                        <li>β-particles: ₋₁e⁰, -1 charge, medium penetration</li>
+                        <li>γ-rays: No charge, high penetration</li>
+                        <li>Displacement law: α→2 left, β→1 right in periodic table</li>
+                        <li>Half-life: t₁/₂ = 0.693/λ, independent of amount</li>
+                        <li>Average life: T = 1/λ = 1.44 × t₁/₂</li>
+                        <li>Fission: Heavy nucleus splits, controlled</li>
+                        <li>Fusion: Light nuclei fuse, requires high temperature</li>
+                        <li>Binding energy: Maximum for Fe (8.7 MeV/nucleon)</li>
+                    </ul>
+                </div>
+              
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Calculate half-life using λ = 0.693/t₁/₂</div>
+                        <div class="topic-item">Apply displacement law to find new elements</div>
+                        <div class="topic-item">Use binding energy formula: Δm × 931 MeV</div>
+                        <div class="topic-item">Remember mass and atomic number changes</div>
+                    </div>
+                  
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Confuse α, β, γ properties</div>
+                        <div class="topic-item">Forget to balance nuclear equations</div>
+                        <div class="topic-item">Mix up fission and fusion processes</div>
+                        <div class="topic-item">Ignore units in radioactivity calculations</div>
+                    </div>
+                </div>
+            </section>
+          
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>This chapter typically carries <span class="highlight">1-2 questions</span> in JEE Main, making it a moderate-weightage chapter. Questions often focus on half-life calculations, nuclear reactions, and types of radioactive decay.</p>
+              
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 50%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>Moderate (1-2 questions)</span>
+                </div>
+            </section>
+        </div>
+      
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - Nuclear Chemistry Summary</div>
+               
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+          
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+          
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

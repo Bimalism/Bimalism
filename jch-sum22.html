@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purification, Classification and Nomenclature of Organic Compounds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+       
+        header {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+       
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+       
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+       
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+       
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+       
+        .content {
+            padding: 40px;
+        }
+       
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+       
+        .section:last-child {
+            border-bottom: none;
+        }
+       
+        h2 {
+            color: #0d47a1;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0d47a1;
+            display: flex;
+            align-items: center;
+        }
+       
+        h2 i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 50%;
+        }
+       
+        h3 {
+            color: #1565c0;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+       
+        h3 i {
+            margin-right: 10px;
+            color: #1976d2;
+        }
+       
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+       
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #0d47a1;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+       
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e3f2fd;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1565c0;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+       
+        th {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+       
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+       
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+       
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+       
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+       
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .topic-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+       
+        .topic-title i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 50%;
+        }
+       
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+       
+        .important-points {
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            border-left: 4px solid #1976d2;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        .important-points h4 {
+            color: #0d47a1;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+       
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+       
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            margin-top: 40px;
+        }
+       
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+       
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+       
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+       
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+           
+            h1 {
+                font-size: 2rem;
+            }
+           
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+           
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+       
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+       
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+       
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+       
+        .topic-item:before {
+            content: "•";
+            color: #0d47a1;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+       
+        .weightage-bar {
+            height: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+       
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1976d2, #0d47a1);
+            border-radius: 5px;
+        }
+       
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+       
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #e3f2fd 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .reaction {
+            font-family: 'Cambria Math', serif;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 22</div>
+            <h1>Purification, Classification and Nomenclature of Organic Compounds</h1>
+            <p class="subtitle">Methods, Analysis, and Naming in Organic Chemistry</p>
+            <div class="importance">Fundamental Chapter in Organic Chemistry</div>
+        </header>
+       
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Introduction to Organic Chemistry</h2>
+                <p><strong>Organic Chemistry</strong> is the chemistry of hydrocarbons and their derivatives where carbon is covalently bonded. Originally thought to be from living organisms under vital force, but disproved by syntheses like urea by Wohler and acetic acid by Kolbe.</p>
+                <div class="example-box">
+                    <div class="example-title">Key Historical Syntheses:</div>
+                    <div class="reaction">NH₄CNO → NH₂CONH₂ (Urea)</div>
+                    <div class="reaction">CH₃CHO → CH₃COOH (Acetic Acid)</div>
+                </div>
+                <p>Berthelot prepared methane, cellulose is most abundant. Kekule proposed tetravalency, Van't Hoff tetrahedron model.</p>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-filter"></i> Purification of Organic Compounds</h2>
+                <p>Purification depends on nature (solid/liquid) and impurities. Common methods include crystallization, distillation, sublimation, chromatography.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-crystal-ball"></i> Crystallization</div>
+                        <div class="topic-item">Simple: Based on solubility difference</div>
+                        <div class="topic-item">Fractional: Repeated for mixtures</div>
+                        <div class="example-box">
+                            <div class="example-title">Examples:</div>
+                            <div class="reaction">Sugar from salt in ethanol</div>
+                            <div class="reaction">Benzoic acid from naphthalene in water</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-empty"></i> Sublimation</div>
+                        <div class="topic-item">For volatile solids like camphor, naphthalene</div>
+                        <div class="topic-item">Solid to vapor without liquid</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Distillation</div>
+                        <div class="topic-item">Simple: For non-volatile impurities</div>
+                        <div class="topic-item">Fractional: Close boiling points</div>
+                        <div class="topic-item">Reduced Pressure: Decomposing liquids</div>
+                        <div class="topic-item">Steam: Insoluble, volatile in steam</div>
+                        <div class="topic-item">Azeotropic: Constant boiling mixtures</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-layer-group"></i> Chromatography</div>
+                        <div class="topic-item">Adsorption, partition based</div>
+                        <div class="topic-item">Types: Column, TLC, HPLC, GLC</div>
+                        <div class="topic-item">Rf = Distance solute / Distance solvent</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Other Methods</div>
+                        <div class="topic-item">Differential Extraction: With immiscible solvents</div>
+                        <div class="topic-item">Chemical: Based on properties like acidity</div>
+                    </div>
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Drying and Purity Criteria</h4>
+                    <ul>
+                        <li>Solids: Press, oven, desiccator</li>
+                        <li>Liquids: Anhydrous agents like CaCl₂</li>
+                        <li>Purity: Sharp m.p./b.p., mixed m.p. test</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-search"></i> Qualitative Analysis (Detection of Elements)</h2>
+                <p>Carbon and hydrogen via copper oxide test. Other elements via Lassaigne's test (sodium fusion).</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Test</th>
+                            <th>Observation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nitrogen</td>
+                            <td>FeSO₄ + NaOH + HCl + FeCl₃</td>
+                            <td>Prussian blue</td>
+                        </tr>
+                        <tr>
+                            <td>Sulphur</td>
+                            <td>Sodium nitroprusside</td>
+                            <td>Purple</td>
+                        </tr>
+                        <tr>
+                            <td>Halogens</td>
+                            <td>AgNO₃</td>
+                            <td>White (Cl), pale yellow (Br), yellow (I)</td>
+                        </tr>
+                        <tr>
+                            <td>N + S</td>
+                            <td>FeCl₃</td>
+                            <td>Blood red</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Other Tests</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Nitrogen: Soda Lime</div>
+                        <div class="topic-item">Evolves NH₃</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Sulphur: Oxidation</div>
+                        <div class="topic-item">White ppt with BaCl₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-burn"></i> Halogens: Beilstein</div>
+                        <div class="topic-item">Green flame</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Phosphorus</div>
+                        <div class="topic-item">Yellow ppt with ammonium molybdate</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-droplet"></i> Oxygen</div>
+                        <div class="topic-item">Inferred from functional groups</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Quantitative Analysis (Estimation of Elements)</h2>
+                <p>Percentage composition determination for C, H, N, halogens, S, P, O.</p>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-atom"></i> Carbon and Hydrogen</h3>
+                        <div class="topic-item">Liebig's combustion method</div>
+                        <div class="formula">%C = (12/44) × (CO₂ mass / compound mass) × 100</div>
+                        <div class="formula">%H = (2/18) × (H₂O mass / compound mass) × 100</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-vial"></i> Nitrogen</h3>
+                        <div class="topic-item">Dumas: %N = (28/22400) × (N₂ vol / compound mass) × 100</div>
+                        <div class="topic-item">Kjeldahl: %N = 1.4 × N × V / mass</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-table"></i> Other Elements</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Method</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Halogens</td>
+                            <td>Carius</td>
+                            <td>%X = (atomic mass X / mol mass AgX) × (AgX mass / compound mass) × 100</td>
+                        </tr>
+                        <tr>
+                            <td>Sulphur</td>
+                            <td>Carius</td>
+                            <td>%S = 32/233 × (BaSO₄ mass / compound mass) × 100</td>
+                        </tr>
+                        <tr>
+                            <td>Phosphorus</td>
+                            <td>Carius</td>
+                            <td>%P = 31/222 × (Mg₂P₂O₇ mass / compound mass) × 100</td>
+                        </tr>
+                        <tr>
+                            <td>Oxygen</td>
+                            <td>Direct/Indirect</td>
+                            <td>%O = 100 - (%C + %H + %N + ...)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sitemap"></i> Empirical and Molecular Formula</h2>
+                <p>Empirical: Simplest ratio from % composition. Molecular = n × Empirical, n = Mol mass / Emp mass.</p>
+                
+                <div class="definition">
+                    <p>Molecular mass from vapor density, colligative properties, or mass spectrometry.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-tags"></i> Classification of Organic Compounds</h2>
+                <p>Based on carbon skeleton: Acyclic (open chain), Cyclic (closed chain: alicyclic, aromatic).</p>
+                <p>Based on functional groups: Alkanes, alkenes, alcohols, etc.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-link"></i> Homologous Series</div>
+                        <div class="topic-item">Same functional group, differ by CH₂</div>
+                        <div class="topic-item">Similar properties, gradation</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Functional Groups</div>
+                        <div class="topic-item">Determine reactivity</div>
+                        <div class="topic-item">Priority in naming</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-pencil-alt"></i> Nomenclature of Organic Compounds</h2>
+                <p>IUPAC system: Root word + prefix + suffix.</p>
+                
+                <h3><i class="fas fa-list-ol"></i> Rules</h3>
+                <div class="topic-item">Longest chain</div>
+                <div class="topic-item">Lowest numbers for substituents</div>
+                <div class="topic-item">Alphabetical order</div>
+                
+                <div class="example-box">
+                    <div class="example-title">Examples:</div>
+                    <p>CH₃CH₂CH₃: Propane</p>
+                    <p>CH₃CH=CH₂: Propene</p>
+                    <p>CH₃CH₂OH: Ethanol</p>
+                </div>
+                
+                <h3><i class="fas fa-ring"></i> Cyclic and Aromatic</h3>
+                <div class="topic-item">Cycloalkanes: Cyclo + root</div>
+                <div class="topic-item">Aromatic: Benzene derivatives</div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>This chapter typically carries <span class="highlight">2-3 questions</span> in JEE Main, covering purification methods, element detection, and IUPAC naming.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 70%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>Medium (2-3 questions)</span>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Tips & Tricks</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-star"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Master Lassaigne's test observations</li>
+                        <li>Practice IUPAC naming for complex molecules</li>
+                        <li>Understand purification choice based on compound nature</li>
+                        <li>Remember formulas for % calculation</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Practice element detection tests</div>
+                        <div class="topic-item">Learn priority order for functional groups</div>
+                        <div class="topic-item">Solve naming problems</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Confuse qualitative tests</div>
+                        <div class="topic-item">Ignore exceptions in Lassaigne</div>
+                        <div class="topic-item">Forget lowest sum rule in naming</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+       
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Organic Chemistry - Purification, Classification and Nomenclature Summary</div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+           
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+           
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

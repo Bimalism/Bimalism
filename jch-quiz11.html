@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Kinetics Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-content {
+            padding: 30px;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #e3f2fd;
+            border-color: #0d47a1;
+        }
+        
+        .option.selected {
+            background-color: #bbdefb;
+            border-color: #0d47a1;
+        }
+        
+        .option.correct {
+            background-color: #c8e6c9;
+            border-color: #2e7d32;
+        }
+        
+        .option.incorrect {
+            background-color: #ffcdd2;
+            border-color: #c62828;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0d47a1;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e3f2fd;
+        }
+        
+        .correct-answer {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        
+        .question-counter {
+            text-align: right;
+            margin-bottom: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <header>
+            <h1>Chemical Kinetics Quiz</h1>
+            <p class="subtitle">Test your understanding of reaction rates, order, and mechanisms</p>
+        </header>
+        
+        <div class="quiz-content">
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width: 0%"></div>
+            </div>
+            
+            <div class="question-counter" id="question-counter">Question 1 of 10</div>
+            
+            <div id="question-1" class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">The rate of a chemical reaction:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Increases as the reaction proceeds</div>
+                    <div class="option" data-value="b">Decreases as the reaction proceeds</div>
+                    <div class="option" data-value="c">May increase or decrease during the reaction</div>
+                    <div class="option" data-value="d">Remains constant as the reaction proceeds</div>
+                </div>
+            </div>
+            
+            <div id="question-2" class="question-container hidden">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">The rate at which a substance reacts depends on its:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Atomic weight</div>
+                    <div class="option" data-value="b">Equivalent weight</div>
+                    <div class="option" data-value="c">Molecular weight</div>
+                    <div class="option" data-value="d">Active mass</div>
+                </div>
+            </div>
+            
+            <div id="question-3" class="question-container hidden">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">If doubling the concentration of a reactant 'A' increases the rate 4 times and tripling the concentration of 'A' increases the rate 9 times, the rate is proportional to:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Concentration of 'A'</div>
+                    <div class="option" data-value="b">Square of concentration of 'A'</div>
+                    <div class="option" data-value="c">Under root of the concentration of 'A'</div>
+                    <div class="option" data-value="d">Cube of concentration of 'A'</div>
+                </div>
+            </div>
+            
+            <div id="question-4" class="question-container hidden">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">The rate law for the reaction RCl + NaOH(aq) → ROH + NaCl is given by Rate = K₁[RCl]. The rate of the reaction will be:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Doubled on doubling the concentration of sodium hydroxide</div>
+                    <div class="option" data-value="b">Halved on reducing the concentration of alkyl halide to one half</div>
+                    <div class="option" data-value="c">Decreased on increasing the temperature of the reaction</div>
+                    <div class="option" data-value="d">Unaffected by increasing the temperature of the reaction</div>
+                </div>
+            </div>
+            
+            <div id="question-5" class="question-container hidden">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">The rate of chemical reaction at constant temperature is proportional to:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">The amount of products formed</div>
+                    <div class="option" data-value="b">The product of masses of the reactants</div>
+                    <div class="option" data-value="c">The product of the molar concentration of the reactants</div>
+                    <div class="option" data-value="d">The mean free path of the reaction</div>
+                </div>
+            </div>
+            
+            <div id="question-6" class="question-container hidden">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">The concentration of a reactant decreases from 0.2 M to 0.1 M in 10 minutes. The rate of the reaction is:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">0.01 M</div>
+                    <div class="option" data-value="b">10⁻²</div>
+                    <div class="option" data-value="c">0.01 mol dm⁻³ min⁻¹</div>
+                    <div class="option" data-value="d">1 mol dm⁻³ min⁻¹</div>
+                </div>
+            </div>
+            
+            <div id="question-7" class="question-container hidden">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">When a reaction is progressing:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">The rate of the reaction goes on increasing</div>
+                    <div class="option" data-value="b">The concentration of the products goes on decreasing</div>
+                    <div class="option" data-value="c">The concentration of the reactants goes on decreasing</div>
+                    <div class="option" data-value="d">The reaction rate always remains constant</div>
+                </div>
+            </div>
+            
+            <div id="question-8" class="question-container hidden">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">Molecularity of a reaction:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Can be zero or fractional</div>
+                    <div class="option" data-value="b">Is always equal to the order of reaction</div>
+                    <div class="option" data-value="c">Is the number of molecules involved in the rate-determining step</div>
+                    <div class="option" data-value="d">Is derived from the balanced chemical equation</div>
+                </div>
+            </div>
+            
+            <div id="question-9" class="question-container hidden">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">According to the Arrhenius equation, the rate constant k is given by:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">k = A e^(Ea/RT)</div>
+                    <div class="option" data-value="b">k = A e^(-Ea/RT)</div>
+                    <div class="option" data-value="c">k = A e^(RT/Ea)</div>
+                    <div class="option" data-value="d">k = A e^(-RT/Ea)</div>
+                </div>
+            </div>
+            
+            <div id="question-10" class="question-container hidden">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">For a reaction to occur according to collision theory:</div>
+                <div class="options-container">
+                    <div class="option" data-value="a">Reacting molecules must collide with proper orientation</div>
+                    <div class="option" data-value="b">Reacting molecules must have energy equal to or greater than threshold energy</div>
+                    <div class="option" data-value="c">Both proper orientation and sufficient energy are required</div>
+                    <div class="option" data-value="d">Only proper orientation is required, energy doesn't matter</div>
+                </div>
+            </div>
+            
+            <div id="results" class="results-container hidden">
+                <h2>Quiz Results</h2>
+                <div class="score" id="score">Your Score: 0/10</div>
+                <div id="feedback"></div>
+                <button id="restart-btn">Restart Quiz</button>
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-btn" disabled>Previous</button>
+                <button id="next-btn">Next</button>
+                <button id="submit-btn" class="hidden">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data with correct answers and explanations
+        const quizData = [
+            {
+                question: "The rate of a chemical reaction:",
+                options: [
+                    "Increases as the reaction proceeds",
+                    "Decreases as the reaction proceeds",
+                    "May increase or decrease during the reaction",
+                    "Remains constant as the reaction proceeds"
+                ],
+                correct: "b",
+                explanation: "The rate of a chemical reaction decreases as the reaction proceeds because the concentration of reactants decreases over time."
+            },
+            {
+                question: "The rate at which a substance reacts depends on its:",
+                options: [
+                    "Atomic weight",
+                    "Equivalent weight",
+                    "Molecular weight",
+                    "Active mass"
+                ],
+                correct: "d",
+                explanation: "According to the law of mass action, the rate at which a substance reacts is proportional to its active mass (concentration)."
+            },
+            {
+                question: "If doubling the concentration of a reactant 'A' increases the rate 4 times and tripling the concentration of 'A' increases the rate 9 times, the rate is proportional to:",
+                options: [
+                    "Concentration of 'A'",
+                    "Square of concentration of 'A'",
+                    "Under root of the concentration of 'A'",
+                    "Cube of concentration of 'A'"
+                ],
+                correct: "b",
+                explanation: "When rate ∝ [A]ⁿ, doubling concentration increases rate by 2ⁿ times. Here 2ⁿ = 4, so n=2. Similarly, 3ⁿ = 9, so n=2."
+            },
+            {
+                question: "The rate law for the reaction RCl + NaOH(aq) → ROH + NaCl is given by Rate = K₁[RCl]. The rate of the reaction will be:",
+                options: [
+                    "Doubled on doubling the concentration of sodium hydroxide",
+                    "Halved on reducing the concentration of alkyl halide to one half",
+                    "Decreased on increasing the temperature of the reaction",
+                    "Unaffected by increasing the temperature of the reaction"
+                ],
+                correct: "b",
+                explanation: "Since the rate depends only on [RCl], halving [RCl] will halve the rate. Temperature generally increases reaction rate, so options c and d are incorrect."
+            },
+            {
+                question: "The rate of chemical reaction at constant temperature is proportional to:",
+                options: [
+                    "The amount of products formed",
+                    "The product of masses of the reactants",
+                    "The product of the molar concentration of the reactants",
+                    "The mean free path of the reaction"
+                ],
+                correct: "c",
+                explanation: "According to the law of mass action, the rate of a reaction is proportional to the product of the molar concentrations of the reactants."
+            },
+            {
+                question: "The concentration of a reactant decreases from 0.2 M to 0.1 M in 10 minutes. The rate of the reaction is:",
+                options: [
+                    "0.01 M",
+                    "10⁻²",
+                    "0.01 mol dm⁻³ min⁻¹",
+                    "1 mol dm⁻³ min⁻¹"
+                ],
+                correct: "c",
+                explanation: "Rate = -Δ[reactant]/Δt = -(0.1 - 0.2)/10 = 0.01 M/min = 0.01 mol dm⁻³ min⁻¹"
+            },
+            {
+                question: "When a reaction is progressing:",
+                options: [
+                    "The rate of the reaction goes on increasing",
+                    "The concentration of the products goes on decreasing",
+                    "The concentration of the reactants goes on decreasing",
+                    "The reaction rate always remains constant"
+                ],
+                correct: "c",
+                explanation: "As a reaction progresses, reactants are consumed, so their concentration decreases. The rate typically decreases as well, not increases or remains constant."
+            },
+            {
+                question: "Molecularity of a reaction:",
+                options: [
+                    "Can be zero or fractional",
+                    "Is always equal to the order of reaction",
+                    "Is the number of molecules involved in the rate-determining step",
+                    "Is derived from the balanced chemical equation"
+                ],
+                correct: "c",
+                explanation: "Molecularity is the number of molecules participating in the rate-determining (slowest) step of a reaction mechanism."
+            },
+            {
+                question: "According to the Arrhenius equation, the rate constant k is given by:",
+                options: [
+                    "k = A e^(Ea/RT)",
+                    "k = A e^(-Ea/RT)",
+                    "k = A e^(RT/Ea)",
+                    "k = A e^(-RT/Ea)"
+                ],
+                correct: "b",
+                explanation: "The Arrhenius equation is k = A e^(-Ea/RT), where A is the frequency factor, Ea is activation energy, R is gas constant, and T is temperature."
+            },
+            {
+                question: "For a reaction to occur according to collision theory:",
+                options: [
+                    "Reacting molecules must collide with proper orientation",
+                    "Reacting molecules must have energy equal to or greater than threshold energy",
+                    "Both proper orientation and sufficient energy are required",
+                    "Only proper orientation is required, energy doesn't matter"
+                ],
+                correct: "c",
+                explanation: "Collision theory states that for a reaction to occur, molecules must collide with proper orientation AND have energy equal to or greater than the activation energy."
+            }
+        ];
+
+        // DOM elements
+        const questionContainers = document.querySelectorAll('.question-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const progressBar = document.getElementById('progress');
+        const questionCounter = document.getElementById('question-counter');
+        const resultsContainer = document.getElementById('results');
+        const scoreElement = document.getElementById('score');
+        const feedbackElement = document.getElementById('feedback');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let score = 0;
+
+        // Initialize quiz
+        function initQuiz() {
+            updateProgressBar();
+            updateQuestionCounter();
+            updateNavigationButtons();
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Update question counter
+        function updateQuestionCounter() {
+            questionCounter.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        // Show question
+        function showQuestion(index) {
+            // Hide all questions
+            questionContainers.forEach(container => {
+                container.classList.add('hidden');
+            });
+            
+            // Show current question
+            questionContainers[index].classList.remove('hidden');
+            
+            // Highlight previously selected option if any
+            if (userAnswers[index] !== null) {
+                const options = questionContainers[index].querySelectorAll('.option');
+                options.forEach(option => {
+                    if (option.dataset.value === userAnswers[index]) {
+                        option.classList.add('selected');
+                    }
+                });
+            }
+        }
+
+        // Select option
+        function selectOption(optionElement) {
+            const questionContainer = optionElement.closest('.question-container');
+            const options = questionContainer.querySelectorAll('.option');
+            
+            // Remove selected class from all options
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            optionElement.classList.add('selected');
+            
+            // Store user's answer
+            const questionIndex = Array.from(questionContainers).indexOf(questionContainer);
+            userAnswers[questionIndex] = optionElement.dataset.value;
+        }
+
+        // Calculate score
+        function calculateScore() {
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        // Show results
+        function showResults() {
+            calculateScore();
+            
+            // Hide all questions
+            questionContainers.forEach(container => {
+                container.classList.add('hidden');
+            });
+            
+            // Show results container
+            resultsContainer.classList.remove('hidden');
+            
+            // Update score
+            scoreElement.textContent = `Your Score: ${score}/${quizData.length}`;
+            
+            // Generate feedback
+            let feedbackHTML = '';
+            quizData.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                feedbackHTML += `
+                    <div class="feedback">
+                        <div><strong>Question ${index + 1}:</strong> ${question.question}</div>
+                        <div>Your answer: ${userAnswer ? question.options[userAnswer.charCodeAt(0) - 97] : 'Not answered'}</div>
+                        <div class="correct-answer">Correct answer: ${question.options[question.correct.charCodeAt(0) - 97]}</div>
+                        <div class="explanation">${question.explanation}</div>
+                    </div>
+                `;
+            });
+            
+            feedbackElement.innerHTML = feedbackHTML;
+        }
+
+        // Reset quiz
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            score = 0;
+            
+            // Reset all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Hide results and show first question
+            resultsContainer.classList.add('hidden');
+            showQuestion(0);
+            updateProgressBar();
+            updateQuestionCounter();
+            updateNavigationButtons();
+        }
+
+        // Event listeners
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                selectOption(this);
+            });
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+                updateProgressBar();
+                updateQuestionCounter();
+                updateNavigationButtons();
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                updateProgressBar();
+                updateQuestionCounter();
+                updateNavigationButtons();
+            }
+        });
+
+        submitBtn.addEventListener('click', showResults);
+        restartBtn.addEventListener('click', resetQuiz);
+
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d and f-Block Elements - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #388e3c;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #66bb6a;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e8f5e9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #388e3c;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f1f8e9);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            border-left: 4px solid #66bb6a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #2e7d32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #4caf50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #66bb6a, #4caf50);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .key-concept {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #388e3c;
+        }
+        
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Inorganic Chemistry</div>
+            <h1>d and f-Block Elements</h1>
+            <p class="subtitle">Transition Metals: Properties, Oxidation States & Applications</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction to d-Block Elements</h2>
+                <p>The d-block elements are known as <strong>transition elements</strong> because they represent a transition from the most electropositive s-block elements to the most electronegative p-block elements.</p>
+                
+                <div class="definition">
+                    <p><strong>Transition Element</strong>: An element whose atom in ground state or ion in common oxidation state has incomplete d-subshell (d¹⁻⁹ electrons).</p>
+                </div>
+                
+                <div class="key-concept">
+                    <h4>General Electronic Configuration</h4>
+                    <p>(n-1)d¹⁻¹⁰ ns¹⁻²</p>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Exceptions</h3>
+                <p>Zn, Cd, Hg have complete d¹⁰ configuration → <strong>not transition elements</strong> (group 12).</p>
+                <p>Group 3 (Sc, Y, La, Ac) and group 12 → <strong>non-typical transition elements</strong>.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-table"></i> Electronic Configurations</h2>
+                
+                <h3>First Transition Series (3d)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Symbol</th>
+                            <th>At. No.</th>
+                            <th>Configuration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Scandium</td><td>Sc</td><td>21</td><td>[Ar] 3d¹ 4s²</td></tr>
+                        <tr><td>Titanium</td><td>Ti</td><td>22</td><td>[Ar] 3d² 4s²</td></tr>
+                        <tr><td>Vanadium</td><td>V</td><td>23</td><td>[Ar] 3d³ 4s²</td></tr>
+                        <tr><td>Chromium*</td><td>Cr</td><td>24</td><td>[Ar] 3d⁵ 4s¹</td></tr>
+                        <tr><td>Manganese</td><td>Mn</td><td>25</td><td>[Ar] 3d⁵ 4s²</td></tr>
+                        <tr><td>Iron</td><td>Fe</td><td>26</td><td>[Ar] 3d⁶ 4s²</td></tr>
+                        <tr><td>Cobalt</td><td>Co</td><td>27</td><td>[Ar] 3d⁷ 4s²</td></tr>
+                        <tr><td>Nickel</td><td>Ni</td><td>28</td><td>[Ar] 3d⁸ 4s²</td></tr>
+                        <tr><td>Copper*</td><td>Cu</td><td>29</td><td>[Ar] 3d¹⁰ 4s¹</td></tr>
+                        <tr><td>Zinc</td><td>Zn</td><td>30</td><td>[Ar] 3d¹⁰ 4s²</td></tr>
+                    </tbody>
+                </table>
+                <p><small>*Anomalous configurations due to stability of half-filled/full-filled orbitals.</small></p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-ruler-horizontal"></i> Atomic and Ionic Radii</h2>
+                
+                <h3>Trends in 3d Series (pm)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>K</th><th>Ca</th><th>Sc</th><th>Ti</th><th>V</th><th>Cr</th><th>Mn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Atomic Radius</td><td>227</td><td>197</td><td>144</td><td>132</td><td>122</td><td>117</td><td>117</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-down"></i> Across Period</div>
+                        <div class="topic-item">Decreases initially → minimum in middle → slight increase</div>
+                        <div class="topic-item">Due to increasing nuclear charge & poor shielding by d-electrons</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Down the Group</div>
+                        <div class="topic-item">Increases due to addition of new shell</div>
+                        <div class="topic-item">2nd & 3rd series similar due to <strong>lanthanide contraction</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-bolt"></i> Ionisation Energies</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>IE₁</th>
+                            <th>IE₂</th>
+                            <th>IE₃</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sc</td><td>632</td><td>1245</td><td>2450</td></tr>
+                        <tr><td>Ti</td><td>659</td><td>1320</td><td>2721</td></tr>
+                        <tr><td>Cr</td><td>652</td><td>1635</td><td>2994</td></tr>
+                        <tr><td>Mn</td><td>716</td><td>1513</td><td>3258</td></tr>
+                        <tr><td>Zn</td><td>906</td><td>1736</td><td>3838</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Trend</div>
+                        <div class="topic-item">Higher than s-block, lower than p-block</div>
+                        <div class="topic-item">Gradual increase across series</div>
+                        <div class="topic-item">5d > 4d > 3d series</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-shield-alt"></i> Reason</div>
+                        <div class="topic-item">Small atomic size</div>
+                        <div class="topic-item">High nuclear charge</div>
+                        <div class="topic-item">Poor shielding by d-electrons</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-fire"></i> Melting & Boiling Points</h2>
+                
+                <p>Very high (except Zn, Cd, Hg) due to strong metallic bonds with covalent character.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-chart-line"></i> Trend</div>
+                        <div class="topic-item">Increases to middle → decreases</div>
+                        <div class="topic-item">Max at Cr (3d⁵ 4s¹) → 5 unpaired electrons</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-link"></i> Strength of Bond</div>
+                        <div class="topic-item">∝ number of unpaired d-electrons</div>
+                        <div class="topic-item">Zn, Cd, Hg: d¹⁰ → no unpaired e⁻ → low MP</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-plus-minus"></i> Oxidation States</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Config</th>
+                            <th>Oxidation States</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sc</td><td>3d¹ 4s²</td><td>+2, +3</td></tr>
+                        <tr><td>Ti</td><td>3d² 4s²</td><td>+2, +3, +4</td></tr>
+                        <tr><td>V</td><td>3d³ 4s²</td><td>+2 to +5</td></tr>
+                        <tr><td>Cr</td><td>3d⁵ 4s¹</td><td>+1 to +6</td></tr>
+                        <tr><td>Mn</td><td>3d⁵ 4s²</td><td>+2 to +7</td></tr>
+                        <tr><td>Fe</td><td>3d⁶ 4s²</td><td>+2, +3, +4, +5, +6</td></tr>
+                        <tr><td>Ni</td><td>3d⁸ 4s²</td><td>+2, +3, +4</td></tr>
+                        <tr><td>Cu</td><td>3d¹⁰ 4s¹</td><td>+1, +2</td></tr>
+                        <tr><td>Zn</td><td>3d¹⁰ 4s²</td><td>+2</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-star"></i> Key Points</h4>
+                    <ul>
+                        <li>Variable oxidation states due to ns and (n-1)d electrons</li>
+                        <li>Most common: <strong>+2</strong> (except Sc)</li>
+                        <li>Highest: <strong>+7</strong> (Mn), <strong>+8</strong> (Ru, Os)</li>
+                        <li>High OS in fluorides/oxides (covalent)</li>
+                        <li>Low OS in carbonyls (e.g., Ni(CO)₄ → Ni⁰)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-paint-brush"></i> Coloured Ions</h2>
+                
+                <p>Due to <strong>d-d transition</strong> of electrons in presence of ligands.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ion</th>
+                            <th>Config</th>
+                            <th>Unpaired e⁻</th>
+                            <th>Colour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sc³⁺</td><td>3d⁰</td><td>0</td><td>Colourless</td></tr>
+                        <tr><td>Ti³⁺</td><td>3d¹</td><td>1</td><td>Purple</td></tr>
+                        <tr><td>V³⁺</td><td>3d²</td><td>2</td><td>Green</td></tr>
+                        <tr><td>Cr³⁺</td><td>3d³</td><td>3</td><td>Violet</td></tr>
+                        <tr><td>Mn²⁺</td><td>3d⁵</td><td>5</td><td>Light pink</td></tr>
+                        <tr><td>Fe³⁺</td><td>3d⁵</td><td>5</td><td>Yellow</td></tr>
+                        <tr><td>Cu²⁺</td><td>3d⁹</td><td>1</td><td>Blue</td></tr>
+                        <tr><td>Zn²⁺</td><td>3d¹⁰</td><td>0</td><td>Colourless</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="key-concept">
+                    <h4>d-d Transition</h4>
+                    <p>Unpaired d-electrons absorb visible light → excited to higher d-orbital → complementary colour observed.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-magnet"></i> Magnetic Properties</h2>
+                
+                <p><strong>Paramagnetic</strong> if unpaired electrons → attracted to magnetic field.</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Trend</div>
+                        <div class="topic-item">Increases to middle → decreases</div>
+                        <div class="topic-item">Max at Mn²⁺, Fe³⁺ (5 unpaired e⁻)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-times"></i> Diamagnetic</div>
+                        <div class="topic-item">Zn²⁺, Cu⁺, Sc³⁺ (d¹⁰ or d⁰)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-battery-half"></i> Standard Electrode Potentials</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Ion</th>
+                            <th>E° (V)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sc</td><td>Sc³⁺</td><td>-2.10</td></tr>
+                        <tr><td>Ti</td><td>Ti²⁺</td><td>-1.60</td></tr>
+                        <tr><td>Mn</td><td>Mn²⁺</td><td>-1.18</td></tr>
+                        <tr><td>Fe</td><td>Fe²⁺</td><td>-0.44</td></tr>
+                        <tr><td>Cu</td><td>Cu²⁺</td><td>+0.34</td></tr>
+                        <tr><td>Zn</td><td>Zn²⁺</td><td>-0.76</td></tr>
+                    </tbody>
+                </table>
+                
+                <p>Negative E° → good reducing agents (except Cu).</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points for Exams</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-check-circle"></i> High Yield Concepts</h4>
+                    <ul>
+                        <li>Cr and Cu have anomalous configuration</li>
+                        <li>Mn shows maximum oxidation states (+2 to +7)</li>
+                        <li>Colour due to d-d transition, absent in d⁰ and d¹⁰</li>
+                        <li>Magnetic moment ∝ √n(n+2) BM</li>
+                        <li>Lanthanide contraction → similar radii of 4d and 5d</li>
+                        <li>KMnO₄, K₂Cr₂O₇ → strong oxidants in +7, +6 states</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically <strong>2-3 questions</strong> from d-block. Focus on trends, oxidation states, colour, and magnetism.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 75%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>High (2-3 Qs)</span>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div>JEE Main & NEET Chemistry - d and f-Block Elements Summary</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

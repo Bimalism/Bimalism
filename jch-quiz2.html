@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Structure Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1565C0, #1E88E5, #42A5F5);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .timer-container {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-home {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #388e3c;
+        }
+        
+        .btn-submit {
+            background: #2196f3;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background: #1976d2;
+        }
+        
+        .btn-reset {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #f57c00;
+        }
+        
+        .progress-container {
+            padding: 15px 30px;
+            background: #e3f2fd;
+            border-bottom: 1px solid #bbdefb;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #4caf50;
+            width: 5%;
+            transition: width 0.5s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 5px solid #1565C0;
+        }
+        
+        .question-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .option:hover {
+            border-color: #1565C0;
+            background: #f0f4ff;
+        }
+        
+        .option.selected {
+            border-color: #1565C0;
+            background: #e3f2fd;
+        }
+        
+        .option input {
+            transform: scale(1.2);
+        }
+        
+        .result-container {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            color: #1565C0;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 20px 0;
+        }
+        
+        .result-details {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .detail-item {
+            padding: 15px;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .correct {
+            border-left: 5px solid #4caf50;
+        }
+        
+        .incorrect {
+            border-left: 5px solid #f44336;
+        }
+        
+        .review-btn {
+            background: #9c27b0;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .review-btn:hover {
+            background: #7b1fa2;
+        }
+        
+        @media (max-width: 768px) {
+            .timer-container {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+                display: inline-block;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #f0f4ff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chemistry Chapter 2 Quiz</h1>
+            <p class="subtitle">Test your knowledge of Structure of Atom</p>
+            <div class="timer-container">
+                Time Left: <span id="timer">15:00</span>
+            </div>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="goToHome()">
+                <span>←</span> Back to Home
+            </button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">
+                    Reset Quiz
+                </button>
+                <button class="btn btn-submit" onclick="submitQuiz()">
+                    Submit Answers
+                </button>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="quiz-progress"></div>
+            </div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">1</span>/20</span>
+                <span id="answered-count">0 questions answered</span>
+            </div>
+        </div>
+        
+        <div class="quiz-container" id="quiz-content">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="result-container" id="result-content">
+            <h2 class="result-title">Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="result-message"></p>
+            
+            <div class="result-details" id="result-details">
+                <!-- Result details will be inserted here -->
+            </div>
+            
+            <button class="btn btn-home" onclick="goToHome()">
+                <span>←</span> Back to Home
+            </button>
+            <button class="btn review-btn" onclick="resetQuiz()">
+                Take Quiz Again
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions based on Chemistry Chapter 2: Structure of Atom
+        const quizQuestions = [
+            {
+                question: "Who discovered the electron?",
+                options: [
+                    "J.J. Thomson",
+                    "Ernest Rutherford",
+                    "James Chadwick",
+                    "John Dalton"
+                ],
+                correct: 0
+            },
+            {
+                question: "What is the charge of a proton?",
+                options: [
+                    "+1.602 × 10⁻¹⁹ C",
+                    "-1.602 × 10⁻¹⁹ C",
+                    "0 C",
+                    "+1.602 × 10⁻¹⁶ C"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which atomic model is also known as the 'plum pudding' model?",
+                options: [
+                    "Thomson's model",
+                    "Rutherford's model",
+                    "Bohr's model",
+                    "Quantum mechanical model"
+                ],
+                correct: 0
+            },
+            {
+                question: "What is the radius of the first Bohr orbit for hydrogen atom?",
+                options: [
+                    "0.529 Å",
+                    "1.058 Å",
+                    "2.116 Å",
+                    "0.265 Å"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which quantum number determines the shape of an orbital?",
+                options: [
+                    "Azimuthal quantum number (l)",
+                    "Principal quantum number (n)",
+                    "Magnetic quantum number (m)",
+                    "Spin quantum number (s)"
+                ],
+                correct: 0
+            },
+            {
+                question: "According to de Broglie, the wavelength associated with a particle is given by:",
+                options: [
+                    "λ = h/p",
+                    "λ = p/h",
+                    "λ = hc/E",
+                    "λ = E/hc"
+                ],
+                correct: 0
+            },
+            {
+                question: "Who discovered the neutron?",
+                options: [
+                    "James Chadwick",
+                    "J.J. Thomson",
+                    "Ernest Rutherford",
+                    "Niels Bohr"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which of the following is NOT a fundamental particle?",
+                options: [
+                    "Positron",
+                    "Electron",
+                    "Proton",
+                    "Neutron"
+                ],
+                correct: 0
+            },
+            {
+                question: "The maximum number of electrons that can be accommodated in the M shell is:",
+                options: [
+                    "18",
+                    "8",
+                    "32",
+                    "2"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which series in the hydrogen spectrum lies in the ultraviolet region?",
+                options: [
+                    "Lyman series",
+                    "Balmer series",
+                    "Paschen series",
+                    "Brackett series"
+                ],
+                correct: 0
+            },
+            {
+                question: "The energy of an electron in the nth orbit of hydrogen atom is given by:",
+                options: [
+                    "E = -13.6/n² eV",
+                    "E = -13.6 × n² eV",
+                    "E = 13.6/n² eV",
+                    "E = 13.6 × n² eV"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which quantum number has values of +½ or -½?",
+                options: [
+                    "Spin quantum number",
+                    "Magnetic quantum number",
+                    "Azimuthal quantum number",
+                    "Principal quantum number"
+                ],
+                correct: 0
+            },
+            {
+                question: "The number of orbitals in the d subshell is:",
+                options: [
+                    "5",
+                    "3",
+                    "7",
+                    "1"
+                ],
+                correct: 0
+            },
+            {
+                question: "According to Heisenberg's uncertainty principle:",
+                options: [
+                    "Δx × Δp ≥ h/4π",
+                    "Δx × Δp ≤ h/4π",
+                    "Δx × Δp = h/4π",
+                    "Δx × Δp = 0"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which of the following elements has an exceptional electronic configuration?",
+                options: [
+                    "Chromium",
+                    "Carbon",
+                    "Nitrogen",
+                    "Oxygen"
+                ],
+                correct: 0
+            },
+            {
+                question: "The angular momentum of an electron in Bohr's orbit is:",
+                options: [
+                    "nħ where ħ = h/2π",
+                    "h/2πn",
+                    "nh/2π",
+                    "2π/nh"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which of the following orbitals has a dumb-bell shape?",
+                options: [
+                    "p-orbital",
+                    "s-orbital",
+                    "d-orbital",
+                    "f-orbital"
+                ],
+                correct: 0
+            },
+            {
+                question: "The Rydberg constant for hydrogen is approximately:",
+                options: [
+                    "109,677 cm⁻¹",
+                    "13.6 cm⁻¹",
+                    "3.29 × 10¹⁵ cm⁻¹",
+                    "6.626 × 10⁻²⁷ cm⁻¹"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which rule states that electrons fill orbitals in order of increasing energy?",
+                options: [
+                    "Aufbau principle",
+                    "Hund's rule",
+                    "Pauli exclusion principle",
+                    "Heisenberg's principle"
+                ],
+                correct: 0
+            },
+            {
+                question: "The number of unpaired electrons in nitrogen atom is:",
+                options: [
+                    "3",
+                    "5",
+                    "2",
+                    "0"
+                ],
+                correct: 0
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let timeLeft = 15 * 60; // 15 minutes in seconds
+        let timerInterval;
+        let quizSubmitted = false;
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const quizContent = document.getElementById('quiz-content');
+            const question = quizQuestions[currentQuestion];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isChecked = userAnswers[currentQuestion] === index ? 'checked' : '';
+                optionsHTML += `
+                    <label class="option ${isChecked ? 'selected' : ''}">
+                        <input type="radio" name="answer" value="${index}" ${isChecked} 
+                               onchange="selectAnswer(${index})">
+                        ${option}
+                    </label>
+                `;
+            });
+            
+            quizContent.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Previous
+                    </button>
+                    <button class="btn btn-submit" onclick="nextQuestion()">
+                        ${currentQuestion === quizQuestions.length - 1 ? 'Finish' : 'Next'} →
+                    </button>
+                </div>
+            `;
+        }
+
+        // Select an answer
+        function selectAnswer(answerIndex) {
+            userAnswers[currentQuestion] = answerIndex;
+            document.querySelectorAll('.option').forEach((opt, idx) => {
+                if (idx === answerIndex) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+            updateProgress();
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        // Update progress bar and counter
+        function updateProgress() {
+            const answered = userAnswers.filter(answer => answer !== null).length;
+            const progress = (answered / quizQuestions.length) * 100;
+            
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = answered;
+            document.getElementById('answered-count').textContent = `${answered} of ${quizQuestions.length} questions answered`;
+        }
+
+        // Start the countdown timer
+        function startTimer() {
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (timeLeft < 300) { // 5 minutes
+                document.getElementById('timer').style.color = '#ff5252';
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            
+            quizSubmitted = true;
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            let score = 0;
+            let resultDetails = '';
+            
+            quizQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultDetails += `
+                    <div class="detail-item ${isCorrect ? 'correct' : 'incorrect'}">
+                        <div>
+                            <strong>Q${index + 1}:</strong> ${question.question}<br>
+                            <span>Your answer: ${userAnswer !== null ? question.options[userAnswer] : 'Not answered'}</span><br>
+                            <span>Correct answer: ${question.options[question.correct]}</span>
+                        </div>
+                        <div>${isCorrect ? '✓' : '✗'}</div>
+                    </div>
+                `;
+            });
+            
+            // Display results
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-details').innerHTML = resultDetails;
+            
+            // Result message based on score
+            let message = '';
+            if (score >= 17) {
+                message = 'Excellent! You have a strong understanding of Atomic Structure concepts.';
+            } else if (score >= 14) {
+                message = 'Great job! You have a good grasp of atomic models and quantum mechanics.';
+            } else if (score >= 11) {
+                message = 'Good effort! Review the material to strengthen your understanding.';
+            } else {
+                message = 'Keep studying! Review the Structure of Atom concepts thoroughly.';
+            }
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        // Reset the quiz
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers = Array(quizQuestions.length).fill(null);
+            timeLeft = 15 * 60;
+            quizSubmitted = false;
+            
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            
+            clearInterval(timerInterval);
+            initializeQuiz();
+        }
+
+        // Navigate to home page
+        function goToHome() {
+            alert("In a real implementation, this would navigate to the Chemistry Chapter 2 summary page");
+            // window.location.href = "jch-sum2.html";
+        }
+
+        // Initialize the quiz when the page loads
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

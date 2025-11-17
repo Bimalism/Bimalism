@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redox Reactions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+      
+        header {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+      
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+      
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+      
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+      
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+        .content {
+            padding: 40px;
+        }
+      
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+      
+        .section:last-child {
+            border-bottom: none;
+        }
+      
+        h2 {
+            color: #1B5E20;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1B5E20;
+            display: flex;
+            align-items: center;
+        }
+      
+        h2 i {
+            margin-right: 10px;
+            background: #E8F5E9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+      
+        h3 {
+            color: #2E7D32;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+      
+        h3 i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+      
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+      
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1B5E20;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+      
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1B5E20, #4CAF50);
+        }
+      
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E8F5E9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2E7D32;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+      
+        th {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+      
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+      
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+      
+        tr:hover {
+            background-color: #E8F5E9;
+        }
+      
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+      
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+      
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1B5E20, #4CAF50);
+        }
+      
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+      
+        .topic-title {
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+      
+        .topic-title i {
+            margin-right: 10px;
+            background: #E8F5E9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+      
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+      
+        .important-points {
+            background: linear-gradient(to right, #E8F5E9, #DCEDC8);
+            border-left: 4px solid #689F38;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+      
+        .important-points h4 {
+            color: #33691E;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+      
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+      
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+            color: white;
+            margin-top: 40px;
+        }
+      
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+      
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+      
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+      
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+          
+            h1 {
+                font-size: 2rem;
+            }
+          
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+          
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+          
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+      
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+      
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+      
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+      
+        .topic-item:before {
+            content: "•";
+            color: #1B5E20;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+      
+        .weightage-bar {
+            height: 10px;
+            background-color: #E8F5E9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+      
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #1B5E20);
+            border-radius: 5px;
+        }
+      
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+      
+        .highlight {
+            background: linear-gradient(120deg, #E8F5E9 0%, #E8F5E9 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+
+        .reaction {
+            font-family: 'Cambria Math', serif;
+            color: #1B5E20;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 13</div>
+            <h1>Redox Reactions</h1>
+            <p class="subtitle">Oxidation, Reduction, and Electron Transfer</p>
+            <div class="importance">Fundamental Physical Chemistry Chapter</div>
+        </header>
+      
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-sync"></i> Introduction to Redox Reactions</h2>
+                <p>Chemical reactions involving transfer of electrons from one substance to another are termed oxidation-reduction or <strong>redox reactions</strong>.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-equals"></i> Molecular and Ionic Equations</h2>
+                
+                <h3><i class="fas fa-cube"></i> Molecular Equations</h3>
+                <div class="definition">
+                    <p>When reactants and products are written in molecular forms, it is a <strong>molecular equation</strong>.</p>
+                </div>
+                <div class="formula reaction">MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂</div>
+
+                <h3><i class="fas fa-atom"></i> Ionic Equations</h3>
+                <div class="definition">
+                    <p>When reactants and products are written as ions, it is an <strong>ionic equation</strong>.</p>
+                </div>
+                <div class="formula reaction">MnO₂ + 4H⁺ + 4Cl⁻ → Mn²⁺ + 2Cl⁻ + 2H₂O + Cl₂</div>
+
+                <h3><i class="fas fa-eye-slash"></i> Spectator Ions</h3>
+                <div class="definition">
+                    <p>Ions that do not change and are equal in number on both sides are <strong>spectator ions</strong>, omitted from final equation.</p>
+                </div>
+                <div class="two-column">
+                    <div>
+                        <p><strong>Ionic Equation:</strong></p>
+                        <div class="formula reaction">Zn + 2H⁺ + 2Cl⁻ → Zn²⁺ + 2Cl⁻ + H₂</div>
+                    </div>
+                    <div>
+                        <p><strong>Final Equation:</strong></p>
+                        <div class="formula reaction">Zn + 2H⁺ → Zn²⁺ + H₂</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-arrow-up"></i> Oxidation</h2>
+                <div class="definition">
+                    <p>Process involving: addition of oxygen, removal of hydrogen, addition of non-metal, removal of metal, increase in +ve valency, loss of electrons, increase in oxidation number.</p>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus"></i> Addition of Oxygen</div>
+                        <div class="formula reaction">2Mg + O₂ → 2MgO</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus"></i> Removal of Hydrogen</div>
+                        <div class="formula reaction">H₂S + Cl₂ → 2HCl + S</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus-circle"></i> Addition of Non-metal</div>
+                        <div class="formula reaction">Fe + S → FeS</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus-circle"></i> Removal of Metal</div>
+                        <div class="formula reaction">2KI + H₂O₂ → 2KOH + I₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Increase in +ve Valency</div>
+                        <div class="formula reaction">Fe²⁺ → Fe³⁺ + e⁻</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-electron"></i> Loss of Electrons (De-electronation)</div>
+                        <div class="formula reaction">H⁰ → H⁺ + e⁻</div>
+                        <div class="formula reaction">MnO₄²⁻ → MnO₄⁻ + e⁻</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-level-up-alt"></i> Increase in Oxidation Number</div>
+                        <div class="formula reaction">Mg⁰ → Mg²⁺</div>
+                        <div class="formula reaction">[Fe(CN)₆]⁴⁻ → [Fe(CN)₆]³⁻</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-arrow-down"></i> Reduction</h2>
+                <div class="definition">
+                    <p>Reverse of oxidation: removal of oxygen, addition of hydrogen, removal of non-metal, addition of metal, decrease in +ve valency, gain of electrons, decrease in oxidation number.</p>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus"></i> Removal of Oxygen</div>
+                        <div class="formula reaction">CuO + C → Cu + CO</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus"></i> Addition of Hydrogen</div>
+                        <div class="formula reaction">Cl₂ + H₂ → 2HCl</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-minus-circle"></i> Removal of Non-metal</div>
+                        <div class="formula reaction">2HgCl₂ + SnCl₂ → Hg₂Cl₂ + SnCl₄</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-plus-circle"></i> Addition of Metal</div>
+                        <div class="formula reaction">HgCl₂ + Hg → Hg₂Cl₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-down"></i> Decrease in +ve Valency</div>
+                        <div class="formula reaction">Fe³⁺ → Fe²⁺</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-electron"></i> Gain of Electrons (Electronation)</div>
+                        <div class="formula reaction">Zn²⁺ + 2e⁻ → Zn</div>
+                        <div class="formula reaction">Pb²⁺ + 2e⁻ → Pb</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-level-down-alt"></i> Decrease in Oxidation Number</div>
+                        <div class="formula reaction">Mg²⁺ → Mg⁰</div>
+                        <div class="formula reaction">[Fe(CN)₆]³⁻ → [Fe(CN)₆]⁴⁻</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-exchange-alt"></i> Redox Reactions</h2>
+                <div class="definition">
+                    <p>Overall reaction where oxidation and reduction occur simultaneously, involving electron transfer.</p>
+                </div>
+
+                <h3><i class="fas fa-classify"></i> Types of Redox Reactions</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-link"></i> Direct Redox</div>
+                        <div class="topic-item">Oxidation and reduction in same vessel</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-unlink"></i> Indirect Redox</div>
+                        <div class="topic-item">Oxidation and reduction in different vessels (electrochemical cells)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-people-arrows"></i> Intermolecular</div>
+                        <div class="topic-item">One substance oxidized, another reduced</div>
+                        <div class="formula reaction">2Al + Fe₂O₃ → Al₂O₃ + 2Fe</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-user"></i> Intramolecular</div>
+                        <div class="topic-item">One element oxidized, another reduced in same compound</div>
+                        <div class="formula reaction">2KClO₃ → 2KCl + 3O₂</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Oxidising and Reducing Agents</h2>
+                
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-down"></i> Oxidising Agent</div>
+                        <p>Gains electrons, gets reduced; oxidation number decreases.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Reducing Agent</div>
+                        <p>Loses electrons, gets oxidized; oxidation number increases.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-arrow-down"></i> Important Oxidising Agents</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Electronegative Elements</div>
+                        <div class="topic-item">O₂, O₃, X₂ (halogens)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-level-up-alt"></i> Highest Oxidation State</div>
+                        <div class="topic-item">KMnO₄, K₂Cr₂O₇, HNO₃, H₂SO₄, FeCl₃</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-cloud"></i> Oxides</div>
+                        <div class="topic-item">MgO, CuO, CrO₃, CO₂, P₄O₁₀</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-star"></i> Strongest</div>
+                        <div class="topic-item">Fluorine</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-arrow-up"></i> Important Reducing Agents</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tools"></i> Metals</div>
+                        <div class="topic-item">Na, Zn, Fe, Al</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Non-metals</div>
+                        <div class="topic-item">C, H₂, S</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Hydracids</div>
+                        <div class="topic-item">HCl, HBr, HI, H₂S</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-level-down-alt"></i> Lower Oxidation State</div>
+                        <div class="topic-item">FeSO₄, SnCl₂, HgCl₂, Cu₂O</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Metallic Hydrides</div>
+                        <div class="topic-item">NaH, LiH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-leaf"></i> Organic</div>
+                        <div class="topic-item">HCOOH, (COOH)₂, aldehydes, alkanes</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-star"></i> Strongest</div>
+                        <div class="topic-item">Lithium (in solution), Cesium (no water)</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-sync"></i> Dual Agents</h3>
+                <p>Act as both: H₂O₂, SO₂, H₂SO₃, HNO₂, NaNO₂, Na₂SO₃, O₃</p>
+
+                <h3><i class="fas fa-lightbulb"></i> Identification Tips</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Highest Oxidation State</div>
+                        <div class="topic-item">Oxidising agent (e.g., KMnO₄, HNO₃)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Lowest Oxidation State</div>
+                        <div class="topic-item">Reducing agent (e.g., H₂S, SnCl₂)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Intermediate State</div>
+                        <div class="topic-item">Both (e.g., H₂O₂, SO₂)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Electronegative High State</div>
+                        <div class="topic-item">Powerful oxidising (e.g., KClO₃, KIO₃)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Electronegative Low State</div>
+                        <div class="topic-item">Powerful reducing (e.g., I⁻, Br⁻)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-weight-hanging"></i> Equivalent Weight of Oxidising/Reducing Agents</h2>
+                <div class="formula">
+                    Eq. wt. of O.A. = Molecular weight / No. of electrons gained per molecule<br>
+                    = Molecular weight / Change in O.N. per mole
+                </div>
+                <div class="formula">
+                    Eq. wt. of R.A. = Molecular weight / No. of electrons lost per molecule<br>
+                    = Molecular weight / Change in O.N. per mole
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agents</th>
+                            <th>O.N.</th>
+                            <th>Product</th>
+                            <th>O.N.</th>
+                            <th>Change in O.N. per atom</th>
+                            <th>Total Change in O.N. per mole</th>
+                            <th>Eq. wt.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cr₂O₇²⁻</td>
+                            <td>+6</td>
+                            <td>Cr³⁺</td>
+                            <td>+3</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>Mol. wt./6</td>
+                        </tr>
+                        <tr>
+                            <td>C₂O₄²⁻</td>
+                            <td>+3</td>
+                            <td>CO₂</td>
+                            <td>+4</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>Mol. wt./2</td>
+                        </tr>
+                        <tr>
+                            <td>S₂O₃²⁻</td>
+                            <td>+2</td>
+                            <td>S₄O₆²⁻</td>
+                            <td>+2.5</td>
+                            <td>0.5</td>
+                            <td>1</td>
+                            <td>Mol. wt./1</td>
+                        </tr>
+                        <tr>
+                            <td>H₂O₂</td>
+                            <td>-1</td>
+                            <td>H₂O</td>
+                            <td>-2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>Mol. wt./2</td>
+                        </tr>
+                        <tr>
+                            <td>H₂O₂</td>
+                            <td>-1</td>
+                            <td>O₂</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>Mol. wt./2</td>
+                        </tr>
+                        <tr>
+                            <td>MnO₄⁻ (Acidic)</td>
+                            <td>+7</td>
+                            <td>Mn²⁺</td>
+                            <td>+2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>Mol. wt./5</td>
+                        </tr>
+                        <tr>
+                            <td>MnO₄⁻ (Neutral)</td>
+                            <td>+7</td>
+                            <td>MnO₂</td>
+                            <td>+4</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>Mol. wt./3</td>
+                        </tr>
+                        <tr>
+                            <td>MnO₄⁻ (Alkaline)</td>
+                            <td>+7</td>
+                            <td>MnO₄²⁻</td>
+                            <td>+6</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Mol. wt./1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> Oxidation Number or Oxidation State</h2>
+                <div class="definition">
+                    <p>Charge on an atom produced by donating or accepting electrons.</p>
+                </div>
+
+                <h3><i class="fas fa-not-equal"></i> Valency vs Oxidation Number</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Oxidation Number</th>
+                            <th>Valency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Charge (real/imaginary) on atom in combination; + or - sign</td>
+                            <td>Combining capacity; no sign</td>
+                        </tr>
+                        <tr>
+                            <td>May vary depending on compound</td>
+                            <td>Usually fixed</td>
+                        </tr>
+                        <tr>
+                            <td>Whole number or fractional</td>
+                            <td>Always whole number</td>
+                        </tr>
+                        <tr>
+                            <td>May be zero</td>
+                            <td>Never zero (except noble gases)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3><i class="fas fa-tags"></i> Nomenclature</h3>
+                <p>-ous (lower O.N.), -ic (higher O.N.) e.g., cuprous (Cu⁺), cupric (Cu²⁺)</p>
+                <p>Stock system: Roman numerals e.g., Copper(I) oxide (Cu₂O), Iron(II) chloride (FeCl₂)</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Important Points to Remember</h2>
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Key JEE Points</h4>
+                    <ul>
+                        <li>Redox: Oxidation + Reduction simultaneously</li>
+                        <li>Oxidation: Loss of e⁻, ↑ O.N.; Reduction: Gain of e⁻, ↓ O.N.</li>
+                        <li>Spectator ions omitted from net ionic equation</li>
+                        <li>Oxidising agent gets reduced; Reducing agent gets oxidized</li>
+                        <li>Eq. wt. = Mol. wt. / Change in O.N. per mole</li>
+                        <li>O.N. can be fractional; Valency is whole number</li>
+                        <li>Fluorine: Strongest oxidising; Lithium: Strongest reducing in solution</li>
+                        <li>Direct redox: Same vessel; Indirect: Different vessels</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+      
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Physical Chemistry - Redox Reactions Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.topic-card, .definition, .formula, table');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

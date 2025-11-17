@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d and f-Block Elements Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #2e7d32, #4caf50); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .quiz-info { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .question { margin-bottom: 35px; padding: 25px; background: #f8f9fa; border-radius: 12px; border-left: 5px solid #4caf50; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .question:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .question-number { display: inline-block; background: #2e7d32; color: white; width: 40px; height: 40px; border-radius: 50%; text-align: center; line-height: 40px; font-weight: bold; margin-bottom: 15px; font-size: 1.1rem; }
+        .question-text { font-size: 1.1rem; margin-bottom: 20px; color: #2e7d32; font-weight: 600; }
+        .options { display: grid; gap: 12px; }
+        .option { padding: 15px 20px; background: white; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; position: relative; }
+        .option:hover { border-color: #4caf50; background: #f8fff8; transform: translateX(5px); }
+        .option input { margin-right: 12px; transform: scale(1.2); }
+        .option-label { cursor: pointer; flex: 1; font-weight: 500; }
+        .option.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+        .option.wrong { background: #ffebee; border-color: #f44336; color: #c62828; }
+        .feedback { margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 0.95rem; display: none; }
+        .feedback.correct { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+        .feedback.wrong { background: #ffebee; color: #c62828; border-left: 4px solid #f44336; }
+        .submit-btn { display: block; width: 200px; margin: 40px auto; padding: 15px 30px; background: linear-gradient(to right, #2e7d32, #4caf50); color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(46,125,50,0.3); }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(46,125,50,0.4); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .result { text-align: center; padding: 30px; background: linear-gradient(to right, #E8F5E9, #DCEDC8); border-radius: 12px; margin: 30px 0; display: none; }
+        .score { font-size: 2rem; font-weight: bold; color: #2e7d32; margin-bottom: 10px; }
+        .result-message { font-size: 1.2rem; margin-bottom: 20px; }
+        .retry-btn { background: #4caf50; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; margin-top: 15px; }
+        .progress-container { margin-bottom: 30px; text-align: center; }
+        .progress-bar { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin: 15px 0; }
+        .progress-fill { height: 100%; background: linear-gradient(to right, #4caf50, #2e7d32); width: 0%; transition: width 0.5s ease; border-radius: 4px; }
+        .progress-text { font-weight: 600; color: #2e7d32; }
+        footer { text-align: center; padding: 25px; background: linear-gradient(to right, #2e7d32, #4caf50); color: white; margin-top: 40px; }
+        @media (max-width: 768px) { .content { padding: 20px; } h1 { font-size: 2rem; } .question { padding: 20px; } .option { padding: 12px 15px; } }
+        .formula { font-family: 'Cambria Math', serif; background-color: #E8F5E9; padding: 10px 15px; margin: 10px 0; border-radius: 8px; border-left: 4px solid #4caf50; font-size: 1rem; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 19</div>
+            <h1>d and f-Block Elements Quiz</h1>
+            <p class="subtitle">Test Your Knowledge</p>
+            <div class="quiz-info">20 Questions • JEE Main Level • Instant Feedback</div>
+        </header>
+      
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-text">Question <span id="current-q">1</span> of <span id="total-q">20</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="progress-text"><span id="progress-percent">0%</span> Complete</div>
+            </div>
+
+            <form id="quiz-form">
+                <!-- Q1 -->
+                <div class="question">
+                    <div class="question-number">1</div>
+                    <div class="question-text">A transition element is defined as an element whose atom or ion has:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q1" value="a"><span class="option-label">Complete d-subshell</span></label>
+                        <label class="option"><input type="radio" name="q1" value="b"><span class="option-label">Incomplete d-subshell (1-9 electrons)</span></label>
+                        <label class="option"><input type="radio" name="q1" value="c"><span class="option-label">Only s-electrons</span></label>
+                        <label class="option"><input type="radio" name="q1" value="d"><span class="option-label">p-block configuration</span></label>
+                    </div>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question">
+                    <div class="question-number">2</div>
+                    <div class="question-text">The general electronic configuration of d-block elements is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q2" value="a"><span class="option-label">ns² np⁶</span></label>
+                        <label class="option"><input type="radio" name="q2" value="b"><span class="option-label">(n-1)d¹⁻¹⁰ ns¹⁻²</span></label>
+                        <label class="option"><input type="radio" name="q2" value="c"><span class="option-label">(n-2)f¹⁻¹⁴ ns²</span></label>
+                        <label class="option"><input type="radio" name="q2" value="d"><span class="option-label">ns¹</span></label>
+                    </div>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question">
+                    <div class="question-number">3</div>
+                    <div class="question-text">Zn, Cd, Hg are excluded from transition elements because they have:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="a"><span class="option-label">Incomplete d-subshell</span></label>
+                        <label class="option"><input type="radio" name="q3" value="b"><span class="option-label">Complete d¹⁰ configuration</span></label>
+                        <label class="option"><input type="radio" name="q3" value="c"><span class="option-label">Variable oxidation states</span></label>
+                        <label class="option"><input type="radio" name="q3" value="d"><span class="option-label">High melting points</span></label>
+                    </div>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question">
+                    <div class="question-number">4</div>
+                    <div class="question-text">The anomalous configuration of Cr (24) is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q4" value="a"><span class="option-label">[Ar] 3d⁴ 4s²</span></label>
+                        <label class="option"><input type="radio" name="q4" value="b"><span class="option-label">[Ar] 3d⁵ 4s¹</span></label>
+                        <label class="option"><input type="radio" name="q4" value="c"><span class="option-label">[Ar] 3d³ 4s²</span></label>
+                        <label class="option"><input type="radio" name="q4" value="d"><span class="option-label">[Ar] 3d⁶ 4s⁰</span></label>
+                    </div>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question">
+                    <div class="question-number">5</div>
+                    <div class="question-text">Atomic radii of d-block elements across a series:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q5" value="a"><span class="option-label">Increase regularly</span></label>
+                        <label class="option"><input type="radio" name="q5" value="b"><span class="option-label">Decrease regularly to minimum in middle, then slight increase</span></label>
+                        <label class="option"><input type="radio" name="q5" value="c"><span class="option-label">Remain constant</span></label>
+                        <label class="option"><input type="radio" name="q5" value="d"><span class="option-label">Increase to maximum at end</span></label>
+                    </div>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="question">
+                    <div class="question-number">6</div>
+                    <div class="question-text">Nearly equal atomic radii in 4d and 5d series is due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q6" value="a"><span class="option-label">Poor shielding by f-electrons (Lanthanide contraction)</span></label>
+                        <label class="option"><input type="radio" name="q6" value="b"><span class="option-label">High nuclear charge</span></label>
+                        <label class="option"><input type="radio" name="q6" value="c"><span class="option-label">Addition of new shell</span></label>
+                        <label class="option"><input type="radio" name="q6" value="d"><span class="option-label">d-electron pairing</span></label>
+                    </div>
+                    <div class="feedback" id="feedback6"></div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="question">
+                    <div class="question-number">7</div>
+                    <div class="question-text">Ionization energies of transition elements are:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q7" value="a"><span class="option-label">Lower than s-block</span></label>
+                        <label class="option"><input type="radio" name="q7" value="b"><span class="option-label">Higher than s-block, between s and p-block</span></label>
+                        <label class="option"><input type="radio" name="q7" value="c"><span class="option-label">Same as p-block</span></label>
+                        <label class="option"><input type="radio" name="q7" value="d"><span class="option-label">Very low</span></label>
+                    </div>
+                    <div class="feedback" id="feedback7"></div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="question">
+                    <div class="question-number">8</div>
+                    <div class="question-text">Melting points of transition elements are high due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q8" value="a"><span class="option-label">Weak metallic bonds</span></label>
+                        <label class="option"><input type="radio" name="q8" value="b"><span class="option-label">Strong metallic bonds with covalent character</span></label>
+                        <label class="option"><input type="radio" name="q8" value="c"><span class="option-label">Ionic bonding</span></label>
+                        <label class="option"><input type="radio" name="q8" value="d"><span class="option-label">No unpaired electrons</span></label>
+                    </div>
+                    <div class="feedback" id="feedback8"></div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="question">
+                    <div class="question-number">9</div>
+                    <div class="question-text">Maximum melting point in 3d series is at:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q9" value="a"><span class="option-label">Sc</span></label>
+                        <label class="option"><input type="radio" name="q9" value="b"><span class="option-label">Cr (5 unpaired electrons)</span></label>
+                        <label class="option"><input type="radio" name="q9" value="c"><span class="option-label">Zn</span></label>
+                        <label class="option"><input type="radio" name="q9" value="d"><span class="option-label">Cu</span></label>
+                    </div>
+                    <div class="feedback" id="feedback9"></div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="question">
+                    <div class="question-number">10</div>
+                    <div class="question-text">Variable oxidation states in transition elements are due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q10" value="a"><span class="option-label">Only ns electrons</span></label>
+                        <label class="option"><input type="radio" name="q10" value="b"><span class="option-label">Participation of ns and (n-1)d electrons</span></label>
+                        <label class="option"><input type="radio" name="q10" value="c"><span class="option-label">f-electrons</span></label>
+                        <label class="option"><input type="radio" name="q10" value="d"><span class="option-label">p-electrons</span></label>
+                    </div>
+                    <div class="feedback" id="feedback10"></div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="question">
+                    <div class="question-number">11</div>
+                    <div class="question-text">Most common oxidation state for first transition series (except Sc) is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q11" value="a"><span class="option-label">+1</span></label>
+                        <label class="option"><input type="radio" name="q11" value="b"><span class="option-label">+2</span></label>
+                        <label class="option"><input type="radio" name="q11" value="c"><span class="option-label">+3</span></label>
+                        <label class="option"><input type="radio" name="q11" value="d"><span class="option-label">+4</span></label>
+                    </div>
+                    <div class="feedback" id="feedback11"></div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="question">
+                    <div class="question-number">12</div>
+                    <div class="question-text">Highest oxidation state shown by any transition metal is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q12" value="a"><span class="option-label">+6 (Cr)</span></label>
+                        <label class="option"><input type="radio" name="q12" value="b"><span class="option-label">+7 (Mn)</span></label>
+                        <label class="option"><input type="radio" name="q12" value="c"><span class="option-label">+8 (Ru, Os)</span></label>
+                        <label class="option"><input type="radio" name="q12" value="d"><span class="option-label">+4 (Ti)</span></label>
+                    </div>
+                    <div class="feedback" id="feedback12"></div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="question">
+                    <div class="question-number">13</div>
+                    <div class="question-text">Standard electrode potential for Cu²⁺/Cu is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q13" value="a"><span class="option-label">-0.76 V</span></label>
+                        <label class="option"><input type="radio" name="q13" value="b"><span class="option-label">+0.34 V</span></label>
+                        <label class="option"><input type="radio" name="q13" value="c"><span class="option-label">-1.18 V</span></label>
+                        <label class="option"><input type="radio" name="q13" value="d"><span class="option-label">-0.44 V</span></label>
+                    </div>
+                    <div class="feedback" id="feedback13"></div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="question">
+                    <div class="question-number">14</div>
+                    <div class="question-text">Transition metal compounds are colored due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q14" value="a"><span class="option-label">d-d transition of electrons</span></label>
+                        <label class="option"><input type="radio" name="q14" value="b"><span class="option-label">Charge transfer</span></label>
+                        <label class="option"><input type="radio" name="q14" value="c"><span class="option-label">f-f transition</span></label>
+                        <label class="option"><input type="radio" name="q14" value="d"><span class="option-label">s-p transition</span></label>
+                    </div>
+                    <div class="feedback" id="feedback14"></div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="question">
+                    <div class="question-number">15</div>
+                    <div class="question-text">The color of Cu²⁺ ion is:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q15" value="a"><span class="option-label">Green</span></label>
+                        <label class="option"><input type="radio" name="q15" value="b"><span class="option-label">Blue</span></label>
+                        <label class="option"><input type="radio" name="q15" value="c"><span class="option-label">Yellow</span></label>
+                        <label class="option"><input type="radio" name="q15" value="d"><span class="option-label">Violet</span></label>
+                    </div>
+                    <div class="feedback" id="feedback15"></div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="question">
+                    <div class="question-number">16</div>
+                    <div class="question-text">Transition elements show paramagnetism due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q16" value="a"><span class="option-label">Paired electrons</span></label>
+                        <label class="option"><input type="radio" name="q16" value="b"><span class="option-label">Unpaired d-electrons</span></label>
+                        <label class="option"><input type="radio" name="q16" value="c"><span class="option-label">Complete d-orbitals</span></label>
+                        <label class="option"><input type="radio" name="q16" value="d"><span class="option-label">s-electrons</span></label>
+                    </div>
+                    <div class="feedback" id="feedback16"></div>
+                </div>
+
+                <!-- Q17 -->
+                <div class="question">
+                    <div class="question-number">17</div>
+                    <div class="question-text">Maximum paramagnetism in 3d series is shown by ions with:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q17" value="a"><span class="option-label">1 unpaired electron</span></label>
+                        <label class="option"><input type="radio" name="q17" value="b"><span class="option-label">5 unpaired electrons (e.g., Mn²⁺, Fe³⁺)</span></label>
+                        <label class="option"><input type="radio" name="q17" value="c"><span class="option-label">0 unpaired electrons</span></label>
+                        <label class="option"><input type="radio" name="q17" value="d"><span class="option-label">3 unpaired electrons</span></label>
+                    </div>
+                    <div class="feedback" id="feedback17"></div>
+                </div>
+
+                <!-- Q18 -->
+                <div class="question">
+                    <div class="question-number">18</div>
+                    <div class="question-text">High enthalpies of atomization in transition metals are due to:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q18" value="a"><span class="option-label">Weak bonds</span></label>
+                        <label class="option"><input type="radio" name="q18" value="b"><span class="option-label">Strong metallic bonds from valence electrons</span></label>
+                        <label class="option"><input type="radio" name="q18" value="c"><span class="option-label">Ionic character</span></label>
+                        <label class="option"><input type="radio" name="q18" value="d"><span class="option-label">No d-electrons</span></label>
+                    </div>
+                    <div class="feedback" id="feedback18"></div>
+                </div>
+
+                <!-- Q19 -->
+                <div class="question">
+                    <div class="question-number">19</div>
+                    <div class="question-text">All transition elements are:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q19" value="a"><span class="option-label">Non-metals</span></label>
+                        <label class="option"><input type="radio" name="q19" value="b"><span class="option-label">Metals with high conductivity and malleability</span></label>
+                        <label class="option"><input type="radio" name="q19" value="c"><span class="option-label">Gases</span></label>
+                        <label class="option"><input type="radio" name="q19" value="d"><span class="option-label">Poor conductors</span></label>
+                    </div>
+                    <div class="feedback" id="feedback19"></div>
+                </div>
+
+                <!-- Q20 -->
+                <div class="question">
+                    <div class="question-number">20</div>
+                    <div class="question-text">Non-typical transition elements include:</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q20" value="a"><span class="option-label">Only group 3</span></label>
+                        <label class="option"><input type="radio" name="q20" value="b"><span class="option-label">Group 3 (Sc, Y, La, Ac) and group 12 (Zn, Cd, Hg)</span></label>
+                        <label class="option"><input type="radio" name="q20" value="c"><span class="option-label">Only group 12</span></label>
+                        <label class="option"><input type="radio" name="q20" value="d"><span class="option-label">s-block elements</span></label>
+                    </div>
+                    <div class="feedback" id="feedback20"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Quiz</button>
+            </form>
+
+            <div class="result" id="result">
+                <div class="score" id="score">0/20</div>
+                <div class="result-message" id="result-message"></div>
+                <button class="retry-btn" id="retry-btn">Try Again</button>
+            </div>
+        </div>
+      
+        <footer>JEE Main Inorganic Chemistry - d and f-Block Elements Quiz</footer>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'b', q2: 'b', q3: 'b', q4: 'b', q5: 'b', q6: 'a', q7: 'b', q8: 'b', q9: 'b', q10: 'b',
+            q11: 'b', q12: 'c', q13: 'b', q14: 'a', q15: 'b', q16: 'b', q17: 'b', q18: 'b', q19: 'b', q20: 'b'
+        };
+
+        const explanations = {
+            q1: 'Transition elements have incomplete d-subshell (1-9 electrons) in atom or common ion.',
+            q2: 'General configuration: (n-1)d¹⁻¹⁰ ns¹⁻².',
+            q3: 'Zn, Cd, Hg have d¹⁰ configuration, no incomplete d-subshell.',
+            q4: 'Cr: [Ar] 3d⁵ 4s¹ due to half-filled d⁵ stability.',
+            q5: 'Radii decrease to minimum near middle, then slight increase due to shielding.',
+            q6: 'Lanthanide contraction: poor shielding by 4f electrons.',
+            q7: 'IE between s and p-block, higher than s-block due to small size and high charge.',
+            q8: 'Strong metallic bonds with covalent character from unpaired d-electrons.',
+            q9: 'Cr has 6 unpaired electrons total, maximum metallic bond strength.',
+            q10: 'ns and (n-1)d electrons participate in bonding.',
+            q11: '+2 from loss of 4s electrons; d-orbitals more stable after Sc.',
+            q12: '+8 by Ru and Os in fluorides/oxides.',
+            q13: 'Cu²⁺/Cu: +0.34 V (positive, less reducing).',
+            q14: 'd-d transitions absorb visible light.',
+            q15: 'Cu²⁺ (3d⁹, 1 unpaired) is blue.',
+            q16: 'Unpaired d-electrons cause paramagnetism.',
+            q17: '5 unpaired electrons give maximum magnetic moment.',
+            q18: 'Strong metallic bonds from many valence electrons.',
+            q19: 'All are metals: hard, conductive, malleable, ductile.',
+            q20: 'Group 3 and 12 do not show typical transition properties.'
+        };
+
+        const totalQuestions = 20;
+        let currentScore = 0;
+
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            checkAnswers();
+        });
+
+        document.getElementById('retry-btn').addEventListener('click', () => location.reload());
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const name = this.name;
+                const selected = this.value;
+                const qNum = name.replace('q', '');
+                const feedback = document.getElementById(`feedback${qNum}`);
+                const option = this.parentElement;
+
+                if (selected === correctAnswers[name]) {
+                    option.classList.add('correct');
+                    feedback.textContent = `Correct! ${explanations[name]}`;
+                    feedback.classList.add('correct');
+                } else {
+                    option.classList.add('wrong');
+                    feedback.textContent = `Wrong. ${explanations[name]}`;
+                    feedback.classList.add('wrong');
+                }
+                feedback.style.display = 'block';
+                updateProgress();
+            });
+        });
+
+        function checkAnswers() {
+            currentScore = 0;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === correctAnswers[`q${i}`]) currentScore++;
+            }
+            showResult();
+        }
+
+        function updateProgress() {
+            const checked = document.querySelectorAll('input[type="radio"]:checked').length;
+            const percent = (checked / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-percent').textContent = Math.round(percent) + '%';
+            document.getElementById('current-q').textContent = checked;
+        }
+
+        function showResult() {
+            document.getElementById('score').textContent = `${currentScore}/${totalQuestions}`;
+            const percentage = (currentScore / totalQuestions) * 100;
+            let message = '';
+            if (percentage >= 90) message = 'Outstanding! Mastered d and f-Block Elements!';
+            else if (percentage >= 75) message = 'Excellent! Strong grasp!';
+            else if (percentage >= 60) message = 'Good! Keep practicing!';
+            else if (percentage >= 40) message = 'Fair. Revise thoroughly.';
+            else message = 'Needs improvement. Study again!';
+            document.getElementById('result-message').textContent = message;
+            document.getElementById('result').style.display = 'block';
+            document.querySelector('.submit-btn').disabled = true;
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>

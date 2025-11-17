@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution and Colligative Properties</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #1565C0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1565C0;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #1E88E5;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #42A5F5;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1565C0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #E3F2FD;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1E88E5;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #1565C0, #1E88E5);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #E3F2FD;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1565C0, #42A5F5);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #E3F2FD;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #FFF8E1, #FFECB3);
+            border-left: 4px solid #FFA000;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #FF6F00;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0D47A1, #1565C0);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #1565C0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #E3F2FD;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #42A5F5, #1565C0);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #E1F5FE 0%, #E1F5FE 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .key-concept {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #7B1FA2;
+        }
+        
+        .key-concept h4 {
+            color: #7B1FA2;
+            margin-top: 0;
+        }
+        
+        .model-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .model-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+        
+        .bond-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bond-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Solution Chemistry</div>
+            <h1>Solution and Colligative Properties</h1>
+            <p class="subtitle">Concentration Units, Raoult's Law, and Colligative Properties</p>
+            <div class="importance">High Weightage in JEE Main</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Introduction</h2>
+                <p>A solution is a homogeneous mixture of two or more substances where the components are uniformly distributed at the molecular level. The substance present in smaller quantity is called the <span class="highlight">solute</span>, while the substance present in larger quantity is called the <span class="highlight">solvent</span>.</p>
+                
+                <div class="definition">
+                    <p><strong>Solubility</strong> is defined as the maximum amount of solute that can dissolve in 100g of solvent at a given temperature to form a saturated solution.</p>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Types of Solutions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Solvent</th>
+                            <th>Solute</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gas</td>
+                            <td>Gas</td>
+                            <td>Air</td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td>Liquid</td>
+                            <td>Humid air</td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td>Solid</td>
+                            <td>Smoke</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Gas</td>
+                            <td>Aerated drinks</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Liquid</td>
+                            <td>Alcohol in water</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Solid</td>
+                            <td>Sugar in water</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Gas</td>
+                            <td>H₂ in Pd</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Liquid</td>
+                            <td>Hg in Zn</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Solid</td>
+                            <td>Alloys</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> Concentration Units</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-percentage"></i> Percentage</div>
+                        <div class="topic-item">% w/w = (Wt. solute / Wt. solution) × 100</div>
+                        <div class="topic-item">% w/v = (Wt. solute / Vol. solution) × 100</div>
+                        <div class="topic-item">% v/v = (Vol. solute / Vol. solution) × 100</div>
+                        <div class="topic-item">% v/w = (Vol. solute / Wt. solution) × 100</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Molarity (M)</div>
+                        <div class="topic-item">Moles of solute per liter of solution</div>
+                        <div class="topic-item">Temperature dependent</div>
+                        <div class="topic-item">M = n/V (in liters)</div>
+                        <div class="topic-item">Most common concentration unit</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-balance-scale"></i> Molality (m)</div>
+                        <div class="topic-item">Moles of solute per kg of solvent</div>
+                        <div class="topic-item">Temperature independent</div>
+                        <div class="topic-item">m = (moles of solute) / (kg of solvent)</div>
+                        <div class="topic-item">Preferred for precise work</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-vial"></i> Normality (N)</div>
+                        <div class="topic-item">Gram equivalents per liter of solution</div>
+                        <div class="topic-item">N = M × n-factor</div>
+                        <div class="topic-item">Used in titrations</div>
+                        <div class="topic-item">Temperature dependent</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-divide"></i> Mole Fraction (X)</div>
+                        <div class="topic-item">Ratio of moles of component to total moles</div>
+                        <div class="topic-item">Temperature independent</div>
+                        <div class="topic-item">X<sub>A</sub> + X<sub>B</sub> = 1</div>
+                        <div class="topic-item">Used in Raoult's Law</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tachometer-alt"></i> Parts Per Million (ppm)</div>
+                        <div class="topic-item">For very dilute solutions</div>
+                        <div class="topic-item">ppm = (mass of solute / total mass) × 10⁶</div>
+                        <div class="topic-item">Temperature independent</div>
+                        <div class="topic-item">Used for trace contaminants</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-link"></i> Important Relationships</h3>
+                <div class="formula">
+                    Normality = Molarity × n-factor (n = basicity for acids, acidity for bases)
+                </div>
+                <div class="formula">
+                    Molarity (M) = (Molality × Density) / (1 + (Molality × Molecular Mass / 1000))
+                </div>
+                <div class="formula">
+                    Molality (m) = Molarity / (Density - (Molarity × Molecular Mass / 1000))
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-temperature-low"></i> Colligative Properties</h2>
+                
+                <p>Colligative properties depend only on the number of solute particles in solution, not on their identity. The four main colligative properties are:</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Vapor Pressure Lowering</div>
+                        <div class="topic-item">Due to non-volatile solute</div>
+                        <div class="topic-item">ΔP = P⁰ - P = P⁰X<sub>solute</sub></div>
+                        <div class="topic-item">Relative lowering = (P⁰ - P)/P⁰ = X<sub>solute</sub></div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-full"></i> Boiling Point Elevation</div>
+                        <div class="topic-item">ΔT<sub>b</sub> = K<sub>b</sub> × m</div>
+                        <div class="topic-item">K<sub>b</sub> = molal elevation constant</div>
+                        <div class="topic-item">m = molality</div>
+                        <div class="topic-item">K<sub>b</sub> (water) = 0.52 °C kg mol⁻¹</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-empty"></i> Freezing Point Depression</div>
+                        <div class="topic-item">ΔT<sub>f</sub> = K<sub>f</sub> × m</div>
+                        <div class="topic-item">K<sub>f</sub> = molal depression constant</div>
+                        <div class="topic-item">m = molality</div>
+                        <div class="topic-item">K<sub>f</sub> (water) = 1.86 °C kg mol⁻¹</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compress-arrows-alt"></i> Osmotic Pressure</div>
+                        <div class="topic-item">π = CRT</div>
+                        <div class="topic-item">π = (n/V)RT</div>
+                        <div class="topic-item">C = molar concentration</div>
+                        <div class="topic-item">Most sensitive colligative property</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Raoult's Law</h2>
+                
+                <div class="definition">
+                    <p><strong>Raoult's Law</strong> states that the partial vapor pressure of each component in an ideal solution is equal to the vapor pressure of the pure component multiplied by its mole fraction in the solution: P<sub>A</sub> = P⁰<sub>A</sub> × X<sub>A</sub></p>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Ideal vs Non-Ideal Solutions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Ideal Solution</th>
+                            <th>Positive Deviation</th>
+                            <th>Negative Deviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Raoult's Law</td>
+                            <td>Obeys</td>
+                            <td>Does not obey</td>
+                            <td>Does not obey</td>
+                        </tr>
+                        <tr>
+                            <td>ΔH<sub>mix</sub></td>
+                            <td>= 0</td>
+                            <td>> 0 (Endothermic)</td>
+                            <td>< 0 (Exothermic)</td>
+                        </tr>
+                        <tr>
+                            <td>ΔV<sub>mix</sub></td>
+                            <td>= 0</td>
+                            <td>> 0</td>
+                            <td>< 0</td>
+                        </tr>
+                        <tr>
+                            <td>Molecular Interactions</td>
+                            <td>A-A ≈ A-B ≈ B-B</td>
+                            <td>A-B < A-A, B-B</td>
+                            <td>A-B > A-A, B-B</td>
+                        </tr>
+                        <tr>
+                            <td>Examples</td>
+                            <td>Benzene + Toluene</td>
+                            <td>Acetone + Ethanol</td>
+                            <td>Acetone + Chloroform</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-flask"></i> Azeotropic Mixtures</h3>
+                <p>Azeotropes are constant boiling mixtures that have the same composition in liquid and vapor phases. They cannot be separated by simple distillation.</p>
+                
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-down"></i> Minimum Boiling Azeotrope</div>
+                        <div class="topic-item">Show positive deviation</div>
+                        <div class="topic-item">Boiling point lower than components</div>
+                        <div class="topic-item">Example: Ethanol + Water (95.6%)</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-up"></i> Maximum Boiling Azeotrope</div>
+                        <div class="topic-item">Show negative deviation</div>
+                        <div class="topic-item">Boiling point higher than components</div>
+                        <div class="topic-item">Example: HCl + Water (20.2%)</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-compress-alt"></i> Osmosis and Osmotic Pressure</h2>
+                
+                <div class="definition">
+                    <p><strong>Osmosis</strong> is the spontaneous flow of solvent molecules through a semipermeable membrane from a pure solvent to a solution or from a dilute to a concentrated solution.</p>
+                </div>
+                
+                <h3><i class="fas fa-exchange-alt"></i> Types of Osmosis</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Exo-Osmosis</div>
+                        <div class="topic-item">Outward flow of solvent</div>
+                        <div class="topic-item">Cell placed in hypertonic solution</div>
+                        <div class="topic-item">Cell shrinks</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-left"></i> Endo-Osmosis</div>
+                        <div class="topic-item">Inward flow of solvent</div>
+                        <div class="topic-item">Cell placed in hypotonic solution</div>
+                        <div class="topic-item">Cell swells</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-redo-alt"></i> Reverse Osmosis</div>
+                        <div class="topic-item">Applied pressure > osmotic pressure</div>
+                        <div class="topic-item">Solvent flows from solution to pure solvent</div>
+                        <div class="topic-item">Used in water purification</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-vial"></i> Types of Solutions Based on Osmotic Pressure</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Osmotic Pressure</th>
+                            <th>Solvent Flow</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Isotonic</td>
+                            <td>π<sub>1</sub> = π<sub>2</sub></td>
+                            <td>No net flow</td>
+                            <td>0.9% NaCl (physiological saline)</td>
+                        </tr>
+                        <tr>
+                            <td>Hypertonic</td>
+                            <td>π<sub>1</sub> > π<sub>2</sub></td>
+                            <td>Into solution 1</td>
+                            <td>Concentrated salt solution</td>
+                        </tr>
+                        <tr>
+                            <td>Hypotonic</td>
+                            <td>π<sub>1</sub> < π<sub>2</sub></td>
+                            <td>Out of solution 1</td>
+                            <td>Distilled water</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="formula">
+                    Van't Hoff Equation for Osmotic Pressure: π = CRT = (n/V)RT
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Abnormal Molecular Masses</h2>
+                
+                <p>When solutes dissociate or associate in solution, the observed colligative properties differ from expected values, leading to abnormal molecular masses.</p>
+                
+                <div class="two-column">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-expand-arrows-alt"></i> Dissociation</div>
+                        <div class="topic-item">Increases number of particles</div>
+                        <div class="topic-item">Observed molecular mass < Normal molecular mass</div>
+                        <div class="topic-item">Van't Hoff factor i > 1</div>
+                        <div class="topic-item">Example: NaCl → Na⁺ + Cl⁻</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compress-arrows-alt"></i> Association</div>
+                        <div class="topic-item">Decreases number of particles</div>
+                        <div class="topic-item">Observed molecular mass > Normal molecular mass</div>
+                        <div class="topic-item">Van't Hoff factor i < 1</div>
+                        <div class="topic-item">Example: 2CH₃COOH ⇌ (CH₃COOH)₂</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-calculator"></i> Van't Hoff Factor (i)</h3>
+                <div class="formula">
+                    i = (Normal molecular mass) / (Observed molecular mass)
+                </div>
+                <div class="formula">
+                    i = (Observed colligative property) / (Calculated colligative property)
+                </div>
+                <div class="formula">
+                    i = (Number of particles after dissociation/association) / (Number of particles before dissociation/association)
+                </div>
+                
+                <h3><i class="fas fa-percentage"></i> Degree of Dissociation/Association</h3>
+                <div class="formula">
+                    For dissociation: α = (i - 1) / (n - 1) where n = number of ions
+                </div>
+                <div class="formula">
+                    For association: α = (i - 1) / (1/n - 1) where n = number of molecules associating
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Modified Colligative Properties</h4>
+                    <ul>
+                        <li>Relative lowering of vapor pressure = iX<sub>B</sub></li>
+                        <li>Elevation in boiling point: ΔT<sub>b</sub> = iK<sub>b</sub>m</li>
+                        <li>Depression in freezing point: ΔT<sub>f</sub> = iK<sub>f</sub>m</li>
+                        <li>Osmotic pressure: π = iCRT</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> Important Points to Remember</h2>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-exclamation-circle"></i> Key Points for JEE Main</h4>
+                    <ul>
+                        <li>Molality is temperature independent, while molarity is temperature dependent</li>
+                        <li>Osmotic pressure is the most sensitive colligative property for determining molecular mass</li>
+                        <li>For electrolytes, colligative properties depend on the number of ions produced</li>
+                        <li>Raoult's law is applicable only to ideal solutions and very dilute solutions</li>
+                        <li>Azeotropes cannot be separated by simple distillation</li>
+                        <li>Reverse osmosis is used in water purification and desalination</li>
+                        <li>Van't Hoff factor i > 1 for dissociation, i < 1 for association</li>
+                    </ul>
+                </div>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-check-circle"></i> Do's</h3>
+                        <div class="topic-item">Practice concentration unit conversions</div>
+                        <div class="topic-item">Understand the difference between molarity and molality</div>
+                        <div class="topic-item">Learn to calculate Van't Hoff factor</div>
+                        <div class="topic-item">Memorize K<sub>b</sub> and K<sub>f</sub> values for water</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-times-circle"></i> Don'ts</h3>
+                        <div class="topic-item">Don't confuse molarity with molality</div>
+                        <div class="topic-item">Don't forget to account for dissociation/association</div>
+                        <div class="topic-item">Don't apply Raoult's law to concentrated solutions</div>
+                        <div class="topic-item">Don't neglect temperature effects on molarity</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                
+                <p>This chapter typically carries <span class="highlight">2-3 questions</span> in JEE Main, making it a high-weightage chapter. Questions often focus on concentration calculations, colligative properties, Raoult's law, and Van't Hoff factor.</p>
+                
+                <div class="weightage-item">
+                    <h4>Chapter Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 75%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>High (2-3 questions)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - Solution and Colligative Properties Summary</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-print"></i> Print</a>
+                    <a href="#"><i class="fas fa-download"></i> Download</a>
+                    <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
