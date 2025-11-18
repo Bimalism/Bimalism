@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldehydes and Ketones Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2e7d32, #4caf50, #66bb6a);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carbonyl-animation {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carbonyl {
+            width: 60px;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 10px;
+            position: relative;
+            border: 2px solid #333;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .carbonyl::before {
+            content: 'C=O';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #2e7d32;
+        }
+        
+        .electron {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ff9800;
+            border-radius: 50%;
+            opacity: 0;
+            animation: orbit 3s ease-in-out infinite;
+        }
+        
+        .electron:nth-child(1) {
+            top: 5px;
+            left: 10px;
+            animation-delay: 0s;
+        }
+        
+        .electron:nth-child(2) {
+            top: 10px;
+            right: 5px;
+            animation-delay: 0.8s;
+        }
+        
+        .electron:nth-child(3) {
+            bottom: 5px;
+            left: 15px;
+            animation-delay: 1.6s;
+        }
+        
+        @keyframes orbit {
+            0% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(40px, 20px); opacity: 0; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #2e7d32;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #e8f5e9;
+            border-color: #2e7d32;
+        }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #2e7d32;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #2e7d32;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .carbonyl-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="carbonyl-animation">
+                <div class="carbonyl">
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                </div>
+            </div>
+            <h1>Chapter 27: Aldehydes and Ketones</h1>
+            <div class="subtitle">Test your knowledge of carbonyl compounds, preparation, and reactions</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">25</span></span>
+                    <span>Score: <span id="score">0</span>/25</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: Aldehydes and Ketones</div>
+                    <div>Level: JEE Advanced</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/25</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carbonylQuiz = [
+            {
+                q: "What is the general formula for aldehydes and ketones?",
+                o: ["CₙH₂ₙ₊₂O", "CₙH₂ₙO", "CₙH₂ₙ₊₁O", "CₙH₂ₙ₋₂O"],
+                a: 1,
+                exp: "Both aldehydes and ketones follow the general formula CₙH₂ₙO."
+            },
+            {
+                q: "The carbonyl carbon is sp² hybridized with bond angle:",
+                o: ["109.5°", "120°", "180°", "90°"],
+                a: 1,
+                exp: "Carbonyl carbon is sp² hybridized, hence bond angle is 120°."
+            },
+            {
+                q: "Which reagent converts 1° alcohol to aldehyde without over-oxidation?",
+                o: ["KMnO₄", "K₂Cr₂O₇/H⁺", "PCC", "LiAlH₄"],
+                a: 2,
+                exp: "PCC (Pyridinium chlorochromate) stops at aldehyde stage."
+            },
+            {
+                q: "Oppenauer oxidation is used for:",
+                o: ["1° alcohol → aldehyde", "2° alcohol → ketone", "Aldehyde → acid", "Ketone → alcohol"],
+                a: 1,
+                exp: "Secondary alcohols are oxidized to ketones using aluminium tert-butoxide."
+            },
+            {
+                q: "Rosenmund reduction uses:",
+                o: ["RCOCl → RCHO", "RCHO → RCH₂OH", "RCOOH → RCHO", "RCN → RCHO"],
+                a: 0,
+                exp: "Acid chloride is reduced to aldehyde using H₂/Pd-BaSO₄."
+            },
+            {
+                q: "Stephen reduction converts:",
+                o: ["RCN → RCHO", "RCOCl → RCHO", "RCOOH → RCHO", "RCH₂OH → RCHO"],
+                a: 0,
+                exp: "Nitriles are reduced to aldehydes using SnCl₂/HCl."
+            },
+            {
+                q: "Etard reaction is used to prepare:",
+                o: ["Benzaldehyde", "Acetophenone", "Benzophenone", "Salicylaldehyde"],
+                a: 0,
+                exp: "Toluene → Benzaldehyde using CrO₂Cl₂."
+            },
+            {
+                q: "Reimer-Tiemann reaction gives:",
+                o: ["Benzaldehyde", "Salicylaldehyde", "Benzophenone", "Acetophenone"],
+                a: 1,
+                exp: "Phenol + CHCl₃/OH⁻ → o-hydroxybenzaldehyde (salicylaldehyde)."
+            },
+            {
+                q: "Which has higher boiling point?",
+                o: ["Aldehyde", "Ketone", "Alcohol", "Alkane"],
+                a: 2,
+                exp: "Alcohols have H-bonding → highest BP among isomeric compounds."
+            },
+            {
+                q: "Reactivity order of carbonyl compounds:",
+                o: ["HCHO > RCHO > RCOR > ArCHO", "ArCHO > RCOR > RCHO > HCHO", "RCOR > RCHO > HCHO > ArCHO", "All equal"],
+                a: 0,
+                exp: "+I effect and steric hindrance decrease reactivity down the order."
+            },
+            {
+                q: "Which gives haloform test?",
+                o: ["Only aldehydes", "Only methyl ketones", "Both methyl ketones and acetaldehyde", "Only acetophenone"],
+                a: 2,
+                exp: "Compounds with CH₃CO– or CH₃CH(OH)– group give haloform."
+            },
+            {
+                q: "Cannizzaro reaction is given by:",
+                o: ["Aldehydes with α-H", "Aldehydes without α-H", "Ketones", "Carboxylic acids"],
+                a: 1,
+                exp: "No α-H → no enolization → undergoes disproportionation."
+            },
+            {
+                q: "Aldol condensation requires:",
+                o: ["Only aldehyde", "Only ketone", "At least one α-H", "No α-H"],
+                a: 2,
+                exp: "α-hydrogen is essential for enolate formation."
+            },
+            {
+                q: "Which does NOT give addition with NaHSO₃?",
+                o: ["HCHO", "CH₃CHO", "CH₃COCH₃", "Benzaldehyde"],
+                a: 3,
+                exp: "Aromatic aldehydes/ketones do not form bisulfite adduct."
+            },
+            {
+                q: "Oxidation of which gives carboxylic acid with same carbon?",
+                o: ["1° alcohol", "2° alcohol", "Aldehyde", "Ketone"],
+                a: 2,
+                exp: "RCHO → RCOOH (same carbon count)."
+            },
+            {
+                q: "Which is used in perfume industry?",
+                o: ["Formaldehyde", "Acetaldehyde", "Higher aldehydes/ketones", "Acetone"],
+                a: 2,
+                exp: "Higher members have pleasant smell."
+            },
+            {
+                q: "Nef reaction converts:",
+                o: ["Nitroalkane → carbonyl", "Alkene → carbonyl", "Alcohol → carbonyl", "Halide → carbonyl"],
+                a: 0,
+                exp: "RCH₂NO₂ → RCHO via hydrolysis."
+            },
+            {
+                q: "Gattermann-Koch reaction uses:",
+                o: ["CO + HCl", "HCN + HCl", "CHCl₃ + KOH", "HCHO + NH₃"],
+                a: 0,
+                exp: "ArH + CO/HCl/AlCl₃ → ArCHO."
+            },
+            {
+                q: "Which shows resonance in carbonyl group?",
+                o: ["C=O ↔ C⁺–O⁻", "C=O ↔ C⁻–O⁺", "C–O ↔ C=O", "No resonance"],
+                a: 0,
+                exp: "Oxygen is more electronegative → partial negative charge."
+            },
+            {
+                q: "Which has highest dipole moment?",
+                o: ["Formaldehyde", "Acetaldehyde", "Acetone", "Benzaldehyde"],
+                a: 2,
+                exp: "Two alkyl groups increase +I effect → higher polarity."
+            },
+            {
+                q: "Which does NOT undergo nucleophilic addition?",
+                o: ["HCHO", "CH₃CHO", "Benzophenone", "Acetone"],
+                a: 2,
+                exp: "Steric hindrance in (Ph)₂CO reduces reactivity significantly."
+            },
+            {
+                q: "Cross aldol between HCHO and CH₃CHO gives:",
+                o: ["Only one product", "Two products", "No reaction", "Polymer"],
+                a: 0,
+                exp: "HCHO has no α-H → only one aldol product."
+            },
+            {
+                q: "Which reduces Tollens' reagent?",
+                o: ["Only aldehydes", "Only ketones", "Both", "Neither"],
+                a: 0,
+                exp: "Aldehydes give silver mirror; ketones do not."
+            },
+            {
+                q: "Fehling's test is positive for:",
+                o: ["Aliphatic aldehydes", "Aromatic aldehydes", "Ketones", "Carboxylic acids"],
+                a: 0,
+                exp: "Only aliphatic aldehydes reduce Fehling's solution."
+            },
+            {
+                q: "Which is correct order of nucleophilic addition?",
+                o: ["HCHO > CH₃CHO > CH₃COCH₃ > PhCHO > PhCOCH₃ > (Ph)₂CO", "Reverse order", "All equal", "Random"],
+                a: 0,
+                exp: "Electronic and steric factors decrease reactivity in this order."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(carbonylQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = carbonylQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = carbonylQuiz[currentQuestion];
+            questionText.innerHTML = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / carbonylQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const optionText = document.createElement('div');
+                optionText.innerHTML = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                // If user has already selected this option
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    
+                    if (userAnswers[currentQuestion] !== null) {
+                        if (index === question.a) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation shown if answered
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.innerHTML = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            // Button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === carbonylQuiz.length - 1 ? 'Finish' : 'Next';
+            
+            // Update score
+            scoreEl.textContent = score;
+        }
+        
+        // Select option
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            const question = carbonylQuiz[currentQuestion];
+            
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.a].classList.add('correct');
+            }
+            
+            explanation.style.display = 'block';
+            explanationText.innerHTML = question.exp;
+        }
+        
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < carbonylQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        // Show results
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            finalScore.textContent = `${score}/${carbonylQuiz.length}`;
+            
+            if (score === carbonylQuiz.length) {
+                scoreText.textContent = "Perfect! You're a Carbonyl Master!";
+            } else if (score >= carbonylQuiz.length * 0.8) {
+                scoreText.textContent = "Outstanding! Expert in named reactions!";
+            } else if (score >= carbonylQuiz.length * 0.6) {
+                scoreText.textContent = "Great! Strong grasp of preparation methods.";
+            } else if (score >= carbonylQuiz.length * 0.4) {
+                scoreText.textContent = "Good effort! Revise reactivity order and tests.";
+            } else {
+                scoreText.textContent = "Keep practicing! Focus on nucleophilic addition.";
+            }
+        }
+        
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(carbonylQuiz.length).fill(null);
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            loadQuestion();
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Start quiz
+        initQuiz();
+    </script>
+</body>
+</html>

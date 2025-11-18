@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitrogen Compounds Summary Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6, #60a5fa);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nitrogen-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .n-atom {
+            width: 50px;
+            height: 50px;
+            background: #60a5fa;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+        }
+        
+        .n-atom::before {
+            content: 'N';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .electron {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: orbit 3s linear infinite;
+        }
+        
+        .electron:nth-child(1) { top: 10px; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .electron:nth-child(2) { top: 50%; right: 10px; transform: translateY(-50%); animation-delay: 0.5s; }
+        .electron:nth-child(3) { bottom: 10px; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
+        .electron:nth-child(4) { top: 50%; left: 10px; transform: translateY(-50%); animation-delay: 1.5s; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes orbit {
+            0% { transform: translateX(-50%) rotate(0deg) translateX(30px) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg) translateX(30px) rotate(-360deg); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #dbeafe;
+            border-color: #1e3a8a;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #1e3a8a;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #1e3a8a;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nitrogen-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nitrogen-animation">
+                <div class="n-atom">
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                    <div class="electron"></div>
+                </div>
+            </div>
+            <h1>Chapter 29: Nitrogen Compounds</h1>
+            <div class="subtitle">Summary Quiz from SelfStudys Notes (19 Pages)</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
+                    <span>Score: <span id="score">0</span>/20</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: Alkyl Nitrites & Nitroalkanes</div>
+                    <div>Level: JEE Main/NEET</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/20</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const summaryQuiz = [
+            {
+                q: "Nitrous acid exists in tautomeric forms as:",
+                o: ["H–O–N=O and H–O=N–O", "H–N=O and H–O–N=O", "H–N=O₂ and H–O–NO", "Only HNO₂"],
+                a: 0,
+                exp: "Nitrous acid shows tautomerism: Nitrite form (H–O–N=O) ⇌ Nitro form (H–O=N–O)."
+            },
+            {
+                q: "Alkyl nitrites are regarded as:",
+                o: ["Nitro derivatives of alkanes", "Alkyl esters of nitrous acid", "Nitroso compounds", "Azo compounds"],
+                a: 1,
+                exp: "Alkyl nitrites (RONO) are esters of nitrous acid, while nitroalkanes (RNO₂) are nitro derivatives of alkanes."
+            },
+            {
+                q: "Ethyl nitrite is prepared by:",
+                o: ["C₂H₅OH + HNO₃", "C₂H₅I + AgNO₂", "C₂H₅OH + HNO₂", "C₂H₅Br + NaNO₂"],
+                a: 2,
+                exp: "C₂H₅OH + HNO₂ → C₂H₅ONO + H₂O at 0°C."
+            },
+            {
+                q: "Boiling point of ethyl nitrite is:",
+                o: ["17°C", "115°C", "78°C", "-10°C"],
+                a: 0,
+                exp: "Ethyl nitrite is a gas at room temperature, liquefies on cooling (b.p. 17°C)."
+            },
+            {
+                q: "Reduction of ethyl nitrite with Sn/HCl gives:",
+                o: ["C₂H₅NH₂", "C₂H₅OH + NH₂OH", "C₂H₅OH + NH₃", "CH₃CHO"],
+                a: 1,
+                exp: "C₂H₅ONO + 6H → C₂H₅OH + NH₂OH + H₂O (hydroxylamine formed)."
+            },
+            {
+                q: "Nitroalkanes are prepared by heating alkyl halide with:",
+                o: ["KCN", "AgNO₂", "NaNO₂", "AgCN"],
+                a: 1,
+                exp: "RX + AgNO₂ → RNO₂ + AgX (some alkyl nitrite also formed, removed by distillation)."
+            },
+            {
+                q: "Primary nitroalkanes on hydrolysis give:",
+                o: ["Ketone + HNO₂", "Carboxylic acid + NH₂OH", "Aldehyde + N₂", "Amine + H₂O"],
+                a: 1,
+                exp: "RCH₂NO₂ + H₂O → RCOOH + NH₂OH."
+            },
+            {
+                q: "Secondary nitroalkanes with HNO₂ give:",
+                o: ["Red color", "Blue solution", "Green color", "No reaction"],
+                a: 1,
+                exp: "Secondary nitroalkanes form pseudonitrol → blue color in alkali."
+            },
+            {
+                q: "Which nitroalkane does NOT react with nitrous acid?",
+                o: ["Primary", "Secondary", "Tertiary", "All react"],
+                a: 2,
+                exp: "Tertiary nitroalkanes have no α-hydrogen, hence no reaction with HNO₂."
+            },
+            {
+                q: "α-hydrogen in nitroalkanes is acidic due to:",
+                o: ["+I effect of NO₂", "Resonance stabilization of carbanion", "Hyperconjugation", "Inductive effect only"],
+                a: 1,
+                exp: "NO₂ shows strong –I effect and resonance stabilizes [R–CH–NO₂]⁻."
+            },
+            {
+                q: "Boiling point of nitroethane is:",
+                o: ["17°C", "115°C", "78°C", "36°C"],
+                a: 1,
+                exp: "Nitroethane (C₂H₅NO₂) has b.p. 115°C due to polarity and H-bonding."
+            },
+            {
+                q: "Ethyl nitrite on hydrolysis gives:",
+                o: ["C₂H₅NH₂", "C₂H₅OH + HNO₂", "CH₃CHO", "C₂H₅NO₂"],
+                a: 1,
+                exp: "C₂H₅ONO + H₂O → C₂H₅OH + HNO₂."
+            },
+            {
+                q: "Vapour phase nitration is used for:",
+                o: ["Aromatic compounds", "Direct nitration of alkanes", "Nitrobenzene", "Aniline"],
+                a: 1,
+                exp: "RH + HNO₃ (400°C) → RNO₂ + H₂O."
+            },
+            {
+                q: "Tertiary nitroalkanes are prepared by:",
+                o: ["RX + AgNO₂", "KMnO₄ oxidation of t-alkyl amine", "Halo acid + NaNO₂", "All of above"],
+                a: 1,
+                exp: "R₃CNH₂ + KMnO₄ → R₃CNO₂ + H₂O."
+            },
+            {
+                q: "Nitroalkanes are excellent solvents because:",
+                o: ["Non-polar", "Polar nature", "Low boiling point", "Inertness"],
+                a: 1,
+                exp: "High polarity allows dissolution of polar and ionic compounds."
+            },
+            {
+                q: "Primary and secondary nitroalkanes dissolve in NaOH due to:",
+                o: ["Salt formation", "Hydrolysis", "Oxidation", "Reduction"],
+                a: 0,
+                exp: "RCH₂NO₂ + NaOH → [RCHNO₂]⁻Na⁺ (aci-form salt)."
+            },
+            {
+                q: "Chloropicrin is:",
+                o: ["CCl₃NO₂", "CHCl₃", "CCl₄", "CH₃NO₂"],
+                a: 0,
+                exp: "CH₃NO₂ + 3Cl₂ + NaOH → CCl₃NO₂ (insecticide)."
+            },
+            {
+                q: "Which gives red color with HNO₂?",
+                o: ["CH₃NO₂", "(CH₃)₂CHNO₂", "(CH₃)₃CNO₂", "C₆H₅NO₂"],
+                a: 0,
+                exp: "Primary nitroalkane → nitrolic acid → red sodium salt."
+            },
+            {
+                q: "Isoamyl nitrite is used in:",
+                o: ["Asthma", "Angina pectoris", "Diuretic", "Explosive"],
+                a: 1,
+                exp: "Used as antispasmodic in angina pectoris."
+            },
+            {
+                q: "Sweet spirit of nitre is:",
+                o: ["4% ethyl nitrite in alcohol", "Nitroethane", "Nitroglycerine", "TNT"],
+                a: 0,
+                exp: "Used as diuretic."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(summaryQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = summaryQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = summaryQuiz[currentQuestion];
+            questionText.textContent = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / summaryQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index);
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    if (userAnswers[currentQuestion] !== null) {
+                        if (index === question.a) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === summaryQuiz.length - 1 ? 'Finish' : 'Next';
+            scoreEl.textContent = score;
+        }
+        
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            const question = summaryQuiz[currentQuestion];
+            
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.a].classList.add('correct');
+            }
+            
+            explanation.style.display = 'block';
+            explanationText.textContent = question.exp;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < summaryQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            finalScore.textContent = `${score}/${summaryQuiz.length}`;
+            
+            if (score === summaryQuiz.length) {
+                scoreText.textContent = "Perfect! You mastered the summary!";
+            } else if (score >= summaryQuiz.length * 0.8) {
+                scoreText.textContent = "Excellent! Strong on key concepts.";
+            } else if (score >= summaryQuiz.length * 0.6) {
+                scoreText.textContent = "Good! Revise HNO₂ tests and preparations.";
+            } else {
+                scoreText.textContent = "Keep studying! Focus on tautomerism and reactions.";
+            }
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(summaryQuiz.length).fill(null);
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            loadQuestion();
+        }
+        
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        initQuiz();
+    </script>
+</body>
+</html>

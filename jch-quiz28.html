@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carboxylic Acids & Derivatives Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #d32f2f, #f44336, #e57373);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #d32f2f, #f44336);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carboxyl-animation {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carboxyl {
+            width: 70px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: 12px;
+            position: relative;
+            border: 2px solid #333;
+            animation: vibrate 2s ease-in-out infinite;
+        }
+        
+        .carboxyl::before {
+            content: 'COOH';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #d32f2f;
+        }
+        
+        .h-bond {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff5252;
+            border-radius: 50%;
+            opacity: 0;
+            animation: bond 3s ease-in-out infinite;
+        }
+        
+        .h-bond:nth-child(1) { top: 10px; left: 15px; animation-delay: 0s; }
+        .h-bond:nth-child(2) { top: 15px; right: 10px; animation-delay: 0.7s; }
+        .h-bond:nth-child(3) { bottom: 10px; left: 20px; animation-delay: 1.4s; }
+        
+        @keyframes bond {
+            0% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(35px, 15px); opacity: 0; }
+        }
+        
+        @keyframes vibrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #d32f2f, #f44336);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #d32f2f;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #ffebee;
+            border-color: #d32f2f;
+        }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #d32f2f, #f44336);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #d32f2f;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #d32f2f;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #d32f2f, #f44336);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #d32f2f, #f44336);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .carboxyl-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="carboxyl-animation">
+                <div class="carboxyl">
+                    <div class="h-bond"></div>
+                    <div class="h-bond"></div>
+                    <div class="h-bond"></div>
+                </div>
+            </div>
+            <h1>Chapter 28: Carboxylic Acids & Derivatives</h1>
+            <div class="subtitle">Master preparation, properties, acidity, and reactions</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">30</span></span>
+                    <span>Score: <span id="score">0</span>/30</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: Carboxylic Acids</div>
+                    <div>Level: JEE Advanced</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/30</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carboxylicQuiz = [
+            {
+                q: "Which is NOT a method to prepare monocarboxylic acids?",
+                o: ["Oxidation of alcohols", "Hydrolysis of nitriles", "Decarboxylation of gem-diacids", "Reduction of esters"],
+                a: 3,
+                exp: "Reduction of esters gives alcohols, not acids. All others are standard preparation methods."
+            },
+            {
+                q: "Which reagent oxidizes 1° alcohol to aldehyde without over-oxidation?",
+                o: ["KMnO₄", "K₂Cr₂O₇", "PCC", "LiAlH₄"],
+                a: 2,
+                exp: "PCC stops at aldehyde; others go to carboxylic acid."
+            },
+            {
+                q: "Haloform reaction converts methyl ketones to:",
+                o: ["Carboxylic acid + haloform", "Alcohol", "Aldehyde", "Ester"],
+                a: 0,
+                exp: "CH₃COR → RCOOH + CHI₃ (for I₂/NaOH)."
+            },
+            {
+                q: "Grignard + CO₂ gives carboxylic acid with:",
+                o: ["Same carbon count", "+1 carbon", "+2 carbon", "-1 carbon"],
+                a: 1,
+                exp: "RMgX + CO₂ → RCOOMgX → RCOOH (one carbon added)."
+            },
+            {
+                q: "Koch reaction uses:",
+                o: ["Alkene + CO + H₂O", "Alkene + CO₂", "Alkane + CO", "Alcohol + CO"],
+                a: 0,
+                exp: "CH₂=CH₂ + CO + H₂O → CH₃CH₂COOH under high P,T."
+            },
+            {
+                q: "Which acid cannot be prepared by oxidation?",
+                o: ["Acetic acid", "Formic acid", "Propanoic acid", "Benzoic acid"],
+                a: 1,
+                exp: "HCOOH is oxidized further to CO₂ + H₂O."
+            },
+            {
+                q: "Acetic acid in solution exists as:",
+                o: ["Monomer", "Dimer", "Trimer", "Polymer"],
+                a: 1,
+                exp: "Due to intermolecular H-bonding → observed MW = 120."
+            },
+            {
+                q: "Boiling point order:",
+                o: ["RCOOH > ROH > RCOR > RH", "ROH > RCOOH > RCOR > RH", "RCOR > RCOOH > ROH > RH", "All equal"],
+                a: 0,
+                exp: "Dimeric H-bonding in acids → highest BP."
+            },
+            {
+                q: "Resonance in carboxylate ion involves:",
+                o: ["Two equivalent structures", "One structure", "Three structures", "No resonance"],
+                a: 0,
+                exp: "Negative charge delocalized over two oxygen atoms."
+            },
+            {
+                q: "Strongest acid among:",
+                o: ["HCOOH", "CH₃COOH", "ClCH₂COOH", "Cl₃CCOOH"],
+                a: 3,
+                exp: "-I effect of Cl stabilizes anion → Cl₃CCOOH > ClCH₂COOH > CH₃COOH > HCOOH."
+            },
+            {
+                q: "Acidity order: FCH₂COOH > ClCH₂COOH > BrCH₂COOH due to:",
+                o: ["Electronegativity", "Size", "Polarizability", "Bond strength"],
+                a: 0,
+                exp: "F > Cl > Br in -I effect → stronger electron withdrawal."
+            },
+            {
+                q: "Inductive effect strongest at:",
+                o: ["α-position", "β-position", "γ-position", "All equal"],
+                a: 0,
+                exp: "Effect decreases with distance: α > β > γ."
+            },
+            {
+                q: "pKₐ order: HCOOH < CH₃COOH < C₂H₅COOH because:",
+                o: ["+I effect increases", "-I effect increases", "Resonance", "H-bonding"],
+                a: 0,
+                exp: "Alkyl groups donate electrons → destabilize anion → weaker acid."
+            },
+            {
+                q: "Which turns blue litmus red?",
+                o: ["Only strong acids", "All carboxylic acids", "Only formic acid", "Only aromatic acids"],
+                a: 1,
+                exp: "All RCOOH are acidic enough to turn litmus red."
+            },
+            {
+                q: "Reaction: RCOOH + NaHCO₃ →",
+                o: ["RCOONa + H₂O + CO₂", "RCOONa + H₂", "No reaction", "RCOONa + CO₂"],
+                a: 0,
+                exp: "Brisk effervescence of CO₂."
+            },
+            {
+                q: "Which does NOT react with RCOOH?",
+                o: ["Na", "NaOH", "NaHCO₃", "NH₃"],
+                a: 3,
+                exp: "NH₃ forms salt but no gas evolution; others liberate H₂ or CO₂."
+            },
+            {
+                q: "Hell-Volhard-Zelinsky (HVZ) reaction is for:",
+                o: ["α-halogenation of carboxylic acids", "Esterification", "Decarboxylation", "Reduction"],
+                a: 0,
+                exp: "RCH₂COOH → RCH(Br)COOH using X₂/P."
+            },
+            {
+                q: "Decarboxylation of sodium acetate gives:",
+                o: ["Methane", "Ethane", "CO₂", "Acetone"],
+                a: 0,
+                exp: "RCOONa + NaOH/CaO → RH + Na₂CO₃."
+            },
+            {
+                q: "Which acid gives soda lime decarboxylation?",
+                o: ["Only formic", "Only acetic", "All monocarboxylic", "Only aromatic"],
+                a: 2,
+                exp: "All RCOONa give RH."
+            },
+            {
+                q: "Esterification follows:",
+                o: ["SN1", "SN2", "E1", "E2"],
+                a: 1,
+                exp: "Nucleophilic acyl substitution via tetrahedral intermediate."
+            },
+            {
+                q: "Fischer esterification is reversible; favored by:",
+                o: ["Excess alcohol + H₂SO₄", "Excess acid", "Water removal", "All of above"],
+                a: 3,
+                exp: "Le Chatelier’s principle."
+            },
+            {
+                q: "Acid chloride + alcohol → ester + HCl is:",
+                o: ["Schotten-Baumann", "Fischer", "Transesterification", "HVZ"],
+                a: 0,
+                exp: "Often done in pyridine base."
+            },
+            {
+                q: "RCOOH → RCOCl reagent:",
+                o: ["SOCl₂", "PCl₅", "Both", "PCl₃"],
+                a: 2,
+                exp: "SOCl₂ is cleaner (gaseous byproducts)."
+            },
+            {
+                q: "Ammonolysis of ester gives:",
+                o: ["Amide", "Amine", "Nitrile", "Acid"],
+                a: 0,
+                exp: "RCOOR' + NH₃ → RCONH₂ + R'OH."
+            },
+            {
+                q: "Which reduces carboxylic acid to alcohol?",
+                o: ["LiAlH₄", "NaBH₄", "H₂/Ni", "Sn/HCl"],
+                a: 0,
+                exp: "LiAlH₄ reduces -COOH → -CH₂OH."
+            },
+            {
+                q: "Formic acid differs from others because it:",
+                o: ["Has aldehydic H", "Gives CO with H₂SO₄", "Reduces Tollens", "All of above"],
+                a: 3,
+                exp: "HCOOH acts as reducing agent."
+            },
+            {
+                q: "Oxalic acid on heating gives:",
+                o: ["CO₂ + CO + H₂O", "CO₂ + HCOOH", "CO + H₂O", "Only CO₂"],
+                a: 0,
+                exp: "Decarboxylation + dehydration."
+            },
+            {
+                q: "Acetic acid + PCl₅ →",
+                o: ["CH₃COCl + POCl₃ + HCl", "CH₃Cl + CO₂", "CH₂ClCOOH", "No reaction"],
+                a: 0,
+                exp: "Standard conversion to acid chloride."
+            },
+            {
+                q: "Which has highest melting point?",
+                o: ["Formic acid", "Acetic acid", "Propanoic acid", "Butanoic acid"],
+                a: 1,
+                exp: "Even carbon acids have higher MP due to packing (acetic has 2C)."
+            },
+            {
+                q: "Acidity: HCOOH > CH₃COOH due to:",
+                o: ["No +I group in HCOOH", "+I in CH₃", "Resonance", "Both A & B"],
+                a: 3,
+                exp: "Alkyl group destabilizes anion."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(carboxylicQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = carboxylicQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = carboxylicQuiz[currentQuestion];
+            questionText.innerHTML = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / carboxylicQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index);
+                
+                const optionText = document.createElement('div');
+                optionText.innerHTML = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    if (userAnswers[currentQuestion] !== null) {
+                        optionElement.classList.add(index === question.a ? 'correct' : 'incorrect');
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if answered
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.innerHTML = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === carboxylicQuiz.length - 1 ? 'Finish' : 'Next';
+            scoreEl.textContent = score;
+        }
+        
+        // Select option
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            const question = carboxylicQuiz[currentQuestion];
+            
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.a].classList.add('correct');
+            }
+            
+            explanation.style.display = 'block';
+            explanationText.innerHTML = question.exp;
+            scoreEl.textContent = score;
+        }
+        
+        // Navigation
+        function nextQuestion() {
+            if (currentQuestion < carboxylicQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        // Results
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            finalScore.textContent = `${score}/${carboxylicQuiz.length}`;
+            
+            if (score === carboxylicQuiz.length) {
+                scoreText.textContent = "Perfect! You're a Carboxylic Acid Expert!";
+            } else if (score >= carboxylicQuiz.length * 0.8) {
+                scoreText.textContent = "Outstanding! Master of Acidity & Reactions!";
+            } else if (score >= carboxylicQuiz.length * 0.6) {
+                scoreText.textContent = "Great! Strong in Preparation Methods.";
+            } else if (score >= carboxylicQuiz.length * 0.4) {
+                scoreText.textContent = "Good! Revise HVZ, Esterification & Acidity Order.";
+            } else {
+                scoreText.textContent = "Keep Practicing! Focus on Resonance & Inductive Effect.";
+            }
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(carboxylicQuiz.length).fill(null);
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            loadQuestion();
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Start
+        initQuiz();
+    </script>
+</body>
+</html>

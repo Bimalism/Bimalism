@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halogen Containing Compounds Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        header {
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-tube-animation {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .test-tube {
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            border: 2px solid #333;
+            animation: bubble 2s ease-in-out infinite;
+        }
+        
+        .test-tube::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            background: #ab47bc;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 2s ease-in-out infinite;
+        }
+        
+        .bubble:nth-child(2) {
+            animation-delay: 0.5s;
+            left: 15px;
+        }
+        
+        .bubble:nth-child(3) {
+            animation-delay: 1s;
+            left: 20px;
+        }
+        
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        @keyframes bubble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #6a1b9a;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9e9e9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background-color: #f3e5f5;
+            border-color: #6a1b9a;
+        }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #6a1b9a;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        #prev-btn:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        #next-btn {
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
+            color: white;
+        }
+        
+        #next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid #6a1b9a;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #6a1b9a;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+        
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        #restart-btn {
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+        
+        #restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .test-tube-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="test-tube-animation">
+                <div class="test-tube">
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                </div>
+            </div>
+            <h1>Chapter 25: Halogen Containing Compounds</h1>
+            <div class="subtitle">Test your knowledge of alkyl halides, preparation, properties, and reactions</div>
+        </header>
+        
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">25</span></span>
+                    <span>Score: <span id="score">0</span>/25</span>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">Question 1</div>
+                <div class="question-text" id="question-text">Question text will appear here</div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation" id="explanation">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="prev-btn" disabled>Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+                
+                <div class="quiz-info">
+                    <div>Topic: Halogen Containing Compounds</div>
+                    <div>Level: JEE Advanced</div>
+                </div>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <h2>Quiz Completed!</h2>
+                <div class="score" id="final-score">0/25</div>
+                <div class="score-text" id="score-text">Well done!</div>
+                <button id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const halogenQuiz = [
+            {
+                q: "Halogen derivatives of saturated hydrocarbons are called:",
+                o: ["Haloalkanes", "Haloalkenes", "Haloarenes", "Haloalkynes"],
+                a: 0,
+                exp: "Halogen derivatives of alkanes are termed haloalkanes."
+            },
+            {
+                q: "The reaction of alkanes with halogens proceeds via:",
+                o: ["Electrophilic addition", "Free radical mechanism", "Nucleophilic substitution", "Elimination"],
+                a: 1,
+                exp: "Halogenation of alkanes proceeds through free radical mechanism under UV light."
+            },
+            {
+                q: "Order of reactivity of halogens with a given alkane:",
+                o: ["F > Cl > Br > I", "I > Br > Cl > F", "Cl > Br > F > I", "Br > Cl > F > I"],
+                a: 0,
+                exp: "Reactivity order: F₂ > Cl₂ > Br₂ > I₂."
+            },
+            {
+                q: "Reactivity order of alkanes towards halogenation:",
+                o: ["1° > 2° > 3°", "3° > 2° > 1°", "2° > 1° > 3°", "All equal"],
+                a: 1,
+                exp: "3° alkane > 2° alkane > 1° alkane due to stability of free radicals."
+            },
+            {
+                q: "Addition of HBr to alkene in presence of peroxide follows:",
+                o: ["Markownikoff’s rule", "Anti-Markownikoff’s rule", "Saytzeff rule", "Hofmann rule"],
+                a: 1,
+                exp: "Peroxide effect leads to anti-Markownikoff addition (Kharasch effect)."
+            },
+            {
+                q: "Groove’s process involves:",
+                o: ["Alcohol + HX + ZnCl₂", "Alkane + Cl₂", "Alkene + HBr", "Silver salt + Br₂"],
+                a: 0,
+                exp: "Groove’s process: ROH + HX → RX (with anhy. ZnCl₂ at 300°C)."
+            },
+            {
+                q: "Reactivity order of HX in reaction with alcohols:",
+                o: ["HF > HCl > HBr > HI", "HI > HBr > HCl > HF", "HCl > HBr > HI > HF", "HBr > HI > HCl > HF"],
+                a: 1,
+                exp: "Reactivity: HI > HBr > HCl > HF."
+            },
+            {
+                q: "Darzan’s process uses:",
+                o: ["PCl₅", "SOCl₂", "PCl₃", "HCl + ZnCl₂"],
+                a: 1,
+                exp: "Darzan’s process: ROH + SOCl₂ → RCl + SO₂ + HCl (SN² mechanism)."
+            },
+            {
+                q: "Hunsdiecker reaction is used for:",
+                o: ["Decarboxylation", "Halogenation of alkane", "Addition to alkene", "Aromatization"],
+                a: 0,
+                exp: "RCOOAg + Br₂ → RBr + CO₂ + AgBr (free radical decarboxylation)."
+            },
+            {
+                q: "Finkelstein reaction is:",
+                o: ["RCl + NaI → RI + NaCl", "RBr + NaCl → RCl + NaBr", "RI + NaBr → RBr + NaI", "RF + NaCl → RCl + NaF"],
+                a: 0,
+                exp: "Halide exchange: RCl/RBr + NaI (acetone) → RI + NaCl/NaBr."
+            },
+            {
+                q: "Beilstein test is for:",
+                o: ["Halogens", "Nitrogen", "Sulphur", "Phosphorus"],
+                a: 0,
+                exp: "Alkyl halides burn with green-edged flame on copper wire (Beilstein test)."
+            },
+            {
+                q: "Boiling point order of alkyl halides (same alkyl group):",
+                o: ["RF > RCl > RBr > RI", "RI > RBr > RCl > RF", "RCl > RF > RBr > RI", "RBr > RI > RCl > RF"],
+                a: 1,
+                exp: "Boiling point increases with molecular weight: RI > RBr > RCl > RF."
+            },
+            {
+                q: "Reactivity order of alkyl halides in SN reactions:",
+                o: ["RI > RBr > RCl > RF", "RF > RCl > RBr > RI", "RCl > RBr > RI > RF", "RBr > RI > RCl > RF"],
+                a: 0,
+                exp: "C–X bond strength: C–F > C–Cl > C–Br > C–I → reactivity: RI > RBr > RCl > RF."
+            },
+            {
+                q: "SN2 reaction involves:",
+                o: ["Backside attack, inversion", "Frontside attack, retention", "Carbocation, racemization", "Free radical"],
+                a: 0,
+                exp: "SN2 is bimolecular with backside attack leading to inversion of configuration."
+            },
+            {
+                q: "Lucas reagent is:",
+                o: ["Conc. HCl + anhy. ZnCl₂", "HBr + peroxide", "SOCl₂ + pyridine", "PCl₅"],
+                a: 0,
+                exp: "Lucas reagent: conc. HCl + anhy. ZnCl₂ used to distinguish alcohols."
+            },
+            {
+                q: "Reaction of alkyl halide with alcoholic KOH gives:",
+                o: ["Alkene", "Alcohol", "Ether", "Ester"],
+                a: 0,
+                exp: "Alcoholic KOH → dehydrohalogenation → alkene (E2 mechanism)."
+            },
+            {
+                q: "Swarts reaction is used to prepare:",
+                o: ["Alkyl fluoride", "Alkyl chloride", "Alkyl bromide", "Alkyl iodide"],
+                a: 0,
+                exp: "RCl + Hg₂F₂ → RF + Hg₂Cl₂ (Swarts reaction)."
+            },
+            {
+                q: "Birnbaum-Simonini reaction gives:",
+                o: ["Ester", "Alkyl halide", "Nitroalkane", "Alkyne"],
+                a: 0,
+                exp: "2RCOOAg + I₂ → RCOOR + CO₂ + 2AgI (ester formation)."
+            },
+            {
+                q: "Primary alkyl halides undergo SN reaction via:",
+                o: ["SN1", "SN2", "Both", "Neither"],
+                a: 1,
+                exp: "1° alkyl halides prefer SN2 mechanism."
+            },
+            {
+                q: "The order of reactivity in elimination (E2) is:",
+                o: ["3° > 2° > 1°", "1° > 2° > 3°", "2° > 1° > 3°", "All equal"],
+                a: 0,
+                exp: "E2 reactivity: 3° > 2° > 1° due to stability of alkene formed."
+            },
+            {
+                q: "The reactivity of alkyl group is F > 2° > 3°:",
+                o: ["Only bromide are obtained in good yield", "Not suitable for chlorination", "Both A and B", "None"],
+                a: 2,
+                exp: "Only bromide are obtained in good yield. Not suitable for chlorination because yield is poor."
+            },
+            {
+                q: "In this reaction iodine forms ester instead of alkyl halide and the reaction is called Birnbaum-Simonini reaction:",
+                o: ["2R–COOAg + I₂ → RCOOR + 2AgI + CO₂", "R–COOAg + Br₂ → RBr + CO₂ + AgBr", "RCl + NaI → RI + NaCl", "RBr + NaCl → RCl + NaBr"],
+                a: 0,
+                exp: "This is Birnbaum-Simonini reaction which gives ester."
+            },
+            {
+                q: "Alkyl fluorides can not be prepared by this method:",
+                o: ["By Finkelstein reaction", "By Swarts reaction", "By Hunsdiecker reaction", "By action of HF on alkyl halide"],
+                a: 0,
+                exp: "Alkyl fluorides can not be prepared by Finkelstein reaction."
+            },
+            {
+                q: "The high reactivity of alkyl halide is:",
+                o: ["Iodide > Bromide > Chloride", "Bromide > Iodide > Chloride", "Chloride > Bromide > Iodide", "All equal"],
+                a: 0,
+                exp: "Nature of the halogen atom: RI > RBr > RCl due to C-I bond being weakest."
+            },
+            {
+                q: "The order of reactivity of alkyl halides in SN1 reaction is:",
+                o: ["CH₃X > C₂H₅X > C₃H₇X", "C₃H₇X > C₂H₅X > CH₃X", "CH₃X > C₃H₇X > C₂H₅X", "All equal"],
+                a: 1,
+                exp: "The highest the primary alkyl halide, the order of reactivity is: CH₃X > C₂H₅X > C₃H₇X, etc."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(halogenQuiz.length).fill(null);
+        
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanation = document.getElementById('explanation');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = halogenQuiz.length;
+            loadQuestion();
+        }
+        
+        // Load current question
+        function loadQuestion() {
+            const question = halogenQuiz[currentQuestion];
+            questionText.textContent = question.q;
+            currentQuestionEl.textContent = currentQuestion + 1;
+            
+            // Update progress bar
+            progress.style.width = `${((currentQuestion) / halogenQuiz.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.o.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.classList.add('option-letter');
+                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                // If user has already selected this option
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    
+                    if (userAnswers[currentQuestion] !== null) {
+                        if (index === question.a) {
+                            optionElement.classList.add('correct');
+                        } else {
+                            optionElement.classList.add('incorrect');
+                        }
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show explanation if answered
+            if (userAnswers[currentQuestion] !== null) {
+                explanation.style.display = 'block';
+                explanationText.textContent = question.exp;
+            } else {
+                explanation.style.display = 'none';
+            }
+            
+            // Button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === halogenQuiz.length - 1 ? 'Finish' : 'Next';
+            
+            // Update score
+            scoreEl.textContent = score;
+        }
+        
+        // Select option
+        function selectOption(index) {
+            if (userAnswers[currentQuestion] !== null) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            const question = halogenQuiz[currentQuestion];
+            
+            if (index === question.a) {
+                options[index].classList.add('correct');
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.a].classList.add('correct');
+            }
+            
+            explanation.style.display = 'block';
+            explanationText.textContent = question.exp;
+        }
+        
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < halogenQuiz.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+        
+        // Show results
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            finalScore.textContent = `${score}/${halogenQuiz.length}`;
+            
+            if (score === halogenQuiz.length) {
+                scoreText.textContent = "Perfect! You're a Halogen expert!";
+            } else if (score >= halogenQuiz.length * 0.8) {
+                scoreText.textContent = "Excellent! Master of alkyl halides!";
+            } else if (score >= halogenQuiz.length * 0.6) {
+                scoreText.textContent = "Good! Strong in preparation methods.";
+            } else if (score >= halogenQuiz.length * 0.4) {
+                scoreText.textContent = "Not bad! Revise SN1/SN2 and elimination.";
+            } else {
+                scoreText.textContent = "Keep practicing! Focus on reactivity orders.";
+            }
+        }
+        
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(halogenQuiz.length).fill(null);
+            document.querySelector('.question-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            loadQuestion();
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        
+        // Start quiz
+        initQuiz();
+    </script>
+</body>
+</html>
