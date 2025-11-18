@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrogen and Its Compounds - Quiz (PDF Summary Based)</title>
+    <title>s and p-Block Elements</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,7 +12,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      
+       
         body {
             background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
             color: #333;
@@ -20,24 +20,24 @@
             padding: 20px;
             min-height: 100vh;
         }
-      
+       
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: white;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
             overflow: hidden;
         }
-      
+       
         header {
-            background: linear-gradient(to right, #1565C0, #1E88E5);
+            background: linear-gradient(to right, #0d47a1, #1565c0);
             color: white;
             padding: 30px 40px;
             text-align: center;
             position: relative;
         }
-      
+       
         .chapter-badge {
             position: absolute;
             top: 20px;
@@ -48,19 +48,19 @@
             font-size: 0.9rem;
             backdrop-filter: blur(5px);
         }
-      
+       
         h1 {
             font-size: 2.4rem;
             margin-bottom: 10px;
             font-weight: 700;
         }
-      
+       
         .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-bottom: 15px;
         }
-      
+       
         .importance {
             display: inline-block;
             background: rgba(255, 255, 255, 0.2);
@@ -69,504 +69,1244 @@
             font-size: 0.9rem;
             margin-top: 10px;
         }
-      
+       
         .content {
             padding: 40px;
         }
-      
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 30px;
+       
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
         }
-      
-        .timer-container {
-            background: #E3F2FD;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+       
+        .section:last-child {
+            border-bottom: none;
+        }
+       
+        h2 {
+            color: #0d47a1;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0d47a1;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-weight: bold;
-            color: #1565C0;
         }
-      
-        .timer {
-            font-size: 1.5rem;
-            color: #D32F2F;
+       
+        h2 i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 50%;
         }
-      
-        .progress-bar {
-            height: 10px;
-            background-color: #E0E0E0;
-            border-radius: 5px;
+       
+        h3 {
+            color: #1565c0;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+       
+        h3 i {
+            margin-right: 10px;
+            color: #1976d2;
+        }
+       
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+       
+        .definition {
+            background-color: #f5f5f5;
+            border-left: 4px solid #0d47a1;
+            padding: 15px 20px;
             margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+       
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e3f2fd;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1565c0;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
             overflow: hidden;
         }
-      
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, #42A5F5, #1565C0);
-            width: 0%;
-            transition: width 0.3s;
-        }
-      
-        .question-container {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border-left: 5px solid #1565C0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-      
-        .question-number {
-            font-weight: bold;
-            color: #1565C0;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-      
-        .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-      
-        .options {
-            display: grid;
-            gap: 12px;
-        }
-      
-        .option {
+       
+        th {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            text-align: left;
             padding: 15px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
+            font-weight: 600;
+        }
+       
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+       
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+       
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+       
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+       
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+        }
+       
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .topic-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
         }
-      
-        .option:hover {
-            border-color: #42A5F5;
-            background: #E3F2FD;
+       
+        .topic-title i {
+            margin-right: 10px;
+            background: #e3f2fd;
+            padding: 8px;
+            border-radius: 50%;
         }
-      
-        .option input {
-            margin-right: 12px;
+       
+        .variable {
+            font-family: 'Cambria Math', serif;
+            font-weight: bold;
+            color: #d32f2f;
         }
-      
-        .option.selected {
-            background: #E8F5E9;
-            border-color: #4CAF50;
-            color: #2E7D32;
+       
+        .important-points {
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            border-left: 4px solid #1976d2;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
-      
-        .option.correct {
-            background: #E8F5E9;
-            border-color: #4CAF50;
-            color: #2E7D32;
+       
+        .important-points h4 {
+            color: #0d47a1;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
         }
-      
-        .option.incorrect {
-            background: #FFEBEE;
-            border-color: #F44336;
-            color: #C62828;
+       
+        .important-points h4 i {
+            margin-right: 10px;
         }
-      
-        .navigation {
+       
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+            color: white;
+            margin-top: 40px;
+        }
+       
+        .footer-content {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            padding: 20px 0;
+            align-items: center;
+            flex-wrap: wrap;
         }
-      
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-      
-        .btn-primary {
-            background: linear-gradient(to right, #1565C0, #1E88E5);
+       
+        .footer-links a {
             color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
         }
-      
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
+       
+        .footer-links a:hover {
+            opacity: 0.8;
         }
-      
-        .btn-secondary {
-            background: #f5f5f5;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-      
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-      
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-      
-        .result-container {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%);
-            border-radius: 15px;
-            margin: 30px 0;
-        }
-      
-        .score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #1565C0;
-            margin: 20px 0;
-        }
-      
-        .result-message {
-            font-size: 1.3rem;
-            margin: 20px 0;
-            color: #333;
-        }
-      
-        .hidden {
-            display: none;
-        }
-      
+       
         @media (max-width: 768px) {
             .content {
                 padding: 20px;
             }
-          
+           
             h1 {
                 font-size: 2rem;
             }
-          
-            .timer-container {
-                flex-direction: column;
-                gap: 10px;
+           
+            .topic-grid {
+                grid-template-columns: 1fr;
             }
-          
-            .navigation {
+           
+            .footer-content {
                 flex-direction: column;
                 gap: 15px;
             }
-          
-            .btn {
-                width: 100%;
+           
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
             }
+        }
+       
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+       
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+       
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+       
+        .topic-item:before {
+            content: "•";
+            color: #0d47a1;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+       
+        .weightage-bar {
+            height: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+       
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1976d2, #0d47a1);
+            border-radius: 5px;
+        }
+       
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+       
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #e3f2fd 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .reaction {
+            font-family: 'Cambria Math', serif;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .comparison-table td {
+            vertical-align: top;
+            padding: 15px;
+        }
+        
+        .comparison-table .left-col {
+            border-right: 1px dashed #ccc;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="chapter-badge">Chapter 17</div>
-            <h1>Hydrogen and Its Compounds</h1>
-            <p class="subtitle">20-Question Timed Quiz (PDF Summary)</p>
-            <div class="importance">20 Minutes | 20 MCQs | JEE/NEET Level</div>
+            <div class="chapter-badge">Chapter 18</div>
+            <h1>s and p-Block Elements</h1>
+            <p class="subtitle">Alkali Metals, Alkaline Earth Metals, Boron, Carbon, Nitrogen, and Oxygen Families</p>
+            <div class="importance">Comprehensive Coverage of Groups 1, 2, 13, 14, 15, and 16</div>
         </header>
-      
+       
         <div class="content">
-            <div class="quiz-header">
-                <h2>Hydrogen Mastery Quiz</h2>
-                <p>Based on selfstudys.com PDF notes — Position, Preparation, Properties, Reactions, Uses & Forms of Hydrogen</p>
-            </div>
-          
-            <div class="timer-container">
-                <div>Time Remaining: <span id="timer" class="timer">20:00</span></div>
-                <div>Question <span id="current-q">1</span> of 20</div>
-            </div>
-          
-            <div class="progress-bar">
-                <div id="progress-fill" class="progress-fill"></div>
-            </div>
-          
-            <div id="quiz-content">
-                <!-- Questions injected via JS -->
-            </div>
-          
-            <div id="result-screen" class="hidden">
-                <div class="result-container">
-                    <h2>Quiz Complete!</h2>
-                    <div class="score" id="final-score">0/20</div>
-                    <div class="result-message" id="result-message"></div>
-                    <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction to s and p-Block Elements</h2>
+                <p>The <strong>s-block elements</strong> include Groups 1 (Alkali Metals) and 2 (Alkaline Earth Metals), characterized by their ns¹ and ns² valence electron configurations. The <strong>p-block elements</strong> comprise Groups 13 to 18, with valence electron configurations ns²np¹ to ns²np⁶.</p>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Key Characteristics</h4>
+                    <ul>
+                        <li>s-block elements are highly reactive metals</li>
+                        <li>p-block contains metals, metalloids, and non-metals</li>
+                        <li>Trends in properties follow periodic variations</li>
+                        <li>Diagonal relationships exist between certain elements</li>
+                    </ul>
                 </div>
-            </div>
-          
-            <div class="navigation">
-                <button id="prev-btn" class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
-                <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()">Next</button>
-                <button id="submit-btn" class="btn btn-primary hidden" onclick="submitQuiz()">Submit Quiz</button>
-            </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Alkali Metals (Group 1)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Lithium (Li), Sodium (Na), Potassium (K)</div>
+                        <div class="topic-item">Rubidium (Rb), Caesium (Cs), Francium (Fr)</div>
+                        <div class="topic-item">Francium is radioactive</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns¹</div>
+                        <div class="topic-item">Li: [He] 2s¹, Na: [Ne] 3s¹</div>
+                        <div class="topic-item">K: [Ar] 4s¹, Rb: [Kr] 5s¹</div>
+                        <div class="topic-item">Cs: [Xe] 6s¹, Fr: [Rn] 7s¹</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">Never found free in nature</div>
+                        <div class="topic-item">Lithium: Lepidolite, Spodumene</div>
+                        <div class="topic-item">Sodium: Rock salt (NaCl), Chile saltpetre</div>
+                        <div class="topic-item">Potassium: Carnallite, Felspar</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic/Ionic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Addition of new shells</td>
+                        </tr>
+                        <tr>
+                            <td>Density</td>
+                            <td>Increases (except K)</td>
+                            <td>Atomic mass increase predominates</td>
+                        </tr>
+                        <tr>
+                            <td>Melting/Boiling Point</td>
+                            <td>Decreases down the group</td>
+                            <td>Weakening metallic bonds</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>Increasing atomic size</td>
+                        </tr>
+                        <tr>
+                            <td>Electropositive Character</td>
+                            <td>Increases down the group</td>
+                            <td>Decreasing ionization energy</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">Li forms Li₂O (oxide)</div>
+                        <div class="topic-item">Na forms Na₂O₂ (peroxide)</div>
+                        <div class="topic-item">K, Rb, Cs form MO₂ (superoxide)</div>
+                        <div class="reaction">4Li + O₂ → 2Li₂O</div>
+                        <div class="reaction">2Na + O₂ → Na₂O₂</div>
+                        <div class="reaction">K + O₂ → KO₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">Vigorous reaction producing hydroxides</div>
+                        <div class="topic-item">Reactivity increases down the group</div>
+                        <div class="topic-item">Li reacts slowly, Cs reacts explosively</div>
+                        <div class="reaction">2M + 2H₂O → 2MOH + H₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form ionic halides (M⁺X⁻)</div>
+                        <div class="topic-item">Reactivity increases down the group</div>
+                        <div class="topic-item">Lithium halides are covalent</div>
+                        <div class="reaction">2M + X₂ → 2MX</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Lithium</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Alkali Metals</h4>
+                    <ul>
+                        <li>Harder and higher melting point</li>
+                        <li>Forms nitride with nitrogen: 6Li + N₂ → 2Li₃N</li>
+                        <li>Carbonates and bicarbonates less stable</li>
+                        <li>Hydroxide decomposes on heating</li>
+                        <li>Chloride is deliquescent and soluble in organic solvents</li>
+                        <li>Does not form alums</li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-arrows-alt-h"></i> Diagonal Relationship: Li with Mg</h3>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <td class="left-col">
+                            <div class="topic-title"><i class="fas fa-check-circle"></i> Similarities</div>
+                            <div class="topic-item">Both are harder and higher melting</div>
+                            <div class="topic-item">Chlorides are covalent and soluble in organic solvents</div>
+                            <div class="topic-item">Carbonates decompose on heating</div>
+                            <div class="topic-item">Form nitrides directly with nitrogen</div>
+                            <div class="topic-item">Bicarbonates are soluble in water</div>
+                        </td>
+                        <td>
+                            <div class="topic-title"><i class="fas fa-times-circle"></i> Differences</div>
+                            <div class="topic-item">Li is group 1, Mg is group 2</div>
+                            <div class="topic-item">Li forms +1 ions, Mg forms +2 ions</div>
+                            <div class="topic-item">Different chemical reactivity patterns</div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Alkaline Earth Metals (Group 2)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Beryllium (Be), Magnesium (Mg), Calcium (Ca)</div>
+                        <div class="topic-item">Strontium (Sr), Barium (Ba), Radium (Ra)</div>
+                        <div class="topic-item">Radium is radioactive</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns²</div>
+                        <div class="topic-item">Be: [He] 2s², Mg: [Ne] 3s²</div>
+                        <div class="topic-item">Ca: [Ar] 4s², Sr: [Kr] 5s²</div>
+                        <div class="topic-item">Ba: [Xe] 6s², Ra: [Rn] 7s²</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">Be: Beryl, Phenacite</div>
+                        <div class="topic-item">Mg: Magnesite, Dolomite, Carnallite</div>
+                        <div class="topic-item">Ca: Limestone, Gypsum, Fluorapatite</div>
+                        <div class="topic-item">Ba: Barytes, Witherite</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Comparison with Alkali Metals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic/Ionic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Smaller than corresponding alkali metals</td>
+                        </tr>
+                        <tr>
+                            <td>Density</td>
+                            <td>Irregular trend</td>
+                            <td>Higher than alkali metals</td>
+                        </tr>
+                        <tr>
+                            <td>Melting/Boiling Point</td>
+                            <td>No regular trend</td>
+                            <td>Higher than alkali metals</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>Higher than alkali metals</td>
+                        </tr>
+                        <tr>
+                            <td>Electropositive Character</td>
+                            <td>Increases down the group</td>
+                            <td>Less electropositive than alkali metals</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">Form oxides (MO)</div>
+                        <div class="topic-item">Ba and Ra form peroxides</div>
+                        <div class="topic-item">Reactivity increases down the group</div>
+                        <div class="reaction">2M + O₂ → 2MO</div>
+                        <div class="reaction">Ba + O₂ → BaO₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">Be - no reaction (protective oxide layer)</div>
+                        <div class="topic-item">Mg - reacts with hot water</div>
+                        <div class="topic-item">Ca, Sr, Ba - react with cold water</div>
+                        <div class="reaction">M + 2H₂O → M(OH)₂ + H₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form ionic halides (MX₂)</div>
+                        <div class="topic-item">BeCl₂ is covalent</div>
+                        <div class="topic-item">Form hydrated crystals</div>
+                        <div class="reaction">M + X₂ → MX₂</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Beryllium</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Alkaline Earth Metals</h4>
+                    <ul>
+                        <li>Amphoteric oxide and hydroxide</li>
+                        <li>Covalent compounds</li>
+                        <li>Does not react with water</li>
+                        <li>Forms complexes</li>
+                        <li>Carbide gives methane on hydrolysis</li>
+                        <li>Does not impart color to flame</li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-arrows-alt-h"></i> Diagonal Relationship: Be with Al</h3>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <td class="left-col">
+                            <div class="topic-title"><i class="fas fa-check-circle"></i> Similarities</div>
+                            <div class="topic-item">Both form covalent compounds</div>
+                            <div class="topic-item">Oxides and hydroxides are amphoteric</div>
+                            <div class="topic-item">Chlorides are covalent and soluble in organic solvents</div>
+                            <div class="topic-item">Carbides give methane on hydrolysis</div>
+                            <div class="topic-item">Both form complexes</div>
+                        </td>
+                        <td>
+                            <div class="topic-title"><i class="fas fa-times-circle"></i> Differences</div>
+                            <div class="topic-item">Be is group 2, Al is group 13</div>
+                            <div class="topic-item">Be forms +2 ions, Al forms +3 ions</div>
+                            <div class="topic-item">Different chemical reactivity patterns</div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Boron Family (Group 13)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Boron (B), Aluminium (Al), Gallium (Ga)</div>
+                        <div class="topic-item">Indium (In), Thallium (Tl)</div>
+                        <div class="topic-item">Boron is non-metal, others are metals</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns² np¹</div>
+                        <div class="topic-item">B: [He] 2s² 2p¹, Al: [Ne] 3s² 3p¹</div>
+                        <div class="topic-item">Ga: [Ar] 3d¹⁰ 4s² 4p¹</div>
+                        <div class="topic-item">In: [Kr] 4d¹⁰ 5s² 5p¹</div>
+                        <div class="topic-item">Tl: [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">B: Borax, Colemanite, Boric acid</div>
+                        <div class="topic-item">Al: Bauxite, Cryolite, Corundum</div>
+                        <div class="topic-item">Ga, In, Tl: Occur in trace amounts</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Ga < Al due to poor shielding of d-electrons</td>
+                        </tr>
+                        <tr>
+                            <td>Melting Point</td>
+                            <td>Decreases B to Ga, then increases</td>
+                            <td>B has very high m.p. due to covalent network</td>
+                        </tr>
+                        <tr>
+                            <td>Boiling Point</td>
+                            <td>Decreases down the group</td>
+                            <td>Regular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>Ga > Al due to smaller size</td>
+                        </tr>
+                        <tr>
+                            <td>Oxidation State</td>
+                            <td>+3 (common), +1 (Tl, In due to inert pair effect)</td>
+                            <td>B shows only +3 oxidation state</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">Form oxides M₂O₃</div>
+                        <div class="topic-item">B₂O₃ - acidic, Al₂O₃ - amphoteric</div>
+                        <div class="topic-item">Ga₂O₃, In₂O₃, Tl₂O₃ - basic</div>
+                        <div class="reaction">4B + 3O₂ → 2B₂O₃</div>
+                        <div class="reaction">4Al + 3O₂ → 2Al₂O₃</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">B - no reaction</div>
+                        <div class="topic-item">Al - reacts to form protective oxide layer</div>
+                        <div class="topic-item">Ga, In - not affected</div>
+                        <div class="topic-item">Tl - forms hydroxide layer</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form trihalides MX₃</div>
+                        <div class="topic-item">Boron halides are covalent Lewis acids</div>
+                        <div class="topic-item">AlCl₃ exists as dimer Al₂Cl₆</div>
+                        <div class="reaction">2B + 3X₂ → 2BX₃</div>
+                        <div class="reaction">2Al + 3X₂ → 2AlX₃</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Boron</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Group 13 Elements</h4>
+                    <ul>
+                        <li>Non-metal while others are metals</li>
+                        <li>Very high melting and boiling points</li>
+                        <li>Forms only covalent compounds</li>
+                        <li>Forms electron-deficient compounds (boranes)</li>
+                        <li>Trihalides exist as monomers</li>
+                        <li>Oxides and hydroxides are acidic</li>
+                        <li>Does not decompose steam</li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-arrows-alt-h"></i> Diagonal Relationship: B with Si</h3>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <td class="left-col">
+                            <div class="topic-title"><i class="fas fa-check-circle"></i> Similarities</div>
+                            <div class="topic-item">Both are non-metals</div>
+                            <div class="topic-item">High melting points</div>
+                            <div class="topic-item">Form covalent compounds</div>
+                            <div class="topic-item">Form volatile hydrides</div>
+                            <div class="topic-item">Chlorides are hydrolyzed by water</div>
+                            <div class="topic-item">Form weak acids (H₃BO₃ and H₂SiO₃)</div>
+                        </td>
+                        <td>
+                            <div class="topic-title"><i class="fas fa-times-circle"></i> Differences</div>
+                            <div class="topic-item">B is group 13, Si is group 14</div>
+                            <div class="topic-item">B forms +3 compounds, Si forms +4 compounds</div>
+                            <div class="topic-item">Different chemical reactivity patterns</div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Carbon Family (Group 14)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Carbon (C), Silicon (Si), Germanium (Ge)</div>
+                        <div class="topic-item">Tin (Sn), Lead (Pb)</div>
+                        <div class="topic-item">C, Si - non-metals, Ge - metalloid, Sn, Pb - metals</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns² np²</div>
+                        <div class="topic-item">C: [He] 2s² 2p², Si: [Ne] 3s² 3p²</div>
+                        <div class="topic-item">Ge: [Ar] 3d¹⁰ 4s² 4p²</div>
+                        <div class="topic-item">Sn: [Kr] 4d¹⁰ 5s² 5p²</div>
+                        <div class="topic-item">Pb: [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">C: Diamond, Graphite, Carbonates</div>
+                        <div class="topic-item">Si: Silica, Silicates (second most abundant)</div>
+                        <div class="topic-item">Ge: Traces in coal</div>
+                        <div class="topic-item">Sn: Cassiterite (SnO₂)</div>
+                        <div class="topic-item">Pb: Galena (PbS)</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Regular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Melting Point</td>
+                            <td>Decreases down the group</td>
+                            <td>C has very high m.p.</td>
+                        </tr>
+                        <tr>
+                            <td>Density</td>
+                            <td>Increases down the group</td>
+                            <td>Regular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>C has highest I.E.</td>
+                        </tr>
+                        <tr>
+                            <td>Oxidation State</td>
+                            <td>+4 (common), +2 (Sn, Pb due to inert pair effect)</td>
+                            <td>C shows only +4 oxidation state</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">Form oxides MO and MO₂</div>
+                        <div class="topic-item">CO₂ - acidic, SiO₂ - acidic</div>
+                        <div class="topic-item">GeO₂ - weakly acidic, SnO₂, PbO₂ - amphoteric</div>
+                        <div class="reaction">C + O₂ → CO₂</div>
+                        <div class="reaction">Si + O₂ → SiO₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">C - no reaction</div>
+                        <div class="topic-item">Si - reacts with steam at redness</div>
+                        <div class="topic-item">Ge, Sn, Pb - not affected</div>
+                        <div class="reaction">Si + 2H₂O → SiO₂ + 2H₂</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form tetrahalides MX₄</div>
+                        <div class="topic-item">PbI₄ and PbBr₄ do not exist</div>
+                        <div class="topic-item">CCl₄ is prepared from hydrocarbons</div>
+                        <div class="reaction">C + 2Cl₂ → CCl₄</div>
+                        <div class="reaction">Si + 2Cl₂ → SiCl₄</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Carbon</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Group 14 Elements</h4>
+                    <ul>
+                        <li>Maximum catenation property</li>
+                        <li>Forms pπ-pπ multiple bonds</li>
+                        <li>CO₂ is gas while others are solids</li>
+                        <li>Not affected by alkalies</li>
+                        <li>Diamond is hardest known substance</li>
+                        <li>Has highest melting point in the group</li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-link"></i> Catenation</h3>
+                <p><strong>Catenation</strong> is the tendency of an element to form chains or rings by bonding with atoms of the same element. Carbon shows maximum catenation due to strong C-C bonds.</p>
+                
+                <div class="formula">
+                    Bond Energies: C-C (348 kJ/mol) > Si-Si (180 kJ/mol)
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Catenation Trend</h4>
+                    <ul>
+                        <li>C: Forms chains of any length</li>
+                        <li>Si, Ge: Maximum 6 atoms in chain</li>
+                        <li>Sn, Pb: Maximum 1-2 atoms in chain</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Nitrogen Family (Group 15)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Nitrogen (N), Phosphorus (P), Arsenic (As)</div>
+                        <div class="topic-item">Antimony (Sb), Bismuth (Bi)</div>
+                        <div class="topic-item">N, P - non-metals, As, Sb - metalloids, Bi - metal</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns² np³</div>
+                        <div class="topic-item">N: [He] 2s² 2p³, P: [Ne] 3s² 3p³</div>
+                        <div class="topic-item">As: [Ar] 3d¹⁰ 4s² 4p³</div>
+                        <div class="topic-item">Sb: [Kr] 4d¹⁰ 5s² 5p³</div>
+                        <div class="topic-item">Bi: [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">N: Atmosphere (78%), Nitrates</div>
+                        <div class="topic-item">P: Phosphorite, Apatite</div>
+                        <div class="topic-item">As, Sb, Bi: Occur as sulphides</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Regular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Melting Point</td>
+                            <td>Increases N to As, then decreases</td>
+                            <td>Irregular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>N has highest I.E.</td>
+                        </tr>
+                        <tr>
+                            <td>Electronegativity</td>
+                            <td>Decreases down the group</td>
+                            <td>N has highest electronegativity</td>
+                        </tr>
+                        <tr>
+                            <td>Oxidation State</td>
+                            <td>-3 to +5</td>
+                            <td>+3 stability increases down the group</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">Form oxides N₂O, NO, N₂O₃, NO₂, N₂O₅</div>
+                        <div class="topic-item">P forms P₄O₆ and P₄O₁₀</div>
+                        <div class="topic-item">As, Sb, Bi form M₂O₃ and M₂O₅</div>
+                        <div class="reaction">N₂ + O₂ → 2NO</div>
+                        <div class="reaction">P₄ + 5O₂ → P₄O₁₀</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">N - no reaction</div>
+                        <div class="topic-item">P - reacts with steam to form phosphoric acid</div>
+                        <div class="topic-item">As, Sb, Bi - no reaction</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form trihalides and pentahalides</div>
+                        <div class="topic-item">N does not form pentahalides</div>
+                        <div class="topic-item">PCl₅ exists but PI₅ does not</div>
+                        <div class="reaction">2P + 3Cl₂ → 2PCl₃</div>
+                        <div class="reaction">2P + 5Cl₂ → 2PCl₅</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Nitrogen</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Group 15 Elements</h4>
+                    <ul>
+                        <li>Diatomic gas while others are solids</li>
+                        <li>Forms pπ-pπ multiple bonds</li>
+                        <li>Does not form pentahalides</li>
+                        <li>Does not show pentacovalency</li>
+                        <li>Hydride (NH₃) shows hydrogen bonding</li>
+                        <li>Forms five oxides</li>
+                        <li>Does not form complexes</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Oxygen Family (Group 16)</h2>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-list"></i> Elements</div>
+                        <div class="topic-item">Oxygen (O), Sulphur (S), Selenium (Se)</div>
+                        <div class="topic-item">Tellurium (Te), Polonium (Po)</div>
+                        <div class="topic-item">O, S - non-metals, Se, Te - metalloids, Po - metal</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Electronic Configuration</div>
+                        <div class="topic-item">General: [Noble gas] ns² np⁴</div>
+                        <div class="topic-item">O: [He] 2s² 2p⁴, S: [Ne] 3s² 3p⁴</div>
+                        <div class="topic-item">Se: [Ar] 3d¹⁰ 4s² 4p⁴</div>
+                        <div class="topic-item">Te: [Kr] 4d¹⁰ 5s² 5p⁴</div>
+                        <div class="topic-item">Po: [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-mountain"></i> Occurrence</div>
+                        <div class="topic-item">O: Atmosphere (21%), Oxides, Water</div>
+                        <div class="topic-item">S: Sulphides, Sulphates</div>
+                        <div class="topic-item">Se, Te: Occur as selenides and tellurides</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-cogs"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Trend</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic Radius</td>
+                            <td>Increases down the group</td>
+                            <td>Regular trend</td>
+                        </tr>
+                        <tr>
+                            <td>Melting/Boiling Point</td>
+                            <td>Increases down the group</td>
+                            <td>O₂ is gas, others are solids</td>
+                        </tr>
+                        <tr>
+                            <td>Ionization Energy</td>
+                            <td>Decreases down the group</td>
+                            <td>O has high I.E.</td>
+                        </tr>
+                        <tr>
+                            <td>Electronegativity</td>
+                            <td>Decreases down the group</td>
+                            <td>O has highest electronegativity</td>
+                        </tr>
+                        <tr>
+                            <td>Oxidation State</td>
+                            <td>-2, +2, +4, +6</td>
+                            <td>O shows -2, -1, +2 oxidation states</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3><i class="fas fa-vial"></i> Chemical Properties</h3>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Reaction with Oxygen</div>
+                        <div class="topic-item">O - forms O₂ and O₃</div>
+                        <div class="topic-item">S, Se, Te form MO₂ and MO₃</div>
+                        <div class="topic-item">SO₂ - acidic, SeO₂ - acidic, TeO₂ - amphoteric</div>
+                        <div class="reaction">S + O₂ → SO₂</div>
+                        <div class="reaction">2SO₂ + O₂ → 2SO₃</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-tint"></i> Reaction with Water</div>
+                        <div class="topic-item">O - slightly soluble</div>
+                        <div class="topic-item">S - insoluble</div>
+                        <div class="topic-item">Se, Te - no reaction</div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-atom"></i> Reaction with Halogens</div>
+                        <div class="topic-item">Form various halides</div>
+                        <div class="topic-item">O forms OF₂, O₂F₂</div>
+                        <div class="topic-item">S forms S₂F₂, SF₂, SF₄, SF₆</div>
+                        <div class="topic-item">Se, Te form SeF₆, TeF₆</div>
+                        <div class="reaction">S + 3F₂ → SF₆</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Anomalous Behavior of Oxygen</h3>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Differences from Other Group 16 Elements</h4>
+                    <ul>
+                        <li>Diatomic gas while others are solids</li>
+                        <li>Shows -2, -1, +2 oxidation states</li>
+                        <li>Forms hydrogen bonds</li>
+                        <li>Maximum covalency of 2</li>
+                        <li>Paramagnetic</li>
+                        <li>Compounds are mainly ionic and polar covalent</li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-wind"></i> Ozone (O₃)</h3>
+                <p><strong>Ozone</strong> is an allotrope of oxygen with a bent structure (bond angle 116.8°). It is a powerful oxidizing agent and is formed in the upper atmosphere by the action of UV radiation on oxygen.</p>
+                
+                <div class="formula">
+                    3O₂ ⇌ 2O₃ (ΔH = +285.4 kJ)
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Uses of Ozone</h4>
+                    <ul>
+                        <li>Disinfecting drinking water</li>
+                        <li>Purifying air in crowded places</li>
+                        <li>Manufacture of KMnO₄, artificial silk, synthetic camphor</li>
+                        <li>Bleaching agent</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-tips"></i> Important Trends and Relationships</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3><i class="fas fa-chart-line"></i> Periodic Trends</h3>
+                        <div class="topic-item">Atomic radius increases down the group</div>
+                        <div class="topic-item">Ionization energy decreases down the group</div>
+                        <div class="topic-item">Electronegativity decreases down the group</div>
+                        <div class="topic-item">Metallic character increases down the group</div>
+                        <div class="topic-item">Reactivity varies with group and period</div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="fas fa-arrows-alt-h"></i> Diagonal Relationships</h3>
+                        <div class="topic-item">Li and Mg</div>
+                        <div class="topic-item">Be and Al</div>
+                        <div class="topic-item">B and Si</div>
+                        <div class="topic-item">Due to similar charge/size ratio</div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-circle"></i> Anomalous Behaviors</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Group</th>
+                            <th>Anomalous Properties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lithium</td>
+                            <td>1</td>
+                            <td>Harder, higher m.p., forms nitride, covalent compounds</td>
+                        </tr>
+                        <tr>
+                            <td>Beryllium</td>
+                            <td>2</td>
+                            <td>Amphoteric, covalent compounds, forms complexes</td>
+                        </tr>
+                        <tr>
+                            <td>Boron</td>
+                            <td>13</td>
+                            <td>Non-metal, high m.p., electron-deficient compounds</td>
+                        </tr>
+                        <tr>
+                            <td>Carbon</td>
+                            <td>14</td>
+                            <td>Maximum catenation, forms multiple bonds</td>
+                        </tr>
+                        <tr>
+                            <td>Nitrogen</td>
+                            <td>15</td>
+                            <td>Diatomic gas, forms multiple bonds, no pentavalency</td>
+                        </tr>
+                        <tr>
+                            <td>Oxygen</td>
+                            <td>16</td>
+                            <td>Diatomic gas, paramagnetic, forms hydrogen bonds</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+               
+                <p>This chapter typically carries <span class="highlight">3-4 questions</span> in JEE Main, covering properties, trends, anomalous behaviors, and important compounds of s and p-block elements.</p>
+               
+                <div class="weightage-item">
+                    <h4>Chapter Weightage in JEE Main</h4>
+                    <div class="weightage-bar">
+                        <div class="weightage-fill" style="width: 80%"></div>
+                    </div>
+                    <div class="weightage-label">
+                        <span>Weightage</span>
+                        <span>High (3-4 questions)</span>
+                    </div>
+                </div>
+                
+                <div class="important-points">
+                    <h4><i class="fas fa-lightbulb"></i> Important Topics for JEE Main</h4>
+                    <ul>
+                        <li>Anomalous behaviors of first elements</li>
+                        <li>Diagonal relationships</li>
+                        <li>Important compounds and their uses</li>
+                        <li>Trends in physical and chemical properties</li>
+                        <li>Preparation and properties of important compounds</li>
+                        <li>Oxidation states and their stability</li>
+                    </ul>
+                </div>
+            </section>
         </div>
+       
+        <footer>
+            <div class="footer-content">
+                <div>JEE Main Chemistry - s and p-Block Elements Summary</div>
+            </div>
+        </footer>
     </div>
-
     <script>
-        // Quiz Data - 20 Questions based on PDF Summary (selfstudys.com)
-        const quizData = [
-            {
-                question: "Hydrogen is placed in no specific group because:",
-                options: ["It only forms H⁺", "It only forms H⁻", "It can form both H⁺ and H⁻", "It is inert"],
-                answer: 2
-            },
-            {
-                question: "Hydrogen resembles alkali metals because:",
-                options: ["It is diatomic", "It has ns¹ configuration", "It forms H⁻ ion", "It has high IE"],
-                answer: 1
-            },
-            {
-                question: "IE of H (1312 kJ/mol) is of the same order as that of:",
-                options: ["Alkali metals", "Halogens", "Noble gases", "Alkaline earth metals"],
-                answer: 1
-            },
-            {
-                question: "Hydrogen was discovered by:",
-                options: ["Lavoisier", "Cavendish", "Priestley", "Scheele"],
-                answer: 1
-            },
-            {
-                question: "Which metal reacts with cold water to liberate H₂?",
-                options: ["Zn", "Fe", "Na", "Al"],
-                answer: 2
-            },
-            {
-                question: "In Lane’s process, steam is passed over:",
-                options: ["Red hot iron", "Aluminium", "Zinc", "Sodium"],
-                answer: 0
-            },
-            {
-                question: "Bosch process involves mixing water gas with:",
-                options: ["Steam", "CO₂", "O₂", "N₂"],
-                answer: 0
-            },
-            {
-                question: "Laboratory preparation of H₂ uses:",
-                options: ["Pure Zn + dil. H₂SO₄", "Granulated Zn + dil. H₂SO₄", "Pure Zn + conc. H₂SO₄", "Mg + HCl"],
-                answer: 1
-            },
-            {
-                question: "Pure hydrogen (>99.95%) is obtained by:",
-                options: ["Electrolysis of Ba(OH)₂", "Zn + NaOH", "Al + HCl", "Fe + steam"],
-                answer: 0
-            },
-            {
-                question: "About 77% of world’s H₂ comes from:",
-                options: ["Coal", "Hydrocarbons", "Electrolysis", "Brine"],
-                answer: 1
-            },
-            {
-                question: "Ionic radius of H⁻ ion is:",
-                options: ["37 pm", "210 pm", "72 pm", "1312 pm"],
-                answer: 1
-            },
-            {
-                question: "Bond dissociation energy of H₂ is:",
-                options: ["435.9 kJ/mol", "1312 kJ/mol", "72.8 kJ/mol", "2000 kJ/mol"],
-                answer: 0
-            },
-            {
-                question: "Interstitial hydrides are formed with:",
-                options: ["Alkali metals", "Halogens", "d-block metals", "s-block metals"],
-                answer: 2
-            },
-            {
-                question: "Reactivity of halogens with H₂ decreases as:",
-                options: ["F₂ > Cl₂ > Br₂ > I₂", "I₂ > Br₂ > Cl₂ > F₂", "Cl₂ > F₂ > Br₂ > I₂", "Br₂ > I₂ > F₂ > Cl₂"],
-                answer: 0
-            },
-            {
-                question: "Hydrogenation of oils is done at:",
-                options: ["2500°C", "473 K", "773 K", "1270 K"],
-                answer: 1
-            },
-            {
-                question: "Atomic hydrogen is produced in:",
-                options: ["Electric arc between tungsten rods", "Electrolysis", "Bosch process", "Lane’s process"],
-                answer: 0
-            },
-            {
-                question: "Nascent hydrogen is:",
-                options: ["More reactive than ordinary H₂", "Less reactive", "Same reactivity", "Inert"],
-                answer: 0
-            },
-            {
-                question: "Atomic hydrogen torch temperature is around:",
-                options: ["2500°C", "4000–4500°C", "773 K", "1270 K"],
-                answer: 1
-            },
-            {
-                question: "Which is NOT a use of dihydrogen?",
-                options: ["Rocket fuel", "Welding", "Oxidising agent", "Reducing agent"],
-                answer: 2
-            },
-            {
-                question: "Occlusion refers to:",
-                options: ["Absorption of H₂ on metal surface", "Formation of H⁻", "Bond dissociation", "Electrolysis"],
-                answer: 0
-            }
-        ];
-
-        let currentQuestion = 0;
-        let userAnswers = new Array(quizData.length).fill(null);
-        let timeLeft = 20 * 60;
-        let timerId = null;
-
-        const quizContent = document.getElementById('quiz-content');
-        const progressFill = document.getElementById('progress-fill');
-        const timerDisplay = document.getElementById('timer');
-        const currentQDisplay = document.getElementById('current-q');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const submitBtn = document.getElementById('submit-btn');
-        const resultScreen = document.getElementById('result-screen');
-        const finalScore = document.getElementById('final-score');
-        const resultMessage = document.getElementById('result-message');
-
-        function initQuiz() {
-            currentQuestion = 0;
-            userAnswers = new Array(quizData.length).fill(null);
-            timeLeft = 20 * 60;
-            renderQuestion();
-            updateNavigation();
-            startTimer();
-        }
-
-        function renderQuestion() {
-            const q = quizData[currentQuestion];
-            const answered = userAnswers[currentQuestion] !== null;
-            
-            let optionsHTML = '';
-            q.options.forEach((option, index) => {
-                const isSelected = userAnswers[currentQuestion] === index;
-                const isCorrect = index === q.answer;
-                let optionClass = 'option';
-                
-                if (answered) {
-                    if (isCorrect) optionClass += ' correct';
-                    else if (isSelected) optionClass += ' incorrect';
-                } else if (isSelected) {
-                    optionClass += ' selected';
-                }
-                
-                optionsHTML += `
-                    <label class="${optionClass}">
-                        <input type="radio" name="q${currentQuestion}" value="${index}" 
-                               ${isSelected ? 'checked' : ''} 
-                               ${answered ? 'disabled' : ''} 
-                               onchange="selectAnswer(${index})">
-                        <span>${String.fromCharCode(65 + index)}. ${option}</span>
-                    </label>
-                `;
+        // Simple animation for topic cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+           
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+           
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
             });
-
-            quizContent.innerHTML = `
-                <div class="question-container">
-                    <div class="question-number">Question ${currentQuestion + 1}</div>
-                    <div class="question-text">${q.question}</div>
-                    <div class="options">${optionsHTML}</div>
-                </div>
-            `;
-
-            currentQDisplay.textContent = currentQuestion + 1;
-            updateProgress();
-        }
-
-        function selectAnswer(answerIndex) {
-            userAnswers[currentQuestion] = answerIndex;
-            renderQuestion();
-        }
-
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / quizData.length) * 100;
-            progressFill.style.width = `${progress}%`;
-        }
-
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                renderQuestion();
-                updateNavigation();
-            }
-        }
-
-        function nextQuestion() {
-            if (currentQuestion < quizData.length - 1) {
-                currentQuestion++;
-                renderQuestion();
-                updateNavigation();
-            }
-        }
-
-        function updateNavigation() {
-            prevBtn.disabled = currentQuestion === 0;
-            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Review' : 'Next';
-            
-            const allAnswered = userAnswers.every(ans => ans !== null);
-            if (currentQuestion === quizData.length - 1 && allAnswered) {
-                submitBtn.classList.remove('hidden');
-                nextBtn.classList.add('hidden');
-            } else {
-                submitBtn.classList.add('hidden');
-                nextBtn.classList.remove('hidden');
-            }
-        }
-
-        function startTimer() {
-            if (timerId) clearInterval(timerId);
-            timerId = setInterval(() => {
-                timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) {
-                    clearInterval(timerId);
-                    submitQuiz();
-                }
-            }, 1000);
-        }
-
-        function submitQuiz() {
-            clearInterval(timerId);
-            let correct = 0;
-            userAnswers.forEach((answer, index) => {
-                if (answer === quizData[index].answer) correct++;
-            });
-            
-            const percentage = Math.round((correct / quizData.length) * 100);
-            finalScore.textContent = `${correct}/20`;
-            
-            if (percentage >= 90) resultMessage.textContent = "Outstanding! Master of Hydrogen Chemistry!";
-            else if (percentage >= 75) resultMessage.textContent = "Excellent! Strong conceptual clarity.";
-            else if (percentage >= 60) resultMessage.textContent = "Good! Revise preparation methods.";
-            else if (percentage >= 40) resultMessage.textContent = "Fair! Focus on properties and uses.";
-            else resultMessage.textContent = "Keep practicing! Review PDF notes thoroughly.";
-
-            quizContent.classList.add('hidden');
-            document.querySelector('.navigation').classList.add('hidden');
-            resultScreen.classList.remove('hidden');
-        }
-
-        function restartQuiz() {
-            resultScreen.classList.add('hidden');
-            quizContent.classList.remove('hidden');
-            document.querySelector('.navigation').classList.remove('hidden');
-            initQuiz();
-        }
-
-        document.addEventListener('DOMContentLoaded', initQuiz);
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrocarbon - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #e65100, #ff8f00);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #e65100;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff8f00;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #f57c00;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #ffb74d;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff8f00;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff8f00, #ffb74d);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #fff3e0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #f57c00;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #e65100, #ff8f00);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fff8e1;
+        }
+        
+        tr:hover {
+            background-color: #fff3e0;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #fff3e0);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff8f00, #ffb74d);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #fff3e0;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #fff3e0, #fff8e1);
+            border-left: 4px solid #ffb74d;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #e65100;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #e65100, #f57c00);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .reaction {
+            background-color: #fff3e0;
+            padding: 12px 18px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-left: 4px solid #e65100;
+            font-family: 'Cambria Math', serif;
+            font-size: 1rem;
+        }
+
+        .gas-name {
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        .octane {
+            color: #f57c00;
+            font-weight: 600;
+        }
+
+        .knocking {
+            font-style: italic;
+            color: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 24</div>
+            <h1>Hydrocarbon</h1>
+            <p class="subtitle">Aliphatic & Aromatic Hydrocarbons | Petroleum Chemistry</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-oil-can"></i> Introduction to Hydrocarbons</h2>
+                <p>Organic compounds composed of only carbon and hydrogen.</p>
+                
+                <div class="definition">
+                    <p><strong>Types</strong>: (1) <strong>Aliphatic</strong> (Alkanes, Alkenes, Alkynes) | (2) <strong>Aromatic</strong> (Arenes)</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-globe"></i> Sources of Aliphatic Hydrocarbons</h2>
+                
+                <h3><i class="fas fa-tint"></i> Petroleum (Crude Oil)</h3>
+                <p>Dark-colored oily liquid with offensive odor, found below earth’s crust, floats over brine.</p>
+
+                <h3><i class="fas fa-layer-group"></i> Composition of Petroleum</h3>
+                
+                <div class="two-column">
+                    <div>
+                        <p><strong>(i) Alkanes</strong>: 30–70%, up to C₄₀, straight & branched chain</p>
+                        <p><strong>(ii) Cycloalkanes</strong>: 16–64%, e.g., cyclohexane, methylcyclopentane</p>
+                        <p><strong>(iii) Aromatic</strong>: 8–15%, e.g., Benzene, Toluene, Xylene, Naphthalene</p>
+                    </div>
+                    <div>
+                        <p><strong>(iv) S, N, O compounds</strong>: Mercaptans (R–SH), Sulphides (R–S–R), Pyridines, Phenols</p>
+                        <p><strong>(v) Natural Gas</strong>: CH₄ (80%), C₂H₆ (13%), C₃H₈ (3%), C₄H₁₀ (1%)</p>
+                        <p><strong>(vi) CNG</strong>: Compressed natural gas, mainly CH₄, octane rating 130</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-flask"></i> Theories of Origin</h3>
+                <ul>
+                    <li><strong>Mendeleeff’s Carbide Theory</strong>: Inorganic origin</li>
+                    <li><strong>Engler’s Theory</strong>: Organic origin</li>
+                    <li><strong>Modern Theory</strong>: Combines both</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-industry"></i> Petroleum Processing</h2>
+
+                <h3><i class="fas fa-mountain"></i> Mining</h3>
+                <p>Drilled from 500–15,000 ft depth.</p>
+
+                <h3><i class="fas fa-fire"></i> Refining: Fractional Distillation</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fraction</th>
+                            <th>Boiling Range (°C)</th>
+                            <th>Composition</th>
+                            <th>Uses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Uncondensed gas</td><td>Up to RT</td><td>C₁–C₄</td><td>Fuel, refrigerant, carbon black</td></tr>
+                        <tr><td>Petroleum ether</td><td>30–70</td><td>C₅–C₆</td><td>Solvent</td></tr>
+                        <tr><td>Petrol/Gasoline</td><td>70–120</td><td>C₆–C₈</td><td>Motor fuel</td></tr>
+                        <tr><td>Kerosene</td><td>150–250</td><td>C₁₁–C₁₆</td><td>Fuel, illuminant</td></tr>
+                        <tr><td>Diesel oil</td><td>250–350</td><td>C₁₅–C₁₈</td><td>Diesel engines</td></tr>
+                        <tr><td>Lubricating oil</td><td>>400</td><td>C₁₇–C₂₀</td><td>Lubrication</td></tr>
+                        <tr><td>Paraffin wax</td><td>>400</td><td>C₂₀–C₃₀</td><td>Candles, polish</td></tr>
+                        <tr><td>Pitch</td><td>>400</td><td>C₃₀–C₄₀</td><td>Road surfacing</td></tr>
+                    </tbody>
+                </table>
+
+                <h3><i class="fas fa-filter"></i> Purification</h3>
+                <ul>
+                    <li><strong>H₂SO₄ treatment</strong>: Removes aromatics, thiophene</li>
+                    <li><strong>Doctor sweetening</strong>: 2RSH + Na₂PbS₂ → RSSR + PbS + 2NaOH</li>
+                    <li><strong>Adsorbents</strong>: Alumina, silica, clay</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> Synthetic Petrol</h2>
+
+                <h3><i class="fas fa-burn"></i> Cracking</h3>
+                <div class="two-column">
+                    <div>
+                        <p><strong>Liquid Phase</strong>: 475–530°C, 7–70 atm, 70% yield, octane 65–70</p>
+                        <p>Catalysts: SiO₂, ZnO, TiO₂, Fe₂O₃, Al₂O₃</p>
+                    </div>
+                    <div>
+                        <p><strong>Vapor Phase</strong>: 600–800°C, 3.5–10.5 atm, 70% yield</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-atom"></i> Synthesis</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-coal"></i> Bergius Process</div>
+                        <p class="reaction">Coal + H₂ <sup>450–500°C</sup>/<sub>250 atm</sub> → Crude oil</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-water"></i> Fischer-Tropsch</div>
+                        <p class="reaction">CO + H₂ <sup>1200°C</sup>/<sub>Co catalyst</sub> → Hydrocarbons</p>
+                        <p>Catalyst: Co(100) + ThO₂(5) + MgO(8) + Kieselguhr(200)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-tachometer-alt"></i> Fuel Quality Parameters</h2>
+
+                <h3><i class="fas fa-bolt"></i> Knocking</h3>
+                <p class="knocking">Metallic sound in engine due to premature ignition.</p>
+                <p>Order: Straight chain > branched > olefins > cycloalkanes > aromatics</p>
+
+                <h3><i class="fas fa-gas-pump"></i> Octane Number</h3>
+                <p>% of iso-octane in iso-octane + n-heptane mixture with same knocking.</p>
+                <div class="formula">
+                    n-Heptane: Octane = 0<br>
+                    2,2,4-Trimethylpentane (iso-octane): Octane = 100
+                </div>
+                <p>Factors increasing octane:</p>
+                <ul>
+                    <li>Branching ↑</li>
+                    <li>Double/triple bond ↑</li>
+                    <li>Cyclic > aliphatic</li>
+                    <li>Aromatics highest</li>
+                    <li>TEL (Pb(C₂H₅)₄)</li>
+                </ul>
+
+                <h3><i class="fas fa-shield-alt"></i> Antiknock Compounds</h3>
+                <p>TEL (63%) + Ethylene bromide (26%) + Ethylene chloride (9%) + Dye (2%)</p>
+                <p>Modern: AK-33-X (Mn-based)</p>
+
+                <h3><i class="fas fa-tools"></i> Octane Improvement</h3>
+                <ul>
+                    <li><strong>Isomerisation</strong>: n-Pentane → iso-Pentane (AlCl₃, 200°C)</li>
+                    <li><strong>Alkylation</strong>: Isobutane + Isobutylene → Iso-octane</li>
+                    <li><strong>Aromatisation</strong>: Heptane → Toluene + 4H₂</li>
+                </ul>
+
+                <h3><i class="fas fa-tint"></i> Cetane Number</h3>
+                <p>For diesel: % cetane in cetane + α-methylnaphthalene mixture.</p>
+                <div class="formula">
+                    Cetane (C₁₆H₃₄): 100<br>
+                    α-Methylnaphthalene: 0
+                </div>
+
+                <h3><i class="fas fa-thermometer-half"></i> Flash Point</h3>
+                <p>Lowest temp for explosive vapor-air mixture. India: 44°C</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-burn"></i> Alkanes (Paraffins)</h2>
+
+                <div class="definition">
+                    <p>Saturated hydrocarbons with C–C single bonds. General formula: CₙH₂ₙ₊₂</p>
+                </div>
+
+                <h3><i class="fas fa-vial"></i> General Methods of Preparation</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-fire"></i> Hydrogenation</div>
+                        <p class="reaction">Alkene + H₂ <sup>Ni, heat</sup> → Alkane</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-hand-sparkles"></i> Wurtz Reaction</div>
+                        <p class="reaction">2RX + 2Na <sup>dry ether</sup> → R–R + 2NaX</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-flask"></i> Decarboxylation</div>
+                        <p class="reaction">RCOONa + NaOH <sup>CaO, heat</sup> → RH + Na₂CO₃</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-bolt"></i> Kolbe’s Electrolysis</div>
+                        <p class="reaction">2RCOO⁻ → R–R + 2CO₂</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-atom"></i> Physical Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Alkane</th>
+                            <th>State</th>
+                            <th>M.P. (K)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>C₁–C₄</td><td>Gas</td><td>—</td></tr>
+                        <tr><td>C₅–C₁₇</td><td>Liquid</td><td>—</td></tr>
+                        <tr><td>C₁₈+</td><td>Solid</td><td>—</td></tr>
+                    </tbody>
+                </table>
+                <p>M.P. even > odd carbon atoms due to symmetry.</p>
+
+                <h3><i class="fas fa-fire-burner"></i> Chemical Properties</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-prescription-bottle"></i> Halogenation</div>
+                        <p class="reaction">RH + X₂ <sup>hv/light</sup> → RX + HX</p>
+                        <p>Reactivity: F₂ > Cl₂ > Br₂ > I₂</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-burn"></i> Combustion</div>
+                        <p class="reaction">CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-smog"></i> Cracking</div>
+                        <p>High MW → Low MW hydrocarbons</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p><strong>4–5 questions</strong> expected from petroleum, octane, knocking, cracking, alkane reactions.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 95%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>Very High (4–5 Qs)</span>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div>JEE Main & NEET Chemistry - Hydrocarbon Chapter Summary</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

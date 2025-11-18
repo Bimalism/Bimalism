@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carboxylic Acids and Their Derivatives - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #388e3c;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #66bb6a;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e8f5e9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #388e3c;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f1f8e9);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            border-left: 4px solid #66bb6a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #2e7d32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px Schmerz;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #4caf50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #66bb6a, #4caf50);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .key-concept {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #388e3c;
+        }
+        
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .reaction {
+            background: #f9f9f9;
+            border: 1px dashed #4caf50;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .resonance {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .resonance div {
+            text-align: center;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .structure-img {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .structure-img img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 28</div>
+            <h1>Carboxylic Acids and Their Derivatives</h1>
+            <p class="subtitle">Structure, Preparation, Properties & Reactions</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction</h2>
+                <p>Carboxylic acids are the compounds containing the carboxyl functional group <span class="formula">−C(=O)−OH</span>.</p>
+                <p>The carboxyl group is made up of carbonyl (>C=O) and hydroxyl (–OH) group.</p>
+                
+                <div class="key-concept">
+                    <h4>Classification</h4>
+                    <p>(1) Carboxylic acids are classified as monocarboxylic acids, dicarboxylic acids, tricarboxylic acids etc. depending on the number of –COOH groups present in the molecule.</p>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Monocarboxylic</div>
+                            <p>CH₃COOH</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Dicarboxylic</div>
+                            <p>HOOC−CH₂−COOH</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Tricarboxylic</div>
+                            <p>HOOC−CH(COOH)−CH₂COOH</p>
+                        </div>
+                    </div>
+                    <p>(2) Monocarboxylic acids of aliphatic series are commonly known as fatty acids such as palmitic acid (C₁₅H₃₁COOH) and stearic acid (C₁₇H₃₅COOH).</p>
+                    <p>(3) The general formula for monocarboxylic acids is CₙH₂ₙ₊₁COOH or CₙH₂ₙO₂. Where n = number of carbon atoms.</p>
+                    <p>(4) The carboxylic acids may be aliphatic or aromatic depending upon whether –COOH group is attached to aliphatic alkyl chain or aryl group respectively.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Methods of Preparation of Monocarboxylic Acid</h2>
+
+                <h3><i class="fas fa-fire"></i> (1) By oxidation of alcohols, aldehydes and ketones</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Primary Alcohol/Aldehyde</div>
+                        <div class="reaction">RCH₂OH →[K₂Cr₂O₇/H⁺] RCOOH</div>
+                        <div class="reaction">RCHO →[K₂Cr₂O₇/H⁺ or Ag(NH₃)₂⁺] RCOOH</div>
+                        <p>Methanoic acid cannot be prepared by oxidation method.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Ketones (Drastic)</div>
+                        <div class="reaction">RCOR' →[Hot conc. KMnO₄] RCOOH + R'COOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Methyl Ketones (Haloform)</div>
+                        <div class="reaction">CH₃COR →[X₂/NaOH] RCOOH + CHX₃</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-prescription-bottle"></i> (2) By Hydrolysis of nitriles, ester, anhydrides and acid chloride</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Nitriles</div>
+                        <div class="reaction">RC≡N →[H₃O⁺ or OH⁻] RCOOH + NH₃</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Esters</div>
+                        <div class="reaction">RCOOR' →[H₃O⁺] RCOOH + R'OH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Anhydrides</div>
+                        <div class="reaction">(RCO)₂O →[H₂O/H⁺] 2RCOOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Acid Chloride</div>
+                        <div class="reaction">RCOCl →[H₂O] RCOOH + HCl</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Nitro Alkane</div>
+                        <div class="reaction">RCH₂NO₂ →[85% H₂SO₄] RCOOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Trihalogen</div>
+                        <div class="reaction">RCX₃ →[NaOH] RCOOH + 3NaX</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-hand-sparkles"></i> (3) From Grignard Reagent</h3>
+                <div class="reaction">RMgX + CO₂ →[Dry ether] RCOOMgX →[H₃O⁺] RCOOH + Mg(OH)X</div>
+
+                <h3><i class="fas fa-link"></i> (4) From Alkene or Hydro-carboxy-addition (Koch reaction)</h3>
+                <div class="reaction">CH₂=CH₂ + CO + H₂O →[H₃PO₄, 350°C, 500-1000 atm] CH₃CH₂COOH</div>
+
+                <h3><i class="fas fa-cogs"></i> (5) Special methods</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Carboxylation of sodium alkoxide</div>
+                        <div class="reaction">RONa + CO₂ → RCOONa →[HCl] RCOOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Action of heat on dicarboxylic acid</div>
+                        <div class="reaction">RCH(COOH)₂ →[Heat] RCH₂COOH + CO₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">From acetoacetic ester</div>
+                        <div class="reaction">CH₃COCH₂COOC₂H₅ →[H₃O⁺/Δ] CH₃COCH₃ + CO₂ + C₂H₅OH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Oxidation of alkene and alkyne</div>
+                        <div class="reaction">RCH=CHR' →[Hot alk. KMnO₄] RCOOH + R'COOH</div>
+                        <div class="reaction">RC≡CR' →[O₃ then H₂O] RCOOH + R'COOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">The Arndt-Eistert synthesis</div>
+                        <div class="reaction">RCOCl + CH₂N₂ → RCOCHN₂ →[Ag₂O/H₂O] RCH₂COOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">From acid amides</div>
+                        <div class="reaction">RCONH₂ →[HNO₂] RCOOH + N₂ + H₂O</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-vial"></i> Physical Properties of Monocarboxylic Acids</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Physical State</div>
+                        <p>First three members (upto 3 carbon atoms) are colourless, pungent smelling liquids. The next six members are oily liquids having unpleasant smell. The higher members are colourless and odourless waxy solids.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Solubility</div>
+                        <p>The lower members of the aliphatic carboxylic acid family (upto C₄) are highly soluble in water. The solubility decreases with the increase in the size of the alkyl group. All carboxylic acids are soluble in alcohol, ether and benzene etc.</p>
+                        <p>The solubility of lower members of carboxylic acids is due to the formation of hydrogen bonds between the –COOH group and water molecules.</p>
+                        <p>Acetic acid exists in the solution in dimer form due to intermolecular hydrogen bonding. The observed molecular mass of acetic acid is 120 instead of 60.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Melting Point</div>
+                        <p>(i) The melting points of carboxylic acids donot vary smoothly from one member to another.</p>
+                        <p>(ii) The melting point of the acids having even number of carbon atoms are higher than those containing an odd number immediately above and below them.</p>
+                        <p>(iii) The acids with even number of carbon atoms have the –COOH group and the terminal –CH₃ group on the opposite side of the carbon chain.</p>
+                        <p>(iv) In the case of odd numbers, the two groups lie on the same side of the chain.</p>
+                        <p>When the terminal groups lie on the opposite sides the molecules fit into each other more closely. More effective packing of the molecule in the lattice. Therefore, results into higher melting point.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Boiling Point</div>
+                        <p>Boiling point of carboxylic acids increase regularly with increase of molecular mass. Boiling points of carboxylic acids are higher than those of alcohols of same molecular mass. This is due to intermolecular hydrogen bonding between two acid molecules.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-exchange-alt"></i> Acidic Nature of Monocarboxylic Acids</h2>
+                <h3><i class="fas fa-info-circle"></i> (1) Cause of acidic nature</h3>
+                <div class="resonance">
+                    <div>
+                        <p>R−C(OH)=O</p>
+                    </div>
+                    <div>↔</div>
+                    <div>
+                        <p>R−C(O⁻)=O⁺H</p>
+                    </div>
+                </div>
+                <p>(i) A molecule of carboxylic acid can be represented as a resonance hybrid of the following structures.</p>
+                <p>(ii) Due to electron deficiency on oxygen atom of the hydroxyl group (Structure II), their is a displacement of electron pair of O–H bond toward the oxygen atom. This facilitate the release of hydrogen as proton (H⁺).</p>
+                <p>(iii) The resulting carboxylate ion also stabilized by resonance (As negative charge is dispersed on both the oxygen atom). This enhance the stability of carboxylate anion and make it weaker base or strong acid.</p>
+
+                <h3><i class="fas fa-cog"></i> (2) Effect of substituent on acidic nature</h3>
+                <p>(i) An electron withdrawing substituent (–I effect) stabilizes the anion by dispersing the negative charge and therefore increases the acidity.</p>
+                <p>(ii) An electron releasing substituent (+I effect) stabilizes negative charge on the anion resulting in the decrease of stability and thus decreased the acidity of acid.</p>
+                <p>Electron with drawing nature of halogen : F > Cl > Br > I</p>
+                <p>Thus, the acidic strength decreases in the order : FCH₂COOH > ClCH₂COOH > BrCH₂COOH > ICH₂COOH</p>
+                <p>Similarly : CCl₃COOH > CHCl₂COOH > CH₂ClCOOH > CH₃COOH</p>
+                <p>(iii) Inductive effect is stronger at α-position than β-position similarly at β-position it is more stronger than at γ-position</p>
+                <p>Example: Cl−CH₂−CH₂−CH₂COOH > Cl−CH₂−CH₂COOH > Cl−CH₂COOH</p>
+                <p>(iv) Relative acid strength in different compounds RH > NH₃ > HC≡CH > ROH > H₂O > RCOOH</p>
+                <p>Greater the value of Kₐ or lesser the value of pKₐ stronger is the acid, i.e. pKₐ = –log Kₐ</p>
+                <p>Acidic nature (Kₐ) α 1/molecular weight</p>
+                <p>Kₐ Value HCOOH 17.5×10⁻⁵ > CH₃COOH 1.75×10⁻⁵ > C₂H₅COOH 1.3×10⁻⁵</p>
+                <p>The formic acid is strongest of all fatty acids.</p>
+                <p>Acetic acid is less weak acid than sulphuric acid due to less degree of ionisation.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Chemical Properties of Monocarboxylic Acids</h2>
+
+                <h3><i class="fas fa-minus-circle"></i> (1) Reaction involving removal of proton from –OH group</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Action with blue litmus</div>
+                        <p>All carboxylic acids turn blue litmus red.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Reaction with metals</div>
+                        <div class="reaction">2CH₃COOH + 2Na → 2CH₃COONa + H₂</div>
+                        <div class="reaction">2CH₃COOH + Zn → (CH₃COO)₂Zn + H₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Action with alkalies</div>
+                        <div class="reaction">CH₃COOH + NaOH → CH₃COONa + H₂O</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Action with carbonates and bicarbonates</div>
+                        <div class="reaction">2CH₃COOH + Na₂CO₃ → 2CH₃COONa + CO₂ + H₂O</div>
+                        <div class="reaction">CH₃COOH + NaHCO₃ → CH₃COONa + CO₂ + H₂O</div>
+                        <p>Reaction of carboxylic acid with aqueous sodium carbonates solution produces bricks effervescence. However most phenols do not produce effervescence. Therefore, this reaction may be used to distinguish between carboxylic acids and phenols.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-exchange-alt"></i> (2) Reaction involving replacement of –OH group</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of acid chloride</div>
+                        <div class="reaction">CH₃COOH + PCl₅ → CH₃COCl + POCl₃ + HCl</div>
+                        <div class="reaction">3CH₃COOH + PCl₃ → 3CH₃COCl + H₃PO₃</div>
+                        <div class="reaction">CH₃COOH + SOCl₂ → CH₃COCl + SO₂ + HCl</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of esters (Esterification)</div>
+                        <div class="reaction">CH₃COOH + C₂H₅OH →[Conc. H₂SO₄] CH₃COOC₂H₅ + H₂O</div>
+                        <p>(a) The reaction is shifted to the right by using excess of alcohol or removal of water by distillation.</p>
+                        <p>(b) The reactivity of alcohol towards esterification. tert-alcohol < sec-alcohol < pri-alcohol < methyl alcohol</p>
+                        <p>(c) The acidic strength of carboxylic acid plays only a minor role. HCOOH < COOHCH₃ < RCH₂COOH < R₂CHCOOH < R₃CCOOH</p>
+                        <p>When methanol is taken in place of ethanol, then reaction is called trans esterification.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of amides</div>
+                        <div class="reaction">CH₃COOH + NH₃ →[Heat] CH₃COONH₄ →[Δ] CH₃CONH₂ + H₂O</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of acid anhydrides</div>
+                        <div class="reaction">2CH₃COOH →[P₂O₅/Heat] (CH₃CO)₂O + H₂O</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Reaction with organo-metallic reagents</div>
+                        <div class="reaction">R'COOH + R''MgBr → R'COOMgBr + R''H</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-burn"></i> (3) Reaction involving carbonyl (>C = O) group</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Reduction</div>
+                        <div class="reaction">RCOOH →[LiAlH₄] RCH₂OH</div>
+                        <p>Carboxylic acid are difficult to reduce either by catalytic hydrogenation or Na/C₂H₅OH</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-cut"></i> (4) Reaction involving attack of carboxylic group (–COOH)</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Decarboxylation</div>
+                        <div class="reaction">RCOONa + NaOH →[CaO/Heat] RH + Na₂CO₃</div>
+                        <p>When sodium formate is heated with sodalime H₂ is evolved. (Exception) HCOONa + NaOH →[CaO] H₂ + Na₂CO₃</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Heating of calcium salts</div>
+                        <div class="reaction">(RCOO)₂Ca →[Heat] RCOR + CaCO₃</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Electrolysis : (Kolbe's synthesis)</div>
+                        <div class="reaction">2CH₃COOK →[Electrolysis] CH₃−CH₃ + 2CO₂ + 2KOH + H₂</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of Alkyl halide (Hunsdiecker's reaction)</div>
+                        <div class="reaction">CH₃COOAg + Br₂ →[CCl₄/Heat] CH₃Br + AgBr + CO₂</div>
+                        <p>In Hunsdiecker reaction, one carbon atom less alkyl halide is formed from acid salt.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Formation of amines (Schmidt reaction)</div>
+                        <div class="reaction">RCOOH + HN₃ →[Conc. H₂SO₄] RNH₂ + CO₂ + N₂</div>
+                        <p>In Schmidt reaction, one carbon less product is formed.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Complete reduction</div>
+                        <div class="reaction">CH₃COOH →[HI/P/Red P] CH₃CH₃ + H₂O + I₂</div>
+                        <p>In the above reaction, the –COOH group is reduced to a CH₃ group.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-radiation"></i> (5) Reaction involving hydrogen of α-carbon Halogenation</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">In presence of U.V. light</div>
+                        <div class="reaction">CH₃COOH →[Cl₂/U.V.] ClCH₂COOH + HCl</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">In presence of Red P and diffused light [Hell Volhard-zelinsky reaction]</div>
+                        <p>Carboxylic acid having an α-hydrogen react with Cl₂ or Br₂ in the presence of a small amount of red phosphorus to give α-chloro acetic acid. The reaction is known as Hell Volhard-zelinsky reaction.</p>
+                        <div class="reaction">CH₃COOH →[Cl₂/Red P] ClCH₂COOH</div>
+                        <div class="reaction">ClCH₂COOH →[Cl₂/Red P] Cl₂CHCOOH</div>
+                        <div class="reaction">Cl₂CHCOOH →[Cl₂/Red P] CCl₃COOH</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-user"></i> Individual Members of Monocarboxylic Acids</h2>
+
+                <h3><i class="fas fa-prescription-bottle"></i> Formic Acid or Methanoic acid (HCOOH)</h3>
+                <p>Formic acid is the first member of monocarboxylic acids series. It occurs in the sting of bees, wasps, red ants, stinging nettles, and fruits. In traces it is present in perspiration, urine, blood and in caterpillar's.</p>
+
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">(1) Methods of preparation</div>
+                        <p>(i) Oxidation of methyl alcohol or formaldehyde</p>
+                        <div class="reaction">CH₃OH + [O] →[Pt] HCOOH + H₂O</div>
+                        <p>(ii) Hydrolysis of hydrocyanic acid : Formic acid is formed by the hydrolysis of HCN with acids or alkalies.</p>
+                        <div class="reaction">HCN + 2H₂O →[HCl] HCOOH + NH₃</div>
+                        <div class="reaction">HCN + 2H₂O →[NaOH] HCOONa + NH₃</div>
+                        <p>(iii) Laboratory preparation</p>
+                        <p>Glycerol + Oxalic acid →[100-110°C] Glycerol monooxalate →[120°C] Glycerol monoformate →[Hydrolysis] HCOOH</p>
+                        <p>The following procedure is applied for obtaining anhydrous formic acid.</p>
+                        <div class="reaction">2HCOOH + PbCO₃ → (HCOO)₂Pb + CO₂ + H₂O</div>
+                        <div class="reaction">(HCOO)₂Pb + H₂S → 2HCOOH + PbS (ppt.)</div>
+                        <p>(iv) Industrial preparation : Formic acid is prepared on industrial scale by heating sodium hydroxide with carbon monoxide at 210°C under a pressure of about 10 atmospheres.</p>
+                        <div class="reaction">NaOH + CO →[210°C, 10 atm] HCOONa</div>
+                        <p>Sodium formate thus formed is distilled with sodium hydrogen sulphate, when anhydrous formic acid distils over.</p>
+                        <div class="reaction">HCOONa + NaHSO₄ → HCOOH + Na₂SO₄</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">(2) Physical properties</div>
+                        <p>(i) It is a colourless pungent smelling liquid.</p>
+                        <p>(ii) It melts at 8.4°C and boils at 100.5°C.</p>
+                        <p>(iii) It is miscible with water, alcohol and ether. It forms azeotropic mixture with water.</p>
+                        <p>(iv) It is strongly corrosive and cause blisters on skin.</p>
+                        <p>(v) It exists in aqueous solution as a dimer involving hydrogen bonding.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">(3) Uses</div>
+                        <p>(i) In the laboratory for preparation of carbon monoxide.</p>
+                        <p>(ii) In the preservation of fruits.</p>
+                        <p>(iii) In textile dyeing and finishing.</p>
+                        <p>(iv) In leather tanning.</p>
+                        <p>(v) As coagulating agent for rubber latex.</p>
+                        <p>(vi) As an antiseptic and in the treatment of gout.</p>
+                        <p>(vii) In the manufacture of plastics, water proofing compounds.</p>
+                        <p>(viii) In electroplating to give proper deposit of metals.</p>
+                        <p>(ix) In the preparation of nickel formate which is used as a catalyst in the hydrogenation of oils.</p>
+                        <p>(x) As a reducing agent.</p>
+                        <p>(xi) In the manufacture of oxalic acid.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-wine-bottle"></i> Acetic Acid (Ethanoic Acid) (CH₃COOH)</h3>
+                <p>Acetic acid is the oldest known fatty acid. It is the chief constituent of vinegar and hence its name (Latin acetum = vinegar)</p>
+
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">(1) Preparation</div>
+                        <p>(i) By oxidation of acetaldehyde (Laboratory-preparation)</p>
+                        <div class="reaction">CH₃CHO →[Na₂Cr₂O₇/H₂SO₄] CH₃COOH</div>
+                        <p>(ii) By hydrolysis of methyl cyanide with acid</p>
+                        <div class="reaction">CH₃CN + 2H₂O →[HCl] CH₃COOH + NH₃</div>
+                        <p>(iii) By Grignard reagent</p>
+                        <div class="reaction">CH₃MgBr + CO₂ → CH₃COOMgBr →[H₃O⁺] CH₃COOH</div>
+                        <p>(iv) By hydrolysis of acetyl chloride, acetic anhydride or acetamide and ester</p>
+                        <div class="reaction">CH₃COOC₂H₅ + H₂O →[H₂SO₄] CH₃COOH + C₂H₅OH</div>
+                        <div class="reaction">CH₃COCl + H₂O →[Dil. HCl] CH₃COOH + HCl</div>
+                        <div class="reaction">(CH₃CO)₂O + H₂O →[Dil. HCl] 2CH₃COOH</div>
+                        <p>(v) Manufacture of acetic acid</p>
+                        <p>(a) From ethyl alcohol (Quick vinegar process) : Vinegar is 6-10% aqueous solution of acetic acid. It is obtained by fermentation of liquors containing 12 to 15% ethyl alcohol. Fermentation is done by Bacterium Mycoderma aceti in presence of air at 30-35°C. The process is termed acetous fermentation.</p>
+                        <div class="reaction">C₂H₅OH + O₂ →[Mycoderma aceti] CH₃COOH + H₂O</div>
+                        <p>It is a slow process and takes about 8 to 10 days for completion.</p>
+                        <p>In this process, the following precautions are necessary:</p>
+                        <p>• The concentration of the ethyl alcohol should not be more than 15%, otherwise the bacteria becomes inactive.</p>
+                        <p>• The supply of air should be regulated. With less air the oxidation takes place only upto acetaldehyde stage while with excess of air, the acid is oxidised to CO₂ and water.</p>
+                        <p>• The flow of alcohol is so regulated that temperature does not exceed 35°C, which is the optimum temperature for bacterial growth.</p>
+                        <p>Acetic acid can be obtained from vinegar with the help of lime. The calcium acetate crystallised from the solution is distilled with concentrated sulphuric acid when pure acetic acid distils over.</p>
+                        <p>(b) From acetylene : Acetylene is first converted into acetaldehyde by passing through 40% sulphuric acid at 60°C in presence of 1% HgSO₄ (catalyst).</p>
+                        <div class="reaction">HC≡CH + H₂O →[40% H₂SO₄, HgSO₄, 60°C] CH₃CHO</div>
+                        <p>The acetaldehyde is oxidised to acetic acid by passing a mixture of acetaldehyde vapour and air over manganous acetate at 70°C.</p>
+                        <div class="reaction">CH₃CHO + 1/2 O₂ →[Manganous acetate, 70°C] CH₃COOH</div>
+                        <p>Acetylene required for this purpose is obtained by action of water on calcium carbide.</p>
+                        <div class="reaction">CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂</div>
+                        <p>The yield is very good and the strength of acid prepared is 97%. The method is also quite cheap.</p>
+                        <p>(c) By the action of CO on methyl alcohol : Methyl alcohol and carbon monoxide react together under a pressure of 30 atmospheres and 200°C in presence of a catalyst cobalt octacarbonyl, Co₂(CO)₈ to form acetic acid.</p>
+                        <div class="reaction">CH₃OH + CO →[Co₂(CO)₈, 200°C, 30 atm] CH₃COOH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">(2) Physical properties</div>
+                        <p>(i) At ordinary temperature, acetic acid is a colourless, corrosive liquid with a sharp pungent odour of vinegar. It has a sour taste.</p>
+                        <p>(ii) Below 16.5°C, it solidifies as an icy mass, hence it is named glacial acetic acid.</p>
+                        <p>(iii) It boils at 118°C. The high boiling point of acetic acid in comparison to alkanes, alkyl halides or alcohols of nearly same molecular masses is due to more stronger hydrogen bonding between acid molecules. This also explains dimer formation of acetic acid in vapour state.</p>
+                        <p>(iv) It is miscible with water, alcohol and ether in all proportions.</p>
+                        <p>(v) It is good solvent for phosphorus, sulphur, iodine and many organic compounds.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">(3) Uses</div>
+                        <p>(i) As a solvent and a laboratory reagent.</p>
+                        <p>(ii) As vinegar for table purpose and for manufacturing pickles.</p>
+                        <p>(iii) In coagulation of rubber latex.</p>
+                        <p>(iv) For making various organic compounds such as acetone, acetic anhydride, acetyl chloride, acetamide and esters.</p>
+                        <p>(v) For making various useful metallic acetates, such as:</p>
+                        <p>(a) Basic copper acetate which is used for making green paints.</p>
+                        <p>(b) Al, Fe and Cr acetates which are used as mordants in dyeing.</p>
+                        <p>(c) Lead tetra-acetate which is a good oxidising agent.</p>
+                        <p>(d) Basic lead acetate which is used in the manufacture of white lead.</p>
+                        <p>(e) Aluminium acetate which is used in the manufacture of water-proof fabrics.</p>
+                        <p>(f) Alkali acetates which are used as diuretics.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-table"></i> Table : 28.1 Comparison of Formic Acid and Acetic Acid</h3>
+                <table>
+                    <<thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Formic acid</th>
+                            <th>Acetic acid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Acidic nature, (i) With electro-positive metals</td>
+                            <td>Forms salts, Hydrogen is evolved.</td>
+                            <td>Forms salts. Hydrogen is evolved.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically <strong>2-3 questions</strong> from Carboxylic Acids and Derivatives. Focus on preparation methods, acidic strength, named reactions (HVZ, Esterification, Decarboxylation), and distinction tests.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 85%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>High (2-3 Qs)</span>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div>JEE Main & NEET Chemistry - Carboxylic Acids and Their Derivatives Summary</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

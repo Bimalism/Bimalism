@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitrogen Containing Compounds - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .importance {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        h3 {
+            color: #388e3c;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #66bb6a;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .definition {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .definition:before {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .formula {
+            font-family: 'Cambria Math', serif;
+            background-color: #e8f5e9;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #388e3c;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .topic-card {
+            background: linear-gradient(to bottom right, #ffffff, #f1f8e9);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4caf50, #66bb6a);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-title i {
+            margin-right: 10px;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .important-points {
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            border-left: 4px solid #66bb6a;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .important-points h4 {
+            color: #2e7d32;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .important-points h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .topic-item:before {
+            content: "•";
+            color: #4caf50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .weightage-bar {
+            height: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .weightage-fill {
+            height: 100%;
+            background: linear-gradient(to right, #66bb6a, #4caf50);
+            border-radius: 5px;
+        }
+        
+        .weightage-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .key-concept {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #388e3c;
+        }
+        
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .reaction {
+            background: #f9f9f9;
+            border: 1px dashed #4caf50;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .resonance {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .resonance div {
+            text-align: center;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .structure-img {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .structure-img img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">Chapter 29</div>
+            <h1>Nitrogen Containing Compounds</h1>
+            <p class="subtitle">Amines, Nitro Compounds, Cyanides & Diazonium Salts</p>
+            <div class="importance">High Weightage in JEE Main & NEET</div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Introduction</h2>
+                <p>Important nitrogen containing organic compounds are alkyl nitrites (RONO), nitro-alkanes (RNO2), aromatic nitro compounds (ArNO2), alkyl cyanides (RCN), alkyl iso cyanides (RNC), amines (–NH2), aryl diazonium salts (ArN2Cl), amides (–CONH2) and oximes (>C = N OH).</p>
+                
+                <div class="key-concept">
+                    <h4>Tautomerism in Nitrous Acid</h4>
+                    <div class="resonance">
+                        <div>H–O–N=O</div>
+                        <div>⇌</div>
+                        <div>H–O=N–O</div>
+                    </div>
+                    <p>Leads to alkyl nitrites and nitroalkanes.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Alkyl Nitrites & Nitroalkanes</h2>
+
+                <h3><i class="fas fa-vial"></i> Alkyl Nitrites (RONO)</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation (Ethyl Nitrite)</div>
+                        <div class="reaction">C2H5OH + HNO2 → C2H5ONO + H2O</div>
+                        <div class="reaction">C2H5I + KONO → C2H5ONO + KI</div>
+                        <div class="reaction">2C2H5OH + N2O3 → 2C2H5ONO + H2O</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Gas at room temp, liquifies on cooling, b.p. 17°C, apple smell, insoluble in water, soluble in alcohol/ether.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <div class="reaction">C2H5ONO + H2O → C2H5OH + HNO2 (Hydrolysis)</div>
+                        <div class="reaction">C2H5ONO + 6H → C2H5OH + NH3 + 2H2O (Reduction Sn/HCl)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Uses</div>
+                        <p>Treatment of asthma, heart diseases; diuretic; source of nitrous acid.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-fire"></i> Nitroalkanes (RNO2)</h3>
+                <div class="key-concept">
+                    <h4>Classification</h4>
+                    <p>Primary (RCH2NO2), Secondary (R2CHNO2), Tertiary (R3CNO2)</p>
+                </div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation</div>
+                        <div class="reaction">RX + AgNO2 → RNO2 + AgX</div>
+                        <div class="reaction">RH + HNO3 → RNO2 + H2O (Vapour phase)</div>
+                        <div class="reaction">RCH2CH2Cl + NaNO2 → RCH2CH2NO2</div>
+                        <div class="reaction">R3CNH2 + KMnO4 → R3CNO2</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Colourless pleasant liquids, sparingly soluble in water, soluble in organic solvents, high b.p. due to polarity.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <div class="reaction">RNO2 + 6H → RNH2 + 2H2O (Reduction)</div>
+                        <div class="reaction">RCH2NO2 + HOH → RCOOH + NH2OH (Hydrolysis 1°)</div>
+                        <div class="reaction">R2CHNO2 + HOH → R2C=O + HNO2 (Hydrolysis 2°)</div>
+                        <div class="reaction">RNO2 + HNO2 → Nitrolic acid or Pseudonitrol</div>
+                        <div class="reaction">RNO2 + Cl2 → Halogenation at α-position</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Uses</div>
+                        <p>Solvents for polar substances, explosives, preparation of amines, hydroxylamines, chloropicrin.</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>Ethyl Nitrite (C2H5ONO)</th>
+                            <th>Nitro Ethane (C2H5NO2)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Boiling Point</td>
+                            <td>17°C</td>
+                            <td>115°C</td>
+                        </tr>
+                        <tr>
+                            <td>Reduction (Sn/HCl)</td>
+                            <td>C2H5OH + NH2OH</td>
+                            <td>C2H5NH2</td>
+                        </tr>
+                        <tr>
+                            <td>NaOH</td>
+                            <td>Hydrolysed to C2H5OH</td>
+                            <td>Forms salt</td>
+                        </tr>
+                        <tr>
+                            <td>HNO2</td>
+                            <td>No action</td>
+                            <td>Forms nitrolic acid</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> Aromatic Nitro Compounds</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation</div>
+                        <div class="reaction">ArH + HNO3/H2SO4 → ArNO2</div>
+                        <p>Indirect from amines via diazonium salts.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Insoluble in water, soluble in organic solvents, pale yellow liquids/solids with smells.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <div class="reaction">ArNO2 + 6H → ArNH2 (Reduction)</div>
+                        <p>Electrophilic substitution at m-position, nucleophilic substitution if o/p-NO2.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Uses</div>
+                        <p>Solvents, explosives, amino compounds, shoe polish, soaps.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Cyanides and Isocyanides</h2>
+                <h3><i class="fas fa-vial"></i> Alkyl Cyanides (RCN)</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation</div>
+                        <div class="reaction">RX + KCN → RCN</div>
+                        <div class="reaction">RCOOH + NH3 → RCONH2 → RCN (Dehydration)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Neutral, pleasant odour, liquids/solids, soluble in water/organic solvents, poisonous.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <div class="reaction">RCN + 2H2O → RCOOH + NH3 (Hydrolysis)</div>
+                        <div class="reaction">RCN + 4H → RCH2NH2 (Reduction)</div>
+                        <div class="reaction">RCN + R'MgX → RCOR' (Grignard)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Uses</div>
+                        <p>Intermediates for acids, amides, esters, amines.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-fire"></i> Alkyl Isocyanides (RNC)</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation</div>
+                        <div class="reaction">RX + AgCN → RNC</div>
+                        <div class="reaction">RNH2 + CHCl3 + 3KOH → RNC (Carbylamine)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Colourless unpleasant liquids, insoluble in water, soluble in organics, more poisonous than cyanides.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <div class="reaction">RNC + 2H2O → RNH2 + HCOOH (Hydrolysis)</div>
+                        <div class="reaction">RNC + 4H → RNHCH3 (Reduction)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-medkit"></i> Uses</div>
+                        <p>Detection of leakage, test for primary amines.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Amines</h2>
+                <div class="key-concept">
+                    <h4>Classification & Structure</h4>
+                    <p>Derivatives of NH3: Primary (RNH2), Secondary (R2NH), Tertiary (R3N), Quaternary (R4N+)</p>
+                    <p>Pyramidal shape, sp3 hybridized N.</p>
+                </div>
+                <h3><i class="fas fa-arrow-right"></i> Preparation of Amines</h3>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Mixture of Amines</div>
+                        <div class="reaction">RX + NH3 → RNH2 + R2NH + R3N</div>
+                        <div class="reaction">ROH + NH3 → RNH2 + R2NH + R3N (Al2O3)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Primary Amines</div>
+                        <div class="reaction">RNO2 + 6H → RNH2</div>
+                        <div class="reaction">RCN + 4H → RCH2NH2</div>
+                        <div class="reaction">RCONH2 + Br2 + KOH → RNH2 (Hofmann)</div>
+                        <div class="reaction">Phthalimide + RX → RNH2 (Gabriel)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Secondary Amines</div>
+                        <div class="reaction">RNH2 + RX → R2NH</div>
+                        <div class="reaction">RNC + 4H → RNHCH3</div>
+                        <div class="reaction">p-Nitroso-dialkylaniline + NaOH → R2NH</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Tertiary Amines</div>
+                        <div class="reaction">RNH2 + 2RX → R3N</div>
+                        <div class="reaction">R2NH + RX → R3N</div>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-separation"></i> Separation of Amines</h3>
+                <p>Fractional distillation, Hofmann's method (diethyl oxalate), Hinsberg's method (benzenesulfonyl chloride).</p>
+
+                <h3><i class="fas fa-thermometer-half"></i> Physical Properties</h3>
+                <p>Gases/low b.p. liquids with fishy odour, H-bonding, soluble in water/organics, b.p. order: 2° > 1° > 3°.</p>
+
+                <h3><i class="fas fa-exchange-alt"></i> Chemical Properties</h3>
+                <div class="important-points">
+                    <h4><i class="fas fa-star"></i> Basicity Order</h4>
+                    <p>Aliphatic: 2° > 1° > 3° > NH3 (gas phase: 3° > 2° > 1° > NH3)</p>
+                    <p>Aromatic: Weaker than aliphatic due to resonance; substituents affect: +I increase, -I decrease.</p>
+                </div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Salt Formation</div>
+                        <div class="reaction">RNH2 + HCl → RNH3+Cl–</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Alkylation</div>
+                        <div class="reaction">RNH2 + RX → R2NH → R3N → R4N+X–</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Acylation</div>
+                        <div class="reaction">RNH2 + CH3COCl → RNHCOCH3</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Carbylamine</div>
+                        <div class="reaction">RNH2 + CHCl3 + 3KOH → RNC</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Nitrous Acid</div>
+                        <p>1°: ROH + N2; 2°: R2N–NO; 3°: Salt</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Oxidation</div>
+                        <p>1°: Aldehydes/Ketones; 2°: Hydroxylamines; 3°: Amine oxides</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Ring Substitution (Aromatic)</div>
+                        <p>Activating, o/p directing; protect NH2 for control.</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>1° Amine</th>
+                            <th>2° Amine</th>
+                            <th>3° Amine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carbylamine</td>
+                            <td>Bad smell RNC</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Mustard Oil</td>
+                            <td>Mustard smell</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>HNO2</td>
+                            <td>N2 gas</td>
+                            <td>Nitrosoamine</td>
+                            <td>Salt</td>
+                        </tr>
+                        <tr>
+                            <td>Acetyl Chloride</td>
+                            <td>Acetyl deriv</td>
+                            <td>Acetyl deriv</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Hinsberg</td>
+                            <td>Soluble sulfonamide</td>
+                            <td>Insoluble</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>CH3I</td>
+                            <td>3 moles</td>
+                            <td>2 moles</td>
+                            <td>1 mole</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-flask"></i> Diazonium Salts (ArN2+X–)</h2>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-arrow-right"></i> Preparation</div>
+                        <div class="reaction">ArNH2 + NaNO2 + HCl → ArN2+Cl– (0-5°C)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-thermometer-half"></i> Physical Properties</div>
+                        <p>Colourless crystalline, water soluble, unstable, explosive when dry.</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-exchange-alt"></i> Chemical Properties</div>
+                        <h4>Substitution</h4>
+                        <div class="reaction">ArN2+Cl– + H2O → ArOH + N2 (Warm)</div>
+                        <div class="reaction">ArN2+Cl– + H3PO2 → ArH + N2</div>
+                        <div class="reaction">ArN2+Cl– + CuCl → ArCl + N2 (Sandmeyer)</div>
+                        <div class="reaction">ArN2+Cl– + KI → ArI + N2</div>
+                        <div class="reaction">ArN2+BF4– → ArF + N2 + BF3 (Balz-Schiemann)</div>
+                        <div class="reaction">ArN2+Cl– + CuCN → ArCN + N2</div>
+                        <div class="reaction">ArN2+Cl– + NaNO2/Cu → ArNO2 + N2</div>
+                        <div class="reaction">ArN2+Cl– + KSH → ArSH + N2</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Coupling Reactions</div>
+                        <div class="reaction">ArN2+Cl– + C6H5OH → ArN=NC6H4OH (p-Hydroxyazobenzene)</div>
+                        <div class="reaction">ArN2+Cl– + C6H5NH2 → ArN=NC6H4NH2</div>
+                    </div>
+                </div>
+                <p>Uses: Azo dyes, organic synthesis, halogen arenes.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-bar"></i> JEE Main Weightage</h2>
+                <p>Typically <strong>3-4 questions</strong> from Nitrogen Compounds. Focus on amine preparation/separation, reactions with HNO2, diazonium reactions, basicity order.</p>
+                
+                <div class="weightage-bar">
+                    <div class="weightage-fill" style="width: 90%"></div>
+                </div>
+                <div class="weightage-label">
+                    <span>Weightage</span>
+                    <span>High (3-4 Qs)</span>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div>JEE Main & NEET Chemistry - Nitrogen Containing Compounds Summary</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topicCards = document.querySelectorAll('.topic-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            topicCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
