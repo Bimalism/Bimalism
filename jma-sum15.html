@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometry Quiz - 20 Questions | JEE Main & Advanced</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
+        body { background: linear-gradient(135deg, #1e3c72, #2a5298, #00d4ff); color:#fff; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:0 auto; background:rgba(0,0,0,0.4); border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.5); overflow:hidden; }
+        header { background:linear-gradient(to right,#0f2027,#203a43,#2c5364); padding:35px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); padding:12px 28px; border-radius:50px; font-size:1.6rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:rgba(255,255,255,0.1); }
+        .btn { padding:12px 32px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#00ff88; color:#0f2027; }
+        .btn-reset { background:#00d4ff; color:#0f2027; }
+        .btn-submit { background:#ff00ff; color:white; }
+        .btn:hover { transform:translateY(-4px); box-shadow:0 10px 25px rgba(0,0,0,0.4); }
+        .progress-bar { height:16px; background:rgba(255,255,255,0.2); margin:15px 30px; border-radius:8px; overflow:hidden; }
+        .progress { height:100%; background:#00ff88; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; display:flex; justify-content:space-between; color:#00ff88; }
+        .quiz { padding:35px; }
+        .question { background:rgba(255,255,255,0.15); padding:28px; border-radius:15px; border-left:6px solid #00ff88; margin-bottom:28px; }
+        .qno { font-weight:bold; font-size:1.3rem; color:#00ff88; }
+        .qtext { font-size:1.3rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:16px; }
+        .option { padding:18px; background:rgba(255,255,255,0.1); border:2px solid rgba(0,255,136,0.4); border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:14px; }
+        .option:hover { border-color:#00ff88; background:rgba(0,255,136,0.2); }
+        .option.selected { border-color:#00ff88; background:rgba(0,255,136,0.4); font-weight:bold; }
+        .result { display:none; padding:60px; text-align:center; background:linear-gradient(135deg,rgba(0,255,136,0.2),rgba(0,212,255,0.2)); }
+        .score { font-size:5rem; font-weight:bold; color:#00ff88; margin:25px 0; }
+        .message { font-size:1.8rem; margin:25px 0; color:#00d4ff; }
+        .details { margin:50px auto; max-width:900px; text-align:left; }
+        .detail { padding:22px; background:rgba(255,255,255,0.1); margin:18px 0; border-radius:12px; border-left:6px solid #00ff88; }
+        .wrong { border-left-color:#ff00ff; background:rgba(255,0,255,0.2); }
+        .exp { margin-top:18px; padding:18px; background:rgba(0,255,136,0.2); border-radius:10px; border-left:4px solid #00d4ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trigonometry</h1>
+            <p class="subtitle">20 High-Level Questions • Full eSaral Coverage • JEE Main + Advanced</p>
+            <div class="timer">Time: <span id="timer">30:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/20</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/20</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "sin(A + B) =", o: ["sinA cosB + cosA sinB", "sinA cosB – cosA sinB", "cosA cosB – sinA sinB", "cosA cosB + sinA sinB"], c: 0, exp: "Standard compound angle formula" },
+            { q: "cos(A – B) =", o: ["cosA cosB – sinA sinB", "cosA cosB + sinA sinB", "sinA cosB + cosA sinB", "sinA cosB – cosA sinB"], c: 1, exp: "cos(A – B) = cosA cosB + sinA sinB" },
+            { q: "tan(A + B) =", o: ["(tanA + tanB)/(1 + tanA tanB)", "(tanA + tanB)/(1 – tanA tanB)", "(tanA – tanB)/(1 + tanA tanB)", "(tanA – tanB)/(1 – tanA tanB)"], c: 1, exp: "tan(A + B) = (tanA + tanB)/(1 – tanA tanB)" },
+            { q: "sin2A =", o: ["2 sinA cosA", "cos²A – sin²A", "2 cos²A – 1", "1 – 2 sin²A"], c: 0, exp: "Double angle: sin2A = 2 sinA cosA" },
+            { q: "cos2A =", o: ["cos²A – sin²A", "2 sinA cosA", "1 + 2 sin²A", "2 cos²A + 1"], c: 0, exp: "cos2A = cos²A – sin²A = 2cos²A – 1 = 1 – 2sin²A" },
+            { q: "sin3A =", o: ["3 sinA – 4 sin³A", "4 sin³A – 3 sinA", "3 cosA – 4 cos³A", "4 cos³A – 3 cosA"], c: 0, exp: "Triple angle formula: sin3A = 3sinA – 4sin³A" },
+            { q: "cos3A =", o: ["4 cos³A – 3 cosA", "3 cosA – 4 cos³A", "3 sinA – 4 sin³A", "4 sin³A – 3 sinA"], c: 0, exp: "cos3A = 4cos³A – 3cosA" },
+            { q: "2 sinA cosB =", o: ["sin(A+B) + sin(A–B)", "sin(A+B) – sin(A–B)", "cos(A–B) – cos(A+B)", "cos(A+B) + cos(A–B)"], c: 0, exp: "Product to sum identity" },
+            { q: "2 cosA cosB =", o: ["cos(A+B) + cos(A–B)", "cos(A–B) – cos(A+B)", "sin(A+B) + sin(A–B)", "sin(A+B) – sin(A–B)"], c: 0, exp: "Standard identity" },
+            { q: "sin C + sin D =", o: ["2 sin((C+D)/2) cos((C–D)/2)", "2 cos((C+D)/2) sin((C–D)/2)", "2 sin((C+D)/2) sin((C–D)/2)", "2 cos((C+D)/2) cos((C–D)/2)"], c: 0, exp: "Sum to product" },
+            { q: "sin⁻¹(–x) =", o: ["–sin⁻¹x", "π – sin⁻¹x", "π + sin⁻¹x", "sin⁻¹x"], c: 0, exp: "Odd function property" },
+            { q: "cos⁻¹(–x) =", o: ["π – cos⁻¹x", "–cos⁻¹x", "π + cos⁻¹x", "cos⁻¹x"], c: 0, exp: "cos⁻¹(–x) = π – cos⁻¹x" },
+            { q: "sin⁻¹x + cos⁻¹x =", o: ["π/2", "π", "0", "–π/2"], c: 0, exp: "Complementary identity" },
+            { q: "General solution of sinθ = sinα is", o: ["θ = nπ + (–1)ⁿ α", "θ = 2nπ + α", "θ = nπ + α", "θ = 2nπ ± α"], c: 0, exp: "sinθ = sinα ⇒ θ = nπ + (–1)ⁿ α" },
+            { q: "General solution of cosθ = 1 is", o: ["θ = 2nπ", "θ = nπ", "θ = (2n+1)π", "θ = nπ/2"], c: 0, exp: "cosθ = 1 ⇒ θ = 2nπ" },
+            { q: "In any triangle, a/sinA = b/sinB = c/sinC =", o: ["2R", "R", "r", "2r"], c: 0, exp: "Law of Sines: a/sinA = 2R" },
+            { q: "Cosine formula: cosA =", o: ["(b² + c² – a²)/(2bc)", "(a² + b² – c²)/(2ab)", "(a² + c² – b²)/(2ac)", "None"], c: 0, exp: "Standard cosine rule" },
+            { q: "Area of triangle =", o: ["(1/2)ab sinC", "(1/2)bc sinA", "(1/2)ca sinB", "All of these"], c: 3, exp: "Area = (1/2) × side × side × sin(included angle)" },
+            { q: "sin(A/2) =", o: ["√[(s–b)(s–c)/(bc)]", "√[(s–a)(s–b)/(ac)]", "√[(s–a) s /(bc)]", "None"], c: 0, exp: "Half-angle formula from notes" },
+            { q: "Angle of depression is measured with respect to", o: ["Horizontal", "Vertical", "Line of sight", "Ground"], c: 0, exp: "Always w.r.t. horizontal" }
+        ];
+
+        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? ' selected' : '';
+                opts += `<div class="option${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} / 20</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:35px;display:flex;justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}">
+                        ${current===19?'Submit':'Next'}
+                    </button>
+                </div>`;
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.get  ('progress').style.width = (done/20*100)+'%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m+':'+s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'<i>Not answered</i>':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 18 ? "Trigonometry Legend!" :
+                        correct >= 15 ? "Outstanding!" :
+                        correct >= 12 ? "Excellent!" :
+                        correct >= 8 ? "Good, Keep Practicing!" : "Revise Trig Again!";
+            document.getElementById('score').textContent = correct + '/20';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 30*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); updateProgress(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+    </script>
+</body>
+</html>

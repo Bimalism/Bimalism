@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differential Equations - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%);color:#333;line-height:1.7;padding:20px;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;background:white;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-radius:15px;overflow:hidden}
+        header{background:linear-gradient(to right,#1565c0,#1976d2);color:white;padding:30px 40px;text-align:center;position:relative}
+        .chapter-badge{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.2);padding:8px 15px;border-radius:20px;font-size:0.9rem;backdrop-filter:blur(5px)}
+        h1{font-size:2.4rem;margin-bottom:10px;font-weight:700}
+        .subtitle{font-size:1.2rem;opacity:0.9;margin-bottom:15px}
+        .importance{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:15px;font-size:0.9rem;margin-top:10px}
+        .content{padding:40px}
+        .section{margin-bottom:40px;padding-bottom:30px;border-bottom:1px dashed #e0e0e0}
+        .section:last-child{border-bottom:none}
+        h2{color:#1565c0;font-size:1.8rem;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #1976d2;display:flex;align-items:center}
+        h2 i{margin-right:10px;background:#e3f2fd;padding:10px;border-radius:50%}
+        h3{color:#1976d2;font-size:1.4rem;margin:25px 0 15px;display:flex;align-items:center}
+        h3 i{margin-right:10px;color:#42a5f5}
+        p{margin-bottom:15px;text-align:justify}
+        .definition{background:#e3f2fd;border-left:4px solid #1976d2;padding:15px 20px;margin:20px 0;border-radius:0 8px 8px 0;font-style:italic;position:relative}
+        .formula{font-family:'Cambria Math',serif;background:#e3f2fd;padding:15px 20px;margin:20px 0;border-radius:8px;border-left:4px solid #1565c0;font-size:1.1rem;box-shadow:0 4px 6px rgba(0,0,0,0.05);text-align:center}
+        .important-points{background:linear-gradient(to right,#e3f2fd,#bbdefb);border-left:4px solid #42a5f5;padding:20px;margin:25px 0;border-radius:0 8px 8px 0}
+        table{width:100%;border-collapse:collapse;margin:20px 0;box-shadow:0 5px 15px rgba(0,0,0,0.05);border-radius:8px;overflow:hidden}
+        th{background:linear-gradient(to right,#1565c0,#1976d2);color:white;padding:15px;text-align:left}
+        td{padding:15px;border-bottom:1px solid #e0e0e0}
+        tr:nth-child(even){background:#f5f9ff}
+        tr:hover{background:#e3f2fd}
+        footer{text-align:center;padding:25px;background:linear-gradient(to right,#0d47a1,#1565c0);color:white;margin-top:40px}
+        @media(max-width:768px){.content{padding:20px}h1{font-size:2rem}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main & Advanced Mathematics</div>
+            <h1>Differential Equations</h1>
+            <p class="subtitle">Complete Summary from eSaral Notes (4 Pages)</p>
+            <div class="importance">High Weightage • 2–4 Questions Expected</div>
+        </header>
+
+        <div class="content">
+
+            <section class="section">
+                <h2><i class="fas fa-book"></i> Basic Definitions</h2>
+                <div class="definition">
+                    <p><strong>Differential Equation</strong>: A mathematical equation that relates some function with its derivatives.</p>
+                </div>
+                <h3>Order and Degree of a Differential Equation</h3>
+                <p><strong>Order</strong>: Order of the highest differential coefficient appearing in the equation.</p>
+                <p><strong>Degree</strong>: Exponent of the highest differential coefficient, when the differential equation is a polynomial in all differential coefficients.</p>
+
+                <h3>Formation of Differential Equations</h3>
+                <p>Consider a family of curves <strong>f(x, y, α₁, α₂, …, αₙ) = 0</strong>, where α₁, α₂, …, αₙ are n independent parameters.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-calculator"></i> First Order Differential Equations</h2>
+
+                <h3>1. Separable Variables</h3>
+                <div class="formula">dy/dx = M(x)/N(y) ⇒ N(y) dy = M(x) dx</div>
+                <div class="formula">∫N(y) dy = ∫M(x) dx + c</div>
+
+                <h3>2. Reducible to Separable Form</h3>
+                <p>dy/dx = f(ax + by + c) → Put <strong>ax + by + c = t</strong></p>
+
+                <h3>3. Homogeneous Differential Equations</h3>
+                <div class="formula">dy/dx = f(x,y) where f(x,y) = F(y/x) or F(x/y)</div>
+                <p>Put <strong>y = vx</strong> (v = v(x)) → dy/dx = v + x dv/dx</p>
+
+                <h3>4. Equations Reducible to Homogeneous Form</h3>
+                <div class="formula">dy/dx = (ax + by + c)/(Ax + By + C)   (aB ≠ Ab)</div>
+                <p>Substitute x = X + h, y = Y + k where h, k chosen such that:</p>
+                <div class="formula">
+                    ah + bk + c = 0<br>
+                    Ah + Bk + C = 0<br><br>
+                    h = (bC − Bc)/(aB − Ab) ,  k = (Ac − aC)/(aB − Ab)
+                </div>
+                <p>Then equation becomes homogeneous in X, Y → Put Y = VX</p>
+                <p>If aB = Ab → Put <strong>ax + by = t</strong></p>
+
+                <h3>5. First Order Linear Differential Equations</h3>
+                <div class="formula">dy/dx + Py = Q  (P, Q functions of x only)</div>
+                <p>Integrating Factor = <strong>e^{∫P dx}</strong></p>
+                <div class="formula">y × e^{∫P dx} = ∫ Q e^{∫P dx} dx + c</div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-tools"></i> General Forms of Variable Separation</h2>
+                <table>
+                    <tr><th>Form</th><th>Equivalent Differential</th></tr>
+                    <tr><td>(i) d(x + y)</td><td>dx + dy</td></tr>
+                    <tr><td>(ii) d(xy)</td><td>y dx + x dy</td></tr>
+                    <tr><td>(iii) d(x/y)</td><td>(y dx − x dy)/y²</td></tr>
+                    <tr><td>(iv) d(y/x)</td><td>(x dy − y dx)/x²</td></tr>
+                    <tr><td>(v) d(log xy)</td><td>(y dx + x dy)/xy</td></tr>
+                    <tr><td>(vi) d(log(y/x))</td><td>(x dy − y dx)/xy</td></tr>
+                    <tr><td>(vii) d(log(x² + y²)/(x − y))</td><td>2(x dy − y dx)/(x² − y²)</td></tr>
+                    <tr><td>(viii) d(tan⁻¹(y/x))</td><td>(x dy − y dx)/(x² + y²)</td></tr>
+                    <tr><td>(ix) d[f(x,y)]^{1−n}/(1−n)</td><td>[f(x,y)]^{-n} f'(x,y)</td></tr>
+                    <tr><td>(x) d(√(x² + y²))</td><td>(x dx + y dy)/√(x² + y²)</td></tr>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-vector-square"></i> Orthogonal Trajectory</h2>
+                <p>Any curve which cuts every member of a given family of curves at right angle.</p>
+                <p>Example: y = kx are orthogonal trajectories of the family x² + y² = a² (circles through origin).</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-project-diagram"></i> Applications of Differential Equations</h2>
+                <h3>Geometrical Applications</h3>
+                <p>Equation of tangent at (x,y) on y = f(x):</p>
+                <div class="formula">Y − y = (dy/dx)(X − x)</div>
+                <p>At X-axis (Y=0): X = x − y/(dy/dx)</p>
+                <p>At Y-axis (X=0): Y = y − x(dy/dx)</p>
+                <p>For normal: (Y − y)(dy/dx) + (X − x) = 0</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> JEE Main/Advanced Weightage</h2>
+                <div class="important-points">
+                    <p>• 2–4 questions expected every year</p>
+                    <p>• Must know: Separable, Homogeneous, Linear, Reducible forms, Orthogonal trajectories</p>
+                    <p>• High probability: Equations of form dy/dx = f(ax+by+c), variable separable tricks, tangent/normal length problems</p>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <div>JEE Main • JEE Advanced • Class 12 Mathematics | Differential Equations - Complete Summary (eSaral Notes)</div>
+        </footer>
+    </div>
+</body>
+</html>

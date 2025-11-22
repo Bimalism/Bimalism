@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence & Series - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #2e7d32, #43a047); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #2e7d32; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #43a047; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #e8f5e9; padding: 10px; border-radius: 50%; color: #2e7d32; }
+        h3 { color: #388e3c; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #43a047; }
+        .definition { background-color: #e8f5e9; border-left: 4px solid #43a047; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .formula { background-color: #e8f5e9; padding: 18px 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #2e7d32; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #2e7d32, #43a047); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #f1f8e9; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #e8f5e9); border: 1px solid #c8e6c9; border-radius: 10px; padding: 22px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #43a047, #2e7d32); }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .topic-title { font-weight: bold; color: #2e7d32; margin-bottom: 12px; font-size: 1.2rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #e8f5e9; padding: 8px; border-radius: 50%; color: #2e7d32; }
+        .important-points { background: linear-gradient(to right, #e8f5e9, #c8e6c9); border-left: 4px solid #43a047; padding: 22px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .important-points h4 { color: #2e7d32; display: flex; align-items: center; margin-bottom: 12px; }
+        .important-points h4 i { margin-right: 10px; }
+        footer { text-align: center; padding: 30px; background: linear-gradient(to right, #1b5e20, #2e7d32); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 25px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .nav-tab.active { border-bottom: 3px solid #43a047; color: #2e7d32; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Sequence & Series</h1>
+            <p class="subtitle">Complete Revision Notes | JEE Main 2025–26</p>
+            <div class="importance">Very High Weightage • 5–7 Questions Expected</div>
+        </header>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="ap">Arithmetic Progression</div>
+                <div class="nav-tab" data-tab="gp">Geometric Progression</div>
+                <div class="nav-tab" data-tab="means">A.M. & G.M.</div>
+                <div class="nav-tab" data-tab="special">Special Series & Sums</div>
+                <div class="nav-tab" data-tab="properties">Important Properties</div>
+                <div class="nav-tab" data-tab="jee">JEE Tips</div>
+            </div>
+
+            <!-- A.P. -->
+            <div class="tab-content active" id="ap">
+                <section class="section">
+                    <h2><i class="fas fa-arrow-trend-up"></i> Arithmetic Progression (A.P.)</h2>
+                    <div class="formula">
+                        aₙ = a + (n−1)d<br>
+                        Sₙ = n/2 [2a + (n−1)d] = n/2 (a + l)  (l = last term)
+                    </div>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-equals"></i> Key Properties</div>
+                            <ul>
+                                <li>a₁ + aₙ = a₂ + aₙ₋₁ = a₃ + aₙ₋₂ = constant</li>
+                                <li>If tₙ is linear in n → sequence is A.P. (d = coefficient of n)</li>
+                                <li>If Sₙ is quadratic in n with constant term 0 → A.P. (d = 2 × coeff of n²)</li>
+                                <li>If {aₙ} is A.P. with aₙ ≠ 0 → {1/aₙ} is G.P.</li>
+                            </ul>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-calculator"></i> Common Difference</div>
+                            <p>d = (tₚ − t_q)/(p − q)  (p, q ∈ N)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- G.P. -->
+            <div class="tab-content" id="gp">
+                <section class="section">
+                    <h2><i class="fas fa-chart-line"></i> Geometric Progression (G.P.)</h2>
+                    <div class="formula">
+                        aₙ = a rⁿ⁻¹<br><br>
+                        Sₙ = a(rⁿ − 1)/(r − 1)  (r ≠ 1)<br>
+                        Sₙ = n a  (r = 1)<br><br>
+                        Sum to infinity (|r| < 1): S∞ = a/(1 − r)
+                    </div>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-equals"></i> Key Properties</div>
+                            <ul>
+                                <li>a₁ aₙ = a₂ aₙ₋₁ = a₃ aₙ₋₂ = constant (square of middle term)</li>
+                                <li>If {aₙ} is G.P. (aₙ > 0) → {log aₙ} is A.P. (converse true)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Means -->
+            <div class="tab-content" id="means">
+                <section class="section">
+                    <h2><i class="fas fa-balance-scale"></i> Arithmetic Mean & Geometric Mean</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-plus"></i> Arithmetic Mean (A.M.)</div>
+                            <p>Between a & c: A = (a + c)/2<br>
+                               For n numbers: A = (a₁ + a₂ + ... + aₙ)/n</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-times"></i> Geometric Mean (G.M.)</div>
+                            <p>Between a & c: G = √(a c)<br>
+                               For n positive numbers: G = (a₁ a₂ ... aₙ)<sup>1/n</sup></p>
+                        </div>
+                    </div>
+                    <div class="important-points">
+                        <h4><i class="fas fa-greater-than-equal"></i> A.M. ≥ G.M. (Equality iff all equal)</h4>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Special Series -->
+            <div class="tab-content" id="special">
+                <section class="section">
+                    <h2><i class="fas fa-sigma"></i> Sum of Special Series</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Sum of first n natural numbers</div>
+                            <div class="formula">S = n(n+1)/2</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Sum of squares</div>
+                            <div class="formula">1² + 2² + ... + n² = n(n+1)(2n+1)/6</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Sum of cubes</div>
+                            <div class="formula">[n(n+1)/2]²</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Properties -->
+            <div class="tab-content" id="properties">
+                <section class="section">
+                    <h2><i class="fas fa-star"></i> Important Properties & Results</h2>
+                    <div class="important-points">
+                        <ul>
+                            <li>Three numbers a, b, c in A.P. ⇔ 2b = a + c</li>
+                            <li>Three numbers a, b, c in G.P. ⇔ b² = a c</li>
+                            <li>If a, b, c, d in A.P. → b − a = c − b = d − c (common difference)</li>
+                            <li>Infinite G.P. sum exists only when |r| < 1</li>
+                            <li>Arithmetic mean of two numbers ≥ their geometric mean</li>
+                            <li>If A.P. and G.P. have same first & last term → A.M. > G.M. unless a = l</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- JEE Tips -->
+            <div class="tab-content" id="jee">
+                <section class="section">
+                    <h2><i class="fas fa-trophy"></i> JEE Main Tips & Weightage</h2>
+                    <p>Highest weightage chapter in Algebra — 5–7 questions every year!</p>
+                    <div class="important-points">
+                        <h4><i class="fas fa-bullseye"></i> Must Know for JEE</h4>
+                        <ul>
+                            <li>nᵗʰ term & sum formulae of A.P. & G.P.</li>
+                            <li>Infinite G.P. sum = a/(1−r) (|r|<1)</li>
+                            <li>Sum of n natural numbers, squares, cubes</li>
+                            <li>Inserting n A.M.s or G.M.s between a & b</li>
+                            <li>A.P. ↔ G.P. conversions (reciprocals, logs)</li>
+                            <li>Three terms in A.P./G.P. problems</li>
+                            <li>Σ sign change problems</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Sequence & Series • Complete Summary 2025–26<br>
+            This chapter alone can give you 15+ marks — master it!</div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

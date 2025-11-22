@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vectors Algebra - Complete Summary (eSaral 4 Pages)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);color:#fff;line-height:1.7;padding:20px;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;background:rgba(0,0,0,0.25);backdrop-filter:blur(10px);box-shadow:0 15px 40px rgba(0,0,0,0.4);border-radius:18px;overflow:hidden}
+        header{background:linear-gradient(to right,#0f2027,#203a43,#2c5364);padding:35px;text-align:center;position:relative}
+        .chapter-badge{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.2);padding:10px 18px;border-radius:25px;font-size:0.95rem}
+        h1{font-size:2.8rem;margin-bottom:10px}
+        .subtitle{font-size:1.3rem;opacity:0.9}
+        .importance{background:rgba(255,255,255,0.2);display:inline-block;padding:8px 20px;border-radius:20px;margin-top:10px}
+        .content{padding:40px;color:#f0f0f0}
+        .section{margin-bottom:45px;background:rgba(255,255,255,0.08);padding:25px;border-radius:12px}
+        h2{color:#00d4ff;font-size:1.9rem;margin-bottom:20px;display:flex;align-items:center}
+        h2 i{margin-right:12px;background:#203a43;padding:12px;border-radius:50%}
+        .formula{background:rgba(0,0,0,0.4);padding:18px 22px;margin:18px 0;border-radius:10px;font-size:1.2rem;text-align:center;border-left:5px solid #00ff88}
+        .formula span{display:block;font-size:1.4rem;margin:10px 0}
+        table{width:100%;border-collapse:collapse;margin:25px 0;background:rgba(0,0,0,0.3);border-radius:10px;overflow:hidden}
+        th{background:#203a43;padding:15px;color:#00ff88;text-align:center}
+        td{padding:15px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1)}
+        tr:hover{background:rgba(255,255,255,0.1)}
+        .highlight{background:#00ff8833;padding:3px 8px;border-radius:5px}
+        .key-points{background:rgba(0,255,136,0.15);border-left:5px solid #00ff88;padding:20px;margin:25px 0;border-radius:0 10px 10px 0}
+        .key-points li{margin:10px 0}
+        footer{text-align:center;padding:30px;background:#0f2027;color:#aaa;margin-top:50px}
+        @media(max-width:768px){.content{padding:20px}h1{font-size:2.3rem}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main & Advanced</div>
+            <h1>Vectors Algebra</h1>
+            <p class="subtitle">Complete Summary • Dot & Cross Products • Triple Products • eSaral 4 Pages</p>
+            <div class="importance">Very High Weightage • 4–7 Questions Every Year</div>
+        </header>
+
+        <div class="content">
+
+            <section class="section">
+                <h2><i class="fas fa-arrows-alt"></i> Basics</h2>
+                <p><strong>Scalar:</strong> Only magnitude (e.g., mass, temperature)</p>
+                <p><strong>Vector:</strong> Magnitude + Direction (e.g., velocity, force)</p>
+                <p>Vector Addition: Triangle / Parallelogram / Polygon Law</p>
+                <div class="key-points">
+                    <ul>
+                        <li>Commutative: a + b = b + a</li>
+                        <li>Associative: a + (b + c) = (a + b) + c</li>
+                        <li>Triangle inequality: |a − b| ≤ |a + b| ≤ |a| + |b|</li>
+                        <li>Two non-zero non-collinear vectors define a plane</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-divide"></i> Section Formula</h2>
+                <div class="formula">
+                    Point dividing join of p and q in ratio m:n (internal)<br>
+                    <span>r = (n p + m q) / (m + n)</span>
+                    External: r = (n p − m q) / (n − m)
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-times"></i> Vector (Cross) Product a × b</h2>
+                <div class="formula">
+                    |a × b| = |a||b| sinθ  Direction: Right-hand rule<br>
+                    Area of parallelogram = |a × b|<br>
+                    Area of triangle = (1/2)|a × b|
+                </div>
+                <table>
+                    <tr><th>Property</th><th>Result</th></tr>
+                    <tr><td>a × a = 0</td><td>Yes</td></tr>
+                    <tr><td>a × b = − (b × a)</td><td>Anti-commutative</td></tr>
+                    <tr><td>λa × μb = λμ (a × b)</td><td>Yes</td></tr>
+                    <tr><td>a × (b + c) = a × b + a × c</td><td>Distributive</td></tr>
+                    <tr><td>a × b = 0</td><td>a ∥ b (or one is zero)</td></tr>
+                </table>
+                <div class="formula">
+                    i × j = k  j × k = i  k × i = j<br>
+                    j × i = −k  etc.
+                </div>
+                <div class="formula">
+                    a = a₁i + a₂j + a₃k  b = b₁i + b₂j + b₃k<br>
+                    a × b = <span>
+                    | i     j     k  |<br>
+                    | a₁   a₂   a₃ |<br>
+                    | b₁   b₂   b₃ |
+                    </span>
+                    = (a₂b₃ − a₃b₂)i − (a₁b₃ − a₃b₁)j + (a₁b₂ − a₂b₁)k
+                </div>
+                <p class="key-points">Unit vector ⊥ to both a and b: ± (a × b) / |a × b|</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-circle"></i> Scalar (Dot) Product a · b</h2>
+                <div class="formula">
+                    a · b = |a||b| cosθ = a₁b₁ + a₂b₂ + a₃b₃
+                </div>
+                <p>Projection of a on b = (a · b)/|b|</p>
+                <div class="key-points">
+                    <ul>
+                        <li>a · b = 0 ⇔ a ⊥ b</li>
+                        <li>i · i = j · j = k · k = 1</li>
+                        <li>i · j = j · k = k · i = 0</li>
+                        <li>a · a = |a|²</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-cube"></i> Scalar Triple Product [a b c] = a · (b × c)</h2>
+                <div class="formula">
+                    Volume of parallelepiped = |[a b c]|
+                </div>
+                <div class="key-points">
+                    <ul>
+                        <li>[a b c] = [b c a] = [c a b]</li>
+                        <li>[a b c] = −[a c b]</li>
+                        <li>[ka b c] = k [a b c]</li>
+                        <li>[a b c] = 0 ⇔ a, b, c coplanar</li>
+                        <li>Can interchange dot & cross: [a b c] = (a × b) · c = a · (b × c)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-dice-three"></i> Vector Triple Product a × (b × c)</h2>
+                <div class="formula">
+                    a × (b × c) = (a · c)b − (a · b)c
+                </div>
+                <p>Lies in plane of b and c (not generally equal to (a × b) × c)</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-star"></i> JEE Must-Know</h2>
+                <div class="key-points">
+                    <strong>High Weightage Topics:</strong>
+                    <li>Section formula (internal/external)</li>
+                    <li>Cross product magnitude & direction</li>
+                    <li>Area/Volume using vector products</li>
+                    <li>Scalar triple product = 0 for coplanarity</li>
+                    <li>Vector triple product expansion</li>
+                    <li>Shortest distance, angle between lines/planes (using vectors)</li>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <div>JEE Main • JEE Advanced • Class 12 Mathematics | Vectors Algebra - Complete Summary (eSaral 4 Pages)</div>
+            <p>All the best — Master Vectors & Crush JEE 2026!</p>
+        </footer>
+    </div>
+</body>
+</html>

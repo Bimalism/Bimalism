@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sets, Relations & Functions Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a237e, #1565c0, #42a5f5);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1565c0, #42a5f5);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .timer-container {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-home {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #388e3c;
+        }
+        
+        .btn-submit {
+            background: #2196f3;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background: #1976d2;
+        }
+        
+        .btn-reset {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #f57c00;
+        }
+        
+        .progress-container {
+            padding: 15px 30px;
+            background: #e3f2fd;
+            border-bottom: 1px solid #bbdefb;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #4caf50;
+            width: 5%;
+            transition: width 0.5s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .quiz-container {
+            padding: 30px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 5px solid #1565c0;
+        }
+        
+        .question-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .option:hover {
+            border-color: #1565c0;
+            background: #f0f4ff;
+        }
+        
+        .option.selected {
+            border-color: #1565c0;
+            background: #e3f2fd;
+        }
+        
+        .option input {
+            transform: scale(1.2);
+        }
+        
+        .result-container {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 20px 0;
+        }
+        
+        .result-details {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .detail-item {
+            padding: 15px;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .correct {
+            border-left: 5px solid #4caf50;
+        }
+        
+        .incorrect {
+            border-left: 5px solid #f44336;
+        }
+        
+        .review-btn {
+            background: #9c27b0;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .review-btn:hover {
+            background: #7b1fa2;
+        }
+        
+        @media (max-width: 768px) {
+            .timer-container {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+                display: inline-block;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sets, Relations & Functions Quiz</h1>
+            <p class="subtitle">Test your knowledge of Sets, Relations, Functions, and their properties</p>
+            <div class="timer-container">
+                Time Left: <span id="timer">20:00</span>
+            </div>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="goToHome()">
+                <span>←</span> Back to Home
+            </button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">
+                    Reset Quiz
+                </button>
+                <button class="btn btn-submit" onclick="submitQuiz()">
+                    Submit Answers
+                </button>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="quiz-progress"></div>
+            </div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">1</span>/20</span>
+                <span id="answered-count">0 questions answered</span>
+            </div>
+        </div>
+        
+        <div class="quiz-container" id="quiz-content">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="result-container" id="result-content">
+            <h2 class="result-title">Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="result-message"></p>
+            
+            <div class="result-details" id="result-details">
+                <!-- Result details will be inserted here -->
+            </div>
+            
+            <button class="btn btn-home" onclick="goToHome()">
+                <span>←</span> Back to Home
+            </button>
+            <button class="btn review-btn" onclick="resetQuiz()">
+                Take Quiz Again
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions based on Sets, Relations & Functions
+        const quizQuestions = [
+            {
+                question: "What is the cardinality of the power set of A = {1, 2, 3}?",
+                options: [
+                    "3",
+                    "6",
+                    "8",
+                    "9"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which of the following relations is always symmetric?",
+                options: [
+                    "Reflexive relation",
+                    "Equivalence relation",
+                    "Transitive relation",
+                    "None of these"
+                ],
+                correct: 1
+            },
+            {
+                question: "If A and B are two sets such that n(A) = 5, n(B) = 3, then the number of injective functions from A to B is:",
+                options: [
+                    "125",
+                    "243",
+                    "60",
+                    "0"
+                ],
+                correct: 3
+            },
+            {
+                question: "The relation R = {(1,1), (2,2), (3,3), (1,2), (2,1)} on set A = {1,2,3} is:",
+                options: [
+                    "Reflexive but not symmetric",
+                    "Reflexive and symmetric but not transitive",
+                    "An equivalence relation",
+                    "None of these"
+                ],
+                correct: 1
+            },
+            {
+                question: "If A = {1,2,3} and B = {4,5}, then the number of onto functions from A to B is:",
+                options: [
+                    "8",
+                    "6",
+                    "0",
+                    "2"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is an empty set?",
+                options: [
+                    "{x: x is a real number and x² = -1}",
+                    "{x: x is a real number and x² = 1}",
+                    "{x: x is a real number and x² - 1 = 0}",
+                    "{x: x is a real number and x² + 1 = 0}"
+                ],
+                correct: 3
+            },
+            {
+                question: "If A and B are two sets, then A ∩ (A ∪ B)' is equal to:",
+                options: [
+                    "A",
+                    "B",
+                    "φ",
+                    "A ∩ B"
+                ],
+                correct: 2
+            },
+            {
+                question: "The function f: R → R defined by f(x) = |x| is:",
+                options: [
+                    "One-one and onto",
+                    "One-one but not onto",
+                    "Onto but not one-one",
+                    "Neither one-one nor onto"
+                ],
+                correct: 3
+            },
+            {
+                question: "If A = {1,2,3}, then the number of equivalence relations containing (1,2) is:",
+                options: [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                correct: 1
+            },
+            {
+                question: "The set A = {x: x is a positive integer less than 6} in roster form is:",
+                options: [
+                    "{1,2,3,4,5,6}",
+                    "{0,1,2,3,4,5}",
+                    "{1,2,3,4,5}",
+                    "{0,1,2,3,4,5,6}"
+                ],
+                correct: 2
+            },
+            {
+                question: "If f: R → R is defined by f(x) = 3x - 2, then f⁻¹(x) is:",
+                options: [
+                    "(x+2)/3",
+                    "1/(3x-2)",
+                    "(x-2)/3",
+                    "Does not exist"
+                ],
+                correct: 0
+            },
+            {
+                question: "For real numbers x and y, define xRy if x - y + √2 is an irrational number. Then the relation R is:",
+                options: [
+                    "Reflexive",
+                    "Symmetric",
+                    "Transitive",
+                    "Equivalence"
+                ],
+                correct: 0
+            },
+            {
+                question: "If A = {1,2,3}, then the number of relations on A is:",
+                options: [
+                    "3",
+                    "6",
+                    "8",
+                    "512"
+                ],
+                correct: 3
+            },
+            {
+                question: "Let f: R → R be defined by f(x) = x² + 1. Then the pre-images of 17 are:",
+                options: [
+                    "4, -4",
+                    "3, -3",
+                    "5, -5",
+                    "4"
+                ],
+                correct: 0
+            },
+            {
+                question: "If A and B are two sets containing 3 and 6 elements respectively, what can be the minimum number of elements in A ∪ B?",
+                options: [
+                    "3",
+                    "6",
+                    "9",
+                    "18"
+                ],
+                correct: 1
+            },
+            {
+                question: "The function f: N → N defined by f(x) = 2x + 3 is:",
+                options: [
+                    "Surjective",
+                    "Injective",
+                    "Bijective",
+                    "None of these"
+                ],
+                correct: 1
+            },
+            {
+                question: "If A = {1,2,3,4}, B = {3,4,5,6}, then A - B is:",
+                options: [
+                    "{1,2}",
+                    "{3,4}",
+                    "{5,6}",
+                    "{1,2,5,6}"
+                ],
+                correct: 0
+            },
+            {
+                question: "Let R be the relation on the set N of natural numbers defined by R = {(a,b): a + 3b = 12, a,b ∈ N}. Then R is:",
+                options: [
+                    "{(9,1), (6,2), (3,3)}",
+                    "{(9,1), (6,2), (3,3), (0,4)}",
+                    "{(3,3), (6,2), (9,1)}",
+                    "None of these"
+                ],
+                correct: 2
+            },
+            {
+                question: "If f: R → R is defined by f(x) = x² - 3x + 2, then f(f(x)) is:",
+                options: [
+                    "x⁴ - 6x³ + 10x² - 3x",
+                    "x⁴ - 6x³ + 10x² - 3x + 2",
+                    "x⁴ - 6x³ + 10x² + 3x",
+                    "x⁴ - 6x³ + 10x² + 3x + 2"
+                ],
+                correct: 1
+            },
+            {
+                question: "The number of bijective functions from set A to itself when A contains 4 elements is:",
+                options: [
+                    "4",
+                    "16",
+                    "24",
+                    "256"
+                ],
+                correct: 2
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = Array(quizQuestions.length).fill(null);
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        let timerInterval;
+        let quizSubmitted = false;
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const quizContent = document.getElementById('quiz-content');
+            const question = quizQuestions[currentQuestion];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isChecked = userAnswers[currentQuestion] === index ? 'checked' : '';
+                optionsHTML += `
+                    <label class="option ${isChecked ? 'selected' : ''}">
+                        <input type="radio" name="answer" value="${index}" ${isChecked} 
+                               onchange="selectAnswer(${index})">
+                        ${option}
+                    </label>
+                `;
+            });
+            
+            quizContent.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                    <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        ← Previous
+                    </button>
+                    <button class="btn btn-submit" onclick="nextQuestion()">
+                        ${currentQuestion === quizQuestions.length - 1 ? 'Finish' : 'Next'} →
+                    </button>
+                </div>
+            `;
+        }
+
+        // Select an answer
+        function selectAnswer(answerIndex) {
+            userAnswers[currentQuestion] = answerIndex;
+            document.querySelectorAll('.option').forEach((opt, idx) => {
+                if (idx === answerIndex) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+            updateProgress();
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        // Update progress bar and counter
+        function updateProgress() {
+            const answered = userAnswers.filter(answer => answer !== null).length;
+            const progress = (answered / quizQuestions.length) * 100;
+            
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = answered;
+            document.getElementById('answered-count').textContent = `${answered} of ${quizQuestions.length} questions answered`;
+        }
+
+        // Start the countdown timer
+        function startTimer() {
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (timeLeft < 300) { // 5 minutes
+                document.getElementById('timer').style.color = '#ff5252';
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            
+            quizSubmitted = true;
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            let score = 0;
+            let resultDetails = '';
+            
+            quizQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultDetails += `
+                    <div class="detail-item ${isCorrect ? 'correct' : 'incorrect'}">
+                        <div>
+                            <strong>Q${index + 1}:</strong> ${question.question}<br>
+                            <span>Your answer: ${userAnswer !== null ? question.options[userAnswer] : 'Not answered'}</span><br>
+                            <span>Correct answer: ${question.options[question.correct]}</span>
+                        </div>
+                        <div>${isCorrect ? '✓' : '✗'}</div>
+                    </div>
+                `;
+            });
+            
+            // Display results
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-details').innerHTML = resultDetails;
+            
+            // Result message based on score
+            let message = '';
+            if (score >= 18) {
+                message = 'Excellent! You have mastered Sets, Relations & Functions concepts.';
+            } else if (score >= 14) {
+                message = 'Good job! You have a solid understanding of these mathematical foundations.';
+            } else if (score >= 10) {
+                message = 'Not bad! Review the concepts to improve your understanding.';
+            } else {
+                message = 'Keep studying! Focus on set operations, relation properties, and function types.';
+            }
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        // Reset the quiz
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers = Array(quizQuestions.length).fill(null);
+            timeLeft = 20 * 60;
+            quizSubmitted = false;
+            
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            
+            clearInterval(timerInterval);
+            initializeQuiz();
+        }
+
+        // Navigate to home page
+        function goToHome() {
+            // In a real application, this would redirect to jee.html
+            // For this example, we'll just show an alert
+            alert("Redirecting to JEE Home Page (jee.html)");
+            // window.location.href = "jee.html";
+        }
+
+        // Initialize the quiz when the page loads
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

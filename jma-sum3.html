@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrices & Determinants - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #ff6f00, #ff9800); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #e65100; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #ff9800; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #fff3e0; padding: 10px; border-radius: 50%; color: #e65100; }
+        h3 { color: #f57c00; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #ff9800; }
+        .definition { background-color: #fff3e0; border-left: 4px solid #ff9800; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .formula { background-color: #fff3e0; padding: 15px 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #f57c00; font-size: 1.2rem; text-align: center; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #ff6f00, #ff9800); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #fff8e1; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #fff3e0); border: 1px solid #ffe0b2; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #ff9800, #f57c00); }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .topic-title { font-weight: bold; color: #e65100; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #fff3e0; padding: 8px; border-radius: 50%; color: #e65100; }
+        .important-points { background: linear-gradient(to right, #fff3e0, #ffe0b2); border-left: 4px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .important-points h4 { color: #e65100; display: flex; align-items: center; margin-bottom: 10px; }
+        .important-points h4 i { margin-right: 10px; }
+        footer { text-align: center; padding: 25px; background: linear-gradient(to right, #e65100, #ff6f00); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .nav-tab.active { border-bottom: 3px solid #ff9800; color: #e65100; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .toggle-btn { background: #ff9800; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin: 10px 0; }
+        .toggle-content { display: none; margin-top: 10px; background: #fff8e1; padding: 15px; border-radius: 8px; }
+        .toggle-content.show { display: block; }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Matrices & Determinants</h1>
+            <p class="subtitle">Complete Revision Notes | JEE Main 2025–26</p>
+            <div class="importance">Very High Weightage • 3–5 Questions Expected</div>
+        </header>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="basic">Basic & Types</div>
+                <div class="nav-tab" data-tab="algebra">Algebra of Matrices</div>
+                <div class="nav-tab" data-tab="transpose">Transpose & Special</div>
+                <div class="nav-tab" data-tab="rank">Rank & Minors</div>
+                <div class="nav-tab" data-tab="inverse">Inverse & System</div>
+                <div class="nav-tab" data-tab="det">Determinants Basics</div>
+                <div class="nav-tab" data-tab="properties">Properties of Det</div>
+                <div class="nav-tab" data-tab="cramer">Cramer's Rule</div>
+                <div class="nav-tab" data-tab="jee">JEE Tips</div>
+            </div>
+
+            <!-- Basic & Types -->
+            <div class="tab-content active" id="basic">
+                <section class="section">
+                    <h2><i class="fas fa-th"></i> Matrix – Definition & Types</h2>
+                    <div class="definition">
+                        A <strong>matrix</strong> is a rectangular array of numbers arranged in m rows and n columns → order m × n<br>
+                        A = [a<sub>ij</sub>]<sub>m×n</sub>
+                    </div>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-ban"></i> Zero/Null Matrix</div>
+                            <p>All elements = 0</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-square"></i> Square Matrix</div>
+                            <p>Number of rows = Number of columns = n</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-grip-lines"></i> Diagonal Matrix</div>
+                            <p>a<sub>ij</sub> = 0 if i ≠ j</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-check-square"></i> Identity/Unit Matrix (I)</div>
+                            <p>a<sub>ij</sub> = 1 if i=j, 0 otherwise</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Algebra -->
+            <div class="tab-content" id="algebra">
+                <section class="section">
+                    <h2><i class="fas fa-plus-minus"></i> Algebra of Matrices</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-plus"></i> Addition/Subtraction</div>
+                            <p>Only if same order<br>C = A ± B → c<sub>ij</sub> = a<sub>ij</sub> ± b<sub>ij</sub></p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-times"></i> Multiplication</div>
+                            <p>Possible only if columns of A = rows of B<br>(AB)<sub>ij</sub> = Σ a<sub>ik</sub>b<sub>kj</sub></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Transpose & Special -->
+            <div class="tab-content" id="transpose">
+                <section class="section">
+                    <h2><i class="fas fa-sync"></i> Transpose & Special Matrices</h2>
+                    <div class="definition">
+                        Transpose A' : (i,j)<sup>th</sup> element of A = (j,i)<sup>th</sup> element of A'
+                    </div>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-equals"></i> Symmetric Matrix</div>
+                            <p>A = A' → a<sub>ij</sub> = a<sub>ji</sub></p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-not-equal"></i> Skew-Symmetric</div>
+                            <p>A' = –A → a<sub>ij</sub> = –a<sub>ji</sub><br>∴ Diagonal elements = 0</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-check-circle"></i> Orthogonal Matrix</div>
+                            <p>AA' = A'A = I</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Rank & Minors -->
+            <div class="tab-content" id="rank">
+                <section class="section">
+                    <h2><i class="fas fa-layer-group"></i> Minor, Cofactor & Rank</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Minor M<sub>ij</sub></div>
+                            <p>Determinant after deleting i<sup>th</sup> row & j<sup>th</sup> column</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Cofactor C<sub>ij</sub></div>
+                            <p>C<sub>ij</sub> = (–1)<sup>i+j</sup> M<sub>ij</sub></p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Rank ρ(A)</div>
+                            <p>Highest order of non-zero minor<br>• Rank unchanged by elementary transformations<br>• ρ(A) = ρ(A')<br>• No skew-symmetric matrix has rank 1</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Inverse & System -->
+            <div class="tab-content" id="inverse">
+                <section class="section">
+                    <h2><i class="fas fa-redo"></i> Inverse & System of Equations</h2>
+                    <div class="formula">
+                        AX = B → X = A<sup>–1</sup>B (if |A| ≠ 0)<br>
+                        A<sup>–1</sup> = (adj A) / |A|
+                    </div>
+                    <p>Unique solution when |A| ≠ 0</p>
+                </section>
+            </div>
+
+            <!-- Determinants Basics -->
+            <div class="tab-content" id="det">
+                <section class="section">
+                    <h2><i class="fas fa-calculator"></i> Determinants – Minor & Cofactor</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Minor M<sub>ij</sub></div>
+                            <p>Det after removing i<sup>th</sup> row & j<sup>th</sup> column</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Cofactor C<sub>ij</sub></div>
+                            <p>(–1)<sup>i+j</sup> × M<sub>ij</sub></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Properties of Determinants -->
+            <div class="tab-content" id="properties">
+                <section class="section">
+                    <h2><i class="fas fa-star"></i> Properties of Determinants</h2>
+                    <div class="important-points">
+                        <h4><i class="fas fa-lightbulb"></i> Must Remember Properties</h4>
+                        <ol>
+                            <li>Rows ↔ Columns → value unchanged</li>
+                            <li>Interchange two rows/columns → sign changes</li>
+                            <li>Two identical rows/columns → det = 0</li>
+                            <li>Multiply row/column by k → det × k</li>
+                            <li>Two proportional rows/columns → det = 0</li>
+                        </ol>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Cramer's Rule -->
+            <div class="tab-content" id="cramer">
+                <section class="section">
+                    <h2><i class="fas fa-ruler-combined"></i> Cramer's Rule</h2>
+                    <div class="formula">
+                        For 3×3 system:<br>
+                        x = D₁/D, y = D₂/D, z = D₃/D (D ≠ 0)
+                    </div>
+                    <table>
+                        <tr><th>Case</th><th>Solution</th></tr>
+                        <tr><td>D ≠ 0</td><td>Unique solution</td></tr>
+                        <tr><td>D = 0, D₁=D₂=D₃=0</td><td>Infinite solutions</td></tr>
+                        <tr><td>D = 0, any Dᵢ ≠ 0</td><td>No solution</td></tr>
+                    </table>
+                </section>
+            </div>
+
+            <!-- JEE Tips -->
+            <div class="tab-content" id="jee">
+                <section class="section">
+                    <h2><i class="fas fa-trophy"></i> JEE Main Tips & Weightage</h2>
+                    <p>Extremely important chapter — 3–5 questions every year!</p>
+                    <div class="important-points">
+                        <h4><i class="fas fa-exclamation-triangle"></i> High Weightage Topics</h4>
+                        <ul>
+                            <li>Symmetric & Skew-symmetric matrices</li>
+                            <li>Properties of determinants (especially row operations)</li>
+                            <li>Cramer's rule & consistency of system</li>
+                            <li>Rank of matrix (especially 3×3)</li>
+                            <li>Adjoint and inverse method</li>
+                            <li>Orthogonal matrix</li>
+                        </ul>
+                    </div>
+                    <div class="important-points" style="margin-top:25px;">
+                        <h4><i class="fas fa-brain"></i> Quick Tricks</h4>
+                        <ul>
+                            <li>Skew-symmetric of odd order → det = 0</li>
+                            <li>If two rows same → det = 0</li>
+                            <li>Triangle determinant → product of diagonal</li>
+                            <li>For system: |A| decides everything!</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Matrices & Determinants • Complete Summary 2025–26</div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

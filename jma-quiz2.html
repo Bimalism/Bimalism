@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Numbers & Quadratic Equations Quiz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255, 255, 255, 0.97); border-radius: 15px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); overflow: hidden; }
+        header { background: linear-gradient(to right, #0d47a1, #1976d2); color: white; padding: 30px; text-align: center; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .timer-container { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.25); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav-buttons { display: flex; justify-content: space-between; padding: 20px 30px; background: #e3f2fd; }
+        .btn { padding: 12px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-home { background: #4caf50; color: white; }
+        .btn-submit { background: #2196f3; color: white; }
+        .btn-reset { background: #ff9800; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .progress-container { padding: 15px 30px; background: #bbdefb; }
+        .progress-bar { height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; }
+        .progress { height: 100%; background: #42a5f5; width: 0%; transition: width 0.6s; }
+        .progress-text { margin-top: 8px; font-weight: 600; display: flex; justify-content: space-between; }
+        .quiz-container { padding: 30px; }
+        .question { background: #f8fdff; padding: 25px; border-radius: 12px; border-left: 6px solid #1976d2; margin-bottom: 30px; }
+        .question-number { font-size: 1.2rem; color: #1565c0; font-weight: bold; }
+        .question-text { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #1976d2; background: #e3f2fd; }
+        .option.selected { border-color: #1976d2; background: #bbdefb; font-weight: bold; }
+        .result-container { display: none; padding: 50px; text-align: center; }
+        .score { font-size: 4rem; font-weight: bold; color: #2e7d32; margin: 20px 0; }
+        .result-details { margin: 40px auto; max-width: 800px; text-align: left; }
+        .detail-item { padding: 15px; background: #f5f5f5; margin: 12px 0; border-radius: 8px; border-left: 5px solid #43a047; }
+        .incorrect { border-left-color: #e53935; }
+        @media (max-width: 768px) { .timer-container { position: static; transform: none; margin-top: 15px; } .nav-buttons { flex-direction: column; gap: 12px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Complex Numbers & Quadratic Equations</h1>
+            <p class="subtitle">20 Questions • JEE Main Level • Full Syllabus Coverage</p>
+            <div class="timer-container">Time Left: <span id="timer">20:00</span></div>
+        </header>
+
+        <div class="nav-buttons">
+            <button class="btn btn-home" onclick="alert('Back to Chapter List')">← Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <div class="progress-text">
+                <span>Progress: <span id="progress-text">0</span>/20</span>
+                <span id="answered">0 answered</span>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quiz"></div>
+
+        <div class="result-container" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/20</div>
+            <p id="message"></p>
+            <div class="result-details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "If Re(z) = 0, then z is", o: ["Real", "Purely imaginary", "Zero", "None"], c: 1 },
+            { q: "Polar form of z = x + iy is", o: ["r(cosθ + i sinθ)", "r(cosθ – i sinθ)", "r(sinθ + i cosθ)", "r²(cosθ + i sinθ)"], c: 0 },
+            { q: "z = ¯z implies z is", o: ["Purely imaginary", "Real", "Zero", "Complex"], c: 1 },
+            { q: "z = –¯z implies z is", o: ["Real", "Purely imaginary", "Zero", "None"], c: 1 },
+            { q: "Re(z) =", o: ["(z + ¯z)/2", "(z – ¯z)/2", "(z + ¯z)i/2", "z + ¯z"], c: 0 },
+            { q: "|z| = 0 iff", o: ["z is real", "z is imaginary", "z = 0", "z is non-zero"], c: 2 },
+            { q: "|z₁z₂| =", o: ["|z₁| + |z₂|", "|z₁| |z₂|", "|z₁| – |z₂|", "|z₁|/|z₂|"], c: 1 },
+            { q: "|z₁ + z₂| ≤", o: ["|z₁| + |z₂|", "|z₁| – |z₂|", "|z₁| |z₂|", "||z₁| – |z₂||"], c: 0 },
+            { q: "arg(–1 + i) =", o: ["π/4", "3π/4", "–π/4", "–3π/4"], c: 1 },
+            { q: "arg(z₁z₂) =", o: ["arg(z₁) + arg(z₂)", "arg(z₁) – arg(z₂)", "arg(z₁) + arg(z₂) + 2kπ (k=0, ±1)", "arg(z₁) × arg(z₂)"], c: 2 },
+            { q: "arg(¯z) =", o: ["arg(z)", "–arg(z)", "arg(z) + π", "arg(z) + 2π"], c: 1 },
+            { q: "De Moivre’s theorem is valid for", o: ["Integer n only", "Rational n only", "Any real n", "Any rational n"], c: 3 },
+            { q: "Cube roots of unity are 1, ω, ω² where", o: ["ω³ = 1, 1 + ω + ω² = 1", "ω³ = –1, 1 + ω + ω² = 0", "ω³ = 1, 1 + ω + ω² = 0", "ω³ = 0"], c: 2 },
+            { q: "Discriminant D = b² – 4ac > 0 implies", o: ["Two equal real roots", "Two distinct real roots", "Complex roots", "No real roots"], c: 1 },
+            { q: "Sum of roots α + β =", o: ["–b/a", "b/a", "c/a", "–c/a"], c: 0 },
+            { q: "Product of roots αβ =", o: ["c/a", "–c/a", "b/a", "a/b"], c: 0 },
+            { q: "Vertex of parabola y = ax² + bx + c is at", o: ["(–b/(2a), –D/(4a))", "(b/(2a), D/(4a))", "(–b/a, c)", "(0, c)"], c: 0 },
+            { q: "If both roots are positive, then", o: ["Sum > 0, product > 0", "Sum < 0, product > 0", "Sum > 0, product < 0", "Sum < 0, product < 0"], c: 0 },
+            { q: "Every odd degree polynomial equation has", o: ["No real root", "Exactly one real root", "At least one real root", "All roots real"], c: 2 },
+            { q: "By Factor Theorem, if f(α) = 0 then (x – α)", o: ["Does not divide f(x)", "Divides f(x)", "Is equal to f(x)", "None"], c: 1 }
+        ];
+
+        let current = 0, answers = new Array(questions.length).fill(null), timeLeft = 20*60, timer;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const checked = answers[current] === i ? 'checked' : '';
+                const selected = answers[current] === i ? 'selected' : '';
+                opts += `<label class="option ${selected}">
+                    <input type="radio" name="q" ${checked} onchange="answers[current]=${i}; updateProgress(); renderOptions()">
+                    ${opt}
+                </label>`;
+            });
+
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${current+1} of ${questions.length}</div>
+                    <div class="question-text">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:30px;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--; showQuestion()">← Previous</button>
+                    <button class="btn btn-submit" onclick="${current===questions.length-1?'submitQuiz()':'current++; showQuestion()'}">
+                        ${current===questions.length-1?'Submit Quiz':'Next →'}
+                    </button>
+                </div>`;
+        }
+
+        function renderOptions() {
+            const labels = document.querySelectorAll('.option');
+            labels.forEach((lbl, i) => {
+                if (answers[current] === i) lbl.classList.add('selected');
+                else lbl.classList.remove('selected');
+            });
+        }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.getElementById('progress').style.width = (done/questions.length*100) + '%';
+            document.getElementById('progress-text').textContent = done;
+            document.getElementById('answered').textContent = `${done} answered`;
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = `${m}:${s}`;
+                if (timeLeft <= 0) { clearInterval(timer); submitQuiz(); }
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timer);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const corr = user === q.c;
+                if (corr) correct++;
+                details += `<div class="detail-item ${corr?'':'incorrect'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'Not answered':q.o[user]}<br>
+                    Correct: ${q.o[q.c]}
+                </div>`;
+            });
+
+            let msg = correct >= 18 ? "Outstanding! You're a Complex Numbers Master!" :
+                      correct >= 15 ? "Excellent! Very strong grasp." :
+                      correct >= 12 ? "Good! Just a little revision needed." :
+                      correct >= 8  ? "Fair. Focus on arguments & roots." : "Keep practicing!";
+
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('score').textContent = `${correct}/20`;
+            document.getElementById('message').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 20*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); updateProgress(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+    </script>
+</body>
+</html>

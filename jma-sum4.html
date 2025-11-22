@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutations & Combinations - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #7b1fa2, #9c27b0); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #6a1b9a; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #9c27b0; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #f3e5f5; padding: 10px; border-radius: 50%; color: #6a1b9a; }
+        h3 { color: #8e24aa; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #9c27b0; }
+        .definition { background-color: #f3e5f5; border-left: 4px solid #9c27b0; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .formula { background-color: #f3e5f5; padding: 18px 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #7b1fa2; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #7b1fa2, #9c27b0); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #faf2fc; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #f3e5f5); border: 1px solid #e1bee7; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #9c27b0, #7b1fa2); }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .topic-title { font-weight: bold; color: #6a1b9a; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #f3e5f5; padding: 8px; border-radius: 50%; color: #6a1b9a; }
+        .important-points { background: linear-gradient(to right, #f3e5f5, #e1bee7); border-left: 4px solid #9c27b0; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .important-points h4 { color: #6a1b9a; display: flex; align-items: center; margin-bottom: 10px; }
+        .important-points h4 i { margin-right: 10px; }
+        footer { text-align: center; padding: 25px; background: linear-gradient(to right, #4a148c, #7b1fa2); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .nav-tab.active { border-bottom: 3px solid #9c27b0; color: #6a1b9a; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Permutations & Combinations</h1>
+            <p class="subtitle">Complete Revision Notes | JEE Main 2025–26</p>
+            <div class="importance">Very High Weightage • 4–6 Questions Expected</div>
+        </header>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="principles">Counting Principles</div>
+                <div class="nav-tab" data-tab="permutation">Permutations</div>
+                <div class="nav-tab" data-tab="specialperm">Special Permutations</div>
+                <div class="nav-tab" data-tab="circular">Circular Permutations</div>
+                <div class="nav-tab" data-tab="combination">Combinations</div>
+                <div class="nav-tab" data-tab="selection">Selection Cases</div>
+                <div class="nav-tab" data-tab="division">Division & Grouping</div>
+                <div class="nav-tab" data-tab="jee">JEE Tips</div>
+            </div>
+
+            <!-- Counting Principles -->
+            <div class="tab-content active" id="principles">
+                <section class="section">
+                    <h2><i class="fas fa-calculator"></i> Fundamental Principle of Counting</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-times"></i> Multiplication Principle</div>
+                            <p>If one job → m ways<br>Second job (after first) → n ways<br>⇒ Both jobs together → <strong>m × n</strong> ways</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-plus"></i> Addition Principle</div>
+                            <p>Job A → m ways<br>Job B → n ways<br>⇒ Either job → <strong>m + n</strong> ways</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Permutations -->
+            <div class="tab-content" id="permutation">
+                <section class="section">
+                    <h2><i class="fas fa-sort-amount-up"></i> Permutations (Order Matters)</h2>
+                    <div class="formula">
+                        ^nP_r = n! / (n-r)! = n(n-1)(n-2)...(n-r+1)<br>
+                        ^nP_n = n!  ^nP_0 = 1  ^nP_1 = n
+                    </div>
+                    <div class="important-points">
+                        <ul>
+                            <li>^nP_r = n × (^(n-1)P_(r-1))</li>
+                            <li>Repetition allowed → n^r</li>
+                            <li>Not all distinct (p alike of 1 kind, q of 2nd, ...) → n! / (p! q! ...)</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Special Permutations -->
+            <div class="tab-content" id="specialperm">
+                <section class="section">
+                    <h2><i class="fas fa-sync-alt"></i> Special Cases of Permutations</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Repetition Allowed</div>
+                            <p>n distinct objects, taken r at a time<br>→ <strong>n^r</strong></p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Not All Distinct</div>
+                            <p>p alike, q alike, ... rest distinct<br>→ n! / (p! q! ...)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Circular -->
+            <div class="tab-content" id="circular">
+                <section class="section">
+                    <h2><i class="fas fa-ring"></i> Circular Permutations</h2>
+                    <div class="formula">
+                        n distinct objects in circle → (n–1)!<br><br>
+                        Taken r at a time:<br>
+                        Clockwise ≠ Anticlockwise → ^nP_r<br>
+                        Clockwise = Anticlockwise → ^nP_r / 2
+                    </div>
+                </section>
+            </div>
+
+            <!-- Combinations -->
+            <div class="tab-content" id="combination">
+                <section class="section">
+                    <h2><i class="fas fa-th-large"></i> Combinations (Order Doesn't Matter)</h2>
+                    <div class="formula">
+                        ^nC_r = n! / (r!(n-r)!) = ^nP_r / r!<br><br>
+                        ^nC_0 = ^nC_n = 1  ^nC_1 = n  ^nC_r = ^nC_(n-r)
+                    </div>
+                    <p>Maximum value of ^nC_r:</p>
+                    <ul>
+                        <li>n even → ^nC_(n/2)</li>
+                        <li>n odd → ^nC_((n+1)/2) or ^nC_((n-1)/2)</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Selection -->
+            <div class="tab-content" id="selection">
+                <section class="section">
+                    <h2><i class="fas fa-check-double"></i> Selection Cases</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Distinct Objects (At least one)</div>
+                            <div class="formula">^nC_1 + ^nC_2 + ... + ^nC_n = 2^n – 1</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Identical Objects (At least one)</div>
+                            <p>a1 alike, a2 alike, ..., k distinct<br>→ (a1+1)(a2+1)...(an+1) × 2^k – 1</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Division & Grouping -->
+            <div class="tab-content" id="division">
+                <section class="section">
+                    <h2><i class="fas fa-users"></i> Division & Grouping</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Distinct objects into distinct groups (m+n+p things)</div>
+                            <div class="formula">^(m+n+p)C_m × ^(n+p)C_n × ^pC_p = (m+n+p)! / (m! n! p!)</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">mn distinct things → m equal groups (order matters)</div>
+                            <div class="formula">(mn)! / (n!)^m</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">n identical things → r groups</div>
+                            <p>Empty allowed → ^(n+r-1)C_(r-1)<br>Empty not allowed → ^(n-1)C_(r-1)</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">n distinct things → r groups (arrangement)</div>
+                            <p>Empty allowed → n! × ^(n+r-1)C_(r-1)<br>Empty not allowed → n! × ^(n-1)C_(r-1)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- JEE Tips -->
+            <div class="tab-content" id="jee">
+                <section class="section">
+                    <h2><i class="fas fa-trophy"></i> JEE Main Tips & Weightage</h2>
+                    <p>One of the highest scoring & most frequent chapters – 4–6 questions almost every year!</p>
+                    <div class="important-points">
+                        <h4><i class="fas fa-lightbulb"></i> Must Remember for JEE</h4>
+                        <ul>
+                            <li>(n–1)! for circular</li>
+                            <li>n^r when repetition allowed</li>
+                            <li>Divide by factorial for identical objects</li>
+                            <li>2^n – 1 for “at least one” from distinct</li>
+                            <li>Division of identical → stars & bars ^(n+r-1)C_(r-1)</li>
+                            <li>Circular with same clockwise/anticlockwise → divide by 2</li>
+                            <li>Maximum binomial coefficient</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Permutations & Combinations • Complete Summary 2025–26</div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

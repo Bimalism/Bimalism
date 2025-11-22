@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Geometry - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:linear-gradient(135deg,#fff3e0 0%,#ffe0b2 100%);color:#333;line-height:1.7;padding:20px;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;background:white;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-radius:15px;overflow:hidden}
+        header{background:linear-gradient(to right,#ff6f00,#ff8f00);color:white;padding:30px 40px;text-align:center;position:relative}
+        .chapter-badge{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.2);padding:8px 15px;border-radius:20px;font-size:0.9rem;backdrop-filter:blur(5px)}
+        h1{font-size:2.6rem;margin-bottom:10px;font-weight:700}
+        .subtitle{font-size:1.2rem;opacity:0.9;margin-bottom:15px}
+        .importance{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:15px;font-size:0.9rem;margin-top:10px}
+        .content{padding:40px}
+        .section{margin-bottom:40px;padding-bottom:30px;border-bottom:1px dashed #e0e0e0}
+        .section:last-child{border-bottom:none}
+        h2{color:#e65100;font-size:1.8rem;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #ff8f00;display:flex;align-items:center}
+        h2 i{margin-right:10px;background:#fff3e0;padding:10px;border-radius:50%}
+        h3{color:#ef6c00;font-size:1.4rem;margin:25px 0 15px;display:flex;align-items:center}
+        h3 i{margin-right:10px;color:#ffb74d}
+        p{margin-bottom:15px;text-align:justify}
+        .definition{background:#fff3e0;border-left:4px solid #ff8f00;padding:15px 20px;margin:20px 0;border-radius:0 8px 8px 0;position:relative}
+        .definition:before{content:"";position:absolute;left:-4px;top:0;height:100%;width:4px;background:linear-gradient(to bottom,#ff8f00,#ffb74d)}
+        .formula{font-family:'Cambria Math',serif;background:#fff3e0;padding:15px 20px;margin:20px 0;border-radius:8px;border-left:4px solid #e65100;font-size:1.15rem;box-shadow:0 4px 6px rgba(0,0,0,0.05);text-align:center}
+        table{width:100%;border-collapse:collapse;margin:20px 0;box-shadow:0 5px 15px rgba(0,0,0,0.05);border-radius:8px;overflow:hidden}
+        th{background:linear-gradient(to right,#e65100,#ff8f00);color:white;padding:15px;text-align:left}
+        td{padding:15px;border-bottom:1px solid #e0e0e0}
+        tr:nth-child(even){background:#fff8e1}
+        tr:hover{background:#fff3e0}
+        .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin:25px 0}
+        .topic-card{background:linear-gradient(to bottom right,#ffffff,#fff3e0);border:1px solid #ffe0b2;border-radius:10px;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,0.05);transition:0.3s}
+        .topic-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,0.1)}
+        .topic-title{font-weight:bold;color:#e65100;margin-bottom:15px;font-size:1.2rem;display:flex;align-items:center}
+        .topic-title i{margin-right:10px;background:#fff3e0;padding:8px;border-radius:50%}
+        .important-points{background:linear-gradient(to right,#fff3e0,#fff8e1);border-left:4px solid #ffb74d;padding:20px;margin:25px 0;border-radius:0 8px 8px 0}
+        footer{text-align:center;padding:25px;background:linear-gradient(to right,#e65100,#ff6f00);color:white;margin-top:40px}
+        @media(max-width:768px){.content{padding:20px}h1{font-size:2.2rem}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main & Advanced Maths</div>
+            <h1>Coordinate Geometry</h1>
+            <p class="subtitle">Complete Summary • Straight Lines + Circle • eSaral Notes</p>
+            <div class="importance">Very High Weightage • 4–6 Questions Expected</div>
+        </header>
+
+        <div class="content">
+
+            <section class="section">
+                <h2><i class="fas fa-ruler-combined"></i> Distance & Section Formula</h2>
+                <div class="formula">Distance: PQ = √[(x₂ − x₁)² + (y₂ − y₁)²]</div>
+                <div class="formula">Section Formula (m:n): R = ( (mx₂ + nx₁)/(m+n) , (my₂ + ny₁)/(m+n) )</div>
+                <p>Internal & External division both covered.</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-shapes"></i> Area & Centres of Triangle</h2>
+                <div class="formula">Area = (1/2) | x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂) |</div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-balance-scale"></i> Centroid (G)</div>
+                        <div class="formula">G = ( (x₁+x₂+x₃)/3 , (y₁+y₂+y₃)/3 )</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title"><i class="fas fa-compass"></i> Incentre (I)</div>
+                        <div class="formula">I = ( (ax₁+bx₂+cx₃)/(a+b+c) , (ay₁+by₂+cy₃)/(a+b+c) )</div>
+                        <p>a, b, c are sides opposite to A, B, C</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Equation of Straight Lines</h2>
+                <table>
+                    <tr><th>Form</th><th>Equation</th><th>Key Points</th></tr>
+                    <tr><td>Slope-Intercept</td><td>y = mx + c</td><td>m = tan θ, c = y-intercept</td></tr>
+                    <tr><td>Intercept</td><td>x/a + y/b = 1</td><td>a = x-intercept, b = y-intercept</td></tr>
+                    <tr><td>Normal</td><td>x cos α + y sin α = p</td><td>p = ⊥ distance from origin</td></tr>
+                    <tr><td>Point-Slope</td><td>y − y₁ = m(x − x₁)</td><td>Through (x₁,y₁), slope m</td></tr>
+                    <tr><td>Two-Point</td><td>(y−y₁)/(y₂−y₁) = (x−x₁)/(x₂−x₁)</td><td>Through (x₁,y₁), (x₂,y₂)</td></tr>
+                    <tr><td>Parametric</td><td>x = h + r cos θ<br>y = k + r sin θ</td><td>From (h,k), angle θ</td></tr>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-search"></i> Reflection, Foot & Distance from Line</h2>
+                <div class="formula">Line: ax + by + c = 0</div>
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Image of (x₁,y₁)</div>
+                        <div class="formula">(x−x₁)/a = (y−y₁)/b = −2(ax₁+by₁+c)/(a²+b²)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Foot of Perpendicular</div>
+                        <div class="formula">(x−x₁)/a = (y−y₁)/b = −(ax₁+by₁+c)/(a²+b²)</div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-title">Perpendicular Distance</div>
+                        <div class="formula">|ax₁ + by₁ + c| / √(a² + b²)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-circle"></i> Circle - Standard Forms</h2>
+                <table>
+                    <tr><th>Form</th><th>Equation</th><th>Centre</th><th>Radius</th></tr>
+                    <tr><td>Standard</td><td>x² + y² = r²</td><td>(0,0)</td><td>r</td></tr>
+                    <tr><td>General Centre</td><td>(x−h)² + (y−k)² = r²</td><td>(h,k)</td><td>r</td></tr>
+                    <tr><td>General Equation</td><td>x² + y² + 2gx + 2fy + c = 0</td><td>(−g, −f)</td><td>√(g² + f² − c)</td></tr>
+                    <tr><td>Diameter Ends</td><td>(x−x₁)(x−x₂) + (y−y₁)(y−y₂) = 0</td><td>Midpoint</td><td>Half distance</td></tr>
+                </table>
+                <div class="important-points">
+                    <p>Circle through 3 points → Determinant form = 0</p>
+                    <p>Parametric: (h + r cos θ, k + r sin θ)</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-eye"></i> Position of Point w.r.t. Circle</h2>
+                <p>S = x² + y² + 2gx + 2fy + c = 0</p>
+                <div class="formula">S₁ = x₁² + y₁² + 2gx₁ + 2fy₁ + c</div>
+                <p>S₁ > 0 → Outside  S₁ = 0 → On  S₁ < 0 → Inside</p>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-tangent"></i> Tangent & Normal to Circle</h2>
+                <div class="definition">
+                    <p>For circle S = 0 → Tangent at (x₁,y₁): <strong>T = 0</strong></p>
+                    <p>T = xx₁ + yy₁ + g(x + x₁) + f(y + y₁) + c = 0</p>
+                </div>
+                <div class="formula">Tangent from external point → Pair of tangents: T² = SS₁</div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-star"></i> Key Highlights for JEE</h2>
+                <div class="important-points">
+                    <p>Must know: All forms of line, Section formula, Image/Foot/Distance, General circle equation, Tangents, Diameter form, Parametric circle</p>
+                    <p>Frequent questions: Locus, Pair of tangents, Chord of contact, Pole & polar, Radical axis, Orthogonality of circles</p>
+                    <p>Weightage: 4–6 questions (12–18 marks) almost every year</p>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <div>JEE Main • JEE Advanced • Class 11/12 Mathematics | Coordinate Geometry - Full Summary (eSaral Notes)</div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculus - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #f57f17, #ffb300); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #e65100; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #ffb300; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #fffde7; padding: 10px; border-radius: 50%; color: #f57f17; }
+        h3 { color: #ff8f00; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #ffb300; }
+        .definition { background-color: #fffde7; border-left: 4px solid #ffb300; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .formula { background-color: #fffde7; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #f57f17; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #f57f17, #ffb300); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #fff8e1; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #fffde7); border: 1px solid #fff59d; border-radius: 10px; padding: 22px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #ffb300, #f57f17); }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .topic-title { font-weight: bold; color: #e65100; margin-bottom: 12px; font-size: 1.2rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #fffde7; padding: 8px; border-radius: 50%; color: #e65100; }
+        .important-points { background: linear-gradient(to right, #fffde7, #fff59d); border-left: 4px solid #ffb300; padding: 22px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .important-points h4 { color: #e65100; display: flex; align-items: center; margin-bottom: 12px; }
+        .important-points h4 i { margin-right: 10px; }
+        footer { text-align: center; padding: 30px; background: linear-gradient(to right, #e65100, #f57f17); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 25px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .nav-tab.active { border-bottom: 3px solid #ffb300; color: #e65100; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Integral Calculus</h1>
+            <p class="subtitle">Complete Revision Notes | JEE Main 2025–26</p>
+            <div class="importance">Very High Weightage • 6–8 Questions Expected</div>
+        </header>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="basic">Indefinite Integral</div>
+                <div class="nav-tab" data-tab="standard">Standard Integrals</div>
+                <div class="nav-tab" data-tab="methods">Methods of Integration</div>
+                <div class="nav-tab" data-tab="definite">Definite Integral</div>
+                <div class="nav-tab" data-tab="properties">Properties of Definite ∫</div>
+                <div class="nav-tab" data-tab="area">Area & Applications</div>
+                <div class="nav-tab" data-tab="jee">JEE Tips</div>
+            </div>
+
+            <!-- Indefinite -->
+            <div class="tab-content active" id="basic">
+                <section class="section">
+                    <h2><i class="fas fa-plus-circle"></i> Indefinite Integral & Properties</h2>
+                    <div class="formula">
+                        ∫ f(x) dx = F(x) + C  ⇔  F'(x) = f(x)
+                    </div>
+                    <div class="important-points">
+                        <ul>
+                            <li>∫ [af(x) + bg(x)] dx = a ∫ f(x) dx + b ∫ g(x) dx</li>
+                            <li>∫ f(ax + b) dx = (1/a) F(ax + b) + C   (a ≠ 0)</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Standard Integrals -->
+            <div class="tab-content" id="standard">
+                <section class="section">
+                    <h2><i class="fas fa-book"></i> Standard Integrals (Must Memorise)</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Power Formula</div>
+                            <div class="formula">∫ xⁿ dx = xⁿ⁺¹/(n+1) + C (n ≠ −1)</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Exponential</div>
+                            <div class="formula">∫ eˣ dx = eˣ + C<br>∫ aˣ dx = aˣ/ln a + C</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Logarithmic</div>
+                            <div class="formula">∫ dx/x = ln|x| + C</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Trigonometric</div>
+                            <div class="formula">
+                                ∫ sin x dx = −cos x + C<br>
+                                ∫ cos x dx = sin x + C<br>
+                                ∫ tan x dx = −ln|cos x| + C<br>
+                                ∫ sec²x dx = tan x + C<br>
+                                ∫ cosec²x dx = −cot x + C<br>
+                                ∫ sec x tan x dx = sec x + C<br>
+                                ∫ cosec x cot x dx = −cosec x + C
+                            </div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Inverse Trig</div>
+                            <div class="formula">
+                                ∫ dx/√(a²−x²) = sin⁻¹(x/a + C<br>
+                                ∫ dx/(a²+x²) = (1/a) tan⁻¹(x/a) + C<br>
+                                ∫ dx/(x√(x²−a²)) = (1/a) sec⁻¹(x/a) + C
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Methods -->
+            <div class="tab-content" id="methods">
+                <section class="section">
+                    <h2><i class="fas fa-cogs"></i> Methods of Integration</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Substitution</div>
+                            <p>Let x = g(t) → dx = g'(t) dt</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">By Parts</div>
+                            <div class="formula">∫ u dv = u v − ∫ v du</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Partial Fractions</div>
+                            <p>For rational functions</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Trig Substitutions</div>
+                            <p>√(a²−x²) → x = a sinθ<br>√(a²+x²) → x = a tanθ<br>√(x²−a²) → x = a secθ</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Definite -->
+            <div class="tab-content" id="definite">
+                <section class="section">
+                    <h2><i class="fas fa-chart-area-chart"></i> Definite Integral</h2>
+                    <div class="formula">
+                        ∫_a^b f(x) dx = F(b) − F(a)
+                    </div>
+                    <div class="important-points">
+                        <h4>Newton-Leibniz Formula</h4>
+                        <p>If F'(x) = f(x) → ∫_a^b f(x) dx = [F(x)]_a^b = F(b) − F(a)</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Properties -->
+            <div class="tab-content" id="properties">
+                <section class="section">
+                    <h2><i class="fas fa-star"></i> Properties of Definite Integrals</h2>
+                    <div class="important-points">
+                        <ul>
+                            <li>∫_a^b f(x) dx = ∫_a^b f(t) dt</li>
+                            <li>∫_a^b f(x) dx = − ∫_b^a f(x) dx</li>
+                            <li>∫_a^a f(x) dx = 0</li>
+                            <li>∫_a^b f(x) dx = ∫_a^c f(x) dx + ∫_c^b f(x) dx</li>
+                            <li>∫_a^b f(x) dx = ∫_a^b f(a+b−x) dx</li>
+                            <li>∫_0^{2a} f(x) dx = ∫_0^a [f(x) + f(2a−x)] dx</li>
+                            <li>If f(2a−x) = f(x) → ∫_0^{2a} f(x) dx = 2 ∫_0^a f(x) dx</li>
+                            <li>If f(2a−x) = −f(x) → ∫_0^{2a} f(x) dx = 0</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Area -->
+            <div class="tab-content" id="area">
+                <section class="section">
+                    <h2><i class="fas fa-chart-area"></i> Area Under Curve</h2>
+                    <div class="formula">
+                        Area = ∫_a^b f(x) dx  (f(x) ≥ 0)<br>
+                        Area between curves = ∫_a^b [f(x) − g(x)] dx
+                    </div>
+                </section>
+            </div>
+
+            <!-- JEE Tips -->
+            <div class="tab-content" id="jee">
+                <section class="section">
+                    <h2><i class="fas fa-trophy"></i> JEE Main Tips & Weightage</h2>
+                    <p>One of the highest scoring chapters — 6–8 questions every year!</p>
+                    <div class="important-points">
+                        <h4><i class="fas fa-fire"></i> Most Important Topics</h4>
+                        <ul>
+                            <li>By parts (ILATE rule)</li>
+                            <li>Definite integrals using properties (especially ∫_0^{2a} and f(a+b−x))</li>
+                            <li>Substitution & trig identities</li>
+                            <li>∫ dx/(ax² + bx + c) forms</li>
+                            <li>Reduction formulae</li>
+                            <li>Area between curves & parametric forms</li>
+                            <li>Integration of irrational functions</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Integral Calculus • Complete Summary 2025–26<br>
+            Master Integration = Solve 90% of Calculus questions in seconds!</div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

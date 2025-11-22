@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Induction - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #1e3d59 0%, #193c59 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 15px 40px rgba(0,0,0,0.3); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #1e3d59, #193c59); color: white; padding: 35px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.25); padding: 10px 18px; border-radius: 30px; font-size: 1rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.8rem; margin-bottom: 12px; font-weight: 800; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .importance { background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px; display: inline-block; margin-top: 15px; font-weight: bold; }
+        .content { padding: 50px; }
+        .section { margin-bottom: 50px; }
+        h2 { color: #1e3d59; font-size: 2rem; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 3px solid #193c59; display: flex; align-items: center; gap: 15px; }
+        h2 i { background: #1e3d59; color: white; padding: 15px; border-radius: 50%; font-size: 1.5rem; }
+        .definition { background: #e8f4f8; border-left: 6px solid #1e3d59; padding: 25px; margin: 25px 0; border-radius: 0 12px 12px 0; font-size: 1.1rem; }
+        .principle-box { background: linear-gradient(135deg, #1e3d59, #193c59); color: white; padding: 30px; border-radius: 15px; margin: 30px 0; text-align: center; }
+        .principle-box h3 { font-size: 1.8rem; margin-bottom: 20px; color: #a0d8ef; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0; }
+        .step { background: white; color: #1e3d59; padding: 25px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; }
+        .step-number { font-size: 3rem; font-weight: bold; color: #193c59; opacity: 0.2; }
+        .step-title { font-size: 1.4rem; font-weight: bold; margin: 15px 0; color: #1e3d59; }
+        .formula { background: #f0f8fa; padding: 25px; margin: 25px 0; border-radius: 12px; border: 2px dashed #1e3d59; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        .key-points { background: #e8f4f8; padding: 25px; border-radius: 12px; border-left: 6px solid #193c59; }
+        .key-points ul { list-style: none; }
+        .key-points li { padding: 12px 0; border-bottom: 1px dashed #aaa; position: relative; padding-left: 30px; }
+        .key-points li:before { content: "✓"; position: absolute; left: 0; color: #1e3d59; font-weight: bold; font-size: 1.3rem; }
+        .example { background: #fff3e0; border-left: 6px solid #ff9800; padding: 20px; margin: 25px 0; border-radius: 0 10px 10px 0; }
+        footer { text-align: center; padding: 30px; background: linear-gradient(to right, #1e3d59, #193c59); color: white; font-size: 1.1rem; }
+        @media (max-width: 768px) { .steps { grid-template-columns: 1fr; } h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Mathematical Induction</h1>
+            <p class="subtitle">Complete Revision Notes • First Principle of Mathematical Induction</p>
+            <div class="importance">Low Weightage but Extremely Important Foundation Topic</div>
+        </header>
+
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-lightbulb"></i> What is Mathematical Induction?</h2>
+                <div class="definition">
+                    <strong>Induction</strong> means reasoning from particular cases (observations) to a general statement.<br><br>
+                    A statement may <strong>look true</strong> from a few examples, but to prove it is true for all natural numbers, we need <strong>Mathematical Induction</strong>.<br><br>
+                    If it's false, we can disprove it by finding a <strong>counter-example</strong>.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-balance-scale"></i> Proposition P(n)</h2>
+                <div class="definition">
+                    A statement whose truth value depends on a natural number n is denoted as <strong>P(n)</strong>.<br><br>
+                    Example:<br>
+                    <div class="formula">
+                        1² + 2² + 3² + ... + n² = <sup>n(n+1)(2n+1)</sup>&frasl;<sub>6</sub>
+                    </div>
+                    We write this as P(n), and P(4) means checking for n = 4.
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="principle-box">
+                    <h3>First Principle of Mathematical Induction</h3>
+                    <p style="font-size:1.3rem;">To prove P(n) is true for all natural numbers n ≥ k, we must show:</p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Base Case (Verification Step)</div>
+                        <p>P(k) is true<br>(Usually k = 1, but can be any starting natural number)</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Induction Hypothesis</div>
+                        <p>Assume P(m) is true for some m ≥ k</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Induction Step</div>
+                        <p>Prove that P(m+1) is also true</p>
+                    </div>
+                </div>
+
+                <div class="definition" style="text-align:center; background:#e8f4f8; margin-top:30px;">
+                    <strong>Conclusion:</strong> By the Principle of Mathematical Induction,<br>
+                    <strong>P(n) is true for all natural numbers n ≥ k</strong>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-check-circle"></i> Standard Procedure to Apply Induction</h2>
+                <div class="key-points">
+                    <ul>
+                        <li><strong>Step 1 (Base Case):</strong> Verify P(1) is true (or P(k) for starting value k)</li>
+                        <li><strong>Step 2 (Assumption):</strong> Assume P(m) is true for some integer m ≥ 1 (or m ≥ k)</li>
+                        <li><strong>Step 3 (Induction Step):</strong> Using the assumption, prove that P(m+1) is true</li>
+                        <li><strong>Conclusion:</strong> Hence, by mathematical induction, P(n) is true for all natural numbers n ≥ 1 (or n ≥ k)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Common Mistakes to Avoid</h2>
+                <div class="key-points">
+                    <ul>
+                        <li>Forgetting to check the base case</li>
+                        <li>Assuming P(1) is true without verifying</li>
+                        <li>Proving P(m+2) instead of P(m+1)</li>
+                        <li>Using strong induction when only weak (first principle) is needed</li>
+                        <li>Wrongly concluding for all n when base case fails</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-trophy"></i> JEE Main Key Points</h2>
+                <div class="example">
+                    <strong>Most Frequently Tested:</strong><br>
+                    • Sum of series (1² + 2² + ... + n²), (1 + 2 + ... + n)<br>
+                    • Divisibility problems (like 3<sup>2n</sup> – 1 is divisible by 8)<br>
+                    • Inequalities (AM–GM, Bernoulli, etc.)<br>
+                    • Matrix or determinant properties (rare but high weightage)
+                </div>
+                <div class="key-points">
+                    <ul>
+                        <li>Always write: "Let P(n) be the statement..."</li>
+                        <li>Clearly mention Base Case, Assumption, and Proof for n = m+1</li>
+                        <li>Conclusion must include "By principle of mathematical induction"</li>
+                        <li>If starting from n = 0 or n = 2, mention it clearly</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Mathematical Induction • Complete Summary 2025–26<br>
+            Master this = Solve the first 2–3 marks in Algebra section are yours!</div>
+        </footer>
+    </div>
+</body>
+</html>

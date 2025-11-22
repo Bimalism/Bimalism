@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limits, Continuity & Differentiability - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #512da8, #673ab7); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #4527a0; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #673ab7; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #ede7f6; padding: 10px; border-radius: 50%; color: #4527a0; }
+        h3 { color: #5e35b1; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #673ab7; }
+        .definition { background-color: #ede7f6; border-left: 4px solid #673ab7; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .formula { background-color: #ede7f6; padding: 18px 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #512da8; font-size: 1.3rem; text-align: center; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #512da8, #673ab7); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #f3e5f5; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #ede7f6); border: 1px solid #d1c4e9; border-radius: 10px; padding: 22px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #673ab7, #512da8); }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .topic-title { font-weight: bold; color: #4527a0; margin-bottom: 12px; font-size: 1.2rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #ede7f6; padding: 8px; border-radius: 50%; color: #4527a0; }
+        .important-points { background: linear-gradient(to right, #ede7f6, #d1c4e9); border-left: 4px solid #673ab7; padding: 22px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .important-points h4 { color: #4527a0; display: flex; align-items: center; margin-bottom: 12px; }
+        .important-points h4 i { margin-right: 10px; }
+        footer { text-align: center; padding: 30px; background: linear-gradient(to right, #311b92, #512da8); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+        .nav-tab { padding: 12px 25px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .nav-tab.active { border-bottom: 3px solid #673ab7; color: #4527a0; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
+            <h1>Limits, Continuity & Differentiability</h1>
+            <p class="subtitle">Complete Revision Notes | JEE Main 2025–26</p>
+            <div class="importance">Very High Weightage • 6–8 Questions Expected</div>
+        </header>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="limits">Limits Basics</div>
+                <div class="nav-tab" data-tab="standard">Standard Limits</div>
+                <div class="nav-tab" data-tab="series">Series Expansions</div>
+                <div class="nav-tab" data-tab="continuity">Continuity</div>
+                <div class="nav-tab" data-tab="differentiability">Differentiability</div>
+                <div class="nav-tab" data-tab="theorems">Rolle’s & LMVT</div>
+                <div class="nav-tab" data-tab="jee">JEE Tips</div>
+            </div>
+
+            <!-- Limits Basics -->
+            <div class="tab-content active" id="limits">
+                <section class="section">
+                    <h2><i class="fas fa-arrow-right"></i> Limits – Left & Right Hand Limits</h2>
+                    <div class="definition">
+                        lim<sub>x→a</sub> f(x) exists ⇔ LHL = RHL = finite value<br><br>
+                        LHL = lim<sub>x→a⁻</sub> f(x), RHL = lim<sub>x→a⁺</sub> f(x)
+                    </div>
+                    <div class="important-points">
+                        <h4>Indeterminate Forms</h4>
+                        <ul>
+                            <li>0/0, ∞/∞, 0×∞, ∞−∞, 1^∞, 0^0, ∞^0</li>
+                            <li>Use L'Hôpital's rule, series, or rationalisation</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Standard Limits -->
+            <div class="tab-content" id="standard">
+                <section class="section">
+                    <h2><i class="fas fa-infinity"></i> Standard Limits</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Trigonometric</div>
+                            <div class="formula">
+                                lim<sub>x→0</sub> sinx/x = 1<br>
+                                lim<sub>x→0</sub> tanx/x = 1<br>
+                                lim<sub>x→0</sub> (1−cosx)/x² = 1/2
+                            </div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Exponential & Log</div>
+                            <div class="formula">
+                                lim<sub>x→0</sub> (1+x)<sup>1/x</sup> = e<br>
+                                lim<sub>x→∞</sub> (1+1/x)<sup>x</sup> = e<br>
+                                lim<sub>x→0</sub> (e^x − 1)/x = 1<br>
+                                lim<sub>x→0</sub> ln(1+x)/x = 1
+                            </div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Other Important</div>
+                            <div class="formula">
+                                lim<sub>x→a</sub> (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹<br>
+                                lim<sub>x→0</sub> (a^x − 1)/x = ln a
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Series Expansions -->
+            <div class="tab-content" id="series">
+                <section class="section">
+                    <h2><i class="fas fa-wave-square"></i> Taylor & Maclaurin Series Expansions</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">sin x</div>
+                            <div class="formula">x − x³/3! + x⁵/5! − x⁷/7! + ...</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">cos x</div>
+                            <div class="formula">1 − x²/2! + x⁴/4! − x⁶/6! + ...</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">e<sup>x</sup></div>
+                            <div class="formula">1 + x + x²/2! + x³/3! + ...</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">ln(1+x)</div>
+                            <div class="formula">x − x²/2 + x³/3 − x⁴/4 + ... (|x|<1)</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">(1+x)<sup>n</sup></div>
+                            <div class="formula">1 + nx + n(n−1)x²/2! + ...</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Continuity -->
+            <div class="tab-content" id="continuity">
+                <section class="section">
+                    <h2><i class="fas fa-link"></i> Continuity</h2>
+                    <div class="definition">
+                        f(x) is continuous at x = a if lim<sub>x→a</sub> f(x) = f(a)<br>
+                        (i.e. LHL = RHL = f(a))
+                    </div>
+                    <div class="important-points">
+                        <h4>Types of Discontinuity</h4>
+                        <ul>
+                            <li>Removable (limit exists, f(a) ≠ limit or undefined)</li>
+                            <li>Jump (LHL ≠ RHL)</li>
+                            <li>Infinite (limit → ±∞)</li>
+                            <li>Oscillating (sin(1/x) type)</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Differentiability -->
+            <div class="tab-content" id="differentiability">
+                <section class="section">
+                    <h2><i class="fas fa-calculator"></i> Differentiability</h2>
+                    <div class="formula">
+                        f'(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h<br>
+                        = LHD = RHD at x = a
+                    </div>
+                    <p>Differentiability ⇒ Continuity<br>
+                       Continuity ⇏ Differentiability (e.g. |x| at x=0)</p>
+                    <div class="important-points">
+                        <h4>Standard Derivatives</h4>
+                        <ul>
+                            <li>(xⁿ)' = nxⁿ⁻¹</li>
+                            <li>(sin x)' = cos x, (cos x)' = −sin x</li>
+                            <li>(e<sup>x</sup>)' = e<sup>x</sup>, (ln x)' = 1/x</li>
+                            <li>Chain rule, product rule, quotient rule</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Theorems -->
+            <div class="tab-content" id="theorems">
+                <section class="section">
+                    <h2><i class="fas fa-book"></i> Rolle’s & Lagrange's Mean Value Theorem</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Rolle’s Theorem</div>
+                            <p>If f(a) = f(b), f continuous on [a,b], differentiable on (a,b) ⇒ ∃ c ∈ (a,b) s.t. f'(c) = 0</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">LMVT</div>
+                            <p>f continuous on [a,b], differentiable on (a,b) ⇒ ∃ c ∈ (a,b) s.t. f'(c) = [f(b)−f(a)]/(b−a)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- JEE Tips -->
+            <div class="tab-content" id="jee">
+                <section class="section">
+                    <h2><i class="fas fa-trophy"></i> JEE Main Tips & Weightage</h2>
+                    <p>Highest weightage chapter — 6–8 questions every year!</p>
+                    <div class="important-points">
+                        <h4><i class="fas fa-fire"></i> Must Master</h4>
+                        <ul>
+                            <li>All standard limits & series expansions</li>
+                            <li>L'Hôpital's rule applications</li>
+                            <li>lim (sin ax)/x, (1+x)<sup>1/x</sup>, etc.</li>
+                            <li>Continuity in pieces & |x| type functions</li>
+                            <li>Differentiability of composite functions</li>
+                            <li>Rolle’s/LMVT applications (equating derivatives)</li>
+                            <li>Sandwich theorem</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div>JEE Main Mathematics • Limits, Continuity & Differentiability • Complete Summary 2025–26<br>
+            This chapter is the backbone of Calculus — 20+ marks depend on it!</div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
