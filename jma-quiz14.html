@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Probability Quiz | 20 Questions</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Arial,sans-serif; }
+        body { background: linear-gradient(135deg, #667eea, #764ba2); color:#fff; min-height:100vh; padding:20px; }
+        .container { max-width:1100px; margin:0 auto; background:rgba(0,0,0,0.45); border-radius:20px; box-shadow:0 25px 70px rgba(0,0,0,0.6); overflow:hidden; }
+        header { background:linear-gradient(to right,#0f2027,#203a43,#2c5364); padding:40px; text-align:center; }
+        h1 { font-size:3rem; margin-bottom:10px; }
+        .subtitle { font-size:1.4rem; opacity:0.95; }
+        .timer { position:absolute; right:40px; top:30px; background:rgba(255,255,255,0.25); padding:15px 35px; border-radius:60px; font-size:1.8rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:25px 40px; background:rgba(255,255,255,0.12); }
+        .btn { padding:14px 36px; border:none; border-radius:14px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#39ff14; color:#000; }
+        .btn-reset { background:#00f2ff; color:#000; }
+        .btn-submit { background:#ff00ff; color:white; }
+        .btn:hover { transform:scale(1.08); }
+        .progress-bar { height:18px; background:rgba(255,255,255,0.25); margin:20px 40px; border-radius:10px; overflow:hidden; }
+        .progress { height:100%; background:#39ff14; width:0%; transition:width 0.6s; }
+        .quiz { padding:40px; }
+        .question { background:rgba(255,255,255,0.18); padding:32px; border-radius:18px; border-left:8px solid #39ff14; margin-bottom:35px; }
+        .qno { font-size:1.5rem; color:#39ff14; font-weight:bold; }
+        .qtext { font-size:1.45rem; margin:18px 0; }
+        .options { display:grid; gap:18px; margin-top:20px; }
+        .option { padding:20px; background:rgba(255,255,255,0.12); border:3px solid rgba(57,255,20,0.5); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:16px; transition:0.3s; }
+        .option:hover { background:rgba(57,255,20,0.25); border-color:#39ff14; }
+        .option.selected { background:rgba(57,255,20,0.4); border-color:#39ff14; font-weight:bold; }
+        .result { display:none; padding:70px; text-align:center; background:linear-gradient(135deg,rgba(57,255,20,0.3),rgba(0,242,255,0.3)); }
+        .score { font-size:6rem; font-weight:bold; color:#39ff14; }
+        .message { font-size:2rem; margin:30px 0; color:#00f2ff; }
+        .details { margin:60px auto; max-width:1000px; text-align:left; }
+        .detail { padding:25px; background:rgba(255,255,255,0.15); margin:20px 0; border-radius:15px; border-left:7px solid #39ff14; }
+        .wrong { border-left-color:#ff00ff; }
+        .exp { margin-top:20px; padding:20px; background:rgba(57,255,20,0.25); border-radius:12px; border-left:5px solid #00f2ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Statistics & Probability</h1>
+            <p class="subtitle">20 JEE-Level Questions • Full eSaral 7-Page Coverage • 2026 Ready</p>
+            <div class="timer">Time: <span id="timer">30:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Dashboard')">Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div style="padding:0 40px 25px; font-size:1.3rem; display:flex; justify-content:space-between;">
+            <span>Progress: <span id="prog">0</span>/20</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Finished!</h2>
+            <div class="score" id="score">0/20</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()" style="margin-top:30px;">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Arithmetic mean of n values x₁, x₂, ..., xₙ is", o: ["Σxᵢ/n", "n/Σxᵢ", "Σxᵢ×n", "Σxᵢ²/n"], c: 0, exp: "x̄ = (1/n) Σxᵢ" },
+            { q: "For frequency distribution, AM =", o: ["Σfᵢxᵢ / Σfᵢ", "Σfᵢ / Σfᵢxᵢ", "Σxᵢ / N", "Σfᵢxᵢ / n"], c: 0, exp: "x̄ = Σfᵢxᵢ / N where N = Σfᵢ" },
+            { q: "Geometric mean of n non-zero positive numbers is", o: ["(x₁x₂...xₙ)^(1/n)", "(Σxᵢ)^(1/n)", "n / Σ(1/xᵢ)", "None"], c: 0, exp: "G = (product of observations)^(1/n)" },
+            { q: "Harmonic mean H =", o: ["n / Σ(1/xᵢ)", "Σ(1/xᵢ)/n", "n Σxᵢ", "Σxᵢ/n"], c: 0, exp: "H = n / Σ(1/xᵢ)" },
+            { q: "Mode of grouped data =", o: ["l + [(f - f₁)/(2f - f₁ - f₂)] × h", "l + [(f₁ - f)/(f₁ + f₂)] × h", "l + (f - f₂)/(2f)", "None"], c: 0, exp: "Standard mode formula from eSaral" },
+            { q: "For odd number of observations, median is", o: ["((n+1)/2)th term", "(n/2)th term", "Average of n/2 and n/2+1", "Last term"], c: 0, exp: "((n+1)/2)th observation" },
+            { q: "For even n, median =", o: ["Average of (n/2)th and (n/2 + 1)th terms", "(n/2)th term", "((n+1)/2)th term", "None"], c: 0, exp: "Average of two middle terms" },
+            { q: "Empirical relation between mean, median, mode:", o: ["Mode = 3Median – 2Mean", "Mean = 3Mode – 2Median", "Median = 3Mode – 2Mean", "None"], c: 0, exp: "Mode ≈ 3Median – 2Mean" },
+            { q: "Mean deviation about A =", o: ["(1/N) Σfᵢ|xᵢ - A|", "Σ|xᵢ - A|/N", "Both", "Σ(xᵢ - A)²/N"], c: 2, exp: "M.D. = (1/N) Σfᵢ|xᵢ - A|" },
+            { q: "Standard deviation σ =", o: ["√[ (1/N) Σfᵢ(xᵢ - x̄)² ]", "(1/N) Σfᵢ(xᵢ - x̄)²", "√[Σ(xᵢ - x̄)]", "Σ(xᵢ - x̄)²/N"], c: 0, exp: "σ = √Variance" },
+            { q: "Variance =", o: ["σ", "σ²", "√σ", "σ/2"], c: 1, exp: "Variance = σ² = (1/N) Σfᵢ(xᵢ - x̄)²" },
+            { q: "Coefficient of variation =", o: ["(σ / x̄) × 100%", "(x̄ / σ) × 100%", "σ × 100", "None"], c: 0, exp: "CV = (σ / mean) × 100" },
+            { q: "Set of all possible outcomes is called", o: ["Event", "Sample Space", "Trial", "Experiment"], c: 1, exp: "Sample Space S" },
+            { q: "A subset of sample space is", o: ["Sample point", "Event  ", "Outcome", "Trial"], c: 1, exp: "Event = subset of S" },
+            { q: "Classical probability P(A) =", o: ["n(A)/n(S)", "n(S)/n(A)", "favourable × total", "1/n(A)"], c: 0, exp: "P(A) = number of favourable outcomes / total outcomes" },
+            { q: "P(A') or P(not A) =", o: ["P(A)", "1 - P(A)", "P(A) - 1", "0"], c: 1, exp: "P(A') = 1 - P(A)" },
+            { q: "For mutually exclusive events A and B,", o: ["P(A ∪ B) = P(A) + P(B)", "P(A ∪ B) = P(A) × P(B)", "P(A ∩ B) = P(A) + P(B)", "None"], c: 0, exp: "Addition theorem for disjoint events" },
+            { q: "Odds in favour of event A are", o: ["P(A) : P(A')", "P(A') : P(A)", "P(A)/P(A')", "Both A & C"], c: 3, exp: "Odds in favour = P(A) : (1 - P(A))" },
+            { q: "Random experiment is one where", o: ["Outcome is predictable", "Outcome cannot be predicted with certainty", "Only one outcome possible", "None"], c: 1, exp: "Definition from eSaral notes" },
+            { q: "Which is NOT an axiom of probability?", o: ["0 ≤ P(A) ≤ 1", "P(S) = 1", "For disjoint A,B: P(A∪B)=P(A)+P(B)", "P(A∪B)=P(A)+P(B)-P(A∩B)"], c: 3, exp: "Last one is theorem, not axiom" }
+        ];
+
+        let current = 0, answers = Array(20).fill(null), timeLeft = 30*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? ' selected' : '';
+                opts += `<div class="option${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} of 20</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:40px; display:flex; justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}">
+                        ${current===19?'Submit Quiz':'Next'}
+                    </button>
+                </div>`;
+            updateProgress();
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(x => x !== null).length;
+            document.getElementById('progress').style.width = (done/20*100) + '%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m + ':' + s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 18 ? "Master of Statistics & Probability!" :
+                        correct >= 15 ? "Outstanding Performance!" :
+                        correct >= 12 ? "Very Good – Almost There!" :
+                        correct >= 8 ? "Good Effort – Keep Practicing!" : "Revise the eSaral Notes Again!";
+            document.getElementById('score').textContent = correct + '/20';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 30*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); startTimer(); };
+    </script>
+</body>
+</html>

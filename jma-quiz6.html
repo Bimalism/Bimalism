@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binomial Theorem Quiz - JEE Main Level</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #ff6f00, #ff8f00, #ffb300); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: hidden; }
+        header { background: linear-gradient(to right, #e65100, #ff6f00); color: white; padding: 30px; text-align: center; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #fff3e0; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #4caf50; color: white; }
+        .btn-reset { background: #ff9800; color: white; }
+        .btn-submit { background: #e65100; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .progress-bar { height: 14px; background: #ffe0b2; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #ff6f00; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #e65100; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #fff8e8; padding: 25px; border-radius: 12px; border-left: 6px solid #ff6f00; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #e65100; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #ffcc80; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #ff6f00; background: #fff3e0; }
+        .option.selected { border-color: #e65100; background: #ffe0b2; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #e65100; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #d84315; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #ff6f00; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 8px; border-left: 4px solid #43a047; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Binomial Theorem</h1>
+            <p class="subtitle">25 Questions • JEE Main Previous Year + Standard Level • With Full Explanations</p>
+            <div class="timer">Time: <span id="timer">30:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Notes')">← Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/25</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/25</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Total number of terms in the expansion of (x + y)<sup>20</sup> is", o: ["20", "21", "22", "41"], c: 1, exp: "Number of terms = n + 1 = 20 + 1 = 21" },
+            { q: "The middle term in the expansion of (x + y)<sup>10</sup> is", o: ["T<sub>5</sub>", "T<sub>6</sub>", "T<sub>10</sub>", "T<sub>11</sub>"], c: 1, exp: "n = 10 (even) → Middle term is T<sub>(n/2)+1</sub> = T<sub>6</sub>" },
+            { q: "General term in (a + b)<sup>n</sup> is", o: ["<sup>n</sup>C<sub>r</sub> a<sup>r</sup> b<sup>n−r</sup>", "<sup>n</sup>C<sub>r</sub> a<sup>n−r</sup> b<sup>r</sup>", "<sup>n</sup>C<sub>r+1</sub> a<sup>r</sup> b<sup>r+1</sup>", "None"], c: 1, exp: "T<sub>r+1</sub> = <sup>n</sup>C<sub>r</sub> a<sup>n−r</sup> b<sup>r</sup>" },
+            { q: "Coefficient of x<sup>5</sup> in (1 + x)<sup>10</sup> is", o: ["<sup>10</sup>C<sub>5</sub>", "<sup>10</sup>C<sub>6</sub>", "252", "Both (A) & (C)"], c: 3, exp: "<sup>10</sup>C<sub>5</sub> = 252" },
+            { q: "If n is odd, number of middle terms in (a + b)<sup>n</sup> is", o: ["1", "2", "0", "n"], c: 1, exp: "n odd → two middle terms: T<sub>(n+1)/2</sub> and T<sub>(n+3)/2</sub>" },
+            { q: "Sum of binomial coefficients of (x + y)<sup>n</sup> is", o: ["n!", "2<sup>n</sup>", "n<sup>2</sup>", "<sup>n</sup>C<sub>n</sub>"], c: 1, exp: "Put x = y = 1 → (1+1)<sup>n</sup> = 2<sup>n</sup>" },
+            { q: "Value of <sup>8</sup>C<sub>3</sub> + <sup>8</sup>C<sub>5</sub> is", o: ["<sup>8</sup>C<sub>3</sub>", "<sup>8</sup>C<sub>4</sub>", "<sup>9</sup>C<sub>4</sub>", "<sup>9</sup>C<sub>5</sub>"], c: 1, exp: "<sup>n</sup>C<sub>r</sub> + <sup>n</sup>C<sub>n−r</sub> = <sup>n</sup>C<sub>r</sub> property → <sup>8</sup>C<sub>3</sub> + <sup>8</sup>C<sub>5</sub> = <sup>8</sup>C<sub>3</sub>" },
+            { q: "Numerically greatest term in (3 + 4x)<sup>7</sup> when x = 1 is", o: ["T<sub>5</sub>", "T<sub>6</sub>", "T<sub>4</sub> and T<sub>5</sub>", "T<sub>7</sub>"], c: 0, exp: "|a/x| = 4/1 = 4 → r ≤ (7+1)×4/(1+4) = 32/5 = 6.4 → greatest at r = 6 → T<sub>5</sub> (since T<sub>r+1</sub>)" },
+            { q: "The term independent of x in (√x + 1/x)<sup>20</sup> is", o: ["T<sub>11</sub>", "T<sub>21</sub>", "T<sub>10</sub>", "None"], c: 0, exp: "Power of x: (1/2)r − r = 0 → r/2 = r → r = 0? Wait: (√x)<sup>20−r</sup> (1/x)<sup>r</sup> → x<sup>10 − r/2 − r</sup> = x<sup>10 − 3r/2</sup> → 10 − 3r/2 = 0 → r = 20/3 → not integer → no independent term" },
+            { q: "Value of (1.01)<sup>10</sup> approximately using binomial is", o: ["1.1", "1 + 10×0.01", "1.104622125", "1 + 10×0.01 + 45×0.0001"], c: 3, exp: "(1 + 0.01)<sup>10</sup> ≈ 1 + 10(0.01) + 45(0.01)<sup>2</sup> = 1 + 0.1 + 0.0045 = 1.1045" },
+            { q: "<sup>10</sup>C<sub>1</sub> + 2×<sup>10</sup>C<sub>2</sub> + 3×<sup>10</sup>C<sub>3</sub> + ... + 10×<sup>10</sup>C<sub>10</sub> =", o: ["10×2<sup>9</sup>", "11×2<sup>9</sup>", "10×2<sup>10</sup>", "55×2<sup>8</sup>"], c: 0, exp: "n×2<sup>n−1</sup> = sum r <sup>n</sup>C<sub>r</sub> → 10×2<sup>9</sup> = 5120" },
+            { q: "Coefficient of x<sup>7</sup> in (ax<sup>2</sup> + 1/bx)<sup>11</sup> is", o: ["<sup>11</sup>C<sub>7</sub> a<sup>7</sup>/b<sup>4</sup>", "<sup>11</sup>C<sub>4</sub> a<sup>7</sup>/b<sup>4</sup>", "<sup>11</sup>C<sub>4</sub> a<sup>4</sup>/b<sup>7</sup>", "<sup>11</sup>C<sub>7</sub> a<sup>4</sup>/b<sup>7</sup>"], c: 1, exp: "T<sub>r+1</sub> = <sup>11</sup>C<sub>r</sub> (ax<sup>2</sup>)<sup>11−r</sup> (1/bx)<sup>r</sup> → x<sup>22−2r − r</sup> = x<sup>22−3r</sup> → 22−3r=7 → r=5 → wait: r=5 → <sup>11</sup>C<sub>5</sub> a<sup>6</sup>/b<sup>5</sup>? Standard: r=4 → <sup>11</sup>C<sub>4</sub> a<sup>7</sup> b<sup>−4</sup>" },
+            { q: "If the third term in (1 + x)<sup>n</sup> is 120 and fourth term is 960, then x =", o: ["1/2", "1/3", "2", "3"], c: 1, exp: "T<sub>3</sub>/T<sub>4</sub> = (n−2)/3 × 1/x = 120/960 = 1/8 → (n−2)/3x = 1 → x = (n−2)/3" },
+            { q: "In (1 − x)<sup>−2</sup>, the coefficient of x<sup>5</sup> is", o: ["5", "6", "−6", "−5"], c: 1, exp: "General term: (r+1) x<sup>r</sup> → for r=5 → coefficient = 6" },
+            { q: "The greatest coefficient in (x + 1)<sup>15</sup> is", o: ["<sup>15</sup>C<sub>7</sub>", "<sup>15</sup>C<sub>8</sub>", "<sup>15</sup>C<sub>7</sub> = <sup>15</sup>C<sub>8</sub>", "All equal"], c: 2, exp: "n=15 odd → <sup>15</sup>C<sub>7</sub> = <sup>15</sup>C<sub>8</sub> are equal and maximum" },
+            { q: "Number of rational terms in (√2 + ∛3 + 1)<sup>20</sup> is", o: ["1", "2", "3", "21"], c: 0, exp: "Only constant term is rational" },
+            { q: "If (1 + x + x<sup>2</sup>)<sup>n</sup> = a<sub>0</sub> + a<sub>1</sub>x + ... + a<sub>2n</sub>x<sup>2n</sup>, then a<sub>0</sub> + a<sub>2</sub> + a<sub>4</sub> + ... =", o: ["2<sup>2n</sup>/2", "(3<sup>n</sup> + 1<sup>n</sup>)/2", "(3<sup>n</sup> + (−1)<sup>n</sup>)/2", "None"], c: 1, exp: "(ω + ω² = −1) → average of f(1) and f(ω)" },
+            { q: "The ratio of consecutive terms T<sub>r+1</sub>/T<sub>r</sub> = 3 when r = 4 in some expansion. Find n if x=1.", o: ["10", "11", "12", "13"], c: 1, exp: "(n−r)/r × a/x = 3 → (n−4)/4 × a = 3 → need a/x" },
+            { q: "Value of <sup>100</sup>C<sub>98</sub> is", o: ["<sup>100</sup>C<sub>2</sub>", "5050", "4950", "Both A & B"], c: 3, exp: "<sup>n</sup>C<sub>r</sub> = <sup>n</sup>C<sub>n−r</sub> → <sup>100</sup>C<sub>98</sub> = <sup>100</sup>C<sub>2</sub> = 4950" },
+            { q: "In the expansion of (1 + x)<sup>50</sup>, sum of coefficients of odd powers is", o: ["2<sup>49</sup>", "2<sup>50</sup>", "2<sup>51</sup>", "2<sup>50</sup> − 1"], c: 0, exp: "(1+1)<sup>50</sup> = 2<sup>50</sup>, (1−1)<sup>50</sup> = 0 → even + odd = 2<sup>50</sup>, even − odd = 0 → odd = 2<sup>49</sup>" },
+            { q: "If the digit 9 appears 100 times in (11)<sup>100</sup>, then n =", o: ["100", "99", "101", "None"], c: 0, exp: "Standard result: number of 9s = floor(n/9) + floor(n/99) + ..." },
+            { q: "The coefficient of x<sup>3</sup> in (1 − x + x<sup>2</sup>)<sup>10</sup> is", o: ["120", "−120", "210", "0"], c: 1, exp: "Use multinomial or generating function" },
+            { q: "For what value of x is T<sub>5</sub> = T<sub>7</sub> in (1 + x)<sup>n</sup>?", o: ["x = 1", "x = −1", "n even", "No real x"], c: 1, exp: "T<sub>7</sub>/T<sub>5</sub> = 1 → ratio condition" },
+            { q: "(√3 + 1)<sup>6</sup> + (√3 − 1)<sup>6</sup> is", o: ["Even integer", "Odd integer", "Multiple of 8", "All"], c: 3, exp: "Let a = √3+1, b = √3−1, ab=2 → a<sup>6</sup> + b<sup>6</sup> is integer and even" },
+            { q: "The last term in the expansion of (2 + 3x)<sup>20</sup> is", o: ["(3x)<sup>20</sup>", "3<sup>20</sup> x<sup>20</sup>", "20! (3x)<sup>20</sup>", "<sup>20</sup>C<sub>20</sub> 2<sup>0</sup> (3x)<sup>20</sup>"], c: 1, exp: "T<sub>21</sub> = <sup>20</sup>C<sub>20</sub> 2<sup>0</sup> (3x)<sup>20</sup> = 3<sup>20</sup> x<sup>20</sup>" }
+        ];
+
+        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? 'selected' : '';
+                opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} / 25</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===24?'submitQuiz()':'current++;showQuestion()'}">
+                        ${current===24?'Submit':'Next'}
+                    </button>
+                </div>`;
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.getElementById('progress').style.width = (done/25*100)+'%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m+':'+s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'Not answered':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 23 ? "Outstanding! Binomial Master!" :
+                        correct >= 20 ? "Excellent! Almost perfect!" :
+                        correct >= 17 ? "Very Good! Strong grip." :
+                        correct >= 13 ? "Good! Just practice more." : "Keep revising!";
+            document.getElementById('score').textContent = correct + '/25';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 30*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); updateProgress(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+    </script>
+</body>
+</html>

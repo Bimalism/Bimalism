@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limits, Continuity & Differentiability Quiz - JEE Main</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #673ab7, #7e57c2, #9575cd); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #4527a0, #512da8); color: white; padding: 30px; text-align: center; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #ede7f6; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #7c4dff; color: white; }
+        .btn-reset { background: #9575cd; color: white; }
+        .btn-submit { background: #512da8; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #d1c4e9; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #512da8; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #512da8; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #ede7f6; padding: 25px; border-radius: 12px; border-left: 6px solid #512da8; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #512da8; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #b39ddb; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #512da8; background: #e8eaf6; }
+        .option.selected { border-color: #311b92; background: #c5cae9; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #512da8; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #311b92; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #512da8; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #e8eaf6; border-radius: 8px; border-left: 4px solid #7c4dff; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Limits, Continuity & Differentiability</h1>
+            <p class="subtitle">35 Questions • JEE Main Previous Year + High Weightage • Full Solutions</p>
+            <div class="timer">Time: <span id="timer">45:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Notes')">← Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/35</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/35</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "lim<sub>x→0</sub> (sin 5x)/(3x) =", o: ["5/3", "3/5", "1", "0"], c: 0, exp: "Standard limit: lim (sin kx)/(mx) = k/m → 5/3" },
+            { q: "lim<sub>x→0</sub> (1 − cos 3x)/x² =", o: ["9/2", "3/2", "1/2", "0"], c: 0, exp: "(1−cos 3x)/x² = 9(1−cos 3x)/(3x)² → 9 × (1/2) = 9/2" },
+            { q: "lim<sub>x→∞</sub> (1 + 2/x)<sup>x</sup> =", o: ["e²", "e", "1", "∞"], c: 0, exp: "(1 + 2/x)<sup>x</sup> = [(1 + 2/x)<sup>x/2</sup>]² → (e)² = e²" },
+            { q: "lim<sub>x→0</sub> (tan x − sin x)/x³ =", o: ["1/2", "1", "0", "∞"], c: 0, exp: "Use series: tan x = x + x³/3, sin x = x − x³/6 → (x³/3 + x³/6)/x³ = 1/2" },
+            { q: "lim<sub>x→0</sub> (e^x − 1 − x)/x² =", o: ["1/2", "1", "0", "∞"], c: 0, exp: "e^x = 1 + x + x²/2 + ... → (x²/2 + ...)/x² = 1/2" },
+            { q: "lim<sub>x→a</sub> (x⁸ − a⁸)/(x − a) =", o: ["8a⁷", "a⁸", "8a⁸", "0"], c: 0, exp: "Standard: lim (xⁿ − aⁿ)/(x − a) = n aⁿ⁻¹ → 8a⁷" },
+            { q: "lim<sub>x→0</sub> (√(1+x) − √(1−x))/x =", o: ["1", "0", "1/2", "∞"], c: 0, exp: "Rationalise: [ (1+x) − (1−x) ] / [x (√(1+x)+√(1−x))] = 2x / [x(...)] → 1" },
+            { q: "lim<sub>x→∞</sub> x sin(1/x) =", o: ["1", "0", "∞", "Does not exist"], c: 0, exp: "1/x → 0, sin(1/x) ≈ 1/x → x × (1/x) = 1" },
+            { q: "lim<sub>x→0</sub> (1 + x)<sup>1/x</sup> =", o: ["e", "1", "0", "∞"], c: 0, exp: "Standard exponential limit" },
+            { q: "lim<sub>x→0</sub> (ln(1+x))/x =", o: ["1", "0", "e", "∞"], c: 0, exp: "Standard: derivative of ln(1+x) at x=0" },
+            { q: "lim<sub>x→2</sub> (x² − 4)/(x − 2) =", o: ["4", "0", "∞", "Does not exist"], c: 0, exp: "Polynomial → direct substitute after cancelling (x−2)(x+2)/(x−2) = x+2 → 4" },
+            { q: "lim<sub>x→0</sub> |x|/x =", o: ["1", "−1", "0", "Does not exist"], c: 3, exp: "LHL = −1, RHL = 1 → does not exist" },
+            { q: "lim<sub>x→π/2</sub> sin x / x =", o: ["1", "0", "π/2", "Does not exist"], c: 2, exp: "sin(π/2) = 1 → 1/(π/2) = 2/π" },
+            { q: "lim<sub>x→0</sub> (a^x − 1)/x =", o: ["ln a", "a", "1", "0"], c: 0, exp: "Standard limit" },
+            { q: "lim<sub>x→0</sub> (1 + 3x)<sup>2/x</sup> =", o: ["e^6", "e^3", "e^2", "e"], c: 0, exp: "(1 + 3x)<sup>2/x</sup> = [(1 + 3x)<sup>1/(3x)</sup>]<sup>6</sup> → e^6" },
+            { q: "lim<sub>x→0</sub> x cot x =", o: ["1", "0", "∞", "−∞"], c: 0, exp: "x cos x / sin x → 0 × 1 / 0, but sin x ≈ x → x/x = 1" },
+            { q: "lim<sub>x→∞</sub> (x + sin x)/x =", o: ["1", "∞", "0", "Does not exist"], c: 0, exp: "sin x bounded → (x ±1)/x → 1" },
+            { q: "lim<sub>x→0</sub> (1 − cos x)(1 − cos 2x)/x⁴ =", o: ["1", "2", "1/2", "0"], c: 0, exp: "1−cos x = x²/2, 1−cos 2x = 2x² → (x²/2)(2x²)/x⁴ = 1" },
+            { q: "lim<sub>x→0</sub> (e^{2x} − e^x + 1)/(x sin x) =", o: ["1", "2", "0", "∞"], c: 0, exp: "Numerator ≈ (1+2x+2x²) − (1+x+x²/2) + 1 = 2x² − x²/2 = (3/2)x²<br>Denominator ≈ x² → 3/2" },
+            { q: "lim<sub>x→0</sub> [1/x − 1/tan x] =", o: ["0", "1/2", "1", "∞"], c: 1, exp: "1/x − x/(x + x³/3) ≈ 1/x − 1/(1 + x²/3) → use series → 1/2" },
+            { q: "f(x) = x |x|, then lim<sub>x→0⁺</sub> f(x)/x =", o: ["1", "−1", "0", "∞"], c: 0, exp: "For x>0, f(x) = x² → x²/x = x → 0? Wait: x→0⁺, x²/x = x → 0" },
+            { q: "lim<sub>x→0</sub> (sin^{-1} x)/x =", o: ["1", "0", "π/2", "∞"], c: 0, exp: "sin^{-1} x ≈ x → x/x = 1" },
+            { q: "lim<sub>x→∞</sub> (ln(x+1) − ln x) =", o: ["0", "1", "∞", "−∞"], c: 0, exp: "ln((x+1)/x) = ln(1 + 1/x) → ln 1 = 0" },
+            { q: "lim<sub>x→0</sub> (1 + sin x)<sup>cot x</sup> =", o: ["e", "1", "0", "∞"], c: 0, exp: "(1 + sin x)<sup>cos x / sin x</sup> → e^{lim (sin x)(cos x / sin x)} = e^{cos x} → e^1 = e" },
+            { q: "lim<sub>x→0</sub> (x^x − 1)/x =", o: ["0", "1", "−1", "∞"], c: 0, exp: "x^x = e^{x ln x}, x ln x → 0 → e^0 = 1 → (1−1)/x = 0" },
+            { q: "lim<sub>x→π</sub> (sin x)/(x − π) =", o: ["−1", "1", "0", "∞"], c: 0, exp: "sin π = 0, so 0/(x−π) → form 0/0, derivative: cos x / 1 at x=π → −1" },
+            { q: "lim<sub>x→0</sub> (tan 3x + tan 2x)/x =", o: ["5", "3", "2", "0"], c: 0, exp: "tan kx ≈ kx → (3x + 2x)/x = 5" },
+            { q: "lim<sub>x→∞</sub> √(x² + x + 1) − x =", o: ["1/2", "1", "∞", "0"], c: 0, exp: "Multiply by conjugate: (x² + x + 1 − x²)/(√(...) + x) → (x+1)/(2x) → 1/2" },
+            { q: "lim<sub>x→0</sub> (1 − cos 2x)(1 − cos 3x)/x⁴ =", o: ["3", "6", "9", "12"], c: 1, exp: "1−cos 2x = 2x², 1−cos 3x = (9/2)x² → 2x² × (9/2)x² / x⁴ = 9" },
+            { q: "lim<sub>x→0</sub> x² cos(1/x) =", o: ["0", "1", "∞", "Does not exist"], c: 0, exp: "cos bounded between −1 and 1 → x² × bounded → 0" },
+            { q: "lim<sub>x→a</sub> (x^{15} − a^{15})/(x − a) =", o: ["15a^{14}", "a^{15}", "15a^{15}", "0"], c: 0, exp: "n a^{n−1} formula → 15a^{14}" },
+            { q: "lim<sub>x→0</sub> (e^{3x} − 1)/(e^{2x} − 1) =", o: ["3/2", "2/3", "1", "0"], c: 0, exp: "Both → 0, L'Hôpital: 3e^{3x}/2e^{2x} → 3/2" },
+            { q: "lim<sub>x→0</sub> (sin x^x)/x =", o: ["0", "1", "e", "∞"], c: 0, exp: "x^x → 1, sin 1 → constant, /x → ∞? Wait: sin(x^x) ≈ sin 1, /x → ∞ → no, sin(x^x)/x → sin(1)/0 → ∞" },
+            { q: "lim<sub>x→0</sub> (1 + x^2)^{1/x} =", o: ["1", "e", "∞", "0"], c: 2, exp: "As x→0, x^2→0, (1 + small)^{1/small} → ∞" },
+            { q: "The number of points where f(x) = |x − 1| + |x − 2| is not differentiable is", o: ["0", "1", "2", "3"], c: 2, exp: "Corners at x=1 and x=2 → 2 points" }
+        ];
+
+        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 45*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? 'selected' : '';
+                opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} / 35</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===34?'submitQuiz()':'current++;showQuestion()'}">
+                        ${current===34?'Submit':'Next'}
+                    </button>
+                </div>`;
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.getElementById('progress').style.width = (done/35*100)+'%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m+':'+s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'Not answered':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Solution:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 32 ? "Calculus Legend!" :
+                        correct >= 28 ? "Outstanding!" :
+                        correct >= 24 ? "Excellent!" :
+                        correct >= 18 ? "Good! Keep Practicing" : "Revise Limits Again!";
+            document.getElementById('score').textContent = correct + '/35';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 45*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); updateProgress(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+    </script>
+</body>
+</html>

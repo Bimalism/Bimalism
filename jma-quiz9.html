@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculus Quiz - JEE Main</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #673ab7, #7e57c2, #9575cd); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #4527a0, #512da8); color: white; padding: 30px; text-align: center; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #ede7f6; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px फ़; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #7c4dff; color: white; }
+        .btn-reset { background: #9575cd; color: white; }
+        .btn-submit { background: #512da8; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #d1c4e9; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #512da8; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #512da8; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #ede7f6; padding: 25px; border-radius: 12px; border-left: 6px solid #512da8; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #512da8; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #b39ddb; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #512da8; background: #e8eaf6; }
+        .option.selected { border-color: #311b92; background: #c5cae9; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+        .score { font-size: 1.5rem; font-weight: bold; color: #512da8; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #311b92; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #512da8; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #e8eaf6; border-radius: 8px; border-left: 4px solid #7c4dff; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Integral Calculus</h1>
+            <p class="subtitle">35 Questions • JEE Main Previous Year + High Weightage • Full Solutions</p>
+            <div class="timer">Time: <span id="timer">45:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Notes')">← Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/35</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/35</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "∫ x<sup>4</sup> dx =", o: ["x<sup>5</sup>/5 + c", "x<sup>5</sup> + c", "4x<sup>3</sup> + c", "x<sup>3</sup>/3 + c"], c: 0, exp: "Power rule: ∫ x<sup>n</sup> dx = x<sup>n+1</sup>/(n+1) + c" },
+            { q: "∫ (1/x) dx =", o: ["ln |x| + c", "ln x + c", "1/x + c", "0"], c: 0, exp: "Standard logarithmic integral" },
+            { q: "∫ e<sup>3x</sup> dx =", o: ["e<sup>3x</sup>/3 + c", "3 e<sup>3x</sup> + c", "e<sup>3x</sup> + c", "e<sup>x</sup> + c"], c: 0, exp: "∫ e<sup>kx</sup> dx = e<sup>kx</sup>/k + c" },
+            { q: "∫ sin 2x dx =", o: ["-cos 2x /2 + c", "-cos 2x + c", "cos 2x + c", "sin 2x /2 + c"], c: 0, exp: "Chain rule reverse: u = 2x" },
+            { q: "∫ cos x dx =", o: ["sin x + c", "-sin x + c", "cos x + c", "tan x + c"], c: 0, exp: "Standard antiderivative" },
+            { q: "∫ sec<sup>2</sup> x dx =", o: ["tan x + c", "sec x + c", "-cot x + c", "cot x + c"], c: 0, exp: "Derivative of tan x" },
+            { q: "∫ (1/(1 + x<sup>2</sup>)) dx =", o: ["tan<sup>-1</sup> x + c", "sin<sup>-1</sup> x + c", "ln |x + √(1 + x<sup>2</sup>)| + c", "cot<sup>-1</sup> x + c"], c: 0, exp: "Standard arctan integral" },
+            { q: "∫ dx / √(1 - x<sup>2</sup>) =", o: ["sin<sup>-1</sup> x + c", "cos<sup>-1</sup> x + c", "tan<sup>-1</sup> x + c", "ln |x| + c"], c: 0, exp: "Standard arcsin integral" },
+            { q: "∫ f(ax + b) dx = (if ∫ f(u) du = F(u) + c)", o: ["(1/a) F(ax + b) + c", "F(ax + b) + c", "a F(ax + b) + c", "F(bx + a) + c"], c: 0, exp: "Property (iii) from notes" },
+            { q: "ILATE is used for choosing first function in", o: ["Integration by parts", "Substitution", "Partial fractions", "Definite integrals"], c: 0, exp: "ILATE rule from notes" },
+            { q: "In ∫ x e<sup>x</sup> dx, first function (u) is", o: ["x", "e<sup>x</sup>"], c: 0, exp: "Algebraic before exponential (ILATE)" },
+            { q: "∫ x e<sup>x</sup> dx =", o: ["e<sup>x</sup> (x - 1) + c", "e<sup>x</sup> x + c", "e<sup>x</sup> (x + 1) + c", "x + c"], c: 0, exp: "By parts: u = x, dv = e<sup>x</sup> dx → x e<sup>x</sup> - ∫ e<sup>x</sup> dx = e<sup>x</sup>( rainwater x - 1) + c" },
+            { q: "∫ e<sup>x</sup> (f(x) + f'(x)) dx =", o: ["e<sup>x</sup> f(x) + c", "e<sup>x</sup> f'(x) + c", "f(x) + c", "e<sup>x</sup> + c"], c: 0, exp: "Important result from notes" },
+            { q: "∫<sub>0</sub><sup>π</sup> sin x dx =", o: ["2", "0", "1", "π"], c: 0, exp: "[-cos x]<sub>0</sub><sup>π</sup> = 1 - (-1) = 2" },
+            { q: "∫<sub>a</sub><sup>b</sup> f(x) dx =", o: ["F(b) - F(a)", "F(a) - F(b)", "F(b) + F(a)", "0"], c: 0, exp: "Newton-Leibnitz formula from notes" },
+            { q: "∫<sub>a</sub><sup>b</sup> f(x) dx = -∫<sub>b</sub><sup>a</sup> f(x) dx", o: ["True", "False"], c: 0, exp: "Property 2 from notes" },
+            { q: "∫<sub>0</sub><sup>a</sup> f(x) dx =", o: ["∫<sub>0</sub><sup>a</sup> f(a - x) dx", " -∫<sub>0</sub><sup>a</sup> f(a - x) dx", "2 ∫<sub>0</sub><sup>a</sup> f(x) dx", "0"], c: 0, exp: "Property 5 from notes" },
+            { q: "If f has period T, ∫<sub>0</sub><sup>2T</sup> f(x) dx =", o: ["2 ∫<sub>0</sub><sup>T</sup> f(x) dx", "∫<sub>0</sub><sup>T</sup> f(x) dx", "0", "depends on f"], c: 0, exp: "Property 8(a) from notes" },
+            { q: "∫<sub>2</sub><sup>4</sup> (ln x<sup>2</sup>) / (ln x<sup>2</sup> + ln (36 - 12x + x<sup>2</sup>)) dx =", o: ["1", "2", "4", "6"], c: 0, exp: "JEE Main 2015 PYQ: Use property with (a+b-x), I + I = ∫ 1 dx = 2 → I = 1" },
+            { q: "∫<sub>π/4</sub><sup>3π/4</sup> dx / (1 + cos x) =", o: ["2", "4", "-2", "1"], c: 0, exp: "JEE Main 2017 PYQ: 1 + cos x = 2 cos²(x/2) → (1/2) ∫ sec²(x/2) dx = tan(x/2) from π/4 to 3π/4 = 1 - (-1) = 2" },
+            { q: "Recommended substitution for √(a<sup>2</sup> - x<sup>2</sup>)", o: ["x = a sin θ or a cos θ", "x = a tan θ", "x = a sec θ", "x = a cot θ"], c: 0, exp: "Standard substitution from notes (page 3)" },
+            { q: "For ∫ √(x<sup>2</sup> + a<sup>2</sup>) dx, standard form includes", o: ["(x/2) √(x<sup>2</sup> + a<sup>2</sup>) + (a<sup>2</sup>/2) ln |x + √(x<sup>2</sup> + a<sup>2</sup>)| + c", "tan<sup>-1</sup>(x/a) + c", "sin<sup>-1</sup>(x/a) + c", "only ln term"], c: 0, exp: "From notes (page 2)" },
+            { q: "∫ cot x dx =", o: ["ln |sin x| + c", "-ln |cos x| + c", "ln |tan x| + c", "all equivalent"], c: 3, exp: "From notes" },
+            { q: "∫ sec x (sec x + tan x) dx =", o: ["ln |sec x + tan x| + c", "tan x + c", "sec x + c", "ln |tan(x/2 + π/4)| + c"], c: 0, exp: "From notes" },
+            { q: "∫<sub>0</sub><sup>1</sup> x dx =", o: ["1/2", "1", "0", "1/4"], c: 0, exp: "[x<sup>2</sup>/2]<sub>0</sub><sup>1</sup> = 1/2" },
+            { q: "Using property, ∫<sub>0</sub><sup>1</sup> (1 - x) dx =", o: ["1/2", "1", "0", "1/4"], c: 0, exp: "Same as ∫<sub>0</sub><sup>1</sup> x dx by property 5" },
+            { q: "∫<sub>-a</sub><sup>a</sup> x dx (odd function) =", o: ["0", "2 ∫<sub>0</sub><sup>a</sup> x dx", "a<sup>2</sup>", "undefined"], c: 0, exp: "Property 6 + odd function" },
+            { q: "∫<sub>-a</sub><sup>a</sup> x<sup>2</sup> dx (even function) =", o: ["2 ∫<sub>0</sub><sup>a</sup> x<sup>2</sup> dx", "0", "∫<sub>0</sub><sup>a</sup> x<sup>2</sup> dx", "a<sup>3</sup>"], c: 0, exp: "Property 6 + even function" },
+            { q: "Leibnitz rule is used for", o: ["Differentiation under integral sign", "Integration by parts", "Substitution", "Partial fractions"], c: 0, exp: "From notes (page 7)" },
+            { q: "d/dx ∫<sub>f1(x)</sub><sup>f2(x)</sup> g(t) dt =", o: ["g(f2) f2' - g(f1) f1'", "g(f2) + g(f1)", "∫ g'(t) dt", "0"], c: 0, exp: "Leibnitz rule from notes" },
+            { q: "For ∑<sub>r=1</sub><sup>n</sup> (r/n)<sup>2</sup> (1/n) as n→∞ =", o: ["∫<sub>0</sub><sup>1</sup> x<sup>2</sup> dx = 1/3", "1/2", "1", "0"], c: 0, exp: "Algorithm from notes (page 4-5)" },
+            { q: "For direct substitution, integral ∫ f(g(x)) g'(x) dx, put", o: ["g(x) = t", "x = t", "g'(x) = t", "f(x) = t"], c: 0, exp: "From notes (page 3)" },
+            { q: "If both √(a + x), √(a - x) present, substitution is", o: ["x = a cos θ", "x = a sin θ", "x = a tan θ", "x = a sec θ"], c: 0, exp: "From notes (page 3)" },
+            { q: "∫<sub>0</sub><sup>π/2</sup> cos x dx =", o: ["1", "0", "2", "π/2"], c: 0, exp: "[sin x]<sub>0</sub><sup>π/2</sup> = 1 - 0 = 1" },
+            { q: "∫<sub>0</sub><sup>π/2</sup> ln(sin x) dx =", o: ["- (π/2) ln 2", "0", "π/2", "ln 2"], c: 0, exp: "High weightage standard result (often tested)" }
+        ];
+
+        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 45*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? 'selected' : '';
+                opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} / 35</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===34?'submitQuiz()':'current++;showQuestion()'}">
+                        ${current===34?'Submit':'Next'}
+                    </button>
+                </div>`;
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.getElementById('progress').style.width = (done/35*100)+'%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m+':'+s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'Not answered':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Solution:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 32 ? "Integration Master!" :
+                        correct >= 28 ? "Outstanding!" :
+                        correct >= 24 ? "Excellent!" :
+                        correct >= 18 ? "Good! Keep Practicing" : "Revise Integration Notes Again!";
+            document.getElementById('score').textContent = correct + '/35';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 45*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); updateProgress(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+    </script>
+</body>
+</html>

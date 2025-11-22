@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Geometry Quiz | 20 JEE Questions | eSaral Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:linear-gradient(135deg,#fff3e0 0%,#ffe0b2 100%);color:#333;min-height:100vh;padding:20px}
+        .container{max-width:1100px;margin:0 auto;background:white;box-shadow:0 15px 40px rgba(0,0,0,0.15);border-radius:18px;overflow:hidden}
+        header{background:linear-gradient(to right,#ff6f00,#ff8f00);color:white;padding:40px;text-align:center;position:relative}
+        .chapter-badge{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.25);padding:10px 20px;border-radius:25px;font-weight:bold}
+        h1{font-size:3rem;margin-bottom:10px}
+        .subtitle{font-size:1.4rem;opacity:0.95}
+        .timer{position:absolute;right:30px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.3);padding:15px 30px;border-radius:50px;font-size:1.8rem;font-weight:bold}
+        .nav{display:flex;justify-content:space-between;padding:25px 40px;background:rgba(255,111,0,0.1)}
+        .btn{padding:14px 35px;border:none;border-radius:14px;font-weight:bold;cursor:pointer;transition:0.3s}
+        .btn-home{background:#ff8f00;color:white}
+        .btn-reset{background:#ffb74d;color:#333}
+        .btn-submit{background:#e65100;color:white}
+        .btn:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,0.2)}
+        .progress-bar{height:16px;background:#ffe0b2;margin:20px 40px;border-radius:10px;overflow:hidden}
+        .progress{height:100%;background:#ff6f00;width:0%;transition:width 0.6s}
+        .progress-text{padding:0 40px 25px;display:flex;justify-content:space-between;font-weight:bold;color:#e65100}
+        .quiz{padding:40px}
+        .question{background:#fff8e1;padding:30px;border-radius:15px;border-left:6px solid #ff8f00;margin-bottom:30px;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+        .qno{font-size:1.4rem;color:#ff6f00;font-weight:bold}
+        .qtext{font-size:1.5rem;margin:20px 0;font-weight:500}
+        .options{display:grid;gap:18px;margin-top:25px}
+        .option{padding:20px;background:white;border:3px solid #ffb74d;border-radius:12px;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:15px}
+        .option:hover{background:#fff3e0;border-color:#ff6f00}
+        .option.selected{background:#ff8f00;color:white;border-color:#e65100;font-weight:bold}
+        .result{display:none;padding:70px;text-align:center;background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+        .score{font-size:6rem;font-weight:bold;color:#e65100;margin:20px 0}
+        .message{font-size:2rem;color:#ff6f00;margin:30px 0}
+        .details{margin:50px auto;max-width:1000px;text-align:left}
+        .detail{padding:25px;background:#fff8e1;margin:20px 0;border-radius:12px;border-left:6px solid #ff8f00}
+        .wrong{border-left-color:#d32f2f;background:#ffebee}
+        .exp{margin-top:20px;padding:20px;background:white;border-left:5px solid #ffb74d;border-radius:8px}
+        footer{text-align:center;padding:30px;background:#e65100;color:white}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="chapter-badge">JEE Main & Advanced</div>
+            <h1>Coordinate Geometry Quiz</h1>
+            <p class="subtitle">20 High-Level Questions • Straight Line + Circle • eSaral Summary Based</p>
+            <div class="timer">Time: <span id="timer">30:00</span></div>
+        </header>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Summary')">← Summary</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/20</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/20</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()" style="margin-top:40px;">Retake Quiz</button>
+        </div>
+
+        <footer>JEE Main & Advanced • Coordinate Geometry Full Quiz • Based on eSaral Notes</footer>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Distance between points (x₁,y₁) and (x₂,y₂) is", o: ["√[(x₂−x₁)² + (y₂−y₁)²]", "√[(x₂+x₁)² + (y₂+y₁)²]", "(x₂−x₁) + (y₂−y₁)", "|x₂−x₁| + |y₂−y₁|"], c: 0, exp: "Standard distance formula" },
+            { q: "Section formula (internal division in ratio m:n)", o: ["((mx₂ + nx₁)/(m+n), (my₂ + ny₁)/(m+n))", "((mx₁ + nx₂)/(m+n), (my₁ + ny₂)/(m+n))", "((mx₂ − nx₁)/(m−n), (my₂ − ny₁)/(m−n))", "None"], c: 0, exp: "Internal section formula" },
+            { q: "Centroid of triangle with vertices (x₁,y₁), (x₂,y₂), (x₃,y₃) is", o: ["((x₁+x₂+x₃)/3, (y₁+y₂+y₃)/3)", "((x₁+x₂)/2, (y₁+y₂)/2)", "((ax₁+bx₂+cx₃)/(a+b+c), ...)", "(0,0)"], c: 0, exp: "Average of vertices" },
+            { q: "Area of triangle with vertices (x₁,y₁), (x₂,y₂), (x₃,y₃)", o: ["(1/2)|x₁(y₂−y₃) + x₂(y₃−y₁) + x₃(y₁−y₂)|", "(1/2)(base × height)", "Both", "None"], c: 2, exp: "Shoelace formula" },
+            { q: "Slope-intercept form of line is", o: ["y = mx + c", "x/a + y/b = 1", "x cosα + y sinα = p", "y − y₁ = m(x − x₁)"], c: 0, exp: "m = slope, c = y-intercept" },
+            { q: "Normal form of line is", o: ["x cosα + y sinα = p", "y = mx + c", "x/a + y/b = 1", "ax + by + c = 0"], c: 0, exp: "p = perpendicular distance from origin" },
+            { q: "General equation of circle is", o: ["x² + y² + 2gx + 2fy + c = 0", "(x−h)² + (y−k)² = r²", "x² + y² = r²", "All are forms"], c: 0, exp: "Centre (−g,−f), radius √(g²+f²−c)" },
+            { q: "Centre of circle (x−h)² + (y−k)² = r² is", o: ["(h,k)", "(−h,−k)", "(h,−k)", "(−h,k)"], c: 0, exp: "Standard form" },
+            { q: "Perpendicular distance from (x₁,y₁) to line ax+by+c=0 is", o: ["|ax₁ + by₁ + c| / √(a² + b²)", "|ax₁ + by₁ − c| / √(a² + b²)", "|ax₁ + by₁ + c| / (a + b)", "ax₁ + by₁ + c"], c: 0, exp: "Standard distance formula" },
+            { q: "Condition for point (x₁,y₁) to lie inside circle S = x²+y²+2gx+2fy+c=0", o: ["S₁ < 0", "S₁ > 0", "S₁ = 0", "S₁ ≥ 0"], c: 0, exp: "S₁ = value of S at (x₁,y₁)" },
+            { q: "Tangent to circle S=0 at point (x₁,y₁) is", o: ["T = 0 where T = xx₁ + yy₁ + g(x+x₁) + f(y+y₁) + c", "xx₁ + yy₁ = r²", "Both", "None"], c: 2, exp: "Standard tangent equation" },
+            { q: "Equation of circle with diameter endpoints (x₁,y₁), (x₂,y₂)", o: ["(x−x₁)(x−x₂) + (y−y₁)(y−y₂) = 0", "(x−x₁)(x−x₂) = (y−y₁)(y−y₂)", "x² + y² = (x₁x₂ + y₁y₂)", "None"], c: 0, exp: "Diameter form" },
+            { q: "Image of point (x₁,y₁) w.r.t. line ax+by+c=0 has parameter", o: ["−2(ax₁+by₁+c)/(a²+b²)", "+2(ax₁+by₁+c)/(a²+b²)", "−(ax₁+by₁+c)/(a²+b²)", "+(ax₁+by₁+c)/(a²+b²)"], c: 0, exp: "Reflection formula" },
+            { q: "Foot of perpendicular from (x₁,y₁) to ax+by+c=0 uses", o: ["−(ax₁+by₁+c)/(a²+b²)", "−2(ax₁+by₁+c)/(a²+b²)", "+(ax₁+by₁+c)/(a²+b²)", "None"], c: 0, exp: "Same as foot formula" },
+            { q: "Parametric point on circle (h,k), radius r is", o: ["(h + r cosθ, k + r sinθ)", "(h + r sinθ, k + r cosθ)", "(h + r tanθ, k + r cotθ)", "All"], c: 0, exp: "Standard parametric form" },
+            { q: "Pair of tangents from external point to circle S=0 is", o: ["T² = S S₁", "T² = S₁", "T = S S₁", "T = 0"], c: 0, exp: "T² = S S₁" },
+            { q: "Equation of line in intercept form is", o: ["x/a + y/b = 1", "x/a + y/b = 0", "x/a − y/b = 1", "ax + by = 1"], c: 0, exp: "a = x-intercept, b = y-intercept" },
+            { q: "Two-point form of line passing through (x₁,y₁) and (x₂,y₂)", o: ["(y−y₁)/(y₂−y₁) = (x−x₁)/(x₂−x₁)", "y − y₁ = m(x − x₁)", "y = mx + c", "ax + by + c = 0"], c: 0, exp: "Standard two-point form" },
+            { q: "For circle x² + y² + 2gx + 2fy + c = 0, radius is", o: ["√(g² + f² − c)", "√(g² + f² + c)", "√(g² − f² − c)", "g² + f² − c"], c: 0, exp: "Radius = √(g² + f² − c)" },
+            { q: "Point (x₁,y₁) lies on the circle S=0 if", o: ["S₁ = 0", "S₁ > 0", "S₁ < 0", "S₁ ≥ 0"], c: 0, exp: "S₁ = 0 means on the circle" }
+        ];
+
+        let current = 0, answers = Array(20).fill(null), timeLeft = 30*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? ' selected' : '';
+                opts += `<div class="option${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
+            });
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} of 20</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:40px;display:flex;justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#e65100">
+                        ${current===19?'Submit Quiz':'Next →'}
+                    </button>
+                </div>`;
+            updateProgress();
+        }
+
+        function selectOption(i) {
+            answers[current] = i;
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const done = answers.filter(x => x !== null).length;
+            document.getElementById('progress').style.width = (done/20*100) + '%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
+        }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m + ':' + s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+                </div>`;
+            });
+            const msg = correct >= 18 ? "Coordinate Geometry Master!" :
+                        correct >= 15 ? "Outstanding Performance!" :
+                        correct >= 12 ? "Excellent – Almost There!" :
+                        correct >= 8 ? "Good, Keep Revising!" : "Revise eSaral Summary Again!";
+            document.getElementById('score').textContent = correct + '/20';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 30*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); startTimer();
+        }
+
+        window.onload = () => { showQuestion(); startTimer(); };
+    </script>
+</body>
+</html>
