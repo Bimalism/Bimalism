@@ -3,180 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trigonometry Quiz - 20 Questions | JEE Main & Advanced</title>
+    <title>Trigonometry - Complete Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
-        body { background: linear-gradient(135deg, #1e3c72, #2a5298, #00d4ff); color:#fff; min-height:100vh; padding:20px; }
-        .container { max-width:1000px; margin:0 auto; background:rgba(0,0,0,0.4); border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.5); overflow:hidden; }
-        header { background:linear-gradient(to right,#0f2027,#203a43,#2c5364); padding:35px; text-align:center; position:relative; }
-        h1 { font-size:2.8rem; margin-bottom:8px; }
-        .subtitle { font-size:1.3rem; opacity:0.95; }
-        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); padding:12px 28px; border-radius:50px; font-size:1.6rem; font-weight:bold; }
-        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:rgba(255,255,255,0.1); }
-        .btn { padding:12px 32px; border:none; border-radius:12px; font-weight:bold; cursor:pointer; transition:0.3s; }
-        .btn-home { background:#00ff88; color:#0f2027; }
-        .btn-reset { background:#00d4ff; color:#0f2027; }
-        .btn-submit { background:#ff00ff; color:white; }
-        .btn:hover { transform:translateY(-4px); box-shadow:0 10px 25px rgba(0,0,0,0.4); }
-        .progress-bar { height:16px; background:rgba(255,255,255,0.2); margin:15px 30px; border-radius:8px; overflow:hidden; }
-        .progress { height:100%; background:#00ff88; width:0%; transition:width 0.5s; }
-        .progress-text { padding:0 30px 20px; font-weight:bold; display:flex; justify-content:space-between; color:#00ff88; }
-        .quiz { padding:35px; }
-        .question { background:rgba(255,255,255,0.15); padding:28px; border-radius:15px; border-left:6px solid #00ff88; margin-bottom:28px; }
-        .qno { font-weight:bold; font-size:1.3rem; color:#00ff88; }
-        .qtext { font-size:1.3rem; margin:15px 0; font-weight:500; }
-        .options { display:grid; gap:16px; }
-        .option { padding:18px; background:rgba(255,255,255,0.1); border:2px solid rgba(0,255,136,0.4); border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:14px; }
-        .option:hover { border-color:#00ff88; background:rgba(0,255,136,0.2); }
-        .option.selected { border-color:#00ff88; background:rgba(0,255,136,0.4); font-weight:bold; }
-        .result { display:none; padding:60px; text-align:center; background:linear-gradient(135deg,rgba(0,255,136,0.2),rgba(0,212,255,0.2)); }
-        .score { font-size:5rem; font-weight:bold; color:#00ff88; margin:25px 0; }
-        .message { font-size:1.8rem; margin:25px 0; color:#00d4ff; }
-        .details { margin:50px auto; max-width:900px; text-align:left; }
-        .detail { padding:22px; background:rgba(255,255,255,0.1); margin:18px 0; border-radius:12px; border-left:6px solid #00ff88; }
-        .wrong { border-left-color:#ff00ff; background:rgba(255,0,255,0.2); }
-        .exp { margin-top:18px; padding:18px; background:rgba(0,255,136,0.2); border-radius:10px; border-left:4px solid #00d4ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
+        header { background: linear-gradient(to right, #1565c0, #42a5f5); color: white; padding: 30px 40px; text-align: center; position: relative; }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
+        .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        h2 { color: #1565c0; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #42a5f5; display: flex; align-items: center; }
+        h2 i { margin-right: 10px; background: #e3f2fd; padding: 10px; border-radius: 50%; color: #1565c0; }
+        h3 { color: #1976d2; font-size: 1.4rem; margin: 25px 0 15px; display: flex; align-items: center; }
+        h3 i { margin-right: 10px; color: #42a5f5; }
+        .formula { background-color: #e3f2fd; padding: 18px 22px; margin: 18px 0; border-radius: 8px; border-left: 5px solid #1976d2; font-size: 1.25rem; text-align: center; font-weight: bold; line-height: 2; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th { background: linear-gradient(to right, #1565c0, #42a5f5); color: white; padding: 15px; text-align: center; }
+        td { padding: 14px; text-align: center; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) { background-color: #f5f9ff; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin: 25px 0; }
+        .topic-card { background: linear-gradient(to bottom right, #ffffff, #e3f2fd); border: 1px solid #bbdefb; border-radius: 10px; padding: 22px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; }
+        .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #42a5f5, #1976d2); border-radius: 10px 0 0 10px; }
+        .topic-card { position: relative; }
+        .topic-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
+        .topic-title { font-weight: bold; color: #1565c0; margin-bottom: 15px; font-size: 1.25rem; display: flex; align-items: center; }
+        .topic-title i { margin-right: 10px; background: #e3f2fd; padding: 8px; border-radius: 50%; color: #1565c0; }
+        .important-points { background: linear-gradient(to right, #e3f2fd, #bbdefb); border-left: 5px solid #42a5f5; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        footer { text-align: center; padding: 25px; background: linear-gradient(to right, #0d47a1, #1976d2); color: white; margin-top: 40px; }
+        .nav-tabs { display: flex; flex-wrap: wrap; margin-bottom: 25px; border-bottom: 1px solid #e0e0e0; }
+        .nav-tab { padding: 12px 22px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; font-weight: 600; }
+        .nav-tab.active { border-bottom: 3px solid #42a5f5; color: #1565c0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <div class="chapter-badge">JEE Main • Mathematics</div>
             <h1>Trigonometry</h1>
-            <p class="subtitle">20 High-Level Questions • Full eSaral Coverage • JEE Main + Advanced</p>
-            <div class="timer">Time: <span id="timer">30:00</span></div>
+            <p class="subtitle">Complete Revision Summary | JEE Main 2025–26</p>
+            <div class="importance">High Weightage • 4–6 Questions Expected</div>
         </header>
 
-        <div class="nav">
-            <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
-            <div>
-                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
-                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        <div class="content">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="compound">Compound Angles</div>
+                <div class="nav-tab" data-tab="multiple">Multiple Angles</div>
+                <div class="nav-tab" data-tab="product">Product ↔ Sum</div>
+                <div class="nav-tab" data-tab="inverse">Inverse Trig</div>
+                <div class="nav-tab" data-tab="equation">Trig Equations</div>
+                <div class="nav-tab" data-tab="triangle">Solution of Triangle</div>
+                <div class="nav-tab" data-tab="height">Height & Distance</div>
+            </div>
+
+            <!-- Compound Angles -->
+            <div class="tab-content active" id="compound">
+                <section class="section">
+                    <h2><i class="fas fa-plus-minus"></i> Trigonometric Ratios of Compound Angles</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-wave-square"></i> Addition Formulas</div>
+                            <div class="formula">sin(A + B) = sin A cos B + cos A sin B</div>
+                            <div class="formula">sin(A − B) = sin A cos B − cos A sin B</div>
+                            <div class="formula">cos(A + B) = cos A cos B − sin A sin B</div>
+                            <div class="formula">cos(A − B) = cos A cos B + sin A sin B</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title"><i class="fas fa-divide"></i> Tangent Formulas</div>
+                            <div class="formula">tan(A + B) = \frac{\tan A + \tan B}{1 - \tan A \tan B}</div>
+                            <div class="formula">tan(A − B) = \frac{\tan A - \tan B}{1 + \tan A \tan B}</div>
+                            <div class="formula">cot(A + B) = \frac{cot A cot B - 1}{cot B + cot A}</div>
+                            <div class="formula">cot(A − B) = \frac{cot A cot B + 1}{cot B - cot A}</div>
+                        </div>
+                    </div>
+                    <div class="important-points">
+                        <h4>Key Identities</h4>
+                        <div class="formula">sin(A+B)sin(A−B) = sin²A − sin²B = cos²B − cos²A</div>
+                        <div class="formula">cos(A+B)cos(A−B) = cos²A − sin²B = cos²B − sin²A</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Multiple Angles -->
+            <div class="tab-content" id="multiple">
+                <section class="section">
+                    <h2><i class="fas fa-redo"></i> Multiple & Sub-multiple Angles</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Double Angle</div>
+                            <div class="formula">sin 2A = 2 sin A cos A = \frac{2 \tan A}{1 + \tan^2 A}</div>
+                            <div class="formula">cos 2A = cos²A − sin²A = 2cos²A − 1 = 1 − 2sin²A = \frac{1 − \tan^2 A}{1 + \tan^2 A}</div>
+                            <div class="formula">tan 2A = \frac{2 \tan A}{1 − \tan^2 A}</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Triple Angle</div>
+                            <div class="formula">sin 3A = 3 sin A − 4 sin³ A</div>
+                            <div class="formula">cos 3A = 4 cos³ A − 3 cos A</div>
+                            <div class="formula">tan 3A = \frac{3 tan A - tan³ A}{1 - 3 tan² A}</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Half Angle</div>
+                            <div class="formula">sin \frac{A}{2} = \sqrt{\frac{1 - cos A}{2}}, \quad cos \frac{A}{2} = \sqrt{\frac{1 + cos A}{2}}</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Product to Sum -->
+            <div class="tab-content" id="product">
+                <section class="section">
+                    <h2><i class="fas fa-exchange-alt"></i> Sum ↔ Product Transformations</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Product → Sum</div>
+                            <div class="formula">2 sin A cos B = sin(A+B) + sin(A−B)</div>
+                            <div class="formula">2 cos A sin B = sin(A+B) − sin(A−B)</div>
+                            <div class="formula">2 cos A cos B = cos(A+B) + cos(A−B)</div>
+                            <div class="formula">2 sin A sin B = cos(A−B) − cos(A+B)</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Sum → Product</div>
+                            <div class="formula">sin C + sin D = 2 sin\left(\frac{C+D}{2}\right) cos\left(\frac{C-D}{2}\right)</div>
+                            <div class="formula">sin C − sin D = 2 cos\left(\frac{C+D}{2}\right) sin\left(\frac{C-D}{2}\right)</div>
+                            <div class="formula">cos C + cos D = 2 cos\left(\frac{C+D}{2}\right) cos\left(\frac{C-D}{2}\right)</div>
+                            <div class="formula">cos C − cos D = -2 sin\left(\frac{C+D}{2}\right) sin\left(\frac{C-D}{2}\right)</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Inverse Trigonometric Functions -->
+            <div class="tab-content" id="inverse">
+                <section class="section">
+                    <h2><i class="fas fa-superscript"></i> Inverse Trigonometric Functions</h2>
+                    <div class="important-points">
+                        <h4>Principal Value Ranges</h4>
+                        <table>
+                            <tr><th>Function</th><th>Domain</th><th>Range</th></tr>
+                            <tr><td>sin⁻¹ x</td><td>[−1, 1]</td><td>[−π/2, π/2]</td></tr>
+                            <tr><td>cos⁻¹ x</td><td>[−1, 1]</td><td>[0, π]</td></tr>
+                            <tr><td>tan⁻¹ x</td><td>ℝ</td><td>(−π/2, π/2)</td></tr>
+                        </table>
+                    </div>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Key Properties</div>
+                            <div class="formula">sin⁻¹(−x) = −sin⁻¹ x</div>
+                            <div class="formula">cos⁻¹(−x) = π − cos⁻¹ x</div>
+                            <div class="formula">tan⁻¹(−x) = −tan⁻¹ x</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Identities</div>
+                            <div class="formula">sin⁻¹ x + cos⁻¹ x = π/2</div>
+                            <div class="formula">tan⁻¹ x + cot⁻¹ x = π/2</div>
+                            <div class="formula">sin⁻¹ x = tan⁻¹ \frac{x}{\sqrt{1-x^2}} = cos⁻¹ \sqrt{1-x^2}</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Trigonometric Equations -->
+            <div class="tab-content" id="equation">
+                <section class="section">
+                    <h2><i class="fas fa-equals"></i> General Solutions of Trigonometric Equations</h2>
+                    <table>
+                        <tr><th>Equation</th><th>General Solution</th></tr>
+                        <tr><td>sin θ = sin α</td><td>θ = nπ + (−1)ⁿ α</td></tr>
+                        <tr><td>cos θ = cos α</td><td>θ = 2nπ ± α</td></tr>
+                        <tr><td>tan θ = tan α</td><td>θ = nπ + α</td></tr>
+                        <tr><td>sin θ = 1</td><td>θ = π/2 + 2nπ</td></tr>
+                        <tr><td>sin θ = −1</td><td>θ = −π/2 + 2nπ = 3π/2 + 2nπ</td></tr>
+                        <tr><td>cos θ = 1</td><td>θ = 2nπ</td></tr>
+                        <tr><td>cos θ = −1</td><td>θ = (2n+1)π</td></tr>
+                    </table>
+                </section>
+            </div>
+
+            <!-- Solution of Triangle -->
+            <div class="tab-content" id="triangle">
+                <section class="section">
+                    <h2><i class="fas fa-triangle"></i> Solution of Triangle</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Sine Rule</div>
+                            <div class="formula">\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Cosine Rule</div>
+                            <div class="formula">cos A = \frac{b^2 + c^2 - a^2}{2bc}</div>
+                            <div class="formula">cos B = \frac{c^2 + a^2 - b^2}{2ca}</div>
+                            <div class="formula">cos C = \frac{a^2 + b^2 - c^2}{2ab}</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Projection Formula</div>
+                            <div class="formula">a = b cos C + c cos B</div>
+                            <div class="formula">b = c cos A + a cos C</div>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Half-Angle Formulas</div>
+                            <div class="formula">\sin \frac{A}{2} = \sqrt{\frac{(s-b)(s-c)}{bc}}, \quad \cos \frac{A}{2} = \sqrt{\frac{s(s-a)}{bc}}, \quad \tan \frac{A}{2} = \sqrt{\frac{(s-b)(s-c)}{s(s-a)}}</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Height & Distance -->
+            <div class="tab-content" id="height">
+                <section class="section">
+                    <h2><i class="fas fa-ruler-vertical"></i> Height and Distance</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">Angle of Elevation</div>
+                            <p>Angle between line of sight and horizontal when object is above observer.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">Angle of Depression</div>
+                            <p>Angle between line of sight and horizontal when object is below observer.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
 
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-        <div class="progress-text">
-            <span>Progress: <span id="prog">0</span>/20</span>
-            <span id="answered">0 answered</span>
-        </div>
-
-        <div class="quiz" id="quiz"></div>
-
-        <div class="result" id="result">
-            <h2>Quiz Complete!</h2>
-            <div class="score" id="score">0/20</div>
-            <div class="message" id="msg"></div>
-            <div class="details" id="details"></div>
-            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
-        </div>
+        <footer>
+            <div>JEE Main Mathematics • Trigonometry Complete Summary • Prepared from eSaral Notes 2025</div>
+        </footer>
     </div>
 
     <script>
-        const questions = [
-            { q: "sin(A + B) =", o: ["sinA cosB + cosA sinB", "sinA cosB – cosA sinB", "cosA cosB – sinA sinB", "cosA cosB + sinA sinB"], c: 0, exp: "Standard compound angle formula" },
-            { q: "cos(A – B) =", o: ["cosA cosB – sinA sinB", "cosA cosB + sinA sinB", "sinA cosB + cosA sinB", "sinA cosB – cosA sinB"], c: 1, exp: "cos(A – B) = cosA cosB + sinA sinB" },
-            { q: "tan(A + B) =", o: ["(tanA + tanB)/(1 + tanA tanB)", "(tanA + tanB)/(1 – tanA tanB)", "(tanA – tanB)/(1 + tanA tanB)", "(tanA – tanB)/(1 – tanA tanB)"], c: 1, exp: "tan(A + B) = (tanA + tanB)/(1 – tanA tanB)" },
-            { q: "sin2A =", o: ["2 sinA cosA", "cos²A – sin²A", "2 cos²A – 1", "1 – 2 sin²A"], c: 0, exp: "Double angle: sin2A = 2 sinA cosA" },
-            { q: "cos2A =", o: ["cos²A – sin²A", "2 sinA cosA", "1 + 2 sin²A", "2 cos²A + 1"], c: 0, exp: "cos2A = cos²A – sin²A = 2cos²A – 1 = 1 – 2sin²A" },
-            { q: "sin3A =", o: ["3 sinA – 4 sin³A", "4 sin³A – 3 sinA", "3 cosA – 4 cos³A", "4 cos³A – 3 cosA"], c: 0, exp: "Triple angle formula: sin3A = 3sinA – 4sin³A" },
-            { q: "cos3A =", o: ["4 cos³A – 3 cosA", "3 cosA – 4 cos³A", "3 sinA – 4 sin³A", "4 sin³A – 3 sinA"], c: 0, exp: "cos3A = 4cos³A – 3cosA" },
-            { q: "2 sinA cosB =", o: ["sin(A+B) + sin(A–B)", "sin(A+B) – sin(A–B)", "cos(A–B) – cos(A+B)", "cos(A+B) + cos(A–B)"], c: 0, exp: "Product to sum identity" },
-            { q: "2 cosA cosB =", o: ["cos(A+B) + cos(A–B)", "cos(A–B) – cos(A+B)", "sin(A+B) + sin(A–B)", "sin(A+B) – sin(A–B)"], c: 0, exp: "Standard identity" },
-            { q: "sin C + sin D =", o: ["2 sin((C+D)/2) cos((C–D)/2)", "2 cos((C+D)/2) sin((C–D)/2)", "2 sin((C+D)/2) sin((C–D)/2)", "2 cos((C+D)/2) cos((C–D)/2)"], c: 0, exp: "Sum to product" },
-            { q: "sin⁻¹(–x) =", o: ["–sin⁻¹x", "π – sin⁻¹x", "π + sin⁻¹x", "sin⁻¹x"], c: 0, exp: "Odd function property" },
-            { q: "cos⁻¹(–x) =", o: ["π – cos⁻¹x", "–cos⁻¹x", "π + cos⁻¹x", "cos⁻¹x"], c: 0, exp: "cos⁻¹(–x) = π – cos⁻¹x" },
-            { q: "sin⁻¹x + cos⁻¹x =", o: ["π/2", "π", "0", "–π/2"], c: 0, exp: "Complementary identity" },
-            { q: "General solution of sinθ = sinα is", o: ["θ = nπ + (–1)ⁿ α", "θ = 2nπ + α", "θ = nπ + α", "θ = 2nπ ± α"], c: 0, exp: "sinθ = sinα ⇒ θ = nπ + (–1)ⁿ α" },
-            { q: "General solution of cosθ = 1 is", o: ["θ = 2nπ", "θ = nπ", "θ = (2n+1)π", "θ = nπ/2"], c: 0, exp: "cosθ = 1 ⇒ θ = 2nπ" },
-            { q: "In any triangle, a/sinA = b/sinB = c/sinC =", o: ["2R", "R", "r", "2r"], c: 0, exp: "Law of Sines: a/sinA = 2R" },
-            { q: "Cosine formula: cosA =", o: ["(b² + c² – a²)/(2bc)", "(a² + b² – c²)/(2ab)", "(a² + c² – b²)/(2ac)", "None"], c: 0, exp: "Standard cosine rule" },
-            { q: "Area of triangle =", o: ["(1/2)ab sinC", "(1/2)bc sinA", "(1/2)ca sinB", "All of these"], c: 3, exp: "Area = (1/2) × side × side × sin(included angle)" },
-            { q: "sin(A/2) =", o: ["√[(s–b)(s–c)/(bc)]", "√[(s–a)(s–b)/(ac)]", "√[(s–a) s /(bc)]", "None"], c: 0, exp: "Half-angle formula from notes" },
-            { q: "Angle of depression is measured with respect to", o: ["Horizontal", "Vertical", "Line of sight", "Ground"], c: 0, exp: "Always w.r.t. horizontal" }
-        ];
-
-        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
-
-        function showQuestion() {
-            const q = questions[current];
-            let opts = '';
-            q.o.forEach((opt, i) => {
-                const sel = answers[current] === i ? ' selected' : '';
-                opts += `<div class="option${sel}" onclick="selectOption(${i})">
-                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
-                    <span>${opt}</span>
-                </div>`;
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
             });
-            document.getElementById('quiz').innerHTML = `
-                <div class="question">
-                    <div class="qno">Question ${current+1} / 20</div>
-                    <div class="qtext">${q.q}</div>
-                    <div class="options">${opts}</div>
-                </div>
-                <div style="margin-top:35px;display:flex;justify-content:space-between;">
-                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
-                    <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}">
-                        ${current===19?'Submit':'Next'}
-                    </button>
-                </div>`;
-        }
-
-        function selectOption(i) {
-            answers[current] = i;
-            updateProgress();
-            showQuestion();
-        }
-
-        function updateProgress() {
-            const done = answers.filter(a => a !== null).length;
-            document.get  ('progress').style.width = (done/20*100)+'%';
-            document.getElementById('prog').textContent = done;
-            document.getElementById('answered').textContent = done + ' answered';
-        }
-
-        function startTimer() {
-            timerId = setInterval(() => {
-                timeLeft--;
-                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
-                const s = String(timeLeft%60).padStart(2,'0');
-                document.getElementById('timer').textContent = m+':'+s;
-                if (timeLeft <= 0) submitQuiz();
-            }, 1000);
-        }
-
-        function submitQuiz() {
-            clearInterval(timerId);
-            let correct = 0, details = '';
-            questions.forEach((q, i) => {
-                const user = answers[i];
-                const isCorrect = user === q.c;
-                if (isCorrect) correct++;
-                details += `<div class="detail ${isCorrect?'':'wrong'}">
-                    <strong>Q${i+1}:</strong> ${q.q}<br>
-                    Your answer: ${user===null?'<i>Not answered</i>':q.o[user]}<br>
-                    Correct: <strong>${q.o[q.c]}</strong>
-                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
-                </div>`;
-            });
-            const msg = correct >= 18 ? "Trigonometry Legend!" :
-                        correct >= 15 ? "Outstanding!" :
-                        correct >= 12 ? "Excellent!" :
-                        correct >= 8 ? "Good, Keep Practicing!" : "Revise Trig Again!";
-            document.getElementById('score').textContent = correct + '/20';
-            document.getElementById('msg').textContent = msg;
-            document.getElementById('details').innerHTML = details;
-            document.getElementById('quiz').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-        }
-
-        function resetQuiz() {
-            current = 0; answers.fill(null); timeLeft = 30*60;
-            document.getElementById('quiz').style.display = 'block';
-            document.getElementById('result').style.display = 'none';
-            showQuestion(); updateProgress(); startTimer();
-        }
-
-        window.onload = () => { showQuestion(); updateProgress(); startTimer(); };
+        });
     </script>
 </body>
 </html>
