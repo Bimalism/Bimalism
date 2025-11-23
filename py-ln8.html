@@ -3,597 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics quiz</title>
+    <title>Thermodynamics Quiz - 20 Questions | JEE Main + Advanced</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a237e, #283593, #303f9f);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #1a237e, #283593);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .planet-decoration {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 30%, #ff9800, #ff5722);
-            border-radius: 50%;
-            top: 20px;
-            right: 30px;
-            box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
-        }
-        
-        .satellite {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #e0e0e0;
-            border-radius: 50%;
-            top: 40px;
-            right: 120px;
-            animation: orbit 8s linear infinite;
-        }
-        
-        @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #1a237e, #283593);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #1a237e;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #d1e7ff;
-            border-color: #1a237e;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #1a237e;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #1a237e, #283593);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #1a237e;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1a237e;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #1a237e, #283593);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #1a237e, #283593);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .formula-highlight {
-            background-color: #e3f2fd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .gravity-fact {
-            background-color: #f3e5f5;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #7b1fa2;
-            font-style: italic;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .planet-decoration, .satellite {
-                display: none;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0277bd, #039be5, #4fc3f7); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #01579b, #0277bd); color: white; padding: 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #e1f5fe; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #039be5; color: white; }
+        .btn-reset { background: #4fc3f7; color: white; }
+        .btn-submit { background: #0277bd; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #b3e5fc; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #0277bd; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #0277bd; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #e1f5fe; padding: 25px; border-radius: 12px; border-left: 6px solid #039be5; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #0277bd; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #b3e5fc; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #039be5; background: #e1f5fe; }
+        .option.selected { border-color: #0277bd; background: #b3e5fc; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #e1f5fe, #b3e5fc); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #0277bd; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #0277bd; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #039be5; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #fffde7; border-radius: 8px; border-left: 4px solid #ff8f00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="planet-decoration"></div>
-            <div class="satellite"></div>
-            <h1>Chapter : 8 Gravitation</h1>
-            <div class="subtitle">Test your knowledge of universal gravitation, planetary motion, and orbital mechanics</div>
-        </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
-            </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Gravitation & Planetary Motion</div>
-                    <div>Level: Intermediate</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
-            </div>
+<div class="container">
+    <header>
+        <h1>Thermodynamics Mastery Quiz</h1>
+        <p class="subtitle">20 JEE-Level Questions • Laws, Carnot, Engines & Entropy • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
         </div>
     </div>
 
-    <script>
-        const q8 = [
-            {q:"The universal law of gravitation was proposed by:",o:["Newton","Einstein","Kepler","Galileo"],a:0,exp:"Newton proposed the universal law of gravitation."},
-            {q:"The gravitational constant G is:",o:["6.67 × 10⁻¹¹ N m²/kg²","6.67 × 10⁻¹⁰ N m²/kg²","6.67 × 10⁻¹² N m²/kg²","6.67 × 10⁻⁹ N m²/kg²"],a:0,exp:"G = 6.67 × 10⁻¹¹ N m²/kg²."},
-            {q:"The acceleration due to gravity on Earth's surface is:",o:["9.8 m/s²","8.9 m/s²","10.8 m/s²","9.2 m/s²"],a:0,exp:"g ≈ 9.8 m/s² on Earth's surface."},
-            {q:"Gravitational force is:",o:["Attractive only","Repulsive only","Both","None"],a:0,exp:"Gravitational force is always attractive."},
-            {q:"The value of g decreases with:",o:["Altitude","Depth","Both","None"],a:2,exp:"g decreases with both altitude and depth."},
-            {q:"Kepler's First Law states:",o:["Elliptical orbits","Equal areas","Harmonic law","None"],a:0,exp:"Planets move in elliptical orbits with the Sun at one focus."},
-            {q:"The escape velocity on Earth is:",o:["11.2 km/s","12.2 km/s","10.2 km/s","13.2 km/s"],a:0,exp:"Escape velocity on Earth ≈ 11.2 km/s."},
-            {q:"Gravitational potential energy is:",o:["-GMm/r","GMm/r","GMm/r²","None"],a:0,exp:"Gravitational potential energy = -GMm/r."},
-            {q:"Kepler's Third Law relates:",o:["T² ∝ r³","T ∝ r²","T² ∝ r²","T ∝ r³"],a:0,exp:"T² ∝ r³ for planetary orbits."},
-            {q:"The gravitational force between two masses is proportional to:",o:["1/r²","r²","1/r","r"],a:0,exp:"F ∝ 1/r² (inverse square law)."},
-            {q:"The value of g is maximum at:",o:["Equator","Poles","Center of Earth","High altitude"],a:1,exp:"g is maximum at the poles due to Earth's shape."},
-            {q:"The orbital velocity of a satellite is:",o:["√(GM/r)","√(GM/r²)","GM/r","GM/r²"],a:0,exp:"Orbital velocity = √(GM/r)."},
-            {q:"Weightlessness in a satellite is due to:",o:["Zero gravity","Free fall","No mass","None"],a:1,exp:"Weightlessness occurs due to free fall in orbit."},
-            {q:"The time period of a geostationary satellite is:",o:["24 hours","12 hours","48 hours","6 hours"],a:0,exp:"Geostationary satellites have a 24-hour period."},
-            {q:"Gravitational field strength is:",o:["GM/r²","GM/r","GMr","G/r"],a:0,exp:"Gravitational field strength = GM/r²."},
-            {q:"The escape velocity depends on:",o:["Mass of planet","Radius of planet","Both","None"],a:2,exp:"Escape velocity depends on mass and radius."},
-            {q:"Kepler's Second Law states:",o:["Equal areas in equal times","Elliptical orbits","T² ∝ r³","None"],a:0,exp:"Equal areas are swept in equal times."},
-            {q:"The gravitational force is a:",o:["Contact force","Non-contact force","Frictional force","None"],a:1,exp:"Gravity is a non-contact force."},
-            {q:"The value of g at the center of Earth is:",o:["9.8 m/s²","Zero","Infinite","4.9 m/s²"],a:1,exp:"g = 0 at the center of Earth."},
-            {q:"The gravitational potential is:",o:["-GM/r","GM/r","GM/r²","None"],a:0,exp:"Gravitational potential = -GM/r."}
-        ];
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(q8.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = q8.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = q8[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / q8.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === q8.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
-        }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = q8[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
-        }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < q8.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
-        }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${q8.length}`;
-            
-            // Set score message
-            if (score === q8.length) {
-                scoreText.textContent = "Perfect! You're a gravitation expert!";
-            } else if (score >= q8.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of gravitational physics!";
-            } else if (score >= q8.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of gravitation!";
-            } else if (score >= q8.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing gravitational problems!";
-            } else {
-                scoreText.textContent = "Keep studying! Gravitation is fundamental to physics!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
-        }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(q8.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
-    </script>
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Internal energy is a", o: ["Path function", "State function", "Neither", "Both"], c: 1, exp: "U depends only on state, not path" },
+        { q: "For isothermal process in ideal gas, ΔU =", o: ["nRT ΔT", "Zero", "nCv ΔT", "nCp ΔT"], c: 1, exp: "ΔT=0 → ΔU=0 for ideal gas" },
+        { q: "Work done by system is taken positive in", o: ["ΔU = Q + W", "ΔU = Q − W", "Both", "None"], c: 1, exp: "Standard JEE sign convention: W = work by system (+ve)" },
+        { q: "In adiabatic process, Q =", o: ["ΔU", "−W", "Zero", "PΔV"], c: 2, exp: "Q=0 → ΔU = −W" },
+        { q: "First law is a statement of conservation of", o: ["Heat", "Work", "Energy", "Entropy"], c: 2, exp: "Energy can neither be created nor destroyed" },
+        { q: "Kelvin-Planck statement prohibits", o: ["Refrigerator", "100% efficient heat engine", "Heat flow from cold to hot", "Entropy decrease"], c: 1, exp: "No engine can convert all heat into work" },
+        { q: "Clausius statement is related to", o: ["Heat engine", "Refrigerator", "Both", "None"], c: 1, exp: "Heat cannot flow from colder to hotter without work" },
+        { q: "Carnot engine efficiency depends only on", o: ["Working substance", "Size", "Temperatures of source & sink", "Pressure"], c: 2, exp: "η = 1 − T₂/T₁" },
+        { q: "Maximum efficiency is given by", o: ["Diesel engine", "Petrol engine", "Carnot engine", "Steam engine"], c: 2, exp: "Carnot cycle is reversible → maximum possible η" },
+        { q: "Coefficient of performance of refrigerator is", o: ["Q₁/Q₂", "Q₂/(Q₁−Q₂)", "Q₁/(Q₁−Q₂)", "(Q₁−Q₂)/Q₂"], c: 1, exp: "COP = heat removed / work done" },
+        { q: "A process that can be reversed without leaving change in surroundings is", o: ["Irreversible", "Reversible", "Adiabatic", "Isothermal"], c: 1, exp: "Quasi-static + no dissipation" },
+        { q: "In free expansion of ideal gas", o: ["W > 0", "Q > 0", "ΔU = 0", "ΔS = 0"], c: 2, exp: "No work, no heat → ΔU=0, but irreversible" },
+        { q: "Entropy of universe in reversible process", o: ["Increases", "Decreases", "Remains constant", "Becomes zero"], c: 2, exp: "ΔS_universe = 0 for reversible" },
+        { q: "For irreversible process, ΔS_universe", o: ["= 0", "> 0", "< 0", "Undefined"], c: 1, exp: "Second law: entropy of universe always increases in irreversible" },
+        { q: "A process with ΔS_universe = 0 is", o: ["Impossible", "Reversible", "Irreversible", "Adiabatic"], c: 1, exp: "Only ideal reversible processes" },
+        { q: "If a room is cooled by opening refrigerator door", o: ["Room cools", "Room heats up", "No change", "Entropy decreases"], c: 1, exp: "Heat rejected > heat absorbed → net heating" },
+        { q: "Carnot cycle consists of", o: ["2 isothermal + 2 adiabatic", "2 isobaric + 2 isochoric", "4 isothermal", "4 adiabatic"], c: 0, exp: "Standard Carnot cycle" },
+        { q: "Work done in cyclic process equals", o: ["Area of PV diagram", "Zero", "ΔU", "Q"], c: 0, exp: "∮W = area enclosed in PV graph" },
+        { q: "Second law implies", o: ["Energy conservation", "Direction of heat flow", "Both", "None"], c: 1, exp: "Gives arrow of time and spontaneity" },
+        { q: "A perfect heat engine is", o: ["Possible", "Impossible", "Possible only at 0 K", "Possible with superconductors"], c: 1, exp: "Violates Kelvin-Planck statement" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Thermodynamics God Level!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Almost Perfect!" :
+                    correct >= 8 ? "Good! Revise Second Law & Carnot" : "Time to Revisit First & Second Law!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
 </body>
 </html>
