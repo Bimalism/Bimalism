@@ -3,369 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPTICS – Complete Chapter Summary</title>
+    <title>Electronic Devices – Complete Summary</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-        body{background:#e8f5e9;padding:20px;}
-        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
-        header{background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a);color:white;padding:50px;text-align:center;}
-        h1{font-size:3.5rem;margin-bottom:10px;letter-spacing:1px;}
-        .subtitle{font-size:1.5rem;opacity:0.96;}
-        .nav{display:flex;background:#1b5e20;flex-wrap:wrap;justify-content:center;}
-        .tab{padding:18px 24px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.05rem;min-width:180px;text-align:center;}
+        body{background:#fff0e0;padding:20px;}
+        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.4rem;margin-bottom:10px;}
+        .subtitle{font-size:1.5rem;opacity:0.95;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;}
+        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;}
         .tab:hover{background:rgba(255,255,255,0.2);}
-        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #a5d6a7;}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
         .content{padding:60px;}
         .pane{display:none;}
         .pane.active{display:block;animation:fade 0.7s;}
         @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-        h2{color:#2e7d32;font-size:2.4rem;margin:50px 0 25px;border-bottom:5px solid #43a047;padding-bottom:12px;}
-        .box{background:#e8f5e9;border-left:8px solid #66bb6a;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
+        h2{color:#e65100;font-size:2.5rem;margin:45px 0 25px;border-bottom:5px solid #f57c00;padding-bottom:12px;}
+        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
         ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
-        footer{background:#1b5e20;color:white;text-align:center;padding:40px;font-size:1.3rem;}
-        @media(max-width:768px){.tab{padding:14px;font-size:0.95rem;min-width:auto;}.nav{justify-content:flex-start;}}
+        footer{background:#bf360c;color:white;text-align:center;padding:38px;font-size:1.25rem;}
+        @media(max-width:768px){.tab{flex:1;padding:16px;text-align:center;font-size:1rem;}}
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>OPTICS</h1>
-        <p class="subtitle">Ray Optics + Wave Optics • Complete Summary • JEE Main + Advanced + NEET 2025-26</p>
+        <h1>ELECTRONIC DEVICES</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
     </header>
 
     <nav class="nav">
-        <div class="tab active" data-tab="t1">Reflection</div>
-        <div class="tab" data-tab="t2">Spherical Mirror</div>
-        <div class="tab" data-tab="t3">Mirror Formula</div>
-        <div class="tab" data-tab="t4">Refraction</div>
-        <div class="tab" data-tab="t5">TIR & Applications</div>
-        <div class="tab" data-tab="t6">Lens Maker & Power</div>
-        <div class="tab" data-tab="t7">Lens Combination</div>
-        <div class="tab" data-tab="t8">Prism & Dispersion</div>
-        <div class="tab" data-tab="t9">Scattering & Eye</div>
-        <div class="tab" data-tab="t10">Telescopes</div>
-        <div class="tab" data-tab="t11">Microscope</div>
-        <div class="tab" data-tab="t12">Huygens’ Principle</div>
-        <div class="tab" data-tab="t13">Interference</div>
-        <div class="tab" data-tab="t14">Young’s Experiment</div>
-        <div class="tab" data-tab="t15">Diffraction</div>
-        <div class="tab" data-tab="t16">Single Slit</div>
-        <div class="tab" data-tab="t17">Resolving Power</div>
-        <div class="tab" data-tab="t18">Polarisation</div>
+        <div class="tab active" data-tab="t1">Energy Bands</div>
+        <div class="tab" data-tab="t2">Conductors/Insulators/Semiconductors</div>
+        <div class="tab" data-tab="t3">p-n Junction Diode</div>
+        <div class="tab" data-tab="t4">I-V Characteristics</div>
+        <div class="tab" data-tab="t5">Diode as Rectifier</div>
+        <div class="tab" data-tab="t6">Photodiode</div>
+        <div class="tab" data-tab="t7">Solar Cell</div>
+        <div class="tab" data-tab="t8">Zener Diode</div>
+        <div class="tab" data-tab="t9">Junction Transistor</div>
+        <div class="tab" data-tab="t10">Transistor Characteristics</div>
+        <div class="tab" data-tab="t11">Transistor as Amplifier/Oscillator</div>
+        <div class="tab" data-tab="t12">Logic Gates & Switch</div>
     </nav>
 
     <div class="content">
 
-        <!-- 1 Reflection -->
+        <!-- 1 -->
         <div class="pane active" id="t1">
-            <h2>1. Reflection of Light</h2>
-            <div class="box"><ul>
-                <li>Laws: i = r, incident ray, reflected ray, normal coplanar</li>
-                <li>Plane mirror: virtual, erect, laterally inverted, same size</li>
-                <li>Image distance = object distance</li>
-                <li>Field of view increases with mirror size</li>
-                <li>Deviation δ = 180° – 2i</li>
-                <li>Multiple reflections: number of images = (360°/θ) – 1</li>
-                <li>Velocity of image perpendicular to mirror = –v_object</li>
-                <li>Parallel component of velocity unchanged</li>
-                <li>Extended object: image same size only if object || mirror</li>
-                <li>Used in periscope, kaleidoscope</li>
-            </ul></div>
+            <h2>1. Energy Bands in Solids</h2>
+            <div class="box">
+                <ul>
+                    <li>Energy levels split into bands due to interatomic interaction</li>
+                    <li>Valence band: occupied by valence electrons</li>
+                    <li>Conduction band: allows free movement of electrons</li>
+                    <li>Forbidden gap (E_g): energy difference between VB & CB</li>
+                    <li>Overlapping bands → conductor</li>
+                    <li>Large E_g (>3 eV) → insulator</li>
+                    <li>Small E_g (≤1 eV) → semiconductor</li>
+                    <li>At 0 K, semiconductors behave as insulators</li>
+                    <li>Thermal excitation promotes electrons to CB</li>
+                    <li>Fermi level lies in middle of band gap in intrinsic semiconductor</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 2 Spherical Mirror -->
+        <!-- 2 -->
         <div class="pane" id="t2">
-            <h2>2. Spherical Mirror</h2>
-            <div class="box"><ul>
-                <li>Concave: converging, real/inverted or virtual/erect</li>
-                <li>Convex: diverging, always virtual/erect/diminished</li>
-                <li>Sign convention: New Cartesian (object distance –ve)</li>
-                <li>Pole P, Centre C, Focus F, Radius R = 2f</li>
-                <li>Paraxial rays: small angle approximation</li>
-                <li>Concave: f –ve, R –ve</li>
-                <li>Convex: f +ve, R +ve</li>
-                <li>Aperture affects spherical aberration</li>
-                <li>Focal length independent of medium (paraxial)</li>
-                <li>Mirror formula derived using similar triangles</li>
-            </ul></div>
+            <h2>2. Conductors, Insulators & Semiconductors</h2>
+            <div class="box">
+                <ul>
+                    <li>Conductors: E_g = 0, huge free electrons (Cu, Ag)</li>
+                    <li>Insulators: E_g > 3 eV, no conduction (diamond, glass)</li>
+                    <li>Semiconductors: E_g ≈ 0.7–1.1 eV (Si: 1.1 eV, Ge: 0.7 eV)</li>
+                    <li>Intrinsic: pure, n_e = n_h</li>
+                    <li>Extrinsic: doped (n-type or p-type)</li>
+                    <li>n-type: pentavalent impurity (P, As) → donor levels</li>
+                    <li>p-type: trivalent impurity (B, Ga) → acceptor levels</li>
+                    <li>Conductivity increases with temperature in semiconductors</li>
+                    <li>Majority & minority carriers</li>
+                    <li>Mobility μ = v_d / E</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 3 Mirror Formula -->
+        <!-- 3 -->
         <div class="pane" id="t3">
-            <h2>3. Mirror Formula & Magnification</h2>
-            <div class="box"><ul>
-                <li>1/v + 1/u = 1/f</li>
-                <li>Magnification m = –v/u = h_i/h_o</li>
-                <li>m negative → inverted image</li>
-                <li>|m| > 1 enlarged, |m| < 1 diminished</li>
-                <li>For real object u always negative</li>
-                <li>Concave mirror: beyond C → diminished real, at C → same size, between C-F → enlarged real</li>
-                <li>Between F-P → enlarged virtual erect</li>
-                <li>Power P = –1/f (in metre)</li>
-                <li>Velocity of image: v_i = –m² v_o</li>
-                <li>Standard ray diagrams: 3 rays</li>
-            </ul></div>
+            <h2>3. Semiconductor Diode (p-n Junction)</h2>
+            <div class="box">
+                <ul>
+                    <li>Formed by joining p-type and n-type semiconductors</li>
+                    <li>Depletion region: immobile ions, no free carriers</li>
+                    <li>Potential barrier: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li>Forward bias: p-side +ve → reduces barrier → high current</li>
+                    <li>Reverse bias: p-side –ve → increases barrier → very low current</li>
+                    <li>Diode acts as one-way valve for current</li>
+                    <li>Knee voltage: minimum voltage for conduction</li>
+                    <li>Dynamic resistance r_d = ΔV/ΔI</li>
+                    <li>Breakdown in reverse bias at high voltage</li>
+                    <li>Symbol: arrow shows conventional current direction</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 4 Refraction -->
+        <!-- 4 -->
         <div class="pane" id="t4">
-            <h2>4. Refraction of Light</h2>
-            <div class="box"><ul>
-                <li>Snell’s law: n₁ sin i = n₂ sin r</li>
-                <li>Absolute refractive index n = c/v</li>
-                <li>Relative n₂₁ = n₂/n₁</li>
-                <li>Real depth/apparent depth = n</li>
-                <li>Lateral shift t = d sin(i–r)/cos r</li>
-                <li>Critical angle sin c = 1/n (denser to rarer)</li>
-                <li>Refraction through slab: lateral shift, emergent || incident</li>
-                <li>Apparent shift = t(1–1/n)</li>
-                <li>n = tan i_p (polarising angle, Brewster)</li>
-                <li>Speed decreases in denser medium</li>
-            </ul></div>
+            <h2>4. I-V Characteristics of p-n Diode</h2>
+            <div class="box">
+                <ul>
+                    <li>Forward bias: exponential rise after knee voltage</li>
+                    <li>Reverse bias: very small saturation current (μA)</li>
+                    <li>Reverse current almost independent of voltage</li>
+                    <li>At high reverse voltage → Zener or avalanche breakdown</li>
+                    <li>Forward current increases rapidly with small voltage</li>
+                    <li>Ideal diode: zero resistance forward, infinite reverse</li>
+                    <li>Cut-in voltage: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li>Reverse saturation current doubles every 10°C rise</li>
+                    <li>Graph: non-linear in forward, nearly flat in reverse</li>
+                    <li>Used to study diode behavior</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 5 TIR -->
+        <!-- 5 -->
         <div class="pane" id="t5">
-            <h2>5. Total Internal Reflection & Applications</h2>
-            <div class="box"><ul>
-                <li>Occurs when i > c and light goes rarer → denser</li>
-                <li>Optical fibre: core n₁, cladding n₂ < n₁</li>
-                <li>Acceptance angle sin i_max = √(n₁² – n₂²)</li>
-                <li>Numerical aperture NA = √(n₁² – n₂²)</li>
-                <li>Mirage due to TIR in hot road</li>
-                <li>Brilliance of diamond (high n, small c)</li>
-                <li>Endoscopy, periscope prism (45°)</li>
-                <li>100% reflection, no loss</li>
-                <li>Fish-eye view in water</li>
-                <li>Porro prism erects image</li>
-            </ul></div>
+            <h2>5. Diode as Rectifier</h2>
+            <div class="box">
+                <ul>
+                    <li>Converts AC to pulsating DC</li>
+                    <li>Half-wave rectifier: only one half-cycle passes</li>
+                    <li>Full-wave rectifier: both half-cycles (center-tap or bridge)</li>
+                    <li>Efficiency: HWR → 40.6%, FWR → 81.2%</li>
+                    <li>Ripple factor: HWR → 1.21, FWR → 0.48</li>
+                    <li>Bridge rectifier: no center tap, 4 diodes</li>
+                    <li>PIV: HWR → V_m, FWR center-tap → 2V_m, bridge → V_m</li>
+                    <li>Filter (C, LC, π) used to smooth output</li>
+                    <li>Output frequency = 2 × input frequency (FWR)</li>
+                    <li>Used in power supplies</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 6 Lens Maker -->
+        <!-- 6 -->
         <div class="pane" id="t6">
-            <h2>6. Lens Maker Formula, Magnification & Power</h2>
-            <div class="box"><ul>
-                <li>1/f = (n–1)(1/R₁ – 1/R₂)</li>
-                <li>Convex lens: R₁ +ve, R₂ –ve → f +ve</li>
-                <li>Concave lens: R₁ +ve, R₂ +ve → f –ve</li>
-                <li>Lens formula: 1/v – 1/u = 1/f</li>
-                <li>m = v/u = h_i/h_o</li>
-                <li>Power P = 1/f (metre) = 100/f (cm) dioptre</li>
-                <li>Convex converging, concave diverging</li>
-                <li>Air bubble in water acts as concave lens</li>
-                <li>f changes in different medium</li>
-                <li>Thin lens approximation</li>
-            </ul></div>
+            <h2>6. Photodiode</h2>
+            <div class="box">
+                <ul>
+                    <li>Operated in reverse bias</li>
+                    <li>Reverse current proportional to light intensity</li>
+                    <li>Depletion region widened for more sensitivity</li>
+                    <li>Used in light detection, optical communication</li>
+                    <li>Fast response, high sensitivity in reverse bias</li>
+                    <li>Symbol has incoming light arrows</li>
+                    <li>Current increases linearly with illumination</li>
+                    <li>Used in smoke detectors, barcode scanners</li>
+                    <li>Can work in photovoltaic mode also</li>
+                    <li>Made of materials sensitive to light (Si, InGaAs)</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 7 Combination -->
+        <!-- 7 -->
         <div class="pane" id="t7">
-            <h2>7. Combination of Thin Lenses</h2>
-            <div class="box"><ul>
-                <li>1/F = 1/f₁ + 1/f₂ + …</li>
-                <li>Power adds: P = P₁ + P₂</li>
-                <li>Lenses in contact act as single lens</li>
-                <li>Separated: image of first acts as object for second</li>
-                <li>Achromatic doublet removes chromatic aberration</li>
-                <li>Two thin lenses separated by d: 1/F = 1/f₁ + 1/f₂ – d/(f₁f₂)</li>
-                <li>Used in compound microscope, telescope</li>
-                <li>Displacement method to find f</li>
-                <li>Convex + concave can make converging/diverging</li>
-                <li>Equivalent focal length calculation</li>
-            </ul></div>
+            <h2>7. Solar Cell</h2>
+            <div class="box">
+                <ul>
+                    <li>p-n junction converts light energy → electrical energy</li>
+                    <li>Works in photovoltaic mode (no external bias)</li>
+                    <li>Open circuit voltage ≈ 0.6 V (Si)</li>
+                    <li>Short circuit current ∝ intensity</li>
+                    <li>Efficiency ≈ 15–22% (commercial)</li>
+                    <li>I-V curve similar to diode but in first quadrant</li>
+                    <li>Fill factor = (V_m I_m)/(V_oc I_sc)</li>
+                    <li>Used in panels, calculators, satellites</li>
+                    <li>Maximum power point (knee of I-V curve)</li>
+                    <li>Renewable & clean energy source</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 8 Prism -->
+        <!-- 8 -->
         <div class="pane" id="t8">
-            <h2>8. Refraction & Dispersion through Prism</h2>
-            <div class="box"><ul>
-                <li>Deviation δ = i₁ + i₂ – A</li>
-                <li>Minimum deviation δ_m = 2i – A (i₁=i₂)</li>
-                <li>n = sin((A+δ_m)/2) / sin(A/2)</li>
-                <li>Dispersion: violet deviates most, red least</li>
-                <li>Angular dispersion = δ_v – δ_r = (n_v – n_r)A</li>
-                <li>Dispersive power ω = (n_v – n_r)/(n–1)</li>
-                <li>Direct vision spectroscope: flint + crown prism</li>
-                <li>Thin prism: δ = (n–1)A</li>
-                <li>Rainbow due to dispersion + TIR in droplets</li>
-                <li>Spectrum purity depends on ω</li>
-            </ul></div>
+            <h2>8. Zener Diode</h2>
+            <div class="box">
+                <ul>
+                    <li>Specially designed for reverse breakdown</li>
+                    <li>Sharp breakdown at V_z (Zener voltage)</li>
+                    <li>Used in reverse bias as voltage regulator</li>
+                    <li>V_out remains constant even if I or V_in changes</li>
+                    <li>High doping → thin depletion → tunneling (Zener effect)</li>
+                    <li>Power rating: P_z = V_z × I_z(max)</li>
+                    <li>Used in voltage stabilizers, reference</li>
+                    <li>Dynamic resistance very low</li>
+                    <li>Symbol has bent ends</li>
+                    <li>Operates safely in breakdown region</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 9 Scattering & Eye -->
+        <!-- 9 -->
         <div class="pane" id="t9">
-            <h2>9. Scattering of Light & Human Eye</h2>
-            <div class="box"><ul>
-                <li>Rayleigh scattering ∝ 1/λ⁴ → sky blue, sunset red</li>
-                <li>Human eye: power 58–60 D, least distance 25 cm</li>
-                <li>Myopia: far point < ∞ → concave lens</li>
-                <li>Hypermetropia: near point > 25 cm → convex lens</li>
-                <li>Presbyopia: loss of accommodation in old age</li>
-                <li>Astigmatism: cylindrical lens</li>
-                <li>Retina acts as screen, fovea most sensitive</li>
-                <li>Persistence of vision 1/16 s</li>
-                <li>Accommodation: ciliary muscles change lens shape</li>
-                <li>Range of vision: 25 cm to ∞</li>
-            </ul></div>
+            <h2>9. Junction Transistor (BJT)</h2>
+            <div class="box">
+                <ul>
+                    <li>Three layers: Emitter, Base, Collector</li>
+                    <li>NPN or PNP types</li>
+                    <li>Two p-n junctions: E-B (forward), C-B (reverse)</li>
+                    <li>Emitter heavily doped, base thin & lightly doped</li>
+                    <li>Current amplification due to transistor action</li>
+                    <li>I_E = I_B + I_C</li>
+                    <li>β = I_C / I_B (50–300 typically)</li>
+                    <li>α = I_C / I_E (0.95–0.99)</li>
+                    <li>Three configurations: CB, CE, CC</li>
+                    <li>CE most common</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 10 Telescopes -->
+        <!-- 10 -->
         <div class="pane" id="t10">
-            <h2>10. Microscope & Astronomical Telescope</h2>
-            <div class="box"><ul>
-                <li>Astronomical telescope (normal): m = f_o/f_e, L = f_o + f_e</li>
-                <li>Final image inverted</li>
-                <li>Galilean telescope: erect image, concave eyepiece</li>
-                <li>Terrestrial: erecting lens, L = f_o + 4f + f_e</li>
-                <li>Magnifying power m = f_o/f_e (1 + D/f_e) for relaxed eye</li>
-                <li>Larger objective aperture → brighter image</li>
-                <li>Reflecting telescope avoids chromatic aberration</li>
-                <li>Newtonian, Cassegrain designs</li>
-                <li>Resolving power ∝ aperture</li>
-                <li>Used for distant objects</li>
-            </ul></div>
+            <h2>10. Characteristics of Transistor (CE)</h2>
+            <div class="box">
+                <ul>
+                    <li>Input characteristics: I_B vs V_BE (like forward diode)</li>
+                    <li>Output characteristics: I_C vs V_CE for different I_B</li>
+                    <li>Three regions: Active, Cut-off, Saturation</li>
+                    <li>Cut-off: both junctions reverse → I_C ≈ 0</li>
+                    <li>Saturation: both junctions forward → I_C max</li>
+                    <li>Active: E-B forward, C-B reverse → amplification</li>
+                    <li>Current gain β = ΔI_C / ΔI_B</li>
+                    <li>Early effect: slight slope in output curve</li>
+                    <li>Power gain = β² × resistance gain</li>
+                    <li>Used to study transistor behavior</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 11 Microscope -->
+        <!-- 11 -->
         <div class="pane" id="t11">
-            <h2>11. Compound Microscope</h2>
-            <div class="box"><ul>
-                <li>m = m_o × m_e = (v_o/u_o) (D/f_e or 1 + D/f_e)</li>
-                <li>L = v_o + f_e (tube length)</li>
-                <li>Image by objective inside focal length of eyepiece</li>
-                <li>Final image inverted</li>
-                <li>Maximum magnification ≈ 1500–2000</li>
-                <li>Higher NA → better resolution</li>
-                <li>Oil immersion increases NA</li>
-                <li>Resolving power d = 1.22λ/(2 n sinβ)</li>
-                <li>Used for magnified close objects</li>
-                <li>Intermediate image real & inverted</li>
-            </ul></div>
+            <h2>11. Transistor as Amplifier, Oscillator & Logic Gates</h2>
+            <div class="box">
+                <ul>
+                    <li>Amplifier: small change in I_B → large change in I_C</li>
+                    <li>CE configuration gives voltage & current gain</li>
+                    <li>Voltage gain A_v = β (R_C / r_e)</li>
+                    <li>Oscillator: positive feedback (Barkhausen criterion)</li>
+                    <li>LC, RC, crystal oscillators</li>
+                    <li>NOT gate: single transistor inverter</li>
+                    <li>AND, OR, NAND, NOR using diode-transistor logic (DTL)</li>
+                    <li>Digital circuits use saturation & cut-off</li>
+                    <li>Transistor switch: fast on/off</li>
+                    <li>Foundation of all digital electronics</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- 12 Huygens -->
+        <!-- 12 -->
         <div class="pane" id="t12">
-            <h2>12. Wavefront & Huygens’ Principle</h2>
-            <div class="box"><ul>
-                <li>Wavefront: locus of points in same phase</li>
-                <li>Spherical, plane, cylindrical wavefronts</li>
-                <li>Huygens: every point acts as secondary source</li>
-                <li>Secondary wavelets spherical</li>
-                <li>Envelope gives new wavefront</li>
-                <li>Explains reflection, refraction, diffraction</li>
-                <li>Plane wave → plane wavefront</li>
-                <li>Backward wavelet cancelled by interference</li>
-                <li>Only forward propagation</li>
-                <li>Foundation of wave optics</li>
-            </ul></div>
-        </div>
-
-        <!-- 13 Interference -->
-        <div class="pane" id="t13">
-            <h2>13. Interference of Light</h2>
-            <div class="box"><ul>
-                <li>Superposition of two coherent waves</li>
-                <li>Constructive: path diff = nλ → bright</li>
-                <li>Destructive: path diff = (2n–1)λ/2 → dark</li>
-                <li>Coherent sources: constant phase difference</li>
-                <li>Incoherent: random phase → no sustained interference</li>
-                <li>Intensity I = 4 I₀ cos²(φ/2)</li>
-                <li>I_max = (√I₁ + √I₂)², I_min = (√I₁ – √I₂)²</li>
-                <li>Energy redistributed, total conserved</li>
-                <li>Seen only if fringe width > resolution of eye</li>
-                <li>Stable pattern needs coherence</li>
-            </ul></div>
-        </div>
-
-        <!-- 14 Young’s -->
-        <div class="pane" id="t14">
-            <h2>14. Young’s Double Slit Experiment</h2>
-            <div class="box"><ul>
-                <li>Fringe width β = λD/d</li>
-                <li>Angular separation θ = λ/d</li>
-                <li>Central fringe bright (path diff = 0)</li>
-                <li>Bright fringes: x = nλD/d</li>
-                <li>Dark fringes: x = (2n–1)λD/2d</li>
-                <li>If one slit closed → uniform illumination</li>
-                <li>White light → coloured fringes, central white</li>
-                <li>Immersion in liquid → β decreases</li>
-                <li>Shift by thin sheet: Δx = (n–1)t D/d</li>
-                <li>Proof of wave nature of light</li>
-            </ul></div>
-        </div>
-
-        <!-- 15 Diffraction -->
-        <div class="pane" id="t15">
-            <h2>15. Diffraction due to Single Slit</h2>
-            <div class="box"><ul>
-                <li>Bending of light around obstacles</li>
-                <li>Central maximum brightest & widest</li>
-                <li>Angular width of central max = 2λ/a</li>
-                <li>Minima: a sinθ = nλ</li>
-                <li>Secondary maxima between minima</li>
-                <li>Intensity falls rapidly away from centre</li>
-                <li>Smaller slit → more spreading</li>
-                <li>Fresnel: near obstacles, Fraunhofer: far/infinity</li>
-                <li>Straight edge → fringes inside geometric shadow</li>
-                <li>Proof of wave nature</li>
-            </ul></div>
-        </div>
-
-        <!-- 16 Single Slit Width -->
-        <div class="pane" id="t16">
-            <h2>16. Width of Central Maximum</h2>
-            <div class="box"><ul>
-                <li>Linear width = 2λD/a</li>
-                <li>Angular width = 2λ/a</li>
-                <li>Inversely proportional to slit width a</li>
-                <li>Smaller a → larger diffraction</li>
-                <li>At a = λ → central max spreads 2 radians</li>
-                <li>Intensity I = I₀ (sin²β/β²), β = (π a sinθ)/λ</li>
-                <li>First minima at sinθ = ±λ/a</li>
-                <li>Half width = λD/a</li>
-                <li>Used to measure wavelength</li>
-                <li>Resolution limit depends on diffraction</li>
-            </ul></div>
-        </div>
-
-        <!-- 17 Resolving Power -->
-        <div class="pane" id="t17">
-            <h2>17. Resolving Power of Instruments</h2>
-            <div class="box"><ul>
-                <li>Minimum angular separation resolvable</li>
-                <li>Telescope: RP = a/(1.22λ) (a = aperture)</li>
-                <li>Microscope: d_min = 1.22λ/(2 n sinβ) = 1.22λ/(2 NA)</li>
-                <li>Larger aperture → better resolution</li>
-                <li>Rayleigh criterion: just resolved when central max of one coincides with first min of other</li>
-                <li>Oil immersion increases NA → better resolution</li>
-                <li>Electron microscope: λ very small → high resolution</li>
-                <li>Human eye resolution ≈ 1 arc minute</li>
-                <li>Limit due to diffraction, not lens quality</li>
-                <li>Higher λ → poorer resolution</li>
-            </ul></div>
-        </div>
-
-        <!-- 18 Polarisation -->
-        <div class="pane" id="t18">
-            <h2>18. Polarisation & Plane Polarised Light</h2>
-            <div class="box"><ul>
-                <li>Transverse wave nature of light</li>
-                <li>Unpolarised: vibrations in all directions ⊥ propagation</li>
-                <li>Plane polarised: vibrations in one plane</li>
-                <li>Polaroids transmit one direction only</li>
-                <li>Brewster’s law: tan i_p = n</li>
-                <li>At i_p, reflected light fully polarised ⊥ to plane</li>
-                <li>Malus law: I = I₀ cos²θ</li>
-                <li>Optical activity: rotation by sugar solution</li>
-                <li>Dichroism, scattering also polarises</li>
-                < UFO>Proof that light is transverse wave</li>
-            </ul></div>
+            <h2>12. Transistor as a Switch</h2>
+            <div class="box">
+                <ul>
+                    <li>Cut-off → OFF state (V_out = V_CC)</li>
+                    <li>Saturation → ON state (V_out ≈ 0)</li>
+                    <li>Small base current controls large collector current</li>
+                    <li>Used in digital circuits, relays, LEDs</li>
+                    <li>Switching time: rise & fall time</li>
+                    <li>Low power consumption</li>
+                    <li>High speed switching (ns range)</li>
+                    <li>Inverter (NOT gate) is basic switch</li>
+                    <li>LED driver circuit classic example</li>
+                    <li>Base resistor limits I_B</li>
+                </ul>
+            </div>
         </div>
 
     </div>
 
     <footer>
-        OPTICS • Complete Summary • Reflection, Refraction, Lenses, Interference, Diffraction, Polarisation • Made for Future IITians & Doctors • JEE/NEET 2025-26
+        Electronic Devices • Full Summary • Energy Bands • p-n Junction • Diode • Transistor • Logic Gates • JEE/NEET 2025-26
     </footer>
 </div>
 
