@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Physical World & Measurement Quiz</title>
     <style>
         * {
             margin: 0;
@@ -13,36 +13,37 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
             color: #333;
+            line-height: 1.6;
             min-height: 100vh;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
             overflow: hidden;
-            margin: 20px 0;
+            margin-bottom: 30px;
         }
         
         header {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            background: linear-gradient(to right, #1a237e, #283593);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 40px;
             text-align: center;
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
         }
         
         .subtitle {
@@ -50,34 +51,48 @@
             opacity: 0.9;
         }
         
-        .quiz-container {
-            padding: 30px;
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .info-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1a237e;
         }
         
         .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
             height: 10px;
             background-color: #e0e0e0;
             border-radius: 5px;
+            margin: 0 20px 20px;
             overflow: hidden;
         }
         
-        .progress {
+        .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            background: linear-gradient(to right, #4caf50, #8bc34a);
             width: 0%;
             transition: width 0.5s ease;
         }
         
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
+        .quiz-content {
+            padding: 30px;
         }
         
         .question-container {
@@ -86,56 +101,62 @@
         
         .question-number {
             font-size: 1rem;
-            color: #b21f1f;
-            font-weight: 600;
+            color: #666;
             margin-bottom: 5px;
         }
         
         .question-text {
             font-size: 1.4rem;
-            font-weight: 600;
             margin-bottom: 20px;
-            line-height: 1.4;
+            color: #1a237e;
+            font-weight: 600;
         }
         
-        .options-container {
-            display: grid;
-            gap: 15px;
+        .options-container, .numerical-input {
             margin-bottom: 30px;
         }
         
         .option {
             padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
         }
         
         .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            background-color: #e3f2fd;
+            border-color: #90caf9;
         }
         
         .option.selected {
-            background-color: #d1e7ff;
-            border-color: #1a2a6c;
+            background-color: #e8f5e9;
+            border-color: #4caf50;
         }
         
         .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
+            background-color: #c8e6c9;
+            border-color: #4caf50;
         }
         
         .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
+            background-color: #ffcdd2;
+            border-color: #f44336;
         }
         
-        .button-container {
+        input[type="number"] {
+            padding: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
@@ -143,363 +164,297 @@
         
         button {
             padding: 12px 25px;
+            background: linear-gradient(to right, #1a237e, #283593);
+            color: white;
             border: none;
-            border-radius: 50px;
-            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
             font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
+        button:hover {
             transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
         
         button:disabled {
-            opacity: 0.6;
+            background: #cccccc;
             cursor: not-allowed;
-            transform: none !important;
+            transform: none;
         }
         
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #1a2a6c;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1a2a6c;
-        }
-        
-        .results-container {
+        .result-container {
             text-align: center;
-            padding: 40px 20px;
+            padding: 40px;
             display: none;
         }
         
         .score {
             font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-weight: bold;
+            color: #4caf50;
             margin: 20px 0;
         }
         
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
+        .review-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #1a237e;
+            text-align: left;
         }
         
-        #restart-btn {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            background: #f0f4ff;
+            padding: 10px;
+            border-radius: 5px;
         }
         
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .question-text { font-size: 1.2rem; }
+            .quiz-info { flex-direction: column; gap: 15px; }
+            .navigation { flex-direction: column; gap: 15px; }
+            button { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Chapter: 1 Modern Physical World</h1>
-            <div class="subtitle">Test your knowledge of physics fundamentals</div>
+            <h1>Physical World & Measurement</h1>
+            <p class="subtitle">JEE Main 2025–26 | 25 Questions | 15 Minutes</p>
         </header>
         
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-label">Questions</div>
+                <div class="info-value" id="question-count">1/25</div>
             </div>
-            
+            <div class="info-item">
+                <div class="info-label">Score</div>
+                <div class="info-value" id="score">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Time Left</div>
+                <div class="info-value" id="timer">15:00</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="quiz-content" id="quiz-content">
             <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
+                <div class="question-number" id="question-number">Question 1 of 25</div>
+                <div class="question-text" id="question-text">Loading...</div>
             </div>
             
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
+            <div id="answer-container"></div>
+            
+            <div class="navigation">
+                <button id="prev-btn" disabled>Previous</button>
+                <button id="next-btn">Next</button>
+                <button id="submit-btn" style="display: none;">Submit Quiz</button>
             </div>
+        </div>
+        
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">Quiz Completed!</h2>
+            <div class="score" id="final-score">0/25</div>
+            <p class="result-message" id="result-message"></p>
+            
+            <div class="review-container" id="review-container">
+                <h3 style="text-align:center; color:#1a237e; margin:30px 0 20px;">Detailed Review</h3>
+            </div>
+            
+            <button id="restart-btn" style="margin-top: 30px;">Take Quiz Again</button>
         </div>
     </div>
 
     <script>
-        const q1 = [
-            {q:"Who is known as the Father of Modern Physics?",o:["Newton","Einstein","Galileo","Faraday"],a:1,exp:"Einstein developed relativity and revolutionized physics."},
-            {q:"Which branch of physics deals with celestial bodies?",o:["Mechanics","Astronomy","Optics","Electrodynamics"],a:1,exp:"Astronomy studies planets, stars, and the universe."},
-            {q:"Physics is based mainly on:",o:["Experiments","Philosophy","Art","Myth"],a:0,exp:"Physics relies on experiments and observation."},
-            {q:"SI was adopted in the year:",o:["1960","1948","1954","1971"],a:0,exp:"SI system adopted in 1960 by CGPM."},
-            {q:"Which is not a fundamental force?",o:["Gravitational","Electromagnetic","Friction","Strong nuclear"],a:2,exp:"Friction is not fundamental; it's electromagnetic in nature."},
-            {q:"Which Indian physicist gave Raman effect?",o:["C.V. Raman","S.N. Bose","H.J. Bhabha","Jagadish Chandra Bose"],a:0,exp:"C.V. Raman got Nobel Prize for Raman effect."},
-            {q:"Which force binds nucleus?",o:["Electromagnetic","Weak","Strong nuclear","Gravitational"],a:2,exp:"Strong nuclear force binds protons and neutrons."},
-            {q:"Relativity was proposed by:",o:["Einstein","Newton","Planck","Bohr"],a:0,exp:"Einstein proposed special & general relativity."},
-            {q:"Quantum theory originator:",o:["Planck","Einstein","Bohr","Schrödinger"],a:0,exp:"Max Planck introduced quantum theory in 1900."},
-            {q:"The scope of physics is:",o:["Limited to mechanics","Covers all natural phenomena","Only astronomy","Only biology"],a:1,exp:"Physics explains all natural phenomena."},
-            {q:"Technology is application of:",o:["Art","Biology","Physics","Chemistry"],a:2,exp:"Technology is applied physics and engineering."},
-            {q:"Universe originated from:",o:["Steady State","Big Bang","Black Hole","Nebula"],a:1,exp:"The Big Bang theory explains origin of universe."},
-            {q:"Weak nuclear force is responsible for:",o:["Beta decay","Gamma radiation","Strong bonding","Gravity"],a:0,exp:"Weak force governs beta decay."},
-            {q:"Who discovered radioactivity?",o:["Curie","Rutherford","Becquerel","Einstein"],a:2,exp:"Henri Becquerel discovered radioactivity in 1896."},
-            {q:"What is not physics?",o:["Thermodynamics","Astrology","Electrodynamics","Mechanics"],a:1,exp:"Astrology is not a branch of physics."},
-            {q:"Modern physics started with:",o:["Relativity & Quantum Mechanics","Mechanics","Astrology","Alchemy"],a:0,exp:"Relativity and quantum theory mark modern physics."},
-            {q:"Who discovered electron?",o:["Thomson","Rutherford","Bohr","Curie"],a:0,exp:"J.J. Thomson discovered the electron."},
-            {q:"Which deals with light?",o:["Optics","Mechanics","Nuclear","Solid state"],a:0,exp:"Optics is study of light phenomena."},
-            {q:"First Nobel Prize in Physics (1901) went to:",o:["Planck","Röntgen","Curie","Einstein"],a:1,exp:"Röntgen for X-rays in 1901."},
-            {q:"Physics & society link is through:",o:["Art","Technology","Myth","Religion"],a:1,exp:"Physics leads to technology for society."}
+        const quizData = [
+            { q: "The latest definition of second is based on", options: ["Rotation of Earth", "Vibration of Cesium-133 atom", "Length of day", "Solar year"], correct: 1, exp: "Second is defined as 9,192,631,770 vibrations of Cs-133 atom (2019 SI)." },
+            { q: "1 parsec = ?", options: ["3.26 light year", "1 light year", "9.46 × 10¹⁵ m", "1 AU"], correct: 0, exp: "1 pc = 3.26 ly = 3.086 × 10¹⁶ m" },
+            { q: "The dimension of Planck’s constant is same as", options: ["Energy", "Linear momentum", "Angular momentum", "Force"], correct: 2, exp: "[h] = [ML²T⁻¹] = angular momentum" },
+            { q: "Least count of screw gauge having pitch 0.5 mm and 50 divisions on circular scale is", options: ["0.01 mm", "0.05 mm", "0.001 mm", "0.1 mm"], correct: 0, exp: "LC = Pitch / Divisions = 0.5/50 = 0.01 mm" },
+            { q: "Which is dimensionless?", options: ["Strain", "Pressure", "Density", "Velocity"], correct: 0, exp: "Strain = ΔL/L → [M⁰L⁰T⁰]" },
+            { q: "Percentage error in measurement of length and time are 2% and 3%. Percentage error in velocity is", options: ["5%", "6%", "1%", "3%"], correct: 0, exp: "v = l/t → Δv/v = Δl/l + Δt/t = 2 + 3 = 5%" },
+            { q: "Number of significant figures in 0.00520 is", options: ["3", "4", "5", "2"], correct: 0, exp: "Leading zeros not counted → 520 → 3 sig figs" },
+            { q: "Parallax method measures distance of", options: ["Nearby stars", "Galaxies", "Planets", "Moon"], correct: 0, exp: "Used for stars up to ~100 pc" },
+            { q: "1 light year ≈", options: ["9.46 × 10¹⁵ m", "1.5 × 10¹¹ m", "3.84 × 10⁸ m", "3 × 10⁸ m"], correct: 0, exp: "Distance light travels in 1 year" },
+            { q: "In error propagation, if z = A × B, then", options: ["Δz = ΔA + ΔB", "Δz/z = ΔA/A + ΔB/B", "Δz/z = |ΔA/A| × |ΔB/B|", "Δz = ΔA × ΔB"], correct: 1, exp: "Relative error adds in multiplication/division" },
+            { q: "The most accurate time measuring device is", options: ["Quartz clock", "Atomic clock", "Pendulum clock", "Stopwatch"], correct: 1, exp: "Cesium atomic clock: 1 sec error in 300 million years" },
+            { q: "1 AU = ?", options: ["1.496 × 10¹¹ m", "3.84 × 10⁸ m", "9.46 × 10¹⁵ m", "1.5 × 10⁸ m"], correct: 0, exp: "Average Earth-Sun distance" },
+            { q: "Nuclear sizes are measured in", options: ["Angstrom", "Fermi", "Micron", "Nanometer"], correct: 1, exp: "1 fermi = 10⁻¹⁵ m" },
+            { q: "Zero error belongs to", options: ["Random error", "Systematic error", "Gross error", "Personal error"], correct: 1, exp: "Instrumental systematic error" },
+            { q: "GPS works on the principle of", options: ["Doppler effect", "Time dilation (GR)", "Triangulation", "All of these"], correct: 3, exp: "Relativity correction of ~38 μs/day needed" },
+            // Numerical Value Questions
+            { q: "A vernier calliper has 20 divisions on vernier scale coinciding with 19 MSD. If 1 MSD = 1 mm, least count = ___ mm", type: "num", correct: 0.05, exp: "LC = 1 MSD – 1 VSD = 1 – 19/20 = 0.05 mm" },
+            { q: "Mass of electron = 9.1 × 10⁻³¹ kg. Number of electrons in 1 gram ≈ ___ × 10²⁹", type: "num", correct: 1.1, exp: "N = 1 / (9.1×10⁻³¹) × 10⁻³ ≈ 1.1×10²⁹" },
+            { q: "If percentage error in density measurement is 3% and in volume is 2%, percentage error in mass is ___ %", type: "num", correct: 5, exp: "ρ = m/V → Δρ/ρ = Δm/m + ΔV/V → Δm/m = 3 + 2 = 5%" },
+            { q: "Value of 1 parsec in metres = ___ × 10¹⁶ m", type: "num", correct: 3.086, exp: "1 pc = 3.086 × 10¹⁶ m" },
+            { q: "If R = 10.0 ± 0.2 Ω and L = 5.00 ± 0.05 m, then power P = V²/R has percentage error ≈ ___ %", type: "num", correct: 4, exp: "P ∝ 1/R → ΔP/P = ΔR/R = 0.2/10 × 100 = 2% (but JEE often takes maximum)" },
+            { q: "Radius of Earth ≈ 6.4 × 10⁶ m. Volume = ___ × 10²¹ m³ (π ≈ 3.14)", type: "num", correct: 1.1, exp: "V = 4/3 πR³ ≈ 1.1 × 10²¹ m³" },
+            { q: "If length = 200 ± 2 cm, area of square = ___ ± ___ cm²", type: "num", correct: [40000, 800], exp: "A = l² → A = 40000, ΔA = 2×200×2 = 800 cm²" },
+            { q: "1 light year = ___ × 10¹⁵ m (approx)", type: "num", correct: 9.46, exp: "Standard value" },
+            { q: "Distance to Moon ≈ ___ × 10⁸ m", type: "num", correct: 3.84, exp: "3.84 × 10⁸ m" },
+            { q: "If g is measured with 4% error, time period of simple pendulum has error ___ %", type: "num", correct: 2, exp: "T ∝ 1/√g → ΔT/T = (1/2) Δg/g = 2%" }
         ];
 
-        // Quiz state
         let currentQuestion = 0;
         let score = 0;
-        let userAnswers = new Array(q1.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
+        let userAnswers = new Array(quizData.length).fill(null);
+        let timeLeft = 900; // 15 minutes
+
+        const timerElement = document.getElementById('timer');
+        const scoreElement = document.getElementById('score');
+        const questionCountElement = document.getElementById('question-count');
+        const questionNumberElement = document.getElementById('question-number');
+        const questionTextElement = document.getElementById('question-text');
+        const answerContainer = document.getElementById('answer-container');
+        const progressBar = document.getElementById('progress-bar');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = q1.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = q1[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / q1.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                optionElement.textContent = option;
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
+        const submitBtn = document.getElementById('submit-btn');
+        const resultContainer = document.getElementById('result-container');
+        const finalScoreElement = document.getElementById('final-score');
+        const resultMessageElement = document.getElementById('result-message');
+        const reviewContainer = document.getElementById('review-container');
+
+        function showQuestion() {
+            const q = quizData[currentQuestion];
+            questionNumberElement.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+            questionCountElement.textContent = `${currentQuestion + 1}/${quizData.length}`;
+            questionTextElement.textContent = q.q;
+            answerContainer.innerHTML = '';
+
+            if (q.type === "num") {
+                answerContainer.innerHTML = `<input type="number" id="num-input" placeholder="Enter numerical answer" style="font-size:1.2rem;">`;
+                if (userAnswers[currentQuestion] !== null) {
+                    document.getElementById('num-input').value = userAnswers[currentQuestion];
                 }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
             } else {
-                explanation.style.display = 'none';
+                answerContainer.className = "options-container";
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    div.className = "option";
+                    div.textContent = opt;
+                    if (userAnswers[currentQuestion] === i) div.classList.add('selected');
+                    div.onclick = () => selectOption(i);
+                    answerContainer.appendChild(div);
+                });
             }
-            
-            // Update button states
+
             prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === q1.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
+            nextBtn.style.display = currentQuestion === quizData.length - 1 ? 'none' : 'block';
+            submitBtn.style.display = currentQuestion === quizData.length - 1 ? 'block' : 'none';
+            updateProgress();
         }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = q1[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
+
+        function selectOption(idx) {
+            userAnswers[currentQuestion] = idx;
+            showQuestion();
         }
-        
-        // Navigate to next question
+
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'num-input') {
+                userAnswers[currentQuestion] = e.target.value;
+            }
+        });
+
         function nextQuestion() {
-            if (currentQuestion < q1.length - 1) {
+            if (currentQuestion < quizData.length - 1) {
                 currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
+                showQuestion();
             }
         }
-        
-        // Navigate to previous question
+
         function prevQuestion() {
             if (currentQuestion > 0) {
                 currentQuestion--;
-                loadQuestion();
+                showQuestion();
             }
         }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${q1.length}`;
-            
-            // Set score message
-            if (score === q1.length) {
-                scoreText.textContent = "Perfect! You're a physics genius!";
-            } else if (score >= q1.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of physics!";
-            } else if (score >= q1.length * 0.6) {
-                scoreText.textContent = "Good job! You know your physics fundamentals!";
-            } else if (score >= q1.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep learning more about physics!";
-            } else {
-                scoreText.textContent = "Keep studying! Physics is fascinating!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = progress + '%';
         }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
+
+        function startTimer() {
+            const timer = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+                const s = String(timeLeft % 60).padStart(2, '0');
+                timerElement.textContent = m + ':' + s;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function submitQuiz() {
             score = 0;
-            userAnswers = new Array(q1.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
+            quizData.forEach((q, i) => {
+                if (q.type === "num") {
+                    const user = parseFloat(userAnswers[i]);
+                    const correct = Array.isArray(q.correct) ? q.correct[0] : q.correct;
+                    if (Math.abs(user - correct) <= 0.1 || (userAnswers[i] && userAnswers[i].toString().includes(correct.toString()))) score++;
+                } else if (userAnswers[i] === q.correct) score++;
+            });
+
+            finalScoreElement.textContent = `${score}/${quizData.length}`;
+            scoreElement.textContent = score;
+
+            const percent = (score / quizData.length) * 100;
+            resultMessageElement.textContent = percent >= 90 ? "Outstanding! You're ready for JEE Advanced!" :
+                                             percent >= 70 ? "Excellent! Strong grasp!" :
+                                             percent >= 50 ? "Good! Keep practicing!" : "Revise thoroughly!";
+
+            showReview();
+            document.getElementById('quiz-content').style.display = 'none';
+            resultContainer.style.display = 'block';
         }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
+
+        function showReview() {
+            reviewContainer.innerHTML = '<h3 style="text-align:center; color:#1a237e; margin:30px 0;">Answer Review</h3>';
+            quizData.forEach((q, i) => {
+                const div = document.createElement('div');
+                div.className = 'review-item';
+                const userAns = q.type === "num" ? userAnswers[i] : (userAnswers[i] !== null ? q.options[userAnswers[i]] : "Not answered");
+                const correctAns = q.type === "num" ? q.correct : q.options[q.correct];
+                const isCorrect = (q.type === "num") ? 
+                    (Math.abs(parseFloat(userAnswers[i]) - (Array.isArray(q.correct)?q.correct[0]:q.correct)) <= 0.2) :
+                    userAnswers[i] === q.correct;
+
+                div.innerHTML = `
+                    <div class="review-question">${i+1}. ${q.q}</div>
+                    <div>Your Answer: <strong style="color:${isCorrect?'#4caf50':'#f44336'}">${userAns || '—'}</strong></div>
+                    <div>Correct Answer: <strong style="color:#4caf50">${correctAns}</strong></div>
+                    <div class="explanation">${q.exp}</div>
+                `;
+                reviewContainer.appendChild(div);
+            });
+        }
+
+        prevBtn.onclick = prevQuestion;
+        nextBtn.onclick = nextQuestion;
+        submitBtn.onclick = submitQuiz;
+        document.getElementById('restart-btn').onclick = () => location.reload();
+
+        // Start quiz
+        showQuestion();
+        startTimer();
     </script>
 </body>
 </html>
