@@ -3,152 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual Nature of Radiation & Matter – Summary</title>
+    <title>EMI & AC – Complete Summary</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
-        body { background:#f3e5f5; padding:20px; }
-        .container { max-width:1150px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
-        header { background:linear-gradient(135deg,#6a1b9a,#7b1fa2,#8e24aa); color:white; padding:45px; text-align:center; }
-        h1 { font-size:3rem; margin-bottom:10px; }
-        .subtitle { font-size:1.4rem; opacity:0.95; }
-        .nav { display:flex; background:#4a148c; flex-wrap:wrap; }
-        .tab { flex:1; padding:20px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; }
-        .tab:hover { background:rgba(255,255,255,0.15); }
-        .tab.active { background:rgba(255,255,255,0.3); border-bottom:5px solid #ba68c8; }
-        .content { padding:50px; }
-        .pane { display:none; }
-        .pane.active { display:block; animation:fade 0.6s; }
-        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
-        h2 { color:#6a1b9a; font-size:2.3rem; margin:40px 0 25px; border-bottom:4px solid #8e24aa; padding-bottom:10px; }
-        .box { background:#f3e5f5; border-left:8px solid #ba68c8; padding:25px; border-radius:0 12px 12px 0; line-height:2.2; }
-        ul { padding-left:40px; font-size:1.15rem; }
-        footer { background:#4a148c; color:white; text-align:center; padding:30px; font-size:1.2rem; }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff3e0;padding:20px;}
+        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.5rem;margin-bottom:10px;}
+        .subtitle{font-size:1.5rem;opacity:0.96;}
+        .nav{display:flex;background:#e65100;flex-wrap:wrap;}
+        .tab{padding:22px 35px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.15rem;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffb74d;}
+        .content{padding:60px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.5rem;margin:50px 0 28px;border-bottom:5px solid #ff8f00;padding-bottom:14px;}
+        .box{background:#fff3e0;border-left:8px solid #ffb74d;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        footer{background:#e65100;color:white;text-align:center;padding:40px;font-size:1.3rem;}
+        @media(max-width:768px){.tab{padding:16px;font-size:1rem;flex:1;text-align:center;}}
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>DUAL NATURE OF RADIATION & MATTER</h1>
-        <p class="subtitle">Complete Short Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+        <h1>ELECTROMAGNETIC INDUCTION & AC</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE/NEET 2025-26</p>
     </header>
 
     <nav class="nav">
-        <div class="tab active" data-tab="t1">Photoelectric Effect</div>
-        <div class="tab" data-tab="t2">Hertz & Lenard’s Observations</div>
-        <179> <div class="tab" data-tab="t3">Einstein’s Equation</div>
-        <div class="tab" data-tab="t4">Matter Waves & de Broglie</div>
-        <div class="tab" data-tab="t5">Davisson-Germer Experiment</div>
+        <div class="tab active" data-tab="t1">Electromagnetic Induction</div>
+        <div class="tab" data-tab="t2">Faraday’s Law</div>
+        <div class="tab" data-tab="t3">Lenz’s Law</div>
+        <div class="tab" data-tab="t4">Eddy Currents</div>
+        <div class="tab" data-tab="t5">Self & Mutual Inductance</div>
+        <div class="tab" data-tab="t6">AC Values & Reactance</div>
+        <div class="tab" data-tab="t7">LC Oscillations</div>
+        <div class="tab" data-tab="t8">LCR Series Circuit</div>
+        <div class="tab" data-tab="t9">Resonance</div>
+        <div class="tab" data-tab="t10">AC Generator & Transformer</div>
     </nav>
 
     <div class="content">
 
         <!-- 1 -->
         <div class="pane active" id="t1">
-            <h2>1. Photoelectric Effect</h2>
-            <div class="box">
-                <ul>
-                    <li>Ejection of electrons from metal surface by light</li>
-                    <li>Occurs only if frequency > threshold frequency (ν₀)</li>
-                    <li>Threshold frequency depends on metal (work function)</li>
-                    <li>Photoelectrons emitted almost instantaneously (<10⁻⁹ s)</li>
-                    <li>Maximum KE of electrons independent of intensity</li>
-                    <li>Number of photoelectrons ∝ intensity of light</li>
-                    <li>Stopping potential (V₀) stops fastest electrons</li>
-                    <li>KE_max = e V₀</li>
-                    <li>Failed to be explained by wave theory of light</li>
-                    <li>Proved particle nature of light (photons)</li>
-                </ul>
-            </div>
+            <h2>1. Electromagnetic Induction</h2>
+            <div class="box"><ul>
+                <li>Production of induced emf due to change in magnetic flux</li>
+                <li>Discovered by Faraday (1831) & Henry</li>
+                <li>Occurs when Φ_B through a circuit changes</li>
+                <li>Flux change: motion of magnet/coil or changing current</li>
+                <li>Induced emf exists only while flux is changing</li>
+                <li>Closed loop required for induced current</li>
+                <li>Two types: self-induction and mutual induction</li>
+                <li>Basis of generators, transformers, inductors</li>
+                <li>No contact needed between source and circuit</li>
+                <li>Foundation of AC technology</li>
+            </ul></div>
         </div>
 
         <!-- 2 -->
         <div class="pane" id="t2">
-            <h2>2. Hertz and Lenard’s Observations</h2>
-            <div class="box">
-                <ul>
-                    <li>Hertz (1887): UV light helps spark discharge easier</li>
-                    <li>UV light ejects electrons from negative plate</li>
-                    <li>Lenard (1900): Studied photoelectric effect systematically</li>
-                    <li>Observed photocurrent ∝ intensity</li>
-                    <li>Found stopping potential independent of intensity</li>
-                    <li>Observed threshold frequency phenomenon</li>
-                    <li>Electrons emitted only above certain frequency</li>
-                    <li>KE increases with frequency, not intensity</li>
-                    <li>Instantaneous emission (no time lag)</li>
-                    <li>Wave theory could not explain these results</li>
-                </ul>
-            </div>
+            <h2>2. Faraday’s Laws</h2>
+            <div class="box"><ul>
+                <li>First law: Changing magnetic flux induces emf</li>
+                <li>Second law: ε = – dΦ_B/dt</li>
+                <li>For N turns: ε = –N dΦ/dt</li>
+                <li>Magnetic flux Φ_B = B⋅A = B A cosθ</li>
+                <li>Unit of flux: weber (Wb), 1 Wb = 1 T m²</li>
+                <li>1 volt = 1 Wb/s</li>
+                <li>Negative sign shows opposition (Lenz’s law)</li>
+                <li>Flux change due to B, A, or θ variation</li>
+                <li>Motional emf: ε = B l v (rod moving ⊥ B)</li>
+                <li>Faraday’s law is fundamental EMI law</li>
+            </ul></div>
         </div>
 
         <!-- 3 -->
         <div class="pane" id="t3">
-            <h2>3. Einstein’s Photoelectric Equation & Particle Nature</h2>
-            <div class="box">
-                <ul>
-                    <li>Light consists of photons: E = hν</li>
-                    <li>Einstein (1905): One photon ejects one electron</li>
-                    <li>hν = φ + KE_max (φ = work function)</li>
-                    <li>KE_max = hν – hν₀ = h(ν – ν₀)</li>
-                    <li>Stopping potential: eV₀ = h(ν – ν₀)</li>
-                    <li>V₀ vs ν graph is straight line with slope h/e</li>
-                    <li>Intercept on frequency axis = ν₀</li>
-                    <li>Explained all observations of photoelectric effect</li>
-                    <li>Proved light has particle nature (photon)</li>
-                    <li>Einstein got Nobel Prize in 1921 for this</li>
-                </ul>
-            </div>
+            <h2>3. Lenz’s Law</h2>
+            <div class="box"><ul>
+                <li>Induced current opposes the cause producing it</li>
+                <li>Conservation of energy statement</li>
+                <li>Gives direction of induced emf/current</li>
+                <li>Negative sign in Faraday’s law represents Lenz</li>
+                <li>Magnet approaching coil → current repels magnet</li>
+                <li>Magnet receding → current attracts magnet</li>
+                <li>Prevents perpetual motion</li>
+                <li>Explains electromagnetic braking</li>
+                <li>Always opposes change in flux</li>
+                <li>Combined with Faraday gives complete law</li>
+            </ul></div>
         </div>
 
         <!-- 4 -->
         <div class="pane" id="t4">
-            <h2>4. Matter Waves & de Broglie Relation</h2>
-            <div class="box">
-                <ul>
-                    <li>de Broglie (1924): Matter has wave nature</li>
-                    <li>Wavelength λ = h / p = h / (m v)</li>
-                    <li>h = Planck’s constant = 6.626 × 10⁻³⁴ J·s</li>
-                    <li>Duality: All particles have both wave & particle nature</li>
-                    <li>Macroscopic objects: λ very small → wave nature not seen</li>
-                    <li>Electrons, protons: λ significant → wave nature observable</li>
-                    <li>Faster particle → smaller wavelength</li>
-                    <li>Explained Bohr’s quantization (standing waves)</li>
-                    <li>Foundation of wave mechanics/quantum mechanics</li>
-                    <li>λ = h / √(2 m E) for non-relativistic particles</li>
-                </ul>
-            </div>
+            <h2>4. Eddy Currents</h2>
+            <div class="box"><ul>
+                <li>Circulating currents in conductor due to changing B</li>
+                <li>Flow in closed loops ⊥ to magnetic field</li>
+                <li>Cause heating (I²R loss)</li>
+                <li>Reduced by laminating core with insulation</li>
+                <li>Useful in induction furnace, electromagnetic damping</li>
+                <li>Used in dead-beat galvanometer, metal detectors</li>
+                <li>Energy loss in transformer minimized by lamination</li>
+                <li>Direction opposes flux change (Lenz)</li>
+                <li>Also called Foucault currents</li>
+                <li>Stronger in solid core than laminated</li>
+            </ul></div>
         </div>
 
         <!-- 5 -->
         <div class="pane" id="t5">
-            <h2>5. Davisson-Germer Experiment (1927)</h2>
-            <div class="box">
-                <ul>
-                    <li>Confirmed wave nature of electrons</li>
-                    <li>Electrons accelerated through V volts → λ = h/√(2meV)</li>
-                    <li>Scattered from nickel crystal (natural diffraction grating)</li>
-                    <li>Observed diffraction pattern with maxima</li>
-                    <li>Maxima at same angle as X-ray diffraction</li>
-                    <li>Measured wavelength matched de Broglie formula</li>
-                    <li>Experimental wavelength = 0.165 nm (theory = 0.167 nm)</li>
-                    <li>Proved electrons behave as waves</li>
-                    <li>Direct evidence of de Broglie hypothesis</li>
-                    <li>Established wave-particle duality for matter</li>
-                </ul>
-            </div>
+            <h2>5. Self and Mutual Inductance</h2>
+            <div class="box"><ul>
+                <li>Self inductance L = Φ/I, unit henry (H)</li>
+                <li>Back emf ε = –L dI/dt</li>
+                <li>For solenoid: L = μ₀ N² A / l</li>
+                <li>Energy stored = (1/2) L I²</li>
+                <li>Mutual inductance M = Φ₂₁/I₁</li>
+                <li>Induced emf ε₂ = –M dI₁/dt</li>
+                <li>M = μ₀ N₁ N₂ A / l (coaxial solenoids)</li>
+                <li>M ≤ √(L₁ L₂), max when coupling coefficient k=1</li>
+                <li>Inductor opposes sudden current change</li>
+                <li>Time constant τ = L/R in RL circuit</li>
+            </ul></div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. AC, Peak/RMS, Reactance & Impedance</h2>
+            <div class="box"><ul>
+                <li>i = I₀ sin(ωt + φ), v = V₀ sin(ωt + φ)</li>
+                <li>RMS value: I_rms = I₀/√2 ≈ 0.707 I₀</li>
+                <li>Peak value I₀, domestic 220 V is RMS</li>
+                <li>Inductive reactance X_L = ωL</li>
+                <li>Capacitive reactance X_C = 1/(ωC)</li>
+                <li>Impedance Z = √(R² + (X_L – X_C)²)</li>
+                <li>Current lags voltage by 90° in pure L</li>
+                <li>Current leads voltage by 90° in pure C</li>
+                <li>Phase angle φ = tan⁻¹((X_L – X_C)/R)</li>
+                <li>Power factor cosφ = R/Z</li>
+            </ul></div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. LC Oscillations</h2>
+            <div class="box"><ul>
+                <li>Energy oscillates between L and C</li>
+                <li>Frequency f = 1/(2π√(LC))</li>
+                <li>Angular frequency ω = 1/√(LC)</li>
+                <li>Charge q = Q₀ cos(ωt + φ)</li>
+                <li>Current i = –ω Q₀ sin(ωt + φ)</li>
+                <li>Total energy constant = (1/2)Q₀²/C</li>
+                <li>Ideal (no R) → undamped oscillations</li>
+                <li>Analogous to mechanical SHM</li>
+                <li>Used in radio tuning circuits</li>
+                <li>Resonance frequency of tank circuit</li>
+            </ul></div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. LCR Series Circuit</h2>
+            <div class="box"><ul>
+                <li>Impedance Z = √(R² + (X_L – X_C)²)</li>
+                <li>Current I = V/Z</li>
+                <li>Voltage drops: V_R in phase, V_L leads 90°, V_C lags 90°</li>
+                <li>Phasor diagram: V_R, V_L, V_C, V vector sum</li>
+                <li>Power P = V I cosφ = I² R</li>
+                <li>Average power zero in pure L or C</li>
+                <li>Power factor = cosφ = R/Z</li>
+                <li>At resonance Z = R minimum → I maximum</li>
+                <li>V_L and V_C can be > V (voltage magnification)</li>
+                <li>Wattless current in pure L/C</li>
+            </ul></div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Resonance in LCR</h2>
+            <div class="box"><ul>
+                <li>Occurs when X_L = X_C → Z = R (minimum)</li>
+                <li>Resonant frequency ω₀ = 1/√(LC)</li>
+                <li>f₀ = 1/(2π√(LC))</li>
+                <li>Current maximum, power factor = 1</li>
+                <li>V_L = V_C, 180° out of phase</li>
+                <li>Quality factor Q = ω₀L/R = 1/(ω₀CR)</li>
+                <li>Higher Q → sharper resonance</li>
+                <li>Bandwidth = R/(2πL) = f₀/Q</li>
+                <li>Used in radio/TV tuning</li>
+                <li>Voltage amplification Q times at resonance</li>
+            </ul></div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. AC Generator & Transformer</h2>
+            <div class="box"><ul>
+                <li>AC generator: ε = N B A ω sinωt</li>
+                <li>Slip rings give AC output</li>
+                <li>Transformer works on mutual induction</li>
+                <li>V_s/V_p = N_s/N_p = I_p/I_s = k</li>
+                <li>Step-up: N_s > N_p → V_s > V_p</li>
+                <li>Step-down: N_s < N_p</li>
+                <li>Ideal efficiency 100%, P_s = P_p</li>
+                <li>Core laminated to reduce eddy loss</li>
+                <li>Copper loss I²R, hysteresis loss</li>
+                <li>High voltage transmission reduces I²R loss</li>
+            </ul></div>
         </div>
 
     </div>
 
     <footer>
-        Dual Nature of Radiation & Matter • Photoelectric Effect • Einstein Equation • de Broglie Waves • Davisson-Germer • JEE/NEET 2025-26
+        Electromagnetic Induction & Alternating Current • Full Summary • Faraday • Lenz • LCR • Resonance • Transformer • JEE/NEET 2025-26
     </footer>
 </div>
 
 <script>
     document.querySelectorAll('.tab').forEach(t => {
         t.onclick = () => {
-            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-            document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
             t.classList.add('active');
             document.getElementById(t.dataset.tab).classList.add('active');
         }
