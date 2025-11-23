@@ -3,767 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Magnetic Effects & Magnetism Quiz - 20 Questions | JEE + NEET</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #e65100, #ef6c00, #f57c00);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #e65100, #ef6c00);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .molecular-animation {
-            position: absolute;
-            width: 120px;
-            height: 80px;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .gas-container {
-            position: relative;
-            width: 100px;
-            height: 60px;
-            border: 2px solid #ffeb3b;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .molecule {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #4caf50;
-            border-radius: 50%;
-            animation: molecular-motion 3s linear infinite;
-        }
-        
-        .molecule:nth-child(1) {
-            top: 10px;
-            left: 20px;
-            animation-delay: 0s;
-        }
-        
-        .molecule:nth-child(2) {
-            top: 40px;
-            left: 60px;
-            animation-delay: 0.5s;
-        }
-        
-        .molecule:nth-child(3) {
-            top: 30px;
-            left: 30px;
-            animation-delay: 1s;
-        }
-        
-        .molecule:nth-child(4) {
-            top: 50px;
-            left: 10px;
-            animation-delay: 1.5s;
-        }
-        
-        .molecule:nth-child(5) {
-            top: 20px;
-            left: 70px;
-            animation-delay: 2s;
-        }
-        
-        @keyframes molecular-motion {
-            0%, 100% {
-                transform: translate(0, 0);
-                background: #4caf50;
-            }
-            25% {
-                transform: translate(20px, 15px);
-                background: #2196f3;
-            }
-            50% {
-                transform: translate(-15px, 25px);
-                background: #ff9800;
-            }
-            75% {
-                transform: translate(25px, -10px);
-                background: #e91e63;
-            }
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #e65100, #ef6c00);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #e65100;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #fff3e0;
-            border-color: #e65100;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #e65100;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #e65100, #ef6c00);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #e65100;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #e65100;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #e65100, #ef6c00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #e65100, #ef6c00);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .formula-highlight {
-            background-color: #fff3e0;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .kinetic-law {
-            background-color: #fff8e1;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #ffb300;
-            font-style: italic;
-        }
-        
-        .pressure-equation {
-            background: linear-gradient(45deg, #ffeb3b, #ff9800);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .molecular-animation {
-                display: none;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #2e7d32, #388e3c, #43a047); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #1b5e20, #2e7d32); color: white; padding: 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #e8f5e8; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #43a047; color: white; }
+        .btn-reset { background: #66bb6a; color: white; }
+        .btn-submit { background: #2e7d32; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #c8e6c9; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #2e7d32; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #2e7d32; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #e8f5e8; padding: 25px; border-radius: 12px; border-left: 6px solid #43a047; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #2e7d32; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #c8e6c9; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #43a047; background: #e8f5e8; }
+        .option.selected { border-color: #2e7d32; background: #c8e6c9; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #e8f5e8, #c8e6c9); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #2e7d32; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #2e7d32; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #43a047; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #fffde7; border-radius: 8px; border-left: 4px solid #ff8f00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="molecular-animation">
-                <div class="gas-container">
-                    <div class="molecule"></div>
-                    <div class="molecule"></div>
-                    <div class="molecule"></div>
-                    <div class="molecule"></div>
-                    <div class="molecule"></div>
-                </div>
-            </div>
-            <h1>Chapter : 13 Kinetic Theory</h1>
-            <div class="subtitle">Test your knowledge of molecular motion, gas laws, and statistical mechanics</div>
-        </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
-            </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Kinetic Theory & Gas Laws</div>
-                    <div>Level: Advanced</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back to home-btn"><a href="neet.html">Back to Home</a></button>
-            </div>
+<div class="container">
+    <header>
+        <h1>Magnetic Effects & Magnetism</h1>
+        <p class="subtitle">20 JEE-Level Questions • Biot-Savart, Ampere, Solenoid, Galvanometer, Hysteresis • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
         </div>
     </div>
 
-    <script>
-        const kineticTheoryQuiz = [
-            {
-                q: "The basic postulate of kinetic theory is that gases consist of:",
-                o: ["Molecules in random motion", "Stationary molecules", "Molecules in fixed positions", "Continuous fluid"],
-                a: 0,
-                exp: "Kinetic theory assumes gases consist of large numbers of tiny molecules moving randomly in all directions with various speeds."
-            },
-            {
-                q: "According to kinetic theory, pressure exerted by a gas is due to:",
-                o: ["Molecules colliding with container walls", "Molecular attraction", "Gravitational pull", "Electric fields"],
-                a: 0,
-                exp: "Gas pressure results from countless molecular collisions with container walls per unit time, transferring momentum."
-            },
-            {
-                q: "The average kinetic energy of gas molecules is proportional to:",
-                o: ["Absolute temperature", "Pressure", "Volume", "Density"],
-                a: 0,
-                exp: "KE_avg = (3/2)kT, where k is Boltzmann's constant. Temperature is a measure of average molecular kinetic energy."
-            },
-            {
-                q: "The root mean square speed of gas molecules is given by:",
-                o: ["√(3RT/M)", "√(2RT/M)", "√(RT/M)", "√(3kT/m)"],
-                a: 0,
-                exp: "v_rms = √(3RT/M), where R is gas constant, T is absolute temperature, and M is molar mass."
-            },
-            {
-                q: "At constant temperature, if volume doubles, pressure:",
-                o: ["Halves", "Doubles", "Quadruples", "Remains same"],
-                a: 0,
-                exp: "Boyle's Law: P ∝ 1/V at constant T. If volume doubles, pressure halves to maintain PV = constant."
-            },
-            {
-                q: "The mean free path of gas molecules:",
-                o: ["Increases when density decreases", "Decreases when density decreases", "Is independent of density", "Is always constant"],
-                a: 0,
-                exp: "Mean free path λ ∝ 1/(√2 πd²n), where n is number density. Lower density means fewer collisions, longer mean free path."
-            },
-            {
-                q: "For an ideal gas, the ratio CP/CV is:",
-                o: ["Greater than 1", "Equal to 1", "Less than 1", "Zero"],
-                a: 0,
-                exp: "γ = CP/CV > 1 because CP > CV. For monatomic gases γ = 5/3, for diatomic γ = 7/5 at room temperature."
-            },
-            {
-                q: "The law of equipartition of energy states that each degree of freedom contributes:",
-                o: ["½kT to average energy", "kT to average energy", "¾kT to average energy", "2kT to average energy"],
-                a: 0,
-                exp: "Each quadratic degree of freedom contributes ½kT to the average energy per molecule (½kT for kinetic, ½kT for potential)."
-            },
-            {
-                q: "Real gases deviate from ideal gas behavior at:",
-                o: ["High pressure and low temperature", "Low pressure and high temperature", "Any condition", "Standard conditions only"],
-                a: 0,
-                exp: "At high pressure, molecular volume becomes significant; at low temperature, intermolecular forces become important."
-            },
-            {
-                q: "The van der Waals equation accounts for:",
-                o: ["Molecular size and intermolecular forces", "Quantum effects", "Relativistic effects", "Magnetic properties"],
-                a: 0,
-                exp: "(P + a/V²)(V - b) = RT, where 'a' corrects for intermolecular attraction and 'b' for molecular volume."
-            },
-            {
-                q: "The most probable speed in Maxwell-Boltzmann distribution is:",
-                o: ["√(2RT/M)", "√(3RT/M)", "√(8RT/πM)", "√(RT/M)"],
-                a: 0,
-                exp: "Most probable speed v_p = √(2RT/M). This is the speed at which the distribution function is maximum."
-            },
-            {
-                q: "According to Graham's law of diffusion, rate of diffusion is inversely proportional to:",
-                o: ["√(Molar mass)", "Molar mass", "(Molar mass)²", "1/(Molar mass)"],
-                a: 0,
-                exp: "r ∝ 1/√M. Lighter gases diffuse faster than heavier ones at same temperature."
-            },
-            {
-                q: "The number of degrees of freedom for a monatomic gas is:",
-                o: ["3", "5", "6", "1"],
-                a: 0,
-                exp: "Monatomic gases have 3 translational degrees of freedom (x, y, z directions), no rotational or vibrational."
-            },
-            {
-                q: "The average distance between gas molecules is proportional to:",
-                o: ["(1/n)^(1/3)", "n^(1/3)", "n", "1/n"],
-                a: 0,
-                exp: "Average intermolecular distance ∝ (V/N)^(1/3) = (1/n)^(1/3), where n is number density."
-            },
-            {
-                q: "At absolute zero temperature, according to kinetic theory:",
-                o: ["Molecular motion ceases", "Pressure becomes infinite", "Volume becomes zero", "Density becomes infinite"],
-                a: 0,
-                exp: "At 0 K, molecular kinetic energy reaches minimum possible value (zero-point energy for quantum systems)."
-            },
-            {
-                q: "The collision frequency of gas molecules:",
-                o: ["Increases with temperature", "Decreases with temperature", "Is independent of temperature", "Becomes zero at 0°C"],
-                a: 0,
-                exp: "Z ∝ n√T. Though density may decrease with heating at constant pressure, the √T factor increases collision frequency."
-            },
-            {
-                q: "For diatomic gases at room temperature, the molar specific heat at constant volume is:",
-                o: ["(5/2)R", "(3/2)R", "(7/2)R", "2R"],
-                a: 0,
-                exp: "CV = (5/2)R for diatomic gases (3 translational + 2 rotational degrees of freedom; vibration not excited at room temp)."
-            },
-            {
-                q: "The speed of sound in a gas is proportional to:",
-                o: ["√T", "T", "1/√T", "T²"],
-                a: 0,
-                exp: "v_sound = √(γRT/M) ∝ √T. Sound speed increases with temperature due to faster molecular motion."
-            },
-            {
-                q: "The Maxwell-Boltzmann distribution describes:",
-                o: ["Distribution of molecular speeds", "Energy levels in atoms", "Electron distribution", "Photon energies"],
-                a: 0,
-                exp: "It gives the probability distribution of molecular speeds in an ideal gas at thermal equilibrium."
-            },
-            {
-                q: "According to Avogadro's law, equal volumes of gases at same T and P contain:",
-                o: ["Equal number of molecules", "Equal mass", "Molecules with same speed", "Same types of molecules"],
-                a: 0,
-                exp: "Avogadro's principle: V ∝ n at constant T and P. One mole of any gas occupies 22.4 L at STP."
-            }
-        ];
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(kineticTheoryQuiz.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = kineticTheoryQuiz.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = kineticTheoryQuiz[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / kineticTheoryQuiz.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === kineticTheoryQuiz.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
-        }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = kineticTheoryQuiz[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
-        }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < kineticTheoryQuiz.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
-        }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${kineticTheoryQuiz.length}`;
-            
-            // Set score message
-            if (score === kineticTheoryQuiz.length) {
-                scoreText.textContent = "Perfect! You're a kinetic theory expert!";
-            } else if (score >= kineticTheoryQuiz.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of gas laws and molecular motion!";
-            } else if (score >= kineticTheoryQuiz.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of kinetic theory!";
-            } else if (score >= kineticTheoryQuiz.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing kinetic theory problems!";
-            } else {
-                scoreText.textContent = "Keep studying! Kinetic theory is fundamental to understanding gas behavior!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
-        }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(kineticTheoryQuiz.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
-    </script>
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Unit of magnetic field B is", o: ["Gauss", "Tesla", "Weber", "Henry"], c: 1, exp: "1 Tesla = 1 N/(A·m)" },
+        { q: "Direction of magnetic field due to straight wire is given by", o: ["Left-hand rule", "Right-hand thumb rule", "Fleming’s left hand", "Fleming’s right hand"], c: 1, exp: "Thumb → current, curled fingers → B" },
+        { q: "Biot-Savart law is analogous to", o: ["Gauss’s law", "Coulomb’s law", "Ampere’s law", "Ohm’s law"], c: 1, exp: "Both are inverse square laws" },
+        { q: "Magnetic field at centre of current loop is", o: ["μ₀I/(2a)", "μ₀I/(4πa)", "μ₀I/a", "Zero"], c: 0, exp: "B = μ₀I/(2a)" },
+        { q: "Ampere’s circuital law is", o: ["∮ E·dl = 0", "∮ B·dl = μ₀ I_enc", "∮ B·dl = 0", "∮ B·dA = μ₀ I"], c: 1, exp: "Valid for steady currents" },
+        { q: "Inside a long solenoid, B =", o: ["μ₀ n I", "μ₀ n I / 2", "Zero", "μ₀ I"], c: 0, exp: "Uniform field B = μ₀ n I" },
+        { q: "Force on a current-carrying wire in magnetic field is zero when", o: ["I ⊥ B", "I ∥ B", "I at 45°", "B = 0"], c: 1, exp: "F = BIl sinθ → sin0 = 0" },
+        { q: "Cyclotron frequency depends on", o: ["Speed of particle", "Radius", "Charge and mass", "All of these"], c: 2, exp: "f = qB/(2πm) — independent of speed & radius" },
+        { q: "Torque on current loop in uniform B is", o: ["N I A B", "N I A B sinθ", "N I A B cosθ", "Zero"], c: 1, exp: "τ = m × B = N I A B sinθ" },
+        { q: "Magnetic moment of loop is", o: ["I × A", "I / A", "I A", "N I A"], c: 2, exp: "m = I A (vector)" },
+        { q: "At magnetic equator, angle of dip is", o: ["0°", "90°", "45°", "180°"], c: 0, exp: "θ = 0°, B_V = 0" },
+        { q: "Ferromagnetic materials have", o: ["μ_r < 1", "μ_r > 1 small", "μ_r >> 1", "μ_r = 0"], c: 2, exp: "Strongly attracted, high permeability" },
+        { q: "Hysteresis loss is proportional to", o: ["Area of B-H loop", "Slope of B-H curve", "Coercivity", "Retentivity"], c: 0, exp: "Energy loss per cycle = area of loop" },
+        { q: "Material suitable for permanent magnet has", o: ["Low coercivity", "High coercivity & high retentivity", "Low retentivity", "Zero hysteresis"], c: 1, exp: "Steel/Alnico — high coercivity" },
+        { q: "Shunt resistance in ammeter is connected", o: ["In series with galvanometer", "In parallel with galvanometer", "In series with load", "Not used"], c: 1, exp: "To bypass excess current" },
+        { q: "Magnetic field on axis of current loop varies as", o: ["1/r", "1/r²", "1/r³", "1/r⁴"], c: 2, exp: "B ∝ 1/r³ for dipole far away" },
+        { q: "Neutral points are obtained when", o: ["Earth’s field dominates", "External field cancels Earth’s field", "No field exists", "B = maximum"], c: 1, exp: "B_total = 0" },
+        { q: "Curie temperature is the point above which", o: ["Ferro → Para", "Para → Dia", "All become diamagnetic", "Superconductivity starts"], c: 0, exp: "Ferromagnetic loses property" },
+        { q: "In moving coil galvanometer, restoring torque is provided by", o: ["Magnetic field", "Phosphor bronze strip", "Eddy currents", "Gravity"], c: 1, exp: "Torsion in suspension fiber" },
+        { q: "For a toroid, magnetic field outside is approximately", o: ["μ₀ N I / (2π r)", "μ₀ n I", "Very large", "Zero"], c: 3, exp: "Ideal toroid → B ≈ 0 outside" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Magnetism Master!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Nearly Perfect!" :
+                    correct >= 8 ? "Good! Revise Solenoid & Dipole" : "Time to Conquer Magnetism!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
 </body>
 </html>
