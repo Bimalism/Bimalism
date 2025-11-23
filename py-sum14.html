@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electromagnetic Waves – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#e0f2f1; padding:20px; }
+        .container { max-width:1100px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
+        header { background:linear-gradient(135deg,#00695c,#00897b,#009688); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3rem; margin-bottom:10px; }
+        .subtitle { font-size:1.4rem; opacity:0.95; }
+        .nav { display:flex; background:#004d40; }
+        .tab { flex:1; padding:20px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; }
+        .tab:hover { background:rgba(255,255,255,0.15); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:5px solid #4db6ac; }
+        .content { padding:50px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.6s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#00695c; font-size:2.4rem; margin:40px 0 25px; border-bottom:4px solid #00897b; padding-bottom:10px; }
+        .box { background:#e0f2f1; border-left:8px solid #4db6ac; padding:25px; border-radius:0 12px 12px 0; line-height:2.2; }
+        ul { padding-left:40px; font-size:1.15rem; }
+        footer { background:#004d40; color:white; text-align:center; padding:30px; font-size:1.2rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>ELECTROMAGNETIC WAVES</h1>
+        <p class="subtitle">Complete Short Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Displacement Current</div>
+        <div class="tab" data-tab="t2">EM Waves Characteristics</div>
+        <div class="tab" data-tab="t3">EM Spectrum</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- Topic 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Need of Displacement Current</h2>
+            <div class="box">
+                <ul>
+                    <li>Ampere’s law ∮ B·dl = μ₀ I was inconsistent between capacitor plates (I = 0)</li>
+                    <li>Changing electric field produces magnetic field → need extra term</li>
+                    <li>Maxwell introduced displacement current I_d = ε₀ dΦ_E/dt</li>
+                    <li>Total current = conduction current + displacement current</li>
+                    <li>Modified Ampere’s law: ∮ B·dl = μ₀ (I_c + I_d) = μ₀ (I_c + ε₀ dΦ_E/dt)</li>
+                    <li>Displacement current exists only where E is changing with time</li>
+                    <li>In capacitor, I_d = I (conduction current in wires)</li>
+                    <li>Displacement current has no flow of charge, only changing E</li>
+                    <li>Essential for continuity of magnetic field and EM wave propagation</li>
+                    <li>Made Maxwell’s equations symmetric and complete</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Electromagnetic Waves & Their Characteristics</h2>
+            <div class="box">
+                <ul>
+                    <li>EM waves are transverse waves produced by accelerating charges</li>
+                    <li>E and B fields are perpendicular to each other and to direction of propagation</li>
+                    <li>E × B gives direction of propagation (right-hand rule)</li>
+                    <li>In free space, E₀/B₀ = c = 3 × 10⁸ m/s (speed of light)</li>
+                    <li>Speed c = 1/√(μ₀ε₀), proves light is EM wave</li>
+                    <li>Energy density: u_E = (1/2)ε₀E², u_B = B²/(2μ₀), average u_E = u_B</li>
+                    <li>Poynting vector S = (1/μ₀) E × B → represents energy flow</li>
+                    <li>Intensity I = average |S| = (1/2) c ε₀ E₀²</li>
+                    <li>EM waves carry both energy and momentum</li>
+                    <li>No medium required → travel in vacuum</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Electromagnetic Spectrum</h2>
+            <div class="box">
+                <ul>
+                    <li>EM spectrum: Radio → Microwave → IR → Visible → UV → X-ray → γ-ray</li>
+                    <li>Radio waves (> 0.1 m): produced by LC oscillations, used in communication</li>
+                    <li>Microwaves (1 mm – 0.1 m): radar, microwave oven, 5G</li>
+                    <li>Infrared (700 nm – 1 mm): heat radiation, remote controls</li>
+                    <li>Visible light (400–700 nm): only part detected by human eye</li>
+                    <li>Ultraviolet (10–400 nm): from sun, causes tanning, harmful</li>
+                    <li>X-rays (0.01–10 nm): produced by bombarding metal, used in medical imaging</li>
+                    <li>Gamma rays (< 0.01 nm): from radioactive decay, highly penetrating</li>
+                    <li>All EM waves have same speed c in vacuum</li>
+                    <li>Frequency order: γ > X-ray > UV > Visible > IR > Microwave > Radio</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Electromagnetic Waves • Displacement Current • Characteristics • Full Spectrum • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

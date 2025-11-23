@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrostatics – Complete Chapter Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#e3f2fd; padding:20px; }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.2); }
+        header { background:linear-gradient(135deg,#1565c0,#1976d2,#1e88e5); color:white; padding:50px; text-align:center; }
+        h1 { font-size:3.4rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.5rem; opacity:0.96; }
+        .nav { display:flex; background:#0d47a1; flex-wrap:wrap; }
+        .tab { padding:22px 38px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.15rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #64b5f6; }
+        .content { padding:60px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#1565c0; font-size:2.5rem; margin:45px 0 28px; border-bottom:5px solid #1976d2; padding-bottom:14px; }
+        .def { background:#e3f2fd; border-left:8px solid #42a5f5; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; line-height:2.1; }
+        ul { margin:20px 0; padding-left:45px; line-height:2.3; font-size:1.18rem; }
+        footer { background:#0d47a1; color:white; text-align:center; padding:38px; font-size:1.25rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:16px;} .content{padding:35px;} h1{font-size:2.6rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>ELECTROSTATICS</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Electric Charge & Conservation</div>
+        <div class="tab" data-tab="t2">Coulomb’s Law</div>
+        <div class="tab" data-tab="t3">Superposition & Continuous Distribution</div>
+        <div class="tab" data-tab="t4">Electric Field & Dipole Torque</div>
+        <div class="tab" data-tab="t5">Electric Flux & Gauss’s Law</div>
+        <div class="tab" data-tab="t6">Applications of Gauss’s Law</div>
+        <div class="tab" data-tab="t7">Electric Potential & Potential Energy</div>
+        <div class="tab" data-tab="t8">Conductors, Dielectrics & Polarization</div>
+        <div class="tab" data-tab="t9">Capacitors & Combinations</div>
+        <div class="tab" data-tab="t10">Energy in Capacitor & Van de Graaff</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Electric Charge & Its Conservation</h2>
+            <div class="def">
+                <ul>
+                    <li>Charge is quantized: q = ±ne (n = integer, e = 1.6 × 10⁻¹⁹ C)</li>
+                    <li>Charge is conserved: Total charge remains constant in any process</li>
+                    <li>Two types: Positive (proton) & Negative (electron)</li>
+                    <li>Like charges repel, unlike charges attract</li>
+                    <li>SI unit of charge: Coulomb (C)</li>
+                    <li>Additivity: Total charge = algebraic sum</li>
+                    <li>Charge is invariant (does not depend on speed of body)</li>
+                    <li>Charging methods: Friction, conduction, induction</li>
+                    <li>Gold leaf electroscope detects presence & nature of charge</li>
+                    <li>Minimum charge possible = ±e (except quarks)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Coulomb’s Law</h2>
+            <div class="def">
+                <ul>
+                    <li>F = k |q₁q₂| / r² (in vacuum), k = 9 × 10⁹ Nm²/C²</li>
+                    <li>Vector form: F₁₂ = (k q₁q₂ / r²) r̂₁₂</li>
+                    <li>In medium: F = k |q₁q₂| / (K r²), K = dielectric constant</li>
+                    <li>Coulomb’s law is inverse square law</li>
+                    <li>Valid only for point charges and at rest</li>
+                    <li>Force is central and conservative</li>
+                    <li>1 Coulomb is a very large charge (10¹⁸ electrons)</li>
+                    <li>k = 1/(4πε₀), ε₀ = 8.85 × 10⁻¹² C²/Nm²</li>
+                    <li>Coulomb’s law obeys Newton’s third law</li>
+                    <li>Force along the line joining the charges</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Force on Multiple Charges & Continuous Distribution</h2>
+            <div class="def">
+                <ul>
+                    <li>Principle of superposition: F_total = F₁ + F₂ + … + Fₙ</li>
+                    <li>Net force on a charge due to others is vector sum</li>
+                    <li>For continuous distribution: dF = k dq₁ dq₂ / r² r̂</li>
+                    <li>Linear charge density λ = q/L, Surface σ = q/A, Volume ρ = q/V</li>
+                    <li>Force on charge due to continuous body requires integration</li>
+                    <li>Equilibrium: Net force = 0 on each charge</li>
+                    <li>Stable equilibrium: Small displacement brings back</li>
+                    <li>Unstable equilibrium: Small displacement increases deviation</li>
+                    <li>Superposition valid only for electrostatic forces</li>
+                    <li>Continuous distribution often solved using symmetry + Gauss law</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Electric Field & Torque on Dipole</h2>
+            <div class="def">
+                <ul>
+                    <li>E = F/q₀ (test charge), unit: N/C or V/m</li>
+                    <li>E due to point charge: E = kq/r² r̂</li>
+                    <li>Superposition applies: E_total = Σ Eᵢ</li>
+                    <li>Electric dipole moment: p = q × d (vector from –q to +q)</li>
+                    <li>Torque on dipole in uniform field: τ = p × E = pE sinθ</li>
+                    <li>Direction of torque: tends to align dipole with field</li>
+                    <li>Maximum torque when θ = 90°, τ_max = pE</li>
+                    <li>Zero torque when θ = 0° or 180° (stable & unstable equilibrium)</li>
+                    <li>Work done to rotate dipole: W = pE (cosθ₁ – cosθ₂)</li>
+                    <li>Electric field lines never form closed loops</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Electric Flux & Gauss’s Theorem</h2>
+            <div class="def">
+                <ul>
+                    <li>Electric flux φ = ∫ E ⋅ dA (through a surface)</li>
+                    <li>For uniform field: φ = E A cosθ</li>
+                    <li>Flux through closed surface: positive (out), negative (in)</li>
+                    <li>Gauss’s law: ∮ E ⋅ dA = q_enclosed / ε₀</li>
+                    <li>Gauss’s law is more fundamental than Coulomb’s law</li>
+                    <li>Applicable only when symmetry exists</li>
+                    <li>Gaussian surface is imaginary closed surface</li>
+                    <li>Flux depends only on enclosed charge, not size/shape</li>
+                    <li>For no charge inside, total flux = 0</li>
+                    <li>Gauss’s law proves inverse square nature of Coulomb’s law</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Applications of Gauss’s Law</h2>
+            <div class="def">
+                <ul>
+                    <li>Infinite plane sheet: E = σ/(2ε₀) (independent of distance)</li>
+                    <li>Two parallel sheets (same σ): E = σ/ε₀ between, 0 outside</li>
+                    <li>Thin spherical shell: E = 0 inside, E = kQ/r² outside</li>
+                    <li>Solid sphere (uniform): E = kQr/R³ (r < R), E = kQ/r² (r ≥ R)</li>
+                    <li>Infinite line charge: E = λ/(2πε₀r)</li>
+                    <li>Charged conductor: E = 0 inside material, E = σ/ε₀ just outside</li>
+                    <li>Charge resides only on outer surface of hollow conductor</li>
+                    <li>Inside cavity of conductor (no charge): E = 0</li>
+                    <li>Electric field is always perpendicular to conductor surface</li>
+                    <li>Sharp points have very high field (lightning conductors)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Electric Potential & Potential Energy</h2>
+            <div class="def">
+                <ul>
+                    <li>V = W/q₀, unit: Volt, V = –∫ E ⋅ dl (from ∞)</li>
+                    <li>Potential due to point charge: V = kq/r</li>
+                    <li>Potential is scalar, superposition: V_total = Σ Vᵢ</li>
+                    <li>Equipotential surfaces are perpendicular to field lines</li>
+                    <li>Potential energy of two charges: U = k q₁q₂ / r</li>
+                    <li>U of dipole in uniform field: U = –p ⋅ E = –pE cosθ</li>
+                    <li>Minimum energy (stable) at θ = 0°, U = –pE</li>
+                    <li>Potential difference V_A – V_B = –∫_B^A E ⋅ dl</li>
+                    <li>Electron volt (eV): 1 eV = 1.6 × 10⁻¹⁹ J</li>
+                    <li>Potential at infinity is taken as zero</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Conductors, Insulators & Dielectrics</h2>
+            <div class="def">
+                <ul>
+                    <li>Conductors: Free electrons, E = 0 inside, excess charge on surface</li>
+                    <li>Insulators: No free charge movement</li>
+                    <li>Dielectrics: Polar (water) or non-polar (N₂), get polarized in field</li>
+                    <li>Polarization P = χₑ ε₀ E, K = 1 + χₑ</li>
+                    <li>Induced charge on dielectric surface reduces net field inside</li>
+                    <li>Electric field inside dielectric: E = E₀ / K</li>
+                    <li>Bound charges appear due to polarization</li>
+                    <li>Electrostatic shielding: Inside hollow conductor, E = 0 (Faraday cage)</li>
+                    <li>Charge given to hollow conductor goes to outer surface</li>
+                    <li>If inner charged body, induced charge appears on inner surface</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Capacitors & Combinations</h2>
+            <div class="def">
+                <ul>
+                    <li>Capacitance C = Q/V, unit: Farad (F)</li>
+                    <li>Parallel plate: C = ε₀A/d (without dielectric)</li>
+                    <li>With dielectric: C = K ε₀A/d</li>
+                    <li>Series combination: 1/C_eq = 1/C₁ + 1/C₂ + …</li>
+                    <li>Parallel combination: C_eq = C₁ + C₂ + …</li>
+                    <li>When dielectric inserted (battery connected): Q increases, V same</li>
+                    <li>When dielectric inserted (isolated): V decreases, Q same</li>
+                    <li>Spherical capacitor: C = 4πε₀ ab/(b–a)</li>
+                    <li>Cylindrical capacitor: C = 2πε₀L / ln(b/a)</li>
+                    <li>Common potential in parallel: V_com = (C₁V₁ + C₂V₂)/(C₁+C₂)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. Energy Stored in Capacitor & Van de Graaff</h2>
+            <div class="def">
+                <ul>
+                    <li>Energy stored U = (1/2) CV² = (1/2) QV = (1/2) Q²/C</li>
+                    <li>Energy density u = (1/2) ε₀ E² (in field region)</li>
+                    <li>Energy lost when capacitors connected = (C₁C₂/(C₁+C₂))(V₁–V₂)²/2</li>
+                    <li>Force on dielectric slab: pulls inside capacitor</li>
+                    <li>Van de Graaff generator produces very high potential (millions of volts)</li>
+                    <li>Principle: Charge given to hollow conductor goes to outer surface</li>
+                    <li>Charge sprayed on moving belt → collected inside hollow sphere</li>
+                    <li>Maximum voltage limited by corona discharge/leakage</li>
+                    <li>Used in particle accelerators</li>
+                    <li>Spark occurs when E exceeds dielectric strength of air (~3 × 10⁶ V/m)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Electrostatics • Complete Summary • Charges, Fields, Gauss Law, Capacitors, Van de Graaff • Made for Future IITians & Doctors • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

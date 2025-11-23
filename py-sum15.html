@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Nature of Radiation & Matter – Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#f3e5f5; padding:20px; }
+        .container { max-width:1150px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
+        header { background:linear-gradient(135deg,#6a1b9a,#7b1fa2,#8e24aa); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3rem; margin-bottom:10px; }
+        .subtitle { font-size:1.4rem; opacity:0.95; }
+        .nav { display:flex; background:#4a148c; flex-wrap:wrap; }
+        .tab { flex:1; padding:20px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; }
+        .tab:hover { background:rgba(255,255,255,0.15); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:5px solid #ba68c8; }
+        .content { padding:50px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.6s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#6a1b9a; font-size:2.3rem; margin:40px 0 25px; border-bottom:4px solid #8e24aa; padding-bottom:10px; }
+        .box { background:#f3e5f5; border-left:8px solid #ba68c8; padding:25px; border-radius:0 12px 12px 0; line-height:2.2; }
+        ul { padding-left:40px; font-size:1.15rem; }
+        footer { background:#4a148c; color:white; text-align:center; padding:30px; font-size:1.2rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>DUAL NATURE OF RADIATION & MATTER</h1>
+        <p class="subtitle">Complete Short Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Photoelectric Effect</div>
+        <div class="tab" data-tab="t2">Hertz & Lenard’s Observations</div>
+        <179> <div class="tab" data-tab="t3">Einstein’s Equation</div>
+        <div class="tab" data-tab="t4">Matter Waves & de Broglie</div>
+        <div class="tab" data-tab="t5">Davisson-Germer Experiment</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Photoelectric Effect</h2>
+            <div class="box">
+                <ul>
+                    <li>Ejection of electrons from metal surface by light</li>
+                    <li>Occurs only if frequency > threshold frequency (ν₀)</li>
+                    <li>Threshold frequency depends on metal (work function)</li>
+                    <li>Photoelectrons emitted almost instantaneously (<10⁻⁹ s)</li>
+                    <li>Maximum KE of electrons independent of intensity</li>
+                    <li>Number of photoelectrons ∝ intensity of light</li>
+                    <li>Stopping potential (V₀) stops fastest electrons</li>
+                    <li>KE_max = e V₀</li>
+                    <li>Failed to be explained by wave theory of light</li>
+                    <li>Proved particle nature of light (photons)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Hertz and Lenard’s Observations</h2>
+            <div class="box">
+                <ul>
+                    <li>Hertz (1887): UV light helps spark discharge easier</li>
+                    <li>UV light ejects electrons from negative plate</li>
+                    <li>Lenard (1900): Studied photoelectric effect systematically</li>
+                    <li>Observed photocurrent ∝ intensity</li>
+                    <li>Found stopping potential independent of intensity</li>
+                    <li>Observed threshold frequency phenomenon</li>
+                    <li>Electrons emitted only above certain frequency</li>
+                    <li>KE increases with frequency, not intensity</li>
+                    <li>Instantaneous emission (no time lag)</li>
+                    <li>Wave theory could not explain these results</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Einstein’s Photoelectric Equation & Particle Nature</h2>
+            <div class="box">
+                <ul>
+                    <li>Light consists of photons: E = hν</li>
+                    <li>Einstein (1905): One photon ejects one electron</li>
+                    <li>hν = φ + KE_max (φ = work function)</li>
+                    <li>KE_max = hν – hν₀ = h(ν – ν₀)</li>
+                    <li>Stopping potential: eV₀ = h(ν – ν₀)</li>
+                    <li>V₀ vs ν graph is straight line with slope h/e</li>
+                    <li>Intercept on frequency axis = ν₀</li>
+                    <li>Explained all observations of photoelectric effect</li>
+                    <li>Proved light has particle nature (photon)</li>
+                    <li>Einstein got Nobel Prize in 1921 for this</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Matter Waves & de Broglie Relation</h2>
+            <div class="box">
+                <ul>
+                    <li>de Broglie (1924): Matter has wave nature</li>
+                    <li>Wavelength λ = h / p = h / (m v)</li>
+                    <li>h = Planck’s constant = 6.626 × 10⁻³⁴ J·s</li>
+                    <li>Duality: All particles have both wave & particle nature</li>
+                    <li>Macroscopic objects: λ very small → wave nature not seen</li>
+                    <li>Electrons, protons: λ significant → wave nature observable</li>
+                    <li>Faster particle → smaller wavelength</li>
+                    <li>Explained Bohr’s quantization (standing waves)</li>
+                    <li>Foundation of wave mechanics/quantum mechanics</li>
+                    <li>λ = h / √(2 m E) for non-relativistic particles</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Davisson-Germer Experiment (1927)</h2>
+            <div class="box">
+                <ul>
+                    <li>Confirmed wave nature of electrons</li>
+                    <li>Electrons accelerated through V volts → λ = h/√(2meV)</li>
+                    <li>Scattered from nickel crystal (natural diffraction grating)</li>
+                    <li>Observed diffraction pattern with maxima</li>
+                    <li>Maxima at same angle as X-ray diffraction</li>
+                    <li>Measured wavelength matched de Broglie formula</li>
+                    <li>Experimental wavelength = 0.165 nm (theory = 0.167 nm)</li>
+                    <li>Proved electrons behave as waves</li>
+                    <li>Direct evidence of de Broglie hypothesis</li>
+                    <li>Established wave-particle duality for matter</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Dual Nature of Radiation & Matter • Photoelectric Effect • Einstein Equation • de Broglie Waves • Davisson-Germer • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

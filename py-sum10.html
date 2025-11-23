@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behaviour of Perfect Gas & Kinetic Theory – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#e8f5e9; padding:20px; }
+        .container { max-width:1300px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
+        header { background:linear-gradient(135deg,#1b5e20,#2e7d32,#388e3c); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.45rem; opacity:0.96; }
+        .nav { display:flex; background:#1b5e20; flex-wrap:wrap; }
+        .tab { padding:20px 35px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.1rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #66bb6a; }
+        .content { padding:55px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#2e7d32; font-size:2.4rem; margin:40px 0 25px; border-bottom:5px solid #43a047; padding-bottom:12px; }
+        h3 { color:#388e3c; font-size:1.8rem; margin:30px 0 15px; }
+        .def { background:#e8f5e9; border-left:8px solid #66bb6a; padding:22px; margin:30px 0; border-radius:0 12px 12px 0; line-height:1.8; }
+        .law { background:#fff3e0; border-left:8px solid #ff8f00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .form { background:#e3f2fd; padding:25px; margin:30px 0; border-radius:12px; border-left:8px solid #039be5; font-family:'Consolas'; font-size:1.25rem; line-height:1.9; }
+        ul { margin:20px 0; padding-left:40px; line-height:2.2; font-size:1.15rem; }
+        footer { background:#1b5e20; color:white; text-align:center; padding:35px; font-size:1.2rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>BEHAVIOUR OF PERFECT GAS & KINETIC THEORY</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 11 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Equation of State</div>
+        <div class="tab" data-tab="t2">Work Done on Compression</div>
+        <div class="tab" data-tab="t3">Kinetic Theory of Gases</div>
+        <div class="tab" data-tab="t4">KE and Temperature</div>
+        <div class="tab" data-tab="t5">Degrees of Freedom</div>
+        <div class="tab" data-tab="t6">Law of Equipartition & Specific Heat</div>
+        <div class="tab" data-tab="t7">Mean Free Path</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1. Equation of State of a Perfect Gas -->
+        <div class="pane active" id="t1">
+            <h2>1. Equation of State of a Perfect Gas</h2>
+            <div class="def">
+                <ul>
+                    <li>Ideal gas obeys PV = nRT for all values of P, V, T.</li>
+                    <li>Also written as PV = NkT (N = total molecules, k = Boltzmann constant).</li>
+                    <li>Boyle’s law: PV = constant (at constant T).</li>
+                    <li>Charles’s law: V/T = constant (at constant P).</li>
+                    <li>Gay-Lussac’s law: P/T = constant (at constant V).</li>
+                    <li>Avogadro’s law: V ∝ n (at constant P, T).</li>
+                    <li>At STP (0°C, 1 atm), 1 mole occupies 22.4 L.</li>
+                    <li>Universal gas constant R = 8.314 J/mol·K.</li>
+                    <li>Boltzmann constant k = R/N_A = 1.38 × 10⁻²³ J/K.</li>
+                    <li>Ideal gas equation is a combination of Boyle, Charles & Avogadro laws.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. Work Done on Compressing Gas -->
+        <div class="pane" id="t2">
+            <h2>2. Work Done on Compressing a Gas</h2>
+            <div class="def">
+                <ul>
+                    <li>Work done by gas = ∫ P dV (area under P-V graph).</li>
+                    <li>Work done on gas = –∫ P dV.</li>
+                    <li>For isochoric process (V = constant): W = 0.</li>
+                    <li>For isobaric process: W = PΔV.</li>
+                    <li>For isothermal process (PV = constant): W = nRT ln(V_f/V_i).</li>
+                    <li>For adiabatic process: W = (P_i V_i – P_f V_f)/(γ – 1) = nR(T_i – T_f)/(γ – 1).</li>
+                    <li>Work is maximum in isobaric expansion (rectangular area).</li>
+                    <li>Work is zero in isochoric process (no area).</li>
+                    <li>In P-V diagram, clockwise loop → work done by system is positive.</li>
+                    <li>Sign convention: Work done on system is negative in first law (modern).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. Kinetic Theory of Gases -->
+        <div class="pane" id="t3">
+            <h2>3. Kinetic Theory of Gases – Assumptions</h2>
+            <div class="def">
+                <ul>
+                    <li>Gaseous molecules are point masses with negligible volume.</li>
+                    <li>No intermolecular forces except during elastic collisions.</li>
+                    <li>Molecules move in straight lines with constant speed between collisions.</li>
+                    <li>Collisions with walls and among molecules are perfectly elastic.</li>
+                    <li>Time of collision is negligible compared to time between collisions.</li>
+                    <li>All molecules have same mass but random velocities.</li>
+                    <li>Pressure P = (1/3) ρ v_rms² (derived from assumptions).</li>
+                    <li>Kinetic theory explains gas laws successfully.</li>
+                    <li>At absolute zero (0 K), molecular motion ceases.</li>
+                    <li>Derivation leads to PV = (1/3) m N <v²> = (2/3) N (½ m <v²>).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Kinetic Energy and Temperature -->
+        <div class="pane" id="t4">
+            <h2>4. Kinetic Energy and Temperature</h2>
+            <div class="def">
+                <ul>
+                    <li>Average translational KE per molecule = (3/2) kT.</li>
+                    <li>Total translational KE of gas = (3/2) nRT = (3/2) NkT.</li>
+                    <li>Temperature is measure of average translational kinetic energy.</li>
+                    <li>At same temperature, all ideal gases have same average KE per molecule.</li>
+                    <li>Root mean square speed v_rms = √(3RT/M) = √(3kT/m).</li>
+                    <li>Average speed <v> = √(8kT/πm) ≈ 0.92 v_rms.</li>
+                    <li>Most probable speed v_mp = √(2kT/m) ≈ 0.82 v_rms.</li>
+                    <li>v_rms > <v> > v_mp.</li>
+                    <li>Speed ratio v_rms : <v> : v_mp = √3 : √(8/π) : √2 ≈ 1 : 0.92 : 0.82.</li>
+                    <li>All speeds ∝ √T and ∝ 1/√M.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Degrees of Freedom -->
+        <div class="pane" id="t5">
+            <h2>5. Degrees of Freedom</h2>
+            <div class="def">
+                <ul>
+                    <li>Number of independent ways a molecule can store energy.</li>
+                    <li>Translational degrees: 3 (along x, y, z).</li>
+                    <li>Rotational degrees: diatomic/linear → 2, non-linear → 3.</li>
+                    <li>Monatomic gas: f = 3 (only translational).</li>
+                    <li>Diatomic gas (at room temp): f = 5 (3 trans + 2 rot).</li>
+                    <li>Diatomic at very high T: f = 7 (vibrational mode activates).</li>
+                    <li>Polyatomic linear (CO₂): f = 5 at room temp, f = 7 at high T.</li>
+                    <li>Non-linear polyatomic: f = 6 at room temp, f = 9 at high T.</li>
+                    <li>Average energy per degree of freedom = (1/2) kT per molecule.</li>
+                    <li>Total internal energy U = (f/2) nRT.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. Law of Equipartition of Energy & Specific Heat -->
+        <div class="pane" id="t6">
+            <h2>6. Law of Equipartition of Energy & Specific Heat Capacity</h2>
+            <div class="def">
+                <ul>
+                    <li>Each degree of freedom contributes (1/2) kT energy per molecule.</li>
+                    <li>For f degrees: molar internal energy U = (f/2) RT.</li>
+                    <li>C_v = dU/dT = (f/2) R.</li>
+                    <li>C_p = C_v + R = (f/2 + 1) R = (f+2)/2 R.</li>
+                    <li>γ = C_p / C_v = 1 + 2/f.</li>
+                    <li>Monatomic: f=3 → C_v = 3/2 R, γ = 5/3 ≈ 1.67.</li>
+                    <li>Diatomic (room temp): f=5 → C_v = 5/2 R, γ = 7/5 = 1.4.</li>
+                    <li>Diatomic (high T): f=7 → C_v = 7/2 R, γ = 9/7 ≈ 1.286.</li>
+                    <li>Polyatomic non-linear: γ ≈ 1.33 at room temperature.</li>
+                    <li>At absolute zero, vibrational modes freeze → C_v decreases.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Concept of Mean Free Path -->
+        <div class="pane" id="t7">
+            <h2>7. Concept of Mean Free Path</h2>
+            <div class="def">
+                <ul>
+                    <li>Mean free path λ = average distance travelled between two successive collisions.</li>
+                    <li>λ = 1 / (√2 π n d²), where n = number density, d = molecular diameter.</li>
+                    <li>λ ∝ 1/P (inversely proportional to pressure).</li>
+                    <li>λ ∝ T (directly proportional to temperature).</li>
+                    <li>λ ∝ V (inversely proportional to density).</li>
+                    <li>At STP, λ ≈ 10⁻⁷ m (100 nm) for air molecules.</li>
+                    <li>In vacuum, λ becomes very large (Knudsen effect).</li>
+                    <li>Collision frequency Z = <v> / λ = √(8kT/πm) × (√2 π n d²).</li>
+                    <li>Higher the temperature, higher the speed → higher collision frequency.</li>
+                    <li>Mean free path is crucial for viscosity, diffusion and thermal conduction in gases.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Behaviour of Perfect Gas & Kinetic Theory • Full Summary • Ideal Gas Laws • Kinetic Theory • Degrees of Freedom • Mean Free Path • Made for Future IITians & Doctors • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

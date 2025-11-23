@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Electricity – Complete Chapter Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#fff3e0; padding:20px; }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.22); }
+        header { background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726); color:white; padding:50px; text-align:center; }
+        h1 { font-size:3.4rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.5rem; opacity:0.96; }
+        .nav { display:flex; background:#e65100; flex-wrap:wrap; }
+        .tab { padding:22px 38px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.15rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #ffb74d; }
+        .content { padding:60px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#e65100; font-size:2.5rem; margin:45px 0 28px; border-bottom:5px solid #ff8f00; padding-bottom:14px; }
+        .def { background:#fff3e0; border-left:8px solid #ffb74d; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; line-height:2.1; }
+        ul { margin:20px 0; padding-left:45px; line-height:2.3; font-size:1.18rem; }
+        footer { background:#e65100; color:white; text-align:center; padding:38px; font-size:1.25rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:16px;} .content{padding:35px;} h1{font-size:2.6rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>CURRENT ELECTRICITY</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Electric Current</div>
+        <div class="tab" data-tab="t2">Drift Velocity & Mobility</div>
+        <div class="tab" data-tab="t3">Resistance & Resistivity</div>
+        <div class="tab" data-tab="t4">Power & Energy</div>
+        <div class="tab" data-tab="t5">Temperature Dependence</div>
+        <div class="tab" data-tab="t6">Cells, EMF & Internal Resistance</div>
+        <div class="tab" data-tab="t7">Kirchhoff’s Laws</div>
+        <div class="tab" data-tab="t8">Wheatstone & Metre Bridge</div>
+        <div class="tab" data-tab="t9">Potentiometer – Principle</div>
+        <div class="tab" data-tab="t10">Potentiometer Applications</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Electric Current</h2>
+            <div class="def">
+                <ul>
+                    <li>Electric current I = dq/dt (rate of flow of charge)</li>
+                    <li>SI unit: Ampere (A), 1 A = 1 C/s</li>
+                    <li>Current is a scalar quantity (though has direction)</li>
+                    <li>Conventional current: from positive to negative terminal</li>
+                    <li>Electron flow: opposite to conventional current</li>
+                    <li>Steady current: constant with time (dc)</li>
+                    <li>In metals, current is due to flow of free electrons</li>
+                    <li>Current density J = I/A (vector), unit: A/m²</li>
+                    <li>J = n e v_d (microscopic expression)</li>
+                    <li>Current is same in series connection</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Flow of Charge, Drift Velocity & Mobility</h2>
+            <div class="def">
+                <ul>
+                    <li>Drift velocity v_d = (e E τ)/m (under electric field)</li>
+                    <li>Average thermal speed >> drift speed (10⁵ vs 10⁻⁴ m/s)</li>
+                    <li>Relaxation time τ ≈ 10⁻¹⁴ s</li>
+                    <li>Mobility μ = v_d / E = e τ / m</li>
+                    <li>Unit of mobility: m²/V·s</li>
+                    <li>Current I = n e A v_d</li>
+                    <li>v_d is proportional to applied electric field</li>
+                    <li>Drift velocity is independent of time in steady state</li>
+                    <li>Higher mobility → better conductor</li>
+                    <li>In semiconductors, both electrons and holes contribute</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Electrical Resistance & Resistivity</h2>
+            <div class="def">
+                <ul>
+                    <li>Ohm’s law: V = I R (for ohmic conductors)</li>
+                    <li>Resistance R = ρ L / A</li>
+                    <li>Resistivity ρ = m / (n e² τ) (from Drude model)</li>
+                    <li>Unit of resistivity: Ω·m</li>
+                    <li>Conductivity σ = 1/ρ = n e μ</li>
+                    <li>Series: R_eq = R₁ + R₂ + R₃</li>
+                    <li>Parallel: 1/R_eq = 1/R₁ + 1/R₂ + …</li>
+                    <li>Carbon resistors have color bands for value & tolerance</li>
+                    <li>Resistors are ohmic if I-V graph is straight line through origin</li>
+                    <li>Non-ohmic: filament lamp, diode, thermistor</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Electrical Energy & Power</h2>
+            <div class="def">
+                <ul>
+                    <li>Power P = V I = I²R = V²/R</li>
+                    <li>Energy E = P t = V I t (joule)</li>
+                    <li>Commercial unit: kWh (1 unit = 3.6 MJ)</li>
+                    <li>Heating effect: H = I² R t (Joule’s law)</li>
+                    <li>Maximum power transfer when R_load = r (internal resistance)</li>
+                    <li>Fuse wire: high resistivity, low melting point</li>
+                    <li>Power dissipated is maximum in resistance</li>
+                    <li>Battery supplies chemical energy → electrical → heat/light</li>
+                    <li>Efficiency of bulb = (light energy/output) × 100%</li>
+                    <li>Power is same in series if resistances are equal</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Temperature Dependence of Resistance</h2>
+            <div class="def">
+                <ul>
+                    <li>R_t = R₀ (1 + α ΔT) for metals (α > 0)</li>
+                    <li>α = temperature coefficient of resistance</li>
+                    <li>For semiconductors & insulators: α is negative</li>
+                    <li>Superconductors: R = 0 below critical temperature</li>
+                    <li>Thermistor (NTC): resistance decreases with temperature</li>
+                    <li>For alloys (constantan, manganin): α ≈ 0</li>
+                    <li>Resistivity ρ also increases with temperature</li>
+                    <li>At high T, resistance increases due to more collisions</li>
+                    <li>Filament lamp resistance increases when hot</li>
+                    <li>Carbon: negative temperature coefficient</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Cells, EMF, Potential Difference & Internal Resistance</h2>
+            <div class="def">
+                <ul>
+                    <li>EMF (ε): maximum potential difference when I = 0</li>
+                    <li>Terminal voltage V = ε – I r (during discharge)</li>
+                    <li>V = ε + I r (during charging)</li>
+                    <li>Internal resistance r causes voltage drop</li>
+                    <li>Primary cells: not rechargeable (Daniel, Leclanché)</li>
+                    <li>Secondary cells: rechargeable (lead-acid, Li-ion)</li>
+                    <li>Current I = ε / (R + r)</li>
+                    <li>Power to load maximum when R = r</li>
+                    <li>Open circuit: V = ε</li>
+                    <li>Short circuit: I_max = ε / r</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Kirchhoff’s Laws & Applications</h2>
+            <div class="def">
+                <ul>
+                    <li>KCL: Σ I_in = Σ I_out at junction (charge conservation)</li>
+                    <li>KVL: Algebraic sum of ΔV = 0 in closed loop</li>
+                    <li>Sign convention: +ve when moving from – to + in battery</li>
+                    <li>Used to solve complex circuits</li>
+                    <li>KCL based on conservation of charge</li>
+                    <li>KVL based on conservation of energy</li>
+                    <li>Number of independent equations = number of loops</li>
+                    <li>Always assign current direction initially</li>
+                    <li>Works for both dc and ac (instantaneous values)</li>
+                    <li>Symmetry often reduces number of variables</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Wheatstone Bridge & Metre Bridge</h2>
+            <div class="def">
+                <ul>
+                    <li>Wheatstone bridge balanced when P/Q = R/S</li>
+                    <li>At balance, no current through galvanometer</li>
+                    <li>Condition: P/Q = R/S (ratio arms equal)</li>
+                    <li>Metre bridge is modified Wheatstone bridge</li>
+                    <li>In metre bridge: R/S = l / (100 – l)</li>
+                    <li>Unknown resistance X = R × (l / (100 – l))</li>
+                    <li>Jockey tapped to get null point</li>
+                    <li>End corrections may be applied for accuracy</li>
+                    <li>Sensitive to small change in resistance</li>
+                    <li>Used to measure medium range resistance</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Potentiometer – Principle & Sensitivity</h2>
+            <div class="def">
+                <ul>
+                    <li>Potentiometer works on null deflection method</li>
+                    <li>Fall of potential per unit length = k = ε / L</li>
+                    <li>At balance: ε = k l (no current from test cell)</li>
+                    <li>Highly sensitive, accurate, no energy loss at null</li>
+                    <li>Longer wire → higher sensitivity</li>
+                    <li>Thicker wire → lower resistance → higher current → better</li>
+                    <li>Uniform cross-section wire is essential</li>
+                    <li>Driver cell EMF > test cell EMF</li>
+                    <li>Positive terminal of driver and test cell connected together</li>
+                    <li>Null point shifts if polarity reversed</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. Potentiometer – Measurement of Internal Resistance</h2>
+            <div class="def">
+                <ul>
+                    <li>Internal resistance r = (l₁ – l₂)/l₂ × R</li>
+                    <li>l₁ = balancing length with high resistance R (open)</li>
+                    <li>l₂ = balancing length when R is shorted (closed)</li>
+                    <li>With R: ε = k l₁</li>
+                    <li>With switch closed: V = ε – I r = k l₂</li>
+                    <li>Also used to compare EMFs: ε₁/ε₂ = l₁/l₂</li>
+                    <li>Can measure very small EMF (thermocouple)</li>
+                    <li>Can calibrate voltmeter and ammeter</li>
+                    <li>More accurate than voltmeter (no current drawn)</li>
+                    <li>Standard cell (Weston cell) used for calibration</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Current Electricity • Complete Summary • Current, Resistance, Kirchhoff, Wheatstone, Potentiometer • Made for Future IITians & Doctors • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

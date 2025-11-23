@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Devices – Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff0e0;padding:20px;}
+        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.4rem;margin-bottom:10px;}
+        .subtitle{font-size:1.5rem;opacity:0.95;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;}
+        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
+        .content{padding:60px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.5rem;margin:45px 0 25px;border-bottom:5px solid #f57c00;padding-bottom:12px;}
+        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        footer{background:#bf360c;color:white;text-align:center;padding:38px;font-size:1.25rem;}
+        @media(max-width:768px){.tab{flex:1;padding:16px;text-align:center;font-size:1rem;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>ELECTRONIC DEVICES</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Energy Bands</div>
+        <div class="tab" data-tab="t2">Conductors/Insulators/Semiconductors</div>
+        <div class="tab" data-tab="t3">p-n Junction Diode</div>
+        <div class="tab" data-tab="t4">I-V Characteristics</div>
+        <div class="tab" data-tab="t5">Diode as Rectifier</div>
+        <div class="tab" data-tab="t6">Photodiode</div>
+        <div class="tab" data-tab="t7">Solar Cell</div>
+        <div class="tab" data-tab="t8">Zener Diode</div>
+        <div class="tab" data-tab="t9">Junction Transistor</div>
+        <div class="tab" data-tab="t10">Transistor Characteristics</div>
+        <div class="tab" data-tab="t11">Transistor as Amplifier/Oscillator</div>
+        <div class="tab" data-tab="t12">Logic Gates & Switch</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Energy Bands in Solids</h2>
+            <div class="box">
+                <ul>
+                    <li>Energy levels split into bands due to interatomic interaction</li>
+                    <li>Valence band: occupied by valence electrons</li>
+                    <li>Conduction band: allows free movement of electrons</li>
+                    <li>Forbidden gap (E_g): energy difference between VB & CB</li>
+                    <li>Overlapping bands → conductor</li>
+                    <li>Large E_g (>3 eV) → insulator</li>
+                    <li>Small E_g (≤1 eV) → semiconductor</li>
+                    <li>At 0 K, semiconductors behave as insulators</li>
+                    <li>Thermal excitation promotes electrons to CB</li>
+                    <li>Fermi level lies in middle of band gap in intrinsic semiconductor</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Conductors, Insulators & Semiconductors</h2>
+            <div class="box">
+                <ul>
+                    <li>Conductors: E_g = 0, huge free electrons (Cu, Ag)</li>
+                    <li>Insulators: E_g > 3 eV, no conduction (diamond, glass)</li>
+                    <li>Semiconductors: E_g ≈ 0.7–1.1 eV (Si: 1.1 eV, Ge: 0.7 eV)</li>
+                    <li>Intrinsic: pure, n_e = n_h</li>
+                    <li>Extrinsic: doped (n-type or p-type)</li>
+                    <li>n-type: pentavalent impurity (P, As) → donor levels</li>
+                    <li>p-type: trivalent impurity (B, Ga) → acceptor levels</li>
+                    <li>Conductivity increases with temperature in semiconductors</li>
+                    <li>Majority & minority carriers</li>
+                    <li>Mobility μ = v_d / E</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Semiconductor Diode (p-n Junction)</h2>
+            <div class="box">
+                <ul>
+                    <li>Formed by joining p-type and n-type semiconductors</li>
+                    <li>Depletion region: immobile ions, no free carriers</li>
+                    <li>Potential barrier: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li>Forward bias: p-side +ve → reduces barrier → high current</li>
+                    <li>Reverse bias: p-side –ve → increases barrier → very low current</li>
+                    <li>Diode acts as one-way valve for current</li>
+                    <li>Knee voltage: minimum voltage for conduction</li>
+                    <li>Dynamic resistance r_d = ΔV/ΔI</li>
+                    <li>Breakdown in reverse bias at high voltage</li>
+                    <li>Symbol: arrow shows conventional current direction</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. I-V Characteristics of p-n Diode</h2>
+            <div class="box">
+                <ul>
+                    <li>Forward bias: exponential rise after knee voltage</li>
+                    <li>Reverse bias: very small saturation current (μA)</li>
+                    <li>Reverse current almost independent of voltage</li>
+                    <li>At high reverse voltage → Zener or avalanche breakdown</li>
+                    <li>Forward current increases rapidly with small voltage</li>
+                    <li>Ideal diode: zero resistance forward, infinite reverse</li>
+                    <li>Cut-in voltage: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li>Reverse saturation current doubles every 10°C rise</li>
+                    <li>Graph: non-linear in forward, nearly flat in reverse</li>
+                    <li>Used to study diode behavior</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Diode as Rectifier</h2>
+            <div class="box">
+                <ul>
+                    <li>Converts AC to pulsating DC</li>
+                    <li>Half-wave rectifier: only one half-cycle passes</li>
+                    <li>Full-wave rectifier: both half-cycles (center-tap or bridge)</li>
+                    <li>Efficiency: HWR → 40.6%, FWR → 81.2%</li>
+                    <li>Ripple factor: HWR → 1.21, FWR → 0.48</li>
+                    <li>Bridge rectifier: no center tap, 4 diodes</li>
+                    <li>PIV: HWR → V_m, FWR center-tap → 2V_m, bridge → V_m</li>
+                    <li>Filter (C, LC, π) used to smooth output</li>
+                    <li>Output frequency = 2 × input frequency (FWR)</li>
+                    <li>Used in power supplies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Photodiode</h2>
+            <div class="box">
+                <ul>
+                    <li>Operated in reverse bias</li>
+                    <li>Reverse current proportional to light intensity</li>
+                    <li>Depletion region widened for more sensitivity</li>
+                    <li>Used in light detection, optical communication</li>
+                    <li>Fast response, high sensitivity in reverse bias</li>
+                    <li>Symbol has incoming light arrows</li>
+                    <li>Current increases linearly with illumination</li>
+                    <li>Used in smoke detectors, barcode scanners</li>
+                    <li>Can work in photovoltaic mode also</li>
+                    <li>Made of materials sensitive to light (Si, InGaAs)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Solar Cell</h2>
+            <div class="box">
+                <ul>
+                    <li>p-n junction converts light energy → electrical energy</li>
+                    <li>Works in photovoltaic mode (no external bias)</li>
+                    <li>Open circuit voltage ≈ 0.6 V (Si)</li>
+                    <li>Short circuit current ∝ intensity</li>
+                    <li>Efficiency ≈ 15–22% (commercial)</li>
+                    <li>I-V curve similar to diode but in first quadrant</li>
+                    <li>Fill factor = (V_m I_m)/(V_oc I_sc)</li>
+                    <li>Used in panels, calculators, satellites</li>
+                    <li>Maximum power point (knee of I-V curve)</li>
+                    <li>Renewable & clean energy source</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Zener Diode</h2>
+            <div class="box">
+                <ul>
+                    <li>Specially designed for reverse breakdown</li>
+                    <li>Sharp breakdown at V_z (Zener voltage)</li>
+                    <li>Used in reverse bias as voltage regulator</li>
+                    <li>V_out remains constant even if I or V_in changes</li>
+                    <li>High doping → thin depletion → tunneling (Zener effect)</li>
+                    <li>Power rating: P_z = V_z × I_z(max)</li>
+                    <li>Used in voltage stabilizers, reference</li>
+                    <li>Dynamic resistance very low</li>
+                    <li>Symbol has bent ends</li>
+                    <li>Operates safely in breakdown region</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Junction Transistor (BJT)</h2>
+            <div class="box">
+                <ul>
+                    <li>Three layers: Emitter, Base, Collector</li>
+                    <li>NPN or PNP types</li>
+                    <li>Two p-n junctions: E-B (forward), C-B (reverse)</li>
+                    <li>Emitter heavily doped, base thin & lightly doped</li>
+                    <li>Current amplification due to transistor action</li>
+                    <li>I_E = I_B + I_C</li>
+                    <li>β = I_C / I_B (50–300 typically)</li>
+                    <li>α = I_C / I_E (0.95–0.99)</li>
+                    <li>Three configurations: CB, CE, CC</li>
+                    <li>CE most common</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. Characteristics of Transistor (CE)</h2>
+            <div class="box">
+                <ul>
+                    <li>Input characteristics: I_B vs V_BE (like forward diode)</li>
+                    <li>Output characteristics: I_C vs V_CE for different I_B</li>
+                    <li>Three regions: Active, Cut-off, Saturation</li>
+                    <li>Cut-off: both junctions reverse → I_C ≈ 0</li>
+                    <li>Saturation: both junctions forward → I_C max</li>
+                    <li>Active: E-B forward, C-B reverse → amplification</li>
+                    <li>Current gain β = ΔI_C / ΔI_B</li>
+                    <li>Early effect: slight slope in output curve</li>
+                    <li>Power gain = β² × resistance gain</li>
+                    <li>Used to study transistor behavior</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="pane" id="t11">
+            <h2>11. Transistor as Amplifier, Oscillator & Logic Gates</h2>
+            <div class="box">
+                <ul>
+                    <li>Amplifier: small change in I_B → large change in I_C</li>
+                    <li>CE configuration gives voltage & current gain</li>
+                    <li>Voltage gain A_v = β (R_C / r_e)</li>
+                    <li>Oscillator: positive feedback (Barkhausen criterion)</li>
+                    <li>LC, RC, crystal oscillators</li>
+                    <li>NOT gate: single transistor inverter</li>
+                    <li>AND, OR, NAND, NOR using diode-transistor logic (DTL)</li>
+                    <li>Digital circuits use saturation & cut-off</li>
+                    <li>Transistor switch: fast on/off</li>
+                    <li>Foundation of all digital electronics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="pane" id="t12">
+            <h2>12. Transistor as a Switch</h2>
+            <div class="box">
+                <ul>
+                    <li>Cut-off → OFF state (V_out = V_CC)</li>
+                    <li>Saturation → ON state (V_out ≈ 0)</li>
+                    <li>Small base current controls large collector current</li>
+                    <li>Used in digital circuits, relays, LEDs</li>
+                    <li>Switching time: rise & fall time</li>
+                    <li>Low power consumption</li>
+                    <li>High speed switching (ns range)</li>
+                    <li>Inverter (NOT gate) is basic switch</li>
+                    <li>LED driver circuit classic example</li>
+                    <li>Base resistor limits I_B</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Electronic Devices • Full Summary • Energy Bands • p-n Junction • Diode • Transistor • Logic Gates • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>
