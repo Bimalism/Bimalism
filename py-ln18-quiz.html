@@ -3,749 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Electronic Devices Quiz - 20 Questions | JEE + NEET 2025-26</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #01579b, #0277bd, #0288d1);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #01579b, #0277bd);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .magnetic-animation {
-            position: absolute;
-            width: 120px;
-            height: 80px;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .magnet {
-            width: 40px;
-            height: 60px;
-            background: linear-gradient(to bottom, #e53935, #b71c1c);
-            border-radius: 10px;
-            position: relative;
-            border: 2px solid #333;
-        }
-        
-        .magnet::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: #e53935;
-            border-radius: 8px 8px 0 0;
-        }
-        
-        .magnet::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: #e53935;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        .field-line {
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background: #ffeb3b;
-            opacity: 0;
-            animation: magnetic-field 3s linear infinite;
-            border-radius: 2px;
-        }
-        
-        .field-line:nth-child(2) {
-            animation-delay: 0.5s;
-            transform: rotate(45deg);
-        }
-        
-        .field-line:nth-child(3) {
-            animation-delay: 1s;
-            transform: rotate(90deg);
-        }
-        
-        .field-line:nth-child(4) {
-            animation-delay: 1.5s;
-            transform: rotate(135deg);
-        }
-        
-        @keyframes magnetic-field {
-            0% { transform: scale(0.1) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #01579b, #0277bd);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #01579b;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #e1f5fe;
-            border-color: #01579b;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #01579b;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #01579b, #0277bd);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #01579b;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #01579b;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #01579b, #0277bd);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #01579b, #0277bd);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .formula-highlight {
-            background-color: #e1f5fe;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .magnetic-law {
-            background-color: #e3f2fd;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #1976d2;
-            font-style: italic;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .magnetic-animation {
-                display: none;
-            }
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#bf360c,#e65100); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.6rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff0e0; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#ff8f00; color:white; }
+        .btn-reset { background:#ffcc80; color:#333; }
+        .btn-submit { background:#e65100; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#ffccbc; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#e65100; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#e65100; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#fff0e0; padding:25px; border-radius:12px; border-left:6px solid #ff8f00; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#e65100; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #ffccbc; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ff8f00; background:#fff0e0; }
+        .option.selected { border-color:#e65100; background:#ffcc80; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#fff0e0,#ffccbc); }
+        .score { font-size:4.5rem; font-weight:bold; color:#e65100; margin:20px 0; }
+        .message { font-size:1.6rem; margin:20px 0; color:#e65100; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ff8f00; }
+        .wrong { border-left-color:#e53935; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ff8f00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="magnetic-animation">
-                <div class="magnet"></div>
-                <div class="field-line"></div>
-                <div class="field-line"></div>
-                <div class="field-line"></div>
-                <div class="field-line"></div>
-            </div>
-            <h1>Chapter : 18 Magnetic Effects of Current & Magnetism</h1>
-            <div class="subtitle">Test your knowledge of magnetic fields, forces, and electromagnetic principles</div>
-        </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
-            </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Magnetism & EM Effects</div>
-                    <div>Level: Advanced</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back to home-btn"><a href="neet.html">Back to Home</a></button>
-            </div>
+<div class="container">
+    <header>
+        <h1>Electronic Devices</h1>
+        <p class="subtitle">20 High-Yield Questions • p-n Junction • Diode • Transistor • Logic Gates • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
         </div>
     </div>
 
-    <script>
-        const magnetismQuiz = [
-            {
-                q: "Oersted's experiment demonstrated that:",
-                o: ["Current-carrying conductor produces magnetic field", "Magnetic field produces electric current", "Like poles repel each other", "Magnetic fields can be shielded"],
-                a: 0,
-                exp: "Oersted discovered that an electric current produces a magnetic field around it, demonstrating the connection between electricity and magnetism."
-            },
-            {
-                q: "The right-hand thumb rule gives the direction of:",
-                o: ["Magnetic field around a straight conductor", "Force on a current-carrying conductor", "Induced current", "Magnetic moment"],
-                a: 0,
-                exp: "The right-hand thumb rule states that if you grasp a current-carrying conductor with your right hand, thumb pointing in current direction, fingers curl in magnetic field direction."
-            },
-            {
-                q: "The magnetic field at the center of a circular loop carrying current is:",
-                o: ["Perpendicular to the plane of the loop", "Parallel to the plane of the loop", "Radial", "Zero"],
-                a: 0,
-                exp: "At the center of a circular current loop, the magnetic field is perpendicular to the plane of the loop, following the right-hand rule."
-            },
-            {
-                q: "The force on a charged particle moving in a magnetic field is maximum when:",
-                o: ["Velocity is perpendicular to magnetic field", "Velocity is parallel to magnetic field", "Velocity is at 45° to magnetic field", "Particle is at rest"],
-                a: 0,
-                exp: "Magnetic force F = qvBsinθ, where θ is angle between velocity and magnetic field. Force is maximum when θ = 90° (perpendicular)."
-            },
-            {
-                q: "What is the SI unit of magnetic field strength?",
-                o: ["Tesla", "Weber", "Henry", "Gauss"],
-                a: 0,
-                exp: "The tesla (T) is the SI unit of magnetic flux density. 1 T = 1 N/(A·m) = 1 Wb/m²."
-            },
-            {
-                q: "The magnetic field inside a long solenoid is:",
-                o: ["Uniform and parallel to axis", "Non-uniform and radial", "Zero", "Circular"],
-                a: 0,
-                exp: "Inside a long solenoid, the magnetic field is nearly uniform, parallel to the axis, and given by B = μ₀nI, where n is turns per unit length."
-            },
-            {
-                q: "Fleming's left-hand rule is used to find:",
-                o: ["Direction of force on current-carrying conductor", "Direction of magnetic field", "Direction of induced current", "Direction of electron flow"],
-                a: 0,
-                exp: "Fleming's left-hand rule: Thumb = Force, First finger = Magnetic field, Second finger = Current (conventional)."
-            },
-            {
-                q: "The magnetic susceptibility of a diamagnetic material is:",
-                o: ["Small and negative", "Small and positive", "Large and positive", "Zero"],
-                a: 0,
-                exp: "Diamagnetic materials have small negative susceptibility (χ < 0). They are weakly repelled by magnetic fields."
-            },
-            {
-                q: "What is Curie's law?",
-                o: ["χ ∝ 1/T for paramagnets", "B ∝ I for solenoids", "F ∝ I₁I₂ for parallel wires", "Φ ∝ B for magnetic flux"],
-                a: 0,
-                exp: "Curie's law states that for paramagnetic materials, magnetic susceptibility is inversely proportional to absolute temperature: χ = C/T."
-            },
-            {
-                q: "The force between two parallel current-carrying conductors is:",
-                o: ["Proportional to product of currents", "Inversely proportional to distance", "Both A and B", "Independent of distance"],
-                a: 2,
-                exp: "Force per unit length between two parallel conductors: F/L = (μ₀I₁I₂)/(2πd), proportional to current product and inversely proportional to distance."
-            },
-            {
-                q: "A cyclotron cannot accelerate:",
-                o: ["Neutral particles", "Charged particles", "Electrons", "Protons"],
-                a: 0,
-                exp: "Cyclotron works on charged particles using electric and magnetic fields. Neutral particles experience no force in magnetic fields."
-            },
-            {
-                q: "The magnetic moment of a current loop is:",
-                o: ["IA (current × area)", "IL (current × length)", "B/μ₀", "Φ/B"],
-                a: 0,
-                exp: "Magnetic moment μ = I × A, where I is current and A is area vector (direction given by right-hand rule)."
-            },
-            {
-                q: "Hysteresis loss in ferromagnetic materials is due to:",
-                o: ["Energy spent in domain alignment", "Resistance heating", "Eddy currents", "Magnetic saturation"],
-                a: 0,
-                exp: "Hysteresis loss is the energy dissipated as heat when magnetic domains realign during AC magnetization cycles."
-            },
-            {
-                q: "The earth's magnetic field is similar to that of:",
-                o: ["A magnetic dipole", "A straight conductor", "A circular loop", "A solenoid"],
-                a: 0,
-                exp: "Earth's magnetic field approximates a giant magnetic dipole tilted about 11° from its rotation axis."
-            },
-            {
-                q: "The permeability of free space (μ₀) has value:",
-                o: ["4π × 10⁻⁷ T·m/A", "8.85 × 10⁻¹² C²/N·m²", "6.67 × 10⁻¹¹ N·m²/kg²", "1.6 × 10⁻¹⁹ C"],
-                a: 0,
-                exp: "μ₀ = 4π × 10⁻⁷ T·m/A (or N/A²). This is the magnetic constant in vacuum."
-            },
-            {
-                q: "A moving coil galvanometer works on the principle of:",
-                o: ["Torque on current-carrying coil in magnetic field", "Electromagnetic induction", "Hall effect", "Magnetic resonance"],
-                a: 0,
-                exp: "A current-carrying coil experiences torque in a magnetic field, causing deflection proportional to current."
-            },
-            {
-                q: "The material used for permanent magnets should have:",
-                o: ["High retentivity and high coercivity", "High susceptibility and low Curie temperature", "Low retentivity and high permeability", "Zero hysteresis loss"],
-                a: 0,
-                exp: "Permanent magnets need high retentivity (to retain magnetization) and high coercivity (to resist demagnetization)."
-            },
-            {
-                q: "The magnetic field due to a straight infinite current-carrying conductor:",
-                o: ["Decreases with distance", "Increases with distance", "Is constant", "Is zero outside"],
-                a: 0,
-                exp: "B = μ₀I/(2πr) for straight conductor, so field strength decreases inversely with distance from conductor."
-            },
-            {
-                q: "What is Ampere's circuital law?",
-                o: ["∮B·dl = μ₀I_enclosed", "F = q(v × B)", "Φ = BAcosθ", "B = μ₀H"],
-                a: 0,
-                exp: "Ampere's law: The line integral of magnetic field around a closed loop equals μ₀ times current enclosed."
-            },
-            {
-                q: "The phenomenon of producing induced EMF by changing magnetic flux is called:",
-                o: ["Electromagnetic induction", "Magnetic resonance", "Hall effect", "Ferromagnetism"],
-                a: 0,
-                exp: "Electromagnetic induction, discovered by Faraday, states that changing magnetic flux through a circuit induces EMF."
-            }
-        ];
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(magnetismQuiz.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = magnetismQuiz.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = magnetismQuiz[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / magnetismQuiz.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === magnetismQuiz.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
-        }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = magnetismQuiz[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
-        }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < magnetismQuiz.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
-        }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${magnetismQuiz.length}`;
-            
-            // Set score message
-            if (score === magnetismQuiz.length) {
-                scoreText.textContent = "Perfect! You're a magnetism and EM effects expert!";
-            } else if (score >= magnetismQuiz.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of magnetic principles!";
-            } else if (score >= magnetismQuiz.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of magnetism!";
-            } else if (score >= magnetismQuiz.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing magnetic effects problems!";
-            } else {
-                scoreText.textContent = "Keep studying! Magnetic effects are fundamental to electromagnetism!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
-        }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(magnetismQuiz.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
-    </script>
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "In semiconductors at 0 K, the valence band is", o: ["Empty", "Partially filled", "Completely filled", "Overlapping CB"], c: 2, exp: "No thermal excitation → VB full, CB empty" },
+        { q: "Energy gap in silicon is", o: ["0.3 eV", "0.7 eV", "1.1 eV", "3.0 eV"], c: 2, exp: "Si: 1.1 eV, Ge: 0.7 eV" },
+        { q: "In n-type semiconductor, majority carriers are", o: ["Holes", "Electrons", "Both equal", "Ions"], c: 1, exp: "Pentavalent doping → excess electrons" },
+        { q: "Knee voltage for silicon diode is", o: ["0.3 V", "0.7 V", "1.0 V", "5 V"], c: 1, exp: "Cut-in voltage ≈ 0.7 V for Si" },
+        { q: "In forward bias, p-n junction offers", o: ["High resistance", "Low resistance", "Infinite resistance", "Zero resistance"], c: 1, exp: "Barrier height reduces → large current" },
+        { q: "Reverse saturation current in diode is due to", o: ["Majority carriers", "Minority carriers", "Zener effect", "Photons"], c: 1, exp: "Thermally generated minority carriers" },
+        { q: "Full-wave rectifier has ripple factor", o: ["1.21", "0.48", "0.8", "0"], c: 1, exp: "FWR ripple = 0.48, HWR = 1.21" },
+        { q: "Efficiency of full-wave rectifier is", o: ["40.6%", "81.2%", "100%", "50%"], c: 1, exp: "η = 81.2% for ideal FWR" },
+        { q: "Photodiode is operated in", o: ["Forward bias", "Reverse bias", "Zero bias", "High forward"], c: 1, exp: "Reverse bias → wider depletion → more sensitivity" },
+        { q: "Solar cell works on", o: ["Photoelectric effect", "Photovoltaic effect", "Thermionic emission", "Zener effect"], c: 1, exp: "Direct conversion of light → electricity" },
+        { q: "Zener diode is used as", o: ["Rectifier", "Amplifier", "Voltage regulator", "Oscillator"], c: 2, exp: "Operates in breakdown region safely" },
+        { q: "In CE configuration, input is between", o: ["Base & emitter", "Collector & emitter", "Base & collector", "Emitter only"], c: 0, exp: "Most common: Base-Emitter input" },
+        { q: "Current gain β = ", o: ["I_E / I_B", "I_C / I_B", "I_B / I_C", "I_C / I_E"], c: 1, exp: "β = I_C / I_B (typically 50–300)" },
+        { q: "In transistor, active region is used for", o: ["Switching", "Amplification", "Cut-off", "Oscillation"], c: 1, exp: "Linear region → amplification" },
+        { q: "Saturation region in transistor acts as", o: ["Open switch", "Closed switch", "Amplifier", "Rectifier"], c: 1, exp: "Both junctions forward → ON state" },
+        { q: "NOT gate using transistor is also called", o: ["Amplifier", "Oscillator", "Inverter", "Buffer"], c: 2, exp: "High input → low output and vice-versa" },
+        { q: "PIV of bridge rectifier is", o: ["V_m", "2V_m", "V_m/2", "4V_m"], c: 0, exp: "Bridge: PIV = V_m (advantage over center-tap)" },
+        { q: "In p-type semiconductor, dopant is", o: ["Pentavalent", "Trivalent", "Tetravalent", "Hexavalent"], c: 1, exp: "B, Ga, In → acceptor impurities" },
+        { q: "Dynamic resistance of diode is", o: ["ΔV/ΔI", "ΔI/ΔV", "V/I", "Constant"], c: 0, exp: "Slope of I-V curve" },
+        { q: "Transistor as switch operates in", o: ["Active region only", "Cut-off & saturation", "Active & cut-off", "Only saturation"], c: 1, exp: "OFF = cut-off, ON = saturation" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Electronics Champion!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Almost There!" :
+                    correct >= 8 ? "Good! Revise Diode & Transistor" : "Time to Master Electronic Devices!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
 </body>
 </html>
