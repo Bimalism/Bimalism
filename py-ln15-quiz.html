@@ -3,708 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics: Waves Quiz</title>
+    <title>EMI & AC Quiz - 20 Questions | JEE + NEET 2025-26</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0d47a1, #1565c0, #1976d2);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #0d47a1, #1565c0);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wave-animation {
-            position: absolute;
-            width: 120px;
-            height: 80px;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .wave {
-            position: absolute;
-            width: 100px;
-            height: 40px;
-            border: 3px solid #ff9800;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: wave-expand 2s ease-out infinite;
-        }
-        
-        .wave:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        
-        .wave:nth-child(3) {
-            animation-delay: 1s;
-        }
-        
-        @keyframes wave-expand {
-            0% { transform: scale(0.1); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #0d47a1, #1565c0);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #0d47a1;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #e3f2fd;
-            border-color: #0d47a1;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #0d47a1;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #0d47a1, #1565c0);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #0d47a1;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #0d47a1;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #0d47a1, #1565c0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #0d47a1, #1565c0);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .formula-highlight {
-            background-color: #e3f2fd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .wave-law {
-            background-color: #e1f5fe;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #0288d1;
-            font-style: italic;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .wave-animation {
-                display: none;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #ff6f00, #ff8f00, #ffa726); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #e65100, #ff6f00); color: white; padding: 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #fff3e0; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #ff6f00; color: white; }
+        .btn-reset { background: #ffa726; color: white; }
+        .btn-submit { background: #e65100; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #ffe0b2; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #e65100; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #e65100; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #fff3e0; padding: 25px; border-radius: 12px; border-left: 6px solid #ff8f00; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #e65100; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #ffe0b2; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #ff6f00; background: #fff3e0; }
+        .option.selected { border-color: #e65100; background: #ffe0b2; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #e65100; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #e65100; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #ff8f00; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #fffde7; border-radius: 8px; border-left: 4px solid #ff8f00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="wave-animation">
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-            </div>
-            <h1>Physics: Waves</h1>
-            <div class="subtitle">Test your knowledge of wave properties, behavior, and phenomena</div>
-        </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
-            </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Waves</div>
-                    <div>Level: Advanced</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>                
-            </div>
+<div class="container">
+    <header>
+        <h1>EMI & Alternating Current</h1>
+        <p class="subtitle">20 JEE-Level Questions • Faraday • Lenz • LCR • Resonance • Transformer • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
         </div>
     </div>
 
-    <script>
-        const wavesQuiz = [
-            {
-                q: "What is the relationship between wave speed (v), frequency (f), and wavelength (λ)?",
-                o: ["v = fλ", "v = f/λ", "v = λ/f", "v = f²λ"],
-                a: 0,
-                exp: "The fundamental wave equation is v = fλ, where v is wave speed, f is frequency, and λ is wavelength."
-            },
-            {
-                q: "Which type of wave requires a medium to propagate?",
-                o: ["Mechanical waves", "Electromagnetic waves", "Both mechanical and electromagnetic", "Neither requires a medium"],
-                a: 0,
-                exp: "Mechanical waves (like sound waves) require a material medium to propagate, while electromagnetic waves can travel through vacuum."
-            },
-            {
-                q: "What happens to the frequency of a wave when it passes from one medium to another?",
-                o: ["Remains constant", "Increases", "Decreases", "Becomes zero"],
-                a: 0,
-                exp: "Frequency remains constant when a wave passes between media. The wavelength and speed change to maintain v = fλ."
-            },
-            {
-                q: "The bending of waves around obstacles is called:",
-                o: ["Diffraction", "Refraction", "Reflection", "Interference"],
-                a: 0,
-                exp: "Diffraction is the bending of waves around obstacles or through openings. It's most noticeable when the obstacle size is comparable to the wavelength."
-            },
-            {
-                q: "When two waves meet and their displacements add together, this is called:",
-                o: ["Superposition", "Polarization", "Dispersion", "Modulation"],
-                a: 0,
-                exp: "The principle of superposition states that when two or more waves overlap, the resultant displacement is the sum of the individual displacements."
-            },
-            {
-                q: "What type of interference occurs when crest meets crest?",
-                o: ["Constructive interference", "Destructive interference", "Partial interference", "No interference"],
-                a: 0,
-                exp: "Constructive interference occurs when waves are in phase (crest meets crest or trough meets trough), resulting in increased amplitude."
-            },
-            {
-                q: "The number of complete waves passing a point per second is called:",
-                o: ["Frequency", "Wavelength", "Amplitude", "Period"],
-                a: 0,
-                exp: "Frequency (f) is measured in Hertz (Hz) and represents the number of complete wave cycles passing a point per second."
-            },
-            {
-                q: "What is the amplitude of a wave?",
-                o: ["Maximum displacement from equilibrium", "Distance between two crests", "Time for one complete cycle", "Speed of wave propagation"],
-                a: 0,
-                exp: "Amplitude is the maximum displacement of particles from their equilibrium position. It determines the wave's intensity or loudness (for sound)."
-            },
-            {
-                q: "When light waves change direction as they pass from one medium to another, this is called:",
-                o: ["Refraction", "Reflection", "Diffraction", "Dispersion"],
-                a: 0,
-                exp: "Refraction is the bending of waves when they pass from one medium to another due to a change in speed. This is described by Snell's Law."
-            },
-            {
-                q: "What phenomenon occurs when two waves of slightly different frequencies interfere?",
-                o: ["Beats", "Harmonics", "Resonance", "Polarization"],
-                a: 0,
-                exp: "Beats occur when two waves of similar frequencies interfere, producing a periodic variation in amplitude at a frequency equal to the difference between the two frequencies."
-            },
-            {
-                q: "The distance between two consecutive points in phase on a wave is called:",
-                o: ["Wavelength", "Amplitude", "Frequency", "Period"],
-                a: 0,
-                exp: "Wavelength (λ) is the distance between two consecutive points that are in phase, such as crest to crest or trough to trough."
-            },
-            {
-                q: "What type of wave oscillates perpendicular to its direction of propagation?",
-                o: ["Transverse wave", "Longitudinal wave", "Surface wave", "Standing wave"],
-                a: 0,
-                exp: "In transverse waves, the particle displacement is perpendicular to the direction of wave propagation. Examples include electromagnetic waves and waves on a string."
-            },
-            {
-                q: "Sound waves are examples of:",
-                o: ["Longitudinal waves", "Transverse waves", "Electromagnetic waves", "Surface waves"],
-                a: 0,
-                exp: "Sound waves are longitudinal waves where particle displacement is parallel to the direction of wave propagation, creating compressions and rarefactions."
-            },
-            {
-                q: "What is the phenomenon where waves spread out after passing through a small opening?",
-                o: ["Diffraction", "Refraction", "Reflection", "Interference"],
-                a: 0,
-                exp: "Diffraction causes waves to spread out after passing through an aperture or around an obstacle. The amount of diffraction depends on the ratio of wavelength to opening size."
-            },
-            {
-                q: "When a wave bounces off a surface, this is called:",
-                o: ["Reflection", "Refraction", "Diffraction", "Absorption"],
-                a: 0,
-                exp: "Reflection occurs when a wave encounters a boundary and bounces back into the original medium. The angle of incidence equals the angle of reflection."
-            },
-            {
-                q: "What is the Doppler effect?",
-                o: ["Change in frequency due to relative motion", "Change in amplitude due to distance", "Change in wavelength due to medium", "Change in speed due to temperature"],
-                a: 0,
-                exp: "The Doppler effect is the change in frequency (and wavelength) of a wave in relation to an observer moving relative to the wave source."
-            },
-            {
-                q: "What type of wave can be polarized?",
-                o: ["Transverse waves", "Longitudinal waves", "Both transverse and longitudinal", "Neither can be polarized"],
-                a: 0,
-                exp: "Only transverse waves can be polarized. Polarization refers to restricting the vibration of waves to one direction perpendicular to propagation."
-            },
-            {
-                q: "What is the period of a wave?",
-                o: ["Time for one complete cycle", "Distance between two crests", "Maximum displacement", "Number of cycles per second"],
-                a: 0,
-                exp: "The period (T) is the time taken for one complete wave cycle to pass a point. It is the reciprocal of frequency: T = 1/f."
-            },
-            {
-                q: "What phenomenon occurs when an object vibrates at its natural frequency?",
-                o: ["Resonance", "Refraction", "Diffraction", "Interference"],
-                a: 0,
-                exp: "Resonance occurs when a system is driven at its natural frequency, resulting in a large amplitude of vibration. This can cause dramatic effects like breaking glass with sound."
-            },
-            {
-                q: "What is the principle behind noise-canceling headphones?",
-                o: ["Destructive interference", "Constructive interference", "Reflection", "Absorption"],
-                a: 0,
-                exp: "Noise-canceling headphones use destructive interference by generating sound waves that are 180° out of phase with ambient noise, canceling it out."
-            }
-        ];
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(wavesQuiz.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = wavesQuiz.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = wavesQuiz[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / wavesQuiz.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === wavesQuiz.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
-        }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = wavesQuiz[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
-        }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < wavesQuiz.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
-        }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${wavesQuiz.length}`;
-            
-            // Set score message
-            if (score === wavesQuiz.length) {
-                scoreText.textContent = "Perfect! You're a waves physics expert!";
-            } else if (score >= wavesQuiz.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of wave principles!";
-            } else if (score >= wavesQuiz.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of waves!";
-            } else if (score >= wavesQuiz.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing wave physics problems!";
-            } else {
-                scoreText.textContent = "Keep studying! Wave physics is fundamental to understanding many natural phenomena!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
-        }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(wavesQuiz.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
-    </script>
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Faraday’s second law gives magnitude of induced emf as", o: ["ε = dΦ/dt", "ε = –dΦ/dt", "ε = –N dΦ/dt", "ε = N dΦ/dt"], c: 2, exp: "ε = –N dΦ_B/dt (negative sign from Lenz)" },
+        { q: "Lenz’s law is based on conservation of", o: ["Charge", "Energy", "Momentum", "Mass"], c: 1, exp: "Induced current opposes the cause → conserves energy" },
+        { q: "Motional emf in a rod moving perpendicular to B is", o: ["B l v", "B l² v", "B l v²", "(1/2)B l v"], c: 0, exp: "ε = B l v (l ⊥ v ⊥ B)" },
+        { q: "Eddy currents are minimized by", o: ["Using solid core", "Laminating the core", "Increasing frequency", "Using copper"], c: 1, exp: "Insulated thin sheets reduce circulating paths" },
+        { q: "Self inductance of a solenoid is", o: ["μ₀ N A / l", "μ₀ N² A / l", "μ₀ N l / A", "μ₀ N² l / A"], c: 1, exp: "L = μ₀ N² A / l" },
+        { q: "Energy stored in inductor is", o: ["(1/2) L I", "(1/2) L I²", "L I²", "(1/2) Q²/L"], c: 1, exp: "U = (1/2) L I²" },
+        { q: "RMS value of AC is", o: ["I₀", "I₀/√2", "I₀ √2", "2 I₀"], c: 1, exp: "I_rms = I₀/√2 ≈ 0.707 I₀" },
+        { q: "In pure inductive circuit, phase difference between V and I is", o: ["0°", "90° (I lags V)", "90° (I leads V)", "180°"], c: 1, exp: "Current lags voltage by 90°" },
+        { q: "Inductive reactance X_L =", o: ["1/(ωC)", "ωL", "R", "ω/L"], c: 1, exp: "X_L = ωL" },
+        { q: "Resonance frequency in LCR series circuit is", o: ["1/(2π√(LC))", "√(LC)", "1/(√(LC))", "2π√(LC)"], c: 0, exp: "f₀ = 1/(2π√(LC))" },
+        { q: "At resonance, impedance Z is", o: ["Maximum", "Minimum (= R)", "Zero", "Infinite"], c: 1, exp: "X_L = X_C → Z = R" },
+        { q: "Power factor at resonance is", o: ["0", "1", "0.5", "∞"], c: 1, exp: "cosφ = R/Z = 1" },
+        { q: "Quality factor Q of series LCR is", o: ["ω₀L/R", "R/(ω₀L)", "ω₀C/R", "1/(ω₀CR)"], c: 0, exp: "Q = ω₀L/R = 1/(ω₀CR)" },
+        { q: "In LC oscillations, frequency is", o: ["1/(2π√(LC))", "1/(π√(LC))", "√(LC)", "2π/√(LC)"], c: 0, exp: "Same as resonance frequency" },
+        { q: "In a step-up transformer", o: ["V_s < V_p", "V_s > V_p", "I_s > I_p", "N_s = N_p"], c: 1, exp: "V_s/V_p = N_s/N_p > 1" },
+        { q: "Transformer works on", o: ["DC only", "AC only", "Both AC & DC", "Neither"], c: 1, exp: "Requires changing flux → AC" },
+        { q: "Average power consumed in pure capacitor is", o: ["V I", "Zero", "V I / 2", "V I cos90°"], c: 1, exp: "cos90° = 0 → P_avg = 0" },
+        { q: "Mutual inductance M is maximum when coupling coefficient k =", o: ["0", "0.5", "1", "∞"], c: 2, exp: "M = k √(L₁ L₂), k=1 for perfect coupling" },
+        { q: "In AC generator, slip rings are used to get", o: ["DC output", "AC output", "Pulsed DC", "No output"], c: 1, exp: "Slip rings preserve sinusoidal AC" },
+        { q: "Laminated core in transformer reduces", o: ["Copper loss", "Eddy current loss", "Hysteresis loss", "Both B & C"], c: 1, exp: "Lamination breaks eddy current paths" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "EMI & AC Legend!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Almost There!" :
+                    correct >= 8 ? "Good! Revise LCR & Resonance" : "Time to Master EMI & AC!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
 </body>
 </html>
