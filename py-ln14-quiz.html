@@ -3,701 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Electromagnetic Waves Quiz - 20 Questions | JEE + NEET</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #006064, #00838f, #0097a7);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #006064, #00838f);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .oscillator {
-            position: absolute;
-            width: 120px;
-            height: 80px;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .pendulum {
-            width: 4px;
-            height: 60px;
-            background: #ff9800;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform-origin: top center;
-            animation: pendulum-swing 2s ease-in-out infinite;
-        }
-        
-        .pendulum-bob {
-            width: 20px;
-            height: 20px;
-            background: #ff9800;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .wave {
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: #ff9800;
-            top: 20px;
-            left: -30px;
-            animation: wave-motion 3s linear infinite;
-            border-radius: 2px;
-        }
-        
-        @keyframes pendulum-swing {
-            0%, 100% { transform: rotate(-30deg); }
-            50% { transform: rotate(30deg); }
-        }
-        
-        @keyframes wave-motion {
-            0% { transform: translateX(0px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(100px); opacity: 0; }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #006064, #00838f);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #006064;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #e0f2f1;
-            border-color: #006064;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #006064;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #006064, #00838f);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #006064;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #006064;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #006064, #00838f);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #006064, #00838f);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .formula-highlight {
-            background-color: #e0f2f1;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .oscillation-law {
-            background-color: #e1f5fe;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #0288d1;
-            font-style: italic;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .oscillator {
-                display: none;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #00695c, #00897b, #009688); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #004d40, #00695c); color: white; padding: 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #e0f2f1; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #009688; color: white; }
+        .btn-reset { background: #4db6ac; color: white; }
+        .btn-submit { background: #00695c; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #b2dfdb; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #00695c; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #00695c; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #e0f2f1; padding: 25px; border-radius: 12px; border-left: 6px solid #009688; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #00695c; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #b2dfdb; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #009688; background: #e0f2f1; }
+        .option.selected { border-color: #00695c; background: #b2dfdb; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #00695c; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #00695c; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #009688; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #fffde7; border-radius: 8px; border-left: 4px solid #ff8f00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="oscillator">
-                <div class="pendulum">
-                    <div class="pendulum-bob"></div>
-                </div>
-                <div class="wave"></div>
-            </div>
-            <h1>Chapter : 14 Oscillation</h1>
-            <div class="subtitle">Test your knowledge of simple harmonic motion, pendulums, and waves</div>
-        </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">15</span></span>
-                    <span>Score: <span id="score">0</span>/15</span>
-                </div>
-            </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Oscillation</div>
-                    <div>Level: Intermediate</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/15</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
-            </div>
+<div class="container">
+    <header>
+        <h1>Electromagnetic Waves</h1>
+        <p class="subtitle">20 High-Yield Questions • Displacement Current • Characteristics • Spectrum • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
         </div>
     </div>
 
-    <script>
-        const oscillationQuiz = [
-            {
-                q: "What is the time period of a simple pendulum?",
-                o: ["T = 2π√(L/g)", "T = 2π√(g/L)", "T = 2π√(m/k)", "T = 2π√(k/m)"],
-                a: 0,
-                exp: "The time period of a simple pendulum is T = 2π√(L/g), where L is the length of the pendulum and g is the acceleration due to gravity."
-            },
-            {
-                q: "In simple harmonic motion, the acceleration is:",
-                o: ["Proportional to displacement and opposite in direction", "Proportional to displacement and in the same direction", "Constant", "Zero"],
-                a: 0,
-                exp: "In SHM, acceleration a = -ω²x, which means it's directly proportional to displacement but in the opposite direction."
-            },
-            {
-                q: "What is the condition for a motion to be simple harmonic?",
-                o: ["Acceleration ∝ -displacement", "Velocity ∝ displacement", "Acceleration is constant", "Velocity is constant"],
-                a: 0,
-                exp: "For motion to be simple harmonic, the acceleration must be directly proportional to the displacement from the mean position and directed towards it."
-            },
-            {
-                q: "The energy in simple harmonic motion is:",
-                o: ["Conserved", "Increasing with time", "Decreasing with time", "Zero at mean position"],
-                a: 0,
-                exp: "In ideal SHM (without damping), the total energy (sum of kinetic and potential energy) remains constant."
-            },
-            {
-                q: "What happens to the time period of a simple pendulum if its length is quadrupled?",
-                o: ["It doubles", "It halves", "It quadruples", "It remains the same"],
-                a: 0,
-                exp: "Since T ∝ √L, if length becomes 4L, time period becomes √4 = 2 times the original period."
-            },
-            {
-                q: "The maximum velocity in SHM occurs when the particle is at:",
-                o: ["Mean position", "Extreme position", "Any position", "Midway between mean and extreme"],
-                a: 0,
-                exp: "In SHM, velocity is maximum at the mean position (x=0) and zero at the extreme positions."
-            },
-            {
-                q: "What is the phase difference between displacement and velocity in SHM?",
-                o: ["π/2", "π", "0", "π/4"],
-                a: 0,
-                exp: "In SHM, velocity leads displacement by a phase of π/2 radians (90 degrees)."
-            },
-            {
-                q: "For a mass-spring system, the time period depends on:",
-                o: ["Mass and spring constant", "Amplitude only", "Gravity only", "Mass only"],
-                a: 0,
-                exp: "The time period of a mass-spring system is T = 2π√(m/k), where m is mass and k is spring constant."
-            },
-            {
-                q: "Damping in oscillatory motion causes:",
-                o: ["Gradual decrease in amplitude", "Increase in frequency", "Increase in amplitude", "No change in motion"],
-                a: 0,
-                exp: "Damping forces (like friction) cause the amplitude of oscillation to gradually decrease over time."
-            },
-            {
-                q: "Resonance occurs when:",
-                o: ["Driving frequency equals natural frequency", "Amplitude is maximum", "Damping is zero", "All of the above"],
-                a: 0,
-                exp: "Resonance occurs when the frequency of the driving force matches the natural frequency of the oscillating system."
-            },
-            {
-                q: "The restoring force in SHM is directed:",
-                o: ["Towards the mean position", "Away from the mean position", "In the direction of motion", "Perpendicular to motion"],
-                a: 0,
-                exp: "The restoring force always acts towards the mean (equilibrium) position in SHM."
-            },
-            {
-                q: "What is the unit of the spring constant k?",
-                o: ["N/m", "N·m", "m/N", "J/s"],
-                a: 0,
-                exp: "The spring constant k has units of N/m (newtons per meter), as per Hooke's Law F = -kx."
-            },
-            {
-                q: "In a simple pendulum, if the mass of the bob is doubled, the time period:",
-                o: ["Remains the same", "Doubles", "Halves", "Becomes four times"],
-                a: 0,
-                exp: "The time period of a simple pendulum is independent of the mass of the bob. It depends only on length and gravity."
-            },
-            {
-                q: "The kinetic energy of a particle in SHM is maximum when:",
-                o: ["It passes through the mean position", "It is at extreme position", "It is at half amplitude", "It is at quarter amplitude"],
-                a: 0,
-                exp: "Kinetic energy is maximum at the mean position where velocity is maximum, and zero at extreme positions."
-            },
-            {
-                q: "For small oscillations, the motion of a simple pendulum is approximately:",
-                o: ["Simple harmonic", "Circular", "Parabolic", "Linear"],
-                a: 0,
-                exp: "For small angular displacements (θ < 10°), the restoring force is approximately proportional to displacement, making the motion simple harmonic."
-            }
-        ];
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(oscillationQuiz.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = oscillationQuiz.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = oscillationQuiz[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / oscillationQuiz.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === oscillationQuiz.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
-        }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = oscillationQuiz[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
-        }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < oscillationQuiz.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
-        }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${oscillationQuiz.length}`;
-            
-            // Set score message
-            if (score === oscillationQuiz.length) {
-                scoreText.textContent = "Perfect! You're an oscillation expert!";
-            } else if (score >= oscillationQuiz.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of oscillation principles!";
-            } else if (score >= oscillationQuiz.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of oscillation!";
-            } else if (score >= oscillationQuiz.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing oscillation problems!";
-            } else {
-                scoreText.textContent = "Keep studying! Oscillation is fundamental to physics!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
-        }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(oscillationQuiz.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
-    </script>
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Displacement current was introduced by", o: ["Ampere", "Faraday", "Maxwell", "Hertz"], c: 2, exp: "Maxwell added I_d = ε₀ dΦ_E/dt to make Ampere’s law consistent" },
+        { q: "Displacement current exists", o: ["Only in conductors", "Only in insulators", "Wherever electric field is changing with time", "Only in vacuum"], c: 2, exp: "I_d = ε₀ dΦ_E/dt → depends on changing E" },
+        { q: "Inside the plates of a charging capacitor, conduction current is", o: ["Maximum", "Zero", "Equal to displacement current", "Infinite"], c: 1, exp: "No free charges move between plates → I_c = 0, but I_d = I" },
+        { q: "Modified Ampere’s circuital law is", o: ["∮ B·dl = μ₀ I", "∮ B·dl = μ₀ (I_c + I_d)", "∮ B·dl = 0", "∮ E·dl = μ₀ I"], c: 1, exp: "∮ B·dl = μ₀ (I_c + ε₀ dΦ_E/dt)" },
+        { q: "EM waves are", o: ["Longitudinal", "Transverse", "Both", "Neither"], c: 1, exp: "E ⊥ B ⊥ direction of propagation" },
+        { q: "In EM waves, E and B are", o: ["In phase", "90° out of phase", "180° out of phase", "Random phase"], c: 0, exp: "E and B oscillate in phase" },
+        { q: "The ratio E₀/B₀ in free space is equal to", o: ["c", "1/c", "c²", "μ₀ε₀"], c: 0, exp: "E₀/B₀ = c = 3×10⁸ m/s" },
+        { q: "Speed of EM waves in vacuum is", o: ["1/√(μ₀ε₀)", "√(μ₀/ε₀)", "√(μ₀ε₀)", "μ₀ε₀"], c: 0, exp: "c = 1/√(μ₀ε₀)" },
+        { q: "Poynting vector S represents", o: ["Electric field", "Magnetic field", "Energy flow per unit area per unit time", "Momentum"], c: 2, exp: "S = (1/μ₀) E × B" },
+        { q: "Average intensity of EM wave is proportional to", o: ["E₀", "E₀²", "1/E₀", "E₀³"], c: 1, exp: "I = (1/2) c ε₀ E₀²" },
+        { q: "EM waves carry", o: ["Require medium", "Do not carry energy", "Carry both energy and momentum", "Are mechanical waves"], c: 2, exp: "They carry energy, momentum & angular momentum" },
+        { q: "Which wave has the highest frequency?", o: ["Radio waves", "Microwaves", "X-rays", "Infrared"], c: 2, exp: "γ-rays > X-rays > UV > Visible > IR > Microwave > Radio" },
+        { q: "Visible light lies between", o: ["IR and UV", "UV and X-ray", "Microwave and IR", "Radio and Microwave"], c: 0, exp: "400 nm (violet) to 700 nm (red)" },
+        { q: "Microwaves are used in", o: ["Remote controls", "Radar & 5G", "Medical imaging", "Tanning"], c: 1, exp: "Wavelength 1 mm to 0.1 m" },
+        { q: "X-rays are produced by", o: ["LC oscillations", "Bombarding metal target with fast electrons", "Radioactive decay", "Thermal radiation"], c: 1, exp: "Bremsstrahlung or characteristic radiation" },
+        { q: "Which of the following has the longest wavelength?", o: ["UV rays", "Gamma rays", "Radio waves", "Visible light"], c: 2, exp: "Radio waves (> 0.1 m)" },
+        { q: "Energy density due to electric field in EM wave is", o: ["(1/2)ε₀E²", "ε₀E²", "B²/(2μ₀)", "Both (A) & (C) are equal"], c: 3, exp: "u_E = u_B = (1/2)ε₀E² = B²/(2μ₀)" },
+        { q: "EM waves exert", o: ["No pressure", "Radiation pressure", "Only electric force", "Only magnetic force"], c: 1, exp: "P = I/c (for perfect absorber)" },
+        { q: "The part of EM spectrum detected by human eye is", o: ["Infrared", "Ultraviolet", "Visible light", "Microwave"], c: 2, exp: "400–700 nm only" },
+        { q: "All EM waves in vacuum have the same", o: ["Same wavelength", "Same frequency", "Same speed", "Different energy"], c: 2, exp: "Speed c = 3×10⁸ m/s for all" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "EM Waves Legend!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Almost There!" :
+                    correct >= 8 ? "Good! Revise Displacement Current & Spectrum" : "Time to Master EM Waves!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
 </body>
-
 </html>
