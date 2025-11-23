@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermodynamics – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#e3f2fd; padding:20px; }
+        .container { max-width:1300px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
+        header { background:linear-gradient(135deg,#0277bd,#039be5,#03a9f4); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.45rem; opacity:0.96; }
+        .nav { display:flex; background:#01579b; flex-wrap:wrap; }
+        .tab { padding:20px 35px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.1rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #80d8ff; }
+        .content { padding:55px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#0277bd; font-size:2.4rem; margin:40px 0 25px; border-bottom:5px solid #039be5; padding-bottom:12px; }
+        h3 { color:#039be5; font-size:1.8rem; margin:30px 0 15px; }
+        .def { background:#e1f5fe; border-left:8px solid #03a9f4; padding:22px; margin:30px 0; border-radius:0 12px 12px 0; line-height:1.8; }
+        .law { background:#fff3e0; border-left:8px solid #ff6f00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .law-title { font-size:1.5rem; font-weight:bold; color:#e65100; margin-bottom:12px; }
+        .form { background:#f3e5f5; padding:25px; margin:30px 0; border-radius:12px; border-left:8px solid #8e24aa; font-family:'Consolas'; font-size:1.25rem; line-height:1.9; }
+        table { width:100%; border-collapse:collapse; margin:35px 0; box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+        th { background:#0277bd; color:white; padding:18px; font-size:1.15rem; }
+        td { padding:16px 20px; border-bottom:1px solid #eee; text-align:center; }
+        tr:nth-child(even) { background:#e3f2fd; }
+        .imp { background:#fff8e1; border-left:8px solid #ffb300; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .imp h4 { color:#ff8f00; font-size:1.4rem; margin-bottom:15px; }
+        ul { margin:20px 0; padding-left:40px; line-height:2; }
+        footer { background:#01579b; color:white; text-align:center; padding:35px; font-size:1.2rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>THERMODYNAMICS</h1>
+        <p class="subtitle">Complete Chapter Summary • Class 11 Physics • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Basic Concepts</div>
+        <div class="tab" data-tab="t2">First Law</div>
+        <div class="tab" data-tab="t3">Second Law</div>
+        <div class="tab" data-tab="t4">Heat Engines</div>
+        <div class="tab" data-tab="t5">Reversible & Irreversible</div>
+        <div class="tab" data-tab="t6">Quick Revision</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1. Basic Concepts -->
+        <div class="pane active" id="t1">
+            <h2>1. Thermal Equilibrium • Heat • Work • Internal Energy</h2>
+            <div class="def">
+                <strong>Thermal Equilibrium:</strong> Two systems in contact → No net heat flow → Same temperature<br>
+                <strong>Zeroth Law:</strong> If A ↔ B and B ↔ C → A ↔ C (defines temperature)
+            </div>
+            <div class="form">
+                First Law of Thermodynamics:<br>
+                ΔU = Q − W  (or ΔU = Q + W depending on sign convention)<br>
+                ΔU → Change in internal energy (state function)<br>
+                Q → Heat added to system<br>
+                W → Work done by system
+            </div>
+            <table>
+                <tr><th>Process</th><th>Q</th><th>W (by system)</th><th>ΔU</th></tr>
+                <tr><td>Isothermal (ΔT=0)</td><td>Q = W</td><td>nRT ln(Vf/Vi)</td><td>0</td></tr>
+                <tr><td>Adiabatic (Q=0)</td><td>0</td><td>−ΔU</td><td>nCv ΔT</td></tr>
+                <tr><td>Isochoric (ΔV=0)</td><td>ΔU</td><td>0</td><td>nCv ΔT</td></tr>
+                <tr><td>Isobaric</td><td>nCp ΔT</td><td>P ΔV = nR ΔT</td><td>nCv ΔT</td></tr>
+            </table>
+        </div>
+
+        <!-- 2. First Law -->
+        <div class="pane" id="t2">
+            <h2>2. First Law of Thermodynamics</h2>
+            <div class="law">
+                <div class="law-title">Statement</div>
+                <p>The total energy of an isolated system remains constant.<br>
+                ΔU = Q − W  (Energy conservation applied to heat)</p>
+            </div>
+            <div class="def">
+                Internal energy (U) is a <strong>state function</strong><br>
+                Q and W are <strong>path functions</strong><br>
+                Cyclic process: ∮dU = 0 → ∮Q = ∮W
+            </div>
+        </div>
+
+        <!-- 3. Second Law -->
+        <div class="pane" id="t3">
+            <h2>3. Second Law of Thermodynamics</h2>
+            <table>
+                <tr><th>Statement</th><th>Formulation</th></tr>
+                <tr><td>Kelvin-Planck</td><td>Impossible to build an engine that converts 100% heat into work</td></tr>
+                <tr><td>Clausius</td><td>Heat cannot flow from colder to hotter body without external work</td></tr>
+            </table>
+            <div class="def">
+                <strong>Entropy Statement:</strong> In any spontaneous process, total entropy of universe increases<br>
+                ΔS_universe ≥ 0  (=0 for reversible)
+            </div>
+        </div>
+
+        <!-- 4. Heat Engines & Refrigerators -->
+        <div class="pane" id="t4">
+            <h2>4. Heat Engines & Refrigerators</h2>
+            <table>
+                <tr><th>Device</th><th>Efficiency/ COP</th><th>Formula</th></tr>
+                <tr><td>Heat Engine</td><td>η</td><td>η = W/Q₁ = 1 − Q₂/Q₁</td></tr>
+                <tr><td>Carnot Engine</td><td>η_max</td><td>η = 1 − T₂/T₁</td></tr>
+                <tr><td>Refrigerator</td><td>COP</td><td>COP = Q₂/(Q₁−Q₂) = T₂/(T₁−T₂)</td></tr>
+            </table>
+            <div class="imp">
+                <h4>Carnot Cycle (Reversible)</h4>
+                1. Isothermal expansion (Q₁ absorbed)<br>
+                2. Adiabatic expansion<br>
+                3. Isothermal compression (Q₂ rejected)<br>
+                4. Adiabatic compression
+            </div>
+        </div>
+
+        <!-- 5. Reversible & Irreversible -->
+        <div class="pane" id="t5">
+            <h2>5. Reversible vs Irreversible Processes</h2>
+            <table>
+                <tr><th>Reversible</th><th>Irreversible</th></tr>
+                <tr><td>Quasi-static + no dissipation</td><td>Finite speed, friction, etc.</td></tr>
+                <tr><td>Maximum work</td><td>Less work</td></tr>
+                <tr><td>ΔS_universe = 0</td><td>ΔS_universe > 0</td></tr>
+                <tr><td>Example: Slow isothermal expansion</td><td>Free expansion, joule heating</td></tr>
+            </table>
+            <div class="def">
+                <strong>Free Expansion:</strong> Q=0, W=0 → ΔU=0 → ΔT=0 (ideal gas)<br>
+                But irreversible → ΔS > 0
+            </div>
+        </div>
+
+        <!-- 6. Quick Revision -->
+        <div class="pane" id="t6">
+            <h2>Quick Revision – Must Remember</h2>
+            <div class="imp">
+                <ul style="line-height:2.4; font-size:1.2rem;">
+                    <li>ΔU = Q − W (work by system)</li>
+                    <li>Isothermal: ΔU=0 → Q=W</li>
+                    <li>Adiabatic: Q=0 → ΔU=−W</li>
+                    <li>First Law: Energy conservation</li>
+                    <li>Second Law: η < 100%, Entropy increases</li>
+                    <li>Carnot efficiency: 1 − T_cold/T_hot</li>
+                    <li>Refrigerator COP = T_cold/(T_hot − T_cold)</li>
+                    <li>Reversible → quasi-static + no friction</li>
+                    <li>Free expansion of ideal gas: ΔT=0, ΔU=0, W=0, Q=0 but irreversible</li>
+                    <li>ΔS_universe ≥ 0 (equality for reversible)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Thermodynamics • Full Summary with Laws, Carnot Cycle, Heat Engines & Entropy • Made for Future IITians • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

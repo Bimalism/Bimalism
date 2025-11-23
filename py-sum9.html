@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscillations & Waves – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#f3e5f5; padding:20px; }
+        .container { max-width:1300px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
+        header { background:linear-gradient(135deg,#8e24aa,#9c27b0,#ab47bc); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.45rem; opacity:0.96; }
+        .nav { display:flex; background:#4a148c; flex-wrap:wrap; }
+        .tab { padding:20px 35px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.1rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #e040fb; }
+        .content { padding:55px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#8e24aa; font-size:2.4rem; margin:40px 0 25px; border-bottom:5px solid #9c27b0; padding-bottom:12px; }
+        h3 { color:#9c27b0; font-size:1.8rem; margin:30px 0 15px; }
+        .def { background:#f3e5f5; border-left:8px solid #ab47bc; padding:22px; margin:30px 0; border-radius:0 12px 12px 0; line-height:1.8; }
+        .law { background:#e8f5e9; border-left:8px solid #43a047; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .law-title { font-size:1.5rem; font-weight:bold; color:#2e7d32; margin-bottom:12px; }
+        .form { background:#e1f5fe; padding:25px; margin:30px 0; border-radius:12px; border-left:8px solid #039be5; font-family:'Consolas'; font-size:1.25rem; line-height:1.9; }
+        table { width:100%; border-collapse:collapse; margin:35px 0; box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+        th { background:#8e24aa; color:white; padding:18px; font-size:1.15rem; }
+        td { padding:16px 20px; border-bottom:1px solid #eee; text-align:center; }
+        tr:nth-child(even) { background:#f8f0fc; }
+        .imp { background:#fff3e0; border-left:8px solid #ff8f00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .imp h4 { color:#e65100; font-size:1.4rem; margin-bottom:15px; }
+        ul { margin:20px 0; padding-left:40px; line-height:2; }
+        footer { background:#4a148c; color:white; text-align:center; padding:35px; font-size:1.2rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>OSCILLATIONS & WAVES</h1>
+        <p class="subtitle">Complete Chapter Summary • SHM + Wave Motion + Doppler • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Periodic Motion</div>
+        <div class="tab" data-tab="t2">Simple Harmonic Motion</div>
+        <div class="tab" data-tab="t3">Energy in SHM</div>
+        <div class="tab" data-tab="t4">Spring & Pendulum</div>
+        <div class="tab" data-tab="t5">Wave Motion</div>
+        <div class="tab" data-tab="t6">Superposition & Doppler</div>
+        <div class="tab" data-tab="t7">Quick Revision</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1. Periodic Motion -->
+        <div class="pane active" id="t1">
+            <h2>1. Periodic Motion • Frequency • Time Period</h2>
+            <div class="def">
+                <strong>Periodic Motion:</strong> Motion that repeats after a fixed time interval<br>
+                <strong>Time Period (T):</strong> Time for one complete oscillation → Unit: s<br>
+                <strong>Frequency (f):</strong> f = 1/T → Unit: Hz<br>
+                <strong>Angular frequency (ω):</strong> ω = 2πf = 2π/T
+            </div>
+            <div class="form">
+                General equation: x(t) = A cos(ωt + φ)  or  A sin(ωt + φ)<br>
+                Velocity: v = −A ω sin(ωt + φ)<br>
+                Acceleration: a = −A ω² cos(ωt + φ) = −ω² x
+            </div>
+        </div>
+
+        <!-- 2. SHM -->
+        <div class="pane" id="t2">
+            <h2>2. Simple Harmonic Motion (SHM)</h2>
+            <div class="law">
+                <div class="law-title">Defining Equation of SHM</div>
+                <p>d²x/dt² + ω² x = 0  →  a ∝ −x (restoring)</p>
+            </div>
+            <div class="form">
+                Solution: x = A cos(ωt + φ)<br>
+                Maximum displacement (Amplitude): A<br>
+                Maximum velocity: v_max = A ω<br>
+                Maximum acceleration: a_max = A ω²
+            </div>
+        </div>
+
+        <!-- 3. Energy -->
+        <div class="pane" id="t3">
+            <h2>3. Energy in Simple Harmonic Motion</h2>
+            <div class="form">
+                Kinetic Energy: KE = (1/2) m ω² (A² − x²)<br>
+                Potential Energy: PE = (1/2) m ω² x²<br>
+                Total Energy: E = (1/2) m ω² A² = constant
+            </div>
+            <div class="imp">
+                <h4>Key Points</h4>
+                • At mean position (x=0): KE max, PE = 0<br>
+                • At extreme (x=±A): KE = 0, PE max<br>
+                • KE + PE = constant
+            </div>
+        </div>
+
+        <!-- 4. Spring & Pendulum -->
+        <div class="pane" id="t4">
+            <h2>4. Spring-Mass System & Simple Pendulum</h2>
+            <table>
+                <tr><th>System</th><th>Restoring Force</th><th>ω</th><th>T</th></tr>
+                <tr><td>Spring (k)</td><td>−kx</td><td>√(k/m)</td><td>2π √(m/k)</td></tr>
+                <tr><td>Spring combo (series)</td><td>—</td><td>√(k_eq/m)</td><td>k_eq = k₁k₂/(k₁+k₂)</td></tr>
+                <tr><td>Spring combo (parallel)</td><td>—</td><td>√((k₁+k₂)/m)</td><td>—</td></tr>
+                <tr><td>Simple Pendulum</td><td>−(mg/L)θ (small θ)</td><td>√(g/L)</td><td>2π √(L/g)</td></tr>
+            </table>
+            <div class="def">
+                <strong>Resonance:</strong> When frequency of driving force = natural frequency → amplitude maximum
+            </div>
+        </div>
+
+        <!-- 5. Wave Motion -->
+        <div class="pane" id="t5">
+            <h2>5. Wave Motion • Types • Speed</h2>
+            <table>
+                <tr><th>Type</th><th>Particle Motion</th><th>Examples</th></tr>
+                <tr><td>Transverse</td><td>⊥ to wave direction</td><td>String wave, light</td></tr>
+                <tr><td>Longitudinal</td><td>∥ to wave direction</td><td>Sound wave</td></tr>
+            </table>
+            <div class="form">
+                Wave equation: y = A sin(kx − ωt + φ)<br>
+                Wave number: k = 2π/λ<br>
+                Wave speed: v = f λ = ω/k
+            </div>
+            <div class="form">
+                Speed on string: v = √(T/μ)  (T = tension, μ = mass/length)
+            </div>
+        </div>
+
+        <!-- 6. Superposition & Doppler -->
+        <div class="pane" id="t6">
+            <h2>6. Superposition • Reflection • Doppler Effect</h2>
+            <div class="law">
+                <div class="law-title">Principle of Superposition</div>
+                When two or more waves meet, resultant displacement = vector sum of individual displacements
+            </div>
+            <div class="def">
+                <strong>Reflection:</strong><br>
+                Fixed end → π phase change<br>
+                Free end → No phase change
+            </div>
+            <div class="form">
+                Doppler Effect (sound):<br>
+                f' = f (v ± v₀)/(v ± vₛ)<br>
+                • v₀ = observer speed (towards +)<br>
+                • vₛ = source speed (towards +)
+            </div>
+            <div class="imp">
+                <h4>Common Cases</h4>
+                Source moving towards stationary observer: f' = f (v/(v − vₛ))<br>
+                Observer moving towards stationary source: f' = f ((v + v₀)/v)
+            </div>
+        </div>
+
+        <!-- 7. Quick Revision -->
+        <div class="pane" id="t7">
+            <h2>Quick Revision – Must Remember Formulas</h2>
+            <div class="imp">
+                <ul style="line-height:2.4; font-size:1.2rem;">
+                    <li>x = A cos(ωt + φ)  v = −Aω sin(ωt + φ)  a = −ω²x</li>
+                    <li>T_spring = 2π√(m/k)  T_pendulum = 2π√(L/g)</li>
+                    <li>E_total = (1/2)mω²A² = (1/2)kA²</li>
+                    <li>v_wave on string = √(T/μ)</li>
+                    <li>v = fλ  ω = 2πf  k = 2π/λ</li>
+                    <li>Fixed end reflection → phase change of π</li>
+                    <li>Doppler: f' = f (v ± v₀)/(v ± vₛ)</li>
+                    <li>Resonance → maximum amplitude</li>
+                    <li>Transverse: string, EM waves  Longitudinal: sound</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Oscillations & Waves • Full Summary with SHM, Spring, Pendulum, Doppler & Superposition • Made for Future IITians • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

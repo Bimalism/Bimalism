@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics – Complete Detailed Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:#f0f7f8; color:#222; line-height:1.7; padding:20px; }
+        .container { max-width:1250px; margin:auto; background:white; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.15); }
+        header { background:linear-gradient(135deg,#006064,#0097a7); color:white; padding:35px; text-align:center; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.35rem; opacity:0.95; }
+        .nav { display:flex; background:#00838f; flex-wrap:wrap; }
+        .tab { padding:18px 28px; color:white; cursor:pointer; font-weight:600; transition:0.3s; }
+        .tab:hover { background:rgba(255,255,255,0.15); }
+        .tab.active { background:rgba(255,255,255,0.25); border-bottom:5px solid #ffca28; }
+        .content { padding:45px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.5s; }
+        @keyframes fade { from{opacity:0} to{opacity:1} }
+        h2 { color:#006064; font-size:2.1rem; margin:30px 0 20px; border-bottom:3px solid #006064; padding-bottom:8px; }
+        h3 { color:#00838f; font-size:1.6rem; margin:25px 0 12px; }
+        .def { background:#e0f7fa; border-left:6px solid #006064; padding:18px; margin:20px 0; border-radius:0 8px 8px 0; }
+        .form { background:#e8f5e8; padding:20px; margin:20px 0; border-radius:8px; border-left:6px solid #2e7d32; font-family:'Consolas',monospace; font-size:1.15rem; }
+        table { width:100%; border-collapse:collapse; margin:25px 0; }
+        th { background:#006064; color:white; padding:14px; }
+        td { padding:12px 15px; border-bottom:1px solid #ddd; }
+        tr:nth-child(even) { background:#f8ffff; }
+        .imp { background:#fff3e0; border-left:6px solid #ff9800; padding:20px; margin:25px 0; border-radius:0 8px 8px 0; }
+        .imp h4 { color:#e65100; margin-top:0; }
+        .quick { background:#f3e5f5; padding:25px; border-radius:10px; margin:30px 0; }
+        footer { background:#006064; color:white; text-align:center; padding:25px; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center;} .content{padding:20px;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>KINEMATICS – Full Detail</h1>
+        <p class="subtitle">Class 11 • JEE Main + Advanced • NEET • Boards • 2025–26</p>
+    </header>
+
+    <nav>
+        <div class="tab active" data-tab="t1">1D Motion</div>
+        <div class="tab" data-tab="t2">Graphs</div>
+        <div class="tab" data-tab="t3">Equations & Free Fall</div>
+        <div class="tab" data-tab="t4">Relative Velocity</div>
+        <div class="tab" data-tab="t5">2D & Projectile</div>
+        <div class="tab" data-tab="t6">Uniform Circular</div>
+        <div class="tab" data-tab="t7">Quick Formula</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1D Motion -->
+        <div class="pane active" id="t1">
+            <h2>1. Motion in a Straight Line</h2>
+            <table>
+                <tr><th>Quantity</th><th>Scalar/Vector</th><th>Formula</th><th>Unit</th></tr>
+                <tr><td>Distance</td><td>Scalar</td><td>Total path</td><td>m</td></tr>
+                <tr><td>Displacement</td><td>Vector</td><td>Δx = x₂ − x₁</td><td><td>m</td></tr>
+                <tr><td>Avg. Speed</td><td>Scalar</td><td>Total distance / Δt</td><td>m/s</td></tr>
+                <tr><td>Avg. Velocity</td><td>Vector</td><td>v̄ = Δx / Δt</td><td>m/s</td></tr>
+                <tr><td>Instant. Velocity</td><td>Vector</td><td>v = dx/dt</td><td>m/s</td></tr>
+                <tr><td>Acceleration</td><td>Vector</td><td>a = dv/dt</td><td>m/s²</td></tr>
+            </table>
+
+            <div class="imp">
+                <h4>Remember</h4>
+                <ul>
+                    <li>|Avg velocity| ≤ Avg speed</li>
+                    <li>Avg speed = Avg velocity only when motion is in straight line without turning back</li>
+                    <li>If body returns to starting point → displacement = 0 → avg velocity = 0</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Graphs -->
+        <div class="pane" id="t2">
+            <h2>2. Graphs Interpretation</h2>
+            <table>
+                <tr><th>Graph</th><th>Slope gives</th><th>Area gives</th></tr>
+                <tr><td>x–t</td><td>Velocity</td><td>—</td></tr>
+                <tr><td>v–t</td><td>Acceleration</td><td>Displacement</td></tr>
+                <tr><td>a–t</td><td>Jerk</td><td>Change in velocity</td></tr>
+            </table>
+
+            <h3>Shape → Motion Type</h3>
+            <table>
+                <tr><td>x–t straight inclined</td><td>Uniform velocity</td></tr>
+                <tr><td>x–t parabola</td><td>Uniform acceleration</td></tr>
+                <tr><td>v–t horizontal</td><td>Zero acceleration</td></tr>
+                <tr><td>v–t inclined</td><td>Constant acceleration</td></tr>
+            </table>
+        </div>
+
+        <!-- Equations -->
+        <div class="pane" id="t3">
+            <h2>3. Equations of Motion (Constant a)</h2>
+            <div class="form">
+                ① v = u + at<br>
+                ② s = ut + ½ at²<br>
+                ③ v² = u² + 2as<br>
+                ④ sₙₜₕ = u + a/2 (2n−1)<br>
+                ⑤ Average velocity = (u + v)/2
+            </div>
+
+            <h3>Free Fall & Motion under Gravity</h3>
+            <div class="def">
+                Take downward direction positive:<br>
+                u = 0 (if dropped), a = +g = 9.8 m/s²<br>
+                Upward throw: a = −g
+            </div>
+            <p>Time of flight (thrown up): T = 2u/g<br>
+            Max height: H = u²/2g</p>
+        </div>
+
+        <!-- Relative -->
+        <div class="pane" id="t4">
+            <h2>4. Relative Velocity</h2>
+            <div class="form">v⃗_AB = v⃗_A − v⃗_B</div>
+
+            <h3>Important 1-D Cases</h3>
+            <table>
+                <tr><td>Both same direction</td><td>v_AB = v_A − v_B</td></tr>
+                <tr><td>Opposite direction</td><td>v_AB = v_A + v_B</td></tr>
+                <tr><td>Time to cross (length l₁+l₂)</td><td>t = (l₁+l₂)/|v_AB|</td></tr>
+            </table>
+
+            <div class="imp">
+                <h4>Rain-Man Problem</h4>
+                v⃗_rm = v⃗_r − v⃗_m<br>
+                tanθ = v_r vertical / (v_r horizontal − v_man)
+            </div>
+        </div>
+
+        <!-- 2D & Projectile -->
+        <div class="pane" id="t5">
+            <h2>5. Motion in a Plane – Projectile Motion</h2>
+            <div class="form">
+                Horizontal: x = (u cosθ) t<br>
+                Vertical: y = (u sinθ) t − ½ gt²<br>
+                vₓ = u cosθ (constant)<br>
+                vᵧ = u sinθ − gt<br>
+            </div>
+
+            <h3>Key Formulae (θ = angle of projection)</h3>
+            <table>
+                <tr><td>Time of flight T</td><td>2u sinθ / g</td></tr>
+                <tr><td>Maximum height H</td><td>u² sin²θ / 2g</td></tr>
+                <tr><td>Range R</td><td>u² sin2θ / g</td></tr>
+                <tr><td>Max Range (θ)</td><td>45°</td></tr>
+                <tr><td>Equation of trajectory</td><td>y = x tanθ − gx²/(2u² cos²θ)</td></tr>
+            </table>
+
+            <div class="imp">
+                <h4>Symmetric Nature</h4>
+                Time to reach max height = T/2<br>
+                Velocity at same height is same in magnitude on upward & downward journey
+            </div>
+        </div>
+
+        <!-- UCM -->
+        <div class="pane" id="t6">
+            <h2>6. Uniform Circular Motion</h2>
+            <table>
+                <tr><td>Angular velocity ω</td><td>v/r = 2π/T = 2πf</td></tr>
+                <tr><td>Centripetal acc.</td><td>a_c = v²/r = ω²r (towards centre)</td></tr>
+                <tr><td>Period T</td><td>2πr/v</td></tr>
+                <tr><td>No tangential acceleration in UCM</td></tr>
+            </table>
+
+            <div class="imp">
+                <h4>Conical Pendulum, Banked Road, etc. use same a_c formula</h4>
+            </div>
+        </div>
+
+        <!-- Quick Formula Sheet -->
+        <div class="pane" id="t7">
+            <h2>Quick Revision Formula Sheet</h2>
+            <div class="quick">
+                <h3 style="text-align:center;color:#6a1b9a">All Important Formulae at One Place</h3>
+                <p><strong>1D (const a):</strong> v=u+at, s=ut+½at², v²=u²+2as</p>
+                <p><strong>Projectile:</strong> R = u² sin2θ/g, H = u² sin²θ/2g, T = 2u sinθ/g</p>
+                <p><strong>UCM:</strong> a_c = v²/r = ω²r, T = 2πr/v</p>
+                <p><strong>Relative:</strong> v_AB = v_A − v_B</p>
+                <p><strong>Max height velocity = 0 (only vertical component)</strong></p>
+                <p><strong>Range same for θ and (90°−θ)</strong></p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>Complete Kinematics Summary 2025 • Made with ♥ for JEE/NEET Warriors</footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties of Bulk Matter – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#fff3e0; padding:20px; }
+        .container { max-width:1300px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
+        header { background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726); color:white; padding:45px; text-align:center; }
+        h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.45rem; opacity:0.96; }
+        .nav { display:flex; background:#e65100; flex-wrap:wrap; }
+        .tab { padding:20px 35px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.1rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #fff176; }
+        .content { padding:55px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#e65100; font-size:2.4rem; margin:40px 0 25px; border-bottom:5px solid #ff8f00; padding-bottom:12px; }
+        h3 { color:#f57c00; font-size:1.8rem; margin:30px 0 15px; }
+        .def { background:#fff8e1; border-left:8px solid #ff8f00; padding:22px; margin:30px 0; border-radius:0 12px 12px 0; line-height:1.8; }
+        .law { background:#fff3e0; border-left:8px solid #fb8c00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .law-title { font-size:1.5rem; font-weight:bold; color:#e65100; margin-bottom:12px; }
+        .form { background:#e8f5e9; padding:25px; margin:30px 0; border-radius:12px; border-left:8px solid #2e7d32; font-family:'Consolas'; font-size:1.25rem; line-height:1.9; }
+        table { width:100%; border-collapse:collapse; margin:35px 0; box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+        th { background:#e65100; color:white; padding:18px; font-size:1.15rem; }
+        td { padding:16px 20px; border-bottom:1px solid #eee; text-align:center; }
+        tr:nth-child(even) { background:#fff8e1; }
+        .imp { background:#ffebee; border-left:8px solid #d32f2f; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .imp h4 { color:#c62828; font-size:1.4rem; margin-bottom:15px; }
+        ul { margin:20px 0; padding-left:40px; line-height:2; }
+        footer { background:#e65100; color:white; text-align:center; padding:35px; font-size:1.2rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>PROPERTIES OF BULK MATTER</h1>
+        <p class="subtitle">Complete Chapter Summary • Elasticity + Fluid Mechanics + Thermal Properties • JEE Main + Advanced • NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Elasticity</div>
+        <div class="tab" data-tab="t2">Fluid Statics</div>
+        <div class="tab" data-tab="t3">Fluid Dynamics</div>
+        <div class="tab" data-tab="t4">Surface Tension</div>
+        <div class="tab" data-tab="t5">Thermal Properties</div>
+        <div class="tab" data-tab="t6">Heat Transfer</div>
+        <div class="tab" data-tab="t7">Quick Revision</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1. Elasticity -->
+        <div class="pane active" id="t1">
+            <h2>1. Elasticity • Stress • Strain • Hooke’s Law</h2>
+            <table>
+                <tr><th>Type</th><th>Stress</th><th>Strain</th><th>Modulus</th></tr>
+                <tr><td>Longitudinal</td><td>F/A</td><td>ΔL/L</td><td>Y = (F/A)/(ΔL/L)</td></tr>
+                <tr><td>Volume</td><td>ΔP</td><td>ΔV/V</td><td>B = ΔP/(ΔV/V)</td></tr>
+                <tr><td>Shear</td><td>F/A</td><td>θ</td><td>η = (F/A)/θ</td></tr>
+            </table>
+            <div class="law">
+                <div class="law-title">Hooke’s Law</div>
+                Within elastic limit: Stress ∝ Strain → Stress = E × Strain
+            </div>
+            <div class="form">Y (Young’s) > B (Bulk) > η (Rigidity)</div>
+        </div>
+
+        <!-- 2. Fluid Statics -->
+        <div class="pane" id="t2">
+            <h2>2. Viscosity • Terminal Velocity • Reynolds Number</h2>
+            <div class="form">
+                Viscous force: F = −η A (dv/dx)<br>
+                Terminal velocity: v_t = [2r²(ρ−σ)g]/(9η)
+            </div>
+            <div class="def">
+                <strong>Reynolds Number (R_e)</strong><br>
+                R_e = ρ v D / η<br>
+                • R_e < 1000 → Streamline flow<br>
+                • R_e > 2000 → Turbulent flow
+            </div>
+        </div>
+
+        <!-- 3. Fluid Dynamics -->
+        <div class="pane" id="t3">
+            <h2>3. Bernoulli’s Theorem & Applications</h2>
+            <div class="law">
+                <div class="law-title">Bernoulli’s Principle</div>
+                P + ρgh + (1/2)ρv² = constant
+            </div>
+            <div class="form">
+                Applications:<br>
+                • Venturimeter<br>
+                • Aspirator pump<br>
+                • Blowing off roof during storm<br>
+                • Magnus effect (spin of ball)<br>
+                • Aerofoil (lift of aircraft)
+            </div>
+        </div>
+
+        <!-- 4. Surface Tension -->
+        <div class="pane" id="t4">
+            <h2>4. Surface Tension • Capillary Rise • Angle of Contact</h2>
+            <div class="form">
+                Surface Tension (T) = F/l Unit: N/m<br>
+                Excess pressure in soap bubble: ΔP = 4T/R<br>
+                Excess pressure in liquid drop: ΔP = 2T/R
+            </div>
+            <table>
+                <tr><th>Angle of Contact θ</th><th>Shape of Meniscus</th><th>Capillary Action</th></tr>
+                <tr><td>θ < 90° (Water-glass)</td><td>Concave</td><td>Rise</td></tr>
+                <tr><td>θ > 90° (Mercury-glass)</td><td>Convex</td><td>Fall</td></tr>
+                <tr><td>θ = 90°</td><td>Flat</td><td>No rise/fall</td></tr>
+            </table>
+            <div class="form">Capillary rise: h = (2T cosθ)/(ρ g r)</div>
+        </div>
+
+        <!-- 5. Thermal Properties -->
+        <div class="pane" id="t5">
+            <h2>5. Heat • Temperature • Expansion • Specific Heat • Latent Heat</h2>
+            <table>
+                <tr><th>Type</th><th>Coefficient</th><th>Formula</th></tr>
+                <tr><td>Linear</td><td>α</td><td>ΔL = L₀ α ΔT</td></tr>
+                <tr><td>Area</td><td>β = 2α</td><td>ΔA = A₀ β ΔT</td></tr>
+                <tr><td>Volume</td><td>γ = 3α</td><td>ΔV = V₀ γ ΔT</td></tr>
+            </table>
+            <div class="form">
+                Specific heat: c = δQ/(m ΔT)<br>
+                Molar specific heat: C = c × M<br>
+                For ideal gas: C_p − C_v = R<br>
+                γ = C_p / C_v
+            </div>
+            <div class="def">
+                Latent heat of fusion (L_f) = 336 J/g (ice)<br>
+                Latent heat of vaporisation (L_v) = 2260 J/g (water)
+            </div>
+        </div>
+
+        <!-- 6. Heat Transfer -->
+        <div class="pane" id="t6">
+            <h2>6. Newton’s Law of Cooling • Stefan’s Law • Black Body • Greenhouse Effect</h2>
+            <div class="law">
+                <div class="law-title">Newton’s Law of Cooling</div>
+                Rate of cooling ∝ (T − T₀) (valid when ΔT small)
+            </div>
+            <div class="law">
+                <div class="law-title">Stefan-Boltzmann Law</div>
+                Power radiated: P = σ A e T⁴ (σ = 5.67 × 10⁻⁸ Wm⁻²K⁻⁴)
+            </div>
+            <div class="def">
+                <strong>Black Body:</strong> Perfect absorber & emitter (e = 1)<br>
+                <strong>Wien’s Law:</strong> λ_max × T = constant<br>
+                <strong>Greenhouse Effect:</strong> CO₂, CH₄ trap IR radiation → Earth warms
+            </div>
+        </div>
+
+        <!-- 7. Quick Revision -->
+        <div class="pane" id="t7">
+            <h2>Quick Revision – Must Remember</h2>
+            <div class="imp">
+                <ul style="line-height:2.4; font-size:1.2rem;">
+                    <li>Hooke’s Law: Stress ∝ Strain (within limit)</li>
+                    <li>Y > B > η</li>
+                    <li>v_t ∝ r² | R_e = ρvd/η</li>
+                    <li>Bernoulli: P + ρgh + ½ρv² = const</li>
+                    <li>Soap bubble: ΔP = 4T/R | Drop: 2T/R</li>
+                    <li>Capillary rise: h = 2T cosθ / (ρgr)</li>
+                    <li>γ = 3α, β = 2α</li>
+                    <li>C_p − C_v = R | γ = C_p/C_v</li>
+                    <li>Latent heat: Fusion 336 J/g, Vaporisation 2260 J/g</li>
+                    <li>Newton’s cooling: dT/dt ∝ (T−T₀)</li>
+                    <li>Stefan: P = σAT⁴ | Wien: λ_max T = const</li>
+                    <li>Greenhouse gases: CO₂, CH₄, H₂O vapor</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Properties of Bulk Matter • Full Summary with Elasticity, Fluid, Surface Tension & Heat Transfer • Made for Future IITians & Doctors • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

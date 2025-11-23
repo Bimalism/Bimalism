@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work, Energy & Power – Complete Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#f5f9ff; padding:20px; }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:18px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,0.2); }
+        header { background:linear-gradient(135deg,#1e88e5,#1976d2,#1565c0); color:white; padding:50px; text-align:center; }
+        h1 { font-size:3.4rem; margin-bottom:12px; letter-spacing:1.5px; }
+        .subtitle { font-size:1.5rem; opacity:0.97; }
+        .nav { display:flex; background:#0d47a1; flex-wrap:wrap; }
+        .tab { padding:22px 38px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.15rem; }
+        .tab:hover { background:rgba(255,255,255,0.22); }
+        .tab.active { background:rgba(255,255,255,0.32); border-bottom:6px solid #ffd54f; }
+        .content { padding:60px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.8s; }
+        @keyframes fade { from{opacity:0; transform:translateY(15px)} to{opacity:1; transform:none} }
+        h2 { color:#1565c0; font-size:2.6rem; margin:45px 0 28px; border-bottom:6px solid #1976d2; padding-bottom:14px; }
+        h3 { color:#1976d2; font-size:1.9rem; margin:35px 0 18px; }
+        .def { background:#e3f2fd; border-left:9px solid #1976d2; padding:28px; margin:35px 0; border-radius:0 14px 14px 0; font-style:italic; line-height:1.9; }
+        .form { background:#e8f5e8; padding:30px; margin:35px 0; border-radius:14px; border-left:9px solid #2e7d32; font-family:'Consolas'; font-size:1.3rem; line-height:2; }
+        .imp { background:#fff3e0; border-left:9px solid #ff8f00; padding:30px; margin:40px 0; border-radius:0 14px 14px 0; }
+        .imp h4 { color:#e65100; font-size:1.5rem; margin-bottom:18px; }
+        table { width:100%; border-collapse:collapse; margin:40px 0; box-shadow:0 8px 22px rgba(0,0,0,0.12); }
+        th { background:#1565c0; color:white; padding:20px; font-size:1.2rem; }
+        td { padding:18px 22px; border-bottom:1px solid #eee; }
+        tr:nth-child(even) { background:#f8fbff; }
+        .highlight { background:#e1f5fe; font-weight:bold; color:#0d47a1; }
+        footer { background:#0d47a1; color:white; text-align:center; padding:40px; font-size:1.25rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:16px;} .content{padding:35px;} h1{font-size:2.6rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>WORK, ENERGY & POWER</h1>
+        <p class="subtitle">Complete JEE Main + Advanced Summary • Class 11 Physics • 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Work & Energy Theorem</div>
+        <div class="tab" data-tab="t2">Power</div>
+        <div class="tab" data-tab="t3">Potential Energy</div>
+        <div class="tab" data-tab="t4">Conservative Forces</div>
+        <div class="tab" data-tab="t5">Collisions</div>
+        <div class="tab" data-tab="t6">Spring & Variable Force</div>
+        <div class="tab" data-tab="t7">Quick Revision</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1. Work-Energy Theorem -->
+        <div class="pane active" id="t1">
+            <h2>1. Work Done & Work-Energy Theorem</h2>
+            <div class="def">
+                Work done by a force is the dot product of force and displacement.<br>
+                W = F⃗ · s⃗ = F s cosθ
+            </div>
+
+            <h3>Work by Constant Force</h3>
+            <table>
+                <tr><th>θ</th><th>W = Fs cosθ</th><th>Nature</th></tr>
+                <tr><td>0°</td><td>+ve (max)</td><td>Force helps motion</td></tr>
+                <tr><td>90°</td><td>0</td><td>e.g., mg in horizontal motion</td></tr>
+                <tr><td>180°</td><td>−ve (max)</td><td>Opposes motion</td></tr>
+            </table>
+
+            <div class="form">
+                Work-Energy Theorem:<br>
+                W_net = ΔK = K_f − K_i = ½mv² − ½mu²
+            </div>
+
+            <div class="imp">
+                <h4>Key Result</h4>
+                <p>Net work done = Change in kinetic energy<br>
+                   Valid for constant or variable force, any path</p>
+            </div>
+        </div>
+
+        <!-- 2. Power -->
+        <div class="pane" id="t2">
+            <h2>2. Power</h2>
+            <div class="form">
+                Instantaneous Power: P = F⃗ · v⃗ = F v cosθ<br>
+                Average Power: P_avg = Total Work / Time<br>
+                Unit: Watt = J/s
+            </div>
+            <table>
+                <tr><th>Case</th><th>Power</th></tr>
+                <tr><td>Force ⊥ velocity</td><td>P = 0 (e.g., centripetal force)</td></tr>
+                <tr><td>Lifting mass vertically</td><td>P = mg v</td></tr>
+                <tr><td>Car on level road</td><td>P = F_drive × v</td></tr>
+            </table>
+        </div>
+
+        <!-- 3. Potential Energy -->
+        <div class="pane" id="t3">
+            <h2>3. Potential Energy</h2>
+            <div class="def">
+                Energy stored in a body due to its position or configuration.<br>
+                U = −W_conservative (from reference point)
+            </div>
+
+            <h3>Common Forms</h3>
+            <table>
+                <tr><th>Type</th><th>Formula</th><th>Zero Point</th></tr>
+                <tr><td>Gravitational</td><td>mgh</td><td>Usually ground</td></tr>
+                <tr><td>Spring</td><td>½ k x²</td><td>x = 0 (natural length)</td></tr>
+                <tr><td>Electrostatic</td><td>k q₁q₂/r</td><td>r = ∞</td></tr>
+            </table>
+
+            <div class="form">
+                Total Mechanical Energy = K + U<br>
+                For conservative forces only: E = constant
+            </div>
+        </div>
+
+        <!-- 4. Conservative & Non-Conservative -->
+        <div class="pane" id="t4">
+            <h2>4. Conservative vs Non-Conservative Forces</h2>
+            <table>
+                <tr><th>Property</th><th>Conservative</th><th>Non-Conservative</th></tr>
+                <tr><td>Work path independent</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Work in closed path</td><td>0</td><td>≠ 0</td></tr>
+                <tr><td>Potential energy exists</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Examples</td><td>Gravity, Spring, Electrostatic</td><td>Friction, Air resistance, Tension (in some cases)</td></tr>
+            </table>
+
+            <div class="form">
+                W_conservative = −ΔU<br>
+                Mechanical Energy conserved only if non-conservative force does zero work
+            </div>
+        </div>
+
+        <!-- 5. Collisions -->
+        <div class="pane" id="t5">
+            <h2>5. Elastic & Inelastic Collisions</h2>
+            <table>
+                <tr><th>Type</th><th>Momentum</th><th>KE</th><th>e</th><th>Velocity of Approach = Separation</th></tr>
+                <tr class="highlight"><td>Elastic</td><td>Conserved</td><td>Conserved</td><td>1</td><td>Yes</td></tr>
+                <tr><td>Perfectly Inelastic</td><td>Conserved</td><td>Not conserved (max loss)</td><td>0</td><td>No (stick together)</td></tr>
+                <tr><td>Inelastic</td><td>Conserved</td><td>Not conserved</td><td>0 < e < 1</td><td>No</td></tr>
+            </table>
+
+            <div class="form">
+                Coefficient of restitution: e = (v₂ − v₁)/(u₁ − u₂)<br>
+                For elastic: v₁ = (m₁ − m₂)u₁/(m₁ + m₂) + (2m₂ u₂)/(m₁ + m₂)<br>
+                Common velocity (perfectly inelastic): v = (m₁u₁ + m₂u₂)/(m₁ + m₂)
+            </div>
+        </div>
+
+        <!-- 6. Spring & Variable Force -->
+        <div class="pane" id="t6">
+            <h2>6. Work by Variable Force & Spring</h2>
+            <div class="form">
+                Work by variable force = ∫ F dx = Area under F-x graph
+            </div>
+
+            <h3>Spring Force (F = −kx)</h3>
+            <table>
+                <tr><th>Quantity</th><th>Formula</th></tr>
+                <tr><td>Work by spring</td><td>W = −½ k x²</td></tr>
+                <tr><td>Potential energy</td><td>U = ½ k x²</td></tr>
+                <tr><td>Max compression (from height h)</td><td>mg = kx → x = mg/k</td></tr>
+                <tr><td>Time period (mass-spring)</td><td>T = 2π √(m/k)</td></tr>
+            </table>
+
+            <div class="imp">
+                <h4>JEE Favourite</h4>
+                <p>When block released on spring from height h:<br>
+                   Energy: mgh = ½ k x² → x = √(2mgh/k)</p>
+            </div>
+        </div>
+
+        <!-- 7. Quick Revision -->
+        <div class="pane" id="t7">
+            <h2>Quick Revision Formula Sheet</h2>
+            <div class="imp">
+                <h4>Must Know for JEE</h4>
+                <ul style="line-height:2.4; font-size:1.2rem;">
+                    <li>W = F s cosθ | W_net = ΔK</li>
+                    <li>P = F · v | 1 hp = 746 W</li>
+                    <li>U_gravity = mgh | U_spring = ½ k x²</li>
+                    <li>Conservative → Path independent, W_closed = 0</li>
+                    <li>Friction → Non-conservative</li>
+                    <li>e = 1 → Elastic | e = 0 → Stick together</li>
+                    <li>Elastic collision: velocities interchange if m₁ = m₂</li>
+                    <li>Work by spring = −ΔU_spring</li>
+                    <li>Variable force work = Area under F-x graph</li>
+                    <li>Mechanical energy conserved only if W_non-conservative = 0</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Work, Energy & Power – Full Summary with Collisions & Springs • JEE Main + Advanced • Made for Rankers
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>
