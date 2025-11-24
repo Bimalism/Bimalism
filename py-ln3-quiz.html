@@ -3,551 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Quiz</title>
+    <title>Laws of Motion Quiz - 20 Questions | JEE Main & Advanced</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1e3c72, #2a5298, #4a6491);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        header {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .quiz-container {
-            padding: 30px;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-number {
-            font-size: 1rem;
-            color: #1e3c72;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .options-container {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .option {
-            padding: 15px 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option:hover {
-            background-color: #e9e9e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .option.selected {
-            background-color: #d1e7ff;
-            border-color: #1e3c72;
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #1e3c72;
-            color: white;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-        
-        #prev-btn:hover:not(:disabled) {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        #next-btn {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
-        }
-        
-        #next-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .explanation {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            border-left: 5px solid #1e3c72;
-        }
-        
-        .explanation-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1e3c72;
-        }
-        
-        .results-container {
-            text-align: center;
-            padding: 40px 20px;
-            display: none;
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 20px 0;
-        }
-        
-        .score-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
-        #restart-btn {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        #restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .motion-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .quiz-container {
-                padding: 20px;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #b71c1c, #d32f2f, #f44336); color: #333; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); overflow: hidden; }
+        header { background: linear-gradient(to right, #b71c1c, #d32f2f); color: white; padding: 30px; text-align: center; position: relative; }
+        h1 { font-size: 2.6rem; margin-bottom: 8px; }
+        .subtitle { font-size: 1.3rem; opacity: 0.95; }
+        .timer { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); padding: 12px 25px; border-radius: 50px; font-size: 1.5rem; font-weight: bold; }
+        .nav { display: flex; justify-content: space-between; padding: 20px 30px; background: #ffebee; }
+        .btn { padding: 12px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-home { background: #d32f2f; color: white; }
+        .btn-reset { background: #f44336; color: white; }
+        .btn-submit { background: #b71c1c; color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height: 14px; background: #ffcdd2; margin: 15px 30px; border-radius: 7px; overflow: hidden; }
+        .progress { height: 100%; background: #b71c1c; width: 0%; transition: width 0.5s; }
+        .progress-text { padding: 0 30px 20px; font-weight: bold; color: #b71c1c; display: flex; justify-content: space-between; }
+        .quiz { padding: 30px; }
+        .question { background: #ffebee; padding: 25px; border-radius: 12px; border-left: 6px solid #d32f2f; margin-bottom: 25px; }
+        .qno { font-weight: bold; color: #b71c1c; font-size: 1.2rem; }
+        .qtext { font-size: 1.25rem; margin: 15px 0; font-weight: 500; }
+        .options { display: grid; gap: 14px; }
+        .option { padding: 16px; background: white; border: 2px solid #ffcdd2; border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: #d32f2f; background: #ffebee; }
+        .option.selected { border-color: #b71c1c; background: #ffcdd2; font-weight: bold; }
+        .result { display: none; padding: 50px; text-align: center; background: linear-gradient(135deg, #ffebee, #ffcdd2); }
+        .score { font-size: 4.5rem; font-weight: bold; color: #b71c1c; margin: 20px 0; }
+        .message { font-size: 1.6rem; margin: 20px 0; color: #b71c1c; }
+        .details { margin: 40px auto; max-width: 900px; text-align: left; }
+        .detail { padding: 20px; background: white; margin: 15px 0; border-radius: 10px; border-left: 6px solid #d32f2f; }
+        .wrong { border-left-color: #e53935; background: #ffebee; }
+        .exp { margin-top: 15px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff6f00; font-size: 0.95rem; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Chapter: 3 Motion in Straight Line</h1>
-            <div class="subtitle">Test your knowledge of displacement, velocity, acceleration, and motion equations</div>
+            <h1>Laws of Motion Mastery</h1>
+            <p class="subtitle">20 High-Level Questions • JEE Main + Advanced • Full Summary Based</p>
+            <div class="timer">Time: <span id="timer">25:00</span></div>
         </header>
-        
-        <div class="quiz-container">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">20</span></span>
-                    <span>Score: <span id="score">0</span>/20</span>
-                </div>
+
+        <div class="nav">
+            <button class="btn btn-home" onclick="alert('Back to Laws of Motion Summary')">Back</button>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
             </div>
-            
-            <div class="question-container">
-                <div class="question-number">Question 1</div>
-                <div class="question-text" id="question-text">Question text will appear here</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
-                
-                <div class="explanation" id="explanation">
-                    <div class="explanation-title">Explanation:</div>
-                    <div id="explanation-text"></div>
-                </div>
-                
-                <div class="button-container">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-                
-                <div class="quiz-info">
-                    <div>Topic: Motion in Physics</div>
-                    <div>Level: Intermediate</div>
-                </div>
-            </div>
-            
-            <div class="results-container" id="results-container">
-                <h2>Quiz Completed!</h2>
-                <div class="score" id="final-score">0/20</div>
-                <div class="score-text" id="score-text">Well done!</div>
-                <button id="restart-btn">Restart Quiz</button>
-                <button id="back-to-home-btn"><a href="neet.html">Back to Home</a></button>
-            </div>
+        </div>
+
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <div class="progress-text">
+            <span>Progress: <span id="prog">0</span>/20</span>
+            <span id="answered">0 answered</span>
+        </div>
+
+        <div class="quiz" id="quiz"></div>
+
+        <div class="result" id="result">
+            <h2>Quiz Complete!</h2>
+            <div class="score" id="score">0/20</div>
+            <div class="message" id="msg"></div>
+            <div class="details" id="details"></div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
         </div>
     </div>
 
     <script>
-        const q3 = [
-            {q:"Displacement is:",o:["Scalar","Vector","Dimensionless","None"],a:1,exp:"Displacement has both magnitude and direction."},
-            {q:"Speed is:",o:["Scalar","Vector","Tensor","None"],a:0,exp:"Speed is scalar."},
-            {q:"Equation of uniformly accelerated motion is:",o:["v=u+at","s=ut+½at²","v²=u²+2as","All"],a:3,exp:"All are equations of motion."},
-            {q:"Graph of uniform motion is:",o:["Straight line","Curve","Circle","Parabola"],a:0,exp:"Straight line with slope = velocity."},
-            {q:"Velocity-time graph slope gives:",o:["Displacement","Acceleration","Velocity","Jerk"],a:1,exp:"Slope of v-t graph = acceleration."},
-            {q:"Area under v-t graph gives:",o:["Displacement","Velocity","Acceleration","Jerk"],a:0,exp:"Area = displacement."},
-            {q:"Retardation means:",o:["Negative acceleration","Positive acceleration","Zero acceleration","Random motion"],a:0,exp:"Retardation is negative acceleration."},
-            {q:"Free fall acceleration on earth:",o:["8.9 m/s²","9.8 m/s²","10.8 m/s²","9.2 m/s²"],a:1,exp:"g ≈ 9.8 m/s²."},
-            {q:"Body thrown vertically up has velocity at top:",o:["Zero","Infinite","g","u"],a:0,exp:"At max height, v=0."},
-            {q:"Unit of acceleration:",o:["m/s","m/s²","m²/s","N"],a:1,exp:"Unit = m/s²."},
-            {q:"If v=0, displacement is:",o:["Zero","Finite","Negative","Undefined"],a:0,exp:"No velocity = no displacement."},
-            {q:"Distance vs displacement:",o:["Always equal","Distance ≥ displacement","Displacement ≥ distance","No relation"],a:1,exp:"Distance ≥ displacement."},
-            {q:"Average speed formula:",o:["Total distance/time","Total displacement/time","Total velocity/time","None"],a:0,exp:"Average speed = total distance / time."},
-            {q:"Slope of s-t graph:",o:["Velocity","Acceleration","Jerk","Speed"],a:0,exp:"Slope = velocity."},
-            {q:"Uniformly accelerated motion means:",o:["Constant velocity","Constant acceleration","Variable speed","Circular motion"],a:1,exp:"Acceleration is constant."},
-            {q:"Negative velocity means:",o:["Motion backward","Zero velocity","Acceleration","Rest"],a:0,exp:"Negative velocity = opposite direction."},
-            {q:"If acceleration=0:",o:["Uniform motion","Uniform acceleration","Rest","Random"],a:0,exp:"Zero acceleration = uniform motion."},
-            {q:"SUVAT eqn v²=u²+2as from:",o:["Elimination","Differentiation","Integration","None"],a:0,exp:"It is derived by elimination."},
-            {q:"Which quantity can be negative?",o:["Distance","Speed","Displacement","Mass"],a:2,exp:"Displacement can be negative."},
-            {q:"Rest means:",o:["Zero displacement","Zero velocity","Zero acceleration","Both a and b"],a:3,exp:"Rest = zero displacement and velocity."}
+        const questions = [
+            { q: "Newton’s first law defines", o: ["Force", "Inertia", "Momentum", "Acceleration"], c: 1, exp: "It is also called Law of Inertia" },
+            { q: "The direction of pseudo force in a non-inertial frame is", o: ["Same as acceleration of frame", "Opposite to acceleration of frame", "Perpendicular", "Zero"], c: 1, exp: "F_pseudo = −m a_frame" },
+            { q: "Newton’s second law gives the measure of", o: ["Inertia", "Force", "Momentum", "Velocity"], c: 1, exp: "F = dp/dt → defines force" },
+            { q: "Impulse equals", o: ["Force × distance", "Change in momentum", "Mass × acceleration", "Work done"], c: 1, exp: "J = Δp = FΔt" },
+            { q: "Action and reaction forces act on", o: ["Same body", "Different bodies", "Center of mass", "Always cancel"], c: 1, exp: "They never act on same body" },
+            { q: "Limiting friction is", o: ["μ_k N", "μ_s N", "Always > kinetic", "Always < kinetic"], c: 1, exp: "f_max = μ_s N ≥ f_k" },
+            { q: "Kinetic friction is", o: ["Self-adjusting", "Constant magnitude", "Greater than static", "Zero"], c: 1, exp: "f_k = μ_k N (constant)" },
+            { q: "Angle of repose is equal to", o: ["Angle of friction", "45°", "90°", "tan⁻¹μ_k"], c: 0, exp: "tanθ = μ_s → θ = λ" },
+            { q: "Centripetal force is", o: ["A real force", "A pseudo force", "Net force toward centre", "Tangential force"], c: 2, exp: "It's the net force providing mv²/r" },
+            { q: "For no skidding on banked road without friction, tanθ =", o: ["v²/rg", "rg/v²", "v/rg", "μ"], c: 0, exp: "tanθ = v²/rg" },
+            { q: "Minimum velocity at top of vertical circle to complete loop", o: ["√(gr)", "√(2gr)", "√(3gr)", "√(5gr)"], c: 3, exp: "v_min = √(5gr) for just completing" },
+            { q: "Tension at lowest point in vertical circle is", o: ["mg", "mv²/r", "mg + mv²/r", "mg − mv²/r"], c: 2, exp: "T − mg = mv²/r → T = mg + mv²/r" },
+            { q: "Rocket equation is derived from", o: ["Newton’s 1st law", "2nd law (variable mass)", "3rd law", "Energy conservation"], c: 1, exp: "F_ext + v_rel(dm/dt) = m dv/dt" },
+            { q: "Lami’s theorem is applicable when forces are", o: ["Parallel", "Concurrent & in equilibrium", "Perpendicular", "Collinear"], c: 1, exp: "Three forces in equilibrium" },
+            { q: "Maximum safe speed on banked road with friction", o: ["√[rg(tanθ + μ)/(1 − μ tanθ)]", "√(rg tanθ)", "√(rg μ)", "√(rg)"], c: 0, exp: "Standard formula" },
+            { q: "If rain falls vertically and man runs, rain appears to fall at angle θ where", o: ["tanθ = v_man/v_rain", "tanθ = v_rain/v_man", "sinθ = v_man/v_rain", "cosθ = v_man/v_rain"], c: 0, exp: "Relative velocity concept" },
+            { q: "A body is in stable equilibrium when", o: ["COM rises", "COM lowers", "COM unchanged", "Torque ≠ 0"], c: 1, exp: "Potential energy minimum" },
+            { q: "A man jumps from a height. The force on ground is", o: ["mg", "> mg", "< mg", "Zero"], c: 1, exp: "By Newton’s 3rd law, ground pushes back > mg" },
+            { q: "The horse pulls the cart. The cart moves because", o: ["Horse pushes ground backward", "Cart pulls horse forward", "Friction on horse", "All of these"], c: 0, exp: "Ground pushes horse forward (3rd law)" },
+            { q: "In conical pendulum, cosθ =", o: ["g/T", "r/T", "g/(ω²r)", "√(g² + (ω²r)²)/T"], c: 2, exp: "T cosθ = mg → cosθ = g/(ω²r) since T sinθ = mω²r" }
         ];
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(q3.length).fill(null);
-        
-        // DOM elements
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanation = document.getElementById('explanation');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progress = document.getElementById('progress');
-        const currentQuestionEl = document.getElementById('current-question');
-        const totalQuestionsEl = document.getElementById('total-questions');
-        const scoreEl = document.getElementById('score');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-btn');
-        
-        // Initialize quiz
-        function initQuiz() {
-            totalQuestionsEl.textContent = q3.length;
-            loadQuestion();
-        }
-        
-        // Load current question
-        function loadQuestion() {
-            const question = q3[currentQuestion];
-            questionText.textContent = question.q;
-            currentQuestionEl.textContent = currentQuestion + 1;
-            
-            // Update progress bar
-            progress.style.width = `${((currentQuestion) / q3.length) * 100}%`;
-            
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            
-            // Create new options
-            question.o.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                
-                const optionLetter = document.createElement('div');
-                optionLetter.classList.add('option-letter');
-                optionLetter.textContent = String.fromCharCode(65 + index); // A, B, C, D
-                
-                const optionText = document.createElement('div');
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                
-                // If user has already selected this option
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // Show if correct/incorrect after answer
-                    if (userAnswers[currentQuestion] !== null) {
-                        if (index === question.a) {
-                            optionElement.classList.add('correct');
-                        } else {
-                            optionElement.classList.add('incorrect');
-                        }
-                    }
-                }
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
+        let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+        function showQuestion() {
+            const q = questions[current];
+            let opts = '';
+            q.o.forEach((opt, i) => {
+                const sel = answers[current] === i ? 'selected' : '';
+                opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                    <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                    <span>${opt}</span>
+                </div>`;
             });
-            
-            // Show explanation if answer has been selected
-            if (userAnswers[currentQuestion] !== null) {
-                explanation.style.display = 'block';
-                explanationText.textContent = question.exp;
-            } else {
-                explanation.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            
-            if (currentQuestion === q3.length - 1) {
-                nextBtn.textContent = 'Finish';
-            } else {
-                nextBtn.textContent = 'Next';
-            }
-            
-            // Update score
-            scoreEl.textContent = score;
+            document.getElementById('quiz').innerHTML = `
+                <div class="question">
+                    <div class="qno">Question ${current+1} of 20</div>
+                    <div class="qtext">${q.q}</div>
+                    <div class="options">${opts}</div>
+                </div>
+                <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                    <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                    <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                        ${current===19?'Submit Quiz':'Next'}
+                    </button>
+                </div>`;
+            updateProgress();
         }
-        
-        // Select an option
-        function selectOption(index) {
-            // If already answered, don't allow changing
-            if (userAnswers[currentQuestion] !== null) return;
-            
-            // Mark selected option
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            // Store user's answer
-            userAnswers[currentQuestion] = index;
-            
-            // Check if correct
-            const question = q3[currentQuestion];
-            if (index === question.a) {
-                options[index].classList.add('correct');
-                score++;
-                scoreEl.textContent = score;
-            } else {
-                options[index].classList.add('incorrect');
-                // Also show correct answer
-                options[question.a].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.style.display = 'block';
-            explanationText.textContent = question.exp;
+
+        function selectOption(i) {
+            answers[current] = i;
+            showQuestion();
         }
-        
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < q3.length - 1) {
-                currentQuestion++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
+
+        function updateProgress() {
+            const done = answers.filter(a => a !== null).length;
+            document.getElementById('progress').style.width = (done/20*100)+'%';
+            document.getElementById('prog').textContent = done;
+            document.getElementById('answered').textContent = done + ' answered';
         }
-        
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion();
-            }
+
+        function startTimer() {
+            timerId = setInterval(() => {
+                timeLeft--;
+                const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+                const s = String(timeLeft%60).padStart(2,'0');
+                document.getElementById('timer').textContent = m+':'+s;
+                if (timeLeft <= 0) submitQuiz();
+            }, 1000);
         }
-        
-        // Show final results
-        function showResults() {
-            document.querySelector('.question-container').style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            finalScore.textContent = `${score}/${q3.length}`;
-            
-            // Set score message
-            if (score === q3.length) {
-                scoreText.textContent = "Perfect! You're a motion physics expert!";
-            } else if (score >= q3.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong grasp of motion concepts!";
-            } else if (score >= q3.length * 0.6) {
-                scoreText.textContent = "Good job! You understand the fundamentals of motion!";
-            } else if (score >= q3.length * 0.4) {
-                scoreText.textContent = "Not bad! Keep practicing motion equations!";
-            } else {
-                scoreText.textContent = "Keep studying! Motion is fundamental to physics!";
-            }
-            
-            // Update progress bar to 100%
-            progress.style.width = '100%';
+
+        function submitQuiz() {
+            clearInterval(timerId);
+            let correct = 0, details = '';
+            questions.forEach((q, i) => {
+                const user = answers[i];
+                const isCorrect = user === q.c;
+                if (isCorrect) correct++;
+                details += `<div class="detail ${isCorrect?'':'wrong'}">
+                    <strong>Q${i+1}:</strong> ${q.q}<br>
+                    Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                    Correct: <strong>${q.o[q.c]}</strong>
+                    <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+                </div>`;
+            });
+
+            const msg = correct >= 18 ? "Newton Would Be Proud!" :
+                        correct >= 15 ? "Outstanding! JEE Ready!" :
+                        correct >= 12 ? "Excellent Progress!" :
+                        correct >= 8 ? "Good! Revise Friction & Circular Motion" : "Time to Revisit Newton’s Laws!";
+
+            document.getElementById('score').textContent = correct + '/20';
+            document.getElementById('msg').textContent = msg;
+            document.getElementById('details').innerHTML = details;
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            window.scrollTo(0,0);
         }
-        
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = new Array(q3.length).fill(null);
-            
-            document.querySelector('.question-container').style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
+
+        function resetQuiz() {
+            current = 0; answers.fill(null); timeLeft = 25*60;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            showQuestion(); startTimer();
         }
-        
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        restartBtn.addEventListener('click', restartQuiz);
-        
-        // Initialize the quiz
-        initQuiz();
+
+        window.onload = () => { showQuestion(); startTimer(); };
     </script>
 </body>
 </html>
