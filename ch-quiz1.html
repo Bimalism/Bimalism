@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Some Basic Concepts in Chemistry Quiz | JEE + NEET 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#bf360c,#e65100); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.6rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff0e0; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#ff8f00; color:white; }
+        .btn-reset { background:#ffcc80; color:#333; }
+        .btn-submit { background:#e65100; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#ffccbc; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#e65100; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#e65100; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#fff0e0; padding:25px; border-radius:12px; border-left:6px solid #ff8f00; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#e65100; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #ffccbc; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ff8f00; background:#fff0e0; }
+        .option.selected { border-color:#e65100; background:#ffcc80; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#fff0e0,#ffccbc); }
+        .score { font-size:4.5rem; font-weight:bold; color:#e65100; margin:20px 0; }
+        .message { font-size:1.6rem; margin:20px 0; color:#e65100; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ff8f00; }
+        .wrong { border-left-color:#e53935; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ff8f00; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Some Basic Concepts in Chemistry</h1>
+        <p class="subtitle">20 JEE-Level Questions • Mole Concept • Stoichiometry • Limiting Reagent • Empirical Formula • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Avogadro’s number is", o: ["6.022 × 10²³", "6.022 × 10²²", "6.022 × 10²⁴", "6.24 × 10²³"], c: 0, exp: "Nₐ = 6.022 × 10²³ particles per mole" },
+        { q: "Molar volume of ideal gas at STP is", o: ["22.4 L", "22.7 L", "24.4 L", "11.2 L"], c: 0, exp: "0°C, 1 atm → 22.4 L/mol" },
+        { q: "Number of moles in 18 g H₂O is", o: ["1", "2", "0.5", "18"], c: 0, exp: "Molar mass H₂O = 18 g/mol → 18/18 = 1 mole" },
+        { q: "Law of Multiple Proportions was given by", o: ["Lavoisier", "Dalton", "Proust", "Richter"], c: 1, exp: "Dalton proposed it" },
+        { q: "Compound with 40% C, 6.67% H, 53.33% O has empirical formula", o: ["CH₂O", "C₂H₄O₂", "C₃H₆O₃", "CH₄O"], c: 0, exp: "C:H:O = 40/12 : 6.67/1 : 53.33/16 = 3.33:6.67:3.33 → divide by 3.33 → 1:2:1 → CH₂O" },
+        { q: "In CO and CO₂, ratio of oxygen combining with 12 g carbon is", o: ["1:1", "1:2", "2:1", "1:3"], c: 1, exp: "CO → 16 g O, CO₂ → 32 g O → 16:32 = 1:2" },
+        { q: "Limiting reagent is the one which", o: ["Is costliest", "Is present in minimum amount", "Has smallest coefficient", "Is completely consumed"], c: 3, exp: "Gets completely used up first" },
+        { q: "10 g CaCO₃ (100% pure) on heating gives CaO + CO₂. Mass of CaO formed is", o: ["5.6 g", "4.4 g", "10 g", "44 g"], c: 0, exp: "CaCO₃ → CaO + CO₂; 100 g → 56 g CaO → 10 g → 5.6 g" },
+        { q: "2H₂ + O₂ → 2H₂O. If 4 g H₂ and 32 g O₂ react, limiting reagent is", o: ["H₂", "O₂", "Both equal", "None"], c: 1, exp: "H₂ = 2 mol, O₂ = 1 mol; ratio 2:1 → O₂ limiting" },
+        { q: "Molarity of 49 g H₂SO₄ in 500 mL solution is", o: ["1 M", "2 M", "0.5 M", "4 M"], c: 0, exp: "Moles = 49/98 = 0.5; Volume = 0.5 L → M = 0.5/0.5 = 1 M" },
+        { q: "Gay Lussac’s law deals with", o: ["Mass ratio", "Volume ratio of gases", "Pressure ratio", "Temperature"], c: 1, exp: "Gases combine in simple ratio by volume" },
+        { q: "Molecular formula if empirical is CH₂O and molar mass = 60 g/mol", o: ["CH₂O", "C₂H₄O₂", "C₃H₆O₃", "C₅H₁₀O₅"], c: 1, exp: "n = 60/30 = 2 → C₂H₄O₂" },
+        { q: "11.2 L of gas at STP contains how many molecules?", o: ["3.011 × 10²³", "6.022 × 10²³", "1.505 × 10²³", "6.022 × 10²²"], c: 0, exp: "22.4 L → 6.022×10²³; 11.2 L → half → 3.011×10²³" },
+        { q: "Percentage of carbon in C₂H₅OH (ethanol) is", o: ["52.17%", "13%", "34.7%", "46%"], c: 0, exp: "C = 24/46 × 100 = 52.17%" },
+        { q: "80% pure 100 g sample of CaCO₃ gives how much CO₂?", o: ["35.2 g", "44 g", "22 g", "17.6 g"], c: 0, exp: "Pure CaCO₃ = 80 g → 80 × 44/100 = 35.2 g CO₂" },
+        { q: "Molality is independent of", o: ["Mass of solute", "Mass of solvent", "Temperature", "Volume"], c: 2, exp: "Defined per kg solvent → independent of temperature" },
+        { q: "In N₂ + 3H₂ → 2NH₃, volume ratio at same T,P is", o: ["1:3:2", "1:2:3", "3:1:2", "2:1:3"], c: 0, exp: "Directly from coefficients → 1:3:2" },
+        { q: "Mass of 3.011 × 10²³ molecules of O₂ is", o: ["16 g", "32 g", "8 g", "64 g"], c: 0, exp: "Half mole → 16 g" },
+        { q: "Which law is violated by isotopes?", o: ["Definite proportions", "Multiple proportions", "Dalton’s atomic theory", "Conservation of mass"], c: 2, exp: "Atoms of same element have different masses → contradicts Dalton" },
+        { q: "POAC method is used when", o: ["Reaction is unbalanced", "Reaction is balanced", "Only mass given", "Volume given"], c: 0, exp: "Principle of Atom Conservation → works even if equation unbalanced" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Mole Concept Master!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Just Revise Limiting Reagent" :
+                    correct >= 8 ? "Good! Practice More Stoichiometry" : "Time to Master Mole Concept!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

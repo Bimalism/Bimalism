@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 14: Some Basic Principles of Organic Chemistry - Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#e8eaf6;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.4);}
+        header{background:linear-gradient(135deg,#1a237e,#3f51b5,#5c6bc0,#7986cb);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.8rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#1a237e;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #c5cae9;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#1a237e;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #3f51b5;padding-bottom:14px;}
+        .box{background:#e8eaf6;border-left:9px solid #5c6bc0;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#c5cae9;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #1a237e;}
+        footer{background:#1a237e;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>SOME BASIC PRINCIPLES OF ORGANIC CHEMISTRY</h1>
+        <p class="subtitle">Unit 14 • Class 11 • Full JEE Main + Advanced Summary • Tetravalency • Nomenclature • Isomerism • Reaction Mechanisms • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Tetravalency & Hybridization</div>
+        <div class="tab" data-tab="t2">Classification & Functional Groups</div>
+        <div class="tab" data-tab="t3">Homologous Series</div>
+        <div class="tab" data-tab="t4">Isomerism</div>
+        <div class="tab" data-tab="t5">Nomenclature (IUPAC)</div>
+        <div class="tab" data-tab="t6">Bond Fission & Reactive Intermediates</div>
+        <div class="tab" data-tab="t7">Electronic Effects</div>
+        <div class="tab" data-tab="t8">Types of Organic Reactions</div>
+        <div class="tab" data-tab="t9">JEE Must-Revise Points</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Tetravalency of Carbon & Hybridization</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Carbon has electronic configuration 1s² 2s² 2p², atomic number 6</li>
+                    <li class="imp">Tetravalent: forms 4 covalent bonds to achieve noble gas configuration</li>
+                    <li class="imp">sp³ hybridization → tetrahedral (109.5°), CH₄, C₂H₆</li>
+                    <li class="imp">sp² hybridization → trigonal planar (120°), C₂H₄, benzene</li>
+                    <li class="imp">sp hybridization → linear (180°), C₂H₂, CO₂</li>
+                    <li>Sigma (σ) bond: head-on overlap, pi (π) bond: side-wise overlap</li>
+                    <li>Single bond: 1σ, double bond: 1σ + 1π, triple bond: 1σ + 2π</li>
+                    <li>Bond length: sp > sp² > sp (more s-character → shorter bond)</li>
+                    <li>Bond strength: sp > sp² > sp³ (more s-character → stronger bond)</li>
+                    <li>JEE loves: Predict geometry and hybridization of carbon in different compounds</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Classification of Organic Compounds & Functional Groups</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Functional group: atom/group responsible for chemical properties</li>
+                    <li class="imp">Halogen: -X (haloalkanes, haloarenes)</li>
+                    <li class="imp">Oxygen: alcohols (-OH), ethers (-O-), aldehydes (-CHO), ketones (>C=O), carboxylic acids (-COOH), esters (-COOR)</li>
+                    <li class="imp">Nitrogen: amines (-NH₂, -NHR, -NR₂), nitriles (-C≡N), nitro (-NO₂)</li>
+                    <li>Sulphur: thiols (-SH), thioethers (-SR)</li>
+                    <li>Hydrocarbons: alkanes, alkenes, alkynes, aromatic</li>
+                    <li>Priority order for naming: -COOH > -SO₃H > esters > acid halides > amides > nitriles > aldehydes > ketones > alcohols > amines > ethers</li>
+                    <li>Compounds with C=C, C≡C are unsaturated</li>
+                    <li>Aromatic compounds follow Hückel’s rule (4n+2 π electrons)</li>
+                    <li>JEE asks: Identify functional group and class of compound</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Homologous Series</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Series of compounds with same functional group and similar chemical properties</li>
+                    <li class="imp">Each member differs by -CH₂- unit</li>
+                    <li class="imp">General formula: CnH₂n+₂ (alkanes), CnH₂n (alkenes), CnH₂n-₂ (alkynes)</li>
+                    <li>Gradation in physical properties (MP, BP increase with molecular mass)</li>
+                    <li>Chemical properties almost same within series</li>
+                    <li>Example: CH₄, C₂H₆, C₃H₈, C₄H₁₀… (alkanes)</li>
+                    <li>Alcohols: CH₃OH, C₂H₅OH, C₃H₇OH…</li>
+                    <li>First member often shows slightly different properties</li>
+                    <li>Can be prepared by similar methods</li>
+                    <li>JEE loves: Identify next member or general formula</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Isomerism – Structural & Stereoisomerism</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Compounds with same molecular formula but different arrangement</li>
+                    <li class="imp">Structural isomerism: chain, position, functional, metamerism, tautomerism</li>
+                    <li class="imp">Stereoisomerism: geometrical (cis-trans), optical (enantiomers, diastereomers)</li>
+                    <li>Chain: n-pentane, isopentane, neopentane</li>
+                    <li>Position: 1-chloropropane, 2-chloropropane</li>
+                    <li>Functional: C₃H₆O → propanone or propanal</li>
+                    <li>Geometrical isomerism in alkenes (restricted rotation around C=C)</li>
+                    <li>Optical isomerism: chiral carbon (4 different groups), non-superimposable mirror images</li>
+                    <li>Racemic mixture: 1:1 enantiomers, optically inactive</li>
+                    <li>JEE favourite: Number of structural/optical isomers of C₄H₁₀, C₅H₁₂, etc.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Nomenclature – Trivial & IUPAC</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">IUPAC: longest continuous carbon chain as parent</li>
+                    <li class="imp">Number chain to give lowest number to functional group/substituent</li>
+                    <li class="imp">Prefixes: methyl, ethyl, chloro, bromo, nitro, etc.</li>
+                    <li>Alkanes → -ane, alkenes → -ene, alkynes → -yne</li>
+                    <li>Alcohols → -ol, aldehydes → -al, ketones → -one, acids → -oic acid</li>
+                    <li>Multiple same substituents: di-, tri-, tetra-</li>
+                    <li>Complex substituents in brackets: (1-methylethyl)</li>
+                    <li>Aromatic: benzene, toluene, aniline, phenol, benzoic acid</li>
+                    <li>Lowest sum rule for multiple double/triple bonds</li>
+                    <li>JEE loves: Write IUPAC name of complex branched compounds</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Covalent Bond Fission, Reactive Intermediates</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Homolytic fission: equal sharing → free radicals (one electron each)</li>
+                    <li class="imp">Heterolytic fission: unequal → carbocation & carbanion</li>
+                    <li class="imp">Free radical: odd electron, highly reactive, planar</li>
+                    <li class="imp">Carbocation: positive charge on C, sp², planar</li>
+                    <li class="imp">Carbanion: negative charge on C, sp³, pyramidal</li>
+                    <li>Stability of carbocation: 3° > 2° > 1° > CH₃⁺</li>
+                    <li>Stability of free radical: 3° > 2° > 1°</li>
+                    <li>Electrophiles: electron deficient (H⁺, NO₂⁺, carbocation, BF₃)</li>
+                    <li>Nucleophiles: electron rich (OH⁻, CN⁻, carbanion, amines)</li>
+                    <li>JEE asks: Most stable carbocation among given options</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Electronic Displacement Effects</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Inductive effect: permanent, through σ bonds, -I and +I groups</li>
+                    <li class="imp">-I order: -NR₃⁺ > -NO₂ > -CN > -COOH > -F > -Cl > -Br > -I > -OCH₃</li>
+                    <li class="imp">Electromeric effect: temporary, in presence of reagent, +E or –E</li>
+                    <li class="imp">Resonance: delocalization of π electrons, stability to benzene, carboxylate ion</li>
+                    <li class="imp">Resonance increases stability, decreases reactivity</li>
+                    <li class="imp">Hyperconjugation: delocalization of σ electrons (in alkenes, carbocations)</li>
+                    <li>Hyperconjugation ∝ number of α-hydrogens</li>
+                    <li>Also called no-bond resonance or Baker-Nathan effect</li>
+                    <li>Resonance > Hyperconjugation > Inductive effect in stability</li>
+                    <li>JEE favourite: Stability of carbocations using hyperconjugation/resonance</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Common Types of Organic Reactions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Substitution: one group replaced by another (nucleophilic, electrophilic, free radical)</li>
+                    <li class="imp">Addition: across multiple bonds (electrophilic, nucleophilic, free radical)</li>
+                    <li class="imp">Elimination: removal of small molecule to form multiple bond (E1, E2)</li>
+                    <li class="imp">Rearrangement: migration of group to electron-deficient site</li>
+                    <li>Nucleophilic substitution: SN1 (carbocation intermediate), SN2 (concerted)</li>
+                    <li>Electrophilic aromatic substitution (ArSE): nitration, halogenation, sulphonation</li>
+                    <li>Addition in alkenes: Markovnikov’s rule, anti-Markovnikov (peroxide effect)</li>
+                    <li>Elimination: Zaitsev’s rule (major product more substituted alkene)</li>
+                    <li>Rearrangement examples: Beckmann, Curtius, Hofmann</li>
+                    <li>JEE loves: Identify type of reaction and major product</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. JEE Must-Revise Points (High Weightage)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Stability: 3° carbocation > 3° free radical > resonance-stabilized > hyperconjugation</li>
+                    <li class="imp">Hybridization: sp (50%) > sp² (33%) > sp³ (25%) s-character</li>
+                    <li class="imp">Acidity: -COOH > phenol > H₂O > alcohol > alkyne > alkene > alkane</li>
+                    <li class="imp">Markovnikov: H adds to carbon with more H, anti in HBr + peroxide</li>
+                    <li class="imp">IUPAC: lowest number to functional group, then multiple bonds, then substituents</li>
+                    <li class="imp">Resonance in benzene: 2 equivalent structures, bond length 139 pm</li>
+                    <li class="imp">Optical isomers: 2ⁿ (n = chiral carbons), meso if plane of symmetry</li>
+                    <li class="imp">SN1 rate depends only on substrate, SN2 on both substrate & nucleophile</li>
+                    <li class="imp">Hyperconjugation explains o/p directing nature of alkyl groups</li>
+                    <li class="imp">Number of hyperconjugative structures = number of α-hydrogens</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Unit 14: Some Basic Principles of Organic Chemistry • Complete JEE Main + Advanced Summary • 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Thermodynamics - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#e8f5e9;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.3);}
+        header{background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.6rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#1b5e20;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #a5d6a7;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#2e7d32;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #43a047;padding-bottom:14px;}
+        .box{background:#e8f5e9;border-left:9px solid #66bb6a;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#c8e6c9;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #2e7d32;}
+        table{width:100%;border-collapse:collapse;margin:25px 0;}
+        th,td{border:1px solid #66bb6a;padding:14px;text-align:center;background:#e8f5e9;}
+        th{background:#a5d6a7;color:#1b5e20;font-weight:bold;}
+        footer{background:#1b5e20;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+        @media(max-width:768px){.tab{padding:16px;font-size:1rem;min-width:auto;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>CHEMICAL THERMODYNAMICS</h1>
+        <p class="subtitle">Unit 4 • Class 11 • Full JEE Main + Advanced Level Summary • First Law • Enthalpy • Second Law • Gibbs Energy • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Fundamentals</div>
+        <div class="tab" data-tab="t2">First Law & Work</div>
+        <div class="tab" data-tab="t3">Enthalpy & Heat Capacity</div>
+        <div class="tab" data-tab="t4">Hess’s Law & Enthalpies</div>
+        <div class="tab" data-tab="t5">Second Law & Entropy</div>
+        <div class="tab" data-tab="t6">Gibbs Energy & Spontaneity</div>
+        <div class="tab" data-tab="t7">Standard Gibbs & Equilibrium</div>
+        <div class="tab" data-tab="t8">JEE Must-Revise</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Fundamentals of Thermodynamics</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">System: Part of universe under study; Surroundings: Everything else</li>
+                    <li class="imp">Open system: Exchange both matter and energy</li>
+                    <li class="imp">Closed system: Exchange energy only</li>
+                    <li class="imp">Isolated system: No exchange of matter or energy</li>
+                    <li class="imp">Extensive properties: Depend on quantity (V, m, U, H, S, G)</li>
+                    <li class="imp">Intensive properties: Independent of quantity (T, P, density, Cp)</li>
+                    <li class="imp">State functions: Depend only on state (U, H, S, G, V, T, P)</li>
+                    <li class="imp">Path functions: Depend on path (q, w)</li>
+                    <li>Types of processes: Isothermal (ΔT=0), Adiabatic (q=0), Isochoric (ΔV=0), Isobaric (ΔP=0)</li>
+                    <li>JEE loves identifying state vs path function & type of system</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. First Law of Thermodynamics</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">ΔU = q + w (sign convention: work done on system is +ve)</li>
+                    <li class="imp">IUPAC: w = –PΔV (expansion work negative)</li>
+                    <li class="imp">Internal energy (U): Total energy of system, state function</li>
+                    <li class="imp">For ideal gas, ΔU = nCvΔT (depends only on T)</li>
+                    <li>Work in isothermal reversible expansion: w = –nRT ln(Vf/Vi)</li>
+                    <li>Work in irreversible expansion: w = –PextΔV</li>
+                    <li>Maximum work → reversible process</li>
+                    <li>Adiabatic reversible: w = nCv(T2–T1)</li>
+                    <li>First law proves energy conservation</li>
+                    <li>JEE asks calculation of q, w, ΔU, ΔH in different processes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Enthalpy & Heat Capacity</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Enthalpy H = U + PV (state function)</li>
+                    <li class="imp">ΔH = ΔU + Δn_g RT (for reactions with gases)</li>
+                    <li class="imp">Heat capacity C = q/ΔT; Molar heat capacity at constant volume Cv, pressure Cp</li>
+                    <li class="imp">Cp – Cv = R (ideal gas)</li>
+                    <li>q_p = ΔH (isobaric process), q_v = ΔU (isochoric)</li>
+                    <li>Enthalpy is more practical than internal energy</li>
+                    <li>For ideal gas ΔH = nCpΔT</li>
+                    <li>Heat capacity increases with molecular complexity</li>
+                    <li>Ratio γ = Cp/Cv (used in adiabatic processes)</li>
+                    <li>JEE favourite: Calculate ΔH from ΔU and vice-versa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Hess’s Law & Various Enthalpies</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Hess’s law: ΔH is same irrespective of path (state function)</li>
+                    <li class="imp">Enthalpy of formation (ΔfH): Formation of 1 mole compound from elements</li>
+                    <li class="imp">Enthalpy of combustion (ΔcH): Heat released when 1 mole burnt in excess O₂</li>
+                    <li class="imp">Bond dissociation enthalpy: Energy to break 1 mole of bond in gas phase</li>
+                    <li>Atomization enthalpy: Energy to convert compound to gaseous atoms</li>
+                    <li>ΔrH = Σ Bond enthalpies (reactants) – Σ Bond enthalpies (products)</li>
+                    <li>Enthalpy of solution, hydration, ionization, sublimation, phase transition</li>
+                    <li>Kirchhoff equation: ΔH₂ – ΔH₁ = ΔCp (T₂ – T₁)</li>
+                    <li>Standard state: 1 bar, 298 K (ΔH°)</li>
+                    <li>JEE loves Hess’s law cycle & bond enthalpy calculations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Second Law & Entropy</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Second law: Total entropy of universe always increases for spontaneous process</li>
+                    <li class="imp">Entropy (S): Measure of disorder, state function</li>
+                    <li class="imp">ΔS_universe = ΔS_system + ΔS_surroundings ≥ 0</li>
+                    <li>For reversible process ΔS_universe = 0</li>
+                    <li>ΔS = q_rev / T (at constant T)</li>
+                    <li>Standard entropy change ΔS° = ΣS°(products) – ΣS°(reactants)</li>
+                    <li>Entropy increases: solid → liquid → gas, dissolution, expansion</li>
+                    <li>Trouton's rule: ΔS_vap ≈ 88 J/mol·K for non-polar liquids</li>
+                    <li>Absolute entropy can be measured (third law)</li>
+                    <li>JEE asks predicting sign of ΔS & calculation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Gibbs Free Energy & Spontaneity</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Gibbs energy G = H – TS (state function)</li>
+                    <li class="imp">ΔG = ΔH – TΔS (criteria for spontaneity at constant T,P)</li>
+                    <li class="imp">ΔG < 0 → spontaneous; ΔG = 0 → equilibrium; ΔG > 0 → non-spontaneous</li>
+                    <li class="imp">ΔG_system = –TΔS_universe (links both laws)</li>
+                    <li>For phase change: ΔG = 0 at melting/boiling point</li>
+                    <li>Temperature dependence: High T → entropy dominant, Low T → enthalpy dominant</li>
+                    <li>Ellingham diagram uses ΔG vs T for metallurgy</li>
+                    <li>ΔG = w_max (maximum non-expansion work)</li>
+                    <li>Standard Gibbs energy ΔG° = –RT ln K</li>
+                    <li>JEE favourite: Predict spontaneity using ΔH & ΔS signs</li>
+                </ul>
+                <div class="formula">Spontaneity Table<br>
+                ΔH &nbsp;&nbsp; ΔS &nbsp;&nbsp; Result<br>
+                –ve &nbsp;&nbsp; +ve &nbsp;&nbsp; Always spontaneous<br>
+                +ve &nbsp;&nbsp; +ve &nbsp;&nbsp; Spontaneous at high T<br>
+                –ve &nbsp;&nbsp; –ve &nbsp;&nbsp; Spontaneous at low T<br>
+                +ve &nbsp;&nbsp; –ve &nbsp;&nbsp; Never spontaneous
+                </div>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Standard Gibbs Energy & Equilibrium Constant</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">ΔG° = –RT ln K (most important relation)</li>
+                    <li class="imp">For K > 1, ΔG° < 0 (reaction goes forward)</li>
+                    <li class="imp">ΔG° = Σ ΔfG°(products) – Σ ΔfG°(reactants)</li>
+                    <li>At equilibrium ΔG = 0, Q = K</li>
+                    <li>ΔG = ΔG° + RT ln Q (reaction quotient)</li>
+                    <li>Temperature effect on K: ln(K2/K1) = –ΔH°/R (1/T2 – 1/T1) (van’t Hoff)</li>
+                    <li>Le Chatelier’s principle from thermodynamics</li>
+                    <li>ΔG° determines feasibility, not rate</li>
+                    <li>Standard values at 298 K, 1 bar</li>
+                    <li>JEE asks calculation of K from ΔG° and vice-versa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. JEE Most Important Points (Revise Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">State vs path function: U,H,S,G → state; q,w → path</li>
+                    <li class="imp">w_rev(isothermal) = –nRT ln(Vf/Vi), w_irrev = –PextΔV</li>
+                    <li class="imp">ΔH = ΔU + ΔngRT</li>
+                    <li class="imp">Hess’s law cycle & bond enthalpy calculation</li>
+                    <li class="imp">Cp – Cv = R, γ = Cp/Cv</li>
+                    <li class="imp">ΔG = ΔH – TΔS → spontaneity criteria</li>
+                    <li class="imp">ΔG° = –RT ln K (memorize)</li>
+                    <li class="imp">Sign of ΔS for phase changes, dissolution, gas evolution</li>
+                    <li class="imp">Maximum work in reversible process</li>
+                    <li class="imp">All four cases of ΔH & ΔS for spontaneity</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Chemical Thermodynamics • Complete Summary • First Law • Hess’s Law • Entropy • Gibbs Energy • JEE Main + Advanced 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

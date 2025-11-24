@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Structure - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff0e0;padding:20px;}
+        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.5rem;margin-bottom:10px;}
+        .subtitle{font-size:1.5rem;opacity:0.96;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;min-width:190px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
+        .content{padding:60px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.5rem;margin:50px 0 25px;border-bottom:5px solid #f57c00;padding-bottom:12px;}
+        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:30px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.4;}
+        ul{padding-left:50px;font-size:1.2rem;line-height:2.5;}
+        .imp{color:#d50000;font-weight:bold;}
+        .formula{background:#ffe0b2;padding:20px;margin:20px 0;border-radius:8px;text-align:center;font-size:1.3rem;font-weight:bold;}
+        footer{background:#bf360c;color:white;text-align:center;padding:40px;font-size:1.3rem;}
+        @media(max-width:768px){.tab{padding:14px;font-size:0.95rem;min-width:auto;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>ATOMIC STRUCTURE</h1>
+        <p class="subtitle">Unit 2 • Class 11 • Full Summary with Derivations • JEE Main + Advanced + NEET 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">EMR & Photoelectric Effect</div>
+        <div class="tab" data-tab="t2">Hydrogen Spectrum</div>
+        <div class="tab" data-tab="t3">Bohr Model & Derivation</div>
+        <div class="tab" data-tab="t4">Limitations of Bohr</div>
+        <div class="tab" data-tab="t5">Dual Nature & de Broglie</div>
+        <div class="tab" data-tab="t6">Heisenberg Uncertainty</div>
+        <div class="tab" data-tab="t7">Quantum Mechanical Model</div>
+        <div class="tab" data-tab="t8">Quantum Numbers & Orbitals</div>
+        <div class="tab" data-tab="t9">Rules of Electronic Configuration</div>
+        <div class="tab" data-tab="t10">JEE Must-Revise Points</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Nature of Electromagnetic Radiation & Photoelectric Effect</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">EMR has dual nature: wave (λ, ν, c = νλ) & particle (photon E = hν)</li>
+                    <li class="imp">Photoelectric effect: Light ejects electrons from metal surface</li>
+                    <li class="imp">Threshold frequency ν₀: Minimum frequency required</li>
+                    <li class="imp">Work function φ = hν₀ (energy needed to remove electron)</li>
+                    <li class="imp">Kinetic energy of photoelectron: K.E.max = hν – hν₀ = h(ν – ν₀)</li>
+                    <li class="imp">Stopping potential V₀: eV₀ = h(ν – ν₀)</li>
+                    <li>Intensity ∝ number of photons, not energy of single photon</li>
+                    <li>No time lag, instantaneous emission</li>
+                    <li>Einstein got Nobel Prize 1921 for this</li>
+                    <li>JEE loves graph of K.E. vs frequency & V₀ vs ν</li>
+                    <li>Proved particle nature of light</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Spectrum of Hydrogen Atom</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Rydberg formula: 1/λ = R (1/n₁² – 1/n₂²)</li>
+                    <li>R = 109677 cm⁻¹ (Rydberg constant)</li>
+                    <li>Lyman series: UV region (n₁=1, n₂>1)</li>
+                    <li>Balmer series: Visible (n₁=2, n₂>2)</li>
+                    <li>Paschen: IR (n₁=3), Brackett (n₁=4), Pfund (n₁=5)</li>
+                    <li>Maximum lines when electron jumps from n=∞ → n=1</li>
+                    <li>Number of lines = (n₂ – n₁)(n₂ – n₁ + 1)/2</li>
+                    <li>Spectral lines prove discrete energy levels</li>
+                    <li>Explained by Bohr model</li>
+                    <li>JEE asks: Wavelength of first line of Balmer series</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Bohr Model of Hydrogen Atom – Postulates & Derivation</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Postulate 1: Electrons revolve in stationary orbits (no energy loss)</li>
+                    <li class="imp">Postulate 2: Angular momentum quantized: mvr = n h/2π</li>
+                    <li class="imp">Postulate 3: Radiation only when jump between orbits</li>
+                    <li class="imp">Radius of nth orbit: rₙ = 0.529 × n²/Z Å (Bohr radius for n=1, Z=1)</li>
+                    <li class="imp">Velocity: vₙ = 2.18 × 10⁶ Z/n m/s</li>
+                    <li class="imp">Energy: Eₙ = –13.6 Z²/n² eV (derivation from centripetal = electrostatic)</li>
+                    <li>Ionization energy of H = 13.6 eV</li>
+                    <li>Energy difference ΔE = 13.6 (1/n₁² – 1/n₂²) eV</li>
+                    <li>Successfully explained H-spectrum</li>
+                    <li>JEE asks full derivation of Eₙ and rₙ</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Limitations of Bohr Model</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Fails for multi-electron atoms (He⁺ ok, but not beyond)</li>
+                    <li>Cannot explain fine spectrum (splitting of lines)</li>
+                    <li>Cannot explain Zeeman & Stark effect</li>
+                    <li>Assumes circular orbits only (elliptical exist)</li>
+                    <li>Violates Heisenberg uncertainty principle</li>
+                    <li>No concept of wave nature of electron</li>
+                    <li>Cannot explain chemical bonding</li>
+                    <li>No explanation of relative intensity of lines</li>
+                    <li>Replaced by quantum mechanical model</li>
+                    <li>Still important for JEE (numericals on H-like atoms)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Dual Nature of Matter & de Broglie Relationship</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">de Broglie: All matter has wave nature</li>
+                    <li class="imp">λ = h / p = h / mv (de Broglie wavelength)</li>
+                    <li>For electron, λ = 12.27 / √V Å (V in volt)</li>
+                    <li>Davisson-Germer experiment confirmed electron diffraction</li>
+                    <li>Macroscopic objects: λ very small → wave nature not observable</li>
+                    <li>Microscopic particles (e⁻, p⁺, n): λ comparable → diffraction seen</li>
+                    <li>Explained Bohr’s quantization (circumference = nλ)</li>
+                    <li>Standing wave concept in orbits</li>
+                    <li>JEE asks: Wavelength of 100 eV electron</li>
+                    <li>Foundation of wave mechanics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Heisenberg Uncertainty Principle</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Δx · Δp ≥ h/4π (cannot know position & momentum exactly)</li>
+                    <li>Δx · Δv ≥ h/4πm</li>
+                    <li>ΔE · Δt ≥ h/4π</li>
+                    <li>Why? Wave-particle duality</li>
+                    <li>Electron cannot exist inside nucleus (Δx small → Δp huge)</li>
+                    <li>Explains non-existence of definite orbits</li>
+                    <li>Bohr model violates this principle</li>
+                    <li>Reason for probabilistic model</li>
+                    <li>JEE numericals on minimum uncertainty</li>
+                    <li>Fundamental to quantum mechanics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Quantum Mechanical Model of Atom</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Schrödinger wave equation: Ĥψ = Eψ</li>
+                    <li>ψ (wave function): Probability amplitude</li>
+                    <li>ψ²: Probability density (electron charge cloud)</li>
+                    <li>Orbit → Orbital (region of max probability)</li>
+                    <li>Three quantum numbers from Schrödinger equation</li>
+                    <li>Exact energy only for H-atom & H-like species</li>
+                    <li>No definite path, only probability</li>
+                    <li>Explains shape, size, energy of orbitals</li>
+                    <li>Replaced Bohr’s planetary model</li>
+                    <li>Foundation of modern chemistry</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Quantum Numbers & Shapes of Orbitals</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Principal quantum number (n): Size & energy (1,2,3...)</li>
+                    <li class="imp">Azimuthal (l): Shape (0=s, 1=p, 2=d, 3=f); l = 0 to n–1</li>
+                    <li class="imp">Magnetic (mₗ): Orientation (–l to +l)</li>
+                    <li class="imp">Spin (mₛ): +½ or –½ (electron spin)</li>
+                    <li>Number of orbitals in shell = n²</li>
+                    <li>s: Spherical, p: Dumbbell, d: Double dumbbell/clover</li>
+                    <li>Radial nodes = n – l – 1</li>
+                    <li>Angular nodes = l</li>
+                    <li>Total nodes = n – 1</li>
+                    <li>ψ vs r: 1s no node, 2s one node, 2p no radial node</li>
+                    <li>JEE asks: Nodes in 3p, 4d etc.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Rules for Filling Electrons in Orbitals</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Aufbau principle: Lower (n+l) fills first, same (n+l) → lower n</li>
+                    <li class="imp">Pauli exclusion: Max 2 electrons per orbital, opposite spin</li>
+                    <li class="imp">Hund’s rule: Singly occupy degenerate orbitals first, parallel spin</li>
+                    <li>Order: 1s < 2s < 2p < 3s < 3p < 4s < 3d < 4p < 5s < 4d < 5p < 6s...</li>
+                    <li>Exceptions: Cr = [Ar] 4s¹ 3d⁵, Cu = [Ar] 4s¹ 3d¹⁰</li>
+                    <li>Extra stability: Half-filled (p³,d⁵,f⁷) & completely filled (p⁶,d¹⁰,f¹⁴)</li>
+                    <li>Due to symmetry & exchange energy</li>
+                    <li>Electronic configuration determines chemical properties</li>
+                    <li>JEE asks exceptions & magnetic properties</li>
+                    <li>Foundation of periodic table</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. JEE Most Important Points (Must Revise Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Photoelectric effect: K.E.max = h(ν – ν₀), graph, stopping potential</li>
+                    <li class="imp">Bohr model derivation: rₙ, vₙ, Eₙ formulas → 4–8 marks guaranteed</li>
+                    <li class="imp">de Broglie λ = h/mv & for accelerated electron</li>
+                    <li class="imp">Heisenberg Δx·Δp ≥ h/4π → numericals</li>
+                    <li class="imp">Quantum numbers: n, l, mₗ, mₛ significance & allowed values</li>
+                    <li class="imp">Nodes: Radial = n–l–1, Total = n–1</li>
+                    <li class="imp">Aufbau order + Cr, Cu exceptions</li>
+                    <li class="imp">Hund’s rule & extra stability of half/completely filled</li>
+                    <li>Hydrogen spectrum lines & Rydberg formula</li>
+                    <li>ψ & ψ² variation for 1s, 2s, 2p</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Atomic Structure • Complete Summary • Photoelectric • Bohr • Quantum Numbers • Electronic Configuration • JEE/NEET 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

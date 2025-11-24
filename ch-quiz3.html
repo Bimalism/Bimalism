@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonding Quiz | JEE + NEET 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#bf360c,#e65100); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.6rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff0e0; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#ff8f00; color:white; }
+        .btn-reset { background:#ffcc80; color:#333; }
+        .btn-submit { background:#e65100; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#ffccbc; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#e65100; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#e65100; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#fff0e0; padding:25px; border-radius:12px; border-left:6px solid #ff8f00; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#e65100; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #ffccbc; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ff8f00; background:#fff0e0; }
+        .option.selected { border-color:#e65100; background:#ffcc80; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#fff0e0,#ffccbc); }
+        .score { font-size:4.5rem; font-weight:bold; color:#e65100; margin:20px 0; }
+        .message { font-size:1.6rem; margin:20px 0; color:#e65100; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ff8f00; }
+        .wrong { border-left-color:#e53935; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ff8f00; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Chemical Bonding</h1>
+        <p class="subtitle">20 High-Yield Questions • VSEPR • Hybridization • MO Theory • H-Bonding • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Shape of XeF₄ is", o: ["Tetrahedral", "Square planar", "Octahedral", "Trigonal bipyramidal"], c: 1, exp: "sp³d² hybridization, 4 bp + 2 lp → square planar" },
+        { q: "Bond order of O₂ is", o: ["1", "2", "2.5", "3"], c: 1, exp: "BO = (10–6)/2 = 2; paramagnetic" },
+        { q: "Hybridization of ClF₃ is", o: ["sp³", "sp³d", "sp³d²", "sp²"], c: 1, exp: "5 electron pairs (3 bp + 2 lp) → sp³d, T-shaped" },
+        { q: "Which has zero dipole moment?", o: ["NH₃", "H₂O", "BF₃", "CHCl₃"], c: 2, exp: "BF₃ is symmetrical trigonal planar → μ = 0" },
+        { q: "Highest covalent character by Fajans rule", o: ["NaCl", "MgCl₂", "AlCl₃", "SiCl₄"], c: 3, exp: "Smallest cation Al³⁺ + high charge → max polarization" },
+        { q: "Bond order of N₂⁺ is", o: ["2", "2.5", "3", "1.5"], c: 1, exp: "N₂ BO=3, remove one e⁻ from bonding MO → BO=2.5" },
+        { q: "Geometry of I₃⁻ is", o: ["Linear", "Bent", "Trigonal planar", "T-shaped"], c: 0, exp: "sp³d hybridization, 3 lp → linear" },
+        { q: "Intramolecular H-bonding is present in", o: ["HF", "o-nitrophenol", "Water", "NH₃"], c: 1, exp: "o-nitrophenol → H-bond within molecule → volatile" },
+        { q: "Resonance in CO₃²⁻ makes all C–O bonds", o: ["Single", "Double", "Equal", "One double two single"], c: 2, exp: "Delocalization → all bonds identical, BO=1.33" },
+        { q: "Lattice energy is highest for", o: ["NaCl", "MgO", "CaF₂", "CsI"], c: 1, exp: "MgO has +2/–2 charges + small ions → highest U" },
+        { q: "Formal charge on oxygen in O₃ (resonance)", o: ["0", "+1", "–1", "+2"], c: 1, exp: "Central O = +1, terminal O’s = 0 & –1 in resonance forms" },
+        { q: "Dipole moment order: NF₃, NH₃, H₂O", o: ["H₂O > NH₃ > NF₃", "NH₃ > H₂O > NF₃", "NF₃ > NH₃ > H₂O", "All equal"], c: 0, exp: "Lone pair opposes in NF₃ → lowest μ" },
+        { q: "Hybridization of carbon in CO₃²⁻", o: ["sp", "sp²", "sp³", "sp³d"], c: 1, exp: "Trigonal planar → sp²" },
+        { q: "Which is paramagnetic?", o: ["O₂²⁻", "O₂", "O₂⁺", "Both O₂ & O₂⁺"], c: 3, exp: "O₂ (2 unpaired), O₂⁺ (1 unpaired) → both paramagnetic" },
+        { q: "Shape of SF₄ is", o: ["Tetrahedral", "Seesaw", "Square planar", "Trigonal bipyramidal"], c: 1, exp: "sp³d, 4 bp + 1 lp → seesaw" },
+        { q: "Bond angle in ClO₂ is", o: ["109.5°", "<109.5°", "107°", ">109.5°"], c: 1, exp: "Odd electron molecule → bond angle less than 109.5°" },
+        { q: "Strongest bond among", o: ["F₂", "Cl₂", "Br₂", "I₂"], c: 1, exp: "Smallest size + max overlap → F–F strongest (despite anomaly)" },
+        { q: "Hybridization in XeF₆ (distorted)", o: ["sp³d", "sp³d²", "sp³d³", "sp³"], c: 2, exp: "7 pairs (6 bp + 1 lp) → sp³d³ → distorted octahedral" },
+        { q: "Which has maximum bond angle?", o: ["NH₃", "PH₃", "AsH₃", "SbH₃"], c: 0, exp: "Electronegativity decreases → lone pair more diffuse → NH₃ has highest bond angle ~107°" },
+        { q: "MO theory successfully explains", o: ["Bond length of O₂", "Paramagnetism of O₂", "Colour of compounds", "All of these"], c: 1, exp: "O₂ has 2 unpaired electrons in π* → paramagnetic" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Bonding Legend!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Revise MOT & VSEPR" :
+                    correct >= 8 ? "Good! Focus on Hybridization & Fajans" : "Time to Master Chemical Bonding!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

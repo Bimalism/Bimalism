@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table Quiz | JEE 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#1a237e,#3f51b5,#5c6bc0); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.5); overflow:hidden; }
+        header { background:linear-gradient(to right,#1a237e,#303f9f); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); padding:12px 28px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#e8eaf6; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#3f51b5; color:white; }
+        .btn-reset { background:#c5cae9; color:#1a237e; }
+        .btn-submit { background:#1a237e; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+        .progress-bar { height:14px; background:#c5cae9; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#3f51b5; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#1a237e; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#e8eaf6; padding:25px; border-radius:12px; border-left:6px solid #5c6bc0; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#1a237e; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #c5cae9; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#5c6bc0; background:#e8eaf6; }
+        .option.selected { border-color:#1a237e; background:#c5cae9; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#e8eaf6,#c5cae9); }
+        .score { font-size:4.8rem; font-weight:bold; color:#1a237e; margin:20px 0; }
+        .message { font-size:1.7rem; margin:20px 0; color:#1a237e; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #5c6bc0; }
+        .wrong { border-left-color:#d50000; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #5c6bc0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Periodic Table & Periodicity</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • Trends • IE • Electron Affinity • Blocks • Diagonal Relationship • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Modern periodic law is based on", o: ["Atomic mass", "Atomic number", "Number of neutrons", "Valency"], c: 1, exp: "Moseley: Properties are periodic function of atomic number" },
+        { q: "Element with atomic number 120 belongs to", o: ["Group 1, Period 8", "Group 2, Period 8", "Group 2, Period 7", "f-block"], c: 1, exp: "ns² configuration → alkaline earth metal, 8th period" },
+        { q: "Correct order of atomic radius is", o: ["Li > Be > B > C", "B > Be > Li > C", "C > B > Be > Li", "Be > Li > B > C"], c: 0, exp: "Li > Be (s vs s-p) and Be > B (half-filled stability)" },
+        { q: "Ionic radius order: O²⁻, F⁻, Na⁺, Mg²⁺", o: ["O²⁻ > F⁻ > Na⁺ > Mg²⁺", "Mg²⁺ > Na⁺ > F⁻ > O²⁻", "Na⁺ > Mg²⁺ > F⁻ > O²⁻", "All equal"], c: 0, exp: "Isoelectronic: higher nuclear charge → smaller size" },
+        { q: "Ionization enthalpy of nitrogen is higher than oxygen because", o: ["Higher nuclear charge", "Half-filled p-subshell stability", "Smaller size", "Higher electronegativity"], c: 1, exp: "N: 1s² 2s² 2p³ → exactly half-filled → extra stable" },
+        { q: "Which has highest electronegativity?", o: ["F", "Cl", "O", "N"], c: 0, exp: "F (4.0) > O (3.5) > N (3.0) > Cl (3.0)" },
+        { q: "Electron gain enthalpy is most negative for", o: ["F", "Cl", "Br", "I"], c: 1, exp: "Cl > F due to small size of F causing e⁻–e⁻ repulsion" },
+        { q: "Gallium has smaller atomic radius than aluminium due to", o: ["Poor shielding of d-orbitals", "Higher nuclear charge", "Lanthanoid contraction", "Both a & c"], c: 0, exp: "d-block contraction: poor shielding by 3d electrons" },
+        { q: "Correct order of first IE: Na < Mg < Al < Si", o: ["True", "False"], c: 1, exp: "Mg > Al because Mg has fully filled 3s² → more stable" },
+        { q: "Which shows diagonal relationship with Mg?", o: ["Be", "Li", "Al", "B"], c: 1, exp: "Li–Mg: similar charge/radius ratio and polarizing power" },
+        { q: "Maximum oxidation state shown by Mn is", o: ["+5", "+6", "+7", "+8"], c: 2, exp: "Mn(+7) in KMnO₄: 3d⁵ 4s² → loses 7 electrons" },
+        { q: "Noble gases have", o: ["Largest atomic radius in period", "Smallest atomic radius in period", "Highest IE", "All of these"], c: 0, exp: "van der Waals radius > covalent radius of others" },
+        { q: "Which has highest metallic character?", o: ["Cs", "Fr", "Ra", "Ba"], c: 1, exp: "Francium (Z=87) is most electropositive" },
+        { q: "According to Fajans’ rule, covalent character is favoured by", o: ["Large cation, small anion", "Small cation, large anion", "Large cation, large anion", "Small cation, small anion"], c: 1, exp: "High charge density of cation polarizes anion" },
+        { q: "Lanthanoid contraction is responsible for", o: ["Zr ≈ Hf size", "Lu > La size", "Pm > Nd size", "All equal"], c: 0, exp: "Poor shielding by 4f electrons → steady decrease in size" },
+        { q: "Which has highest second ionization enthalpy?", o: ["Na", "Mg", "Al", "Si"], c: 0, exp: "Na⁺ → Ne configuration → very stable → high IE₂" },
+        { q: "The correct order of acidic nature of oxides is", o: ["Na₂O < MgO < Al₂O₃ < SiO₂", "SiO₂ < Al₂O₃ < MgO < Na₂O", "Na₂O < SiO₂ < MgO < Al₂O₃", "All same"], c: 0, exp: "Metallic oxides basic → non-metallic acidic" },
+        { q: "Which element does NOT belong to p-block?", o: ["Ga", "Tl", "Sc", "Ge"], c: 2, exp: "Sc (Z=21): [Ar] 4s² 3d¹ → d-block" },
+        { q: "The element with highest electron affinity is", o: ["F", "Cl", "Br", "At"], c: 1, exp: "Cl has highest electron affinity (348 kJ/mol)" },
+        { q: "In which pair first ION has larger radius than second?", o: ["O⁻, F⁻", "Na⁺, Mg²⁺", "Fe²⁺, Fe³⁺", "Cl⁻, Br⁻"], c: 3, exp: "Down the group ionic radius increases" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#1a237e;">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Periodic Table Emperor!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Revise Trends & Exceptions" :
+                    correct >= 8 ? "Good! Focus on IE & Electron Affinity" : "Time to Master Periodic Properties!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers = Array(questions.length).fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

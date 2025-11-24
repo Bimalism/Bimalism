@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonding & Molecular Structure - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff0e0;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.3);}
+        header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.6rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #f57c00;padding-bottom:14px;}
+        .box{background:#fff0e0;border-left:9px solid #ff8f00;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#d50000;font-weight:bold;}
+        .formula{background:#ffe0b2;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #e65100;}
+        table{width:100%;border-collapse:collapse;margin:25px 0;}
+        th,td{border:1px solid #ff8f00;padding:14px;text-align:center;background:#fff8e1;}
+        th{background:#ffcc80;color:#bf360c;font-weight:bold;}
+        footer{background:#bf360c;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+        @media(max-width:768px){.tab{padding:16px;font-size:1rem;min-width:auto;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>CHEMICAL BONDING & MOLECULAR STRUCTURE</h1>
+        <p class="subtitle">Unit 3 • Class 11 • Full JEE Advanced Level Summary • VSEPR • Hybridization • MO Theory • H-Bonding • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Kossel-Lewis & Types</div>
+        <div class="tab" data-tab="t2">Ionic Bonding</div>
+        <div class="tab" data-tab="t3">Covalent & Fajans</div>
+        <div class="tab" data-tab="t4">VSEPR Theory</div>
+        <div class="tab" data-tab="t5">Valence Bond Theory</div>
+        <div class="tab" data-tab="t6">Hybridization</div>
+        <div class="tab" data-tab="t7">Resonance</div>
+        <div class="tab" data-tab="t8">Molecular Orbital Theory</div>
+        <div class="tab" data-tab="t9">H-Bonding & Metallic</div>
+        <div class="tab" data-tab="t10">JEE Must-Revise</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Kossel-Lewis Approach & Types of Bonds</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Octet rule: Atoms combine to attain 8 electrons in valence shell</li>
+                    <li class="imp">Lewis dot structure: Valence electrons shown as dots</li>
+                    <li class="imp">Ionic bond: Complete transfer of e⁻ (metal + non-metal)</li>
+                    <li class="imp">Covalent bond: Sharing of electrons (non-metal + non-metal)</li>
+                    <li class="imp">Coordinate bond: Both electrons from one atom (→)</li>
+                    <li>Formal charge = Valence e⁻ – (Non-bonding + ½ Bonding e⁻)</li>
+                    <li>Most stable structure has lowest formal charges (ideally zero)</li>
+                    <li>Exceptions to octet: BF₃ (6e⁻), PCl₅ (10e⁻), SF₆ (12e⁻), ICl₄⁻ (14e⁻)</li>
+                    <li>Odd electron molecules: NO, NO₂ (paramagnetic)</li>
+                    <li>JEE loves formal charge & Lewis structure of polyatomic ions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Ionic Bonding & Lattice Enthalpy</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Formation: Cation + Anion → electrostatic attraction</li>
+                    <li class="imp">Lattice enthalpy (U): Energy released when 1 mole ionic crystal forms from gaseous ions</li>
+                    <li class="imp">Higher lattice energy → stronger ionic bond</li>
+                    <li class="imp">Factors: Charge (U ∝ q₁q₂) & Size (U ∝ 1/(r⁺ + r⁻))</li>
+                    <li>Born-Haber cycle: Calculates lattice enthalpy indirectly</li>
+                    <li>LiF > LiI, MgO > NaCl (due to charge & size)</li>
+                    <li>Ionic compounds: High MP, soluble in water, conduct in molten/aqueous state</li>
+                    <li>100% ionic character is theoretical (maximum in CsF)</li>
+                    <li>JEE asks Born-Haber cycle & comparison of lattice energy</li>
+                    <li>Ionic character increases with electronegativity difference > 1.7</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Covalent Bond, Fajans Rule, Dipole Moment</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Electronegativity: Pauling scale (F = 4.0)</li>
+                    <li class="imp">Dipole moment μ = q × d (Debye unit)</li>
+                    <li class="imp">μ = 0 for symmetrical molecules (CO₂, BF₃, CCl₄)</li>
+                    <li class="imp">Fajans Rule: Covalent character ∝ (charge/size of cation) & (size/charge of anion)</li>
+                    <li>Small cation + large anion → high polarizing power → more covalent (AlCl₃, LiI)</li>
+                    <li>Polarization → distortion of anion electron cloud</li>
+                    <li>% ionic character = [1 – e^(-(Δχ/2)²)] × 100 (Pauling)</li>
+                    <li>Bond length: Covalent > Ionic (due to partial charges)</li>
+                    <li>JEE favourite: Order of covalent character LiCl < BeCl₂ < BCl₃ < CCl₄</li>
+                    <li>Dipole moment direction: From electropositive to electronegative</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. VSEPR Theory & Shapes</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Electron pairs repel → maximum separation</li>
+                    <li class="imp">Order of repulsion: lp–lp > lp–bp > bp–bp</li>
+                    <li class="imp">AX₂: Linear (BeCl₂, CO₂)</li>
+                    <li class="imp">AX₃: Trigonal planar (BF₃), AX₃E: Trigonal pyramidal (NH₃)</li>
+                    <li class="imp">AX₄: Tetrahedral (CH₄), AX₅: Trigonal bipyramidal (PCl₅), AX₆: Octahedral (SF₆)</li>
+                    <li>AX₄E₂: Square planar (XeF₄), AX₃E₂: T-shaped (ClF₃), AX₂E₃: Linear (XeF₂)</li>
+                    <li>Bond angle: 109°28′ (tetrahedral), 120° (trigonal), 90°/180° (octahedral)</li>
+                    <li>NH₃ (107°), H₂O (104.5°) due to lone pairs</li>
+                    <li>JEE asks shape of XeF₆ (distorted octahedral), ICl₄⁻ (square planar)</li>
+                    <li>Back bonding reduces bond angle (BF₃ = 120° exact)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Valence Bond Theory (VBT)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Overlap of atomic orbitals → bond formation</li>
+                    <li class="imp">Maximum overlap → stronger bond</li>
+                    <li class="imp">Sigma (σ) bond: Head-on overlap</li>
+                    <li class="imp">Pi (π) bond: Sideways overlap (weaker)</li>
+                    <li>Overlap types: s-s, s-p, p-p</li>
+                    <li>Cannot explain paramagnetic O₂ (VBT fails)</li>
+                    <li>Explains directional nature of covalent bond</li>
+                    <li>Bond energy ∝ extent of overlap</li>
+                    <li>Introduced concept of hybridization</li>
+                    <li>JEE compares VBT vs MOT</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Hybridization – Most Important</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Mixing of atomic orbitals → new hybrid orbitals</li>
+                    <li class="imp">sp: Linear (180°), sp²: Trigonal (120°), sp³: Tetrahedral (109.5°)</li>
+                    <li class="imp">sp³d: Trigonal bipyramidal, sp³d²: Octahedral, sp³d³: Pentagonal bipyramidal</li>
+                    <li>BeCl₂ (sp), BF₃ (sp²), CH₄ (sp³), PCl₅ (sp³d), SF₆ (sp³d²)</li>
+                    <li>dsp²: Square planar (Ni(CN)₄²⁻)</li>
+                    <li>Hybridization depends on geometry, not vice versa</li>
+                    <li>Lone pairs occupy hybrid orbitals (NH₃: sp³, one lone pair)</li>
+                    <li>JEE asks hybridization of I₃⁻ (sp³d, linear), XeF₄ (sp³d², square planar)</li>
+                    <li>Involvement of d orbitals only in elements ≥ 3rd period</li>
+                    <li>Hybridization changes in excited state (e.g., carbon in CH₄)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Resonance</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Actual structure is hybrid of two or more Lewis structures</li>
+                    <li class="imp">Resonance hybrid has lower energy → extra stability</li>
+                    <li>O₃, CO₃²⁻, SO₄²⁻, NO₃⁻, Benzene</li>
+                    <li>Bond order in resonance = Total bonds / Number of positions</li>
+                    <li>CO₃²⁻: C–O bond order = 1.33</li>
+                    <li>Benzene: C–C bond order = 1.5, all bonds equal</li>
+                    <li>Resonance energy = Experimental – Calculated from one structure</li>
+                    <li>JEE asks bond length in ozone, carbonate</li>
+                    <li>Greater the resonance structures → more stable</li>
+                    <li>Delocalization of π electrons</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Molecular Orbital Theory (MOT) – JEE Advanced Favourite</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">LCAO: Molecular orbitals from linear combination of atomic orbitals</li>
+                    <li class="imp">Bonding MO (lower energy), Antibonding MO (higher energy)</li>
+                    <li class="imp">Bond order = (N₆ – Nₐ)/2</li>
+                    <li class="imp">Bond order > 0 → stable molecule</li>
+                    <li>O₂: KK (σ2s)² (σ*2s)² (σ2p)² (π2p)⁴ (π*2p)² → BO = 2, paramagnetic</li>
+                    <li>N₂: BO = 3 (diamagnetic), strongest bond</li>
+                    <li>F₂: BO = 1, B₂: BO = 1 (paramagnetic)</li>
+                    <li>Energy order for O₂, F₂: σ2p < π2p < π*2p < σ*2p</li>
+                    <li>For N₂ and lighter: σ2p > π2p</li>
+                    <li>JEE asks MO configuration & magnetic nature of O₂⁺, N₂⁺, etc.</li>
+                </ul>
+                <table>
+                    <tr><th>Molecule</th><th>Bond Order</th><th>Magnetic</th><th>Bond Energy</th></tr>
+                    <tr><td>N₂</td><td>3</td><td>Dia</td><td>Highest</td></tr>
+                    <tr><td>O₂</td><td>2</td><td>Para</td><td>High</td></tr>
+                    <tr><td>O₂⁺</td><td>2.5</td><td>Para</td><td>Higher than O₂</td></tr>
+                    <tr><td>F₂</td><td>1</td><td>Dia</td><td>Low</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Hydrogen Bonding & Metallic Bonding</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">H-bonding: H attached to N, O, F → attraction with another N/O/F</li>
+                    <li class="imp">Intermolecular (H₂O, NH₃, HF) & Intramolecular (o-nitrophenol)</li>
+                    <li class="imp">Explains: High BP of H₂O > H₂S, solubility of NH₃, ice density</li>
+                    <li>Ice has open cage structure → less dense than water</li>
+                    <li>Strength: 5–10 kcal/mol (stronger than van der Waals)</li>
+                    <li>Metallic bonding: Delocalized electrons in metal lattice</li>
+                    <li>Explains conductivity, malleability, luster</li>
+                    <li>Strength ∝ number of valence electrons & charge on nucleus</li>
+                    <li>JEE asks: Why HF has highest BP among hydrogen halides?</li>
+                    <li>Abnormal properties of H₂O due to extensive H-bonding</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. JEE Most Important Points (Revise Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Fajans rule & order of covalent character</li>
+                    <li class="imp">VSEPR shapes of XeF₂, XeF₄, XeF₆, ICl₄⁻, BrF₅</li>
+                    <li class="imp">Hybridization of central atom in all above</li>
+                    <li class="imp">MO configuration & bond order of O₂, O₂⁺, N₂, N₂⁺, CO, NO</li>
+                    <li class="imp">Resonance structures of CO₃²⁻, SO₄²⁻, benzene, ozone</li>
+                    <li class="imp">Formal charge calculation (SO₄²⁻, NO₃⁻)</li>
+                    <li class="imp">Dipole moment: CO₂ = 0, H₂O > NH₃ > NF₃</li>
+                    <li class="imp">Lattice energy comparison using charge & radius</li>
+                    <li class="imp">Why O₂ paramagnetic but N₂ diamagnetic?</li>
+                    <li class="imp">Abnormal properties of water due to H-bonding</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Chemical Bonding & Molecular Structure • Complete Summary • VSEPR • Hybridization • MOT • H-Bonding • JEE Main + Advanced 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

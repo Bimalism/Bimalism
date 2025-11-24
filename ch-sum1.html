@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Some Basic Concepts in Chemistry - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff0e0;padding:20px;}
+        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.4rem;margin-bottom:10px;}
+        .subtitle{font-size:1.5rem;opacity:0.95;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;}
+        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
+        .content{padding:60px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.5rem;margin:45px 0 25px;border-bottom:5px solid #f57c00;padding-bottom:12px;}
+        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        .imp{color:#d50000;font-weight:bold;}
+        footer{background:#bf360c;color:white;text-align:center;padding:38px;font-size:1.25rem;}
+        @media(max-width:768px){.tab{flex:1;padding:16px;text-align:center;font-size:1rem;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>SOME BASIC CONCEPTS IN CHEMISTRY</h1>
+        <p class="subtitle">Unit I • Class 11 • Complete Summary • JEE Main + Advanced + NEET 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Matter & Classification</div>
+        <div class="tab" data-tab="t2">Laws of Chemical Combinations</div>
+        <div class="tab" data-tab="t3">Dalton’s Atomic Theory</div>
+        <div class="tab" data-tab="t4">Atomic & Molecular Mass</div>
+        <div class="tab" data-tab="t5">Mole Concept & Molar Mass</div>
+        <div class="tab" data-tab="t6">Percentage Composition</div>
+        <div class="tab" data-tab="t7">Stoichiometry & Calculations</div>
+        <div class="tab" data-tab="t8">Limiting Reagent</div>
+        <div class="tab" data-tab="t9">Concentration Terms</div>
+        <div class="tab" data-tab="t10">JEE Important Points</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Matter & Its Classification</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Matter: Anything that has mass and occupies space</li>
+                    <li>Three states: Solid (fixed shape & volume), Liquid (fixed volume), Gas (neither)</li>
+                    <li class="imp">Physical classification: Solid, Liquid, Gas</li>
+                    <li class="imp">Chemical classification: Element, Compound, Mixture</li>
+                    <li>Element: Cannot be subdivided (92 natural + 26 synthetic)</li>
+                    <li>Compound: Fixed ratio, homogeneous, different properties</li>
+                    <li>Mixture: Variable composition → Homogeneous (solution), Heterogeneous</li>
+                    <li class="imp">Pure substance: Fixed composition (element/compound)</li>
+                    <li>Impure substance: Mixture</li>
+                    <li>Precision: Closeness of readings | Accuracy: Closeness to true value</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Laws of Chemical Combinations (5 Laws)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Law of Conservation of Mass (Lavoisier): Mass neither created nor destroyed</li>
+                    <li class="imp">Law of Definite Proportions (Proust): Fixed ratio by mass (CO₂ always 12:32)</li>
+                    <li class="imp">Law of Multiple Proportions (Dalton): Same elements form compounds in simple whole-number ratio (CO & CO₂ → 1:2)</li>
+                    <li class="imp">Law of Reciprocal Proportions (Richter): Equivalent weights combine in same/inverse ratio</li>
+                    <li class="imp">Gay Lussac’s Law of Gaseous Volumes: Gases combine in simple ratio by volume at same T,P (H₂ + Cl₂ → 2HCl : 1:1:2)</li>
+                    <li>Avogadro’s Law: Equal volumes of gases contain equal molecules at same T,P</li>
+                    <li>All laws explained by Dalton’s theory</li>
+                    <li>JEE loves numericals on Multiple Proportions</li>
+                    <li>Conservation of mass holds even in nuclear reactions (E=mc²)</li>
+                    <li>Foundation of stoichiometry</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Dalton’s Atomic Theory (Modified)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Matter made of indivisible atoms</li>
+                    <li class="imp">Atoms of same element identical in mass & properties</li>
+                    <li class="imp">Atoms of different elements have different mass & properties</li>
+                    <li class="imp">Compounds formed by whole-number ratio of atoms</li>
+                    <li class="imp">Atoms neither created nor destroyed</li>
+                    <li>Limitations: Doesn’t explain isotopes, isobars, allotropes</li>
+                    <li>Modified: 1: Atoms divisible (subatomic particles)</li>
+                    <li>Modified 2: Isotopes exist (same Z, different A)</li>
+                    <li>Modified 3: Isobars exist (different Z, same A)</li>
+                    <li>JEE asks: Which postulate explains Law of Multiple Proportions?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Atomic & Molecular Mass</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Atomic mass unit (amu): 1/12th mass of C-12 atom</li>
+                    <li>1 u = 1.66054 × 10⁻²⁷ kg</li>
+                    <li class="imp">Relative atomic mass: Mass compared to 1/12th C-12</li>
+                    <li>H = 1.008, O = 16.00, Na = 22.99, Cl = 35.45</li>
+                    <li class="imp">Molecular mass: Sum of atomic masses (H₂O = 18)</li>
+                    <li>Formula mass: For ionic compounds (NaCl = 58.5)</li>
+                    <li>Average atomic mass: Weighted average (Cl = 35.5)</li>
+                    <li>Gram atomic mass = Atomic mass in grams</li>
+                    <li>Gram molecular mass = Molecular mass in grams</li>
+                    <li>JEE asks: Atomic mass of element with 75% X-24, 25% X-26 → 24.75</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Mole Concept – The Heart of Chemistry</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Mole: Amount containing 6.022 × 10²³ particles (Avogadro’s number Nₐ)</li>
+                    <li class="imp">1 mole = 6.022 × 10²³ atoms/molecules/formula units</li>
+                    <li class="imp">Molar mass (M): Mass of 1 mole in grams (numerically = molecular mass)</li>
+                    <li>Number of moles n = mass / molar mass = N / Nₐ = V(lit)/22.4 (STP)</li>
+                    <li>22.4 L = Molar volume of ideal gas at STP (0°C, 1 atm)</li>
+                    <li>At STP: 1 mole gas = 22.4 L = M grams</li>
+                    <li>Mole triangle: n ↔ mass/M ↔ particles/Nₐ ↔ volume/22.4</li>
+                    <li>GAY-LUSSAC + AVOGADRO = Volume ratio = Mole ratio</li>
+                    <li>JEE asks: 11.2 L of gas at STP has how many molecules? → 3.011 × 10²³</li>
+                    <li>1 mole electrons = 96500 C (Faraday)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Percentage Composition & Empirical/Molecular Formula</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">% of element = (Atomic mass × No. of atoms × 100) / Molecular mass</li>
+                    <li>Empirical formula: Simplest whole-number ratio</li>
+                    <li>Molecular formula = n × Empirical formula</li>
+                    <li>n = Molecular mass / Empirical formula mass</li>
+                    <li>Steps: % → moles → divide by smallest → ratio → empirical → n → molecular</li>
+                    <li>Example: 40% C, 6.7% H, 53.3% O → CH₂O (empirical), C₆H₁₂O₆ (molecular)</li>
+                    <li>JEE favourite: Combustion analysis (C,H,O compound)</li>
+                    <li>If % not given: Assume 100 g sample</li>
+                    <li>Limiting reagent + % yield also asked</li>
+                    <li>Minimum 2–3 questions every year</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Stoichiometry & Calculations</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Balanced equation → Mole ratio → Stoichiometry</li>
+                    <li>4 types: Mass-Mass, Mass-Volume, Volume-Volume, Mixed</li>
+                    <li>Volume-Volume: Direct mole ratio (Gay Lussac)</li>
+                    <li>Mass-Volume: Use molar mass & 22.4 L</li>
+                    <li>POAC (Principle of Atomic Conservation) for complex reactions</li>
+                    <li>Excess reagent = Given – Required</li>
+                    <li>% Yield = (Actual / Theoretical) × 100</li>
+                    <li>% Purity = (Mass of pure / Mass of sample) × 100</li>
+                    <li>JEE asks: 80% pure 125 g Na₂CO₃ reacts with HCl → how much CO₂?</li>
+                    <li>Always convert to moles first!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Limiting Reagent – Most Important</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Reagent that is completely consumed</li>
+                    <li>Decides amount of product formed</li>
+                    <li>Method: Divide given moles by coefficient → smallest is limiting</li>
+                    <li>Theoretical yield based on limiting reagent</li>
+                    <li>Excess % = [(given – required)/required] × 100</li>
+                    <li>JEE asks every year (direct or indirect)</li>
+                    <li>Example: 2H₂ + O₂ → 2H₂O, if 3 moles H₂ & 1 mole O₂ → O₂ limiting</li>
+                    <li>Product = 2 moles H₂O, excess H₂ = 1 mole</li>
+                    <li>Never assume excess reagent!</li>
+                    <li>POAC also used in limiting problems</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. Concentration Terms</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Mass % = (solute/soln)×100</li>
+                    <li class="imp">Volume % = (vol solute/vol soln)×100</li>
+                    <li>Molarity (M) = moles solute / litre solution</li>
+                    <li>Molality (m) = moles solute / kg solvent (temp independent)</li>
+                    <li>Mole fraction (x) = moles component / total moles (sum = 1)</li>
+                    <li>ppm = (mass solute / mass soln) × 10⁶</li>
+                    <li>Normality (N) = M × acidity/basicity (less used now)</li>
+                    <li>Dilution: M₁V₁ = M₂V₂</li>
+                    <li>JEE asks: Molality vs Molarity in density problems</li>
+                    <li>For dilute solutions: M ≈ m (if density ≈ 1 g/mL)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pane" id="t10">
+            <h2>10. JEE Most Important Points (Must Revise)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Mole concept + Stoichiometry + Limiting Reagent = 8–10 marks every year</li>
+                    <li class="imp">Empirical/Molecular formula from % → 1–2 questions guaranteed</li>
+                    <li class="imp">Limiting reagent + % yield → Direct 4-marker</li>
+                    <li>22.4 L at STP, Nₐ = 6.022×10²³ → Memorize</li>
+                    <li>POAC method for unbalanced/complex reactions</li>
+                    <li>Combustion analysis (C,H,O) → Classic JEE question</li>
+                    <li>Volume-Volume stoichiometry → Gay Lussac + Avogadro</li>
+                    <li>Law of Multiple Proportions numerical → High chance</li>
+                    <li>Molarity vs Molality in density change</li>
+                    <li>Never forget to balance equation first!</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Some Basic Concepts in Chemistry • Full Summary • Mole Concept • Stoichiometry • Limiting Reagent • JEE/NEET 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

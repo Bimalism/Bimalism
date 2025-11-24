@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equilibrium Quiz | JEE + NEET 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#7b1fa2,#9c27b0,#ba68c8); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#4a148c,#7b1fa2); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.6rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#f3e5f5; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#9c27b0; color:white; }
+        .btn-reset { background:#e1bee7; color:#333; }
+        .btn-submit { background:#7b1fa2; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#e1bee7; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#7b1fa2; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#7b1fa2; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#f3e5f5; padding:25px; border-radius:12px; border-left:6px solid #ba68c8; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#7b1fa2; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #e1bee7; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ba68c8; background:#f3e5f5; }
+        .option.selected { border-color:#7b1fa2; background:#e1bee7; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#f3e5f5,#e1bee7); }
+        .score { font-size:4.5rem; font-weight:bold; color:#7b1fa2; margin:20px 0; }
+        .message { font-size:1.6rem; margin:20px 0; color:#7b1fa2; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ba68c8; }
+        .wrong { border-left-color:#e53935; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ba68c8; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Equilibrium</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • Kc/Kp • Le Chatelier • Buffer • pH • Ksp • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "For N₂ + 3H₂ ⇌ 2NH₃, Kp = Kc (RT)^x, x =", o: ["2", "-2", "1", "-1"], c: 1, exp: "Δn_g = 2 – (1+3) = –2 → Kp = Kc (RT)^–2" },
+        { q: "ΔG° = –RT ln K. If K = 10⁶, reaction is", o: ["At equilibrium", "Reactant favoured", "Product favoured", "Very slow"], c: 2, exp: "K >> 1 → ΔG° << 0 → strongly product favoured" },
+        { q: "In Haber's process, low temperature is used because", o: ["Reaction is endothermic", "Reaction is exothermic", "Rate decreases", "Catalyst works better"], c: 1, exp: "Forward reaction is exothermic → low T shifts equilibrium forward" },
+        { q: "Catalyst affects", o: ["Position of equilibrium", "Equilibrium constant", "Time to attain equilibrium", "ΔG"], c: 2, exp: "Catalyst speeds up both forward and backward reactions equally" },
+        { q: "pH of 10⁻⁸ M HCl is", o: ["8", "7", "Less than 7", "Greater than 7"], c: 2, exp: "Total [H⁺] = 10⁻⁸ + 10⁻⁷ = 1.1×10⁻⁷ M → pH ≈ 6.96 < 7" },
+        { q: "Buffer solution resists change in pH when", o: ["Large acid/base added", "Small acid/base added", "Temperature changed", "Pressure changed"], c: 1, exp: "Buffer works only for small amounts of added H⁺/OH⁻" },
+        { q: "pH of CH₃COOH + CH₃COONa buffer is given by", o: ["pH = pK_a + log([acid]/[salt])", "pH = pK_a + log([salt]/[acid])", "pH = 7", "pH = 14"], c: 1, exp: "Henderson-Hasselbalch equation: pH = pK_a + log([A⁻]/[HA])" },
+        { q: "Salt of weak acid + strong base has pH", o: ["7", "<7", ">7", "Depends on concentration"], c: 2, exp: "Anionic hydrolysis → excess OH⁻ → pH > 7" },
+        { q: "For AgCl ⇌ Ag⁺ + Cl⁻, Ksp = 1.8×10⁻¹⁰. Solubility in mol/L =", o: ["1.8×10⁻¹⁰", "1.34×10⁻⁵", "1.8×10⁻⁵", "3.6×10⁻¹⁰"], c: 1, exp: "Ksp = S² → S = √(1.8×10⁻¹⁰) ≈ 1.34×10⁻⁵ M" },
+        { q: "Common ion effect is used in", o: ["Purification of NaCl", "Precipitation of soap", "Both", "None"], c: 2, exp: "HCl gas passed through saturated NaCl → more NaCl crystallizes" },
+        { q: "Which has highest buffer capacity?", o: ["0.1 M acid + 0.1 M salt", "0.2 M acid + 0.1 M salt", "0.1 M acid + 0.2 M salt", "0.01 M each"], c: 0, exp: "Buffer capacity max when [acid] ≈ [salt]" },
+        { q: "Degree of dissociation of 0.1 M CH₃COOH (K_a=1.8×10⁻⁵) is", o: ["1.8×10⁻⁵", "0.0134", "1.34×10⁻³", "0.042"], c: 1, exp: "α ≈ √(K_a/C) = √(1.8×10⁻⁵ / 0.1) = √1.8×10⁻⁴ ≈ 0.0134" },
+        { q: "In N₂ + O₂ ⇌ 2NO (endothermic), increase in T causes", o: ["Increase in K", "Decrease in K", "No change in K", "K becomes zero"], c: 0, exp: "Endothermic reaction → K increases with temperature" },
+        { q: "Strongest Lewis acid among", o: ["BF₃", "BCl₃", "BBr₃", "BI₃"], c: 0, exp: "BF₃ has strongest B–F back bonding → least electron deficiency" },
+        { q: "Minimum [OH⁻] to precipitate Mg(OH)₂ (Ksp=1.8×10⁻¹¹) from 0.01 M Mg²⁺", o: ["1.8×10⁻⁹", "1.34×10⁻⁵", "4.2×10⁻⁵", "1.8×10⁻¹¹"], c: 2, exp: "Ksp = [Mg²⁺][OH⁻]² → [OH⁻]² = 1.8×10⁻¹¹ / 0.01 = 1.8×10⁻⁹ → [OH⁻] = √1.8×10⁻⁹ ≈ 4.24×10⁻⁵ M" },
+        { q: "Solubility of Ag₂CrO₄ increases in acid because", o: ["Common ion", "CrO₄²⁻ forms HCrO₄⁻", "Complex formation", "Temperature"], c: 1, exp: "H⁺ converts CrO₄²⁻ → HCrO₄⁻ → removes CrO₄²⁻ → more dissolution" },
+        { q: "pK_a of weak acid is 4.74. Its 0.1 M salt with strong base has pH ≈", o: ["4.74", "9.26", "7.00", "8.37"], c: 1, exp: "pH = 7 + ½pK_a + ½logC ≈ 7 + 2.37 + ½(-1) = 9.26" },
+        { q: "Ionic product of water at 298 K is", o: ["10⁻⁷", "10⁻¹⁴", "10⁻¹²", "1"], c: 1, exp: "K_w = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴" },
+        { q: "Which increases solubility of CaF₂?", o: ["Adding NaF", "Adding HCl", "Adding CaCl₂", "Increasing T"], c: 1, exp: "H⁺ + F⁻ → HF (weak acid) → removes F⁻ → more CaF₂ dissolves" },
+        { q: "For exothermic reaction, van’t Hoff equation predicts K", o: ["Increases with T", "Decreases with T", "No change", "Becomes 1"], c: 1, exp: "ΔH < 0 → d(ln K)/dT < 0 → K decreases with increase in T" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===questions.length-1 ? 'submitQuiz()' : 'current++;showQuestion();updateProgress()'}" style="background:#4a148c;">
+                    ${current===questions.length-1 ? 'Submit Quiz' : 'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { 
+        answers[current] = i; 
+        showQuestion(); 
+    }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) { clearInterval(timerId); submitQuiz(); }
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Equilibrium Emperor!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Revise Buffer & Ksp" :
+                    correct >= 8 ? "Good! Focus on Le Chatelier & pH" : "Time to Master Equilibrium!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; 
+        answers = Array(questions.length).fill(null); 
+        timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); 
+        startTimer();
+    }
+
+    window.onload = () => { 
+        showQuestion(); 
+        startTimer(); 
+    };
+</script>
+</body>
+</html>

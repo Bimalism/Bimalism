@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 16: Haloalkanes & Haloarenes - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff3e0;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.4);}
+        header{background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726,#ffb74d);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.8rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#e65100;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffe0b2;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #ff8f00;padding-bottom:14px;}
+        .box{background:#fff3e0;border-left:9px solid #ffa726;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#ffe0b2;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #e65100;}
+        footer{background:#e65100;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>HALOALKANES & HALOARENES</h1>
+        <p class="subtitle">Unit 16 • Class 12 • Full JEE Main + Advanced Summary • SN1 • SN2 • E1 • E2 • Uses & Environmental Effects • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Classification & Nomenclature</div>
+        <div class="tab" data-tab="t2">Nature of C–X Bond</div>
+        <div class="tab" data-tab="t3">Methods of Preparation</div>
+        <div class="tab" data-tab="t4">Nucleophilic Substitution (SN)</div>
+        <div class="tab" data-tab="t5">Elimination Reactions (E1 & E2)</div>
+        <div class="tab" data-tab="t6">Haloarenes & Reactions</div>
+        <div class="tab" data-tab="t7">Polyhalogen Compounds & Effects</div>
+        <div class="tab" data-tab="t8">JEE Must-Revise Points</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Classification & IUPAC Nomenclature</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Haloalkanes: Halogen attached to sp³ carbon (alkyl halide)</li>
+                    <li class="imp">Haloarenes: Halogen attached directly to benzene ring</li>
+                    <li class="imp">Classification: 1°, 2°, 3° (based on carbon bearing X)</li>
+                    <li>Vinylic halide: X on C of C=C</li>
+                    <li>Benzylic halide: X on carbon adjacent to benzene</li>
+                    <li>IUPAC: Halogen as prefix (fluoro, chloro, bromo, iodo)</li>
+                    <li>Order of naming: Functional group > multiple bond > halo</li>
+                    <li>Gem-dihalide: Two X on same carbon</li>
+                    <li>Vicinal dihalide: X on adjacent carbons</li>
+                    <li>JEE loves: Correct IUPAC name of complex halo compounds</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Nature of C–X Bond & Physical Properties</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">C–X bond is polar (Cδ+ – Xδ–) due to electronegativity difference</li>
+                    <li class="imp">Bond length: C–F < C–Cl < C–Br < C–I</li>
+                    <li class="imp">Bond strength: C–F > C–Cl > C–Br > C–I</li>
+                    <li>Boiling point order: RI > RBr > RCl > RF (van der Waals forces)</li>
+                    <li>Density order: RI > RBr > RCl > RF</li>
+                    <li>Alkyl iodides are purple in color with I₂</li>
+                    <li>Dipole moment: CH₃Cl > CH₃F (bond length factor)</li>
+                    <li>Chloroform is stored in dark bottles with ethanol (prevents phosgene)</li>
+                    <li>Haloarenes less polar than haloalkanes (sp² C–X bond)</li>
+                    <li>JEE asks: Why C–F bond strongest but RF has lowest BP?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. General Methods of Preparation</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">From alcohols: ROH + HX (ZnCl₂ for 1°), PCl₅, PCl₃, SOCl₂ (best)</li>
+                    <li class="imp">Halogen exchange: Finkelstein (RCl/RBr → RI with NaI/acetone)</li>
+                    <li>Hunsdiecker: RCOOA→ RBr + CO₂ (with Br₂)</li>
+                    <li>From alkenes: HX (Markovnikov), HBr + peroxide (anti-M)</li>
+                    <li>From alkynes: HX (two times → gem-dihalide)</li>
+                    <li>Swarts reaction: RCl → RF with Hg₂F₂ or SbF₃</li>
+                    <li>Borodine-Hunsdiecker for bromides</li>
+                    <li>Direct halogenation of hydrocarbons (free radical)</li>
+                    <li>Sandmeyer/Gatterman for haloarenes from diazonium</li>
+                    <li>JEE favourite: Best method for RI from ROH</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Nucleophilic Substitution Reactions (SN1 & SN2)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">SN2: Bimolecular, one-step, inversion, 1° best, strong Nu</li>
+                    <li class="imp">SN1: Unimolecular, two-step, carbocation, racemisation, 3° best</li>
+                    <li>Order of reactivity: RI > RBr > RCl > RF</li>
+                    <li>SN2 rate depends on [RX] and [Nu⁻]</li>
+                    <li>SN1 rate depends only on [RX]</li>
+                    <li>Solvent: Polar protic → favours SN1, Polar aprotic → favours SN2</li>
+                    <li>Allylic & benzylic halides → highly reactive (resonance stabilized carbocation)</li>
+                    <li>Strong base/Nu → favours SN2/E2</li>
+                    <li>Ambident nucleophiles: CN⁻ (C or N), NO₂⁻</li>
+                    <li>JEE loves: Predict mechanism & product for given substrate</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Elimination Reactions (E1 & E2)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">E2: One-step, anti-periplanar, strong base, 3° best</li>
+                <li class="imp">E1: Two-step, carbocation intermediate, 3° best</li>
+                <li>Zaitsev’s rule: Major product = more substituted alkene</li>
+                <li>Hofmann product: Bulky base → less substituted alkene</li>
+                <li>Dehydrohalogenation: Alcoholic KOH</li>
+                <li>E2 favoured by strong base, high temp, poor leaving group</li>
+                <li>Order of reactivity in elimination: RI > RBr > RCl > RF</li>
+                <li>Competition: SN1/E1 or SN2/E2 depending on conditions</li>
+                <li>High temperature favours elimination</li>
+                <li>JEE asks: Major product with alc. KOH vs aq. KOH</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Haloarenes – Reactions & Properties</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">C–X bond in haloarene has partial double bond character (resonance)</li>
+                    <li class="imp">Less reactive than haloalkanes toward nucleophilic substitution</li>
+                    <li>Reimer-Tiemann: Phenol + CHCl₃ + KOH → salicylaldehyde</li>
+                    <li>Wurtz-Fittig: ArX + RX + Na → Ar–R</li>
+                    <li>Fittig: 2 ArX + Na → Ar–Ar</li>
+                    <li>Electrophilic aromatic substitution (EAS) possible (halogen is o/p director but deactivating)</li>
+                    <li>Rasching process: Chlorobenzene from benzene + HCl + air</li>
+                    <li>Dow’s process: Chlorobenzene from phenol</li>
+                    <li>High boiling point and insoluble in water</li>
+                    <li>JEE loves: Why haloarene does not undergo SN reaction easily</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Polyhalogen Compounds & Environmental Effects</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Chloroform: CHCl₃, anaesthetic, forms phosgene (COCl₂ + HCl)</li>
+                    <li class="imp">Iodoform: CHI₃, antiseptic, yellow ppt with CH₃COR or CH₃CH(OH)R</li>
+                    <li>Carbon tetrachloride: CCl₄, fire extinguisher (phosgene issue)</li>
+                    <li>Freons (CFCs): Cause ozone depletion (Cl• radical chain)</li>
+                    <li>DDT: Persistent pesticide, bioaccumulation, banned in many countries</li>
+                    <li>Trihalomethanes in water → carcinogenic</li>
+                    <li>Westron & Westrosol: Acetylene tetrachloride & pentachloroethane</li>
+                    <li>Teflon: Polymer of tetrafluoroethene</li>
+                    <li>Phosgene: Highly toxic, used in warfare</li>
+                    <li>JEE asks: Environmental hazard of CFCs & DDT</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. JEE Must-Revise Points (Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Reactivity order: RI > RBr > RCl > RF (both SN & E)</li>
+                    <li class="imp">SN1 → 3° > 2° > 1°, racemisation, polar protic solvent</li>
+                    <li class="imp">SN2 → 1° > 2° > 3°, inversion, polar aprotic solvent</li>
+                    <li class="imp">Alc. KOH → elimination, Aq. KOH → substitution</li>
+                    <li class="imp">Chloroform + air + light → phosgene (toxic)</li>
+                    <li class="imp">CFCs destroy ozone layer; DDT is non-biodegradable</li>
+                    <li class="imp">Haloarene inert due to resonance & sp² C–X bond</li>
+                    <li class="imp">Iodoform test positive for methyl ketones & acetaldehyde</li>
+                    <li class="imp">Best reagent for ROH → RCl: SOCl₂ (gaseous byproducts)</li>
+                    <li class="imp">Ambident nucleophile: SCN⁻ gives R–SCN (SN2) & R–NCS (SN1)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Unit 16: Organic Compounds Containing Halogens • Complete JEE Main + Advanced Summary • SN1/SN2 • Environmental Effects • 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

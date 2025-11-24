@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P-Block Elements Quiz | JEE 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#1b5e20,#2e7d32,#43a047); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.5); overflow:hidden; }
+        header { background:linear-gradient(to right,#1b5e20,#2e7d32); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); padding:12px 28px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#e8f5e9; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#2e7d32; color:white; }
+        .btn-reset { background:#c8e6c9; color:#1b5e20; }
+        .btn-submit { background:#1b5e20; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+        .progress-bar { height:14px; background:#c8e6c9; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#2e7d32; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#1b5e20; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#e8f5e9; padding:25px; border-radius:12px; border-left:6px solid #66bb6a; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#1b5e20; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #c8e6c9; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#66bb6a; background:#e8f5e9; }
+        .option.selected { border-color:#1b5e20; background:#c8e6c9; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#e8f5e9,#c8e6c9); }
+        .score { font-size:4.8rem; font-weight:bold; color:#1b5e20; margin:20px 0; }
+        .message { font-size:1.7rem; margin:20px 0; color:#1b5e20; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #66bb6a; }
+        .wrong { border-left-color:#d50000; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #66bb6a; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>P-BLOCK ELEMENTS</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • Group 13–18 • Inert Pair • Anomalous Behaviour • Xe Compounds • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Which element of group 13 is non-metal?", o: ["B", "Al", "Ga", "In"], c: 0, exp: "Boron is the only non-metal in group 13" },
+        { q: "The strongest acid among HX (X = F, Cl, Br, I) is", o: ["HF", "HCl", "HBr", "HI"], c: 3, exp: "HI is strongest due to weakest H–I bond" },
+        { q: "Which has distorted octahedral shape?", o: ["XeF₂", "XeF₄", "XeF₆", "XeO₃"], c: 2, exp: "XeF₆ has 7 electron pairs (6 bp + 1 lp) → distorted octahedron" },
+        { q: "Inert pair effect is maximum in", o: ["B", "Al", "Ga", "Tl"], c: 3, exp: "Tl⁺ more stable than Tl³⁺ due to inert pair effect" },
+        { q: "PCl₅ in solid state exists as", o: ["PCl₅ molecule", "[PCl₄]⁺[PCl₆]⁻", "[PCl₄]⁺Cl⁻", "PCl₃ + Cl₂"], c: 1, exp: "Ionic form in solid: [PCl₄]⁺[PCl₆]⁻" },
+        { q: "Which oxide is amphoteric?", o: ["CO₂", "SiO₂", "SnO₂", "N₂O₅"], c: 2, exp: "SnO₂ reacts with both acid and base" },
+        { q: "SF₆ is inert towards hydrolysis because", o: ["S–F bond strong", "Steric crowding", "No vacant d-orbital", "Both a & b"], c: 3, exp: "S has no vacant d-orbital after using 6 in SF₆" },
+        { q: "Disproportionation occurs when white phosphorus is heated with conc. NaOH. Product gases are", o: ["PH₃ only", "H₂ only", "PH₃ and H₂", "No gas"], c: 0, exp: "P₄ + NaOH → PH₃ + NaH₂PO₂" },
+        { q: "Correct order of acidic strength of oxyacids", o: ["HClO < HClO₂ < HClO₃ < HClO₄", "HClO₄ < HClO₃ < HClO₂ < HClO", "HClO > HClO₄", "All equal"], c: 0, exp: "Acidity increases with number of oxygen atoms" },
+        { q: "Which noble gas forms maximum compounds?", o: ["He", "Ne", "Kr", "Xe"], c: 3, exp: "Xenon has lowest IE and largest size" },
+        { q: "Boric acid is", o: ["Protonic acid", "Lewis acid", "Arrhenius acid", "Triprotic acid"], c: 1, exp: "H₃BO₃ accepts OH⁻ → B(OH)₄⁻" },
+        { q: "F₂ reacts with water to give", o: ["O₂ only", "O₃ only", "O₂ + HF", "O₂ + O₃"], c: 3, exp: "2F₂ + 2H₂O → 4HF + O₂ (and some O₃)" },
+        { q: "Aluminium chloride is dimer because", o: ["3 centre-4 electron bonds", "Coordinate bonds", "Both a & b", "Ionic"], c: 2, exp: "Al₂Cl₆ has two 3c–4e bonds" },
+        { q: "Which has highest bond angle?", o: ["NH₃", "PH₃", "AsH₃", "SbH₃"], c: 0, exp: "Bond angle decreases down the group due to lone pair in s-orbital" },
+        { q: "Correct order of thermal stability of hydrides", o: ["NH₃ > PH₃ > AsH₃ > SbH₃", "SbH₃ > AsH₃ > PH₃ > NH₃", "All equal", "PH₃ > NH₃"], c: 0, exp: "M–H bond strength decreases down the group" },
+        { q: "XeF₄ + H₂O →", o: ["Xe + O₂ + HF", "XeOF₄", "XeO₃", "No reaction"], c: 1, exp: "XeF₄ hydrolyses to XeOF₄ (partial) or XeO₃ (complete)" },
+        { q: "Chlorine water on standing loses its colour due to formation of", o: ["HCl", "HOCl", "HCl + HOCl", "HClO₄"], c: 2, exp: "Cl₂ + H₂O → HCl + HOCl → further decomposes" },
+        { q: "Which is correct for N₂ molecule?", o: ["Bond order 2", "Diamagnetic", "Bond order 3", "Both b & c"], c: 3, exp: "N≡N has bond order 3 and is diamagnetic" },
+        { q: "The bleaching action of SO₂ is due to", o: ["Oxidation", "Reduction", "Acidic nature", "Basic nature"], c: 1, exp: "SO₂ + H₂O + [O] → H₂SO₄ (reduction bleaching)" },
+        { q: "Which has sp³d² hybridization but is not octahedral?", o: ["SF₆", "XeF₆", "TeCl₆", "IF₇"], c: 1, exp: "XeF₆ is sp³d³ but distorted due to lone pair" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#1b5e20;">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "P-Block Emperor!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Master of Inert Pair & Xenon!" :
+                    correct >= 8 ? "Good! Revise Group 15 & 17" : "Time to Conquer P-Block!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers = Array(questions.length).fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

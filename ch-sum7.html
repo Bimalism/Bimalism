@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redox & Electrochemistry - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#ffebee;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.4);}
+        header{background:linear-gradient(135deg,#b71c1c,#e53935,#ff5252);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.8rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#b71c1c;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffccbc;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#c62828;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #e53935;padding-bottom:14px;}
+        .box{background:#ffebee;border-left:9px solid #ff5252;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#ffcdd2;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #c62828;}
+        table{width:100%;border-collapse:collapse;margin:25px 0;}
+        th,td{border:1px solid #ff5252;padding:14px;text-align:center;background:#ffebee;}
+        th{background:#ffccbc;color:#b71c1c;font-weight:bold;}
+        footer{background:#b71c1c;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>REDOX & ELECTROCHEMISTRY</h1>
+        <p class="subtitle">Unit 7 • Class 11 • Full JEE Main + Advanced Summary • Oxidation Number • Balancing • Nernst • Kohlrausch • Cells • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Oxidation Number</div>
+        <div class="tab" data-tab="t2">Balancing Redox</div>
+        <div class="tab" data-tab="t3">Types of Redox</div>
+        <div class="tab" data-tab="t4">Conductance</div>
+        <div class="tab" data-tab="t5">Kohlrausch Law</div>
+        <div class="tab" data-tab="t6">Electrochemical Cells</div>
+        <div class="tab" data-tab="t7">Nernst Equation</div>
+        <div class="tab" data-tab="t8">Batteries & Fuel Cells</div>
+        <div class="tab" data-tab="t9">JEE Must-Revise</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Oxidation Number Rules</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Pure element → O.N. = 0</li>
+                    <li class="imp">Monoatomic ion → O.N. = charge</li>
+                    <li>F always –1, O usually –2 (except peroxides –1, OF₂ +2)</li>
+                    <li>H +1 (except metal hydrides –1)</li>
+                    <li>Alkali metals +1, Alkaline earth +2</li>
+                    <li>Sum of O.N. in compound = 0, in ion = charge</li>
+                    <li>Maximum O.N. = group number, Minimum = group number – 8</li>
+                    <li>In KO₂ → K⁺, O = –½ (superoxide)</li>
+                    <li>Cr in Cr₂O₇²⁻ → +6, in CrO₅ → +6 (with two peroxide links)</li>
+                    <li>JEE loves: Find O.N. of S in S₈, SO₂, H₂SO₅, Na₂S₄O₆</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Balancing Redox Reactions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Oxidation number method: Balance increase/decrease in O.N.</li>
+                    <li class="imp">Half-reaction method: Split into oxidation & reduction halves</li>
+                    <li>Acidic medium: Use H⁺ and H₂O</li>
+                    <li>Basic medium: Add OH⁻ on both sides, form H₂O</li>
+                    <li>MnO₄⁻ → Mn²⁺ (acidic): +5e⁻, 8H⁺ → 4H₂O</li>
+                    <li>Cr₂O₇²⁻ → Cr³⁺: +6e⁻, 14H⁺ → 7H₂O</li>
+                    <li>Balancing in basic: First balance as acidic, then add OH⁻</li>
+                    <li>Disproportionation: Same species oxidized & reduced (H₂O₂, Cl₂)</li>
+                    <li>JEE favourite: Balance MnO₄⁻ + Fe²⁺, I⁻ + IO₃⁻</li>
+                    <li>Never forget to balance charge in half reactions</li>
+                </ul>
+            </div>
+            </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Types of Redox Reactions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Combination: A + B → C (e.g., 2Mg + O₂ → 2MgO)</li>
+                    <li class="imp">Decomposition: C → A + B (thermal/photochemical)</li>
+                    <li>Displacement: A + BC → AC + B (metal + acid)</li>
+                    <li>Disproportionation: Same element → two different O.N.</li>
+                    <li>Comproportionation: Two O.N. → intermediate (reverse)</li>
+                    <li>Examples: Cl₂ + H₂O → HCl + HOCl (disprop)</li>
+                    <li>2Cu⁺ → Cu + Cu²⁺ (disprop), Cu + Cu²⁺ → 2Cu⁺ (comprop)</li>
+                    <li>Intramolecular redox: NH₄NO₂ → N₂ + 2H₂O</li>
+                    <li>JEE asks: Identify type of redox reaction</li>
+                    <li>All combustion reactions are redox</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Conductance in Electrolytic Solutions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Conductance (G) = 1/R, Siemens (S)</li>
+                    <li class="imp">Specific conductance (κ) = G × (l/A)</li>
+                    <li>Molar conductance (Λ_m) = κ × 1000 / C</li>
+                    <li>Λ_m ↑ with dilution for all electrolytes</li>
+                    <li>Strong electrolytes: Slight ↑ due to less ion pairing</li>
+                    <li>Weak electrolytes: Sharp ↑ due to more ionization</li>
+                    <li>Λ_m vs √C plot: Straight line for strong (Debye-Hückel-Onsager)</li>
+                    <li>Unit of κ → S cm⁻¹, Λ_m → S cm² mol⁻¹</li>
+                    <li>Cell constant = l/A, measured using 0.1 N KCl</li>
+                    <li>JEE loves: Calculate Λ_m from κ and concentration</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Kohlrausch’s Law</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Λ°_m (electrolyte) = ν₊ λ°₊ + ν₋ λ°₋</li>
+                    <li class="imp">Limiting molar conductance at infinite dilution</li>
+                    <li>Additivity of ionic conductances</li>
+                    <li>λ°(H⁺) = 349.8, λ°(OH⁻) = 199.1 → highest mobility</li>
+                    <li>Application: Find Λ°_m of weak electrolytes (CH₃COOH)</li>
+                    <li>Λ°(CH₃COOH) = Λ°(CH₃COONa) + Λ°(HCl) – Λ°(NaCl)</li>
+                    <li>Degree of dissociation α = Λ_m / Λ°_m</li>
+                    <li>K_a = α²C / (1–α) for weak acid</li>
+                    <li>JEE favourite: Calculate K_a of HF using Kohlrausch</li>
+                    <li>Transport number: λ₊ / (λ₊ + λ₋)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Electrochemical Cells</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Galvanic cell: Spontaneous, chemical → electrical</li>
+                    <li class="imp">Electrolytic cell: Non-spontaneous, electrical → chemical</li>
+                    <li>Anode: Oxidation, Cathode: Reduction</li>
+                    <li>SHE: H₂(1 atm) | H⁺(1 M) || E° = 0.00 V</li>
+                    <li>E°(Zn²⁺/Zn) = –0.76 V, E°(Cu²⁺/Cu) = +0.34 V</li>
+                    <li>Daniell cell: Zn | Zn²⁺ || Cu²⁺ | Cu → E_cell = 1.10 V</li>
+                    <li>Salt bridge: Maintains neutrality (KCl, KNO₃)</li>
+                    <li>EMF = E_cathode – E_anode (including sign)</li>
+                    <li>Galvanic cell: E_cell > 0, ΔG < 0</li>
+                    <li>JEE asks: Which is anode in Cu-Zn cell?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Nernst Equation & Applications</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">E = E° – (RT/nF) ln Q = E° – (0.0591/n) log Q at 298 K</li>
+                    <li class="imp">E_cell = E°_cell – (0.0591/n) log (1/[reactants])</li>
+                    <li>At equilibrium: E_cell = 0 → E°_cell = (0.0591/n) log K</li>
+                    <li>ΔG = –nFE_cell, ΔG° = –nFE°_cell</li>
+                    <li>Concentration cells: E_cell = (0.0591/n) log (C₂/C₁)</li>
+                    <li>pH measurement using glass electrode</li>
+                    <li>Solubility product from cell potential</li>
+                    <li>Potentiometric titration: Fe²⁺ vs KMnO₄, Ag⁺ vs Cl⁻</li>
+                    <li>JEE favourite: Calculate E_cell for non-standard conditions</li>
+                    <li>log K = n E°_cell / 0.0591</li>
+                </ul>
+                <div class="formula">E_cell = E°_cell – (0.059/n) log Q</div>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Batteries & Fuel Cells</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Primary cell: Dry cell (Zn | NH₄Cl | MnO₂), 1.5 V</li>
+                    <li class="imp">Secondary cell: Lead accumulator (Pb | PbSO₄ | H₂SO₄)</li>
+                    <li>Charging: PbSO₄ → Pb + PbO₂</li>
+                    <li>Li-ion battery: Highest energy density</li>
+                    <li>Fuel cell: H₂-O₂ → H₂O, E = 1.23 V, 70% efficient</li>
+                    <li>No recharging needed, continuous fuel supply</li>
+                    <li>Mercury cell: Constant voltage 1.35 V</li>
+                    <li>Ni-Cd cell: Rechargeable, memory effect</li>
+                    <li>Corrosion: Electrochemical rusting of Fe</li>
+                    <li>JEE asks: Why fuel cell is future of energy?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. JEE Must-Revise Points (Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">E_cell = E_cathode – E_anode → always positive for galvanic</li>
+                    <li class="imp">Nernst: E = E° – (0.059/n) log Q</li>
+                    <li class="imp">log K = n E° / 0.0591</li>
+                    <li class="imp">Kohlrausch: Λ° = sum of ionic conductances</li>
+                    <li class="imp">Oxidation number of O in peroxide = –1</li>
+                    <li class="imp">MnO₄⁻ in acidic medium gains 5e⁻</li>
+                    <li class="imp">H⁺ and OH⁻ have highest λ°</li>
+                    <li class="imp">ΔG = –nFE_cell</li>
+                    <li class="imp">Anode: negative in galvanic, positive in electrolytic</li>
+                    <li class="imp">Fuel cell: Highest efficiency, no pollution</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Redox Reactions & Electrochemistry • Complete Summary • Nernst • Kohlrausch • Batteries • JEE Main + Advanced 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

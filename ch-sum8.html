@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Kinetics - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#fff3e0;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.4);}
+        header{background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726,#ffb74d);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.8rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#e65100;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#e65100;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #ff8f00;padding-bottom:14px;}
+        .box{background:#fff3e0;border-left:9px solid #ffa726;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#ffcc80;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #e65100;}
+        table{width:100%;border-collapse:collapse;margin:25px 0;}
+        th,td{border:1px solid #ffa726;padding:14px;text-align:center;background:#fff3e0;}
+        th{background:#ffcc80;color:#e65100;font-weight:bold;}
+        footer{background:#e65100;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>CHEMICAL KINETICS</h1>
+        <p class="subtitle">Unit 8 • Class 12 • Full JEE Main + Advanced Summary • Rate Law • Order • Arrhenius • Collision Theory • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Rate of Reaction</div>
+        <div class="tab" data-tab="t2">Order & Molecularity</div>
+        <div class="tab" data-tab="t3">Zero Order</div>
+        <div class="tab" data-tab="t4">First Order</div>
+        <div class="tab" data-tab="t5">Temperature Dependence</div>
+        <div class="tab" data-tab="t6">Arrhenius Equation</div>
+        <div class="tab" data-tab="t7">Collision Theory</div>
+        <div class="tab" data-tab="t8">Mechanisms</div>
+        <div class="tab" data-tab="t9">JEE Must-Revise</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Rate of Reaction & Factors</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Rate = –d[R]/dt = +d[P]/dt (average or instantaneous)</li>
+                    <li class="imp">Factors: Concentration, Temperature, Catalyst, Surface area, Light</li>
+                    <li>Rate ∝ [Reactants]^order (rate law from experiment only)</li>
+                    <li>Catalyst lowers activation energy → increases rate</li>
+                    <li>Negative order possible (inhibition)</li>
+                    <li>Rate constant k has units depending on order</li>
+                    <li>Initial rate method used to find order</li>
+                    <li>Pseudo first order: Excess reactant → order appears 1</li>
+                    <li>Temperature ↑ → rate ↑ exponentially</li>
+                    <li>JEE loves: Effect of catalyst on rate and Ea</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Order vs Molecularity</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Order = Sum of powers in rate law (experimental)</li>
+                    <li class="imp">Molecularity = Number of molecules in elementary step (theoretical)</li>
+                    <li>Order can be zero, fraction, negative; Molecularity 1, 2, 3 only</li>
+                    <li>Complex reaction → overall order ≠ molecularity</li>
+                    <li>Elementary reaction → order = molecularity</li>
+                    <li>Unimolecular: 1st order, Bimolecular: 2nd order</li>
+                    <li>Zero order: On solid surface or enzyme saturation</li>
+                    <li>Rate determining step (RDS) decides overall order</li>
+                    <li>JEE asks: Can order be zero? Yes (NH₃ on Pt)</li>
+                    <li>Molecularity never fractional or zero</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Zero Order Reactions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">[A] = [A]₀ – kt (integrated rate law)</li>
+                    <li class="imp">t½ = [A]₀ / 2k (half-life ∝ initial concentration)</li>
+                    <li>Plot of [A] vs t → straight line (slope = –k)</li>
+                    <li>Unit of k = mol L⁻¹ s⁻¹</li>
+                    <li>Examples: Decomposition on hot metal surface</li>
+                    <li>Enzyme catalysis (Michaelis-Menten at high [S])</li>
+                    <li>Photochemical reactions sometimes zero order</li>
+                    <li>Rate independent of reactant concentration</li>
+                    <li>JEE favourite: Find k from half-life data</li>
+                    <li>t₁₀₀ = [A]₀ / k (time for completion)</li>
+                </ul>
+                <div class="formula">Zero Order: [A] = [A]₀ – kt<br>t½ = [A]₀ / 2k</div>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. First Order Reactions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">ln[A] = ln[A]₀ – kt → k = (2.303/t) log([A]₀/[A])</li>
+                    <li class="imp">t½ = 0.693 / k (independent of initial concentration)</li>
+                    <li>Plot of ln[A] vs t → straight line (slope = –k)</li>
+                    <li>Unit of k = s⁻¹ (time⁻¹)</li>
+                    <li>All radioactive decay, inversion of cane sugar</li>
+                    <li>Pseudo first order: Hydrolysis of ester (excess water)</li>
+                    <li>Time for 99% completion = 6.93 / k ≈ 10 × t½</li>
+                    <li>Successive half-lives are equal</li>
+                    <li>JEE loves: Calculate k from half-life or concentration data</li>
+                    <li>Rate = k[A] even if reaction is bimolecular</li>
+                </ul>
+                <div class="formula">First Order: k = (2.303/t) log([A]₀/[A])<br>t½ = 0.693/k</div>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Temperature Dependence</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Rate increases 2–3 times for every 10°C rise</li>
+                    <li class="imp">Temperature coefficient (Q₁₀) = k_(T+10)/k_T ≈ 2–3</li>
+                    <li>Most reactions double rate per 10°C rise</li>
+                    <li>Enzymes denature above 45°C → rate drops</li>
+                    <li>High Ea reactions more sensitive to T</li>
+                    <li>Arrhenius equation explains T dependence</li>
+                    <li>Log(k₂/k₁) = (Ea/2.303R) (1/T₁ – 1/T₂)</li>
+                    <li>Plot of ln k vs 1/T → straight line (slope = –Ea/R)</li>
+                    <li>JEE asks: Effect of T on rate constant</li>
+                    <li>Reaction with Ea = 50 kJ/mol → rate ×16 when T from 300→330 K</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Arrhenius Equation & Activation Energy</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">k = A e^(-Ea/RT) → A = pre-exponential factor</li>
+                    <li class="imp">Ea = Activation energy barrier</li>
+                    <li>ln k = ln A – Ea/RT</li>
+                    <li>Higher Ea → slower reaction</li>
+                    <li>Catalyst provides alternate path with lower Ea</li>
+                    <li>A = frequency of successful collisions</li>
+                    <li>Unit of Ea = J/mol or kJ/mol</li>
+                    <li>Typical Ea: 50–200 kJ/mol</li>
+                    <li>JEE favourite: Calculate Ea from two k values</li>
+                    <li>Negative catalyst (inhibitor) increases effective Ea</li>
+                </ul>
+                <div class="formula">log(k₂/k₁) = (Ea/2.303R) (1/T₁ – 1/T₂)</div>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Collision Theory</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Rate = Z × f × e^(-Ea/RT)</li>
+                    <li class="imp">Z = collision frequency</li>
+                    <li>f = steric/orientation factor (P factor)</li>
+                    <li>Only fraction of collisions have proper orientation</li>
+                    <li>Complex molecules → low P factor</li>
+                    <li>Gaseous reactions: Rate ∝ √T (from Z)</li>
+                    <li>High Ea → very few molecules have sufficient energy</li>
+                    <li>A = P × Z (Arrhenius factor)</li>
+                    <li>JEE asks: Why actual rate < theoretical collision rate?</li>
+                    <li>Energy distribution follows Maxwell-Boltzmann</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Reaction Mechanisms & Rate Laws</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Slowest step = Rate Determining Step (RDS)</li>
+                    <li>Rate law written from RDS</li>
+                    <li>Intermediates not in rate law</li>
+                    <li>2NO + O₂ → 2NO₂ → rate = k[NO]²[O₂] (termolecular RDS)</li>
+                    <li>Decomposition of N₂O₅ → first order (unimolecular RDS)</li>
+                    <li>H₂ + I₂ → 2HI → bimolecular elementary</li>
+                    <li>Lindemann mechanism for unimolecular reactions</li>
+                    <li>Steady state approximation for intermediates</li>
+                    <li>JEE loves: Find order from mechanism</li>
+                    <li>Pre-equilibrium approximation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. JEE Most Important Points (Revise Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">First order t½ independent of [A]₀ → t½ = 0.693/k</li>
+                    <li class="imp">Zero order t½ ∝ [A]₀ → t½ = [A]₀/2k</li>
+                    <li class="imp">k = A e^(-Ea/RT) → Arrhenius equation</li>
+                    <li class="imp">log(k₂/k₁) = (Ea/19.147) (1/T₁ – 1/T₂)</li>
+                    <li class="imp">Order from experiment only, molecularity from mechanism</li>
+                    <li class="imp">Pseudo first order → one reactant in excess</li>
+                    <li class="imp">Catalyst lowers Ea, no change in equilibrium</li>
+                    <li class="imp">Rate = P × Z × e^(-Ea/RT) → collision theory</li>
+                    <li class="imp">Plot ln k vs 1/T → slope = –Ea/R</li>
+                    <li class="imp">Half-life increases in zero order, constant in first order</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Chemical Kinetics • Complete Summary • Rate Law • Order • Arrhenius • Collision Theory • JEE Main + Advanced 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

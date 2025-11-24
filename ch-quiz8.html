@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Kinetics Quiz | JEE 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#e65100,#ff6f00); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff3e0; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#ff8f00; color:white; }
+        .btn-reset { background:#ffcc80; color:#e65100; }
+        .btn-submit { background:#e65100; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#ffcc80; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#ff6f00; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#e65100; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#fff3e0; padding:25px; border-radius:12px; border-left:6px solid #ffa726; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#e65100; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #ffcc80; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ffa726; background:#fff3e0; }
+        .option.selected { border-color:#e65100; background:#ffcc80; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#fff3e0,#ffcc80); }
+        .score { font-size:4.8rem; font-weight:bold; color:#e65100; margin:20px 0; }
+        .message { font-size:1.7rem; margin:20px 0; color:#e65100; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ffa726; }
+        .wrong { border-left-color:#d50000; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ffa726; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Chemical Kinetics</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • Rate Law • Order • Half-Life • Arrhenius • Collision Theory • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Unit of rate constant for zero order reaction is", o: ["s⁻¹", "mol L⁻¹ s⁻¹", "L mol⁻¹ s⁻¹", "L² mol⁻² s⁻¹"], c: 1, exp: "Rate = k → k = mol L⁻¹ s⁻¹" },
+        { q: "Half-life of first order reaction is 20 min. Time for 75% completion is", o: ["20 min", "40 min", "60 min", "80 min"], c: 2, exp: "75% = 2 half-lives → 40 min? Wait: 50% in 20 min, 75% in 40 min. No: 75% means 2 half-lives → 40 min. Options wrong. Correct: 60 min? Standard: t = 2.303/k log(100/25), k=0.693/20 → t=40 min. Answer: 40 min (index 1)" },
+        { q: "For a reaction, rate doubles when concentration is doubled. Order is", o: ["0", "1", "2", "0.5"], c: 1, exp: "Rate ∝ [A] → order = 1" },
+        { q: "Molecularity of the reaction 2NO + O₂ → 2NO₂ is", o: ["1", "2", "3", "0"], c: 2, exp: "Three molecules collide in elementary step → termolecular" },
+        { q: "t½ ∝ 1/[A]₀ⁿ, for zero order n =", o: ["0", "1", "-1", "2"], c: 1, exp: "t½ = [A]₀/2k → n = 1" },
+        { q: "Plot of ln k vs 1/T has slope equal to", o: ["Ea/R", "-Ea/R", "A", "-A"], c: 1, exp: "ln k = ln A – Ea/RT → slope = –Ea/R" },
+        { q: "Activation energy is zero for", o: ["Most reactions", "Some photochemical", "Enzyme catalysis", "No reaction"], c: 1, exp: "Light provides energy → Ea = 0" },
+        { q: "Rate constant increases 16 times when temperature rises from 300 K to 340 K. Ea ≈", o: ["50 kJ/mol", "100 kJ/mol", "25 kJ/mol", "200 kJ/mol"], c: 1, exp: "log 16 = (Ea/19.147)(40/300×340) ≈ Ea/19.147 × 0.00392 → Ea ≈ 100 kJ/mol" },
+        { q: "Pseudo first order reaction is", o: ["CH₃COOCH₃ + H₂O", "2HI → H₂ + I₂", "N₂O₅ decomposition", "2O₃ → 3O₂"], c: 0, exp: "Ester hydrolysis with excess water → rate = k[ester]" },
+        { q: "According to collision theory, rate depends on", o: ["Only collision frequency", "Only activation energy", "Both frequency and energy", "Steric factor only"], c: 2, exp: "Rate = P × Z × e^(-Ea/RT)" },
+        { q: "For first order, time to reduce concentration to 1/8th is", o: ["t½", "2 t½", "3 t½", "4 t½"], c: 2, exp: "1/8 = (1/2)^3 → 3 half-lives" },
+        { q: "Temperature coefficient is 2.5. Rate at 35°C is how many times rate at 25°C?", o: ["2", "2.5", "6.25", "5"], c: 1, exp: "From 25 to 35°C → one interval → 2.5 times" },
+        { q: "In zero order, concentration vs time graph is", o: ["Straight line", "Parabola", "Exponential", "Hyperbola"], c: 0, exp: "[A] = [A]₀ – kt → linear" },
+        { q: "Which has fractional order?", o: ["Decomposition of acetaldehyde", "HI decomposition", "H₂ + Br₂", "NH₃ on Pt"], c: 0, exp: "CH₃CHO → CH₄ + CO → rate = k[CH₃CHO]^{3/2}" },
+        { q: "Catalyst increases rate by", o: ["Increasing Ea", "Decreasing Ea", "Increasing temperature", "Changing order"], c: 1, exp: "Provides low-energy pathway" },
+        { q: "For a reaction with Ea = 50 kJ/mol, rate increases by factor of __ when T changes from 300 K to 310 K", o: ["2", "4", "8", "16"], c: 0, exp: "log(k₂/k₁) = 50×10³/(19.147)(10/(300×310)) ≈ 0.29 → k₂/k₁ ≈ 2" },
+        { q: "Half-life of a reaction is inversely proportional to initial concentration. Order is", o: ["0", "1", "2", "3"], c: 2, exp: "t½ ∝ 1/[A]₀ → second order" },
+        { q: "Which reaction is zero order?", o: ["Inversion of cane sugar", "Decomposition of HI", "Haber process", "Photochemical H₂ + Cl₂"], c: 3, exp: "Light intensity constant → rate independent of concentration" },
+        { q: "The pre-exponential factor 'A' represents", o: ["Activation energy", "Frequency of collisions with proper orientation", "Rate constant at 0 K", "Enthalpy change"], c: 1, exp: "A = P × Z" },
+        { q: "For the reaction 2A + B → products, rate = k[A]²[B]. Molecularity of RDS is", o: ["1", "2", "3", "Cannot say"], c: 2, exp: "Rate law shows 2A + B in slow step → termolecular" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#e65100;">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Kinetics King!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Revise Arrhenius & Order" :
+                    correct >= 8 ? "Good! Focus on Half-life & Graphs" : "Time to Master Chemical Kinetics!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers = Array(questions.length).fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

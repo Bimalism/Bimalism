@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Thermodynamics Quiz | JEE + NEET 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+        header { background:linear-gradient(to right,#1b5e20,#2e7d32); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.6rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#e8f5e9; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#43a047; color:white; }
+        .btn-reset { background:#a5d6a7; color:#333; }
+        .btn-submit { background:#2e7d32; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+        .progress-bar { height:14px; background:#c8e6c9; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#2e7d32; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#2e7d32; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#e8f5e9; padding:25px; border-radius:12px; border-left:6px solid #43a047; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#2e7d32; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #c8e6c9; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#43a047; background:#e8f5e9; }
+        .option.selected { border-color:#2e7d32; background:#a5d6a7; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#e8f5e9,#c8e6c9); }
+        .score { font-size:4.5rem; font-weight:bold; color:#2e7d32; margin:20px 0; }
+        .message { font-size:1.6rem; margin:20px 0; color:#2e7d32; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #43a047; }
+        .wrong { border-left-color:#e53935; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #43a047; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Chemical Thermodynamics</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • First Law • Hess’s • Entropy • Gibbs • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Which is a state function?", o: ["Work", "Heat", "Internal energy", "q + w"], c: 2, exp: "U is state function; q and w are path functions" },
+        { q: "For ideal gas, ΔU depends only on", o: ["Pressure", "Volume", "Temperature", "Path"], c: 2, exp: "ΔU = nCvΔT → depends only on temperature change" },
+        { q: "In isothermal reversible expansion of ideal gas", o: ["ΔU = 0", "q = 0", "w = 0", "ΔH ≠ 0"], c: 0, exp: "ΔT=0 → ΔU=0, q = –w (First law)" },
+        { q: "Maximum work is obtained in", o: ["Irreversible expansion", "Reversible expansion", "Adiabatic expansion", "Free expansion"], c: 1, exp: "w_rev = –nRT ln(Vf/Vi) > |w_irrev|" },
+        { q: "ΔH = ΔU + Δn_g RT is applicable for", o: ["Only solids", "Only liquids", "Reactions involving gases", "All reactions"], c: 2, exp: "Δn_g = moles gaseous products – reactants" },
+        { q: "Cp – Cv = ?", o: ["R", "2R", "Zero", "PV"], c: 0, exp: "Mayer’s relation for ideal gas: Cp – Cv = R" },
+        { q: "Hess’s law is direct consequence of", o: ["Zeroth law", "First law", "Second law", "Third law"], c: 1, exp: "ΔH is state function → First law" },
+        { q: "Enthalpy of formation of diamond is", o: ["Zero", "Positive", "Negative", "Infinite"], c: 1, exp: "Diamond is less stable than graphite → ΔfH > 0" },
+        { q: "For spontaneous process", o: ["ΔS_universe > 0", "ΔS_system > 0", "ΔG > 0", "ΔH < 0"], c: 0, exp: "Second law: ΔS_universe must increase" },
+        { q: "ΔG = 0 implies", o: ["Reaction is spontaneous", "Reaction is at equilibrium", "Reaction is non-spontaneous", "K = 0"], c: 1, exp: "At equilibrium, ΔG = 0 and Q = K" },
+        { q: "If ΔH = –ve and ΔS = +ve, reaction is spontaneous at", o: ["Low T", "High T", "All temperatures", "No temperature"], c: 2, exp: "ΔG = ΔH – TΔS always negative" },
+        { q: "ΔG° = –RT ln K, if K > 1 then ΔG° is", o: ["Positive", "Negative", "Zero", "Infinite"], c: 1, exp: "K > 1 → ln K > 0 → ΔG° < 0 (spontaneous)" },
+        { q: "Bond dissociation enthalpy of H₂ is 435 kJ/mol. ΔH for H(g) → 2H(g) is", o: ["–435 kJ", "435 kJ", "217.5 kJ", "870 kJ"], c: 1, exp: "Bond dissociation is endothermic → +435 kJ/mol" },
+        { q: "In adiabatic reversible expansion", o: ["q = 0", "w = 0", "ΔU = 0", "ΔT = 0"], c: 0, exp: "q = 0 → ΔU = w (cooling occurs)" },
+        { q: "Trouton’s rule is related to", o: ["ΔH_vap", "ΔS_vap", "ΔG_vap", "Boiling point"], c: 1, exp: "ΔS_vap ≈ 88 J/mol·K for non-polar liquids" },
+        { q: "Which has highest entropy?", o: ["Diamond", "Graphite", "CO₂(g)", "H₂O(l)"], c: 2, exp: "Gas > liquid > solid; CO₂(g) has highest disorder" },
+        { q: "For exothermic reaction with decrease in entropy, spontaneity", o: ["Increases with T", "Decreases with T", "Independent of T", "Never spontaneous"], c: 1, exp: "ΔH < 0, ΔS < 0 → spontaneous only at low T" },
+        { q: "The relation ΔG = ΔH – TΔS is", o: ["First law", "Second law", "Gibbs-Helmholtz equation", "Hess’s law"], c: 2, exp: "Fundamental criterion for spontaneity at const T,P" },
+        { q: "Standard state for Gibbs energy is", o: ["1 atm, 298 K", "1 bar, 298 K", "0 K", "100 kPa, 273 K"], c: 1, exp: "Since 1982, standard pressure = 1 bar" },
+        { q: "For a reaction 2A(g) → B(g) + C(g), if Δn_g = +1, then", o: ["ΔH = ΔU + RT", "ΔH = ΔU – RT", "ΔH = ΔU", "ΔH = ΔU + 2RT"], c: 0, exp: "ΔH = ΔU + Δn_g RT; Δn_g = 2 – 1 = +1" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion()'}">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Thermodynamics Master!" :
+                    correct >= 15 ? "Outstanding! Ready for JEE Advanced!" :
+                    correct >= 12 ? "Excellent! Revise Gibbs & Hess’s Law" :
+                    correct >= 8 ? "Good! Focus on First & Second Law" : "Time to Master Chemical Thermodynamics!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers.fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

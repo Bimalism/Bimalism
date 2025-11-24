@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redox & Electrochemistry Quiz | JEE 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#b71c1c,#e53935,#ff5252); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.5); overflow:hidden; }
+        header { background:linear-gradient(to right,#b71c1c,#c62828); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); padding:12px 28px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#ffebee; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#e53935; color:white; }
+        .btn-reset { background:#ffccbc; color:#b71c1c; }
+        .btn-submit { background:#c62828; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+        .progress-bar { height:14px; background:#ffcdd2; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#e53935; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#c62828; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#ffebee; padding:25px; border-radius:12px; border-left:6px solid #ff5252; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#c62828; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #ffcdd2; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ff5252; background:#ffebee; }
+        .option.selected { border-color:#c62828; background:#ffccbc; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#ffebee,#ffcdd2); }
+        .score { font-size:4.8rem; font-weight:bold; color:#c62828; margin:20px 0; }
+        .message { font-size:1.7rem; margin:20px 0; color:#b71c1c; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ff5252; }
+        .wrong { border-left-color:#d50000; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fff8e1; border-radius:8px; border-left:4px solid #ff5252; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Redox & Electrochemistry</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • O.N. • Balancing • Nernst • Kohlrausch • Batteries • 30 Minutes</p>
+        <div class="timer">Time: <span id="timer">30:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Oxidation number of Cr in CrO₅ is", o: ["+6", "+5", "+4", "+10"], c: 0, exp: "Four O as peroxide (-1 each), one O as oxide (-2) → Cr + 6 = 0 → +6" },
+        { q: "In acidic medium, MnO₄⁻ is reduced to Mn²⁺ by gaining", o: ["3e⁻", "5e⁻", "6e⁻", "8e⁻"], c: 1, exp: "Mn⁷⁺ → Mn²⁺ → gain of 5 electrons" },
+        { q: "Which is a disproportionation reaction?", o: ["Zn + CuSO₄ → ZnSO₄ + Cu", "Cl₂ + 2NaOH → NaCl + NaOCl + H₂O", "2H₂O₂ → 2H₂O + O₂", "Both b & c"], c: 3, exp: "Same element (Cl & O) shows increase and decrease in O.N." },
+        { q: "Λ_m increases sharply with dilution for", o: ["KCl", "NaCl", "CH₃COOH", "MgCl₂"], c: 2, exp: "Weak electrolyte → more ionization on dilution" },
+        { q: "Kohlrausch law is used to find Λ°_m of", o: ["Strong electrolytes only", "Weak electrolytes", "Gases", "None"], c: 1, exp: "Used for weak acids/bases like CH₃COOH, NH₄OH" },
+        { q: "Which has highest molar conductivity?", o: ["H⁺", "Na⁺", "K⁺", "Ca²⁺"], c: 0, exp: "λ°(H⁺) = 349.8 S cm² mol⁻¹ → highest mobility" },
+        { q: "E°_cell for Daniell cell is +1.10 V. Reaction is", o: ["Non-spontaneous", "Spontaneous", "At equilibrium", "Endothermic"], c: 1, exp: "E° > 0 → spontaneous → ΔG < 0" },
+        { q: "Nernst equation at 298 K is", o: ["E = E° – (0.0591/n) log Q", "E = E° – (0.0591/n) log K", "E = E° + RT/nF ln Q", "E = E° + 0.0591 log Q"], c: 0, exp: "Standard form: E = E° – (0.0591/n) log Q" },
+        { q: "At equilibrium, E_cell =", o: ["E°_cell", "0", "Positive", "Negative"], c: 1, exp: "E_cell = 0 → Q = K" },
+        { q: "log K = nE°/0.0591. For E° = 1.10 V, n=2, log K =", o: ["18.64", "37.29", "1.10", "2.20"], c: 0, exp: "log K = 2×1.10 / 0.0591 ≈ 37.2 / 2 = 18.64" },
+        { q: "Which is a secondary cell?", o: ["Dry cell", "Mercury cell", "Lead storage battery", "Fuel cell"], c: 2, exp: "Can be recharged → Pb + PbO₂" },
+        { q: "Fuel cell converts chemical energy directly into", o: ["Heat", "Electricity", "Mechanical", "Light"], c: 1, exp: "No combustion → highest efficiency ~70%" },
+        { q: "Anode in galvanic cell is", o: ["Positive", "Negative", "Neutral", "Depends"], c: 1, exp: "Oxidation occurs → electrons flow out → negative terminal" },
+        { q: "Degree of dissociation α = Λ_m / Λ°_m is for", o: ["Strong electrolyte", "Weak electrolyte", "Both", "None"], c: 1, exp: "Only valid for weak electrolytes" },
+        { q: "Corrosion of iron is", o: ["Electrolytic process", "Galvanic process", "Photochemical", "Thermal"], c: 1, exp: "Fe acts as anode, O₂ as cathode → electrochemical rusting" },
+        { q: "Which battery has constant voltage throughout life?", o: ["Lead acid", "Ni-Cd", "Mercury cell", "Li-ion"], c: 2, exp: "Zn-Hg | HgO → E = 1.35 V constant" },
+        { q: "In concentration cell, E_cell depends on", o: ["Temperature", "Ratio of concentrations", "Nature of electrode", "All"], c: 1, exp: "E = (0.0591/n) log(C₂/C₁)" },
+        { q: "Oxidation number of oxygen in OF₂ is", o: ["-2", "-1", "+1", "+2"], c: 3, exp: "F is always -1 → 2F = -2 → O must be +2" },
+        { q: "Which is NOT a primary cell?", o: ["Dry cell", "Daniel cell", "Li-ion battery", "Mercury cell"], c: 2, exp: "Li-ion is rechargeable → secondary" },
+        { q: "The cell reaction with maximum ΔG is", o: ["Most negative E°", "Most positive E°", "Zero E°", "Cannot say"], c: 1, exp: "ΔG = –nFE° → most positive E° → most negative ΔG" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 30*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#b71c1c;">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) { clearInterval(timerId); submitQuiz(); }
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Redox Master!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Revise Nernst & Kohlrausch" :
+                    correct >= 8 ? "Good! Focus on Balancing & Batteries" : "Time to Conquer Redox!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers = Array(questions.length).fill(null); timeLeft = 30*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html> 

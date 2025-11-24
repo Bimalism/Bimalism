@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equilibrium - Complete Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#f3e5f5;padding:20px;}
+        .container{max-width:1450px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.3);}
+        header{background:linear-gradient(135deg,#7b1fa2,#9c27b0,#ba68c8);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.6rem;margin-bottom:10px;}
+        .subtitle{font-size:1.55rem;opacity:0.96;}
+        .nav{display:flex;background:#4a148c;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.12rem;min-width:200px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #e1bee7;}
+        .content{padding:65px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#7b1fa2;font-size:2.6rem;margin:55px 0 28px;border-bottom:5px solid #9c27b0;padding-bottom:14px;}
+        .box{background:#f3e5f5;border-left:9px solid #ba68c8;padding:32px;margin:38px 0;border-radius:0 14px 14px 0;line-height:2.5;}
+        ul{padding-left:55px;font-size:1.22rem;line-height:2.6;}
+        .imp{color:#b71c1c;font-weight:bold;}
+        .formula{background:#e1bee7;padding:22px;margin:22px 0;border-radius:10px;text-align:center;font-size:1.35rem;font-weight:bold;border-left:6px solid #7b1fa2;}
+        table{width:100%;border-collapse:collapse;margin:25px 0;}
+        th,td{border:1px solid #ba68c8;padding:14px;text-align:center;background:#f3e5f5;}
+        th{background:#e1bee7;color:#4a148c;font-weight:bold;}
+        footer{background:#4a148c;color:white;text-align:center;padding:45px;font-size:1.35rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>EQUILIBRIUM</h1>
+        <p class="subtitle">Unit 6 • Class 11 • Full JEE Main + Advanced Summary • Kc • Kp • Le Chatelier • Buffer • pH • Solubility Product • 2025–26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Dynamic Equilibrium</div>
+        <div class="tab" data-tab="t2">Physical Equilibrium</div>
+        <div class="tab" data-tab="t3">Chemical Equilibrium</div>
+        <div class="tab" data-tab="t4">Le Chatelier’s Principle</div>
+        <div class="tab" data-tab="t5">Ionic Equilibrium</div>
+        <div class="tab" data-tab="t6">Acids & Bases</div>
+        <div class="tab" data-tab="t7">Buffer Solutions</div>
+        <div class="tab" data-tab="t8">Solubility Product</div>
+        <div class="tab" data-tab="t9">JEE Must-Revise</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Concept of Dynamic Equilibrium</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Equilibrium → rate of forward reaction = rate of backward reaction</li>
+                    <li class="imp">Dynamic in nature → reactions never stop</li>
+                    <li>Attained only in closed system</li>
+                    <li>Macroscopic properties (P, T, conc) become constant</li>
+                    <li>Can be achieved from either side</li>
+                    <li>Catalyst does not affect position, only speeds attainment</li>
+                    <li>Equilibrium constant is temperature dependent</li>
+                    <li>Reversible reactions → ⇌, Irreversible → →</li>
+                    <li>Equilibrium state ≠ static state (molecules still react)</li>
+                    <li>JEE asks: Why ice ⇌ water is dynamic even at 0°C?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Physical Equilibrium & Henry’s Law</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Solid ⇌ Liquid: Melting point (at 1 atm)</li>
+                    <li class="imp">Liquid ⇌ Gas: Vapour pressure becomes constant</li>
+                    <li>Henry’s law: P_gas = K_H × x_gas (solubility of gas)</li>
+                    <li>K_H ↑ as T ↑ → solubility of gas ↓ with temperature</li>
+                    <li>Soda bottle: High pressure → more CO₂ dissolved</li>
+                    <li>Deep sea divers: N₂ dissolves more at high P → decompression sickness</li>
+                    <li>Solid in liquid: Saturated solution → dynamic equilibrium</li>
+                    <li>λ = vapour density at equilibrium</li>
+                    <li>General: All phase changes are physical equilibrium</li>
+                    <li>JEE loves: Why do fish die in hot water? (Less O₂)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pane" id="t3">
+            <h2>3. Chemical Equilibrium & Equilibrium Constants</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Law of mass action: Rate ∝ [reactants]^stoich</li>
+                    <li class="imp">Kc = [C]^c [D]^d / [A]^a [B]^b</li>
+                    <li>Kp = (P_C^c P_D^d) / (P_A^a P_B^b)</li>
+                    <li>Kp = Kc (RT)^Δn_g → Δn_g = moles products – moles reactants gases</li>
+                    <li>Kc has units if Δn ≠ 0, Kp always has units</li>
+                    <li>If K > 10³ → product favoured, K < 10⁻³ → reactant favoured</li>
+                    <li>Reaction quotient Q: If Q < K → forward, Q > K → backward</li>
+                    <li>For reverse reaction K’ = 1/K</li>
+                    <li>For multiplied reaction K’’ = K^n</li>
+                    <li>JEE favourite: Calculate Kp from Kc and vice-versa</li>
+                </ul>
+                <div class="formula">ΔG° = –RT ln K → K = e^(–ΔG°/RT)</div>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pane" id="t4">
+            <h2>4. Le Chatelier’s Principle & Factors</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">System opposes any change in T, P, conc</li>
+                    <li>Increase conc of reactant → shifts forward</li>
+                    <li>Increase pressure → shifts to lesser moles of gas</li>
+                    <li>Exothermic reaction → increase T → shifts backward</li>
+                    <li>Catalyst → no effect on position</li>
+                    <li>Inert gas at constant volume → no effect</li>
+                    <li>Inert gas at constant pressure → shifts to more moles</li>
+                    <li>Removal of product → shifts forward (industrial importance)</li>
+                    <li>Haber's process: High P, low T, remove NH₃</li>
+                    <li>JEE asks: Predict shift in 2SO₂ + O₂ ⇌ 2SO₃</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pane" id="t5">
+            <h2>5. Ionic Equilibrium & Electrolytes</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Strong electrolytes: Complete ionization (HCl, NaOH)</li>
+                    <li class="imp">Weak electrolytes: Partial (CH₃COOH, NH₄OH)</li>
+                    <li>Ostwald dilution law: K_a = α²C / (1–α) for weak acid</li>
+                    <li>Degree of dissociation α ↑ with dilution</li>
+                    <li>pH = –log[H⁺], pOH = –log[OH⁻]</li>
+                    <li>pK_a = –log K_a → lower pK_a = stronger acid</li>
+                    <li>Kw = [H⁺][OH⁻] = 10⁻¹⁴ at 298 K</li>
+                    <li>pH + pOH = 14</li>
+                    <li>Common ion effect: Suppresses dissociation</li>
+                    <li>JEE loves: Calculate pH of 0.1 M CH₃COOH + 0.1 M CH₃COONa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pane" id="t6">
+            <h2>6. Acids & Bases Concepts</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Arrhenius: Acid → H⁺, Base → OH⁻ in water</li>
+                    <li class="imp">Brønsted-Lowry: Acid → proton donor, Base → proton acceptor</li>
+                    <li>Lewis: Acid → e⁻ pair acceptor, Base → e⁻ pair donor</li>
+                    <li>Conjugate acid-base pair differ by one H⁺</li>
+                    <li>H₂O is amphoteric</li>
+                    <li>Strength: HCl > H₂SO₄ > HNO₃ > HF (F⁻ strong conjugate)</li>
+                    <li>Levelling effect: All strong acids same strength in water</li>
+                    <li>Polyprotic acids: H₃PO₄ → multistage ionization</li>
+                    <li>pH of salts depends on hydrolysis</li>
+                    <li>JEE asks: Which is strongest Lewis acid? BF₃</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pane" id="t7">
+            <h2>7. Buffer Solutions</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Resist change in pH on adding small acid/base</li>
+                    <li class="imp">Acidic buffer: Weak acid + its salt (CH₃COOH + CH₃COONa)</li>
+                    <li>Basic buffer: Weak base + its salt (NH₄OH + NH₄Cl)</li>
+                    <li>Henderson equation: pH = pK_a + log([salt]/[acid])</li>
+                    <li>pOH = pK_b + log([salt]/[base])</li>
+                    <li>Buffer capacity maximum when [acid] = [salt]</li>
+                    <li>Blood buffer: H₂CO₃ / HCO₃⁻ (pH ~7.4)</li>
+                    <li>Solubility of salt affected by common ion</li>
+                    <li>Buffer works best in pK_a ± 1 range</li>
+                    <li>JEE favourite: Calculate pH after adding HCl to buffer</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pane" id="t8">
+            <h2>8. Solubility Product (Ksp)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Ksp = [M⁺]^m [A⁻]^n for MxAy ⇌ mM⁺ + nA⁻</li>
+                    <li class="imp">If ionic product > Ksp → precipitation</li>
+                    <li>Ksp ↑ with temperature for most salts</li>
+                    <li>Common ion decreases solubility</li>
+                    <li>pH affects solubility of salts of weak acids (CaF₂, Ag₂CrO₄)</li>
+                    <li>Selective precipitation: AgCl precipitates before AgBr</li>
+                    <li>Simultaneous solubility when two salts have common ion</li>
+                    <li>Ksp of AgCl = 1.8 × 10⁻¹⁰, CaF₂ = 3.9 × 10⁻¹¹</li>
+                    <li>Complex formation increases solubility (AgCl in NH₃)</li>
+                    <li>JEE asks: Minimum [OH⁻] to precipitate Mg(OH)₂</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pane" id="t9">
+            <h2>9. JEE Most Important Points (Revise Daily)</h2>
+            <div class="box">
+                <ul>
+                    <li class="imp">Kp = Kc(RT)^Δn_g → Δn_g = gaseous products – reactants</li>
+                    <li class="imp">ΔG° = –RT ln K → K > 1 if ΔG° < 0</li>
+                    <li class="imp">Le Chatelier: High P → less moles, High T → endothermic</li>
+                    <li class="imp">pH = pK_a + log([salt]/[acid]) → Buffer equation</li>
+                    <li class="imp">Ksp > Ionic product → unsaturated, = saturated, < precipitation</li>
+                    <li class="imp">Common ion effect suppresses ionization/solubility</li>
+                    <li class="imp">α = √(K_a/C) for weak acid (Ostwald)</li>
+                    <li class="imp">pH of salt: NH₄Cl acidic, Na₂CO₃ basic, CH₃COONa basic</li>
+                    <li class="imp">Henry’s law: Solubility ∝ Pressure</li>
+                    <li class="imp">Catalyst does NOT affect K or position of equilibrium</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Equilibrium • Complete Summary • Kc Kp • Le Chatelier • Buffer • pH • Ksp • JEE Main + Advanced 2025–26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

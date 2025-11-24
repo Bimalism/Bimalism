@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordination Compounds Quiz | JEE 2025-26</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+        body { background:linear-gradient(135deg,#7b1fa2,#8e24aa,#ab47bc); color:#333; min-height:100vh; padding:20px; }
+        .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.5); overflow:hidden; }
+        header { background:linear-gradient(to right,#6a1b9a,#8e24aa); color:white; padding:30px; text-align:center; position:relative; }
+        h1 { font-size:2.8rem; margin-bottom:8px; }
+        .subtitle { font-size:1.3rem; opacity:0.95; }
+        .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); padding:12px 28px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+        .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#f3e5f5; }
+        .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn-home { background:#8e24aa; color:white; }
+        .btn-reset { background:#e1bee7; color:#6a1b9a; }
+        .btn-submit { background:#6a1b9a; color:white; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+        .progress-bar { height:14px; background:#e1bee7; margin:15px 30px; border-radius:7px; overflow:hidden; }
+        .progress { height:100%; background:#8e24aa; width:0%; transition:width 0.5s; }
+        .progress-text { padding:0 30px 20px; font-weight:bold; color:#6a1b9a; display:flex; justify-content:space-between; }
+        .quiz { padding:30px; }
+        .question { background:#f3e5f5; padding:25px; border-radius:12px; border-left:6px solid #ce93d8; margin-bottom:25px; }
+        .qno { font-weight:bold; color:#6a1b9a; font-size:1.2rem; }
+        .qtext { font-size:1.25rem; margin:15px 0; font-weight:500; }
+        .options { display:grid; gap:14px; }
+        .option { padding:16px; background:white; border:2px solid #e1bee7; border-radius:10px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:12px; }
+        .option:hover { border-color:#ce93d8; background:#f3e5f5; }
+        .option.selected { border-color:#6a1b9a; background:#e1bee7; font-weight:bold; }
+        .result { display:none; padding:50px; text-align:center; background:linear-gradient(135deg,#f3e5f5,#e1bee7); }
+        .score { font-size:4.8rem; font-weight:bold; color:#6a1b9a; margin:20px 0; }
+        .message { font-size:1.7rem; margin:20px 0; color:#6a1b9a; }
+        .details { margin:40px auto; max-width:900px; text-align:left; }
+        .detail { padding:20px; background:white; margin:15px 0; border-radius:10px; border-left:6px solid #ce93d8; }
+        .wrong { border-left-color:#d50000; background:#ffebee; }
+        .exp { margin-top:15px; padding:15px; background:#fffde7; border-radius:8px; border-left:4px solid #ce93d8; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>COORDINATION COMPOUNDS</h1>
+        <p class="subtitle">20 High-Yield JEE Questions • Werner • CFT • Isomerism • Nomenclature • Colour • Magnetism • 25 Minutes</p>
+        <div class="timer">Time: <span id="timer">25:00</span></div>
+    </header>
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Coordination number of Co in [Co(en)₃]³⁺ is", o: ["3", "6", "9", "12"], c: 1, exp: "en is bidentate → 3 en = 6 donor atoms → CN = 6" },
+        { q: "IUPAC name of [Co(NH₃)₅Cl]Cl₂ is", o: ["Pentaamminechloridocobalt(II) chloride", "Pentaamminechloridocobalt(III) chloride", "Chloropentaamminecobalt(III) chloride", "Amminechlorocobalt chloride"], c: 1, exp: "Co is +3, ligands alphabetical, chloro ends with o" },
+        { q: "Which ligand is ambidentate?", o: ["en", "CN⁻", "NH₃", "EDTA⁴⁻"], c: 1, exp: "CN⁻ can bind via C (cyano) or N (isocyano)" },
+        { q: "Total number of geometrical isomers of [PtCl₂(NH₃)₂] is", o: ["1", "2", "3", "4"], c: 1, exp: "Square planar Ma₂b₂ → cis and trans" },
+        { q: "Hybridisation of Ni in [Ni(CN)₄]²⁻ is", o: ["sp³", "dsp²", "sp³d", "d²sp³"], c: 1, exp: "Square planar → always dsp²" },
+        { q: "According to CFT, splitting in tetrahedral complex is", o: ["Δ_t = 4/9 Δ_o", "Δ_t = 9/4 Δ_o", "Δ_t = Δ_o", "Δ_t = 2 Δ_o"], c: 0, exp: "Δ_t = 4/9 Δ_o and inverted" },
+        { q: "Complex showing optical isomerism is", o: ["[Co(en)₃]³⁺", "trans-[Co(en)₂Cl₂]⁺", "[Co(NH₃)₆]³⁺", "[Pt(NH₃)₄]²⁺"], c: 0, exp: "Only [M(AA)₃] type shows optical isomerism" },
+        { q: "Magnetic moment of [Fe(H₂O)₆]²⁺ (high spin) is", o: ["0 BM", "1.73 BM", "4.90 BM", "5.92 BM"], c: 2, exp: "Fe²⁺ d⁶ high spin → 4 unpaired → μ = √24 ≈ 4.9 BM" },
+        { q: "Which is a strong field ligand?", o: ["H₂O", "F⁻", "CN⁻", "Cl⁻"], c: 2, exp: "CN⁻ is at the top of spectrochemical series" },
+        { q: "CFSE for d⁵ high spin octahedral complex is", o: ["0", "–0.4 Δ_o", "–2.0 Δ_o", "–1.2 Δ_o"], c: 0, exp: "t₂g³ e_g² → (–0.4×3) + (0.6×2) = 0" },
+        { q: "The complex used as anticancer drug is", o: ["Cis-platin", "Trans-platin", "Zeise’s salt", "Haemoglobin"], c: 0, exp: "cis-[Pt(NH₃)₂Cl₂] is active, trans is inactive" },
+        { q: "In [NiCl₄]²⁻, Ni is in", o: ["sp³, paramagnetic", "dsp², diamagnetic", "sp³, diamagnetic", "dsp², paramagnetic"], c: 0, exp: "Tetrahedral → sp³, Ni²⁺ d⁸ → 2 unpaired" },
+        { q: "The colour of [Ti(H₂O)₆]³⁺ is", o: ["Colourless", "Purple", "Green", "Yellow"], c: 1, exp: "Ti³⁺ d¹ → d-d transition → purple" },
+        { q: "Number of ions given by [Co(NH₃)₅Br]SO₄ is", o: ["1", "2", "3", "4"], c: 1, exp: "Gives [Co(NH₃)₅Br]²⁺ and SO₄²⁻ → 2 ions" },
+        { q: "EDTA is a ___ dentate ligand", o: ["Bidentate", "Tetradentate", "Hexadentate", "Octadentate"], c: 2, exp: "EDTA has 6 donor atoms (4O + 2N)" },
+        { q: "Which shows linkage isomerism?", o: ["[Co(NH₃)₅NO₂]²⁺", "[Co(NH₃)₆]³⁺", "[Co(en)₃]³⁺", "[Co(NH₃)₄Cl₂]⁺"], c: 0, exp: "NO₂⁻ can bind as nitro or nitrito" },
+        { q: "Jahn-Teller distortion is maximum in", o: ["d⁹ octahedral", "d¹⁰ octahedral", "d⁵ high spin", "d⁰"], c: 0, exp: "d⁹ (Cu²⁺) shows strong distortion" },
+        { q: "Haemoglobin contains metal ion", o: ["Mg²⁺", "Fe²⁺", "Co³⁺", "Zn²⁺"], c: 1, exp: "Fe²⁺ in haemoglobin, Fe³⁺ in methemoglobin" },
+        { q: "The geometry of [Cu(NH₃)₄]²⁺ is", o: ["Square planar", "Tetrahedral", "Octahedral", "Distorted octahedral"], c: 0, exp: "Cu²⁺ d⁹ → square planar (dsp²)" },
+        { q: "Wilkinson’s catalyst is used for", o: ["Oxidation", "Hydrogenation", "Polymerisation", "Hardness removal"], c: 1, exp: "Rh complex used for alkene hydrogenation" }
+    ];
+
+    let current = 0, answers = Array(questions.length).fill(null), timeLeft = 25*60, timerId;
+
+    function showQuestion() {
+        const q = questions[current];
+        let opts = '';
+        q.o.forEach((opt, i) => {
+            const sel = answers[current] === i ? 'selected' : '';
+            opts += `<div class="option ${sel}" onclick="selectOption(${i})">
+                <input type="radio" name="q${current}" ${answers[current]===i?'checked':''}>
+                <span>${opt}</span>
+            </div>`;
+        });
+        document.getElementById('quiz').innerHTML = `
+            <div class="question">
+                <div class="qno">Question ${current+1} of 20</div>
+                <div class="qtext">${q.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+            <div style="margin-top:30px; display:flex; justify-content:space-between;">
+                <button class="btn" ${current===0?'disabled':''} onclick="current--;showQuestion();updateProgress()">Previous</button>
+                <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'current++;showQuestion();updateProgress()'}" style="background:#6a1b9a;">
+                    ${current===19?'Submit Quiz':'Next'}
+                </button>
+            </div>`;
+        updateProgress();
+    }
+
+    function selectOption(i) { answers[current] = i; showQuestion(); }
+
+    function updateProgress() {
+        const done = answers.filter(a => a !== null).length;
+        document.getElementById('progress').style.width = (done/20*100)+'%';
+        document.getElementById('prog').textContent = done;
+        document.getElementById('answered').textContent = done + ' answered';
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+            const s = String(timeLeft%60).padStart(2,'0');
+            document.getElementById('timer').textContent = m+':'+s;
+            if (timeLeft <= 0) submitQuiz();
+        }, 1000);
+    }
+
+    function submitQuiz() {
+        clearInterval(timerId);
+        let correct = 0, details = '';
+        questions.forEach((q, i) => {
+            const user = answers[i];
+            const isCorrect = user === q.c;
+            if (isCorrect) correct++;
+            details += `<div class="detail ${isCorrect?'':'wrong'}">
+                <strong>Q${i+1}:</strong> ${q.q}<br>
+                Your answer: ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+                Correct: <strong>${q.o[q.c]}</strong>
+                <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+            </div>`;
+        });
+        const msg = correct >= 18 ? "Coordination King/Queen!" :
+                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 12 ? "Excellent! Master of CFT & Isomerism!" :
+                    correct >= 8 ? "Good! Revise Nomenclature & Applications" : "Time to Conquer Coordination Chemistry!";
+        document.getElementById('score').textContent = correct + '/20';
+        document.getElementById('msg').textContent = msg;
+        document.getElementById('details').innerHTML = details;
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function resetQuiz() {
+        current = 0; answers = Array(questions.length).fill(null); timeLeft = 25*60;
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+        showQuestion(); startTimer();
+    }
+
+    window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>
