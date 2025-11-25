@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atomic Structure Quiz | JEE + NEET 2025-26</title>
+    <title>Atomic Structure Quiz | NEET 2025-26</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
         body { background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00); color:#333; min-height:100vh; padding:20px; }
@@ -153,7 +153,7 @@
             </div>`;
         });
         const msg = correct >= 18 ? "Atomic Structure Legend!" :
-                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 15 ? "Outstanding! Ready!" :
                     correct >= 12 ? "Excellent! Just Revise Bohr Derivations" :
                     correct >= 8 ? "Good! Focus on Quantum Numbers & Nodes" : "Revise Bohr, de Broglie & Electronic Config!";
         document.getElementById('score').textContent = correct + '/20';
@@ -172,4 +172,5 @@
     window.onload = () => { showQuestion(); startTimer(); };
 </script>
 </body>
+
 </html>
