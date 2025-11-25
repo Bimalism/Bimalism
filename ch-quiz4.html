@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemical Thermodynamics Quiz | JEE + NEET 2025-26</title>
+    <title>Chemical Thermodynamics Quiz | NEET 2025-26</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
         body { background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a); color:#333; min-height:100vh; padding:20px; }
@@ -152,7 +152,7 @@
             </div>`;
         });
         const msg = correct >= 18 ? "Thermodynamics Master!" :
-                    correct >= 15 ? "Outstanding! Ready for JEE Advanced!" :
+                    correct >= 15 ? "Outstanding! Ready for NEET!" :
                     correct >= 12 ? "Excellent! Revise Gibbs & Hess’s Law" :
                     correct >= 8 ? "Good! Focus on First & Second Law" : "Time to Master Chemical Thermodynamics!";
         document.getElementById('score').textContent = correct + '/20';
@@ -173,4 +173,5 @@
     window.onload = () => { showQuestion(); startTimer(); };
 </script>
 </body>
+
 </html>
