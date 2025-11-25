@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solutions Quiz | JEE + NEET 2025-26</title>
+    <title>Solutions Quiz | NEET 2025-26</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
         body { background:linear-gradient(135deg,#0277bd,#039be5,#29b6f6); color:#333; min-height:100vh; padding:20px; }
@@ -152,7 +152,7 @@
             </div>`;
         });
         const msg = correct >= 18 ? "Solutions Legend!" :
-                    correct >= 15 ? "Outstanding! JEE Advanced Ready!" :
+                    correct >= 15 ? "Outstanding! NEET Ready!" :
                     correct >= 12 ? "Excellent! Revise van’t Hoff & Azeotropes" :
                     correct >= 8 ? "Good! Focus on Colligative Properties" : "Time to Master Solutions!";
         document.getElementById('score').textContent = correct + '/20';
@@ -173,4 +173,5 @@
     window.onload = () => { showQuestion(); startTimer(); };
 </script>
 </body>
+
 </html>
