@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biotechnology & Its Applications – Complete Chapter Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#e1f5fe; padding:20px; }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.22); }
+        header { background:linear-gradient(135deg,#006064,#00838f,#0097a7); color:white; padding:50px; text-align:center; }
+        h1 { font-size:3.4rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.5rem; opacity:0.96; }
+        .nav { display:flex; background:#004d40; flex-wrap:wrap; }
+        .tab { padding:22px 38px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.15rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #80deea; }
+        .content { padding:60px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#006064; font-size:2.5rem; margin:45px 0 28px; border-bottom:5px solid #0097a7; padding-bottom:14px; }
+        .def { background:#e1f5fe; border-left:8px solid #80deea; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; line-height:2.1; }
+        ul { margin:20px 0; padding-left:45px; line-height:2.3; font-size:1.18rem; }
+        footer { background:#004d40; color:white; text-align:center; padding:38px; font-size:1.25rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:16px;} .content{padding:35px;} h1{font-size:2.6rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>BIOTECHNOLOGY & ITS APPLICATIONS</h1>
+        <p class="subtitle">Unit 9 • Complete Chapter Summary • Class 12 Biology • NEET 2025–2026</p>
+    </header>
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Principles & Processes of Biotechnology</div>
+        <div class="tab" data-tab="t2">Applications in Health & Agriculture + Ethical Issues</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Principles and Processes of Biotechnology</h2>
+            <div class="def">
+                <ul>
+                    <li>Biotechnology = use of biology to develop technologies/products; recombinant DNA technology is core.</li>
+                    <li>Tools: Restriction enzymes (molecular scissors), DNA ligase (molecular glue), vectors (plasmid, bacteriophage), competent host (E. coli).</li>
+                    <li>Restriction enzymes: palindromic recognition, Type II most used (EcoRI, HindIII); produce sticky or blunt ends.</li>
+                    <li>Steps of rDNA technology: Isolation of DNA → Fragmentation → Selection → Insertion into vector → Transformation → Selection of recombinants → Culturing.</li>
+                    <li>Cloning vectors: ori, selectable marker (ampR, tetR), cloning site, promoter (pBR322, pUC).</li>
+                    <li>Competent cell preparation: CaCl₂ or electroporation.</li>
+                    <li>Selection of recombinants: Insertional inactivation (blue-white screening using lacZ), antibiotic resistance.</li>
+                    <li>Bioreactors: large vessels (10–10000 L) for mass culture; stirred-tank most common.</li>
+                    <li>Downstream processing: separation, purification, preservation of product.</li>
+                    <li>PCR (Polymerase Chain Reaction): denaturation → annealing → extension; Taq polymerase used.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Applications in Health & Agriculture + Ethical Issues</h2>
+            <div class="def">
+                <ul>
+                    <li>Human insulin: A & B chains produced in E. coli using recombinant DNA → mature insulin (Humulin – first rDNA product).</li>
+                    <li>Gene therapy: ADA deficiency treated by introducing functional ADA gene (first clinical gene therapy 1990).</li>
+                    <li>Vaccines: subunit (Hepatitis B), DNA vaccines, edible vaccines under research.</li>
+                    <li>Bt crops: Bacillus thuringiensis cry genes (cryIAc, cryIIAb, cryIAb) → Bt cotton, Bt brinjal, Bt corn.</li>
+                    <li>RNAi technology: silencing mRNA (e.g., nematode-resistant tobacco using Meloidegyne incognita).</li>
+                    <li>Golden rice: enriched with vitamin A (β-carotene) using psy & crtI genes.</li>
+                    <li>Transgenic animals: sheep (Tracy) producing α-1-antitrypsin, mice (super mouse), cattle for increased milk.</li>
+                    <li>Biosafety issues: GEAC (India) regulates GMOs; Cartagena Protocol for biosafety.</li>
+                    <li>Biopiracy: illegal use of bioresources (e.g., neem, basmati patents by foreign companies).</li>
+                    <li>Patents: granted for Bt cotton (Monsanto), but India developed indigenous Bt varieties.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Biotechnology & Its Applications • Complete Summary • rDNA Technology • Insulin • Bt Crops • Gene Therapy • RNAi • Biopatent • Biopiracy • Made for Future Doctors & Biotech Engineers • NEET 2025–2026
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cell Structure & Function Quiz - 20 Questions | NEET 2025-26</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:linear-gradient(135deg,#1565c0,#1976d2,#42a5f5); color:#333; min-height:100vh; padding:20px; }
+    .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+    header { background:linear-gradient(to right,#0d47a1,#1565c0); color:white; padding:30px; text-align:center; position:relative; }
+    h1 { font-size:2.6rem; margin-bottom:8px; }
+    .subtitle { font-size:1.3rem; opacity:0.95; }
+    .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+    .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#e3f2fd; }
+    .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .btn-home { background:#42a5f5; color:white; }
+    .btn-reset { background:#90caf9; color:#333; }
+    .btn-submit { background:#1565c0; color:white; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .progress-bar { height:14px; background:#bbdefb; margin:15px 30px; border-radius:7px; overflow:hidden; }
+    .progress { height:100%; background:#1565c0; width:0%; transition:width 0.5s; }
+    .progress-text { padding:0 30px 20px; font-weight:bold; color:#1565c0; display:flex; justify-content:space-between; }
+    .quiz { padding:30px; min-height:70vh; }
+    .question { background:#e3f2fd; padding:28px; border-radius:14px; border-left:7px solid #42a5f5; margin-bottom:30px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+    .qno { font-weight:bold; color:#1565c0; font-size:1.3rem; margin-bottom:10px; }
+    .qtext { font-size:1.28rem; margin:18px 0; line-height:1.6; font-weight:500; }
+    .options { display:grid; gap:16px; margin-top:20px; }
+    .option { padding:18px; background:white; border:3px solid #bbdefb; border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:15px; font-size:1.1rem; }
+    .option:hover { border-color:#42a5f5; background:#f5fbff; transform:translateX(5px); }
+    .option.selected { border-color:#1565c0; background:#90caf9; font-weight:bold; color:#0d47a1; }
+    .radio { width:24px; height:24px; border:3px solid #999; border-radius:50%; flex-shrink:0; position:relative; }
+    .radio.checked { border-color:#1565c0; background:#1565c0; }
+    .radio.checked::after { content:''; width:12px; height:12px; background:white; border-radius:50%; position:absolute; top:6px; left:6px; }
+    .result { display:none; padding:50px 30px; text-align:center; background:linear-gradient(135deg,#e3f2fd,#bbdefb); min-height:100vh; }
+    .score { font-size:5rem; font-weight:bold; color:#1565c0; margin:25px 0; }
+    .message { font-size:1.8rem; margin:25px 0; color:#0d47a1; font-weight:600; }
+    .details { margin:40px auto; max-width:900px; text-align:left; }
+    .detail { padding:22px; background:white; margin:18px 0; border-radius:12px; border-left:6px solid #42a5f5; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    .wrong { border-left-color:#c62828; background:#ffebee; }
+    .exp { margin-top:18px; padding:16px; background:#fff8e1; border-radius:10px; border-left:5px solid #42a5f5; font-size:1.05rem; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>CELL: STRUCTURE & FUNCTION</h1>
+        <p class="subtitle">20 High-Yield MCQs • Cell Theory • Organelles • Biomolecules • Cell Cycle • 20 Minutes</p>
+        <div class="timer">Time: <span id="timer">20:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" style="margin-top:30px; padding:15px 40px; font-size:1.2rem;" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "Cell theory was proposed by", o: ["Schleiden & Schwann","Virchow","Robert Hooke","Leeuwenhoek"], c:0, exp:"Schleiden (plants) & Schwann (animals) – 1838–39" },
+    { q: "The only cell organelle seen in prokaryotes is", o: ["Mitochondria","Ribosome","Lysosome","Plastid"], c:1, exp:"Ribosomes (70S) are present in all cells" },
+    { q: "Fluid mosaic model was given by", o: ["Robertson","Singer & Nicolson","Watson & Crick","Palade"], c:1, exp:"Singer & Nicolson (1972) – proteins float in lipid bilayer" },
+    { q: "70S ribosomes are found in", o: ["Eukaryotic cytoplasm","Mitochondria","Chloroplast","Both B & C"], c:3, exp:"70S in prokaryotes, mitochondria & chloroplasts" },
+    { q: "Powerhouse of the cell is", o: ["Nucleus","Mitochondria","Ribosome","Golgi"], c:1, exp:"Mitochondria – site of aerobic respiration" },
+    { q: "Site of photosynthesis in plant cell is", o: ["Mitochondria","Chloroplast","Nucleus","Ribosome"], c:1, exp:"Chloroplast contains chlorophyll & thylakoids" },
+    { q: "Suicidal bags of the cell are", o: ["Lysosomes","Peroxisomes","Glyoxysomes","Vacuoles"], c:0, exp:"Lysosomes contain digestive enzymes" },
+    { q: "Chromatin is made up of", o: ["DNA only","DNA + Histone","RNA + Protein","Lipids"], c:1, exp:"DNA wrapped around histone proteins" },
+    { q: "The enzyme present in saliva is", o: ["Pepsin","Trypsin","Amylase","Lipase"], c:2, exp:"Salivary amylase (ptyalin) digests starch" },
+    { q: "Lock and key model of enzyme action was proposed by", o: ["Koshland","Fischer","Michaelis-Menten","None"], c:1, exp:"Emil Fischer (1894)" },
+    { q: "Co-factor of enzyme carboxypeptidase is", o: ["Zn²⁺","Mg²⁺","Fe²⁺","Cu²⁺"], c:0, exp:"Zn²⁺ is prosthetic group" },
+    { q: "Stage absent in mitosis is", o: ["Prophase","Metaphase","Anaphase","Pachytene"], c:3, exp:"Pachytene (crossing over) occurs in meiosis I" },
+    { q: "Synaptonemal complex is formed during", o: ["Leptotene","Zygotene","Pachytene","Diplotene"], c:1, exp:"Zygotene – pairing of homologous chromosomes" },
+    { q: "Number of chromosomes in daughter cells after meiosis is", o: ["Same as parent","Double","Half","None"], c:2, exp:"Reduction division – 2n → n" },
+    { q: "Centriole is made up of", o: ["Tubulin","Actin","Myosin","Keratin"], c:0, exp:"Microtubules of tubulin protein" },
+    { q: "Middle lamella is made up of", o: ["Cellulose","Pectin","Lignin","Suberin"], c:1, exp:"Calcium & magnesium pectate" },
+    { q: "The functional unit of contractile system is", o: ["Myofibril","Sarcomere","Sarcolemma","Z-line"], c:1, exp:"Sarcomere – between two Z-lines" },
+    { q: "Plasmodesmata are found in", o: ["Animal cells","Plant cells","Bacterial cells","All"], c:1, exp:"Cytoplasmic connections in plant cells" },
+    { q: "Oxysomes are present on", o: ["Inner mitochondrial membrane","Outer mitochondrial membrane","Cristae","Matrix"], c:0, exp:"F₀-F₁ particles – site of ATP synthesis" },
+    { q: "The cell organelle without membrane is", o: ["Ribosome","Centriole","Nucleolus","All of these"], c:3, exp:"All are non-membranous" }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let timeLeft = 20 * 60;
+let timerId;
+
+function showQuestion() {
+    const q = questions[current];
+    let opts = '';
+    q.o.forEach((opt, i) => {
+        const sel = answers[current] === i;
+        opts += `
+            <div class="option ${sel ? 'selected' : ''}" onclick="selectOption(${i})">
+                <div class="radio ${sel ? 'checked' : ''}"></div>
+                <span>${opt}</span>
+            </div>`;
+    });
+
+    document.getElementById('quiz').innerHTML = `
+        <div class="question">
+            <div class="qno">Question ${current + 1} of 20</div>
+            <div class="qtext">${q.q}</div>
+            <div class="options">${opts}</div>
+        </div>
+        <div style="margin-top:40px; display:flex; justify-content:space-between;">
+            <button class="btn" ${current===0?'disabled':''} onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'nextQuestion()' }">
+                ${current===19?'Submit Quiz':'Next'}
+            </button>
+        </div>`;
+    updateProgress();
+}
+
+function selectOption(i) { answers[current] = i; showQuestion(); }
+function nextQuestion() { if(current < 19) current++; showQuestion(); }
+function prevQuestion() { if(current > 0) current--; showQuestion(); }
+
+function updateProgress() {
+    const done = answers.filter(a => a !== null).length;
+    document.getElementById('progress').style.width = (done/20*100)+'%';
+    document.getElementById('prog').textContent = done;
+    document.getElementById('answered').textContent = done + ' answered';
+}
+
+function startTimer() {
+    timerId = setInterval(() => {
+        timeLeft--;
+        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+        const s = String(timeLeft%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m+':'+s;
+        if(timeLeft <= 0) submitQuiz();
+    }, 1000);
+}
+
+function submitQuiz() {
+    clearInterval(timerId);
+    let correct = 0, details = '';
+    questions.forEach((q,i) => {
+        const user = answers[i];
+        const isCorrect = user === q.c;
+        if(isCorrect) correct++;
+        details += `<div class="detail ${isCorrect?'':'wrong'}">
+            <strong>Q${i+1}:</strong> ${q.q}<br>
+            <strong>Your:</strong> ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+            <strong>Correct:</strong> ${q.o[q.c]}
+            <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const msg = correct >= 18 ? "Cell Biology Champion! NEET Topper!" :
+                correct >= 15 ? "Outstanding! Almost Perfect" :
+                correct >= 12 ? "Excellent! Just a Little Revision" :
+                correct >= 8 ? "Good! Focus on Organelles & Enzymes" : "Revise Cell Theory & Cell Cycle!";
+
+    document.getElementById('score').textContent = correct + '/20';
+    document.getElementById('msg').textContent = msg;
+    document.getElementById('details').innerHTML = details;
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function resetQuiz() {
+    current = 0;
+    answers.fill(null);
+    timeLeft = 20*60;
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    showQuestion();
+    startTimer();
+}
+
+window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

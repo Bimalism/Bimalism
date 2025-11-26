@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology & Human Welfare Quiz – 20 Questions | NEET 2025-26</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:linear-gradient(135deg,#e65100,#ff8f00,#ffb74d); color:#333; min-height:100vh; padding:20px; }
+    .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+    header { background:linear-gradient(to right,#e65100,#ff6f00); color:white; padding:30px; text-align:center; position:relative; }
+    h1 { font-size:2.6rem; margin-bottom:8px; }
+    .subtitle { font-size:1.3rem; opacity:0.95; }
+    .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+    .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff8e1; }
+    .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .btn-home { background:#ffb74d; color:white; }
+    .btn-reset { background:#ffcc80; color:#e65100; }
+    .btn-submit { background:#ff6f00; color:white; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .progress-bar { height:14px; background:#ffe0b2; margin:15px 30px; border-radius:7px; overflow:hidden; }
+    .progress { height:100%; background:#ff6f00; width:0%; transition:width 0.5s; }
+    .progress-text { padding:0 30px 20px; font-weight:bold; color:#ff6f00; display:flex; justify-content:space-between; }
+    .quiz { padding:30px; min-height:70vh; }
+    .question { background:#fff8e1; padding:28px; border-radius:14px; border-left:7px solid #ffb74d; margin-bottom:30px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+    .qno { font-weight:bold; color:#ff6f00; font-size:1.3rem; margin-bottom:10px; }
+    .qtext { font-size:1.28rem; margin:18px 0; line-height:1.6; font-weight:500; }
+    .options { display:grid; gap:16px; margin-top:20px; }
+    .option { padding:18px; background:white; border:3px solid #ffe0b2; border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:15px; font-size:1.1rem; }
+    .option:hover { border-color:#ffb74d; background:#fffde7; transform:translateX(5px); }
+    .option.selected { border-color:#ff6f00; background:#ffcc80; font-weight:bold; color:#e65100; }
+    .radio { width:24px; height:24px; border:3px solid #999; border-radius:50%; flex-shrink:0; position:relative; }
+    .radio.checked { border-color:#ff6f00; background:#ff6f00; }
+    .radio.checked::after { content:''; width:12px; height:12px; background:white; border-radius:50%; position:absolute; top:6px; left:6px; }
+    .result { display:none; padding:50px 30px; text-align:center; background:linear-gradient(135deg,#fff8e1,#ffe0b2); }
+    .score { font-size:5rem; font-weight:bold; color:#ff6f00; margin:25px 0; }
+    .message { font-size:1.8rem; margin:25px 0; color:#e65100; font-weight:600; }
+    .details { margin:40px auto; max-width:900px; text-align:left; }
+    .detail { padding:22px; background:white; margin:18px 0; border-radius:12px; border-left:6px solid #ffb74d; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    .wrong { border-left-color:#c62828; background:#ffebee; }
+    .exp { margin-top:18px; padding:16px; background:#fffde7; border-radius:10px; border-left:5px solid #ffb74d; font-size:1.05rem; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>BIOLOGY & HUMAN WELFARE</h1>
+        <p class="subtitle">20 High-Yield MCQs • Diseases • Life Cycles • Immunology • Microbes • Biogas • Biofertilizers • 20 Minutes</p>
+        <div class="timer">Time: <span id="timer">20:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" style="margin-top:30px; padding:15px 40px; font-size:1.2rem;" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "Causative agent of malaria is", o: ["Plasmodium vivax","Wuchereria bancrofti","Salmonella typhi","Entamoeba histolytica"], c:0, exp:"Plasmodium (vivax, falciparum, malariae, ovale); transmitted by female Anopheles" },
+    { q: "Elephantiasis is caused by", o: ["Ascaris","Plasmodium","Wuchereria bancrofti","Salmonella"], c:2, exp:"Wuchereria bancrofti → lymphatic filariasis → elephantiasis" },
+    { q: "Widal test is diagnostic for", o: ["Malaria","Dengue","Typhoid","AIDS"], c:2, exp:"Detects antibodies against Salmonella typhi O & H antigens" },
+    { q: "Ringworm is caused by", o: ["Virus","Bacteria","Fungi","Protozoa"], c:2, exp:"Dermatophytes – Trichophyton, Microsporum, Epidermophyton" },
+    { q: "HIV primarily infects", o: ["RBCs","Macrophages","Helper T-cells (CD4)","B-cells"], c:2, exp:"CD4+ T-helper cells → weakens cell-mediated immunity" },
+    { q: "Bacillus thuringiensis is used in Bt-cotton is a", o: ["Biofertilizer","Biocontrol agent","Biofuel producer","Antibiotic producer"], c:1, exp:"Produces Cry toxin lethal to bollworms" },
+    { q: "Curd is formed by", o: ["Saccharomyces","Lactobacillus","Penicillium","Acetobacter"], c:1, exp:"Lactic acid bacteria (LAB) – Lactobacillus" },
+    { q: "Main gas produced in gobar gas plant is", o: ["Hydrogen","Carbon dioxide","Methane","Ethanol"], c:2, exp:"Methanogens produce 60–70% methane" },
+    { q: "Cyclosporin A (immunosuppressant) is produced by", o: ["Aspergillus niger","Trichoderma polysporum","Monascus purpureus","Clostridium butylicum"], c:1, exp:"Used in organ transplant patients" },
+    { q: "Statins (blood cholesterol lowering drug) are produced by", o: ["Monascus purpureus","Trichoderma","Streptococcus","Lactobacillus"], c:0, exp:"Monascus purpureus (yeast) – inhibits HMG-CoA reductase" },
+    { q: "Rhizobium is a", o: ["Symbiotic nitrogen fixer","Free-living nitrogen fixer","Denitrifying bacteria","Pathogen"], c:0, exp:"Forms root nodules in legumes" },
+    { q: "Ladybird beetle is used to control", o: ["Mosquitoes","Aphids","Bollworms","Fungi"], c:1, exp:"Natural predator of aphids" },
+    { q: "First antibiotic discovered was", o: ["Streptomycin","Tetracycline","Penicillin","Chloramphenicol"], c:2, exp:"Alexander Fleming – Penicillium notatum" },
+    { q: "Secondary treatment of sewage is done by", o: ["Physical removal","Aerobic bacteria","Anaerobic bacteria","Both B & C"], c:3, exp:"Aeration tank (aerobic) → anaerobic sludge digesters" },
+    { q: "Active immunity is developed by", o: ["Antibiotics","Vaccination","Antiserum","All"], c:1, exp:"Body produces own antibodies after vaccination" },
+    { q: "Opioid drugs are obtained from", o: ["Cannabis","Coca plant","Poppy (Papaver somniferum)","Datura"], c:2, exp:"Morphine, heroin, codeine from Papaver" },
+    { q: "Cannabinoids are obtained from", o: ["Poppy","Coca","Cannabis sativa","Erythroxylum"], c:2, exp:"Leaves & inflorescence of Cannabis" },
+    { q: "Entamoeba histolytica causes", o: ["Malaria","Amoebic dysentery","Typhoid","Filariasis"], c:1, exp:"Amoebiasis – contaminated food/water" },
+    { q: "Mycorrhiza is", o: ["Pathogenic fungus","Symbiotic association of fungus & roots","Free-living nitrogen fixer","Anaerobic bacterium"], c:1, exp:"Helps in phosphorus absorption" },
+    { q: "Dragonflies are used as biocontrol agents against", o: ["Aphids","Mosquito larvae","Fungi","Nematodes"], c:1, exp:"Natural predators of mosquito larvae" }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let timeLeft = 20 * 60;
+let timerId;
+
+function showQuestion() {
+    const q = questions[current];
+    let opts = '';
+    q.o.forEach((opt, i) => {
+        const sel = answers[current] === i;
+        opts += `
+            <div class="option ${sel ? 'selected' : ''}" onclick="selectOption(${i})">
+                <div class="radio ${sel ? 'checked' : ''}"></div>
+                <span>${opt}</span>
+            </div>`;
+    });
+
+    document.getElementById('quiz').innerHTML = `
+        <div class="question">
+            <div class="qno">Question ${current + 1} of 20</div>
+            <div class="qtext">${q.q}</div>
+            <div class="options">${opts}</div>
+        </div>
+        <div style="margin-top:40px; display:flex; justify-content:space-between;">
+            <button class="btn" ${current===0 ? 'disabled' : ''} onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-submit" onclick="${current===19 ? 'submitQuiz()' : 'nextQuestion()'}">
+                ${current===19 ? 'Submit Quiz' : 'Next'}
+            </button>
+        </div>`;
+    updateProgress();
+}
+
+function selectOption(i) { answers[current] = i; showQuestion(); }
+function nextQuestion() { if(current < 19) current++; showQuestion(); }
+function prevQuestion() { if(current > 0) current--; showQuestion(); }
+
+function updateProgress() {
+    const done = answers.filter(a => a !== null).length;
+    document.getElementById('progress').style.width = (done/20*100)+'%';
+    document.getElementById('prog').textContent = done;
+    document.getElementById('answered').textContent = done + ' answered';
+}
+
+function startTimer() {
+    timerId = setInterval(() => {
+        timeLeft--;
+        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+        const s = String(timeLeft%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m+':'+s;
+        if(timeLeft <= 0) submitQuiz();
+    }, 1000);
+}
+
+function submitQuiz() {
+    clearInterval(timerId);
+    let correct = 0, details = '';
+    questions.forEach((q,i) => {
+        const user = answers[i];
+        const isCorrect = user === q.c;
+        if(isCorrect) correct++;
+        details += `<div class="detail ${isCorrect?'':'wrong'}">
+            <strong>Q${i+1}:</strong> ${q.q}<br>
+            <strong>Your:</strong> ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+            <strong>Correct:</strong> ${q.o[q.c]}
+            <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const msg = correct >= 18 ? "Welfare Champion! NEET Topper!" :
+                correct >= 15 ? "Outstanding! Almost Perfect" :
+                correct >= 12 ? "Excellent! Revise Microbes" :
+                correct >= 8 ? "Good! Focus on Diseases" : "Revise Diseases & Microbes Thoroughly!";
+
+    document.getElementById('score').textContent = correct + '/20';
+    document.getElementById('msg').textContent = msg;
+    document.getElementById('details').innerHTML = details;
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function resetQuiz() {
+    current = 0;
+    answers.fill(null);
+    timeLeft = 20*60;
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    showQuestion();
+    startTimer();
+}
+
+window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

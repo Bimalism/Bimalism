@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproduction Quiz - 20 Questions | NEET 2025-26</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:linear-gradient(135deg,#ad1457,#c2185b,#ec407a); color:#333; min-height:100vh; padding:20px; }
+    .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+    header { background:linear-gradient(to right,#880e4f,#ad1457); color:white; padding:30px; text-align:center; position:relative; }
+    h1 { font-size:2.6rem; margin-bottom:8px; }
+    .subtitle { font-size:1.3rem; opacity:0.95; }
+    .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+    .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fce4ec; }
+    .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .btn-home { background:#ec407a; color:white; }
+    .btn-reset { background:#f8bbd0; color:#880e4f; }
+    .btn-submit { background:#ad1457; color:white; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .progress-bar { height:14px; background:#f5c6cb; margin:15px 30px; border-radius:7px; overflow:hidden; }
+    .progress { height:100%; background:#c2185b; width:0%; transition:width 0.5s; }
+    .progress-text { padding:0 30px 20px; font-weight:bold; color:#c2185b; display:flex; justify-content:space-between; }
+    .quiz { padding:30px; min-height:70vh; }
+    .question { background:#fce4ec; padding:28px; border-radius:14px; border-left:7px solid #ec407a; margin-bottom:30px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+    .qno { font-weight:bold; color:#c2185b; font-size:1.3rem; margin-bottom:10px; }
+    .qtext { font-size:1.28rem; margin:18px 0; line-height:1.6; font-weight:500; }
+    .options { display:grid; gap:16px; margin-top:20px; }
+    .option { padding:18px; background:white; border:3px solid #f5c6cb; border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:15px; font-size:1.1rem; }
+    .option:hover { border-color:#ec407a; background:#fff0f5; transform:translateX(5px); }
+    .option.selected { border-color:#c2185b; background:#f8bbd0; font-weight:bold; color:#880e4f; }
+    .radio { width:24px; height:24px; border:3px solid #999; border-radius:50%; flex-shrink:0; position:relative; }
+    .radio.checked { border-color:#c2185b; background:#c2185b; }
+    .radio.checked::after { content:''; width:12px; height:12px; background:white; border-radius:50%; position:absolute; top:6px; left:6px; }
+    .result { display:none; padding:50px 30px; text-align:center; background:linear-gradient(135deg,#fce4ec,#f8bbd0); min-height:100vh; }
+    .score { font-size:5rem; font-weight:bold; color:#c2185b; margin:25px 0; }
+    .message { font-size:1.8rem; margin:25px 0; color:#880e4f; font-weight:600; }
+    .details { margin:40px auto; max-width:900px; text-align:left; }
+    .detail { padding:22px; background:white; margin:18px 0; border-radius:12px; border-left:6px solid #ec407a; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    .wrong { border-left-color:#c62828; background:#ffebee; }
+    .exp { margin-top:18px; padding:16px; background:#fce4ec; border-radius:10px; border-left:5px solid #ec407a; font-size:1.05rem; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>REPRODUCTION</h1>
+        <p class="subtitle">20 High-Yield MCQs • Flowers • Human Reproduction • Menstrual Cycle • Contraception • ART • 20 Minutes</p>
+        <div class="timer">Time: <span id="timer">20:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" style="margin-top:30px; padding:15px 40px; font-size:1.2rem;" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "The embryo sac is", o: ["7-celled, 8-nucleate","7-celled, 7-nucleate","8-celled, 7-nucleate","8-celled, 8-nucleate"], c:0, exp:"Egg apparatus (1 egg + 2 synergids) + 3 antipodals + 2 polar nuclei → 7 cells, 8 nuclei" },
+    { q: "Double fertilization is unique to", o: ["Algae","Gymnosperms","Angiosperms","Pteridophytes"], c:2, exp:"One male gamete fuses with egg, second with polar nuclei → angiosperms only" },
+    { q: "Apomixis is", o: ["Sexual reproduction","Asexual seed formation","Parthenocarpy","Polyembryony"], c:1, exp:"Seeds without fertilization → clones of mother plant" },
+    { q: "Site of fertilization in humans is", o: ["Vagina","Uterus","Ampulla of fallopian tube","Cervix"], c:2, exp:"Ampullary-isthmic junction" },
+    { q: "Spermatogenesis produces", o: ["1 sperm","2 sperms","4 sperms","8 sperms"], c:2, exp:"One primary spermatocyte → 4 functional spermatozoa" },
+    { q: "Oogenesis produces", o: ["4 ova","1 ovum + 3 polar bodies","2 ova + 2 polar bodies","1 ovum only"], c:1, exp:"Unequal cytokinesis → 1 functional ovum + 3 polar bodies" },
+    { q: "Ovulation occurs on which day of menstrual cycle?", o: ["Day 7","Day 10","Day 14","Day 21"], c:2, exp:"LH surge on day 14 in 28-day cycle" },
+    { q: "hCG is secreted by", o: ["Ovary","Placenta","Anterior pituitary","Corpus luteum"], c:1, exp:"Syncytiotrophoblast of blastocyst/placenta" },
+    { q: "Parturition is induced by", o: ["Prolactin","Oxytocin","Estrogen","Progesterone"], c:1, exp:"Foetal ejection reflex → oxytocin release" },
+    { q: "First milk (colostrum) is rich in", o: ["IgG","IgA","IgM","IgE"], c:1, exp:"IgA provides passive immunity" },
+    { q: "Most effective contraceptive with least side effects", o: ["Condom","Oral pills","Copper-T","Tubectomy"], c:2, exp:"Cu-T (IUD) → highly effective, reversible, no daily intake" },
+    { q: "LNG-20 is a", o: ["Oral pill","Implant","Hormone releasing IUD","Emergency contraceptive"], c:2, exp:"Levonorgestrel-releasing IUD" },
+    { q: "Saheli is", o: ["Once a week pill","Centchroman","Emergency contraceptive","Injectable"], c:1, exp:"Non-steroidal oral contraceptive (ORMELOXIFENE)" },
+    { q: "India’s first test tube baby was born in", o: ["1978","1986","1990","2000"], c:1, exp:"Harsha (1986) – Dr. Indira Hinduja" },
+    { q: "In ZIFT, embryo with how many cells is transferred?", o: ["2-cell","4-cell","8-cell","16-cell"], c:2, exp:"Up to 8-cell stage transferred to fallopian tube" },
+    { q: "Amniocentesis is banned for", o: ["Detecting genetic disorders","Sex determination","Both","None"], c:1, exp:"Misused for female foeticide → banned for sex determination" },
+    { q: "Parthenocarpy produces", o: ["Seedless fruits","Fruits with seeds","Multiple embryos","Apomictic seeds"], c:0, exp:"Fruit without fertilization → banana, grapes" },
+    { q: "Outbreeding device NOT found in plants", o: ["Self-incompatibility","Dichogamy","Herkogamy","Monoecious"], c:3, exp:"Monoecious promotes self-pollination" },
+    { q: "Corpus luteum secretes mainly", o: ["Estrogen","Progesterone","hCG","Relaxin"], c:1, exp:"Maintains endometrium till placenta takes over" },
+    { q: "Which is a natural contraceptive method?", o: ["Copper-T","Periodic abstinence","Vasectomy","Oral pill"], c:1, exp:"Rhythm method/safe period" }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let timeLeft = 20 * 60;
+let timerId;
+
+function showQuestion() {
+    const q = questions[current];
+    let opts = '';
+    q.o.forEach((opt, i) => {
+        const sel = answers[current] === i;
+        opts += `
+            <div class="option ${sel ? 'selected' : ''}" onclick="selectOption(${i})">
+                <div class="radio ${sel ? 'checked' : ''}"></div>
+                <span>${opt}</span>
+            </div>`;
+    });
+
+    document.getElementById('quiz').innerHTML = `
+        <div class="question">
+            <div class="qno">Question ${current + 1} of 20</div>
+            <div class="qtext">${q.q}</div>
+            <div class="options">${opts}</div>
+        </div>
+        <div style="margin-top:40px; display:flex; justify-content:space-between;">
+            <button class="btn" ${current===0 ? 'disabled' : ''} onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-submit" onclick="${current===19 ? 'submitQuiz()' : 'nextQuestion()'}">
+                ${current===19 ? 'Submit Quiz' : 'Next'}
+            </button>
+        </div>`;
+    updateProgress();
+}
+
+function selectOption(i) { answers[current] = i; showQuestion(); }
+function nextQuestion() { if(current < 19) current++; showQuestion(); }
+function prevQuestion() { if(current > 0) current--; showQuestion(); }
+
+function updateProgress() {
+    const done = answers.filter(a => a !== null).length;
+    document.getElementById('progress').style.width = (done/20*100)+'%';
+    document.getElementById('prog').textContent = done;
+    document.getElementById('answered').textContent = done + ' answered';
+}
+
+function startTimer() {
+    timerId = setInterval(() => {
+        timeLeft--;
+        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+        const s = String(timeLeft%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m+':'+s;
+        if(timeLeft <= 0) submitQuiz();
+    }, 1000);
+}
+
+function submitQuiz() {
+    clearInterval(timerId);
+    let correct = 0, details = '';
+    questions.forEach((q,i) => {
+        const user = answers[i];
+        const isCorrect = user === q.c;
+        if(isCorrect) correct++;
+        details += `<div class="detail ${isCorrect?'':'wrong'}">
+            <strong>Q${i+1}:</strong> ${q.q}<br>
+            <strong>Your:</strong> ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+            <strong>Correct:</strong> ${q.o[q.c]}
+            <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const msg = correct >= 18 ? "Reproduction Topper! Future Doctor" :
+                correct >= 15 ? "Outstanding! Almost Perfect" :
+                correct >= 12 ? "Excellent! Just Revise ART & Contraception" :
+                correct >= 8 ? "Good! Focus on Gametogenesis & Menstrual Cycle" : "Revise Complete Chapter Again!";
+
+    document.getElementById('score').textContent = correct + '/20';
+    document.getElementById('msg').textContent = msg;
+    document.getElementById('details').innerHTML = details;
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function resetQuiz() {
+    current = 0;
+    answers.fill(null);
+    timeLeft = 20*60;
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    showQuestion();
+    startTimer();
+}
+
+window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>

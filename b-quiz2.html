@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structural Organisation Quiz - 20 Questions | NEET 2025-26</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00); color:#333; min-height:100vh; padding:20px; }
+    .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+    header { background:linear-gradient(to right,#bf360c,#e65100); color:white; padding:30px; text-align:center; position:relative; }
+    h1 { font-size:2.6rem; margin-bottom:8px; }
+    .subtitle { font-size:1.3rem; opacity:0.95; }
+    .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+    .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#fff0e0; }
+    .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .btn-home { background:#ff8f00; color:white; }
+    .btn-reset { background:#ffcc80; color:#333; }
+    .btn-submit { background:#e65100; color:white; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .progress-bar { height:14px; background:#ffccbc; margin:15px 30px; border-radius:7px; overflow:hidden; }
+    .progress { height:100%; background:#e65100; width:0%; transition:width 0.5s; }
+    .progress-text { padding:0 30px 20px; font-weight:bold; color:#e65100; display:flex; justify-content:space-between; }
+    .quiz { padding:30px; min-height:70vh; }
+    .question { background:#fff0e0; padding:28px; border-radius:14px; border-left:7px solid #ff8f00; margin-bottom:30px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+    .qno { font-weight:bold; color:#e65100; font-size:1.3rem; margin-bottom:10px; }
+    .qtext { font-size:1.28rem; margin:18px 0; line-height:1.6; font-weight:500; }
+    .options { display:grid; gap:16px; margin-top:20px; }
+    .option { padding:18px; background:white; border:3px solid #ffccbc; border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:15px; font-size:1.1rem; }
+    .option:hover { border-color:#ff8f00; background:#fff5e6; transform:translateX(5px); }
+    .option.selected { border-color:#e65100; background:#ffcc80; font-weight:bold; color:#bf360c; }
+    .radio { width:24px; height:24px; border:3px solid #999; border-radius:50%; flex-shrink:0; position:relative; }
+    .radio.checked { border-color:#e65100; background:#e65100; }
+    .radio.checked::after { content:''; width:12px; height:12px; background:white; border-radius:50%; position:absolute; top:6px; left:6px; }
+    .result { display:none; padding:50px 30px; text-align:center; background:linear-gradient(135deg,#fff0e0,#ffccbc); min-height:100vh; }
+    .score { font-size:5rem; font-weight:bold; color:#e65100; margin:25px 0; }
+    .message { font-size:1.8rem; margin:25px 0; color:#bf360c; font-weight:600; }
+    .details { margin:40px auto; max-width:900px; text-align:left; }
+    .detail { padding:22px; background:white; margin:18px 0; border-radius:12px; border-left:6px solid #ff8f00; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    .wrong { border-left-color:#c62828; background:#ffebee; }
+    .exp { margin-top:18px; padding:16px; background:#fff8e1; border-radius:10px; border-left:5px solid #ff8f00; font-size:1.05rem; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>STRUCTURAL ORGANISATION</h1>
+        <p class="subtitle">20 High-Yield MCQs • Plant & Animal Anatomy • Tissues • Cockroach • Frog • 20 Minutes</p>
+        <div class="timer">Time: <span id="timer">20:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" style="margin-top:30px; padding:15px 40px; font-size:1.2rem;" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "Casparian strip is present in", o: ["Epidermis","Endodermis","Pericycle","Cortex"], c:1, exp:"Endodermis has suberin band (Casparian strip) – regulates water entry" },
+    { q: "Vascular bundles are scattered in", o: ["Dicot stem","Monocot stem","Dicot root","Monocot root"], c:1, exp:"Monocot stem – scattered, closed bundles" },
+    { q: "Bulliform cells are found in", o: ["Dicot leaf","Monocot leaf","Stem","Root"], c:1, exp:"Help in rolling of monocot leaves during drought" },
+    { q: "Tetradynamous condition of stamens is found in", o: ["Malvaceae","Brassicaceae","Fabaceae","Solanaceae"], c:1, exp:"4 long + 2 short stamens – Brassicaceae (mustard family)" },
+    { q: "Vexillary aestivation is characteristic of", o: ["Malvaceae","Brassicaceae","Fabaceae","Liliaceae"], c:2, exp:"Papilionaceous corolla – one large posterior petal (standard)" },
+    { q: "Potato is a modified", o: ["Root","Stem","Leaf","Flower"], c:1, exp:"Underground stem (tuber) with eyes" },
+    { q: "Tendrils of pea are modification of", o: ["Stem","Leaf","Leaflet","Stipule"], c:2, exp:"Leaflet tendril in Lathyrus/Pisum" },
+    { q: "Gizzard in earthworm is part of", o: ["Foregut","Midgut","Hindgut","None"], c:0, exp:"Foregut – helps in grinding food" },
+    { q: "Malpighian tubules in cockroach are", o: ["Respiratory","Excretory","Digestive","Circulatory"], c:1, exp:"100–150 tubules at junction of midgut & hindgut" },
+    { q: "Blood of cockroach is", o: ["Red","Colourless","Blue","Green"], c:1, exp:"Colourless haemolymph – no respiratory pigment" },
+    { q: "Frog is", o: ["Ammonotelic","Ureotelic","Uricotelic","None"], c:1, exp:"Adult frog excretes urea – ureotelic" },
+    { q: "Tadpole of frog is", o: ["Ammonotelic","Ureotelic","Uricotelic","Guanotelic"], c:0, exp:"Aquatic larva excretes ammonia" },
+    { q: "Heart of frog is", o: ["2-chambered","3-chambered","4-chambered","None"], c:1, exp:"2 atria + 1 ventricle" },
+    { q: "Osteoblasts are found in", o: ["Cartilage","Bone","Blood","Muscle"], c:1, exp:"Bone-forming cells" },
+    { q: "Compound epithelium is present in", o: ["Stomach lining","Skin","Intestine","Kidney tubules"], c:1, exp:"Stratified epithelium – skin" },
+    { q: "Clitellum in earthworm is present in segments", o: ["9–11","12–13","14–16","17–19"], c:2, exp:"Segments 14–16 – gland for cocoon" },
+    { q: "Mosaic vision is seen in", o: ["Frog","Earthworm","Cockroach","Human"], c:2, exp:"Compound eyes of cockroach" },
+    { q: "Phylloclade is found in", o: ["Opuntia","Cuscuta","Nepenthes","Pea"], c:0, exp:"Flattened green stem performing photosynthesis – cactus" },
+    { q: "Largest cell in animal body is", o: ["Neuron","Osteocyte","Ovum","RBC"], c:2, exp:"Ovum (egg cell)" },
+    { q: "Pericycle in root gives rise to", o: ["Root hairs","Lateral roots","Cork cambium","Both A & B"], c:1, exp:"Lateral roots arise endogenously from pericycle" }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let timeLeft = 20 * 60;
+let timerId;
+
+function showQuestion() {
+    const q = questions[current];
+    let opts = '';
+    q.o.forEach((opt, i) => {
+        const selected = answers[current] === i;
+        opts += `
+            <div class="option ${selected ? 'selected' : ''}" onclick="selectOption(${i})">
+                <div class="radio ${selected ? 'checked' : ''}"></div>
+                <span>${opt}</span>
+            </div>`;
+    });
+
+    document.getElementById('quiz').innerHTML = `
+        <div class="question">
+            <div class="qno">Question ${current + 1} of 20</div>
+            <div class="qtext">${q.q}</div>
+            <div class="options">${opts}</div>
+        </div>
+        <div style="margin-top:40px; display:flex; justify-content:space-between;">
+            <button class="btn" ${current===0?'disabled':''} onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-submit" onclick="${current===19?'submitQuiz()':'nextQuestion()' }">
+                ${current===19?'Submit Quiz':'Next'}
+            </button>
+        </div>`;
+    updateProgress();
+}
+
+function selectOption(i) { answers[current] = i; showQuestion(); }
+function nextQuestion() { if(current < 19) { current++; showQuestion(); } }
+function prevQuestion() { if(current > 0) { current--; showQuestion(); } }
+
+function updateProgress() {
+    const done = answers.filter(x => x!==null).length;
+    document.getElementById('progress').style.width = (done/20*100)+'%';
+    document.getElementById('prog').textContent = done;
+    document.getElementById('answered').textContent = done + ' answered';
+}
+
+function startTimer() {
+    timerId = setInterval(() => {
+        timeLeft--;
+        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+        const s = String(timeLeft%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m+':'+s;
+        if(timeLeft <= 0) submitQuiz();
+    }, 1000);
+}
+
+function submitQuiz() {
+    clearInterval(timerId);
+    let correct = 0, details = '';
+    questions.forEach((q,i) => {
+        const user = answers[i];
+        const correctAns = q.c;
+        if(user === correctAns) correct++;
+        details += `<div class="detail ${user===correctAns?'':'wrong'}">
+            <strong>Q${i+1}:</strong> ${q.q}<br>
+            <strong>Your:</strong> ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+            <strong>Correct:</strong> ${q.o[correctAns]}
+            <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const msg = correct >= 18 ? "Anatomy Master! NEET Topper Level!" :
+                correct >= 15 ? "Outstanding! Almost Perfect" :
+                correct >= 12 ? "Excellent! Just Revise Cockroach & Frog" :
+                correct >= 8 ? "Good! Focus on Tissues & Floral Families" : "Revise Plant Anatomy & Animal Tissues!";
+
+    document.getElementById('score').textContent = correct + '/20';
+    document.getElementById('msg').textContent = msg;
+    document.getElementById('details').innerHTML = details;
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function resetQuiz() {
+    current = 0;
+    answers.fill(null);
+    timeLeft = 20*60;
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    showQuestion();
+    startTimer();
+}
+window.onload = () => { showQuestion(), startTimer(); };
+</script>
+</body>
+</html>

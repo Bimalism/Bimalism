@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology & Human Welfare – Complete Chapter Summary</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
+        body { background:#fff8e1; padding:20px; }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.22); }
+        header { background:linear-gradient(135deg,#ff8f00,#ffab40,#ffb74d); color:white; padding:50px; text-align:center; }
+        h1 { font-size:3.4rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.5rem; opacity:0.96; }
+        .nav { display:flex; background:#e65100; flex-wrap:wrap; }
+        .tab { padding:22px 38px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.15rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #ffcc80; }
+        .content { padding:60px; }
+        .pane { display:none; }
+        .pane.active { display:block; animation:fade 0.7s; }
+        @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+        h2 { color:#e65100; font-size:2.5rem; margin:45px 0 28px; border-bottom:5px solid #ffb74d; padding-bottom:14px; }
+        .def { background:#fff8e1; border-left:8px solid #ffcc80; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; line-height:2.1; }
+        ul { margin:20px 0; padding-left:45px; line-height:2.3; font-size:1.18rem; }
+        footer { background:#e65100; color:white; text-align:center; padding:38px; font-size:1.25rem; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:16px;} .content{padding:35px;} h1{font-size:2.6rem;} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>BIOLOGY & HUMAN WELFARE</h1>
+        <p class="subtitle">Unit 8 • Complete Chapter Summary • Class 12 Biology • NEET 2025–2026</p>
+    </header>
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Health, Diseases & Immunology</div>
+        <div class="tab" data-tab="t2">Microbes in Human Welfare</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 -->
+        <div class="pane active" id="t1">
+            <h2>1. Health, Diseases & Immunology</h2>
+            <div class="def">
+                <ul>
+                    <li>Health = state of complete physical, mental & social well-being; disease = malfunctioning.</li>
+                    <li>Malaria – Plasmodium vivax/falciparum, female Anopheles mosquito, life cycle involves liver & RBC.</li>
+                    <li>Filariasis (elephantiasis) – Wuchereria bancrofti, female Culex mosquito, blocks lymph vessels.</li>
+                    <li>Ascariasis – Ascaris lumbricoides (roundworm), faecal-oral route, lives in intestine.</li>
+                    <li>Typhoid – Salmonella typhi, Widal test, fever, weakness, intestinal perforation possible.</li>
+                    <li>Pneumonia – Streptococcus pneumoniae/Haemophilus influenzae, alveoli filled with fluid.</li>
+                    <li>Common cold – Rhino virus, nasal chamber, highly infectious.</li>
+                    <li>Amoebiasis – Entamoeba histolytica, contaminated water, dysentery.</li>
+                    <li>Ringworm – Microsporum/Trichophyton, warm & moist skin, itching.</li>
+                    <li>Cancer – uncontrolled cell division, carcinogens, metastasis; treatment – surgery, radiation, chemotherapy, immunotherapy.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pane" id="t2">
+            <h2>2. Microbes in Human Welfare</h2>
+            <div class="def">
+                <ul>
+                    <li>Household: curd (Lactobacillus), dough (yeast – CO₂), idli/dosa (fermentation by bacteria & yeast).</li>
+                    <li>Industrial: antibiotics (Penicillium notatum – penicillin), fermented beverages (yeast – ethanol).</li>
+                    <li>Sewage treatment: primary (physical) → secondary (aerobic bacteria in aeration tank → anaerobic sludge digesters → biogas (methane).</li>
+                    <li>Biogas plant: methanogens (Methanobacterium) in cow-dung produce biogas (60–70% CH₄).</li>
+                    <li>Biofertilizers: Rhizobium (symbiotic N₂ fixer), Azospirillum/Anabaena (free-living), mycorrhiza, cyanobacter (paddy fields).</li>
+                    <li>Biocontrol: Bacillus thuringiensis (Bt cotton), Trichoderma (fungal biocontrol), ladybird & dragonflies (aphid/mosquito control).</li>
+                    <li>Integrated Pest Management (IPM) – minimal chemical pesticides + biological control.</li>
+                    <li>Microbes as biofertilizers reduce chemical fertilizer use, eco-friendly.</li>
+                    <li>Cyclosporin A (immunosuppressant) from Trichoderma polysporum; Statins (blood cholesterol lowering) from Monascus purpureus.</li>
+                    <li>Microbes also used in production of enzymes, organic acids, vitamins, single-cell protein (SCP).</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Biology & Human Welfare • Complete Summary • Diseases • Causative Agents • Life Cycles • Immunology • Vaccines • Cancer • HIV • Drugs • Microbes in Sewage, Biogas, Biofertilizers • NEET 2025–2026
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t=> {
+        t.onclick = () => {
+            document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

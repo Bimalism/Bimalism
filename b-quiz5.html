@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Physiology Quiz - 20 Questions | NEET 2025-26</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a); color:#333; min-height:100vh; padding:20px; }
+    .container { max-width:1000px; margin:auto; background:rgba(255,255,255,0.98); border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.4); overflow:hidden; }
+    header { background:linear-gradient(to right,#1b5e20,#2e7d32); color:white; padding:30px; text-align:center; position:relative; }
+    h1 { font-size:2.6rem; margin-bottom:8px; }
+    .subtitle { font-size:1.3rem; opacity:0.95; }
+    .timer { position:absolute; right:30px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.3); padding:12px 25px; border-radius:50px; font-size:1.5rem; font-weight:bold; }
+    .nav { display:flex; justify-content:space-between; padding:20px 30px; background:#e8f5e9; }
+    .btn { padding:12px 30px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .btn-home { background:#66bb6a; color:white; }
+    .btn-reset { background:#a5d6a7; color:#333; }
+    .btn-submit { background:#2e7d32; color:white; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+    .progress-bar { height:14px; background:#c8e6c9; margin:15px 30px; border-radius:7px; overflow:hidden; }
+    .progress { height:100%; background:#2e7d32; width:0%; transition:width 0.5s; }
+    .progress-text { padding:0 30px 20px; font-weight:bold; color:#2e7d32; display:flex; justify-content:space-between; }
+    .quiz { padding:30px; min-height:70vh; }
+    .question { background:#e8f5e9; padding:28px; border-radius:14px; border-left:7px solid #66bb6a; margin-bottom:30px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+    .qno { font-weight:bold; color:#2e7d32; font-size:1.3rem; margin-bottom:10px; }
+    .qtext { font-size:1.28rem; margin:18px 0; line-height:1.6; font-weight:500; }
+    .options { display:grid; gap:16px; margin-top:20px; }
+    .option { padding:18px; background:white; border:3px solid #c8e6c9; border-radius:12px; cursor:pointer; transition:all 0.3s; display:flex; align-items:center; gap:15px; font-size:1.1rem; }
+    .option:hover { border-color:#66bb6a; background:#f1f8e9; transform:translateX(5px); }
+    .option.selected { border-color:#2e7d32; background:#a5d6a7; font-weight:bold; color:#1b5e20; }
+    .radio { width:24px; height:24px; border:3px solid #999; border-radius:50%; flex-shrink:0; position:relative; }
+    .radio.checked { border-color:#2e7d32; background:#2e7d32; }
+    .radio.checked::after { content:''; width:12px; height:12px; background:white; border-radius:50%; position:absolute; top:6px; left:6px; }
+    .result { display:none; padding:50px 30px; text-align:center; background:linear-gradient(135deg,#e8f5e9,#c8e6c9); min-height:100vh; }
+    .score { font-size:5rem; font-weight:bold; color:#2e7d32; margin:25px 0; }
+    .message { font-size:1.8rem; margin:25px 0; color:#1b5e20; font-weight:600; }
+    .details { margin:40px auto; max-width:900px; text-align:left; }
+    .detail { padding:22px; background:white; margin:18px 0; border-radius:12px; border-left:6px solid #66bb6a; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    .wrong { border-left-color:#c62828; background:#ffebee; }
+    .exp { margin-top:18px; padding:16px; background:#fffde7; border-radius:10px; border-left:5px solid #66bb6a; font-size:1.05rem; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>HUMAN PHYSIOLOGY</h1>
+        <p class="subtitle">20 High-Yield MCQs • Breathing • Circulation • Excretion • Movement • Neural & Endocrine • 20 Minutes</p>
+        <div class="timer">Time: <span id="timer">20:00</span></div>
+    </header>
+
+    <div class="nav">
+        <button class="btn btn-home" onclick="alert('Back to Summary')">Back</button>
+        <div>
+            <button class="btn btn-reset" onclick="resetQuiz()">Reset</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="progress-text">
+        <span>Progress: <span id="prog">0</span>/20</span>
+        <span id="answered">0 answered</span>
+    </div>
+
+    <div class="quiz" id="quiz"></div>
+
+    <div class="result" id="result">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="score">0/20</div>
+        <div class="message" id="msg"></div>
+        <div class="details" id="details"></div>
+        <button class="btn btn-reset" style="margin-top:30px; padding:15px 40px; font-size:1.2rem;" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "Which is NOT a respiratory volume?", o: ["Tidal volume","Residual volume","Dead space volume","Inspiratory capacity"], c:2, exp:"Dead space volume is anatomical/physiological dead space, not a lung volume" },
+    { q: "Oxygen is transported mainly as", o: ["Dissolved in plasma","Oxyhaemoglobin","Carbamino-haemoglobin","Bicarbonate"], c:1, exp:"97–98.5% O₂ is carried as oxyhaemoglobin" },
+    { q: "Pacemaker of heart is", o: ["AV node","SA node","Bundle of His","Purkinje fibres"], c:1, exp:"SA node generates impulse spontaneously (~72/min)" },
+    { q: "Which hormone increases heart rate?", o: ["Acetylcholine","Adrenaline","ADH","Aldosterone"], c:1, exp:"Adrenaline & noradrenaline (sympathetic)" },
+    { q: "Normal blood pressure is", o: ["120/80 mmHg","140/90 mmHg","100/60 mmHg","160/100 mmHg"], c:0, exp:"Systolic 120, Diastolic 80 mmHg" },
+    { q: "GFR is approximately", o: ["180 L/day","125 mL/min","7.5 L/hour","All are correct"], c:3, exp:"125 mL/min ≈ 180 L/day ≈ 7.5 L/hour" },
+    { q: "Counter current mechanism helps in", o: ["Concentration of urine","Dilution of urine","Reabsorption of glucose","Secretion of H⁺"], c:0, exp:"Helps maintain medullary hyperosmolarity → concentrated urine" },
+    { q: "ADH is secreted by", o: ["Anterior pituitary","Posterior pituitary","Hypothalamus (stored in posterior)","Adrenal cortex"], c:2, exp:"Synthesized in hypothalamus, stored & released by posterior pituitary" },
+    { q: "Which is a part of sarcomere?", o: ["A-band","H-zone","Z-line","All of these"], c:3, exp:"A-band, I-band, H-zone, Z-line, M-line are parts of sarcomere" },
+    { q: "Power stroke in muscle contraction is due to", o: ["Release of Ca²⁺","Binding of Ca²⁺ to troponin","Myosin head pulling actin","ATP binding to myosin"], c:2, exp:"Myosin head pivots → power stroke → sarcomere shortens" },
+    { q: "Myasthenia gravis is", o: ["Autoimmune disorder","Muscular dystrophy","Bone disease","Tetany"], c:0, exp:"Antibodies against ACh receptors → muscle weakness" },
+    { q: "Saltatory conduction occurs in", o: ["Non-myelinated fibres","Myelinated fibres","Both","None"], c:1, exp:"Impulse jumps from node to node → faster conduction" },
+    { q: "Resting membrane potential is", o: ["+70 mV","–70 mV","0 mV","–90 mV"], c:1, exp:"Due to K⁺ leakage & Na⁺/K⁺ pump" },
+    { q: "Which is called master gland?", o: ["Thyroid","Hypothalamus","Pituitary","Adrenal"], c:2, exp:"Pituitary controls most other endocrine glands" },
+    { q: "Insulin is secreted by", o: ["Alpha cells","Beta cells","Delta cells","PP cells"], c:1, exp:"Beta cells of islets of Langerhans" },
+    { q: "Graves' disease is due to", o: ["Hypothyroidism","Hyperthyroidism","Addison disease","Cretinism"], c:1, exp:"Autoimmune hypersecretion of thyroid hormones → exophthalmic goitre" },
+    { q: "Which is NOT a steroid hormone?", o: ["Cortisol","Aldosterone","Testosterone","Insulin"], c:3, exp:"Insulin is peptide hormone" },
+    { q: "Which part of nephron is impermeable to water in absence of ADH?", o: ["PCT","DCT","Ascending limb of Henle","Collecting duct"], c:3, exp:"Without ADH, collecting duct remains impermeable → dilute urine" },
+    { q: "Oxygen dissociation curve shifts right due to", o: ["Increase pH","Decrease CO₂","Increase temperature","Bohr effect"], c:3, exp:"Bohr effect: ↑CO₂, ↓pH, ↑temp → right shift → O₂ release" },
+    { q: "Largest WBC is", o: ["Neutrophil","Basophil","Monocyte","Lymphocyte"], c:2, exp:"Monocyte is largest, becomes macrophage in tissues" }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let timeLeft = 20 * 60;
+let timerId;
+
+function showQuestion() {
+    const q = questions[current];
+    let opts = '';
+    q.o.forEach((opt, i) => {
+        const sel = answers[current] === i;
+        opts += `
+            <div class="option ${sel ? 'selected' : ''}" onclick="selectOption(${i})">
+                <div class="radio ${sel ? 'checked' : ''}"></div>
+                <span>${opt}</span>
+            </div>`;
+    });
+
+    document.getElementById('quiz').innerHTML = `
+        <div class="question">
+            <div class="qno">Question ${current + 1} of 20</div>
+            <div class="qtext">${q.q}</div>
+            <div class="options">${opts}</div>
+        </div>
+        <div style="margin-top:40px; display:flex; justify-content:space-between;">
+            <button class="btn" ${current===0 ? 'disabled' : ''} onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-submit" onclick="${current===19 ? 'submitQuiz()' : 'nextQuestion()'}">
+                ${current===19 ? 'Submit Quiz' : 'Next'}
+            </button>
+        </div>`;
+    updateProgress();
+}
+
+function selectOption(i) { answers[current] = i; showQuestion(); }
+function nextQuestion() { if(current < 19) current++; showQuestion(); }
+function prevQuestion() { if(current > 0) current--; showQuestion(); }
+
+function updateProgress() {
+    const done = answers.filter(a => a !== null).length;
+    document.getElementById('progress').style.width = (done/20*100)+'%';
+    document.getElementById('prog').textContent = done;
+    document.getElementById('answered').textContent = done + ' answered';
+}
+
+function startTimer() {
+    timerId = setInterval(() => {
+        timeLeft--;
+        const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+        const s = String(timeLeft%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m+':'+s;
+        if(timeLeft <= 0) submitQuiz();
+    }, 1000);
+}
+
+function submitQuiz() {
+    clearInterval(timerId);
+    let correct = 0, details = '';
+    questions.forEach((q,i) => {
+        const user = answers[i];
+        const isCorrect = user === q.c;
+        if(isCorrect) correct++;
+        details += `<div class="detail ${isCorrect?'':'wrong'}">
+            <strong>Q${i+1}:</strong> ${q.q}<br>
+            <strong>Your:</strong> ${user===null?'<i>Not attempted</i>':q.o[user]}<br>
+            <strong>Correct:</strong> ${q.o[q.c]}
+            <div class="exp"><strong>Explanation:</strong> ${q.exp}</div>
+        </div>`;
+    });
+
+    const msg = correct >= 18 ? "Physiology Master! Future Doctor!" :
+                correct >= 15 ? "Outstanding! Almost There" :
+                correct >= 12 ? "Excellent! Keep Practicing" :
+                correct >= 8 ? "Good Attempt! Revise Neural & Endocrine" : "Revise Complete Chapter Again!";
+
+    document.getElementById('score').textContent = correct + '/20';
+    document.getElementById('msg').textContent = msg;
+    document.getElementById('details').innerHTML = details;
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+function resetQuiz() {
+    current = 0;
+    answers.fill(null);
+    timeLeft = 20*60;
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    showQuestion();
+    startTimer();
+}
+
+window.onload = () => { showQuestion(); startTimer(); };
+</script>
+</body>
+</html>
