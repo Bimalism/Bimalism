@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bimalism Game - Math Runner (Fixed Obstacle Timing)</title>
+<style>
+  :root{
+    --ground:#2b2b2b;
+    --accent:#ffcc33;
+    --danger:#f44336;
+    --player:#4caf50;
+    --ui-bg: rgba(0,0,0,0.75);
+    --shield: rgba(124,58,237,0.6);
+    --magnet: rgba(56,189,248,0.8);
+  }
+  html,body{
+    height:100%; margin:0; font-family: 'Segoe UI', sans-serif;
+    background:radial-gradient(ellipse at center, #081121 0%, #000 100%);
+    color:#fff; overflow:hidden; touch-action:none;
+  }
+  #gameWrap{position:relative;width:100vw;height:100vh;overflow:hidden;user-select:none;}
+  .layer{position:absolute;inset:0;pointer-events:none;}
+  .sky{background:linear-gradient(to bottom, #1a2a6c 0%, #0f3460 50%, #081121 100%);}
+  .ground{position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(180deg,var(--ground),#0b0b0b);
+    z-index:10;box-shadow:inset 0 10px 40px rgba(0,0,0,0.6);border-top:3px solid #444;}
+  .lane-marker{position:absolute;bottom:0;width:2px;height:160px;background:rgba(255,255,255,0.1);z-index:11;}
+  #lane-left{left:25%} #lane-center{left:50%} #lane-right{left:75%}
+  #stage{position:absolute;inset:0;z-index:20;overflow:hidden;}
+  .player{position:absolute;bottom:28px;width:56px;height:56px;z-index:30;
+    transform-origin:center bottom;transition:left .15s ease-out;}
+  .player svg{width:100%;height:100%;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5));}
+  .obstacle{position:absolute;bottom:28px;width:56px;height:56px;background:var(--danger);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;z-index:25;
+    box-shadow:0 8px 18px rgba(0,0,0,0.6);animation:bob 1.8s infinite alternate;}
+  .obstacle.small{width:36px;height:36px;}
+  .obstacle.large{width:84px;height:84px;bottom:20px;}
+  @keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
+  .coin{position:absolute;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffd24d, #ffa800);
+    display:flex;align-items:center;justify-content:center;color:#6b3b00;font-weight:800;z-index:28;
+    box-shadow:0 6px 12px rgba(0,0,0,0.45);animation:spin 1.5s infinite linear;}
+  @keyframes spin{to{transform:rotateY(360deg)}}
+  #hud{position:absolute;left:12px;top:12px;z-index:50;background:var(--ui-bg);padding:12px 16px;border-radius:12px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);}
+  #score{font-size:18px;font-weight:700;color:var(--accent);}
+  .badge{font-size:13px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.08);}
+  button{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;
+    border-radius:8px;cursor:pointer;transition:.2s;backdrop-filter:blur(5px);font-weight:600;}
+  button:hover{background:rgba(255,255,255,0.2);}
+  #overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:60;background:rgba(6,6,6,0.95);
+    padding:24px;border-radius:16px;min-width:340px;max-width:90%;display:none;box-shadow:0 20px 40px rgba(0,0,0,0.7);
+    border:2px solid var(--accent);backdrop-filter:blur(10px);}
+  #mathQuestion{font-size:28px;font-weight:800;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;margin:20px 0;}
+  #mathInput{width:100%;padding:14px;border-radius:10px;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);
+    color:#fff;font-size:18px;text-align:center;margin:16px 0;}
+  #toast{position:absolute;left:50%;transform:translateX(-50%,-50%);top:40%;background:rgba(0,0,0,0.9);
+    padding:16px 24px;border-radius:12px;display:none;z-index:80;font-size:20px;font-weight:bold;
+    animation:fade 2s forwards;}
+  @keyframes fade{0%{opacity:0;transform:translate(-50%,-60%)}30%{opacity:1;transform:translate(-50%,-50%)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-40%)}}
+  #gameOver{position:absolute;inset:0;z-index:70;background:rgba(0,0,0,0.95);display:none;
+    justify-content:center;align-items:center;flex-direction:column;text-align:center;color:#fff;}
+  #gameOver h2{font-size:48px;color:#f44336;margin:0;}
+  #finalScore{font-size:42px;color:var(--accent);margin:20px 0;font-weight:800;}
+  @media (max-width:768px){
+    .player{width:44px;height:44px;}
+    #overlay{min-width:280px;padding:20px;}
+  }
+</style>
+</head>
+<body>
+<div id="gameWrap>
+  <div class="layer sky"></div>
+  <div id="stage"></div>
+  <div class="lane-marker" id="lane-left"></div>
+  <div class="lane-marker" id="lane-center"></div>
+  <div class="lane-marker" id="lane-right"></div>
+  <div class="ground"></div>
+
+  <div id="hud">
+    <div id="score">Score: 0</div>
+    <div class="badge" id="coins">Coins: 0</div>
+    <div class="badge" id="lives">Lives: 3</div>
+    <div class="badge" id="mathSolved">Math: 0/20</div>
+  </div>
+
+  <div class="player" id="player">
+    <svg viewBox="0 0 100 100">
+      <circle cx="30" cy="30" r="10" fill="#ffe6c7"/>
+      <rect x="22" y="38" width="16" height="22" rx="3" fill="#2d6a4f"/>
+      <rect x="40" y="42" width="22" height="10" rx="3" fill="#2d6a4f" transform="rotate(-18 51 47)"/>
+      <rect x="6" y="46" width="22" height="8" rx="3" fill="#2d6a4f" transform="rotate(18 17 50)"/>
+      <circle cx="30" cy="30" r="3" fill="#222"/>
+    </svg>
+  </div>
+
+  <div id="overlay">
+    <h2>Math Challenge!</h2>
+    <p>Solve correctly to <strong>GAIN A LIFE</strong>!</strong></p>
+    <div id="mathQuestion">?</div>
+    <input id="mathInput" type="text" inputmode="numeric" placeholder="Your answer" autofocus>
+    <div style="display:flex;gap:12px;margin-top:20px;">
+      <button id="submitAns">Submit (+1 Life)</button>
+      <button id="skipBtn" style="background:#c62828;">Skip (-1 Life)</button>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:#aaa;">
+      Solved: <span id="currentMath">0</span>/20 • Lives: <span id="currentLives">3</span>
+    </p>
+  </div>
+
+  <div id="gameOver">
+    <h2>GAME OVER</h2>
+    <p style="font-size:24px;margin:20px 0;">Final Score: <span id="finalScore">0</span></p>
+    <p>Math Solved: <span id="finalMath">0</span>/20</p>
+    <p>Coins Collected: <span id="finalCoins">0</span></p>
+    <button id="btnPlayAgain" style="margin-top:30px;padding:15px 30px;font-size:18px;">Play Again</button>
+  </div>
+
+  <div id="toast"></div>
+</div>
+
+<script>
+// Elements
+const stage = document.getElementById('stage');
+const playerEl = document.getElementById('player');
+const scoreEl = document.getElementById('score');
+const coinsEl = document.getElementById('coins');
+const livesEl = document.getElementById('lives');
+const mathSolvedEl = document.getElementById('mathSolved');
+const overlay = document.getElementById('overlay');
+const mathQuestionEl = document.getElementById('mathQuestion');
+const mathInput = document.getElementById('mathInput');
+const submitAns = document.getElementById('submitAns');
+const skipBtn = document.getElementById('skipBtn');
+const toast = document.getElementById('toast');
+const currentMath = document.getElementById('currentMath');
+const currentLives = document.getElementById('currentLives');
+const gameOverScreen = document.getElementById('gameOver');
+const finalScore = document.getElementById('finalScore');
+const finalMath = document.getElementById('finalMath');
+const finalCoins = document.getElementById('finalCoins');
+const btnPlayAgain = document.getElementById('btnPlayAgain');
+
+const LANES = [innerWidth*0.25, innerWidth*0.5, innerWidth*0.75];
+
+// Game State
+let gameState = {
+  running: true,
+  score: 0,
+  coins: 0,
+  lives: 3,
+  maxLives: 5,
+  speed: 1.0,
+  objects: [],
+  lastTime: 0,
+  gameStartTime: performance.now(),
+  obstaclesAllowed: false,
+  mathProblemsSolved: 0,
+  invulnerable: false,
+  invulnerableTimer: 0,
+  
+  // NEW: Obstacle timing sequence: 4s → 2s → 3s → 5s → repeat
+  obstacleDelays: [4000, 2000, 3000, 5000],
+  currentDelayIndex: 0,
+  nextObstacleTime: 0
+};
+
+let player = {
+  x: innerWidth * 0.5,
+  y: 28,
+  vy: 0,
+  width: 56,
+  height: 56,
+  lane: 1,
+  targetX: innerWidth * 0.5,
+  onGround: true
+};
+
+const mathProblems = [
+  {q:"5 + 7",a:12},{q:"12 - 4",a:8},{q:"9 + 6",a:15},{q:"15 - 3",a:12},{q:"7 + 8",a:15},
+  {q:"20 - 9",a:11},{q:"9 × 2",a:18},{q:"3 × 7",a:21},{q:"4 × 5",a:20},{q:"6 × 6",a:36},
+  {q:"25 ÷ 5",a:5},{q:"18 ÷ 3",a:6},{q:"21 ÷ 7",a:3},{q:"30 ÷ 6",a:5},{q:"10 × 3",a:30}
+];
+let currentProblem = null;
+let availableProblems = [...mathProblems];
+
+// Simple sound
+function beep(freq=600, dur=80){
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.connect(g); g.connect(ctx.destination);
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur/1000);
+  o.start(ctx.currentTime);
+  o.stop(ctx.currentTime + dur/1000);
+}
+
+// Initialize game
+function initGame(){
+  gameState = {
+    running: true, score:0, coins:0, lives:3, maxLives:5, speed:1.0,
+    objects:[], lastTime:0, gameStartTime: performance.now(),
+    obstaclesAllowed: false,
+    mathProblemsSolved:0,
+    invulnerable: false, invulnerableTimer:0,
+    obstacleDelays: [4000, 2000, 3000, 5000],
+    currentDelayIndex: 0,
+    nextObstacleTime: performance.now() + 4000 // first obstacle after 4s
+  };
+  player = {x:innerWidth*0.5, y:28, vy:0, width:56, height:56, lane:1, targetX:innerWidth*0.5, onGround:true};
+  stage.innerHTML = '';
+  overlay.style.display = 'none';
+  gameOverScreen.style.display = 'none';
+  availableProblems = [...mathProblems];
+  updateUI();
+  gameState.nextObstacleTime = performance.now() + 4000;
+  requestAnimationFrame(gameLoop);
+  toastMessage("Game Started! Obstacles in 4s...");
+}
+
+// Update HUD
+function updateUI(){
+  scoreEl.textContent = `Score: ${Math.floor(gameState.score)}`;
+  coinsEl.textContent = `Coins: ${gameState.coins}`;
+  livesEl.textContent = `Lives: ${gameState.lives}`;
+  mathSolvedEl.textContent = `Math: ${gameState.mathProblemsSolved}/20`;
+}
+
+// Fixed obstacle sequence: 4s → 2s → 3s → 5s → repeat
+function spawnNextObstacle(){
+  const now = performance.now();
+  if(now < gameState.nextObstacleTime) return;
+
+  createObstacle();
+
+  // Set next delay
+  gameState.currentDelayIndex = (gameState.currentDelayIndex + 1) % 4;
+  gameState.nextObstacleTime = now + gameState.obstacleDelays[gameState.currentDelayIndex];
+}
+
+function createObstacle(){
+  const el = document.createElement('div');
+  el.className = 'obstacle';
+  
+  // Random size
+  const rand = Math.random();
+  if(rand < 0.3) el.classList.add('small');
+  else if(rand > 0.7) el.classList.add('large');
+
+  const lane = Math.floor(Math.random() * 3);
+  const width = el.classList.contains('large') ? 84 : el.classList.contains('small') ? 36 : 56;
+  const height = el.classList.contains('large') ? 84 : 56;
+  const bottom = el.classList.contains('large') ? 20 : 28;
+
+  el.style.left = innerWidth + 'px';
+  el.style.bottom = bottom + 'px';
+  stage.appendChild(el);
+
+  gameState.objects.push({
+    el, type:'obstacle', x:innerWidth, y:bottom, width, height,
+    speed: 6.8 * gameState.speed
+  });
+}
+
+// Coins spawn randomly (not timed)
+function spawnCoin(){
+  if(Math.random() > 0.35) return;
+  const el = document.createElement('div');
+  el.className = 'coin';
+  el.textContent = '$';
+  const y = 70 + Math.random()*80;
+  const lane = Math.floor(Math.random()*3);
+  el.style.left = innerWidth + 'px';
+  el.style.bottom = y + 'px';
+  stage.appendChild(el);
+  gameState.objects.push({el, type:'coin', x:innerWidth, y, width:28, height:28, speed:4*gameState.speed});
+}
+
+// Collision check
+function checkCollision(a, b){
+  return !(a.x + a.width/2 < b.x - b.width/2 ||
+           a.x - a.width/2 > b.x + b.width/2 ||
+           player.y + player.height < b.y ||
+           player.y > b.y + b.height);
+}
+
+// Collision → show math
+function handleCollision(){
+  if(gameState.invulnerable) return;
+  beep(120,300);
+  gameState.running = false;
+  showMathProblem();
+}
+
+function showMathProblem(){
+  if(gameState.mathProblemsSolved >= 20){
+    gameOver();
+    return;
+  }
+  const i = Math.floor(Math.random() * availableProblems.length);
+  currentProblem = availableProblems.splice(i,1)[0];
+  if(availableProblems.length === 0) availableProblems = [...mathProblems];
+  mathQuestionEl.textContent = currentProblem.q + " = ?";
+  currentMath.textContent = gameState.mathProblemsSolved;
+  currentLives.textContent = gameState.lives;
+  overlay.style.display = 'block';
+  mathInput.focus();
+  mathInput.value = '';
+}
+
+// Correct answer → +1 life + resume
+function correctAnswer(){
+  beep(900,200);
+  gameState.mathProblemsSolved++;
+  gameState.lives = Math.min(gameState.maxLives, gameState.lives + 1);
+  toastMessage("Correct! +1 Life");
+  resumeGame();
+}
+
+// Wrong answer → -1 life, stay in math
+function wrongAnswer(){
+  beep(200,300);
+  gameState.lives--;
+  toastMessage("Wrong! -1 Life");
+  if(gameState.lives <= 0){
+    gameOver();
+    return;
+  }
+  mathInput.value = '';
+  mathInput.focus();
+  currentLives.textContent = gameState.lives;
+}
+
+// Skip → -1 life + resume immediately
+function skipProblem(){
+  gameState.lives--;
+  toastMessage("-1 Life (Skipped)", 1500);
+  if(gameState.lives <= 0){
+    gameOver();
+    return;
+  }
+  currentLives.textContent = gameState.lives;
+  resumeGame(); // resume without new problem
+}
+
+function resumeGame(){
+  overlay.style.display = 'none';
+  gameState.running = true;
+  gameState.invulnerable = true;
+  gameState.invulnerableTimer = 2000;
+  // Clear nearby obstacles
+  gameState.objects = gameState.objects.filter(o => o.type !== 'obstacle' || o.x > player.x + 250);
+  requestAnimationFrame(gameLoop);
+}
+
+function gameOver(){
+  gameState.running = false;
+  finalScore.textContent = Math.floor(gameState.score);
+  finalMath.textContent = gameState.mathProblemsSolved;
+  finalCoins.textContent = gameState.coins;
+  gameOverScreen.style.display = 'flex';
+}
+
+function toastMessage(msg, time=2000){
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  clearTimeout(toast.t);
+  toast.t = setTimeout(()=> toast.style.display='none', time);
+}
+
+// Controls
+function moveLeft(){ if(player.lane>0) player.lane--, player.targetX = LANES[player.lane]; }
+function moveRight(){ if(player.lane<2) player.lane++, player.targetX = LANES[player.lane]; }
+function jump(){ if(player.onGround){ player.vy = -16; player.onGround = false; beep(400,100); } }
+
+function gameLoop(t){
+  if(!gameState.running) return;
+  if(!gameState.lastTime) gameState.lastTime = t;
+  const dt = Math.min((t - gameState.lastTime)/16.67, 3);
+  gameState.lastTime = t;
+
+  // SLOW score growth
+  gameState.score += 0.15 * dt; // Very slow now
+
+  // Player movement
+  player.x += (player.targetX - player.x) * 0.2;
+  player.vy += 0.8;
+  player.y += player.vy;
+  if(player.y >= 28){
+    player.y = 28; player.vy = 0; player.onGround = true;
+  }
+  playerEl.style.left = (player.x - 28) + 'px';
+  playerEl.style.bottom = player.y + 'px';
+
+  // Spawn obstacles on exact timer
+  spawnNextObstacle();
+  spawnCoin(); // coins random
+
+  // Update objects
+  for(let i=gameState.objects.length-1; i>=0; i--){
+    const o = gameState.objects[i];
+    o.x -= o.speed * dt;
+    o.el.style.left = o.x + 'px';
+    if(o.x < -100){
+      o.el.remove();
+      gameState.objects.splice(i,1);
+      continue;
+    }
+    if(o.type === 'coin' && checkCollision(player, o)){
+      gameState.coins++;
+      gameState.score += 10;
+      beep(880,100);
+      o.el.remove();
+      gameState.objects.splice(i,1);
+    }
+    if(o.type === 'obstacle' && checkCollision(player, o)){
+      handleCollision();
+      break;
+    }
+  }
+
+  // Invulnerability blink
+  if(gameState.invulnerable){
+    gameState.invulnerableTimer -= dt*16.67;
+    playerEl.style.opacity = (Math.floor(t/150)%2) ? 0.5 : 1;
+    if(gameState.invulnerableTimer <= 0){
+      gameState.invulnerable = false;
+      playerEl.style.opacity = 1;
+    }
+  }
+
+  updateUI();
+  requestAnimationFrame(gameLoop);
+}
+
+// Event Listeners
+document.addEventListener('keydown', e => {
+  if(overlay.style.display === 'block'){
+    if(e.key === 'Enter') submitAns.click();
+    return;
+  }
+  if(e.key === 'ArrowLeft' || e.key === 'a') moveLeft();
+  if(e.key === 'ArrowRight' || e.key === 'd') moveRight();
+  if(e.key === ' ' || e.key === 'ArrowUp'){ e.preventDefault(); jump(); }
+});
+
+submitAns.onclick = () => {
+  const ans = parseInt(mathInput.value);
+  if(ans === currentProblem.a){
+    correctAnswer();
+  } else {
+    wrongAnswer();
+  }
+};
+
+skipBtn.onclick = skipProblem;
+btnPlayAgain.onclick = initGame;
+
+// Start game
+initGame();
+</script>
+</body>
+</html>
