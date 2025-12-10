@@ -17,7 +17,7 @@
   html,body{
     height:100%; margin:0; font-family: 'Segoe UI', sans-serif;
     background:radial-gradient(ellipse at center, #081121 0%, #000 100%);
-    color:#fff; overflow:hidden; touch-action:none;
+    color:#fff; overflow:hidden; touch-action: manipulation;
   }
   #gameWrap{position:relative;width:100vw;height:100vh;overflow:hidden;user-select:none;}
   .layer{position:absolute;inset:0;pointer-events:none;}
@@ -36,10 +36,47 @@
   .obstacle.small{width:36px;height:36px;}
   .obstacle.large{width:84px;height:84px;bottom:20px;}
   @keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
-  .coin{position:absolute;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffd24d, #ffa800);
-    display:flex;align-items:center;justify-content:center;color:#6b3b00;font-weight:800;z-index:28;
-    box-shadow:0 6px 12px rgba(0,0,0,0.45);animation:spin 1.5s infinite linear;}
+  .coin{
+    position:absolute;
+    width:32px;height:32px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #ffd24d, #ffa800);
+    display:flex;align-items:center;justify-content:center;
+    color:#6b3b00;font-weight:900;font-size:18px;
+    z-index:28;
+    box-shadow:0 6px 12px rgba(0,0,0,0.6);
+    animation:spin 1.4s infinite linear, float 2s infinite ease-in-out;
+  }
   @keyframes spin{to{transform:rotateY(360deg)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* Mobile Controls */
+  #mobileControls{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:none;
+    gap:20px;
+    z-index:100;
+  }
+  #mobileControls button{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    border:2px solid rgba(255,255,255,0.3);
+    color:#fff;
+    font-size:32px;
+    font-weight:bold;
+    backdrop-filter:blur(8px);
+    box-shadow:0 4px 15px rgba(0,0,0,0.4);
+  }
+  #mobileControls button:active{
+    background:rgba(255,255,255,0.3);
+    transform:scale(0.95);
+  }
+
   #hud{position:absolute;left:12px;top:12px;z-index:50;background:var(--ui-bg);padding:12px 16px;border-radius:12px;
     display:flex;flex-wrap:wrap;gap:12px;align-items:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);}
   #score{font-size:18px;font-weight:700;color:var(--accent);}
@@ -53,7 +90,7 @@
   #mathQuestion{font-size:28px;font-weight:800;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;margin:20px 0;}
   #mathInput{width:100%;padding:14px;border-radius:10px;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);
     color:#fff;font-size:18px;text-align:center;margin:16px 0;}
-  #toast{position:absolute;left:50%;transform:translateX(-50%,-50%);top:40%;background:rgba(0,0,0,0.9);
+  #toast{position:absolute;left:50%;transform:translateX(-50%);top:40%;background:rgba(0,0,0,0.9);
     padding:16px 24px;border-radius:12px;display:none;z-index:80;font-size:20px;font-weight:bold;
     animation:fade 2s forwards;}
   @keyframes fade{0%{opacity:0;transform:translate(-50%,-60%)}30%{opacity:1;transform:translate(-50%,-50%)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-40%)}}
@@ -61,14 +98,18 @@
     justify-content:center;align-items:center;flex-direction:column;text-align:center;color:#fff;}
   #gameOver h2{font-size:48px;color:#f44336;margin:0;}
   #finalScore{font-size:42px;color:var(--accent);margin:20px 0;font-weight:800;}
+  
   @media (max-width:768px){
-    .player{width:44px;height:44px;}
+    .player{width:48px;height:48px;}
+    #mobileControls{display:flex;}
+    #hud{left:50%;transform:translateX(-50%);top:8px;padding:10px 14px;}
     #overlay{min-width:280px;padding:20px;}
+    #mathQuestion{font-size:24px;}
   }
 </style>
 </head>
 <body>
-<div id="gameWrap>
+<div id="gameWrap">
   <div class="layer sky"></div>
   <div id="stage"></div>
   <div class="lane-marker" id="lane-left"></div>
@@ -83,6 +124,13 @@
     <div class="badge" id="mathSolved">Math: 0/20</div>
   </div>
 
+  <!-- Mobile Touch Controls -->
+  <div id="mobileControls">
+    <button id="btnLeft">←</button>
+    <button id="btnJump">↑</button>
+    <button id="btnRight">→</button>
+  </div>
+
   <div class="player" id="player">
     <svg viewBox="0 0 100 100">
       <circle cx="30" cy="30" r="10" fill="#ffe6c7"/>
@@ -90,12 +138,13 @@
       <rect x="40" y="42" width="22" height="10" rx="3" fill="#2d6a4f" transform="rotate(-18 51 47)"/>
       <rect x="6" y="46" width="22" height="8" rx="3" fill="#2d6a4f" transform="rotate(18 17 50)"/>
       <circle cx="30" cy="30" r="3" fill="#222"/>
+      <circle cx="34" cy="28" r="1.5" fill="#fff"/>
     </svg>
   </div>
 
   <div id="overlay">
     <h2>Math Challenge!</h2>
-    <p>Solve correctly to <strong>GAIN A LIFE</strong>!</strong></p>
+    <p>Solve correctly to <strong>GAIN A LIFE</strong>!</p>
     <div id="mathQuestion">?</div>
     <input id="mathInput" type="text" inputmode="numeric" placeholder="Your answer" autofocus>
     <div style="display:flex;gap:12px;margin-top:20px;">
@@ -140,7 +189,13 @@ const finalMath = document.getElementById('finalMath');
 const finalCoins = document.getElementById('finalCoins');
 const btnPlayAgain = document.getElementById('btnPlayAgain');
 
+// Mobile buttons
+const btnLeft = document.getElementById('btnLeft');
+const btnJump = document.getElementById('btnJump');
+const btnRight = document.getElementById('btnRight');
+
 const LANES = [innerWidth*0.25, innerWidth*0.5, innerWidth*0.75];
+const COIN_HEIGHT = 65; // Coins at dino's height
 
 // Game State
 let gameState = {
@@ -157,11 +212,12 @@ let gameState = {
   mathProblemsSolved: 0,
   invulnerable: false,
   invulnerableTimer: 0,
-  
-  // NEW: Obstacle timing sequence: 4s → 2s → 3s → 5s → repeat
-  obstacleDelays: [4000, 2000, 3000, 5000],
+  obstacleDelays: [1500, 1000, 1200, 1800], // EVEN FASTER SPAWNING
   currentDelayIndex: 0,
-  nextObstacleTime: 0
+  nextObstacleTime: 0,
+  lastCoinTime: 0,
+  obstacleSpeed: 12.0, // FASTER MOVEMENT
+  nextObstacleLane: -1 // Track which lane has next obstacle
 };
 
 let player = {
@@ -183,7 +239,7 @@ const mathProblems = [
 let currentProblem = null;
 let availableProblems = [...mathProblems];
 
-// Simple sound
+// Sound
 function beep(freq=600, dur=80){
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
   const o = ctx.createOscillator();
@@ -192,34 +248,33 @@ function beep(freq=600, dur=80){
   o.frequency.value = freq;
   g.gain.setValueAtTime(0.3, ctx.currentTime);
   g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur/1000);
-  o.start(ctx.currentTime);
+  o.start();
   o.stop(ctx.currentTime + dur/1000);
 }
 
-// Initialize game
+// Init
 function initGame(){
-  gameState = {
-    running: true, score:0, coins:0, lives:3, maxLives:5, speed:1.0,
+  Object.assign(gameState, {
+    running: true, score:0, coins:0, lives:3, speed:1.0,
     objects:[], lastTime:0, gameStartTime: performance.now(),
-    obstaclesAllowed: false,
-    mathProblemsSolved:0,
+    obstaclesAllowed: false, mathProblemsSolved:0,
     invulnerable: false, invulnerableTimer:0,
-    obstacleDelays: [4000, 2000, 3000, 5000],
     currentDelayIndex: 0,
-    nextObstacleTime: performance.now() + 4000 // first obstacle after 4s
-  };
+    nextObstacleTime: performance.now() + 1200, // Faster initial obstacle
+    lastCoinTime: performance.now(),
+    obstacleSpeed: 12.0,
+    nextObstacleLane: -1
+  });
   player = {x:innerWidth*0.5, y:28, vy:0, width:56, height:56, lane:1, targetX:innerWidth*0.5, onGround:true};
   stage.innerHTML = '';
   overlay.style.display = 'none';
   gameOverScreen.style.display = 'none';
   availableProblems = [...mathProblems];
   updateUI();
-  gameState.nextObstacleTime = performance.now() + 4000;
+  toastMessage("Game Started! Watch out for obstacles!");
   requestAnimationFrame(gameLoop);
-  toastMessage("Game Started! Obstacles in 4s...");
 }
 
-// Update HUD
 function updateUI(){
   scoreEl.textContent = `Score: ${Math.floor(gameState.score)}`;
   coinsEl.textContent = `Coins: ${gameState.coins}`;
@@ -227,14 +282,12 @@ function updateUI(){
   mathSolvedEl.textContent = `Math: ${gameState.mathProblemsSolved}/20`;
 }
 
-// Fixed obstacle sequence: 4s → 2s → 3s → 5s → repeat
+// Obstacle spawn (timed) - OBSTACLES COME TO DINO'S LANE
 function spawnNextObstacle(){
   const now = performance.now();
   if(now < gameState.nextObstacleTime) return;
 
   createObstacle();
-
-  // Set next delay
   gameState.currentDelayIndex = (gameState.currentDelayIndex + 1) % 4;
   gameState.nextObstacleTime = now + gameState.obstacleDelays[gameState.currentDelayIndex];
 }
@@ -242,54 +295,105 @@ function spawnNextObstacle(){
 function createObstacle(){
   const el = document.createElement('div');
   el.className = 'obstacle';
-  
-  // Random size
   const rand = Math.random();
   if(rand < 0.3) el.classList.add('small');
   else if(rand > 0.7) el.classList.add('large');
 
-  const lane = Math.floor(Math.random() * 3);
+  // OBSTACLES TARGET DINO'S LANE MORE OFTEN
+  let lane;
+  if(Math.random() < 0.8) { // 80% chance to target dino's lane
+    lane = player.lane;
+  } else {
+    lane = Math.floor(Math.random() * 3);
+  }
+  
+  gameState.nextObstacleLane = lane; // Track which lane has obstacle
+  
   const width = el.classList.contains('large') ? 84 : el.classList.contains('small') ? 36 : 56;
   const height = el.classList.contains('large') ? 84 : 56;
   const bottom = el.classList.contains('large') ? 20 : 28;
 
-  el.style.left = innerWidth + 'px';
+  // OBSTACLES START CLOSER TO DINO - only 400-600px away
+  const startX = player.x + 400 + Math.random() * 200;
+  
+  el.style.left = startX + 'px';
   el.style.bottom = bottom + 'px';
+  el.style.zIndex = 25;
   stage.appendChild(el);
 
   gameState.objects.push({
-    el, type:'obstacle', x:innerWidth, y:bottom, width, height,
-    speed: 6.8 * gameState.speed
+    el, type:'obstacle', x:startX, y:bottom, width, height,
+    speed: gameState.obstacleSpeed * gameState.speed,
+    lane: lane
   });
 }
 
-// Coins spawn randomly (not timed)
+// COINS - placed strategically for dino to catch
 function spawnCoin(){
-  if(Math.random() > 0.35) return;
-  const el = document.createElement('div');
-  el.className = 'coin';
-  el.textContent = '$';
-  const y = 70 + Math.random()*80;
-  const lane = Math.floor(Math.random()*3);
-  el.style.left = innerWidth + 'px';
-  el.style.bottom = y + 'px';
-  stage.appendChild(el);
-  gameState.objects.push({el, type:'coin', x:innerWidth, y, width:28, height:28, speed:4*gameState.speed});
+  const now = performance.now();
+  if(now - gameState.lastCoinTime < 800 + Math.random()*1200) return;
+
+  const coinsInRow = 2 + Math.floor(Math.random()*3); // 2-4 coins in a row
+  const lane = Math.floor(Math.random() * 3);
+  const startX = player.x + 300 + Math.random() * 250; // Coins start closer to dino
+
+  for(let i = 0; i < coinsInRow; i++){
+    const el = document.createElement('div');
+    el.className = 'coin';
+    el.textContent = '$';
+    el.style.left = (startX + i*50) + 'px';
+    el.style.bottom = COIN_HEIGHT + 'px'; // Coins at dino's height
+    el.style.zIndex = 28;
+    stage.appendChild(el);
+
+    gameState.objects.push({
+      el, type:'coin', x: startX + i*50, y: COIN_HEIGHT, width:32, height:32,
+      speed: 7.5 * gameState.speed
+    });
+  }
+  gameState.lastCoinTime = now;
 }
 
-// Collision check
+// IMPROVED COLLISION DETECTION - easier to hit
 function checkCollision(a, b){
-  return !(a.x + a.width/2 < b.x - b.width/2 ||
-           a.x - a.width/2 > b.x + b.width/2 ||
-           player.y + player.height < b.y ||
-           player.y > b.y + b.height);
+  // Larger collision boxes for easier hitting
+  const bufferX = 15; // Increased more
+  const bufferY = 10;  // Increased more
+  
+  return !(a.x + a.width/2 - bufferX < b.x - b.width/2 ||
+           a.x - a.width/2 + bufferX > b.x + b.width/2 ||
+           a.y + a.height - bufferY < b.y ||
+           a.y + bufferY > b.y + b.height);
 }
 
-// Collision → show math
-function handleCollision(){
+// FIXED: Remove obstacle that hit the dino
+function handleCollision(obstacleIndex){
   if(gameState.invulnerable) return;
+  
+  // Remove the obstacle that hit the dino
+  if(obstacleIndex >= 0 && obstacleIndex < gameState.objects.length) {
+    const hitObstacle = gameState.objects[obstacleIndex];
+    if(hitObstacle && hitObstacle.el) {
+      // Add explosion effect
+      hitObstacle.el.style.background = '#ff6600';
+      hitObstacle.el.style.boxShadow = '0 0 20px #ff6600';
+      hitObstacle.el.style.opacity = '0';
+      hitObstacle.el.style.transform = 'scale(1.5)';
+      
+      // Remove after animation
+      setTimeout(() => {
+        if(hitObstacle.el && hitObstacle.el.parentNode) {
+          hitObstacle.el.remove();
+        }
+      }, 150);
+    }
+    // Remove from objects array
+    gameState.objects.splice(obstacleIndex, 1);
+  }
+  
   beep(120,300);
   gameState.running = false;
+  // ALWAYS SHOW QUESTION WHEN HIT - NO EXCEPTIONS
   showMathProblem();
 }
 
@@ -305,11 +409,9 @@ function showMathProblem(){
   currentMath.textContent = gameState.mathProblemsSolved;
   currentLives.textContent = gameState.lives;
   overlay.style.display = 'block';
-  mathInput.focus();
-  mathInput.value = '';
+  setTimeout(() => mathInput.focus(), 100);
 }
 
-// Correct answer → +1 life + resume
 function correctAnswer(){
   beep(900,200);
   gameState.mathProblemsSolved++;
@@ -318,39 +420,30 @@ function correctAnswer(){
   resumeGame();
 }
 
-// Wrong answer → -1 life, stay in math
 function wrongAnswer(){
   beep(200,300);
   gameState.lives--;
   toastMessage("Wrong! -1 Life");
-  if(gameState.lives <= 0){
-    gameOver();
-    return;
+  if(gameState.lives <= 0) gameOver();
+  else {
+    mathInput.value = '';
+    mathInput.focus();
+    currentLives.textContent = gameState.lives;
   }
-  mathInput.value = '';
-  mathInput.focus();
-  currentLives.textContent = gameState.lives;
 }
 
-// Skip → -1 life + resume immediately
 function skipProblem(){
   gameState.lives--;
   toastMessage("-1 Life (Skipped)", 1500);
-  if(gameState.lives <= 0){
-    gameOver();
-    return;
-  }
-  currentLives.textContent = gameState.lives;
-  resumeGame(); // resume without new problem
+  if(gameState.lives <= 0) gameOver();
+  else resumeGame();
 }
 
 function resumeGame(){
   overlay.style.display = 'none';
   gameState.running = true;
   gameState.invulnerable = true;
-  gameState.invulnerableTimer = 2000;
-  // Clear nearby obstacles
-  gameState.objects = gameState.objects.filter(o => o.type !== 'obstacle' || o.x > player.x + 250);
+  gameState.invulnerableTimer = 1000; // Even shorter invulnerability
   requestAnimationFrame(gameLoop);
 }
 
@@ -366,25 +459,52 @@ function toastMessage(msg, time=2000){
   toast.textContent = msg;
   toast.style.display = 'block';
   clearTimeout(toast.t);
-  toast.t = setTimeout(()=> toast.style.display='none', time);
+  toast.t = setTimeout(() => toast.style.display='none', time);
 }
 
 // Controls
-function moveLeft(){ if(player.lane>0) player.lane--, player.targetX = LANES[player.lane]; }
-function moveRight(){ if(player.lane<2) player.lane++, player.targetX = LANES[player.lane]; }
-function jump(){ if(player.onGround){ player.vy = -16; player.onGround = false; beep(400,100); } }
+function moveLeft(){ if(player.lane>0){ player.lane--; player.targetX = LANES[player.lane]; } }
+function moveRight(){ if(player.lane<2){ player.lane++; player.targetX = LANES[player.lane]; } }
+function jump(){ if(player.onGround){ player.vy = -16; player.onGround = false; beep(440,100); } }
 
+// Touch & Keyboard
+document.addEventListener('keydown', e => {
+  if(overlay.style.display === 'block'){
+    if(e.key === 'Enter') submitAns.click();
+    return;
+  }
+  if(e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') moveLeft();
+  if(e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') moveRight();
+  if(e.key === ' ' || e.key === 'ArrowUp'){ e.preventDefault(); jump(); }
+});
+
+btnLeft.onclick = moveLeft;
+btnJump.onclick = jump;
+btnRight.onclick = moveRight;
+
+// Prevent scroll on mobile
+window.addEventListener('touchstart', e => e.preventDefault(), {passive:false});
+
+submitAns.onclick = () => {
+  const ans = parseInt(mathInput.value.trim());
+  if(ans === currentProblem.a) correctAnswer();
+  else wrongAnswer();
+};
+
+skipBtn.onclick = skipProblem;
+btnPlayAgain.onclick = initGame;
+
+// Game Loop
 function gameLoop(t){
   if(!gameState.running) return;
   if(!gameState.lastTime) gameState.lastTime = t;
   const dt = Math.min((t - gameState.lastTime)/16.67, 3);
   gameState.lastTime = t;
 
-  // SLOW score growth
-  gameState.score += 0.15 * dt; // Very slow now
+  gameState.score += 0.3 * dt; // Faster score increase
 
   // Player movement
-  player.x += (player.targetX - player.x) * 0.2;
+  player.x += (player.targetX - player.x) * 0.25;
   player.vy += 0.8;
   player.y += player.vy;
   if(player.y >= 28){
@@ -393,37 +513,47 @@ function gameLoop(t){
   playerEl.style.left = (player.x - 28) + 'px';
   playerEl.style.bottom = player.y + 'px';
 
-  // Spawn obstacles on exact timer
   spawnNextObstacle();
-  spawnCoin(); // coins random
+  spawnCoin();
 
   // Update objects
-  for(let i=gameState.objects.length-1; i>=0; i--){
+  for(let i = gameState.objects.length-1; i >= 0; i--){
     const o = gameState.objects[i];
     o.x -= o.speed * dt;
-    o.el.style.left = o.x + 'px';
+    if(o.el) o.el.style.left = o.x + 'px';
+
     if(o.x < -100){
-      o.el.remove();
+      if(o.el && o.el.parentNode) o.el.remove();
       gameState.objects.splice(i,1);
       continue;
     }
+
     if(o.type === 'coin' && checkCollision(player, o)){
       gameState.coins++;
-      gameState.score += 10;
-      beep(880,100);
-      o.el.remove();
+      gameState.score += 30; // Good coin value
+      beep(880,120);
+      if(o.el) {
+        o.el.style.transform = 'scale(1.5)';
+        o.el.style.opacity = '0';
+        setTimeout(() => {
+          if(o.el && o.el.parentNode) {
+            o.el.remove();
+          }
+        }, 200);
+      }
       gameState.objects.splice(i,1);
     }
+
     if(o.type === 'obstacle' && checkCollision(player, o)){
-      handleCollision();
-      break;
+      handleCollision(i); // Pass the index of the obstacle that hit
+      return; // Stop immediately after collision
     }
   }
 
-  // Invulnerability blink
+  // Invulnerability
   if(gameState.invulnerable){
     gameState.invulnerableTimer -= dt*16.67;
-    playerEl.style.opacity = (Math.floor(t/150)%2) ? 0.5 : 1;
+    playerEl.style.opacity = (Math.floor(t/80)%2) ? 0.3 : 1; // Faster blink
     if(gameState.invulnerableTimer <= 0){
       gameState.invulnerable = false;
       playerEl.style.opacity = 1;
@@ -434,32 +564,8 @@ function gameLoop(t){
   requestAnimationFrame(gameLoop);
 }
 
-// Event Listeners
-document.addEventListener('keydown', e => {
-  if(overlay.style.display === 'block'){
-    if(e.key === 'Enter') submitAns.click();
-    return;
-  }
-  if(e.key === 'ArrowLeft' || e.key === 'a') moveLeft();
-  if(e.key === 'ArrowRight' || e.key === 'd') moveRight();
-  if(e.key === ' ' || e.key === 'ArrowUp'){ e.preventDefault(); jump(); }
-});
-
-submitAns.onclick = () => {
-  const ans = parseInt(mathInput.value);
-  if(ans === currentProblem.a){
-    correctAnswer();
-  } else {
-    wrongAnswer();
-  }
-};
-
-skipBtn.onclick = skipProblem;
-btnPlayAgain.onclick = initGame;
-
-// Start game
+// Start
 initGame();
 </script>
 </body>
-
 </html>
