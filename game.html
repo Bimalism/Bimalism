@@ -1,571 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Bimalism Game</title>
+<meta charset="UTF-8">
+<title>Tic Tac Toe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✅ Custom Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --ground:#2b2b2b;
-    --accent:#ffcc33;
-    --danger:#f44336;
-    --player:#4caf50;
-    --ui-bg: rgba(0,0,0,0.75);
-    --shield: rgba(124,58,237,0.6);
-    --magnet: rgba(56,189,248,0.8);
-  }
-  html,body{
-    height:100%; margin:0; font-family: 'Segoe UI', sans-serif;
-    background:radial-gradient(ellipse at center, #081121 0%, #000 100%);
-    color:#fff; overflow:hidden; touch-action: manipulation;
-  }
-  #gameWrap{position:relative;width:100vw;height:100vh;overflow:hidden;user-select:none;}
-  .layer{position:absolute;inset:0;pointer-events:none;}
-  .sky{background:linear-gradient(to bottom, #1a2a6c 0%, #0f3460 50%, #081121 100%);}
-  .ground{position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(180deg,var(--ground),#0b0b0b);
-    z-index:10;box-shadow:inset 0 10px 40px rgba(0,0,0,0.6);border-top:3px solid #444;}
-  .lane-marker{position:absolute;bottom:0;width:2px;height:160px;background:rgba(255,255,255,0.1);z-index:11;}
-  #lane-left{left:25%} #lane-center{left:50%} #lane-right{left:75%}
-  #stage{position:absolute;inset:0;z-index:20;overflow:hidden;}
-  .player{position:absolute;bottom:28px;width:56px;height:56px;z-index:30;
-    transform-origin:center bottom;transition:left .15s ease-out;}
-  .player svg{width:100%;height:100%;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5));}
-  .obstacle{position:absolute;bottom:28px;width:56px;height:56px;background:var(--danger);border-radius:8px;
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;z-index:25;
-    box-shadow:0 8px 18px rgba(0,0,0,0.6);animation:bob 1.8s infinite alternate;}
-  .obstacle.small{width:36px;height:36px;}
-  .obstacle.large{width:84px;height:84px;bottom:20px;}
-  @keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
-  .coin{
-    position:absolute;
-    width:32px;height:32px;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #ffd24d, #ffa800);
-    display:flex;align-items:center;justify-content:center;
-    color:#6b3b00;font-weight:900;font-size:18px;
-    z-index:28;
-    box-shadow:0 6px 12px rgba(0,0,0,0.6);
-    animation:spin 1.4s infinite linear, float 2s infinite ease-in-out;
-  }
-  @keyframes spin{to{transform:rotateY(360deg)}}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* ✅ THEME VARIABLES */
+:root {
+    --bg: #f2f2f2;
+    --text: #222;
+    --board: #fff;
+    --cell: #fff;
+    --hover: #e6e6e6;
+    --primary: #007bff;
+    --win: #28a745;
+    --shadow: rgba(0,0,0,0.15);
+}
 
-  /* Mobile Controls */
-  #mobileControls{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    display:none;
-    gap:20px;
-    z-index:100;
-  }
-  #mobileControls button{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.15);
-    border:2px solid rgba(255,255,255,0.3);
-    color:#fff;
-    font-size:32px;
-    font-weight:bold;
-    backdrop-filter:blur(8px);
-    box-shadow:0 4px 15px rgba(0,0,0,0.4);
-  }
-  #mobileControls button:active{
-    background:rgba(255,255,255,0.3);
-    transform:scale(0.95);
-  }
+body.dark {
+    --bg: #121212;
+    --text: #f5f5f5;
+    --board: #1e1e1e;
+    --cell: #1e1e1e;
+    --hover: #333;
+    --primary: #4dabf7;
+    --win: #51cf66;
+    --shadow: rgba(0,0,0,0.5);
+}
 
-  #hud{position:absolute;left:12px;top:12px;z-index:50;background:var(--ui-bg);padding:12px 16px;border-radius:12px;
-    display:flex;flex-wrap:wrap;gap:12px;align-items:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);}
-  #score{font-size:18px;font-weight:700;color:var(--accent);}
-  .badge{font-size:13px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.08);}
-  button{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;
-    border-radius:8px;cursor:pointer;transition:.2s;backdrop-filter:blur(5px);font-weight:600;}
-  button:hover{background:rgba(255,255,255,0.2);}
-  #overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:60;background:rgba(6,6,6,0.95);
-    padding:24px;border-radius:16px;min-width:340px;max-width:90%;display:none;box-shadow:0 20px 40px rgba(0,0,0,0.7);
-    border:2px solid var(--accent);backdrop-filter:blur(10px);}
-  #mathQuestion{font-size:28px;font-weight:800;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;margin:20px 0;}
-  #mathInput{width:100%;padding:14px;border-radius:10px;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);
-    color:#fff;font-size:18px;text-align:center;margin:16px 0;}
-  #toast{position:absolute;left:50%;transform:translateX(-50%);top:40%;background:rgba(0,0,0,0.9);
-    padding:16px 24px;border-radius:12px;display:none;z-index:80;font-size:20px;font-weight:bold;
-    animation:fade 2s forwards;}
-  @keyframes fade{0%{opacity:0;transform:translate(-50%,-60%)}30%{opacity:1;transform:translate(-50%,-50%)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-40%)}}
-  #gameOver{position:absolute;inset:0;z-index:70;background:rgba(0,0,0,0.95);display:none;
-    justify-content:center;align-items:center;flex-direction:column;text-align:center;color:#fff;}
-  #gameOver h2{font-size:48px;color:#f44336;margin:0;}
-  #finalScore{font-size:42px;color:var(--accent);margin:20px 0;font-weight:800;}
-  
-  @media (max-width:768px){
-    .player{width:48px;height:48px;}
-    #mobileControls{display:flex;}
-    #hud{left:50%;transform:translateX(-50%);top:8px;padding:10px 14px;}
-    #overlay{min-width:280px;padding:20px;}
-    #mathQuestion{font-size:24px;}
-  }
+/* ✅ GLOBAL STYLES */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+/* ✅ TOP BAR */
+.top-bar {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    background: var(--board);
+    color: var(--text);
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+/* ✅ DARK MODE TOGGLE */
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.switch {
+    width: 40px;
+    height: 20px;
+    background: #aaa;
+    border-radius: 20px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.knob {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+body.dark .switch {
+    background: var(--primary);
+}
+
+body.dark .knob {
+    transform: translateX(20px);
+}
+
+/* ✅ SCOREBOARD */
+.scoreboard {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.score {
+    flex: 1;
+    background: var(--board);
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+.score-value {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ✅ GAME BOARD */
+#game {
+    display: grid;
+    grid-template-columns: repeat(3, 110px);
+    gap: 10px;
+}
+
+@media (max-width: 480px) {
+    #game {
+        grid-template-columns: repeat(3, 85px);
+        gap: 8px;
+    }
+}
+
+.cell {
+    width: 110px;
+    height: 110px;
+    background: var(--cell);
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px var(--shadow);
+    transition: 0.2s;
+    animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .cell {
+        width: 85px;
+        height: 85px;
+        font-size: 32px;
+    }
+}
+
+.cell:hover {
+    background: var(--hover);
+    transform: translateY(-2px);
+}
+
+/* ✅ ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.pop {
+    animation: pop 0.15s ease-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.7); }
+    100% { transform: scale(1); }
+}
+
+.win {
+    background: var(--win) !important;
+    color: white !important;
+    animation: glow 0.6s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px var(--win); }
+    to { box-shadow: 0 0 15px var(--win); }
+}
+
+/* ✅ BUTTONS */
+button {
+    margin-top: 15px;
+    padding: 10px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px var(--shadow);
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
 </style>
 </head>
+
 <body>
-<div id="gameWrap">
-  <div class="layer sky"></div>
-  <div id="stage"></div>
-  <div class="lane-marker" id="lane-left"></div>
-  <div class="lane-marker" id="lane-center"></div>
-  <div class="lane-marker" id="lane-right"></div>
-  <div class="ground"></div>
 
-  <div id="hud">
-    <div id="score">Score: 0</div>
-    <div class="badge" id="coins">Coins: 0</div>
-    <div class="badge" id="lives">Lives: 3</div>
-    <div class="badge" id="mathSolved">Math: 0/20</div>
-  </div>
+<h1>Ultimate Tic Tac Toe</h1>
 
-  <!-- Mobile Touch Controls -->
-  <div id="mobileControls">
-    <button id="btnLeft">←</button>
-    <button id="btnJump">↑</button>
-    <button id="btnRight">→</button>
-  </div>
+<div class="top-bar">
+    <select id="modeSelect">
+        <option value="ai">Player vs AI</option>
+        <option value="pvp">Player vs Player</option>
+    </select>
 
-  <div class="player" id="player">
-    <svg viewBox="0 0 100 100">
-      <circle cx="30" cy="30" r="10" fill="#ffe6c7"/>
-      <rect x="22" y="38" width="16" height="22" rx="3" fill="#2d6a4f"/>
-      <rect x="40" y="42" width="22" height="10" rx="3" fill="#2d6a4f" transform="rotate(-18 51 47)"/>
-      <rect x="6" y="46" width="22" height="8" rx="3" fill="#2d6a4f" transform="rotate(18 17 50)"/>
-      <circle cx="30" cy="30" r="3" fill="#222"/>
-      <circle cx="34" cy="28" r="1.5" fill="#fff"/>
-    </svg>
-  </div>
-
-  <div id="overlay">
-    <h2>Math Challenge!</h2>
-    <p>Solve correctly to <strong>GAIN A LIFE</strong>!</p>
-    <div id="mathQuestion">?</div>
-    <input id="mathInput" type="text" inputmode="numeric" placeholder="Your answer" autofocus>
-    <div style="display:flex;gap:12px;margin-top:20px;">
-      <button id="submitAns">Submit (+1 Life)</button>
-      <button id="skipBtn" style="background:#c62828;">Skip (-1 Life)</button>
+    <div class="toggle" id="darkToggle">
+        <span>Dark</span>
+        <div class="switch"><div class="knob"></div></div>
     </div>
-    <p style="margin-top:20px;font-size:14px;color:#aaa;">
-      Solved: <span id="currentMath">0</span>/20 • Lives: <span id="currentLives">3</span>
-    </p>
-  </div>
-
-  <div id="gameOver">
-    <h2>GAME OVER</h2>
-    <p style="font-size:24px;margin:20px 0;">Final Score: <span id="finalScore">0</span></p>
-    <p>Math Solved: <span id="finalMath">0</span>/20</p>
-    <p>Coins Collected: <span id="finalCoins">0</span></p>
-    <button id="btnPlayAgain" style="margin-top:30px;padding:15px 30px;font-size:18px;">Play Again</button>
-  </div>
-
-  <div id="toast"></div>
 </div>
 
+<div class="scoreboard">
+    <div class="score">
+        <div>Player X</div>
+        <div class="score-value" id="scoreX">0</div>
+    </div>
+    <div class="score">
+        <div>Draws</div>
+        <div class="score-value" id="scoreDraw">0</div>
+    </div>
+    <div class="score">
+        <div>Player O</div>
+        <div class="score-value" id="scoreO">0</div>
+    </div>
+</div>
+
+<div id="status">Player X's turn</div>
+
+<div id="game">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+</div>
+
+<button id="reset">Restart Round</button>
+<button id="resetAll">Reset Scores</button>
+
 <script>
-// Elements
-const stage = document.getElementById('stage');
-const playerEl = document.getElementById('player');
-const scoreEl = document.getElementById('score');
-const coinsEl = document.getElementById('coins');
-const livesEl = document.getElementById('lives');
-const mathSolvedEl = document.getElementById('mathSolved');
-const overlay = document.getElementById('overlay');
-const mathQuestionEl = document.getElementById('mathQuestion');
-const mathInput = document.getElementById('mathInput');
-const submitAns = document.getElementById('submitAns');
-const skipBtn = document.getElementById('skipBtn');
-const toast = document.getElementById('toast');
-const currentMath = document.getElementById('currentMath');
-const currentLives = document.getElementById('currentLives');
-const gameOverScreen = document.getElementById('gameOver');
-const finalScore = document.getElementById('finalScore');
-const finalMath = document.getElementById('finalMath');
-const finalCoins = document.getElementById('finalCoins');
-const btnPlayAgain = document.getElementById('btnPlayAgain');
+/* ✅ GAME VARIABLES */
+const cells = document.querySelectorAll(".cell");
+const statusText = document.getElementById("status");
+const modeSelect = document.getElementById("modeSelect");
+const darkToggle = document.getElementById("darkToggle");
 
-// Mobile buttons
-const btnLeft = document.getElementById('btnLeft');
-const btnJump = document.getElementById('btnJump');
-const btnRight = document.getElementById('btnRight');
+let board = ["","","","","","","","",""];
+let currentPlayer = "X";
+let running = true;
+let mode = "ai";
 
-const LANES = [innerWidth*0.25, innerWidth*0.5, innerWidth*0.75];
-const COIN_HEIGHT = 65; // Coins at dino's height
+let scoreX = 0, scoreO = 0, scoreDraw = 0;
 
-// Game State
-let gameState = {
-  running: true,
-  score: 0,
-  coins: 0,
-  lives: 3,
-  maxLives: 5,
-  speed: 1.0,
-  objects: [],
-  lastTime: 0,
-  gameStartTime: performance.now(),
-  obstaclesAllowed: false,
-  mathProblemsSolved: 0,
-  invulnerable: false,
-  invulnerableTimer: 0,
-  obstacleDelays: [1500, 1000, 1200, 1800], // EVEN FASTER SPAWNING
-  currentDelayIndex: 0,
-  nextObstacleTime: 0,
-  lastCoinTime: 0,
-  obstacleSpeed: 12.0, // FASTER MOVEMENT
-  nextObstacleLane: -1 // Track which lane has next obstacle
-};
-
-let player = {
-  x: innerWidth * 0.5,
-  y: 28,
-  vy: 0,
-  width: 56,
-  height: 56,
-  lane: 1,
-  targetX: innerWidth * 0.5,
-  onGround: true
-};
-
-const mathProblems = [
-  {q:"5 + 7",a:12},{q:"12 - 4",a:8},{q:"9 + 6",a:15},{q:"15 - 3",a:12},{q:"7 + 8",a:15},
-  {q:"20 - 9",a:11},{q:"9 × 2",a:18},{q:"3 × 7",a:21},{q:"4 × 5",a:20},{q:"6 × 6",a:36},
-  {q:"25 ÷ 5",a:5},{q:"18 ÷ 3",a:6},{q:"21 ÷ 7",a:3},{q:"30 ÷ 6",a:5},{q:"10 × 3",a:30}
+/* ✅ WIN PATTERNS */
+const wins = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
 ];
-let currentProblem = null;
-let availableProblems = [...mathProblems];
 
-// Sound
-function beep(freq=600, dur=80){
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
-  o.connect(g); g.connect(ctx.destination);
-  o.frequency.value = freq;
-  g.gain.setValueAtTime(0.3, ctx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur/1000);
-  o.start();
-  o.stop(ctx.currentTime + dur/1000);
+/* ✅ EVENT LISTENERS */
+cells.forEach(c => c.addEventListener("click", handleClick));
+document.getElementById("reset").addEventListener("click", restart);
+document.getElementById("resetAll").addEventListener("click", resetAll);
+modeSelect.addEventListener("change", () => { mode = modeSelect.value; restart(); });
+darkToggle.addEventListener("click", () => document.body.classList.toggle("dark"));
+
+/* ✅ HANDLE PLAYER CLICK */
+function handleClick() {
+    const i = this.dataset.index;
+    if (!running || board[i] !== "") return;
+
+    makeMove(i, currentPlayer);
+    if (checkState()) return;
+
+    if (mode === "ai" && currentPlayer === "O") {
+        setTimeout(aiMove, 300);
+    }
 }
 
-// Init
-function initGame(){
-  Object.assign(gameState, {
-    running: true, score:0, coins:0, lives:3, speed:1.0,
-    objects:[], lastTime:0, gameStartTime: performance.now(),
-    obstaclesAllowed: false, mathProblemsSolved:0,
-    invulnerable: false, invulnerableTimer:0,
-    currentDelayIndex: 0,
-    nextObstacleTime: performance.now() + 1200, // Faster initial obstacle
-    lastCoinTime: performance.now(),
-    obstacleSpeed: 12.0,
-    nextObstacleLane: -1
-  });
-  player = {x:innerWidth*0.5, y:28, vy:0, width:56, height:56, lane:1, targetX:innerWidth*0.5, onGround:true};
-  stage.innerHTML = '';
-  overlay.style.display = 'none';
-  gameOverScreen.style.display = 'none';
-  availableProblems = [...mathProblems];
-  updateUI();
-  toastMessage("Game Started! Watch out for obstacles!");
-  requestAnimationFrame(gameLoop);
+/* ✅ MAKE MOVE */
+function makeMove(i, player) {
+    board[i] = player;
+    const cell = document.querySelector(`[data-index="${i}"]`);
+    cell.textContent = player;
+    cell.classList.add("pop");
 }
 
-function updateUI(){
-  scoreEl.textContent = `Score: ${Math.floor(gameState.score)}`;
-  coinsEl.textContent = `Coins: ${gameState.coins}`;
-  livesEl.textContent = `Lives: ${gameState.lives}`;
-  mathSolvedEl.textContent = `Math: ${gameState.mathProblemsSolved}/20`;
+/* ✅ AI MOVE (UNBEATABLE MINIMAX) */
+function aiMove() {
+    const best = minimax(board, "O").index;
+    makeMove(best, "O");
+    checkState();
 }
 
-// Obstacle spawn (timed) - OBSTACLES COME TO DINO'S LANE
-function spawnNextObstacle(){
-  const now = performance.now();
-  if(now < gameState.nextObstacleTime) return;
+/* ✅ MINIMAX ALGORITHM */
+function minimax(newBoard, player) {
+    const empty = newBoard.map((v,i)=>v===""?i:null).filter(v=>v!==null);
 
-  createObstacle();
-  gameState.currentDelayIndex = (gameState.currentDelayIndex + 1) % 4;
-  gameState.nextObstacleTime = now + gameState.obstacleDelays[gameState.currentDelayIndex];
+    if (winner(newBoard,"X")) return {score:-10};
+    if (winner(newBoard,"O")) return {score:10};
+    if (empty.length===0) return {score:0};
+
+    const moves = [];
+
+    for (let i of empty) {
+        const move = { index:i };
+        newBoard[i] = player;
+
+        move.score = (player==="O")
+            ? minimax(newBoard,"X").score
+            : minimax(newBoard,"O").score;
+
+        newBoard[i] = "";
+        moves.push(move);
+    }
+
+    return (player==="O")
+        ? moves.reduce((a,b)=>a.score>b.score?a:b)
+        : moves.reduce((a,b)=>a.score<b.score?a:b);
 }
 
-function createObstacle(){
-  const el = document.createElement('div');
-  el.className = 'obstacle';
-  const rand = Math.random();
-  if(rand < 0.3) el.classList.add('small');
-  else if(rand > 0.7) el.classList.add('large');
-
-  // OBSTACLES TARGET DINO'S LANE MORE OFTEN
-  let lane;
-  if(Math.random() < 0.8) { // 80% chance to target dino's lane
-    lane = player.lane;
-  } else {
-    lane = Math.floor(Math.random() * 3);
-  }
-  
-  gameState.nextObstacleLane = lane; // Track which lane has obstacle
-  
-  const width = el.classList.contains('large') ? 84 : el.classList.contains('small') ? 36 : 56;
-  const height = el.classList.contains('large') ? 84 : 56;
-  const bottom = el.classList.contains('large') ? 20 : 28;
-
-  // OBSTACLES START CLOSER TO DINO - only 400-600px away
-  const startX = player.x + 400 + Math.random() * 200;
-  
-  el.style.left = startX + 'px';
-  el.style.bottom = bottom + 'px';
-  el.style.zIndex = 25;
-  stage.appendChild(el);
-
-  gameState.objects.push({
-    el, type:'obstacle', x:startX, y:bottom, width, height,
-    speed: gameState.obstacleSpeed * gameState.speed,
-    lane: lane
-  });
+/* ✅ CHECK WINNER */
+function winner(b,p) {
+    return wins.some(w => w.every(i => b[i] === p));
 }
 
-// COINS - placed strategically for dino to catch
-function spawnCoin(){
-  const now = performance.now();
-  if(now - gameState.lastCoinTime < 800 + Math.random()*1200) return;
+/* ✅ CHECK GAME STATE */
+function checkState() {
+    if (winner(board, currentPlayer)) {
+        statusText.textContent = `${currentPlayer} wins`;
+        highlightWin(currentPlayer);
+        updateScore(currentPlayer);
+        running = false;
+        return true;
+    }
 
-  const coinsInRow = 2 + Math.floor(Math.random()*3); // 2-4 coins in a row
-  const lane = Math.floor(Math.random() * 3);
-  const startX = player.x + 300 + Math.random() * 250; // Coins start closer to dino
+    if (!board.includes("")) {
+        statusText.textContent = "Draw";
+        scoreDraw++;
+        document.getElementById("scoreDraw").textContent = scoreDraw;
+        running = false;
+        return true;
+    }
 
-  for(let i = 0; i < coinsInRow; i++){
-    const el = document.createElement('div');
-    el.className = 'coin';
-    el.textContent = '$';
-    el.style.left = (startX + i*50) + 'px';
-    el.style.bottom = COIN_HEIGHT + 'px'; // Coins at dino's height
-    el.style.zIndex = 28;
-    stage.appendChild(el);
-
-    gameState.objects.push({
-      el, type:'coin', x: startX + i*50, y: COIN_HEIGHT, width:32, height:32,
-      speed: 7.5 * gameState.speed
-    });
-  }
-  gameState.lastCoinTime = now;
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusText.textContent = `${currentPlayer}'s turn`;
+    return false;
 }
 
-// IMPROVED COLLISION DETECTION - easier to hit
-function checkCollision(a, b){
-  // Larger collision boxes for easier hitting
-  const bufferX = 15; // Increased more
-  const bufferY = 10;  // Increased more
-  
-  return !(a.x + a.width/2 - bufferX < b.x - b.width/2 ||
-           a.x - a.width/2 + bufferX > b.x + b.width/2 ||
-           a.y + a.height - bufferY < b.y ||
-           a.y + bufferY > b.y + b.height);
-}
-
-// FIXED: Remove obstacle that hit the dino
-function handleCollision(obstacleIndex){
-  if(gameState.invulnerable) return;
-  
-  // Remove the obstacle that hit the dino
-  if(obstacleIndex >= 0 && obstacleIndex < gameState.objects.length) {
-    const hitObstacle = gameState.objects[obstacleIndex];
-    if(hitObstacle && hitObstacle.el) {
-      // Add explosion effect
-      hitObstacle.el.style.background = '#ff6600';
-      hitObstacle.el.style.boxShadow = '0 0 20px #ff6600';
-      hitObstacle.el.style.opacity = '0';
-      hitObstacle.el.style.transform = 'scale(1.5)';
-      
-      // Remove after animation
-      setTimeout(() => {
-        if(hitObstacle.el && hitObstacle.el.parentNode) {
-          hitObstacle.el.remove();
+/* ✅ HIGHLIGHT WIN */
+function highlightWin(player) {
+    wins.forEach(w => {
+        if (w.every(i => board[i] === player)) {
+            w.forEach(i => {
+                document.querySelector(`[data-index="${i}"]`).classList.add("win");
+            });
         }
-      }, 150);
+    });
+}
+
+/* ✅ UPDATE SCORE */
+function updateScore(p) {
+    if (p === "X") {
+        scoreX++;
+        document.getElementById("scoreX").textContent = scoreX;
+    } else {
+        scoreO++;
+        document.getElementById("scoreO").textContent = scoreO;
     }
-    // Remove from objects array
-    gameState.objects.splice(obstacleIndex, 1);
-  }
-  
-  beep(120,300);
-  gameState.running = false;
-  // ALWAYS SHOW QUESTION WHEN HIT - NO EXCEPTIONS
-  showMathProblem();
 }
 
-function showMathProblem(){
-  if(gameState.mathProblemsSolved >= 20){
-    gameOver();
-    return;
-  }
-  const i = Math.floor(Math.random() * availableProblems.length);
-  currentProblem = availableProblems.splice(i,1)[0];
-  if(availableProblems.length === 0) availableProblems = [...mathProblems];
-  mathQuestionEl.textContent = currentProblem.q + " = ?";
-  currentMath.textContent = gameState.mathProblemsSolved;
-  currentLives.textContent = gameState.lives;
-  overlay.style.display = 'block';
-  setTimeout(() => mathInput.focus(), 100);
+/* ✅ RESTART ROUND */
+function restart() {
+    board = ["","","","","","","","",""];
+    currentPlayer = "X";
+    running = true;
+    statusText.textContent = "Player X's turn";
+    cells.forEach(c => {
+        c.textContent = "";
+        c.classList.remove("win");
+    });
 }
 
-function correctAnswer(){
-  beep(900,200);
-  gameState.mathProblemsSolved++;
-  gameState.lives = Math.min(gameState.maxLives, gameState.lives + 1);
-  toastMessage("Correct! +1 Life");
-  resumeGame();
+/* ✅ RESET ALL SCORES */
+function resetAll() {
+    restart();
+    scoreX = scoreO = scoreDraw = 0;
+    document.getElementById("scoreX").textContent = 0;
+    document.getElementById("scoreO").textContent = 0;
+    document.getElementById("scoreDraw").textContent = 0;
 }
-
-function wrongAnswer(){
-  beep(200,300);
-  gameState.lives--;
-  toastMessage("Wrong! -1 Life");
-  if(gameState.lives <= 0) gameOver();
-  else {
-    mathInput.value = '';
-    mathInput.focus();
-    currentLives.textContent = gameState.lives;
-  }
-}
-
-function skipProblem(){
-  gameState.lives--;
-  toastMessage("-1 Life (Skipped)", 1500);
-  if(gameState.lives <= 0) gameOver();
-  else resumeGame();
-}
-
-function resumeGame(){
-  overlay.style.display = 'none';
-  gameState.running = true;
-  gameState.invulnerable = true;
-  gameState.invulnerableTimer = 1000; // Even shorter invulnerability
-  requestAnimationFrame(gameLoop);
-}
-
-function gameOver(){
-  gameState.running = false;
-  finalScore.textContent = Math.floor(gameState.score);
-  finalMath.textContent = gameState.mathProblemsSolved;
-  finalCoins.textContent = gameState.coins;
-  gameOverScreen.style.display = 'flex';
-}
-
-function toastMessage(msg, time=2000){
-  toast.textContent = msg;
-  toast.style.display = 'block';
-  clearTimeout(toast.t);
-  toast.t = setTimeout(() => toast.style.display='none', time);
-}
-
-// Controls
-function moveLeft(){ if(player.lane>0){ player.lane--; player.targetX = LANES[player.lane]; } }
-function moveRight(){ if(player.lane<2){ player.lane++; player.targetX = LANES[player.lane]; } }
-function jump(){ if(player.onGround){ player.vy = -16; player.onGround = false; beep(440,100); } }
-
-// Touch & Keyboard
-document.addEventListener('keydown', e => {
-  if(overlay.style.display === 'block'){
-    if(e.key === 'Enter') submitAns.click();
-    return;
-  }
-  if(e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') moveLeft();
-  if(e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') moveRight();
-  if(e.key === ' ' || e.key === 'ArrowUp'){ e.preventDefault(); jump(); }
-});
-
-btnLeft.onclick = moveLeft;
-btnJump.onclick = jump;
-btnRight.onclick = moveRight;
-
-// Prevent scroll on mobile
-window.addEventListener('touchstart', e => e.preventDefault(), {passive:false});
-
-submitAns.onclick = () => {
-  const ans = parseInt(mathInput.value.trim());
-  if(ans === currentProblem.a) correctAnswer();
-  else wrongAnswer();
-};
-
-skipBtn.onclick = skipProblem;
-btnPlayAgain.onclick = initGame;
-
-// Game Loop
-function gameLoop(t){
-  if(!gameState.running) return;
-  if(!gameState.lastTime) gameState.lastTime = t;
-  const dt = Math.min((t - gameState.lastTime)/16.67, 3);
-  gameState.lastTime = t;
-
-  gameState.score += 0.3 * dt; // Faster score increase
-
-  // Player movement
-  player.x += (player.targetX - player.x) * 0.25;
-  player.vy += 0.8;
-  player.y += player.vy;
-  if(player.y >= 28){
-    player.y = 28; player.vy = 0; player.onGround = true;
-  }
-  playerEl.style.left = (player.x - 28) + 'px';
-  playerEl.style.bottom = player.y + 'px';
-
-  spawnNextObstacle();
-  spawnCoin();
-
-  // Update objects
-  for(let i = gameState.objects.length-1; i >= 0; i--){
-    const o = gameState.objects[i];
-    o.x -= o.speed * dt;
-    if(o.el) o.el.style.left = o.x + 'px';
-
-    if(o.x < -100){
-      if(o.el && o.el.parentNode) o.el.remove();
-      gameState.objects.splice(i,1);
-      continue;
-    }
-
-    if(o.type === 'coin' && checkCollision(player, o)){
-      gameState.coins++;
-      gameState.score += 30; // Good coin value
-      beep(880,120);
-      if(o.el) {
-        o.el.style.transform = 'scale(1.5)';
-        o.el.style.opacity = '0';
-        setTimeout(() => {
-          if(o.el && o.el.parentNode) {
-            o.el.remove();
-          }
-        }, 200);
-      }
-      gameState.objects.splice(i,1);
-    }
-
-    if(o.type === 'obstacle' && checkCollision(player, o)){
-      handleCollision(i); // Pass the index of the obstacle that hit
-      return; // Stop immediately after collision
-    }
-  }
-
-  // Invulnerability
-  if(gameState.invulnerable){
-    gameState.invulnerableTimer -= dt*16.67;
-    playerEl.style.opacity = (Math.floor(t/80)%2) ? 0.3 : 1; // Faster blink
-    if(gameState.invulnerableTimer <= 0){
-      gameState.invulnerable = false;
-      playerEl.style.opacity = 1;
-    }
-  }
-
-  updateUI();
-  requestAnimationFrame(gameLoop);
-}
-
-// Start
-initGame();
 </script>
+
 </body>
 </html>
