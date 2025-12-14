@@ -2,295 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chain Reaction – Mobile Friendly (10 Players + AI)</title>
+<title>Chain Reaction</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ---------- GLOBAL ---------- */
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: system-ui, Arial, sans-serif;
-  background: radial-gradient(circle at top, #1b1b1b, #000);
-  color: #eee;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,Arial;
+  background:radial-gradient(circle at top,#1b1b1b,#000);
+  color:#eee;
+  height:100vh;
+  overflow:hidden;
 }
 
-/* ---------- SETTINGS ---------- */
-#settingsBtn {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  padding: 10px 14px;
-  background: linear-gradient(135deg, #444, #222);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
+/* SETTINGS BUTTON */
+#settingsBtn{
+  position:fixed;
+  top:12px;
+  left:12px;
+  z-index:10;
+  padding:10px 14px;
+  border:none;
+  border-radius:12px;
+  background:#333;
+  color:#fff;
+  font-size:18px;
 }
 
-.settings-panel {
-  width: 260px;
-  background: #181818;
-  padding: 15px;
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
+/* PHONE STYLE SETTINGS */
+#settingsOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:flex-end;
+  z-index:20;
 }
 
-.settings-panel h2, h3 {
-  margin: 6px 0;
+.settingsBox{
+  width:100%;
+  max-height:85%;
+  background:#121212;
+  border-radius:18px 18px 0 0;
+  padding:16px;
+  overflow-y:auto;
+  animation:slideUp .25s ease;
 }
 
-.settings-panel label {
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
+@keyframes slideUp{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
 }
 
-.settings-panel input {
-  width: 70px;
-  border-radius: 6px;
-  border: none;
-  padding: 4px;
+.settingsBox h2{
+  text-align:center;
+  margin:6px 0 12px;
 }
 
-.settings-panel button {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(135deg, #333, #111);
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
+.settingRow{
+  background:#1e1e1e;
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.settings-panel button:hover {
-  background: linear-gradient(135deg, #555, #222);
+.settingRow input{
+  width:70px;
+  padding:6px;
+  border-radius:8px;
+  border:none;
 }
 
-/* ---------- PLAYER LIST ---------- */
-.player-item {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
+.settingBtn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  margin-top:8px;
+  background:#2a2a2a;
+  color:#fff;
+  font-size:15px;
 }
 
-.color-box {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 8px;
+.settingBtn.primary{background:#444}
+
+/* GRID */
+.grid-wrap{
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* ---------- GRID ---------- */
-.grid-wrap {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.grid{
+  display:grid;
+  gap:6px;
+  padding:10px;
 }
 
-.grid {
-  display: grid;
-  gap: 6px;
-  padding: 10px;
+.cell{
+  width:48px;
+  height:48px;
+  background:#222;
+  border-radius:12px;
+  position:relative;
+  touch-action:manipulation;
 }
 
-/* ---------- CELL ---------- */
-.cell {
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 12px;
-  position: relative;
-  cursor: pointer;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
-  touch-action: manipulation;
+.orb{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 6px rgba(255,255,255,.5);
 }
 
-/* ---------- ORBS ---------- */
-.orb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px rgba(255,255,255,0.4);
+#turnInfo{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  padding:8px 14px;
+  border-radius:12px;
+  font-weight:bold;
 }
 
-/* ---------- INFO ---------- */
-#turnInfo {
-  font-weight: bold;
-  margin-top: 6px;
-}
-
-/* ---------- MOBILE ---------- */
-@media (max-width: 600px) {
-  .cell {
-    width: 38px !important;
-    height: 38px !important;
-  }
+/* MOBILE */
+@media(max-width:600px){
+  .cell{width:38px;height:38px}
 }
 </style>
 </head>
+
 <body>
 
 <button id="settingsBtn">⚙</button>
 
-<div class="settings-panel" id="settingsPanel">
-  <h2>Settings</h2>
-  <label>Rows <input id="rows" type="number" min="5" max="12" value="6"></label>
-  <label>Cols <input id="cols" type="number" min="5" max="12" value="9"></label>
-  <label>Players <input id="playerCount" type="number" min="2" max="10" value="10"></label>
+<div id="settingsOverlay">
+  <div class="settingsBox">
+    <h2>Game Settings</h2>
 
-  <button id="playerMode">Player Mode</button>
-  <button id="aiMode">AI Mode</button>
-  <button id="newGame">New Game</button>
-  <button id="startBattle">Start Battle (AI)</button>
+    <div class="settingRow">Rows <input id="rows" type="number" value="6" min="5" max="12"></div>
+    <div class="settingRow">Cols <input id="cols" type="number" value="9" min="5" max="12"></div>
+    <div class="settingRow">Players <input id="playerCount" type="number" value="4" min="2" max="10"></div>
 
-  <h3>Players</h3>
-  <div id="playersList"></div>
-
-  <p id="turnInfo">Turn: —</p>
-  <p id="aiCount">AI Count: 0</p>
+    <button class="settingBtn" id="playerMode">Player Mode</button>
+    <button class="settingBtn" id="aiMode">AI Mode</button>
+    <button class="settingBtn primary" id="newGame">Start Game</button>
+    <button class="settingBtn" onclick="closeSettings()">Close</button>
+  </div>
 </div>
 
 <div class="grid-wrap">
   <div class="grid" id="grid"></div>
 </div>
 
+<div id="turnInfo">Turn: —</div>
+
 <script>
-/* ======================================================
-   CHAIN REACTION – VISUAL + MOBILE FRIENDLY VERSION
-   - 10 players supported
-   - Each player & AI has unique color
-   - Touch friendly
-====================================================== */
+const COLORS=['#ff3b3b','#3b6cff','#3bff6f','#ffe93b','#b93bff',
+'#ff8ad8','#3bfff3','#ff963b','#8aff3b','#ffffff'];
 
-const COLORS = [
-'#FF0000','#0000FF','#00FF00','#FFFF00','#800080',
- '#D0F0C0','#FFC0CB','#00008B','#B06500','#F4C542'
-];
+let ROWS=6,COLS=9;
+let players=[],grid=[],current=0,aiMode=false;
 
-let ROWS = 6, COLS = 9;
-let players = [];
-let currentPlayer = 0;
-let grid = [];
-let gameOver = false;
-let aiMode = false;
+const gridEl=document.getElementById('grid');
 
-const gridEl = document.getElementById('grid');
-
-/* ---------- HELPERS ---------- */
-const idx = (c,r) => r * COLS + c;
-const cap = (c,r) => {
-  const corner = (c===0||c===COLS-1)&&(r===0||r===ROWS-1);
-  const edge = (c===0||c===COLS-1||r===0||r===ROWS-1);
-  return corner ? 2 : edge ? 3 : 4;
+const idx=(c,r)=>r*COLS+c;
+const cap=(c,r)=>{
+  const edge=c==0||r==0||c==COLS-1||r==ROWS-1;
+  const corner=(c==0||c==COLS-1)&&(r==0||r==ROWS-1);
+  return corner?2:edge?3:4;
 };
 
-/* ---------- SETUP ---------- */
-function setupPlayers(count) {
-  players = [];
-  for (let i=0;i<count;i++) {
-    players.push({
-      id:i,
-      name:`P${i+1}`,
-      color:COLORS[i],
-      isAI: aiMode
-    });
-  }
-  renderPlayers();
+function setupPlayers(n){
+  players=[];
+  for(let i=0;i<n;i++)
+    players.push({id:i,color:COLORS[i],ai:aiMode});
 }
 
-function setupGrid() {
-  gridEl.innerHTML = '';
-  gridEl.style.gridTemplateColumns = `repeat(${COLS}, minmax(38px, 50px))`;
-  grid = Array(COLS*ROWS).fill(0).map(()=>({count:0, owner:-1}));
+function setupGrid(){
+  gridEl.innerHTML='';
+  gridEl.style.gridTemplateColumns=`repeat(${COLS},1fr)`;
+  grid=Array(ROWS*COLS).fill().map(()=>({o:-1,c:0}));
 
-  for(let r=0;r<ROWS;r++){
-    for(let c=0;c<COLS;c++){
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-      cell.style.width = '50px';
-      cell.style.height = '50px';
-      cell.onclick = ()=>{ if(!aiMode) move(c,r); };
-      gridEl.appendChild(cell);
-    }
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const d=document.createElement('div');
+    d.className='cell';
+    d.onclick=()=>!players[current].ai&&move(c,r);
+    gridEl.appendChild(d);
   }
   render();
 }
 
-/* ---------- RENDER ---------- */
-function renderPlayers() {
-  const list = document.getElementById('playersList');
-  list.innerHTML = '';
-  let aiCount = 0;
-
-  players.forEach(p=>{
-    const row = document.createElement('div');
-    row.className = 'player-item';
-    const box = document.createElement('div');
-    box.className = 'color-box';
-    box.style.background = p.color;
-    row.appendChild(box);
-    row.appendChild(document.createTextNode(`${p.name}${p.isAI?' (AI)':''}`));
-    list.appendChild(row);
-    if(p.isAI) aiCount++;
-  });
-
-  document.getElementById('aiCount').textContent = 'AI Count: ' + aiCount;
-}
-
-function render() {
-  const cells = document.querySelectorAll('.cell');
-  cells.forEach((cell,i)=>{
-    cell.innerHTML = '';
-    const d = grid[i];
-    for(let k=0;k<d.count;k++){
-      const orb = document.createElement('div');
-      orb.className = 'orb';
-      orb.style.background = players[d.owner]?.color || '#888';
-      orb.style.top = (50 + Math.sin((k/d.count)*Math.PI*2)*14) + '%';
-      orb.style.left = (50 + Math.cos((k/d.count)*Math.PI*2)*14) + '%';
-      cell.appendChild(orb);
+function render(){
+  [...gridEl.children].forEach((cell,i)=>{
+    cell.innerHTML='';
+    const g=grid[i];
+    for(let k=0;k<g.c;k++){
+      const o=document.createElement('div');
+      o.className='orb';
+      o.style.background=players[g.o]?.color||'#aaa';
+      o.style.transform=`translate(${Math.cos(k)*8}px,${Math.sin(k)*8}px)`;
+      cell.appendChild(o);
     }
   });
-
-  document.getElementById('turnInfo').textContent =
-    'Turn: ' + players[currentPlayer].name + (players[currentPlayer].isAI?' (AI)':'');
+  turnInfo.textContent=`Turn: Player ${current+1}${players[current].ai?' (AI)':''}`;
 }
 
-/* ---------- GAME LOGIC ---------- */
 function move(c,r){
-  if(gameOver) return;
-  const cell = grid[idx(c,r)];
-  if(cell.owner !== -1 && cell.owner !== currentPlayer) return;
-  applyMove(c,r,currentPlayer);
-  nextTurn();
+  const cell=grid[idx(c,r)];
+  if(cell.o!=-1&&cell.o!=current)return;
+  explode(c,r,current);
+  next();
 }
 
-function applyMove(c,r,pid){
-  const q = [{c,r,player:pid}];
-  grid[idx(c,r)].count++;
-  grid[idx(c,r)].owner = pid;
+function explode(c,r,p){
+  const q=[[c,r]];
+  grid[idx(c,r)].c++;
+  grid[idx(c,r)].o=p;
 
   while(q.length){
-    const {c,r,player} = q.shift();
-    const cell = grid[idx(c,r)];
-    if(cell.count >= cap(c,r)){
-      cell.count -= cap(c,r);
-      if(cell.count <= 0) cell.owner = -1;
-      [[c-1,r],[c+1,r],[c,r-1],[c,r+1]].forEach(([nc,nr])=>{
-        if(nc>=0 && nc<COLS && nr>=0 && nr<ROWS){
-          const n = grid[idx(nc,nr)];
-          n.count++;
-          n.owner = player;
-          if(n.count >= cap(nc,nr)) q.push({c:nc,r:nr,player});
+    const [x,y]=q.shift();
+    const cell=grid[idx(x,y)];
+    if(cell.c>=cap(x,y)){
+      cell.c-=cap(x,y);
+      if(cell.c<=0)cell.o=-1;
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{
+        const nx=x+dx,ny=y+dy;
+        if(nx>=0&&ny>=0&&nx<COLS&&ny<ROWS){
+          const n=grid[idx(nx,ny)];
+          n.c++;n.o=p;
+          if(n.c>=cap(nx,ny))q.push([nx,ny]);
         }
       });
     }
@@ -298,64 +249,41 @@ function applyMove(c,r,pid){
   render();
 }
 
-function nextTurn(){
-  currentPlayer = (currentPlayer + 1) % players.length;
+function next(){
+  current=(current+1)%players.length;
   render();
-  if(players[currentPlayer].isAI){
-    setTimeout(()=>aiMove(currentPlayer),600);
-  }
+  if(players[current].ai)setTimeout(()=>aiMove(),500);
 }
 
-function aiMove(pid){
+function aiMove(){
   const opts=[];
-  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
-    const cell = grid[idx(c,r)];
-    if(cell.owner===-1 || cell.owner===pid) opts.push({c,r});
+  grid.forEach((g,i)=>{
+    if(g.o==-1||g.o==current)
+      opts.push([i%COLS,Math.floor(i/COLS)]);
+  });
+  if(opts.length){
+    const [c,r]=opts[Math.random()*opts.length|0];
+    move(c,r);
   }
-  if(!opts.length) return;
-  const pick = opts[Math.floor(Math.random()*opts.length)];
-  applyMove(pick.c,pick.r,pid);
-  nextTurn();
 }
 
-/* ---------- UI EVENTS ---------- */
-document.getElementById('settingsBtn').onclick = ()=>{
-  const p = document.getElementById('settingsPanel');
-  p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
-};
+function openSettings(){settingsOverlay.style.display='flex'}
+function closeSettings(){settingsOverlay.style.display='none'}
 
-document.getElementById('playerMode').onclick = ()=>{
-  aiMode = false;
-  setupPlayers(players.length || 10);
-};
+settingsBtn.onclick=openSettings;
 
-document.getElementById('aiMode').onclick = ()=>{
-  aiMode = true;
-  setupPlayers(players.length || 10);
-};
+playerMode.onclick=()=>aiMode=false;
+aiMode.onclick=()=>aiMode=true;
 
-document.getElementById('newGame').onclick = ()=>{
-  ROWS = +rows.value;
-  COLS = +cols.value;
+newGame.onclick=()=>{
+  ROWS=+rows.value; COLS=+cols.value;
   setupPlayers(+playerCount.value);
-  setupGrid();
-  currentPlayer = 0;
-  gameOver = false;
+  setupGrid(); current=0;
+  closeSettings();
 };
 
-document.getElementById('startBattle').onclick = ()=>{
-  aiMode = true;
-  setupPlayers(+playerCount.value);
-  setupGrid();
-  currentPlayer = 0;
-  gameOver = false;
-  setTimeout(()=>aiMove(0),600);
-};
-
-/* ---------- INIT ---------- */
-setupPlayers(10);
+setupPlayers(4);
 setupGrid();
 </script>
-
 </body>
 </html>
