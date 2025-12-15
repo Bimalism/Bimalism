@@ -10,8 +10,8 @@
 body{
   margin:0;
   font-family:system-ui,Arial;
-  background:radial-gradient(circle at top,#1b1b1b,#000);
-  color:#eee;
+  background:#ffffff;               /* WHITE BACKGROUND */
+  color:#111;
   height:100vh;
   overflow:hidden;
 }
@@ -24,17 +24,17 @@ body{
   z-index:10;
   padding:10px 14px;
   border:none;
-  border-radius:12px;
-  background:#333;
+  border-radius:10px;
+  background:#000;
   color:#fff;
   font-size:18px;
 }
 
-/* PHONE STYLE SETTINGS */
+/* SETTINGS OVERLAY */
 #settingsOverlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.4);
   display:none;
   align-items:flex-end;
   z-index:20;
@@ -43,16 +43,10 @@ body{
 .settingsBox{
   width:100%;
   max-height:85%;
-  background:#121212;
+  background:#f5f5f5;
   border-radius:18px 18px 0 0;
   padding:16px;
   overflow-y:auto;
-  animation:slideUp .25s ease;
-}
-
-@keyframes slideUp{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
 }
 
 .settingsBox h2{
@@ -60,35 +54,35 @@ body{
   margin:6px 0 12px;
 }
 
+/* SETTING ROW */
 .settingRow{
-  background:#1e1e1e;
+  background:#fff;
   padding:12px;
-  border-radius:12px;
+  border-radius:10px;
   margin-bottom:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  border:1px solid #ddd;
 }
 
 .settingRow input{
-  width:70px;
+  width:120px;
   padding:6px;
-  border-radius:8px;
-  border:none;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
 .settingBtn{
   width:100%;
   padding:12px;
   border:none;
-  border-radius:12px;
+  border-radius:10px;
   margin-top:8px;
-  background:#2a2a2a;
+  background:#000;
   color:#fff;
   font-size:15px;
 }
-
-.settingBtn.primary{background:#444}
 
 /* GRID */
 .grid-wrap{
@@ -100,17 +94,20 @@ body{
 
 .grid{
   display:grid;
-  gap:6px;
-  padding:10px;
+  gap:8px;
+  padding:12px;
+  background:#eee;
+  border-radius:16px;
 }
 
 .cell{
   width:48px;
   height:48px;
-  background:#222;
-  border-radius:12px;
+  background:#fff;
+  border-radius:10px;
   position:relative;
-  touch-action:manipulation;
+  border:1px solid #bbb;           /* DIFFERENTIATED BOX */
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
 }
 
 .orb{
@@ -121,17 +118,18 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  box-shadow:0 0 6px rgba(255,255,255,.5);
 }
 
+/* TURN INFO */
 #turnInfo{
   position:fixed;
   bottom:10px;
   left:50%;
   transform:translateX(-50%);
-  background:#111;
+  background:#000;
+  color:#fff;
   padding:8px 14px;
-  border-radius:12px;
+  border-radius:10px;
   font-weight:bold;
 }
 
@@ -150,13 +148,14 @@ body{
   <div class="settingsBox">
     <h2>Game Settings</h2>
 
-    <div class="settingRow">Rows <input id="rows" type="number" value="6" min="5" max="12"></div>
-    <div class="settingRow">Cols <input id="cols" type="number" value="9" min="5" max="12"></div>
+    <div class="settingRow">Rows <input id="rows" type="number" value="6"></div>
+    <div class="settingRow">Cols <input id="cols" type="number" value="9"></div>
     <div class="settingRow">Players <input id="playerCount" type="number" value="4" min="2" max="10"></div>
 
-    <button class="settingBtn" id="playerMode">Player Mode</button>
-    <button class="settingBtn" id="aiMode">AI Mode</button>
-    <button class="settingBtn primary" id="newGame">Start Game</button>
+    <h3>Player Names</h3>
+    <div id="playerNames"></div>
+
+    <button class="settingBtn" id="newGame">Apply & Restart</button>
     <button class="settingBtn" onclick="closeSettings()">Close</button>
   </div>
 </div>
@@ -169,10 +168,10 @@ body{
 
 <script>
 const COLORS=['#ff3b3b','#3b6cff','#3bff6f','#ffe93b','#b93bff',
-'#ff8ad8','#3bfff3','#ff963b','#8aff3b','#ffffff'];
+'#ff8ad8','#3bfff3','#ff963b','#8aff3b','#000000'];
 
 let ROWS=6,COLS=9;
-let players=[],grid=[],current=0,aiMode=false;
+let players=[],grid=[],current=0;
 
 const gridEl=document.getElementById('grid');
 
@@ -185,8 +184,24 @@ const cap=(c,r)=>{
 
 function setupPlayers(n){
   players=[];
-  for(let i=0;i<n;i++)
-    players.push({id:i,color:COLORS[i],ai:aiMode});
+  for(let i=0;i<n;i++){
+    players.push({
+      id:i,
+      color:COLORS[i],
+      name:`Player ${i+1}`
+    });
+  }
+}
+
+function buildNameEditor(){
+  playerNames.innerHTML='';
+  players.forEach(p=>{
+    const row=document.createElement('div');
+    row.className='settingRow';
+    row.innerHTML=`<span>${p.name}</span>
+      <input value="${p.name}" onchange="players[${p.id}].name=this.value; render()">`;
+    playerNames.appendChild(row);
+  });
 }
 
 function setupGrid(){
@@ -197,7 +212,7 @@ function setupGrid(){
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
     const d=document.createElement('div');
     d.className='cell';
-    d.onclick=()=>!players[current].ai&&move(c,r);
+    d.onclick=()=>move(c,r);
     gridEl.appendChild(d);
   }
   render();
@@ -210,19 +225,20 @@ function render(){
     for(let k=0;k<g.c;k++){
       const o=document.createElement('div');
       o.className='orb';
-      o.style.background=players[g.o]?.color||'#aaa';
+      o.style.background=players[g.o]?.color;
       o.style.transform=`translate(${Math.cos(k)*8}px,${Math.sin(k)*8}px)`;
       cell.appendChild(o);
     }
   });
-  turnInfo.textContent=`Turn: Player ${current+1}${players[current].ai?' (AI)':''}`;
+  turnInfo.textContent=`Turn: ${players[current].name}`;
 }
 
 function move(c,r){
   const cell=grid[idx(c,r)];
   if(cell.o!=-1&&cell.o!=current)return;
   explode(c,r,current);
-  next();
+  current=(current+1)%players.length;
+  render();
 }
 
 function explode(c,r,p){
@@ -246,39 +262,22 @@ function explode(c,r,p){
       });
     }
   }
-  render();
 }
 
-function next(){
-  current=(current+1)%players.length;
-  render();
-  if(players[current].ai)setTimeout(()=>aiMove(),500);
+function openSettings(){
+  buildNameEditor();
+  settingsOverlay.style.display='flex';
 }
-
-function aiMove(){
-  const opts=[];
-  grid.forEach((g,i)=>{
-    if(g.o==-1||g.o==current)
-      opts.push([i%COLS,Math.floor(i/COLS)]);
-  });
-  if(opts.length){
-    const [c,r]=opts[Math.random()*opts.length|0];
-    move(c,r);
-  }
-}
-
-function openSettings(){settingsOverlay.style.display='flex'}
 function closeSettings(){settingsOverlay.style.display='none'}
 
 settingsBtn.onclick=openSettings;
 
-playerMode.onclick=()=>aiMode=false;
-aiMode.onclick=()=>aiMode=true;
-
 newGame.onclick=()=>{
-  ROWS=+rows.value; COLS=+cols.value;
+  ROWS=+rows.value;
+  COLS=+cols.value;
   setupPlayers(+playerCount.value);
-  setupGrid(); current=0;
+  setupGrid();
+  current=0;
   closeSettings();
 };
 
