@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Center - Tic Tac Toe & Chain Reaction</title>
+<title>Game Center</title>
 <style>
 * {
     margin: 0;
@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     width: 100%;
     text-align: center;
 }
@@ -94,6 +94,10 @@ h1 {
 
 .game-card.chainreaction::before {
     background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+}
+
+.game-card.snake::before {
+    background: linear-gradient(90deg, #7FFF00 0%, #32CD32 100%);
 }
 
 .game-icon {
@@ -226,8 +230,14 @@ footer {
             </div>
             <button class="play-btn">Play Chain Reaction</button>
         </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Back to Home</a></li>
+        <div class="game-card snake" onclick="window.location.href='snake game.html'">
+            <div class="game-icon">🐍🍎</div>
+            <h2 class="game-title">Snake Game</h2>
+            <div class="game-description">
+                The classic Snake game! Control the snake to eat food and grow longer without hitting the walls or yourself. How long can you survive?
+            </div>
+            <button class="play-btn">Play Snake Game</button>
+        </div>
     </div>
     
     <div class="features">
