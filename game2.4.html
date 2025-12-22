@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Car Obstacle Game - Level 5</title>
+  <style>
+    body { margin:0; overflow:hidden; background:#0b0f1a; }
+    #hud {
+      position: fixed; top: 16px; left: 16px; color: #e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.35);
+    }
+    #status {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      color:#e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      min-width: 280px; text-align: center;
+    }
+    #btn { margin-left: 8px; padding: 6px 10px; border-radius: 8px; border: 0; cursor: pointer; background:#ffaa00; color:white; }
+    #leftZone, #rightZone, #centerZone {
+      position: fixed; top: 0; bottom: 0; z-index: 5; opacity: 0;
+    }
+    #leftZone { left: 0; width: 33%; }
+    #centerZone { left: 33%; width: 34%; }
+    #rightZone { right: 0; width: 33%; }
+    canvas { display:block; }
+    /* Start overlay */
+    #startOverlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(11, 15, 26, 0.95); display: flex; flex-direction: column;
+      justify-content: center; align-items: center; z-index: 100; color: white;
+      font-family: system-ui, sans-serif; text-align: center; padding: 20px;
+    }
+    #startOverlay h1 { font-size: 2.5em; margin-bottom: 10px; color: #ffaa00; }
+    #startOverlay p { font-size: 1.2em; margin-bottom: 20px; max-width: 500px; line-height: 1.5; }
+    #startButton {
+      background: #ffaa00; color: white; border: none; padding: 15px 40px;
+      font-size: 1.2em; border-radius: 10px; cursor: pointer; margin-top: 20px;
+      transition: background 0.3s;
+    }
+    #startButton:hover { background: #e69500; }
+    /* Controls info */
+    #controlsInfo {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+      color: #e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.35); min-width: 320px; text-align: center;
+      display: none;
+    }
+    #controlsInfo.show { display: block; }
+   
+    /* Hit flash effect */
+    .hit-flash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 50, 50, 0.3);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 20;
+      transition: opacity 0.1s;
+    }
+    .hit-flash.active { opacity: 1; }
+   
+    /* Reverse indicator */
+    #reverseIndicator {
+      position: fixed; top: 80px; left: 16px; color: #ff4488; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.8); padding: 8px 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.3);
+      font-weight: bold; font-size: 1.1em; display: none;
+    }
+    #reverseIndicator.active { display: block; animation: pulse-reverse 1s infinite; }
+    @keyframes pulse-reverse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(255,68,136,.3); }
+      50% { transform: scale(1.05); box-shadow: 0 6px 16px rgba(255,68,136,.5); }
+    }
+   
+    /* Win overlay */
+    #winOverlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(11, 15, 26, 0.85); display: none;
+      flex-direction: column; justify-content: center; align-items: center; z-index: 100;
+      color: white; font-family: system-ui, sans-serif; text-align: center; padding: 20px;
+    }
+    #winOverlay.show { display: flex; }
+   
+    .win-title {
+      font-size: 3.5em; margin-bottom: 20px; color: #ffaa00;
+      text-shadow: 0 0 20px rgba(255, 170, 0, 0.5); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .win-message { font-size: 1.5em; margin-bottom: 40px; max-width: 600px; line-height: 1.6; }
+    .win-buttons { margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .win-button {
+      padding: 12px 30px; border-radius: 10px; border: none; font-size: 1.1em;
+      cursor: pointer; transition: all 0.3s;
+    }
+    #restartWin { background: #2f7de9; color: white; }
+    #restartWin:hover { background: #1a5fc9; transform: translateY(-3px); }
+    #dashboardBtn {
+      background: #ffaa00; color: white;
+      box-shadow: 0 4px 15px rgba(255, 170, 0, 0.4);
+    }
+    #dashboardBtn:hover {
+      background: #e69500; transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 170, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="hit-flash" id="hitFlash"></div>
+  <div id="reverseIndicator">🔄 REVERSE MODE</div>
+ 
+  <div id="winOverlay">
+    <div class="win-title">🎉 LEVEL 5 COMPLETE! 🎉</div>
+    <div class="win-message">
+      Maze Master! You navigated the labyrinth perfectly!
+    </div>
+    <div class="win-buttons">
+      <button class="win-button" id="restartWin">Play Again</button>
+      <button class="win-button" id="dashboardBtn">Continue to Dashboard</button>
+    </div>
+  </div>
+ 
+  <div id="startOverlay">
+    <h1>3D Car Obstacle Game - Level 5</h1>
+    <p>🌀 MAZE MASTER! Multiple paths - find the correct one!</p>
+    <p><strong>NEW CONTROLS:</strong><br>
+    • LEFT side → Turn LEFT<br>
+    • RIGHT side → Turn RIGHT<br>
+    • BOTH sides → STOP 🚫<br>
+    • CENTER → REVERSE 🔄 (toggle)</p>
+    <p><strong>Wrong path = reset!</strong> Low obstacles + full control!</p>
+    <button id="startButton">Start Maze Challenge</button>
+  </div>
+  <div id="hud">
+    <div><b>← Left = Turn Left  → Right = Turn Right  🎮 CENTER = Reverse</b></div>
+    <div>Level 5 • Maze Master (Reverse + Stop) 🌀</div>
+  </div>
+  <div id="controlsInfo">
+    <div>← LEFT = Turn Left  → RIGHT = Turn Right<br>
+    🎮 BOTH = STOP  CENTER = REVERSE 🔄</div>
+  </div>
+  <div id="status">Ready. <button id="btn">Restart</button></div>
+  <div id="leftZone"></div>
+  <div id="centerZone"></div>
+  <div id="rightZone"></div>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+    let gameStarted = false;
+    const startOverlay = document.getElementById('startOverlay');
+    const controlsInfo = document.getElementById('controlsInfo');
+    const status = document.getElementById('status');
+    const hitFlash = document.getElementById('hitFlash');
+    const winOverlay = document.getElementById('winOverlay');
+    const reverseIndicator = document.getElementById('reverseIndicator');
+    const restartWinBtn = document.getElementById('restartWin');
+    const dashboardBtn = document.getElementById('dashboardBtn');
+    
+    function restartGame() {
+      winOverlay.classList.remove('show');
+      reset();
+      status.textContent = "Go! Find the correct path!";
+    }
+   
+    function goToDashboard() {
+      window.location.href = 'dashboard.html';
+    }
+   
+    function showWinScreen() {
+      winOverlay.classList.add('show');
+      status.textContent = "Level 5 Complete!";
+    }
+    restartWinBtn.addEventListener('click', restartGame);
+    dashboardBtn.addEventListener('click', goToDashboard);
+    
+    function startGame() {
+      gameStarted = true;
+      startOverlay.style.display = 'none';
+      controlsInfo.classList.add('show');
+      status.textContent = "Go! Find the correct path!";
+      setTimeout(() => controlsInfo.classList.remove('show'), 4000);
+    }
+    document.addEventListener('touchstart', startGame, { once: true });
+    document.getElementById('startButton').addEventListener('click', startGame);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b0f1a);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);
+    camera.position.set(0, 14, 18);
+
+    scene.add(new THREE.HemisphereLight(0xbbe1ff, 0x101010, 1.0));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(10, 20, 10);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024, 1024);
+    scene.add(dirLight);
+
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(160, 100),
+      new THREE.MeshStandardMaterial({ color: 0x1a2537, roughness: 0.9 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    const finish = new THREE.Mesh(
+      new THREE.BoxGeometry(8, 0.2, 6),
+      new THREE.MeshStandardMaterial({ color: 0xffaa00, emissive: 0xffaa00, emissiveIntensity: 0.2 })
+    );
+    finish.position.set(75, 0.1, 0);
+    scene.add(finish);
+
+    const flagPole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.05, 0.05, 4, 8),
+      new THREE.MeshStandardMaterial({ color: 0xcccccc })
+    );
+    flagPole.position.set(78.5, 2.1, 0);
+    scene.add(flagPole);
+   
+    const flag = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0xffaa00, side: THREE.DoubleSide })
+    );
+    flag.position.set(79.2, 2.7, 0);
+    flag.rotation.y = Math.PI / 4;
+    scene.add(flag);
+
+    const car = new THREE.Group();
+    const body = new THREE.Mesh(
+      new THREE.BoxGeometry(2.4, 0.7, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0xffaa00 })
+    );
+    const cabin = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 0.6, 1.0),
+      new THREE.MeshStandardMaterial({ color: 0xcc8800 })
+    );
+    cabin.position.y = 0.65;
+    car.add(body, cabin);
+    car.position.set(-35, 0.35, 0);
+    scene.add(car);
+   
+    const carHitSpheres = [];
+    const sphereGeometry = new THREE.SphereGeometry(0.28, 8, 8);
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff0000, transparent: true, opacity: 0.0, wireframe: true
+    });
+   
+    for (let i = 0; i < 4; i++) {
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial.clone());
+      car.add(sphere);
+      carHitSpheres.push(sphere);
+    }
+
+    const obstacles = [];
+    function makeBox(x, z, w = 2.0, h = 0.6, d = 2.0) {
+      const mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(w, h, d),
+        new THREE.MeshStandardMaterial({ color: 0x8888ff, emissive: 0x4444cc, emissiveIntensity: 0.15 })
+      );
+      mesh.position.set(x, h / 2, z);
+      mesh.castShadow = true;
+     
+      const wireframe = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d)),
+        new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 })
+      );
+      mesh.add(wireframe);
+     
+      scene.add(mesh);
+      obstacles.push(mesh);
+    }
+
+    // Maze layout (unchanged - spacious + low obstacles)
+    [[-30,-18],[-30,18], [-25,-18],[-25,18], [-20,-18],[-20,18], [-15,-18],[-15,18]]
+      .forEach(p => makeBox(p[0], p[1], 1.8, 0.6, 1.8));
+
+    makeBox(-8, 12, 4, 0.6, 20);
+    makeBox(-8, -12, 12, 0.6, 20);
+    makeBox(2, 12, 4, 0.6, 20);
+
+    makeBox(10, -15, 2, 0.6, 12);
+    makeBox(15, 15, 12, 0.6, 2);
+
+    makeBox(20, -6, 16, 0.6, 5);
+    makeBox(28, 14, 4, 0.6, 20);
+    makeBox(35, -14, 4, 0.6, 20);
+
+    makeBox(40, 0, 2, 0.6, 24);
+    makeBox(48, 16, 16, 0.6, 2);
+    makeBox(55, -16, 2, 0.6, 24);
+    makeBox(62, 0, 16, 0.6, 2);
+
+    makeBox(68, -14, 4, 0.6, 20);
+    makeBox(75, 7, 16, 0.6, 5);
+    makeBox(82, 16, 4, 0.6, 20);
+
+    [[85,-18],[85,18], [90,-18],[90,18]]
+      .forEach(p => makeBox(p[0], p[1], 1.8, 0.6, 1.8));
+
+    // Moving guardians
+    const mazeMovers = [];
+    for (let i = 0; i < 4; i++) {
+      const mover = new THREE.Mesh(
+        new THREE.BoxGeometry(1.8, 0.6, 1.8),
+        new THREE.MeshStandardMaterial({
+          color: 0xff4488,
+          emissive: 0xcc2266,
+          emissiveIntensity: 0.3
+        })
+      );
+      const positions = [
+        {x: -2, z: 0},
+        {x: 24, z: 4},
+        {x: 50, z: -6},
+        {x: 74, z: 8}
+      ];
+      mover.position.set(positions[i].x, 0.3, positions[i].z);
+      scene.add(mover);
+      obstacles.push(mover);
+     
+      const wire = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(1.8, 0.6, 1.8)),
+        new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 })
+      );
+      mover.add(wire);
+      mazeMovers.push(mover);
+    }
+
+    // === NEW INPUT SYSTEM ===
+    const keys = {};
+    let touchLeft = false, touchRight = false, touchCenter = false, isReverse = false;
+    
+    const leftZone = document.getElementById('leftZone');
+    const centerZone = document.getElementById('centerZone');
+    const rightZone = document.getElementById('rightZone');
+    
+    function addInput(el, action) {
+      ['touchstart', 'mousedown'].forEach(ev => {
+        el.addEventListener(ev, (e) => { 
+          e.preventDefault(); 
+          action(true); 
+          if (!gameStarted) startGame(); 
+        });
+      });
+      ['touchend', 'mouseup', 'mouseleave'].forEach(ev => {
+        el.addEventListener(ev, (e) => { 
+          e.preventDefault(); 
+          action(false); 
+        });
+      });
+    }
+    
+    // Left zone: Turn left
+    addInput(leftZone, (v) => touchLeft = v);
+    // Right zone: Turn right  
+    addInput(rightZone, (v) => touchRight = v);
+    // Center zone: Toggle reverse
+    addInput(centerZone, (v) => {
+      if (v) {
+        isReverse = !isReverse;
+        reverseIndicator.classList.toggle('active');
+        status.textContent = isReverse ? "🔄 REVERSE MODE - Use turns to go back!" : "Go! Find the correct path!";
+      }
+    });
+    
+    // Keyboard support
+    window.addEventListener('keydown', e => { 
+      keys[e.key.toLowerCase()] = true; 
+      if (!gameStarted) startGame(); 
+    });
+    window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+    // Game state
+    let heading = 0, won = false, isResetting = false, collisionCooldown = 0;
+    const BASE_SPEED = 9.5;
+    const REVERSE_SPEED = 7.0;  // Slower reverse
+    const TURN_SPEED = 2.3;
+    const MAX_TURN = Math.PI / 2.4;
+    
+    function reset() {
+      car.position.set(-35, 0.35, 0);
+      heading = 0;
+      car.rotation.y = 0;
+      won = false;
+      gameStarted = true;
+      isResetting = false;
+      collisionCooldown = 0;
+      isReverse = false;
+      reverseIndicator.classList.remove('active');
+      body.material.emissive.setHex(0x000000);
+      finish.material.emissiveIntensity = 0.2;
+      status.textContent = "Go! Find the correct path!";
+    }
+   
+    document.getElementById('btn').onclick = reset;
+
+    function updateHitSpheres() {
+      const positions = [
+        new THREE.Vector3(0.8, 0, 0.5),
+        new THREE.Vector3(0.8, 0, -0.5),
+        new THREE.Vector3(-0.8, 0, 0.5),
+        new THREE.Vector3(-0.8, 0, -0.5)
+      ];
+      carHitSpheres.forEach((sphere, i) => {
+        sphere.position.copy(positions[i]);
+      });
+    }
+    updateHitSpheres();
+
+    function checkCollision() {
+      if (collisionCooldown > 0) {
+        collisionCooldown--;
+        return false;
+      }
+     
+      let hasCollision = false;
+      updateHitSpheres();
+     
+      for (const sphere of carHitSpheres) {
+        const sphereWorldPos = new THREE.Vector3();
+        sphere.getWorldPosition(sphereWorldPos);
+        const sphereRadius = 0.28;
+       
+        for (const obstacle of obstacles) {
+          obstacle.geometry.computeBoundingBox();
+          const obb = obstacle.geometry.boundingBox.clone();
+          obb.applyMatrix4(obstacle.matrixWorld);
+         
+          const closest = new THREE.Vector3();
+          closest.x = Math.max(obb.min.x, Math.min(sphereWorldPos.x, obb.max.x));
+          closest.y = Math.max(obb.min.y, Math.min(sphereWorldPos.y, obb.max.y));
+          closest.z = Math.max(obb.min.z, Math.min(sphereWorldPos.z, obb.max.z));
+         
+          const distance = sphereWorldPos.distanceTo(closest);
+         
+          if (distance < sphereRadius) {
+            hasCollision = true;
+            sphere.material.opacity = 0.8;
+            setTimeout(() => { sphere.material.opacity = 0.0; }, 200);
+            break;
+          }
+        }
+        if (hasCollision) break;
+      }
+      return hasCollision;
+    }
+
+    async function smoothReset() {
+      if (isResetting) return;
+      isResetting = true;
+      status.textContent = "Wrong path! Try again...";
+     
+      hitFlash.classList.add('active');
+      await new Promise(r => setTimeout(r, 100));
+      hitFlash.classList.remove('active');
+     
+      body.material.emissive.setHex(0xff0000);
+      await new Promise(r => setTimeout(r, 300));
+      body.material.emissive.setHex(0x000000);
+      
+      const targetX = -35, targetZ = 0;
+      const steps = 60;
+      const startPos = { x: car.position.x, z: car.position.z };
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        car.position.x = startPos.x + (targetX - startPos.x) * t;
+        car.position.z = startPos.z + (targetZ - startPos.z) * t;
+        heading *= (1 - t);
+        car.rotation.y = -heading;
+        await new Promise(r => requestAnimationFrame(r));
+      }
+      reset();
+      collisionCooldown = 25;
+      status.textContent = "Go! Find the correct path!";
+      isResetting = false;
+    }
+
+    let lastTime = performance.now() / 1000;
+    let mazeTime = 0;
+    
+    function animate() {
+      const now = performance.now() / 1000;
+      const dt = Math.min(0.033, now - lastTime);
+      lastTime = now;
+      mazeTime += dt;
+      
+      // Update moving obstacles
+      mazeMovers[0].position.z = Math.sin(mazeTime * 1.2) * 6;
+      mazeMovers[1].position.x = 24 + Math.sin(mazeTime * 0.8) * 4;
+      mazeMovers[2].position.z = -6 + Math.cos(mazeTime * 1.1) * 5;
+      mazeMovers[3].position.x = 74 + Math.sin(mazeTime * 0.9) * 3;
+      
+      if (gameStarted && !won && !isResetting) {
+        // === ENHANCED INPUT LOGIC ===
+        const leftInput = keys['a'] || keys['arrowleft'] || touchLeft;
+        const rightInput = keys['d'] || keys['arrowright'] || touchRight;
+        const stopInput = leftInput && rightInput;  // BOTH = STOP
+        
+        // Turning (only when not stopping)
+        if (!stopInput) {
+          if (leftInput && !rightInput) heading += TURN_SPEED * dt;
+          if (rightInput && !leftInput) heading -= TURN_SPEED * dt;
+          heading = Math.max(-MAX_TURN, Math.min(MAX_TURN, heading));
+        }
+        
+        // Auto-straighten when no input
+        if (!leftInput && !rightInput) heading *= 0.92;
+        
+        // MOVEMENT LOGIC
+        let speed = 0;
+        if (stopInput) {
+          speed = 0;  // STOP
+          status.textContent = "🚫 STOPPED";
+        } else if (isReverse) {
+          speed = -REVERSE_SPEED;  // REVERSE
+          status.textContent = "🔄 REVERSING";
+        } else {
+          speed = BASE_SPEED;  // FORWARD
+          status.textContent = "Go! Find the correct path!";
+        }
+        
+        // Apply movement
+        car.position.x += Math.cos(heading) * speed * dt;
+        car.position.z += Math.sin(heading) * speed * dt;
+        car.rotation.y = -heading;
+        
+        // Camera follow
+        camera.position.set(
+          car.position.x - 9 * Math.cos(heading),
+          7,
+          car.position.z - 9 * Math.sin(heading)
+        );
+        camera.lookAt(car.position.x, car.position.y + 0.5, car.position.z);
+        
+        // Collision check
+        if (checkCollision()) {
+          smoothReset();
+        }
+        
+        // Win condition
+        const carCenter = new THREE.Vector3();
+        car.getWorldPosition(carCenter);
+       
+        finish.geometry.computeBoundingBox();
+        const finishBox = finish.geometry.boundingBox.clone();
+        finishBox.applyMatrix4(finish.matrixWorld);
+       
+        if (carCenter.x > finishBox.min.x && carCenter.x < finishBox.max.x &&
+            carCenter.z > finishBox.min.z && carCenter.z < finishBox.max.z) {
+          if (!won) {
+            won = true;
+            body.material.emissive.setHex(0xffffff);
+            body.material.emissiveIntensity = 0.8;
+            finish.material.emissiveIntensity = 0.8;
+            setTimeout(showWinScreen, 1000);
+          }
+        }
+       
+        // Boundary limits (expanded for reverse)
+        if (car.position.z < -40) car.position.z = -40;
+        if (car.position.z > 40) car.position.z = 40;
+        if (car.position.x < -45) car.position.x = -45;
+        if (car.position.x > 95) car.position.x = 95;
+        
+      } else if (!gameStarted) {
+        camera.position.x = Math.sin(now * 0.2) * 15;
+        camera.position.z = 35 + Math.cos(now * 0.2) * 8;
+        camera.lookAt(15, 0, 0);
+       
+        const pulse = Math.sin(now * 2) * 0.15 + 0.85;
+        obstacles.forEach(obs => {
+          obs.material.emissiveIntensity = pulse * 0.2;
+        });
+      }
+      
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
