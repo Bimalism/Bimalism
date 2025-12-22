@@ -197,80 +197,6 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
-    
-    .back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(18,26,40,0.8);
-      color: #e8f0ff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1em;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-      z-index: 100;
-      text-decoration: none;
-      display: inline-block;
-    }
-    
-    .back-btn:hover {
-      background: rgba(47,125,233,0.8);
-      transform: translateY(-2px);
-    }
-    
-    @media (max-width: 768px) {
-      .levels-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-      
-      .stats {
-        gap: 15px;
-      }
-      
-      header {
-        padding: 20px 15px;
-      }
-    }
-    
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #2f7de9;
-      border-radius: 50%;
-      animation: float 6s infinite linear;
-    }
-    
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -289,7 +215,7 @@
           <span class="stat-label">Total Levels</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="completedLevels">7</span>
+          <span class="stat-number" id="completedLevels">8</span>
           <span class="stat-label">Completed</span>
         </div>
         <div class="stat-card">
@@ -347,22 +273,24 @@
         <div class="level-desc">Low visibility, trust your instincts + dynamic headlights!</div>
         <button class="level-btn">Play Level 6</button>
       </div>
-      
-      <!-- Level 7 - NOW UNLOCKED! 🌙 -->
+
+      <!-- Level 7 - UNLOCKED -->
       <div class="level-card" onclick="playLevel(7)">
         <div class="level-number">7</div>
         <div class="level-title">Silent Midnight</div>
-        <div class="level-desc">Pure darkness. One mistake and you restart from the beginning. True focus required.</div>
+        <div class="level-desc">Pitch black darkness • only your headlights and sound</div>
         <button class="level-btn">Play Level 7</button>
       </div>
       
-      <div class="level-card level-locked">
+      <!-- Level 8 - UNLOCKED -->
+      <div class="level-card" onclick="playLevel(8)">
         <div class="level-number">8</div>
-        <div class="level-title">Chaos Mode</div>
-        <div class="level-desc">Random obstacles, adapt or crash</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-title">LAVA RUSH → GREEN OASIS</div>
+        <div class="level-desc">From molten chaos to peaceful paradise in one run</div>
+        <button class="level-btn">Play Level 8</button>
       </div>
       
+      <!-- Level 9 - Still Locked -->
       <div class="level-card level-locked">
         <div class="level-number">9</div>
         <div class="level-title">Master Challenge</div>
@@ -370,6 +298,7 @@
         <button class="level-btn">Coming Soon</button>
       </div>
       
+      <!-- Level 10 - Still Locked -->
       <div class="level-card level-locked">
         <div class="level-number">10</div>
         <div class="level-title">Ultimate Boss</div>
@@ -393,22 +322,21 @@
       }
     }
     
-    // Play level function - NOW SUPPORTS LEVEL 7!
+    // Play level function
     function playLevel(level) {
-      if (level === 1) {
-        window.location.href = 'game2.html';
-      } else if (level === 2) {
-        window.location.href = 'game2.1.html';
-      } else if (level === 3) {
-        window.location.href = 'game2.2.html';
-      } else if (level === 4) {
-        window.location.href = 'game2.3.html';
-      } else if (level === 5) {
-        window.location.href = 'game2.4.html';
-      } else if (level === 6) {
-        window.location.href = 'game2.5.html';
-      } else if (level === 7) {
-        window.location.href = 'game2.6.html';  // NEW: Silent Midnight unlocked!
+      const levels = {
+        1: 'game2.html',
+        2: 'game2.1.html',
+        3: 'game2.2.html',
+        4: 'game2.3.html',
+        5: 'game2.4.html',
+        6: 'game2.5.html',
+        7: 'game2.7.html',      // Silent Midnight
+        8: 'game2.6.html',      // LAVA RUSH → GREEN OASIS
+      };
+
+      if (levels[level]) {
+        window.location.href = levels[level];
       } else {
         alert('Level ' + level + ' coming soon! Complete previous levels first! 🚀');
       }
