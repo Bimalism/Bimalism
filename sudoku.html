@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Sudoku - Touch Enabled</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+       
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+       
+        .game-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+       
+        .game-header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+       
+        .game-header p {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+       
+        .game-board-container {
+            flex: 3;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+       
+        .game-controls {
+            flex: 2;
+            min-width: 250px;
+        }
+       
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            gap: 0;
+            border: 3px solid #2c3e50;
+            margin: 0 auto;
+            max-width: 450px;
+        }
+       
+        .sudoku-cell {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 1px solid #bdc3c7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+        }
+       
+        .sudoku-cell:hover {
+            background-color: #f8f9fa;
+        }
+       
+        .sudoku-cell:active {
+            background-color: #e3f2fd !important;
+        }
+       
+        .sudoku-cell.fixed {
+            background-color: #f0f8ff;
+            color: #2980b9;
+            font-weight: 700;
+        }
+       
+        .sudoku-cell.selected {
+            background-color: #e3f2fd;
+            box-shadow: inset 0 0 0 2px #3498db;
+        }
+       
+        .sudoku-cell.highlighted {
+            background-color: #f1f8e9;
+        }
+       
+        .sudoku-cell.error {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+       
+        .sudoku-cell:nth-child(3n) {
+            border-right: 2px solid #2c3e50;
+        }
+       
+        .sudoku-cell:nth-child(9n) {
+            border-right: 1px solid #bdc3c7;
+        }
+       
+        .sudoku-cell:nth-child(n+19):nth-child(-n+27),
+        .sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+            border-bottom: 2px solid #2c3e50;
+        }
+       
+        .control-panel {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+       
+        .control-panel h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 10px;
+        }
+       
+        .difficulty-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+       
+        .difficulty-btn {
+            flex: 1;
+            padding: 12px 0;
+            border: none;
+            border-radius: 6px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 80px;
+        }
+       
+        .difficulty-btn:hover {
+            background-color: #d5dbdb;
+        }
+       
+        .difficulty-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+       
+        .game-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+       
+        .game-btn {
+            padding: 14px 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+       
+        .game-btn i {
+            font-size: 1.1rem;
+        }
+       
+        .game-btn.primary {
+            background-color: #3498db;
+            color: white;
+        }
+       
+        .game-btn.primary:hover {
+            background-color: #2980b9;
+        }
+       
+        .game-btn.secondary {
+            background-color: #2ecc71;
+            color: white;
+        }
+       
+        .game-btn.secondary:hover {
+            background-color: #27ae60;
+        }
+       
+        .game-btn.warning {
+            background-color: #e74c3c;
+            color: white;
+        }
+       
+        .game-btn.warning:hover {
+            background-color: #c0392b;
+        }
+       
+        .touch-number-pad {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+        }
+       
+        .touch-number-pad.hidden {
+            display: none;
+        }
+       
+        .touch-number-pad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+       
+        .touch-number-pad-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+       
+        .close-pad-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+        .close-pad-btn:hover {
+            background-color: #f5f5f5;
+            color: #e74c3c;
+        }
+       
+        .touch-number-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+       
+        .touch-number-btn {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 10px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+        .touch-number-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+       
+        .touch-number-btn:active {
+            transform: translateY(0);
+        }
+       
+        .touch-number-btn.eraser {
+            background-color: #e74c3c;
+            font-size: 1.5rem;
+        }
+       
+        .touch-number-btn.eraser:hover {
+            background-color: #c0392b;
+        }
+       
+        .number-btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+       
+        .number-btn-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+       
+        .selected-cell-info {
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #3498db;
+        }
+       
+        .selected-cell-info.hidden {
+            display: none;
+        }
+       
+        .cell-position {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+       
+        .cell-position span {
+            color: #3498db;
+        }
+       
+        .cell-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+       
+        .cell-value span {
+            color: #27ae60;
+            font-size: 1.3rem;
+        }
+       
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+       
+        .stat-box {
+            text-align: center;
+            flex: 1;
+        }
+       
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+       
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+       
+        .timer {
+            color: #e74c3c;
+        }
+       
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+           
+            .game-board-container {
+                padding-right: 0;
+                margin-bottom: 25px;
+            }
+           
+            .sudoku-board {
+                max-width: 100%;
+            }
+           
+            .sudoku-cell {
+                font-size: 1.2rem;
+            }
+           
+            .touch-number-pad {
+                padding: 15px;
+            }
+           
+            .touch-number-btn {
+                font-size: 1.5rem;
+            }
+        }
+       
+        @media (max-width: 480px) {
+            .sudoku-cell {
+                font-size: 1rem;
+            }
+           
+            .game-buttons {
+                grid-template-columns: 1fr;
+            }
+           
+            .difficulty-selector {
+                flex-direction: column;
+            }
+           
+            .touch-number-grid {
+                gap: 10px;
+            }
+           
+            .touch-number-btn {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>Professional Sudoku</h1>
+            <p>Tap a blank cell to enter a number</p>
+        </div>
+       
+        <div class="game-board-container">
+            <div class="sudoku-board" id="sudoku-board"></div>
+           
+            <div class="selected-cell-info hidden" id="selected-cell-info">
+                <div class="cell-position">Selected: Row <span id="selected-row">-</span>, Column <span id="selected-col">-</span></div>
+                <div class="cell-value">Current value: <span id="selected-value">-</span></div>
+            </div>
+           
+            <div class="touch-number-pad hidden" id="touch-number-pad">
+                <div class="touch-number-pad-header">
+                    <div class="touch-number-pad-title">Select a Number</div>
+                    <button class="close-pad-btn" id="close-pad-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="touch-number-grid" id="touch-number-grid"></div>
+            </div>
+        </div>
+       
+        <div class="game-controls">
+            <div class="control-panel">
+                <h2>Game Controls</h2>
+               
+                <div class="difficulty-selector">
+                    <button class="difficulty-btn active" data-level="easy">Easy</button>
+                    <button class="difficulty-btn" data-level="medium">Medium</button>
+                    <button class="difficulty-btn" data-level="hard">Hard</button>
+                    <button class="difficulty-btn" data-level="expert">Expert</button>
+                </div>
+               
+                <div class="game-buttons">
+                    <button class="game-btn primary" id="continue-game-btn" style="display:none;">
+                        <i class="fas fa-play-circle"></i> Continue Game
+                    </button>
+                    <button class="game-btn primary" id="new-game-btn">
+                        <i class="fas fa-plus-circle"></i> New Game
+                    </button>
+                    <button class="game-btn secondary" id="hint-btn">
+                        <i class="fas fa-lightbulb"></i> Hint (3 left)
+                    </button>
+                    <button class="game-btn warning" id="clear-btn">
+                        <i class="fas fa-eraser"></i> Clear Cell
+                    </button>
+                    <button class="game-btn primary" id="check-btn">
+                        <i class="fas fa-check-circle"></i> Check Solution
+                    </button>
+                </div>
+            </div>
+           
+            <div class="game-stats">
+                <div class="stat-box">
+                    <div class="stat-value timer" id="timer">00:00</div>
+                    <div class="stat-label">Time</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="mistakes">0</div>
+                    <div class="stat-label">Mistakes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="hints-left">3</div>
+                    <div class="stat-label">Hints Left</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let gameBoard = [];
+            let solutionBoard = [];
+            let initialBoard = [];
+            let selectedCell = null;
+            let currentDifficulty = 'easy';
+            let timerInterval = null;
+            let secondsElapsed = 0;
+            let mistakesCount = 0;
+            let hintsLeft = 3;
+            let gameCompleted = false;
+
+            const STORAGE_KEY = 'sudoku_savegame';
+            const continueBtn = document.getElementById('continue-game-btn');
+
+            const touchNumberPad = document.getElementById('touch-number-pad');
+            const touchNumberGrid = document.getElementById('touch-number-grid');
+            const selectedCellInfo = document.getElementById('selected-cell-info');
+            const closePadBtn = document.getElementById('close-pad-btn');
+
+            function initGame() {
+                createSudokuBoard();
+                createTouchNumberPad();
+                setupEventListeners();
+
+                if (loadGameFromStorage()) {
+                    continueBtn.style.display = 'block';
+                    loadSavedGame();
+                } else {
+                    continueBtn.style.display = 'none';
+                    generateNewPuzzle();
+                }
+                startTimer();
+            }
+
+            function saveGameToStorage() {
+                const saveData = {
+                    gameBoard,
+                    solutionBoard,
+                    initialBoard,
+                    currentDifficulty,
+                    secondsElapsed,
+                    mistakesCount,
+                    hintsLeft,
+                    gameCompleted
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
+            }
+
+            function loadGameFromStorage() {
+                return localStorage.getItem(STORAGE_KEY) !== null;
+            }
+
+            function loadSavedGame() {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                if (!data) return generateNewPuzzle();
+
+                gameBoard = data.gameBoard;
+                solutionBoard = data.solutionBoard;
+                initialBoard = data.initialBoard;
+                currentDifficulty = data.currentDifficulty || 'easy';
+                secondsElapsed = data.secondsElapsed || 0;
+                mistakesCount = data.mistakesCount || 0;
+                hintsLeft = data.hintsLeft || 3;
+                gameCompleted = data.gameCompleted || false;
+
+                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level === currentDifficulty);
+                });
+
+                updateBoardDisplay();
+                updateTimerDisplay();
+                updateMistakesDisplay();
+                updateHintsDisplay();
+            }
+
+            function clearSavedGame() {
+                localStorage.removeItem(STORAGE_KEY);
+                continueBtn.style.display = 'none';
+            }
+
+            function generateNewPuzzle() {
+                clearSavedGame();
+                resetGameState();
+                solutionBoard = generateSolvedBoard();
+                initialBoard = removeNumbersFromBoard([...solutionBoard.map(row => [...row])], currentDifficulty);
+                gameBoard = [...initialBoard.map(row => [...row])];
+                updateBoardDisplay();
+                hintsLeft = 3;
+                updateHintsDisplay();
+                hideTouchPad();
+                hideSelectedCellInfo();
+                clearSelectedCell();
+                saveGameToStorage();
+            }
+
+            function generateSolvedBoard() {
+                const board = Array(9).fill().map(() => Array(9).fill(0));
+                fillBoard(board);
+                return board;
+            }
+
+            function fillBoard(board) {
+                for (let row = 0; row < 9; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        if (board[row][col] === 0) {
+                            const numbers = shuffleArray([1,2,3,4,5,6,7,8,9]);
+                            for (let num of numbers) {
+                                if (isValidPlacement(board, row, col, num)) {
+                                    board[row][col] = num;
+                                    if (fillBoard(board)) return true;
+                                    board[row][col] = 0;
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            function removeNumbersFromBoard(board, difficulty) {
+                let cellsToRemove;
+                switch(difficulty) {
+                    case 'easy': cellsToRemove = 30; break;
+                    case 'medium': cellsToRemove = 40; break;
+                    case 'hard': cellsToRemove = 50; break;
+                    case 'expert': cellsToRemove = 60; break;
+                    default: cellsToRemove = 30;
+                }
+                let removed = 0;
+                while (removed < cellsToRemove) {
+                    const row = Math.floor(Math.random() * 9);
+                    const col = Math.floor(Math.random() * 9);
+                    if (board[row][col] !== 0) {
+                        board[row][col] = 0;
+                        removed++;
+                    }
+                }
+                return board;
+            }
+
+            function isValidPlacement(board, row, col, num) {
+                for (let x = 0; x < 9; x++) {
+                    if (board[row][x] === num || board[x][col] === num) return false;
+                }
+                const boxRowStart = Math.floor(row / 3) * 3;
+                const boxColStart = Math.floor(col / 3) * 3;
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if (board[boxRowStart + i][boxColStart + j] === num) return false;
+                    }
+                }
+                return true;
+            }
+
+            function shuffleArray(array) {
+                const a = [...array];
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            }
+
+            function updateBoardDisplay() {
+                const cells = document.querySelectorAll('.sudoku-cell');
+                cells.forEach(cell => {
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                    const value = gameBoard[row][col];
+                    cell.className = 'sudoku-cell';
+                    if (initialBoard[row][col] !== 0) cell.classList.add('fixed');
+                    cell.textContent = value !== 0 ? value : '';
+                    if (value !== 0 && value !== solutionBoard[row][col]) {
+                        cell.classList.add('error');
+                    }
+                });
+            }
+
+            function selectCell(cellElement) {
+                const row = parseInt(cellElement.dataset.row);
+                const col = parseInt(cellElement.dataset.col);
+                const isFixed = initialBoard[row][col] !== 0;
+                const isEmpty = gameBoard[row][col] === 0;
+                clearSelectedCell();
+                selectedCell = cellElement;
+                cellElement.classList.add('selected');
+                highlightRelatedCells(row, col);
+                if (!isFixed && isEmpty) {
+                    showTouchPad();
+                } else {
+                    hideTouchPad();
+                }
+                updateSelectedCellInfo(row, col);
+            }
+
+            function highlightRelatedCells(row, col) {
+                document.querySelectorAll('.sudoku-cell').forEach(cell => {
+                    const cr = parseInt(cell.dataset.row);
+                    const cc = parseInt(cell.dataset.col);
+                    if (cr === row || cc === col ||
+                        (Math.floor(cr / 3) === Math.floor(row / 3) && Math.floor(cc / 3) === Math.floor(col / 3))) {
+                        cell.classList.add('highlighted');
+                    }
+                });
+            }
+
+            function clearSelectedCell() {
+                if (selectedCell) {
+                    selectedCell.classList.remove('selected');
+                    document.querySelectorAll('.sudoku-cell').forEach(c => c.classList.remove('highlighted'));
+                    selectedCell = null;
+                }
+            }
+
+            function updateSelectedCellInfo(row, col) {
+                const value = gameBoard[row][col];
+                document.getElementById('selected-row').textContent = row + 1;
+                document.getElementById('selected-col').textContent = col + 1;
+                document.getElementById('selected-value').textContent = value !== 0 ? value : 'Empty';
+                selectedCellInfo.classList.remove('hidden');
+            }
+
+            function showTouchPad() { touchNumberPad.classList.remove('hidden'); }
+            function hideTouchPad() { touchNumberPad.classList.add('hidden'); }
+            function hideSelectedCellInfo() { selectedCellInfo.classList.add('hidden'); }
+
+            function placeNumberInCell(number) {
+                if (!selectedCell || gameCompleted) return;
+                const row = parseInt(selectedCell.dataset.row);
+                const col = parseInt(selectedCell.dataset.col);
+                if (initialBoard[row][col] !== 0) return;
+
+                if (number === 0) {
+                    gameBoard[row][col] = 0;
+                } else {
+                    gameBoard[row][col] = number;
+                    if (number !== solutionBoard[row][col]) {
+                        mistakesCount++;
+                        updateMistakesDisplay();
+                    }
+                }
+                updateBoardDisplay();
+                updateSelectedCellInfo(row, col);
+                highlightRelatedCells(row, col);
+                checkPuzzleCompletion();
+                saveGameToStorage();
+            }
+
+            function provideHint() {
+                if (hintsLeft <= 0 || gameCompleted) return;
+                const emptyCells = [];
+                for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) if (gameBoard[r][c] === 0) emptyCells.push({r, c});
+                if (emptyCells.length === 0) return;
+                const cell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                gameBoard[cell.r][cell.c] = solutionBoard[cell.r][cell.c];
+                updateBoardDisplay();
+                hintsLeft--;
+                updateHintsDisplay();
+                checkPuzzleCompletion();
+                saveGameToStorage();
+            }
+
+            function clearSelectedCellValue() {
+                if (!selectedCell) return alert("Please select a cell first.");
+                const row = parseInt(selectedCell.dataset.row);
+                const col = parseInt(selectedCell.dataset.col);
+                if (initialBoard[row][col] !== 0) return alert("Cannot clear a fixed cell.");
+                gameBoard[row][col] = 0;
+                updateBoardDisplay();
+                updateSelectedCellInfo(row, col);
+                highlightRelatedCells(row, col);
+                showTouchPad();
+                saveGameToStorage();
+            }
+
+            function checkSolution() {
+                let hasErrors = false;
+                for (let r = 0; r < 9; r++) {
+                    for (let c = 0; c < 9; c++) {
+                        if (gameBoard[r][c] !== 0 && gameBoard[r][c] !== solutionBoard[r][c]) hasErrors = true;
+                    }
+                }
+                if (hasErrors) {
+                    alert("There are errors in your solution. Keep trying!");
+                } else if ([...gameBoard.flat()].includes(0)) {
+                    alert("All filled cells are correct! Keep going!");
+                } else {
+                    alert("Perfect! You've solved the puzzle!");
+                }
+            }
+
+            function checkPuzzleCompletion() {
+                for (let r = 0; r < 9; r++) {
+                    for (let c = 0; c < 9; c++) {
+                        if (gameBoard[r][c] !== solutionBoard[r][c]) return false;
+                    }
+                }
+                gameCompleted = true;
+                clearInterval(timerInterval);
+                clearSavedGame();
+                setTimeout(() => {
+                    alert(`Congratulations! You solved the puzzle in ${formatTime(secondsElapsed)} with ${mistakesCount} mistakes.`);
+                }, 500);
+                return true;
+            }
+
+            function resetGameState() {
+                selectedCell = null;
+                secondsElapsed = 0; mistakesCount = 0; hintsLeft = 3; gameCompleted = false;
+                updateTimerDisplay(); updateMistakesDisplay(); updateHintsDisplay();
+                clearInterval(timerInterval);
+            }
+
+            function startTimer() {
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    secondsElapsed++;
+                    updateTimerDisplay();
+                    saveGameToStorage();
+                }, 1000);
+            }
+
+            function formatTime(seconds) {
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                return `${m}:${s}`;
+            }
+
+            function updateTimerDisplay() { document.getElementById('timer').textContent = formatTime(secondsElapsed); }
+            function updateMistakesDisplay() { document.getElementById('mistakes').textContent = mistakesCount; }
+            function updateHintsDisplay() {
+                document.getElementById('hints-left').textContent = hintsLeft;
+                document.getElementById('hint-btn').innerHTML = `<i class="fas fa-lightbulb"></i> Hint (${hintsLeft} left)`;
+            }
+
+            function setDifficulty(difficulty) {
+                currentDifficulty = difficulty;
+                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level === difficulty);
+                });
+                generateNewPuzzle();
+            }
+
+            function createSudokuBoard() {
+                const boardElement = document.getElementById('sudoku-board');
+                boardElement.innerHTML = '';
+                for (let row = 0; row < 9; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'sudoku-cell';
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        cell.textContent = '';
+                        cell.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            selectCell(cell);
+                        });
+                        boardElement.appendChild(cell);
+                    }
+                }
+            }
+
+            function createTouchNumberPad() {
+                touchNumberGrid.innerHTML = '';
+                for (let i = 1; i <= 9; i++) {
+                    const btnContainer = document.createElement('div');
+                    btnContainer.className = 'number-btn-container';
+                    const btn = document.createElement('button');
+                    btn.className = 'touch-number-btn';
+                    btn.textContent = i;
+                    btn.dataset.number = i;
+                    btnContainer.appendChild(btn);
+                    touchNumberGrid.appendChild(btnContainer);
+                }
+                const eraserContainer = document.createElement('div');
+                eraserContainer.className = 'number-btn-container';
+                const eraserBtn = document.createElement('button');
+                eraserBtn.className = 'touch-number-btn eraser';
+                eraserBtn.innerHTML = '<i class="fas fa-eraser"></i>';
+                eraserBtn.dataset.number = '0';
+                const eraserLabel = document.createElement('div');
+                eraserLabel.className = 'number-btn-label';
+                eraserLabel.textContent = 'Erase';
+                eraserContainer.appendChild(eraserBtn);
+                eraserContainer.appendChild(eraserLabel);
+                touchNumberGrid.appendChild(eraserContainer);
+            }
+
+            function setupEventListeners() {
+                document.querySelectorAll('.touch-number-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const num = parseInt(btn.dataset.number);
+                        placeNumberInCell(num);
+                    });
+                });
+
+                closePadBtn.addEventListener('click', () => {
+                    hideTouchPad();
+                    clearSelectedCell();
+                    selectedCellInfo.classList.add('hidden');
+                });
+
+                document.querySelectorAll('.difficulty-btn').forEach(btn => btn.addEventListener('click', () => setDifficulty(btn.dataset.level)));
+                document.getElementById('new-game-btn').addEventListener('click', generateNewPuzzle);
+                document.getElementById('continue-game-btn').addEventListener('click', () => {
+                    loadSavedGame();
+                    continueBtn.style.display = 'none';
+                });
+                document.getElementById('hint-btn').addEventListener('click', provideHint);
+                document.getElementById('clear-btn').addEventListener('click', clearSelectedCellValue);
+                document.getElementById('check-btn').addEventListener('click', checkSolution);
+
+                document.addEventListener('keydown', (e) => {
+                    if (!selectedCell || gameCompleted) return;
+                    if (/[1-9]/.test(e.key)) {
+                        placeNumberInCell(parseInt(e.key));
+                    } else if (e.key === '0' || e.key === 'Backspace' || e.key === 'Delete') {
+                        placeNumberInCell(0);
+                    }
+                });
+            }
+
+            initGame();
+        });
+    </script>
+</body>
+</html>
