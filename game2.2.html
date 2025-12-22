@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Car Obstacle Game - Level 3 (Narrow Path)</title>
+  <style>
+    body { margin:0; overflow:hidden; background:#0b0f1a; }
+    #hud {
+      position: fixed; top: 16px; left: 16px; color: #e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.35);
+    }
+    #status {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      color:#e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      min-width: 260px; text-align: center;
+    }
+    #btn { margin-left: 8px; padding: 6px 10px; border-radius: 8px; border: 0; cursor: pointer; background:#2f7de9; color:white; }
+    #leftZone, #rightZone {
+      position: fixed; top: 0; bottom: 0; width: 50%; z-index: 5; opacity: 0;
+    }
+    #leftZone { left: 0; }
+    #rightZone { right: 0; }
+    canvas { display:block; }
+
+    /* Start overlay */
+    #startOverlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(11, 15, 26, 0.95); display: flex; flex-direction: column;
+      justify-content: center; align-items: center; z-index: 100; color: white;
+      font-family: system-ui, sans-serif; text-align: center; padding: 20px;
+    }
+    #startOverlay h1 { font-size: 2.5em; margin-bottom: 10px; color: #2f7de9; }
+    #startOverlay p { font-size: 1.2em; margin-bottom: 20px; max-width: 500px; line-height: 1.5; }
+    #startButton {
+      background: #2f7de9; color: white; border: none; padding: 15px 40px;
+      font-size: 1.2em; border-radius: 10px; cursor: pointer; margin-top: 20px;
+      transition: background 0.3s;
+    }
+    #startButton:hover { background: #1a5fc9; }
+
+    /* Controls info */
+    #controlsInfo {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+      color: #e8f0ff; font-family: system-ui, sans-serif; z-index: 10;
+      background: rgba(18,26,40,.7); padding: 10px 14px; border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.35); min-width: 260px; text-align: center;
+      display: none;
+    }
+    #controlsInfo.show { display: block; }
+    
+    /* Hit flash effect */
+    .hit-flash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 50, 50, 0.3);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 20;
+      transition: opacity 0.1s;
+    }
+    .hit-flash.active { opacity: 1; }
+    
+    /* Win overlay */
+    #winOverlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(11, 15, 26, 0.85); display: none;
+      flex-direction: column; justify-content: center; align-items: center; z-index: 100;
+      color: white; font-family: system-ui, sans-serif; text-align: center; padding: 20px;
+    }
+    #winOverlay.show { display: flex; }
+    
+    .win-title {
+      font-size: 3.5em; margin-bottom: 20px; color: #19c97c;
+      text-shadow: 0 0 20px rgba(25, 201, 124, 0.5); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .win-message { font-size: 1.5em; margin-bottom: 40px; max-width: 600px; line-height: 1.6; }
+    .win-buttons { margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .win-button {
+      padding: 12px 30px; border-radius: 10px; border: none; font-size: 1.1em;
+      cursor: pointer; transition: all 0.3s;
+    }
+    #restartWin { background: #2f7de9; color: white; }
+    #restartWin:hover { background: #1a5fc9; transform: translateY(-3px); }
+    #dashboardBtn { 
+      background: #19c97c; color: white; 
+      box-shadow: 0 4px 15px rgba(25, 201, 124, 0.4);
+    }
+    #dashboardBtn:hover { 
+      background: #14a866; transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(25, 201, 124, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="hit-flash" id="hitFlash"></div>
+  
+  <div id="winOverlay">
+    <div class="win-title">🎉 LEVEL 3 COMPLETE! 🎉</div>
+    <div class="win-message">
+      Precision driving! You threaded the narrow path perfectly!
+    </div>
+    <div class="win-buttons">
+      <button class="win-button" id="restartWin">Play Again</button>
+      <button class="win-button" id="dashboardBtn">Continue to Dashboard</button>
+    </div>
+  </div>
+  
+  <div id="startOverlay">
+    <h1>3D Car Obstacle Game - Level 3</h1>
+    <p>🔥 NARROW PATH! Precise turns through tight gaps!</p>
+    <p><strong>Controls:</strong><br>
+    • Touch LEFT side → Turn LEFT<br>
+    • Touch RIGHT side → Turn RIGHT<br>
+    • Car moves forward automatically</p>
+    <p><strong>Only direct hits crash!</strong> Precision required.</p>
+    <button id="startButton">Start Level 3</button>
+  </div>
+
+  <div id="hud">
+    <div><b>← Left = Turn Left  → Right = Turn Right</b></div>
+    <div>Level 3 • Narrow Path Challenge!</div>
+  </div>
+
+  <div id="controlsInfo">
+    <div>← Touch LEFT to turn left  → Touch RIGHT to turn right</div>
+  </div>
+
+  <div id="status">Ready. <button id="btn">Restart</button></div>
+
+  <div id="leftZone"></div>
+  <div id="rightZone"></div>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+    let gameStarted = false;
+    const startOverlay = document.getElementById('startOverlay');
+    const controlsInfo = document.getElementById('controlsInfo');
+    const status = document.getElementById('status');
+    const hitFlash = document.getElementById('hitFlash');
+    const winOverlay = document.getElementById('winOverlay');
+    const restartWinBtn = document.getElementById('restartWin');
+    const dashboardBtn = document.getElementById('dashboardBtn');
+
+    function restartGame() {
+      winOverlay.classList.remove('show');
+      reset();
+      status.textContent = "Go! Reach the green pad!";
+    }
+    
+    function goToDashboard() {
+      window.location.href = 'dashboard.html';
+    }
+    
+    function showWinScreen() {
+      winOverlay.classList.add('show');
+      status.textContent = "Level 3 Complete!";
+    }
+
+    restartWinBtn.addEventListener('click', restartGame);
+    dashboardBtn.addEventListener('click', goToDashboard);
+
+    function startGame() {
+      gameStarted = true;
+      startOverlay.style.display = 'none';
+      controlsInfo.classList.add('show');
+      status.textContent = "Go! Reach the green pad!";
+      setTimeout(() => controlsInfo.classList.remove('show'), 3000);
+    }
+
+    document.addEventListener('touchstart', startGame, { once: true });
+    document.getElementById('startButton').addEventListener('click', startGame);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b0f1a);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);
+    camera.position.set(0, 14, 18);
+
+    scene.add(new THREE.HemisphereLight(0xbbe1ff, 0x101010, 1.0));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(10, 20, 10);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024, 1024);
+    scene.add(dirLight);
+
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(120, 70),
+      new THREE.MeshStandardMaterial({ color: 0x1a2537, roughness: 0.9 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    const finish = new THREE.Mesh(
+      new THREE.BoxGeometry(6, 0.2, 4),
+      new THREE.MeshStandardMaterial({ color: 0x19c97c, emissive: 0x19c97c, emissiveIntensity: 0.1 })
+    );
+    finish.position.set(55, 0.1, 0);
+    scene.add(finish);
+
+    const flagPole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.05, 0.05, 3, 8),
+      new THREE.MeshStandardMaterial({ color: 0xcccccc })
+    );
+    flagPole.position.set(58, 1.6, 0);
+    scene.add(flagPole);
+    
+    const flag = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.5, 1),
+      new THREE.MeshStandardMaterial({ color: 0x19c97c, side: THREE.DoubleSide })
+    );
+    flag.position.set(58.8, 2.1, 0);
+    flag.rotation.y = Math.PI / 4;
+    scene.add(flag);
+
+    const car = new THREE.Group();
+    const body = new THREE.Mesh(
+      new THREE.BoxGeometry(2.4, 0.7, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0x2f7de9 })
+    );
+    const cabin = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 0.6, 1.0),
+      new THREE.MeshStandardMaterial({ color: 0x1b4f95 })
+    );
+    cabin.position.y = 0.65;
+    car.add(body, cabin);
+    car.position.set(-30, 0.35, 0);
+    scene.add(car);
+    
+    const carHitSpheres = [];
+    const sphereGeometry = new THREE.SphereGeometry(0.28, 8, 8);
+    const sphereMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xff0000, transparent: true, opacity: 0.0, wireframe: true 
+    });
+    
+    for (let i = 0; i < 4; i++) {
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial.clone());
+      car.add(sphere);
+      carHitSpheres.push(sphere);
+    }
+
+    const obstacles = [];
+    function makeBox(x, z, w = 1.2, h = 1.2, d = 1.2) {
+      const mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(w, h, d),
+        new THREE.MeshStandardMaterial({ color: 0xff5f5f, emissive: 0xff0000, emissiveIntensity: 0.15 })
+      );
+      mesh.position.set(x, h / 2, z);
+      mesh.castShadow = true;
+      
+      const wireframe = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d)),
+        new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 })
+      );
+      mesh.add(wireframe);
+      
+      scene.add(mesh);
+      obstacles.push(mesh);
+    }
+
+    // NARROW PATH DESIGN: Long obstacles with gaps just wide enough for car (car length ~2.4 units)
+    // Each section has space to go LEFT or RIGHT of center obstacle
+    
+    // Entry walls
+    makeBox(-20, -9);
+    makeBox(-20, 9);
+    
+    // Section 1: Straight with center obstacle - go left or right
+    makeBox(-12, 0, 1.2, 1.2, 6);  // Long center blocker
+    
+    // Section 2: Left choice or right choice around long obstacle
+    makeBox(-2, 3.5, 1.2, 1.2, 8);  // Right side blocker
+    
+    // Section 3: Right choice or left choice
+    makeBox(8, -3.5, 1.2, 1.2, 8);   // Left side blocker
+    
+    // Section 4: Center long obstacle again
+    makeBox(18, 0, 1.2, 1.2, 6);
+    
+    // Section 5: Left side long blocker
+    makeBox(28, 4, 1.2, 1.2, 7);
+    
+    // Section 6: Right side long blocker  
+    makeBox(38, -4, 1.2, 1.2, 7);
+    
+    // Section 7: Final narrow center gauntlet
+    makeBox(48, 0, 1.2, 1.2, 5);
+
+    // Keep moving obstacles but positioned in gaps
+    const mover1 = new THREE.Mesh(
+      new THREE.BoxGeometry(1.2, 1.2, 5),
+      new THREE.MeshStandardMaterial({ color: 0xffa640, emissive: 0xff8800, emissiveIntensity: 0.2 })
+    );
+    mover1.position.set(4, 0.6, 0);
+    scene.add(mover1);
+    obstacles.push(mover1);
+    mover1.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(1.2, 1.2, 5)),
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 })
+    ));
+
+    const mover2 = new THREE.Mesh(
+      new THREE.BoxGeometry(5, 1.2, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0xffa640, emissive: 0xff8800, emissiveIntensity: 0.2 })
+    );
+    mover2.position.set(22, 0.6, 0);
+    scene.add(mover2);
+    obstacles.push(mover2);
+    mover2.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(5, 1.2, 1.2)),
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 })
+    ));
+
+    const mover3 = new THREE.Mesh(
+      new THREE.BoxGeometry(1.5, 1.5, 1.5),
+      new THREE.MeshStandardMaterial({ color: 0xff44aa, emissive: 0xff0088, emissiveIntensity: 0.25 })
+    );
+    mover3.position.set(33, 0.75, 0);
+    scene.add(mover3);
+    obstacles.push(mover3);
+    mover3.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(1.5, 1.5, 1.5)),
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 })
+    ));
+
+    const keys = {};
+    let touchLeft = false, touchRight = false;
+    const leftZone = document.getElementById('leftZone');
+    const rightZone = document.getElementById('rightZone');
+
+    function addInput(el, isLeft) {
+      const set = v => isLeft ? touchLeft = v : touchRight = v;
+      ['touchstart', 'mousedown'].forEach(ev => {
+        el.addEventListener(ev, () => { set(true); if (!gameStarted) startGame(); });
+      });
+      ['touchend', 'mouseup', 'mouseleave'].forEach(ev => {
+        el.addEventListener(ev, () => set(false));
+      });
+    }
+    addInput(leftZone, true);
+    addInput(rightZone, false);
+
+    window.addEventListener('keydown', e => { keys[e.key] = true; if (!gameStarted) startGame(); });
+    window.addEventListener('keyup', e => keys[e.key] = false);
+
+    // Game settings for precision driving
+    let heading = 0, won = false, isResetting = false, collisionCooldown = 0;
+    const BASE_SPEED = 8;
+    const TURN_SPEED = 2.4;
+    const MAX_TURN = Math.PI / 2.5;
+
+    function reset() {
+      car.position.set(-30, 0.35, 0);
+      heading = 0;
+      car.rotation.y = 0;
+      won = false;
+      gameStarted = true;
+      isResetting = false;
+      collisionCooldown = 0;
+      body.material.emissive.setHex(0x000000);
+      finish.material.emissiveIntensity = 0.1;
+    }
+    
+    document.getElementById('btn').onclick = reset;
+
+    function updateHitSpheres() {
+      const positions = [
+        new THREE.Vector3(0.8, 0, 0.5),
+        new THREE.Vector3(0.8, 0, -0.5),
+        new THREE.Vector3(-0.8, 0, 0.5),
+        new THREE.Vector3(-0.8, 0, -0.5)
+      ];
+      carHitSpheres.forEach((sphere, i) => {
+        sphere.position.copy(positions[i]);
+      });
+    }
+    updateHitSpheres();
+
+    function checkCollision() {
+      if (collisionCooldown > 0) {
+        collisionCooldown--;
+        return false;
+      }
+      
+      let hasCollision = false;
+      updateHitSpheres();
+      
+      for (const sphere of carHitSpheres) {
+        const sphereWorldPos = new THREE.Vector3();
+        sphere.getWorldPosition(sphereWorldPos);
+        const sphereRadius = 0.28;
+        
+        for (const obstacle of obstacles) {
+          obstacle.geometry.computeBoundingBox();
+          const obb = obstacle.geometry.boundingBox.clone();
+          obb.applyMatrix4(obstacle.matrixWorld);
+          
+          const closest = new THREE.Vector3();
+          closest.x = Math.max(obb.min.x, Math.min(sphereWorldPos.x, obb.max.x));
+          closest.y = Math.max(obb.min.y, Math.min(sphereWorldPos.y, obb.max.y));
+          closest.z = Math.max(obb.min.z, Math.min(sphereWorldPos.z, obb.max.z));
+          
+          const distance = sphereWorldPos.distanceTo(closest);
+          
+          if (distance < sphereRadius) {
+            hasCollision = true;
+            sphere.material.opacity = 0.8;
+            setTimeout(() => { sphere.material.opacity = 0.0; }, 200);
+            break;
+          }
+        }
+        if (hasCollision) break;
+      }
+      return hasCollision;
+    }
+
+    async function smoothReset() {
+      if (isResetting) return;
+      isResetting = true;
+      status.textContent = "Crash! Returning to start...";
+      
+      hitFlash.classList.add('active');
+      await new Promise(r => setTimeout(r, 100));
+      hitFlash.classList.remove('active');
+      
+      body.material.emissive.setHex(0xff0000);
+      await new Promise(r => setTimeout(r, 300));
+      body.material.emissive.setHex(0x000000);
+
+      const targetX = -30, targetZ = 0;
+      const steps = 60;
+      const startPos = { x: car.position.x, z: car.position.z };
+
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        car.position.x = startPos.x + (targetX - startPos.x) * t;
+        car.position.z = startPos.z + (targetZ - startPos.z) * t;
+        heading *= (1 - t);
+        car.rotation.y = -heading;
+        await new Promise(r => requestAnimationFrame(r));
+      }
+
+      reset();
+      collisionCooldown = 30;
+      status.textContent = "Go! Reach the green pad!";
+      isResetting = false;
+    }
+
+    let lastTime = performance.now() / 1000;
+    let mover3Time = 0;
+    function animate() {
+      const now = performance.now() / 1000;
+      const dt = Math.min(0.033, now - lastTime);
+      lastTime = now;
+
+      // Moving obstacles in the path gaps
+      mover1.position.x = 4 + Math.sin(now * 1.8) * 2.5;
+      mover2.position.z = Math.sin(now * 2.0) * 4;
+      mover3Time += dt;
+      mover3.position.x = 33 + Math.sin(mover3Time * 2.5) * 2;
+      mover3.position.z = Math.cos(mover3Time * 2.3) * 2;
+
+      if (gameStarted && !won && !isResetting) {
+        const left = keys['a'] || keys['ArrowLeft'] || touchLeft;
+        const right = keys['d'] || keys['ArrowRight'] || touchRight;
+
+        if (left && !right) heading += TURN_SPEED * dt;
+        if (right && !left) heading -= TURN_SPEED * dt;
+        heading = Math.max(-MAX_TURN, Math.min(MAX_TURN, heading));
+        if (!left && !right) heading *= 0.92;
+
+        car.position.x += Math.cos(heading) * BASE_SPEED * dt;
+        car.position.z += Math.sin(heading) * BASE_SPEED * dt;
+        car.rotation.y = -heading;
+
+        camera.position.set(
+          car.position.x - 8 * Math.cos(heading),
+          6,
+          car.position.z - 8 * Math.sin(heading)
+        );
+        camera.lookAt(car.position.x, car.position.y + 0.5, car.position.z);
+
+        if (checkCollision()) {
+          smoothReset();
+        }
+
+        updateHitSpheres();
+        const carCenter = new THREE.Vector3();
+        car.getWorldPosition(carCenter);
+        
+        finish.geometry.computeBoundingBox();
+        const finishBox = finish.geometry.boundingBox.clone();
+        finishBox.applyMatrix4(finish.matrixWorld);
+        
+        if (carCenter.x > finishBox.min.x && carCenter.x < finishBox.max.x &&
+            carCenter.z > finishBox.min.z && carCenter.z < finishBox.max.z) {
+          if (!won) {
+            won = true;
+            body.material.emissive.setHex(0x19c97c);
+            body.material.emissiveIntensity = 0.5;
+            finish.material.emissiveIntensity = 0.5;
+            setTimeout(showWinScreen, 1000);
+          }
+        }
+        
+        if (car.position.z < -22) car.position.z = -22;
+        if (car.position.z > 22) car.position.z = 22;
+        if (car.position.x > 60) car.position.x = 60;
+      } else if (!gameStarted) {
+        camera.position.x = Math.sin(now * 0.3) * 10;
+        camera.position.z = 25 + Math.cos(now * 0.3) * 4;
+        camera.lookAt(0, 0, 0);
+        
+        const pulse = Math.sin(now * 2.5) * 0.15 + 0.85;
+        obstacles.forEach(obs => {
+          obs.material.emissiveIntensity = pulse * 0.25;
+        });
+      }
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
