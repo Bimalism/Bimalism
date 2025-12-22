@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Center - Tic Tac Toe, Chain Reaction, Snake & Car Game</title>
+<title>Game Center - Tic Tac Toe, Chain Reaction, Snake, Car & Sudoku</title>
 <style>
 * {
     margin: 0;
@@ -88,21 +88,11 @@ h1 {
     background: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
 }
 
-.game-card.tictactoe::before {
-    background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%);
-}
-
-.game-card.chainreaction::before {
-    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
-}
-
-.game-card.snake::before {
-    background: linear-gradient(90deg, #7FFF00 0%, #32CD32 100%);
-}
-
-.game-card.cargame::before {
-    background: linear-gradient(90deg, #FF8C00 0%, #FFD700 100%);
-}
+.game-card.tictactoe::before { background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%); }
+.game-card.chainreaction::before { background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%); }
+.game-card.snake::before { background: linear-gradient(90deg, #7FFF00 0%, #32CD32 100%); }
+.game-card.cargame::before { background: linear-gradient(90deg, #FF8C00 0%, #FFD700 100%); }
+.game-card.sudoku::before { background: linear-gradient(90deg, #9C27B0 0%, #E91E63 100%); } /* Purple to Pink */
 
 .game-icon {
     font-size: 3.5rem;
@@ -170,81 +160,25 @@ footer {
     text-align: center;
 }
 
-.back-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 10px 25px;
-    border-radius: 50px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    .games-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .game-card {
-        min-height: 250px;
-        padding: 20px;
-    }
-    
-    .game-icon {
-        font-size: 3rem;
-    }
-    
-    .game-title {
-        font-size: 1.6rem;
-    }
-    
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .feature {
-        width: 100%;
-        max-width: 250px;
-    }
+    h1 { font-size: 2.5rem; }
+    .games-container { grid-template-columns: 1fr; gap: 20px; }
+    .game-card { min-height: 250px; padding: 20px; }
+    .game-icon { font-size: 3rem; }
+    .game-title { font-size: 1.6rem; }
+    .features { flex-direction: column; align-items: center; }
+    .feature { width: 100%; max-width: 250px; }
 }
 
 @media (max-width: 480px) {
-    .games-container {
-        gap: 15px;
-    }
-    
-    .game-card {
-        padding: 15px;
-        min-height: 230px;
-    }
-    
-    .game-icon {
-        font-size: 2.5rem;
-    }
-    
-    .game-title {
-        font-size: 1.4rem;
-    }
-    
-    .play-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
+    .game-card { padding: 15px; min-height: 230px; }
+    .game-icon { font-size: 2.5rem; }
+    .game-title { font-size: 1.4rem; }
+    .play-btn { padding: 10px 20px; font-size: 0.9rem; }
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <div class="container">
@@ -260,54 +194,52 @@ footer {
             <div class="game-description">
                 The classic 3×3 strategy game. Play against a friend or challenge our smart AI in this timeless battle of X's and O's.
             </div>
-            <button class="play-btn">Play Tic Tac Toe</button>
+            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='game.html'">Play Tic Tac Toe</button>
         </div>
         
         <div class="game-card chainreaction" onclick="window.location.href='game1.html'">
             <div class="game-icon">⚡💥</div>
             <h2 class="game-title">Chain Reaction</h2>
             <div class="game-description">
-                A strategic board game with up to 10 players! Control cells, create chain reactions, and eliminate opponents in this explosive battle.
+                A strategic board game with up to 10 players! Control cells, create chain reactions, and eliminate opponents.
             </div>
-            <button class="play-btn">Play Chain Reaction</button>
+            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='game1.html'">Play Chain Reaction</button>
         </div>
         
         <div class="game-card snake" onclick="window.location.href='snake game.html'">
             <div class="game-icon">🐍🍎</div>
             <h2 class="game-title">Snake Game</h2>
             <div class="game-description">
-                The classic Snake game! Control the snake to eat food and grow longer without hitting the walls or yourself. How long can you survive?
+                The classic Snake game! Control the snake to eat food and grow longer without hitting the walls or yourself.
             </div>
-            <button class="play-btn">Play Snake Game</button>
+            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='snake game.html'">Play Snake Game</button>
         </div>
         
-        <div class="game-card cargame" onclick="window.location.href='game2.html'">
+        <div class="game-card cargame" onclick="window.location.href='car-game.html'">
             <div class="game-icon">🏎️💨</div>
             <h2 class="game-title">3D Car Game</h2>
             <div class="game-description">
-                Navigate through obstacles in this 3D driving game! Touch left/right to steer through the course and reach the finish line without crashing.
+                Navigate through obstacles in this 3D driving game! Steer through the course and reach the finish line.
             </div>
-            <button class="play-btn">Play Car Game</button>
+            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='car-game.html'">Play Car Game</button>
+        </div>
+
+        <!-- Sudoku Card - Redirects to sudoku.html -->
+        <div class="game-card sudoku" onclick="window.location.href='sudoku.html'">
+            <div class="game-icon">🧩</div>
+            <h2 class="game-title">Sudoku</h2>
+            <div class="game-description">
+                Professional 9×9 Sudoku with touch support, hints, timer, mistakes tracking, auto-save, and four difficulty levels!
+            </div>
+            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='sudoku.html'">Play Sudoku</button>
         </div>
     </div>
     
     <div class="features">
-        <div class="feature">
-            <h3>🎯 Multiplayer</h3>
-            <p>Play with friends or against AI</p>
-        </div>
-        <div class="feature">
-            <h3>⚡ Fast Games</h3>
-            <p>Quick matches for instant fun</p>
-        </div>
-        <div class="feature">
-            <h3>📱 Mobile Friendly</h3>
-            <p>Play on any device</p>
-        </div>
-        <div class="feature">
-            <h3>🎮 3D Graphics</h3>
-            <p>Immersive gaming experience</p>
-        </div>
+        <div class="feature"><h3>🎯 Multiplayer</h3><p>Play with friends or AI</p></div>
+        <div class="feature"><h3>⚡ Fast Games</h3><p>Quick matches for fun</p></div>
+        <div class="feature"><h3>📱 Mobile Friendly</h3><p>Play on any device</p></div>
+        <div class="feature"><h3>🧩 Brain Games</h3><p>Challenge your mind</p></div>
     </div>
     
     <footer>
@@ -316,31 +248,34 @@ footer {
 </div>
 
 <script>
-// Add confirmation dialog for game navigation
+// Prevent card click from triggering when button is clicked
+document.querySelectorAll('.play-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+});
+
+// Optional: Add confirmation before leaving (you can remove if not wanted)
 document.querySelectorAll('.game-card').forEach(card => {
     card.addEventListener('click', function(e) {
-        if (e.target.classList.contains('play-btn') || e.target.closest('.play-btn')) {
-            return; // Let the button click handle navigation
-        }
+        if (e.target.closest('.play-btn')) return;
         const gameName = this.querySelector('.game-title').textContent;
         if (confirm(`Start playing ${gameName}?`)) {
-            const link = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-            window.location.href = link;
+            const link = this.onclick.toString().match(/'([^']+)'/);
+            if (link) window.location.href = link[1];
         }
     });
 });
 
-// Add hover effect for play buttons
+// Button hover effect
 document.querySelectorAll('.play-btn').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        this.style.background = 'linear-gradient(90deg, #96c93d 0%, #00b09b 100%)';
+    btn.addEventListener('mouseenter', () => {
+        btn.style.background = 'linear-gradient(90deg, #96c93d 0%, #00b09b 100%)';
     });
-    
-    btn.addEventListener('mouseleave', function() {
-        this.style.background = 'linear-gradient(90deg, #00b09b 0%, #96c93d 100%)';
+    btn.addEventListener('mouseleave', () => {
+        btn.style.background = 'linear-gradient(90deg, #00b09b 0%, #96c93d 100%)';
     });
 });
 </script>
 </body>
 </html>
-
