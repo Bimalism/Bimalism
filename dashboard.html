@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,7 +277,6 @@
 <body>
   <div class="particles" id="particles"></div>
   
-  <!-- Back button now redirects directly to g.html -->
   <a href="g.html" class="back-btn">← Back to Game</a>
   
   <div class="container">
@@ -290,11 +290,11 @@
           <span class="stat-label">Total Levels</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="completedLevels">2</span>
+          <span class="stat-number" id="completedLevels">5</span>
           <span class="stat-label">Completed</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="bestTime">1:23</span>
+          <span class="stat-number" id="bestTime">1:12</span>
           <span class="stat-label">Best Time</span>
         </div>
       </div>
@@ -317,28 +317,31 @@
         <button class="level-btn">Play Level 2</button>
       </div>
       
-      <!-- Levels 3-10 (Locked) -->
-      <div class="level-card level-locked">
+      <!-- Level 3 -->
+      <div class="level-card" onclick="playLevel(3)">
         <div class="level-number">3</div>
-        <div class="level-title">Winding Turns</div>
-        <div class="level-desc">Navigate tight corners and moving barriers</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-title">Narrow Precision</div>
+        <div class="level-desc">Thread the needle through tight gaps and moving obstacles!</div>
+        <button class="level-btn">Play Level 3</button>
       </div>
       
-      <div class="level-card level-locked">
+      <!-- Level 4 -->
+      <div class="level-card" onclick="playLevel(4)">
         <div class="level-number">4</div>
         <div class="level-title">Speed Trial</div>
-        <div class="level-desc">Faster pace, quicker reflexes required</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-desc">Faster car, quicker moving obstacles – reflexes required!</div>
+        <button class="level-btn">Play Level 4</button>
       </div>
       
-      <div class="level-card level-locked">
+      <!-- Level 5 - NOW UNLOCKED -->
+      <div class="level-card" onclick="playLevel(5)">
         <div class="level-number">5</div>
         <div class="level-title">Maze Master</div>
-        <div class="level-desc">Complex maze with multiple paths</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-desc">Complex branching paths – choose wisely and navigate the maze!</div>
+        <button class="level-btn">Play Level 5</button>
       </div>
       
+      <!-- Levels 6-10 (Still Locked) -->
       <div class="level-card level-locked">
         <div class="level-number">6</div>
         <div class="level-title">Night Drive</div>
@@ -390,12 +393,18 @@
       }
     }
     
-    // Play level function
+    // Play level function - now supports up to Level 5
     function playLevel(level) {
       if (level === 1) {
         window.location.href = 'game2.html';
       } else if (level === 2) {
         window.location.href = 'game2.1.html';
+      } else if (level === 3) {
+        window.location.href = 'game2.2.html';
+      } else if (level === 4) {
+        window.location.href = 'game2.3.html';
+      } else if (level === 5) {
+        window.location.href = 'game2.4.html';
       } else {
         alert('Level ' + level + ' coming soon! Complete previous levels first! 🚀');
       }
@@ -404,8 +413,8 @@
     // Initialize particles
     createParticles();
     
-    // Button click handling inside cards
-    document.querySelectorAll('.level-card:not(.level-locked) .level-btn').forEach(btn => {
+    // Button click handling
+    document.querySelectorAll('.level-card .level-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const levelNum = parseInt(btn.closest('.level-card').querySelector('.level-number').textContent);
