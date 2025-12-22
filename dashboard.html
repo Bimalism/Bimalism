@@ -3,97 +3,415 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bimalism-Entrance Hub</title>
-</head>
-<body>
+  <title>3D Car Obstacle Game - Dashboard</title>
   <style>
-     {
+    * {
       margin: 0;
-       *padding: 0;
+      padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
     }
+    
     body {
-      background: linear-gradient(135deg, #f5d142, #f39c12);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0b0f1a 0%, #1a2537 50%, #2f7de9 100%);
+      min-height: 100vh;
+      color: #e8f0ff;
+      overflow-x: hidden;
     }
+    
     .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
       text-align: center;
-      color: #fff;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-      animation: slideDown 1.2s ease-in-out;
-    }
-    p {
-      font-size: 1.2rem;
       margin-bottom: 40px;
-      opacity: 0.9;
+      padding: 40px 20px;
+      background: rgba(18, 26, 40, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
     }
-    .buttons {
+    
+    h1 {
+      font-size: clamp(2.5em, 5vw, 4em);
+      background: linear-gradient(45deg, #2f7de9, #19c97c, #ff5f5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      text-shadow: 0 0 30px rgba(47, 125, 233, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 10px rgba(47,125,233,0.5)); }
+      to { filter: drop-shadow(0 0 20px rgba(25,201,124,0.5)); }
+    }
+    
+    .subtitle {
+      font-size: 1.3em;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    
+    .stats {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
     }
-    .btn {
-      background: #fff;
-      color: #f39c12;
-      padding: 15px 40px;
+    
+    .stat-card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .stat-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #19c97c;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+    
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .level-card {
+      background: rgba(18, 26, 40, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .level-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .level-card:hover::before {
+      left: 100%;
+    }
+    
+    .level-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      border-color: #2f7de9;
+      box-shadow: 0 30px 60px rgba(47, 125, 233, 0.4);
+      background: rgba(47, 125, 233, 0.2);
+    }
+    
+    .level-number {
+      font-size: 4em;
+      background: linear-gradient(45deg, #2f7de9, #19c97c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    
+    .level-title {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      color: #e8f0ff;
+    }
+    
+    .level-desc {
+      opacity: 0.8;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .level-btn {
+      background: linear-gradient(45deg, #2f7de9, #1a5fc9);
+      color: white;
       border: none;
+      padding: 15px 40px;
       border-radius: 50px;
-      font-size: 1.2rem;
+      font-size: 1.1em;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, background 0.3s ease;
-      animation: popIn 1.5s ease-in-out;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(47, 125, 233, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .btn:hover {
-      transform: scale(1.1);
-      background: #f1c40f;
-      color: #fff;
+    
+    .level-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(47, 125, 233, 0.6);
+      background: linear-gradient(45deg, #1a5fc9, #2f7de9);
     }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    
+    .level-locked {
+      opacity: 0.4;
+      cursor: not-allowed;
+      position: relative;
     }
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    
+    .level-locked::after {
+      content: '🔒';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2em;
+      animation: lockPulse 2s infinite;
     }
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    
+    @keyframes lockPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
-    footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      animation: fadeIn 2s ease-in-out;
+    
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(18,26,40,0.8);
+      color: #e8f0ff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1em;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      z-index: 100;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .back-btn:hover {
+      background: rgba(47,125,233,0.8);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+      .levels-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .stats {
+        gap: 15px;
+      }
+      
+      header {
+        padding: 20px 15px;
+      }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #2f7de9;
+      border-radius: 50%;
+      animation: float 6s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="particles" id="particles"></div>
+  
+  <!-- Back button now redirects directly to g.html -->
+  <a href="g.html" class="back-btn">← Back to Game</a>
+  
   <div class="container">
-    <h1>Welcome to Bimalism</h1>
-    <p>Select Your Exam to Begin Your Journey</p>
-    <div class="buttons">
-      <button class="btn" onclick="location.href='neet.html'">NEET</button>
-      <button class="btn" onclick="location.href='jee.html'">JEE</button>
+    <header>
+      <h1>🚗 3D Car Obstacle</h1>
+      <p class="subtitle">Master the ultimate driving challenge!</p>
+      
+      <div class="stats">
+        <div class="stat-card">
+          <span class="stat-number" id="totalLevels">10</span>
+          <span class="stat-label">Total Levels</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="completedLevels">2</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="bestTime">1:23</span>
+          <span class="stat-label">Best Time</span>
+        </div>
+      </div>
+    </header>
+    
+    <div class="levels-grid">
+      <!-- Level 1 -->
+      <div class="level-card" onclick="playLevel(1)">
+        <div class="level-number">1</div>
+        <div class="level-title">Beginner Course</div>
+        <div class="level-desc">Learn the basics and get comfortable with controls</div>
+        <button class="level-btn">Play Level 1</button>
+      </div>
+      
+      <!-- Level 2 -->
+      <div class="level-card" onclick="playLevel(2)">
+        <div class="level-number">2</div>
+        <div class="level-title">Easy Path</div>
+        <div class="level-desc">Fewer obstacles, perfect for warming up</div>
+        <button class="level-btn">Play Level 2</button>
+      </div>
+      
+      <!-- Levels 3-10 (Locked) -->
+      <div class="level-card level-locked">
+        <div class="level-number">3</div>
+        <div class="level-title">Winding Turns</div>
+        <div class="level-desc">Navigate tight corners and moving barriers</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">4</div>
+        <div class="level-title">Speed Trial</div>
+        <div class="level-desc">Faster pace, quicker reflexes required</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">5</div>
+        <div class="level-title">Maze Master</div>
+        <div class="level-desc">Complex maze with multiple paths</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">6</div>
+        <div class="level-title">Night Drive</div>
+        <div class="level-desc">Low visibility, trust your instincts</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">7</div>
+        <div class="level-title">Expert Gauntlet</div>
+        <div class="level-desc">Non-stop action, perfect precision needed</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">8</div>
+        <div class="level-title">Chaos Mode</div>
+        <div class="level-desc">Random obstacles, adapt or crash</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">9</div>
+        <div class="level-title">Master Challenge</div>
+        <div class="level-desc">All skills combined, one shot only</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
+      
+      <div class="level-card level-locked">
+        <div class="level-number">10</div>
+        <div class="level-title">Ultimate Boss</div>
+        <div class="level-desc">The final test - can you conquer it all?</div>
+        <button class="level-btn">Coming Soon</button>
+      </div>
     </div>
-    <footer>
-      Made with ❤️ by Aalif & Dharunesh | Inspired by Mr. Kageshwararao
-    </footer>
   </div>
-  </style>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        particles.appendChild(particle);
+      }
+    }
+    
+    // Play level function
+    function playLevel(level) {
+      if (level === 1) {
+        window.location.href = 'game2.html';
+      } else if (level === 2) {
+        window.location.href = 'game2.1.html';
+      } else {
+        alert('Level ' + level + ' coming soon! Complete previous levels first! 🚀');
+      }
+    }
+    
+    // Initialize particles
+    createParticles();
+    
+    // Button click handling inside cards
+    document.querySelectorAll('.level-card:not(.level-locked) .level-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const levelNum = parseInt(btn.closest('.level-card').querySelector('.level-number').textContent);
+        playLevel(levelNum);
+      });
+    });
+  </script>
 </body>
 </html>
