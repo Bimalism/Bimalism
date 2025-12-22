@@ -289,7 +289,7 @@
           <span class="stat-label">Total Levels</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="completedLevels">6</span>
+          <span class="stat-number" id="completedLevels">7</span>
           <span class="stat-label">Completed</span>
         </div>
         <div class="stat-card">
@@ -340,7 +340,7 @@
         <button class="level-btn">Play Level 5</button>
       </div>
       
-      <!-- Level 6 - NOW UNLOCKED! 🌙 -->
+      <!-- Level 6 -->
       <div class="level-card" onclick="playLevel(6)">
         <div class="level-number">6</div>
         <div class="level-title">🌙 Night Drive</div>
@@ -348,12 +348,12 @@
         <button class="level-btn">Play Level 6</button>
       </div>
       
-      <!-- Levels 7-10 (Still Locked) -->
-      <div class="level-card level-locked">
+      <!-- Level 7 - NOW UNLOCKED! 🌙 -->
+      <div class="level-card" onclick="playLevel(7)">
         <div class="level-number">7</div>
-        <div class="level-title">Expert Gauntlet</div>
-        <div class="level-desc">Non-stop action, perfect precision needed</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-title">Silent Midnight</div>
+        <div class="level-desc">Pure darkness. One mistake and you restart from the beginning. True focus required.</div>
+        <button class="level-btn">Play Level 7</button>
       </div>
       
       <div class="level-card level-locked">
@@ -393,7 +393,7 @@
       }
     }
     
-    // Play level function - NOW SUPPORTS LEVEL 6!
+    // Play level function - NOW SUPPORTS LEVEL 7!
     function playLevel(level) {
       if (level === 1) {
         window.location.href = 'game2.html';
@@ -406,7 +406,9 @@
       } else if (level === 5) {
         window.location.href = 'game2.4.html';
       } else if (level === 6) {
-        window.location.href = 'game2.5.html';  // NEW: Night Drive unlocked!
+        window.location.href = 'game2.5.html';
+      } else if (level === 7) {
+        window.location.href = 'game2.6.html';  // NEW: Silent Midnight unlocked!
       } else {
         alert('Level ' + level + ' coming soon! Complete previous levels first! 🚀');
       }
