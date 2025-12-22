@@ -1,411 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Night Drive - Silent Midnight</title>
-  <style>
-    body { margin:0; overflow:hidden; background:#000; }
-    #hud {
-      position: fixed; top: 16px; left: 16px; color: #c8d8ff; font-family: system-ui, sans-serif; z-index: 10;
-      background: rgba(0,0,30,.85); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.7);
-      border: 1px solid rgba(80,120,255,.25);
-    }
-    #status {
-      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-      color:#c8d8ff; font-family: system-ui, sans-serif; z-index: 10;
-      background: rgba(0,0,30,.85); padding: 10px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,.7);
-      min-width: 280px; text-align: center; border: 1px solid rgba(80,120,255,.25);
-    }
-    #btn { margin-left: 8px; padding: 6px 10px; border-radius: 8px; border: 0; cursor: pointer; background:#cc9900; color:white; font-size:0.9em; }
-    #leftZone, #rightZone, #centerZone {
-      position: fixed; top: 0; bottom: 0; z-index: 5; opacity: 0;
-    }
-    #leftZone { left: 0; width: 33%; }
-    #centerZone { left: 33%; width: 34%; }
-    #rightZone { right: 0; width: 33%; }
-    canvas { display:block; }
-
-    #startOverlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at center, rgba(0,10,30,.96) 0%, rgba(0,0,15,.99) 100%);
-      display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100;
-      color: #c8d8ff; font-family: system-ui, sans-serif; text-align: center; padding: 20px;
-    }
-    #startOverlay h1 {
-      font-size: 3em; margin-bottom: 12px; color: #aaccff;
-      text-shadow: 0 0 20px #4466aa;
-    }
-    #startOverlay p { font-size: 1.3em; margin: 16px 0; max-width: 600px; line-height: 1.6; }
-    #startButton {
-      background: #335588; color: white; border: 1px solid #5588cc; padding: 16px 44px;
-      font-size: 1.3em; border-radius: 12px; cursor: pointer; margin-top: 30px;
-      box-shadow: 0 0 20px rgba(80,120,255,.4); transition: all 0.3s;
-    }
-    #startButton:hover { background: #4466aa; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(80,120,255,.6); }
-
-    #winOverlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle, rgba(0,30,60,.92) 0%, rgba(0,0,20,.98) 80%);
-      display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 100;
-      color: #c8d8ff; font-family: system-ui, sans-serif; text-align: center; padding: 20px;
-    }
-    #winOverlay.show { display: flex; }
-    .win-title { font-size: 3.2em; color: #88ccff; text-shadow: 0 0 30px #4488cc; }
-
-    .hit-flash {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle, rgba(255,80,80,0.4) 0%, transparent 70%);
-      pointer-events: none; opacity: 0; z-index: 20; transition: opacity 0.2s;
-    }
-    .hit-flash.active { opacity: 1; animation: hitShake 0.4s ease-out; }
-    @keyframes hitShake {
-      0%,100%{transform:translate(0,0)} 20%{transform:translate(-4px,-2px)}
-      40%{transform:translate(4px,2px)} 60%{transform:translate(-2px,4px)} 80%{transform:translate(2px,-2px)}
-    }
-
-    #reverseIndicator {
-      position: fixed; top: 80px; left: 16px; color: #ff6688; font-weight: bold; z-index: 10;
-      background: rgba(0,0,30,.85); padding: 8px 12px; border-radius: 8px; display: none;
-      border: 1px solid rgba(255,80,120,.4);
-    }
-    #reverseIndicator.active { display: block; }
-
-    #speedIndicator {
-      position: fixed; top: 130px; left: 16px; color: #aaddff; z-index: 10;
-      background: rgba(0,0,30,.85); padding: 6px 10px; border-radius: 8px;
-      border: 1px solid rgba(80,120,255,.25);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>3D Night Drive - Silent Midnight</title>
+<style>
+  body { margin:0; overflow:hidden; background:#000; font-family: system-ui, sans-serif; }
+  #hud {
+    position: fixed; top: 16px; left: 16px; color: #c8d8ff;
+    background: rgba(0,0,30,.85); padding: 10px 14px; border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.7); border: 1px solid rgba(80,120,255,.25);
+    z-index: 10;
+  }
+  #status {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    color:#c8d8ff; background: rgba(0,0,30,.85); padding: 10px 14px; border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.7); min-width: 280px; text-align: center;
+    border: 1px solid rgba(80,120,255,.25); z-index: 10;
+  }
+  #btn { margin-left: 8px; padding: 6px 10px; border-radius: 8px; border: 0; cursor: pointer; background:#cc9900; color:white; font-size:0.9em; }
+ 
+  #leftZone, #rightZone, #centerZone {
+    position: fixed; top: 0; bottom: 0; z-index: 5; opacity: 0;
+  }
+  #leftZone { left: 0; width: 33%; }
+  #centerZone { left: 33%; width: 34%; }
+  #rightZone { right: 0; width: 33%; }
+  canvas { display:block; }
+  #startOverlay, #winOverlay {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at center, rgba(0,10,30,.96) 0%, rgba(0,0,15,.99) 100%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    color: #c8d8ff; text-align: center; padding: 20px; z-index: 100;
+  }
+  #winOverlay { display: none; background: radial-gradient(circle, rgba(0,30,60,.92) 0%, rgba(0,0,20,.98) 80%); }
+  #winOverlay.show { display: flex; }
+  #startOverlay h1, .win-title { font-size: 3.2em; margin-bottom: 12px; color: #aaccff; text-shadow: 0 0 20px #4466aa; }
+  .win-title { color: #88ccff; text-shadow: 0 0 30px #4488cc; }
+  button.start-btn, button.win-btn {
+    background: #335588; color: white; border: 1px solid #5588cc; padding: 16px 44px;
+    font-size: 1.3em; border-radius: 12px; cursor: pointer; margin-top: 30px;
+    box-shadow: 0 0 20px rgba(80,120,255,.4); transition: all 0.3s;
+  }
+  .win-btn.dashboard {
+    background: #337755; border-color: #55aa88; margin-top: 15px;
+  }
+  .win-btn.dashboard:hover {
+    background: #448866; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(80,255,120,.6);
+  }
+  .win-btn.play-again {
+    background: #335588; border-color: #5588cc; margin-top: 15px;
+  }
+  .win-btn.play-again:hover {
+    background: #4466aa; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(80,120,255,.6);
+  }
+  .win-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    width: 300px;
+  }
+  button:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(80,120,255,.6); }
+  .hit-flash {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle, rgba(255,80,80,0.45) 0%, transparent 70%);
+    pointer-events: none; opacity: 0; z-index: 20; transition: opacity 0.25s;
+  }
+  .hit-flash.active { opacity: 1; animation: hitShake 0.45s ease-out; }
+  @keyframes hitShake {
+    0%,100%{transform:translate(0,0)} 20%{transform:translate(-5px,-3px)}
+    40%{transform:translate(5px,3px)} 60%{transform:translate(-3px,5px)} 80%{transform:translate(3px,-3px)}
+  }
+  #reverseIndicator {
+    position: fixed; top: 80px; left: 16px; color: #ff6688; font-weight: bold; z-index: 10;
+    background: rgba(0,0,30,.85); padding: 8px 12px; border-radius: 8px; display: none;
+    border: 1px solid rgba(255,80,120,.4);
+  }
+  #reverseIndicator.active { display: block; }
+  #speedIndicator {
+    position: fixed; top: 130px; left: 16px; color: #aaddff; z-index: 10;
+    background: rgba(0,0,30,.85); padding: 6px 10px; border-radius: 8px;
+    border: 1px solid rgba(80,120,255,.25);
+  }
+</style>
 </head>
 <body>
-  <div class="hit-flash" id="hitFlash"></div>
-  <div id="reverseIndicator">REVERSE ACTIVE</div>
-  <div id="speedIndicator">Speed: 0 km/h</div>
-
-  <div id="winOverlay">
-    <div class="win-title">MIDNIGHT RUN COMPLETE</div>
-    <p style="font-size:1.6em; margin:20px 0;">You reached the end of the endless night.</p>
-    <button class="win-button" id="restartWin" style="background:#335588; color:white; padding:14px 36px; border-radius:10px; border:1px solid #5588cc; font-size:1.2em; cursor:pointer; margin:10px;">Drive Again</button>
+<div class="hit-flash" id="hitFlash"></div>
+<div id="reverseIndicator">REVERSE ACTIVE</div>
+<div id="speedIndicator">Speed: 0 km/h</div>
+<div id="winOverlay">
+  <div class="win-title">MIDNIGHT RUN COMPLETE</div>
+  <p style="font-size:1.6em; margin:20px 0;">You survived the endless silent night.</p>
+  <div class="win-buttons-container">
+    <button class="win-btn dashboard" id="dashboardBtn">Continue to Dashboard</button>
+    <button class="win-btn play-again" id="restartWin">Play Again</button>
   </div>
+</div>
+<div id="startOverlay">
+  <h1>SILENT MIDNIGHT</h1>
+  <p>A tense, atmospheric night drive through pitch-black endless highway.</p>
+  <p><strong>Controls:</strong><br>
+  • Left screen → steer left<br>
+  • Right screen → steer right<br>
+  • Both sides → brake<br>
+  • Center → toggle reverse</p>
+  <p>Stay on the road. Get extremely close — but don't touch.</p>
+  <button class="start-btn" id="startButton">Begin Drive</button>
+</div>
+<div id="hud">
+  <div><b>← Left  → Right  Both = Brake  Center = Reverse</b></div>
+  <div>Silent Midnight Highway</div>
+</div>
+<div id="status">Ready. <button id="btn">Restart</button></div>
+<div id="leftZone"></div>
+<div id="centerZone"></div>
+<div id="rightZone"></div>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+// ──────────────────────────────────────────────────────────────────────────────
+// EXTREMELY TIGHT COLLISION VERSION - car must get VERY close to crash
+// ──────────────────────────────────────────────────────────────────────────────
+let gameStarted = false, won = false;
+const startOverlay = document.getElementById('startOverlay');
+const winOverlay = document.getElementById('winOverlay');
+const status = document.getElementById('status');
+const hitFlash = document.getElementById('hitFlash');
+const reverseIndicator = document.getElementById('reverseIndicator');
+const speedIndicator = document.getElementById('speedIndicator');
 
-  <div id="startOverlay">
-    <h1>SILENT MIDNIGHT</h1>
-    <p>A calm, atmospheric night drive through a dark endless highway.</p>
-    <p><strong>Controls:</strong><br>
-    • Tap/click LEFT side → steer left<br>
-    • Tap/click RIGHT side → steer right<br>
-    • Tap BOTH sides → brake/stop<br>
-    • Tap CENTER → toggle reverse</p>
-    <p>Stay on the road. Reach the distant glow.<br><strong>If you hit an obstacle, you will restart from the beginning.</strong></p>
-    <button id="startButton">Begin Drive</button>
-  </div>
+// Function to redirect to dashboard
+function redirectToDashboard() {
+  // Redirect to dashboard.html
+  window.location.href = 'dashboard.html';
+}
 
-  <div id="hud">
-    <div><b>← Left  → Right  Both = Brake  Center = Reverse</b></div>
-    <div>Silent Midnight Highway</div>
-  </div>
-  <div id="status">Ready. <button id="btn">Restart</button></div>
+// ─── THREE.JS SETUP ──────────────────────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.body.appendChild(renderer.domElement);
 
-  <div id="leftZone"></div>
-  <div id="centerZone"></div>
-  <div id="rightZone"></div>
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000011);
+scene.fog = new THREE.FogExp2(0x000022, 0.018);
 
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script>
-    let gameStarted = false, won = false;
-    const startOverlay = document.getElementById('startOverlay');
-    const winOverlay = document.getElementById('winOverlay');
-    const status = document.getElementById('status');
-    const hitFlash = document.getElementById('hitFlash');
-    const reverseIndicator = document.getElementById('reverseIndicator');
-    const speedIndicator = document.getElementById('speedIndicator');
+const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 600);
+camera.position.set(0, 10, 14);
 
-    // === THREE.JS SETUP ===
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
-    renderer.shadowMap.enabled = true;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
-    document.body.appendChild(renderer.domElement);
+// Lighting
+scene.add(new THREE.AmbientLight(0x112244, 0.25));
+const moonLight = new THREE.DirectionalLight(0x5577aa, 0.4);
+moonLight.position.set(20, 40, 15);
+moonLight.castShadow = true;
+moonLight.shadow.mapSize.set(2048, 2048);
+scene.add(moonLight);
 
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000011);
-    scene.fog = new THREE.FogExp2(0x000022, 0.018);
+// ─── CAR ─────────────────────────────────────────────────────────────────────
+const car = new THREE.Group();
+const body = new THREE.Mesh(
+  new THREE.BoxGeometry(2.7, 0.8, 1.5),
+  new THREE.MeshStandardMaterial({ color: 0x223355, emissive: 0x334466, emissiveIntensity: 0.25, roughness: 0.7, metalness: 0.3 })
+);
+car.add(body);
 
-    const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 600);
-    camera.position.set(0, 10, 14);
+const cabin = new THREE.Mesh(
+  new THREE.BoxGeometry(1.7, 0.7, 1.2),
+  new THREE.MeshStandardMaterial({ color: 0x334466, roughness: 0.8 })
+);
+cabin.position.y = 0.75;
+car.add(cabin);
 
-    // Lighting
-    const ambient = new THREE.AmbientLight(0x112244, 0.25);
-    scene.add(ambient);
+// Wheels
+const wheelGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.32, 16);
+const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111122 });
+const positions = [[-1.1,0,0.75], [1.1,0,0.75], [-1.1,0,-0.75], [1.1,0,-0.75]];
+const wheels = [];
+positions.forEach(pos => {
+  const w = new THREE.Mesh(wheelGeo, wheelMat);
+  w.rotation.z = Math.PI / 2;
+  w.position.set(...pos);
+  car.add(w);
+  wheels.push(w);
+});
 
-    const moonLight = new THREE.DirectionalLight(0x5577aa, 0.4);
-    moonLight.position.set(20, 40, 15);
-    moonLight.castShadow = true;
-    moonLight.shadow.mapSize.set(2048, 2048);
-    scene.add(moonLight);
+// Headlights
+const headL = new THREE.SpotLight(0xffeecc, 2.5, 60, Math.PI/6, 0.5);
+headL.position.set(1.1, 0.5, 1.0);
+headL.target.position.set(0,0,20);
+car.add(headL, headL.target);
 
-    // === CAR ===
-    const car = new THREE.Group();
+const headR = headL.clone();
+headR.position.x = -1.1;
+car.add(headR, headR.target);
 
-    const body = new THREE.Mesh(
-      new THREE.BoxGeometry(2.7, 0.8, 1.5),
-      new THREE.MeshStandardMaterial({
-        color: 0x223355,
-        emissive: 0x334466,
-        emissiveIntensity: 0.25,
-        roughness: 0.7,
-        metalness: 0.3
-      })
-    );
-    car.add(body);
+// Tail lights
+const tailMat = new THREE.MeshBasicMaterial({ color: 0xff3344 });
+const tailL = new THREE.Mesh(new THREE.BoxGeometry(0.35,0.22,0.08), tailMat);
+tailL.position.set(1.2, 0.5, -0.8);
+const tailR = tailL.clone();
+tailR.position.x = -1.2;
+car.add(tailL, tailR);
 
-    const cabin = new THREE.Mesh(
-      new THREE.BoxGeometry(1.7, 0.7, 1.2),
-      new THREE.MeshStandardMaterial({ color: 0x334466, roughness: 0.8 })
-    );
-    cabin.position.y = 0.75;
-    car.add(cabin);
+car.position.y = 0.35;
+scene.add(car);
 
-    // Wheels
-    const wheelGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.32, 16);
-    const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111122 });
-    const positions = [[-1.1,0,0.75], [1.1,0,0.75], [-1.1,0,-0.75], [1.1,0,-0.75]];
-    const wheels = [];
-    positions.forEach(pos => {
-      const w = new THREE.Mesh(wheelGeo, wheelMat);
-      w.rotation.z = Math.PI / 2;
-      w.position.set(...pos);
-      car.add(w);
-      wheels.push(w);
-    });
+// ─── GROUND & ROAD ───────────────────────────────────────────────────────────
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(400, 120),
+  new THREE.MeshStandardMaterial({ color: 0x001122, roughness: 0.95 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
 
-    // Headlights
-    const headL = new THREE.SpotLight(0xffeecc, 2.5, 60, Math.PI/6, 0.5);
-    headL.position.set(1.1, 0.5, 1.0);
-    headL.target.position.set(0,0,20);
-    car.add(headL, headL.target);
+// Dashed center line
+const lineMat = new THREE.MeshStandardMaterial({ color: 0xdddd88, emissive: 0xaaaa44, emissiveIntensity: 0.2 });
+for (let i = -50; i < 150; i += 8) {
+  const dash = new THREE.Mesh(new THREE.PlaneGeometry(6, 0.25), lineMat);
+  dash.rotation.x = -Math.PI / 2;
+  dash.position.set(i + 20, 0.02, 0);
+  scene.add(dash);
+}
 
-    const headR = headL.clone();
-    headR.position.x = -1.1;
-    car.add(headR, headR.target);
+// Finish zone (glow)
+const finish = new THREE.Mesh(
+  new THREE.BoxGeometry(15, 0.4, 15),
+  new THREE.MeshStandardMaterial({ color: 0x88ccff, emissive: 0x4488cc, emissiveIntensity: 0.8, transparent: true, opacity: 0.6 })
+);
+finish.position.set(140, 0.2, 0);
+scene.add(finish);
 
-    // Tail lights
-    const tailMat = new THREE.MeshBasicMaterial({ color: 0xff3344 });
-    const tailL = new THREE.Mesh(new THREE.BoxGeometry(0.35,0.22,0.08), tailMat);
-    tailL.position.set(1.2, 0.5, -0.8);
-    const tailR = tailL.clone();
-    tailR.position.x = -1.2;
-    car.add(tailL, tailR);
+// ─── OBSTACLES ───────────────────────────────────────────────────────────────
+const obstacles = [];
+function addObstacle(x, z, scale = 1) {
+  const mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(3*scale, 1.4*scale, 3*scale),
+    new THREE.MeshStandardMaterial({ color: 0x333366, emissive: 0x555588, emissiveIntensity: 0.35, roughness: 0.8 })
+  );
+  mesh.position.set(x, 0.7*scale, z);
+  mesh.castShadow = true;
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(mesh.geometry),
+    new THREE.LineBasicMaterial({ color: 0x88aadd, transparent: true, opacity: 0.6 })
+  );
+  mesh.add(edges);
+  scene.add(mesh);
+  obstacles.push(mesh);
+}
 
-    car.position.y = 0.35;
-    scene.add(car);
+for (let i = 20; i < 130; i += 10) {
+  const offset = (Math.sin(i * 0.08) * 12);
+  addObstacle(i + 5, offset, 1.1);
+  addObstacle(i + 12, -offset + 8, 0.9);
+}
 
-    // Ground + road
-    const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(400, 120),
-      new THREE.MeshStandardMaterial({ color: 0x001122, roughness: 0.95 })
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.receiveShadow = true;
-    scene.add(ground);
+// ─── INPUT ───────────────────────────────────────────────────────────────────
+const keys = {};
+let touchLeft = false, touchRight = false, isReverse = false;
+const leftZone = document.getElementById('leftZone');
+const centerZone = document.getElementById('centerZone');
+const rightZone = document.getElementById('rightZone');
 
-    // Dashed line
-    const lineMat = new THREE.MeshStandardMaterial({ color: 0xdddd88, emissive: 0xaaaa44, emissiveIntensity: 0.2 });
-    for (let i = -50; i < 150; i += 8) {
-      const dash = new THREE.Mesh(new THREE.PlaneGeometry(6, 0.25), lineMat);
-      dash.rotation.x = -Math.PI / 2;
-      dash.position.set(i + 20, 0.02, 0);
-      scene.add(dash);
+function addInput(el, setter) {
+  ['touchstart','mousedown'].forEach(ev =>
+    el.addEventListener(ev, e => { e.preventDefault(); setter(true); if(!gameStarted) startGame(); }));
+  ['touchend','mouseup','mouseleave'].forEach(ev => el.addEventListener(ev, () => setter(false)));
+}
+
+addInput(leftZone, v => touchLeft = v);
+addInput(rightZone, v => touchRight = v);
+addInput(centerZone, v => { if(v) { isReverse = !isReverse; reverseIndicator.classList.toggle('active'); } });
+
+window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+// ─── GAME LOGIC ──────────────────────────────────────────────────────────────
+let heading = 0, currentSpeed = 0;
+
+function reset() {
+  car.position.set(0, 0.35, 0);
+  heading = 0;
+  car.rotation.y = 0;
+  won = false;
+  isReverse = false;
+  reverseIndicator.classList.remove('active');
+  currentSpeed = 0;
+  status.textContent = "Driving through the silent night...";
+  winOverlay.classList.remove('show');
+}
+
+function showWin() {
+  winOverlay.classList.add('show');
+  status.textContent = "Journey complete.";
+}
+
+function startGame() {
+  gameStarted = true;
+  startOverlay.style.display = 'none';
+  reset();
+}
+
+// Event Listeners
+document.getElementById('startButton').onclick = startGame;
+document.getElementById('btn').onclick = reset;
+document.getElementById('restartWin').onclick = reset;
+document.getElementById('dashboardBtn').onclick = redirectToDashboard;
+document.addEventListener('touchstart', startGame, { once: true });
+
+// ─── EXTREMELY TIGHT COLLISION DETECTION ─────────────────────────────────────
+function checkCollision() {
+  const carBox = new THREE.Box3().setFromObject(car);
+ 
+  // Shrink car hitbox significantly → allows visually extremely close passes
+  const shrinkX = 0.68;
+  const shrinkZ = 0.62;
+  carBox.min.x += shrinkX;
+  carBox.max.x -= shrinkX;
+  carBox.min.z += shrinkZ;
+  carBox.max.z -= shrinkZ;
+  for (const obs of obstacles) {
+    const obsBox = new THREE.Box3().setFromObject(obs);
+    // Very small margin for ultra-tight gameplay
+    const margin = 0.10; // You must get VERY close to trigger a hit
+    if (
+      carBox.min.x - margin < obsBox.max.x &&
+      carBox.max.x + margin > obsBox.min.x &&
+      carBox.min.z - margin < obsBox.max.z &&
+      carBox.max.z + margin > obsBox.min.z
+    ) {
+      hitFlash.classList.add('active');
+      setTimeout(() => hitFlash.classList.remove('active'), 450);
+      status.textContent = "You hit the obstacle – restarting...";
+      setTimeout(reset, 800);
+      return true;
+    }
+  }
+  return false;
+}
+
+const BASE_SPEED = 14;
+const REVERSE_SPEED = 9;
+const TURN_SPEED = 2.4;
+
+let lastTime = performance.now() / 1000;
+
+function animate() {
+  const now = performance.now() / 1000;
+  const dt = Math.min(0.033, now - lastTime);
+  lastTime = now;
+
+  if (gameStarted && !won) {
+    const left = keys['a'] || keys['arrowleft'] || touchLeft;
+    const right = keys['d'] || keys['arrowright'] || touchRight;
+    const braking = left && right;
+
+    if (!braking) {
+      if (left) heading += TURN_SPEED * dt;
+      if (right) heading -= TURN_SPEED * dt;
+      heading = Math.max(-Math.PI/2.1, Math.min(Math.PI/2.1, heading));
+    } else {
+      heading *= 0.88;
     }
 
-    // Finish zone
-    const finish = new THREE.Mesh(
-      new THREE.BoxGeometry(15, 0.4, 15),
-      new THREE.MeshStandardMaterial({
-        color: 0x88ccff,
-        emissive: 0x4488cc,
-        emissiveIntensity: 0.8,
-        transparent: true,
-        opacity: 0.6
-      })
-    );
-    finish.position.set(140, 0.2, 0);
-    scene.add(finish);
+    if (!left && !right) heading *= 0.94;
 
-    // Obstacles
-    const obstacles = [];
-    function addObstacle(x, z, scale = 1) {
-      const mesh = new THREE.Mesh(
-        new THREE.BoxGeometry(3*scale, 1.4*scale, 3*scale),
-        new THREE.MeshStandardMaterial({
-          color: 0x333366,
-          emissive: 0x555588,
-          emissiveIntensity: 0.35,
-          roughness: 0.8
-        })
-      );
-      mesh.position.set(x, 0.7*scale, z);
-      mesh.castShadow = true;
+    const targetSpeed = braking ? 0 : (isReverse ? -REVERSE_SPEED : BASE_SPEED);
+    currentSpeed = THREE.MathUtils.lerp(currentSpeed, targetSpeed, 0.09);
 
-      const edges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(mesh.geometry),
-        new THREE.LineBasicMaterial({ color: 0x88aadd, transparent: true, opacity: 0.6 })
-      );
-      mesh.add(edges);
+    car.position.x += Math.cos(heading) * currentSpeed * dt;
+    car.position.z += Math.sin(heading) * currentSpeed * dt;
+    car.rotation.y = -heading;
 
-      scene.add(mesh);
-      obstacles.push(mesh);
+    // Headlights follow direction
+    headL.target.position.set(car.position.x + 20*Math.cos(heading), 0, car.position.z + 20*Math.sin(heading));
+    headR.target.position.copy(headL.target.position);
+
+    wheels.forEach(w => w.rotation.x += currentSpeed * dt * 0.6);
+
+    // Tail lights pulse
+    const pulse = 0.3 + Math.sin(now * 8) * 0.1;
+    tailL.material.emissiveIntensity = pulse;
+    tailR.material.emissiveIntensity = pulse;
+
+    // Camera follow
+    camera.position.lerp(new THREE.Vector3(
+      car.position.x - 11 * Math.cos(heading),
+      9 + Math.sin(now * 1.5) * 0.4,
+      car.position.z - 11 * Math.sin(heading)
+    ), 0.08);
+    camera.lookAt(car.position.x, car.position.y + 1, car.position.z);
+
+    speedIndicator.textContent = `Speed: ${Math.abs(currentSpeed * 3.6).toFixed(0)} km/h`;
+
+    checkCollision();
+
+    if (car.position.x > 130) {
+      won = true;
+      showWin();
     }
 
-    for (let i = 20; i < 130; i += 10) {
-      const offset = (Math.sin(i * 0.08) * 12);
-      addObstacle(i + 5, offset, 1.1);
-      addObstacle(i + 12, -offset + 8, 0.9);
-    }
+    // Keep on road
+    car.position.z = Math.max(-28, Math.min(28, car.position.z));
+  }
 
-    // === INPUT ===
-    const keys = {};
-    let touchLeft = false, touchRight = false, isReverse = false;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
 
-    const leftZone = document.getElementById('leftZone');
-    const centerZone = document.getElementById('centerZone');
-    const rightZone = document.getElementById('rightZone');
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
-    function addInput(el, setter) {
-      ['touchstart','mousedown'].forEach(ev => el.addEventListener(ev, e => { e.preventDefault(); setter(true); if(!gameStarted) startGame(); }));
-      ['touchend','mouseup','mouseleave'].forEach(ev => el.addEventListener(ev, () => setter(false)));
-    }
-
-    addInput(leftZone, v => touchLeft = v);
-    addInput(rightZone, v => touchRight = v);
-    addInput(centerZone, v => { if(v) { isReverse = !isReverse; reverseIndicator.classList.toggle('active'); } });
-
-    window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
-    window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
-
-    // === GAME LOGIC ===
-    let heading = 0, currentSpeed = 0;
-
-    function reset() {
-      car.position.set(0, 0.35, 0);
-      heading = 0;
-      car.rotation.y = 0;
-      won = false;
-      isReverse = false;
-      reverseIndicator.classList.remove('active');
-      currentSpeed = 0;
-      status.textContent = "Driving through the silent night...";
-    }
-
-    function showWin() {
-      winOverlay.classList.add('show');
-      status.textContent = "Journey complete.";
-    }
-
-    function startGame() {
-      gameStarted = true;
-      startOverlay.style.display = 'none';
-      reset();
-    }
-
-    document.getElementById('startButton').onclick = startGame;
-    document.getElementById('btn').onclick = reset;
-    document.getElementById('restartWin').onclick = () => { winOverlay.classList.remove('show'); reset(); };
-    document.addEventListener('touchstart', startGame, { once: true });
-
-    function checkCollision() {
-      const carPos = car.position;
-      for (const obs of obstacles) {
-        if (carPos.distanceTo(obs.position) < 4.2) {
-          // Instant restart on collision
-          hitFlash.classList.add('active');
-          setTimeout(() => hitFlash.classList.remove('active'), 400);
-          status.textContent = "Hit obstacle – Restarting from beginning...";
-          setTimeout(reset, 600); // Small delay so player sees the flash and message
-          return true;
-        }
-      }
-      return false;
-    }
-
-    const BASE_SPEED = 14;
-    const REVERSE_SPEED = 9;
-    const TURN_SPEED = 2.4;
-
-    let lastTime = performance.now() / 1000;
-    function animate() {
-      const now = performance.now() / 1000;
-      const dt = Math.min(0.033, now - lastTime);
-      lastTime = now;
-
-      if (gameStarted && !won) {
-        const left = keys['a'] || keys['arrowleft'] || touchLeft;
-        const right = keys['d'] || keys['arrowright'] || touchRight;
-        const braking = left && right;
-
-        if (!braking) {
-          if (left) heading += TURN_SPEED * dt;
-          if (right) heading -= TURN_SPEED * dt;
-          heading = Math.max(-Math.PI/2.1, Math.min(Math.PI/2.1, heading));
-        } else {
-          heading *= 0.88;
-        }
-        if (!left && !right) heading *= 0.94;
-
-        const targetSpeed = braking ? 0 : (isReverse ? -REVERSE_SPEED : BASE_SPEED);
-        currentSpeed = THREE.MathUtils.lerp(currentSpeed, targetSpeed, 0.09);
-
-        car.position.x += Math.cos(heading) * currentSpeed * dt;
-        car.position.z += Math.sin(heading) * currentSpeed * dt;
-        car.rotation.y = -heading;
-
-        // Headlights direction
-        headL.target.position.set(car.position.x + 20*Math.cos(heading), 0, car.position.z + 20*Math.sin(heading));
-        headR.target.position.copy(headL.target.position);
-
-        // Wheels
-        wheels.forEach(w => w.rotation.x += currentSpeed * dt * 0.6);
-
-        // Tail lights pulse
-        const pulse = 0.3 + Math.sin(now * 8) * 0.1;
-        tailL.material.emissiveIntensity = pulse;
-        tailR.material.emissiveIntensity = pulse;
-
-        // Camera
-        camera.position.lerp(new THREE.Vector3(
-          car.position.x - 11 * Math.cos(heading),
-          9 + Math.sin(now * 1.5) * 0.4,
-          car.position.z - 11 * Math.sin(heading)
-        ), 0.08);
-        camera.lookAt(car.position.x, car.position.y + 1, car.position.z);
-
-        speedIndicator.textContent = `Speed: ${Math.abs(currentSpeed * 3.6).toFixed(0)} km/h`;
-
-        checkCollision();
-
-        if (car.position.x > 130) {
-          won = true;
-          showWin();
-        }
-
-        // Boundaries
-        car.position.z = Math.max(-28, Math.min(28, car.position.z));
-      }
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    animate();
-  </script>
+animate();
+</script>
 </body>
 </html>
