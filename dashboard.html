@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -290,7 +289,7 @@
           <span class="stat-label">Total Levels</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="completedLevels">5</span>
+          <span class="stat-number" id="completedLevels">6</span>
           <span class="stat-label">Completed</span>
         </div>
         <div class="stat-card">
@@ -333,7 +332,7 @@
         <button class="level-btn">Play Level 4</button>
       </div>
       
-      <!-- Level 5 - NOW UNLOCKED -->
+      <!-- Level 5 -->
       <div class="level-card" onclick="playLevel(5)">
         <div class="level-number">5</div>
         <div class="level-title">Maze Master</div>
@@ -341,14 +340,15 @@
         <button class="level-btn">Play Level 5</button>
       </div>
       
-      <!-- Levels 6-10 (Still Locked) -->
-      <div class="level-card level-locked">
+      <!-- Level 6 - NOW UNLOCKED! 🌙 -->
+      <div class="level-card" onclick="playLevel(6)">
         <div class="level-number">6</div>
-        <div class="level-title">Night Drive</div>
-        <div class="level-desc">Low visibility, trust your instincts</div>
-        <button class="level-btn">Coming Soon</button>
+        <div class="level-title">🌙 Night Drive</div>
+        <div class="level-desc">Low visibility, trust your instincts + dynamic headlights!</div>
+        <button class="level-btn">Play Level 6</button>
       </div>
       
+      <!-- Levels 7-10 (Still Locked) -->
       <div class="level-card level-locked">
         <div class="level-number">7</div>
         <div class="level-title">Expert Gauntlet</div>
@@ -393,7 +393,7 @@
       }
     }
     
-    // Play level function - now supports up to Level 5
+    // Play level function - NOW SUPPORTS LEVEL 6!
     function playLevel(level) {
       if (level === 1) {
         window.location.href = 'game2.html';
@@ -405,6 +405,8 @@
         window.location.href = 'game2.3.html';
       } else if (level === 5) {
         window.location.href = 'game2.4.html';
+      } else if (level === 6) {
+        window.location.href = 'game2.5.html';  // NEW: Night Drive unlocked!
       } else {
         alert('Level ' + level + ' coming soon! Complete previous levels first! 🚀');
       }
