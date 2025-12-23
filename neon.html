@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎾 Neon Pong - Classic Pong Battle!</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0c0c1a, #1a0a2a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            color: #00ffaa;
+        }
+        #gameContainer {
+            position: relative;
+            width: 500px;
+            height: 400px;
+            background: #000011;
+            border: 4px solid #00ffaa;
+            border-radius: 12px;
+            box-shadow: 0 0 60px rgba(0, 255, 170, 0.6);
+            overflow: hidden;
+        }
+        canvas { display: block; width: 100%; height: 100%; }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 0 0 12px #00ffaa;
+            pointer-events: none;
+        }
+        #gameOver {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ff4488;
+            font-size: 36px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        #gameOver.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #winner {
+            font-size: 28px;
+            color: #00ffaa;
+            margin: 15px 0;
+        }
+        #restartBtn {
+            padding: 15px 35px;
+            background: linear-gradient(45deg, #00ffaa, #00cc77);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #restartBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px #00ffaa;
+        }
+        #instructions {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #00ffaa;
+            text-shadow: 0 0 8px #00ffaa;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="canvas"></canvas>
+        
+        <div id="ui">
+            <div>Player: <span id="playerScore">0</span></div>
+            <div>AI: <span id="aiScore">0</span></div>
+        </div>
+        
+        <div id="gameOver">
+            <div>GAME OVER</div>
+            <div id="winner"></div>
+            <button id="restartBtn">NEW GAME 🎾</button>
+        </div>
+    </div>
+    
+    <div id="instructions">
+        Player: W/S or ↑↓ to move paddle | AI plays automatically!<br>
+        First to 5 points wins!
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 500;
+        canvas.height = 400;
+
+        const playerScoreEl = document.getElementById('playerScore');
+        const aiScoreEl = document.getElementById('aiScore');
+        const gameOverEl = document.getElementById('gameOver');
+        const winnerEl = document.getElementById('winner');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Game state
+        let game = {
+            playerScore: 0,
+            aiScore: 0,
+            winScore: 5,
+            running: true
+        };
+
+        // Paddle sizes
+        const paddleWidth = 12;
+        const paddleHeight = 80;
+        const ballSize = 12;
+
+        // Player paddle (left)
+        const player = {
+            x: 20,
+            y: (canvas.height - paddleHeight) / 2,
+            dy: 0,
+            speed: 8
+        };
+
+        // AI paddle (right)
+        const ai = {
+            x: canvas.width - 20 - paddleWidth,
+            y: (canvas.height - paddleHeight) / 2,
+            dy: 0,
+            speed: 6
+        };
+
+        // Ball
+        const ball = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            vx: 7,
+            vy: 4,
+            speed: Math.sqrt(7*7 + 4*4)
+        };
+
+        // Input
+        const keys = {};
+        document.addEventListener('keydown', e => {
+            keys[e.key.toLowerCase()] = true;
+        });
+        document.addEventListener('keyup', e => {
+            keys[e.key.toLowerCase()] = false;
+        });
+
+        // Touch controls (mobile)
+        canvas.addEventListener('touchstart', e => {
+            e.preventDefault();
+        });
+        canvas.addEventListener('touchmove', e => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touchY = e.touches[0].clientY - rect.top;
+            player.y = Math.max(0, Math.min(canvas.height - paddleHeight, touchY - paddleHeight / 2));
+        });
+
+        // Update player
+        function updatePlayer() {
+            if ((keys['w'] || keys['arrowup']) && player.y > 0) {
+                player.y -= player.speed;
+            }
+            if ((keys['s'] || keys['arrowdown']) && player.y < canvas.height - paddleHeight) {
+                player.y += player.speed;
+            }
+        }
+
+        // Update AI (simple tracking)
+        function updateAI() {
+            const targetY = ball.y - paddleHeight / 2;
+            if (ai.y + ai.dy * 0.1 < targetY) {
+                ai.y += ai.speed * 0.8;
+            } else {
+                ai.y -= ai.speed * 0.8;
+            }
+            ai.y = Math.max(0, Math.min(canvas.height - paddleHeight, ai.y));
+        }
+
+        // Update ball
+        function updateBall() {
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+
+            // Wall bounce
+            if (ball.y < ballSize || ball.y > canvas.height - ballSize) {
+                ball.vy *= -1;
+            }
+
+            // Player paddle collision
+            if (ball.x < player.x + paddleWidth + ballSize &&
+                ball.x > player.x &&
+                ball.y < player.y + paddleHeight &&
+                ball.y > player.y) {
+                ball.vx *= -1;
+                ball.vy += (ball.y - (player.y + paddleHeight / 2)) * 0.2;
+                ball.vx *= 1.05; // Speed up slightly
+            }
+
+            // AI paddle collision
+            if (ball.x > ai.x - ballSize &&
+                ball.x < ai.x + paddleWidth &&
+                ball.y < ai.y + paddleHeight &&
+                ball.y > ai.y) {
+                ball.vx *= -1;
+                ball.vy += (ball.y - (ai.y + paddleHeight / 2)) * 0.2;
+                ball.vx *= 1.05;
+            }
+
+            // Score
+            if (ball.x < 0) {
+                game.aiScore++;
+                aiScoreEl.textContent = game.aiScore;
+                resetBall();
+                checkWin();
+            }
+            if (ball.x > canvas.width) {
+                game.playerScore++;
+                playerScoreEl.textContent = game.playerScore;
+                resetBall();
+                checkWin();
+            }
+        }
+
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.vx = -ball.vx * 0.9;
+            ball.vy = (Math.random() - 0.5) * 8;
+        }
+
+        function checkWin() {
+            if (game.playerScore >= game.winScore) {
+                gameOver('YOU WIN! 🎉');
+            } else if (game.aiScore >= game.winScore) {
+                gameOver('AI WINS! 😈');
+            }
+        }
+
+        function gameOver(winner) {
+            game.running = false;
+            winnerEl.textContent = winner;
+            gameOverEl.classList.add('show');
+        }
+
+        // Draw
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#000022';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Center line
+            ctx.setLineDash([10, 10]);
+            ctx.strokeStyle = '#00ffaa';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Paddles - neon glow
+            ctx.shadowColor = '#00ffaa';
+            ctx.shadowBlur = 20;
+
+            // Player
+            ctx.fillStyle = '#00ffaa';
+            ctx.fillRect(player.x, player.y, paddleWidth, paddleHeight);
+
+            // AI
+            ctx.fillStyle = '#ff4488';
+            ctx.shadowColor = '#ff4488';
+            ctx.fillRect(ai.x, ai.y, paddleWidth, paddleHeight);
+
+            ctx.shadowBlur = 0;
+
+            // Ball - glowing
+            const pulse = Math.sin(Date.now() / 100) * 3 + ballSize;
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 25;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, pulse / 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        // Game loop
+        function loop() {
+            if (game.running) {
+                updatePlayer();
+                updateAI();
+                updateBall();
+            }
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        // Restart
+        restartBtn.addEventListener('click', () => {
+            game.playerScore = 0;
+            game.aiScore = 0;
+            playerScoreEl.textContent = 0;
+            aiScoreEl.textContent = 0;
+            game.running = true;
+            resetBall();
+            player.y = ai.y = (canvas.height - paddleHeight) / 2;
+            gameOverEl.classList.remove('show');
+        });
+
+        // Start!
+        loop();
+    </script>
+</body>
+</html>
