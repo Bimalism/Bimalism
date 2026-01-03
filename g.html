@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Center - Tic Tac Toe, Chain Reaction, Snake, Car , slow car game & Sudoku</title>
+<title>Game Center - Tic Tac Toe, Chain Reaction, Snake, Car & Sudoku</title>
 <style>
 * {
     margin: 0;
@@ -361,7 +361,7 @@ footer {
             <button class="play-btn" onclick="showRedirect('neon.html', 'Neon Pong')">Play</button>
         </div>
         
-        <!-- Super Slow Car -->
+        <!-- Super Slow Car (4th Game - Special Redirect) -->
         <div class="game-card cargame">
             <div class="game-icon">🐌🏎️</div>
             <h2 class="game-title">Super Slow Car</h2>
@@ -388,9 +388,9 @@ footer {
             <div class="game-description">
                 3D racing game! Collect coins, avoid obstacles, and enjoy the fast-paced action.
             </div>
-            <button class="play-btn" onclick="showRedirect('Tem.html', 3D Car game')">Play</button>
+            <button class="play-btn" onclick="showRedirect('dashboard.html', '3D Coin Collector')">Play 🏎️</button>
         </div>
-        
+    </div>
     
     <div class="features">
         <div class="feature"><h3>🎯 Multiplayer</h3><p>Play with friends or AI</p></div>
@@ -453,12 +453,23 @@ function showRedirect(url, gameName) {
 // Confirm redirect
 function confirmRedirect() {
     if (currentRedirect) {
-        window.location.href = currentRedirect.url;
+        // Special handling for the 4th game (Super Slow Car)
+        if (currentRedirect.gameName === 'Super Slow Car') {
+            window.location.href = 'Tem.html';
+        } else {
+            window.location.href = currentRedirect.url;
+        }
     }
 }
 
 // Cancel redirect
 function cancelRedirect() {
+    // Special handling for the 4th game (Super Slow Car)
+    if (currentRedirect && currentRedirect.gameName === 'Super Slow Car') {
+        window.location.href = 'g.html';
+        return;
+    }
+    
     document.getElementById('redirectOverlay').classList.remove('show');
     document.body.style.overflow = 'auto';
     currentRedirect = null;
@@ -557,4 +568,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
