@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Center - Tic Tac Toe, Chain Reaction, Neon pong, Car & Sudoku</title>
+<title>Game Center - Tic Tac Toe, Chain Reaction, Snake, Car , slow car game & Sudoku</title>
 <style>
 * {
     margin: 0;
@@ -21,6 +21,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -91,8 +92,10 @@ h1 {
 .game-card.tictactoe::before { background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%); }
 .game-card.chainreaction::before { background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%); }
 .game-card.snake::before { background: linear-gradient(90deg, #7FFF00 0%, #32CD32 100%); }
-.game-card.cargame::before { background: linear-gradient(90deg, #FF8C00 0%, #FFD700 100%); }
-.game-card.sudoku::before { background: linear-gradient(90deg, #9C27B0 0%, #E91E63 100%); } /* Purple to Pink */
+.game-card.cargame::before { background: linear-gradient(90deg, #0a0a0a 0%, #333333 100%); }
+.game-card.sudoku::before { background: linear-gradient(90deg, #9C27B0 0%, #E91E63 100%); }
+.game-card.coincollect::before { background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); }
+.game-card.redirect::before { background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%); }
 
 .game-icon {
     font-size: 3.5rem;
@@ -160,6 +163,142 @@ footer {
     text-align: center;
 }
 
+/* Game fullscreen overlay */
+.game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-overlay.show {
+    display: flex;
+}
+
+.game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #000;
+}
+
+/* Back button */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Redirect Overlay */
+.redirect-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+.redirect-overlay.show {
+    display: flex;
+}
+
+.redirect-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    border: 2px solid #00dbde;
+    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
+}
+
+.redirect-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.redirect-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+.redirect-btn {
+    background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.redirect-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.cancel-btn {
+    background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.cancel-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
@@ -169,6 +308,8 @@ footer {
     .game-title { font-size: 1.6rem; }
     .features { flex-direction: column; align-items: center; }
     .feature { width: 100%; max-width: 250px; }
+    .redirect-content { padding: 20px; }
+    .redirect-content h2 { font-size: 2rem; }
 }
 
 @media (max-width: 480px) {
@@ -176,6 +317,8 @@ footer {
     .game-icon { font-size: 2.5rem; }
     .game-title { font-size: 1.4rem; }
     .play-btn { padding: 10px 20px; font-size: 0.9rem; }
+    .button-group { flex-direction: column; }
+    .redirect-btn, .cancel-btn { width: 100%; margin: 5px 0; }
 }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -188,52 +331,66 @@ footer {
     </header>
     
     <div class="games-container">
-        <div class="game-card tictactoe" onclick="window.location.href='game.html'">
+        <!-- Tic Tac Toe -->
+        <div class="game-card tictactoe">
             <div class="game-icon">❌⭕</div>
             <h2 class="game-title">Tic Tac Toe</h2>
             <div class="game-description">
-                The classic 3×3 strategy game. Play against a friend or challenge our smart AI in this timeless battle of X's and O's.
+                The classic 3×3 strategy game. Play against a friend or challenge our smart AI.
             </div>
-            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='game.html'">Play Tic Tac Toe</button>
+            <button class="play-btn" onclick="showRedirect('game.html', 'Tic Tac Toe')">Play</button>
         </div>
         
-        <div class="game-card chainreaction" onclick="window.location.href='game1.html'">
+        <!-- Chain Reaction -->
+        <div class="game-card chainreaction">
             <div class="game-icon">⚡💥</div>
             <h2 class="game-title">Chain Reaction</h2>
             <div class="game-description">
-                A strategic board game with up to 10 players! Control cells, create chain reactions, and eliminate opponents.
+                Strategic board game with up to 10 players! Create chain reactions to win.
             </div>
-            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='game1.html'">Play Chain Reaction</button>
+            <button class="play-btn" onclick="showRedirect('game1.html', 'Chain Reaction')">Play</button>
         </div>
         
-        <div class="game-card snake" onclick="window.location.href='neon.html'">
+        <!-- Neon Pong -->
+        <div class="game-card snake">
             <div class="game-icon">🎾</div>
             <h2 class="game-title">Neon Pong</h2>
             <div class="game-description">
-                The classic Pong game with a neon glow effect! Play against an AI opponent in this timeless arcade battle.
+                Classic Pong with neon glow! Battle the AI in this arcade classic.
             </div>
-            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='neon.html'">Play Neon Pong</button>
+            <button class="play-btn" onclick="showRedirect('neon.html', 'Neon Pong')">Play</button>
         </div>
         
-        <div class="game-card cargame" onclick="window.location.href='dashboard.html'">
-            <div class="game-icon">🏎️💨</div>
-            <h2 class="game-title">3D Car Game</h2>
+        <!-- Super Slow Car -->
+        <div class="game-card cargame">
+            <div class="game-icon">🐌🏎️</div>
+            <h2 class="game-title">Super Slow Car</h2>
             <div class="game-description">
-                Navigate through obstacles in this 3D driving game! Steer through the course and reach the finish line.
+                Relaxing 3D endless runner! Take your time dodging obstacles in your sleek black car 🖤
             </div>
-            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='dashboard.html'">Play Car Game</button>
+            <button class="play-btn" onclick="showRedirect('tem.html', 'Super Slow Car')">Play 🐌</button>
         </div>
 
-        <!-- Sudoku Card - Redirects to sudoku.html -->
-        <div class="game-card sudoku" onclick="window.location.href='sudoku.html'">
+        <!-- Sudoku -->
+        <div class="game-card sudoku">
             <div class="game-icon">🧩</div>
             <h2 class="game-title">Sudoku</h2>
             <div class="game-description">
-                Professional 9×9 Sudoku with touch support, hints, timer, mistakes tracking, auto-save, and four difficulty levels!
+                Professional 9×9 Sudoku with hints, timer, auto-save & 4 difficulty levels!
             </div>
-            <button class="play-btn" onclick="event.stopPropagation(); window.location.href='sudoku.html'">Play Sudoku</button>
+            <button class="play-btn" onclick="showRedirect('sudoku.html', 'Sudoku')">Play</button>
         </div>
-    </div>
+        
+        <!-- 3D Car Game (Coin Collector) -->
+        <div class="game-card coincollect">
+            <div class="game-icon">💰🏎️</div>
+            <h2 class="game-title">3D Car game</h2>
+            <div class="game-description">
+                3D racing game! Collect coins, avoid obstacles, and enjoy the fast-paced action.
+            </div>
+            <button class="play-btn" onclick="showRedirect('dashboard.html', '3D Coin Collector')">Play 🏎️</button>
+        </div>
+        
     
     <div class="features">
         <div class="feature"><h3>🎯 Multiplayer</h3><p>Play with friends or AI</p></div>
@@ -247,27 +404,107 @@ footer {
     </footer>
 </div>
 
+<!-- Redirect Overlay -->
+<div id="redirectOverlay" class="redirect-overlay">
+    <div class="redirect-content">
+        <h2>Redirecting...</h2>
+        <p id="redirectMessage">You are about to be redirected to <span id="redirectGameName">Game</span></p>
+        <div id="redirectDestination"></div>
+        <div class="button-group">
+            <button class="redirect-btn" onclick="confirmRedirect()">Yes, Redirect Now</button>
+            <button class="cancel-btn" onclick="cancelRedirect()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Fullscreen Game Overlay (for embedded games if needed) -->
+<div id="gameOverlay" class="game-overlay">
+    <button class="back-btn" onclick="hideGame()">← Back to Games</button>
+    <iframe id="gameFrame" class="game-frame"></iframe>
+</div>
+
 <script>
-// Prevent card click from triggering when button is clicked
-document.querySelectorAll('.play-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-});
+// Game redirect URLs mapping
+const gameRedirects = {
+    'Tic Tac Toe': { url: 'game.html', description: 'Classic 3×3 strategy game' },
+    'Chain Reaction': { url: 'game1.html', description: 'Strategic chain reaction board game' },
+    'Neon Pong': { url: 'neon.html', description: 'Neon-themed Pong arcade game' },
+    '3D Coin Collector': { url: 'dashboard.html', description: '3D racing coin collection game' },
+    'Super Slow Car': { url: 'tem.html', description: 'Relaxing 3D endless runner' },
+    'Sudoku': { url: 'sudoku.html', description: 'Professional Sudoku puzzle game' }
+};
 
-// Optional: Add confirmation before leaving (you can remove if not wanted)
-document.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('click', function(e) {
-        if (e.target.closest('.play-btn')) return;
-        const gameName = this.querySelector('.game-title').textContent;
-        if (confirm(`Start playing ${gameName}?`)) {
-            const link = this.onclick.toString().match(/'([^']+)'/);
-            if (link) window.location.href = link[1];
-        }
-    });
-});
+let currentRedirect = null;
 
-// Button hover effect
+// Show redirect confirmation
+function showRedirect(url, gameName) {
+    currentRedirect = { url, gameName };
+    
+    const gameInfo = gameRedirects[gameName] || { url, description: 'Fun game' };
+    
+    document.getElementById('redirectGameName').textContent = gameName;
+    document.getElementById('redirectMessage').innerHTML = 
+        `You are about to be redirected to <strong>${gameName}</strong><br><br>${gameInfo.description}`;
+    
+    document.getElementById('redirectOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Confirm redirect
+function confirmRedirect() {
+    if (currentRedirect) {
+        window.location.href = currentRedirect.url;
+    }
+}
+
+// Cancel redirect
+function cancelRedirect() {
+    document.getElementById('redirectOverlay').classList.remove('show');
+    document.body.style.overflow = 'auto';
+    currentRedirect = null;
+}
+
+// Show all games in a summary
+function showAllGames() {
+    let allGamesHTML = '<h3>All Games & Redirects</h3><ul style="text-align: left; margin: 20px 0; list-style: none;">';
+    
+    for (const [gameName, gameInfo] of Object.entries(gameRedirects)) {
+        allGamesHTML += `<li style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+            <strong>${gameName}</strong><br>
+            <small>Redirects to: ${gameInfo.url}</small><br>
+            <button onclick="showRedirect('${gameInfo.url}', '${gameName}')" 
+                    style="margin-top: 5px; padding: 5px 15px; background: #4CAF50; border: none; border-radius: 5px; color: white; cursor: pointer;">
+                Play ${gameName}
+            </button>
+        </li>`;
+    }
+    
+    allGamesHTML += '</ul>';
+    
+    document.getElementById('redirectGameName').textContent = 'All Games';
+    document.getElementById('redirectMessage').innerHTML = allGamesHTML;
+    document.getElementById('redirectOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// For embedded games overlay (if needed)
+function showGame(gameId) {
+    const overlay = document.getElementById('gameOverlay');
+    const frame = document.getElementById('gameFrame');
+    
+    // If you want to embed games directly, you can add them here
+    // For now, we're using redirects
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function hideGame() {
+    document.getElementById('gameOverlay').classList.remove('show');
+    document.getElementById('gameFrame').src = '';
+    document.body.style.overflow = 'auto';
+}
+
+// UI interactions
 document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('mouseenter', () => {
         btn.style.background = 'linear-gradient(90deg, #96c93d 0%, #00b09b 100%)';
@@ -275,6 +512,47 @@ document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('mouseleave', () => {
         btn.style.background = 'linear-gradient(90deg, #00b09b 0%, #96c93d 100%)';
     });
+});
+
+// ESC key to cancel redirect
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        cancelRedirect();
+        hideGame();
+    }
+});
+
+// Close redirect overlay when clicking outside
+document.getElementById('redirectOverlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+        cancelRedirect();
+    }
+});
+
+// Add some visual effects
+document.addEventListener('DOMContentLoaded', () => {
+    // Add random animation delays to game cards
+    document.querySelectorAll('.game-card').forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.style.opacity = '0';
+        card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.1}s`;
+    });
+    
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
 });
 </script>
 </body>
