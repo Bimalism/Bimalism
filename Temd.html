@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>🐌 Super Slow Car Run - Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #0a1425;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    color: #e0f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 5.5rem;
+    margin: 0 0 40px 0;
+    color: #ff9999;
+    text-shadow: 0 0 20px #ff6666;
+  }
+
+  .mode-btn {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 25px auto;
+    padding: 24px 60px;
+    font-size: 2.2rem;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.25s;
+    color: white;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  }
+
+  #endgame-btn {
+    background: #4CAF50;
+  }
+  #endgame-btn:hover {
+    background: #66bb6a;
+    transform: scale(1.07);
+  }
+
+  #endless-btn {
+    background: #ff6b6b;
+  }
+  #endless-btn:hover {
+    background: #ff8787;
+    transform: scale(1.07);
+  }
+
+  .subtitle {
+    font-size: 1.9rem;
+    margin: 30px 0 60px 0;
+    opacity: 0.9;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🐌 SUPER SLOW CAR RUN</h1>
+  <div class="subtitle">Choose your adventure</div>
+
+  <button id="endgame-btn" class="mode-btn">
+    EndGame Mode<br/>
+    <span style="font-size:1.3rem; opacity:0.8;">Collect 20 coins to win</span>
+  </button>
+
+  <button id="endless-btn" class="mode-btn">
+    Endless Mode<br/>
+    <span style="font-size:1.3rem; opacity:0.8;">Drive forever!</span>
+  </button>
+</div>
+
+<script>
+  // Redirect to separate game files
+  document.getElementById('endgame-btn').onclick = () => {
+    window.location.href = 'Tem1.html';
+  };
+
+  document.getElementById('endless-btn').onclick = () => {
+    window.location.href = 'Tem.html';
+  };
+</script>
+</body>
+</html>
