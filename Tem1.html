@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>🐌 Super Slow 3D Car Run</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+  body { margin:0; overflow:hidden; background:#0a1425; font-family:Arial,Helvetica,sans-serif; height:100vh; }
+  #ui {
+    position: absolute; top: 12px; left: 12px; color: #e0f0ff;
+    background: rgba(0,0,0,0.65); padding: 10px 16px; border-radius: 10px;
+    z-index: 100; font-size: 1.2rem; user-select: none;
+  }
+  #gameover, #winscreen {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.88); color: #e0f0ff;
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 200; text-align: center;
+  }
+  button {
+    padding: 14px 40px; font-size: 1.5rem; margin-top: 25px;
+    color: white; border: none; border-radius: 10px; cursor: pointer;
+  }
+  #gameover button { background: #ff6b6b; }
+  #winscreen button { background: #4CAF50; }
+  .flash { position: fixed; inset: 0; pointer-events: none; transition: opacity 0.8s; opacity: 0; z-index: 150; }
+  .hit.active { background: rgba(255,60,60,0.35); opacity:1; }
+  .coin.active { background: rgba(255,220,80,0.4); opacity:1; }
+  #startScreen {
+    position: absolute; inset: 0; background: rgba(10,20,37,0.92); color: #e0f0ff;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 300; padding: 20px;
+  }
+  .controls-info {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    color: #a0c0ff; background: rgba(0,0,0,0.65); padding: 8px 16px; border-radius: 8px;
+    font-size: 1rem; z-index: 101; pointer-events: none;
+  }
+  .touch-controls {
+    position: absolute; bottom: 0; width: 100%; height: 38%; display: flex; z-index: 90; pointer-events: none;
+  }
+  .touch-left, .touch-right {
+    flex: 1; pointer-events: auto; display: flex; align-items: center; justify-content: center;
+    opacity: 0.25; transition: all 0.2s;
+  }
+  .touch-left { background: rgba(0,120,255,0.08); }
+  .touch-right { background: rgba(255,120,0,0.08); }
+  .touch-left.active, .touch-right.active { opacity: 0.45; }
+  .touch-indicator { font-size: 3.2rem; color: white; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<div id="ui">Distance: <b id="dist">0</b>m  •  Coins: <b id="coinCount">0</b> 🪙</div>
+
+<div id="startScreen">
+  <h1 style="font-size:4.8rem; margin:0 0 20px; color:#ff9999">🐌 SUPER SLOW CAR RUN</h1>
+  <div style="font-size:1.6rem; margin:20px 0; max-width:90%;">Take your time... everything moves super slow<br>Relax and enjoy the chill drive</div>
+  <div style="font-size:1.3rem; margin:30px 0; color:#a0c0ff;">
+    <b>Controls:</b><br>
+    ← / A = Left   → / D = Right<br>
+    <span style="color:#ffaaaa">Touch LEFT side of screen to go LEFT</span><br>
+    <span style="color:#ffaaaa">Touch RIGHT side of screen to go RIGHT</span>
+  </div>
+  <button onclick="startGame()">Start Slow Journey</button>
+</div>
+
+<div id="gameover">
+  <h1 style="font-size:5rem; margin:0; color:#ff9999">Oops! Crash!</h1>
+  <div style="font-size:1.9rem; margin:25px 0;">
+    You traveled <b id="finalDist">0</b>m<br>collected <b id="finalCoins">0</b> coins 🪙
+  </div>
+  <button onclick="restartGame()">Try Again</button>
+</div>
+
+<div id="winscreen">
+  <h1 style="font-size:5.5rem; margin:0; color:#ffdd44">🏆 YOU WIN! 🏆</h1>
+  <div style="font-size:2.2rem; margin:25px 0; color:#fff9a1;">
+    You collected <b id="winCoins">0</b> coins! 🪙
+  </div>
+  <div style="font-size:1.6rem; color:#aaffaa; margin:15px 0;">Legendary ultra-slow driving! 🌟🐌</div>
+  <button onclick="restartGame()">Play Again</button>
+</div>
+
+<div class="flash hit" id="hitFlash"></div>
+<div class="flash coin" id="coinFlash"></div>
+
+<div class="controls-info" id="controlsInfo">Touch LEFT ←   Touch RIGHT →</div>
+
+<div class="touch-controls" id="touchControls">
+  <div class="touch-left" id="touchLeft"><div class="touch-indicator">←</div></div>
+  <div class="touch-right" id="touchRight"><div class="touch-indicator">→</div></div>
+</div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+// ─── CORE SETUP ────────────────────────────────────────────────
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a1425);
+scene.fog = new THREE.Fog(0x0a1425, 140, 480);
+
+const camera = new THREE.PerspectiveCamera(62, innerWidth/innerHeight, 0.1, 1200);
+camera.position.set(0, 9, 20);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xccddee, 0.7));
+scene.add(new THREE.HemisphereLight(0xffffff, 0x444466, 0.9));
+const dirLight = new THREE.DirectionalLight(0xffffe5, 1.2);
+dirLight.position.set(25, 45, 25);
+dirLight.castShadow = true;
+dirLight.shadow.mapSize.width = dirLight.shadow.mapSize.height = 2048;
+scene.add(dirLight);
+
+// ─── ROAD ──────────────────────────────────────────────────────
+const roadGroup = new THREE.Group();
+scene.add(roadGroup);
+
+const road = new THREE.Mesh(new THREE.PlaneGeometry(30,1200), new THREE.MeshLambertMaterial({color:0x222b3a}));
+road.rotation.x = -Math.PI/2; road.receiveShadow = true; roadGroup.add(road);
+
+const lineMat = new THREE.MeshBasicMaterial({color:0xffff99});
+roadGroup.add(new THREE.Mesh(new THREE.PlaneGeometry(0.5,1200), lineMat).rotateX(-Math.PI/2).position.y = 0.03);
+
+const sideMat = new THREE.MeshBasicMaterial({color:0xffffff});
+const side = new THREE.Mesh(new THREE.PlaneGeometry(0.35,1200), sideMat);
+side.rotation.x = -Math.PI/2; side.position.y = 0.03;
+roadGroup.add(side.clone().position.x = -15);
+roadGroup.add(side.clone().position.x = 15);
+
+// ─── FULL DETAILED BLACK CAR ───────────────────────────────────
+const car = new THREE.Group();
+car.position.y = 0.9;
+scene.add(car);
+
+// Main body - deep black metallic
+const body = new THREE.Mesh(
+  new THREE.BoxGeometry(5.2, 1.9, 10.8),
+  new THREE.MeshStandardMaterial({color: 0x0a0a0a, metalness: 0.85, roughness: 0.18})
+);
+body.position.y = 1.2; body.castShadow = true; car.add(body);
+
+// Roof/cabin
+const roof = new THREE.Mesh(
+  new THREE.BoxGeometry(4.1, 1.4, 6.2),
+  new THREE.MeshStandardMaterial({color: 0x111111, metalness: 0.9, roughness: 0.12})
+);
+roof.position.set(0, 2.45, -0.8); car.add(roof);
+
+// Tinted windows
+const glassMat = new THREE.MeshPhysicalMaterial({
+  color: 0x112233, metalness: 0.15, roughness: 0.05, transmission: 0.7,
+  thickness: 0.8, transparent: true, opacity: 0.45
+});
+const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(3.9, 1.5, 0.12), glassMat);
+frontGlass.position.set(0, 2.4, 2.4); frontGlass.rotation.x = Math.PI * 0.14; car.add(frontGlass);
+
+const sideGlass = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.2, 5.2), glassMat);
+sideGlass.position.set(-2.15, 2.35, -0.7); car.add(sideGlass);
+car.add(sideGlass.clone().translateX(4.3));
+
+// Wheels with rims
+function createWheel(x, z) {
+  const group = new THREE.Group();
+  group.position.set(x, 0.7, z);
+  // Tire
+  group.add(new THREE.Mesh(
+    new THREE.CylinderGeometry(1.3,1.3,0.8,24),
+    new THREE.MeshStandardMaterial({color:0x050505, roughness:0.95})
+  ).rotateZ(Math.PI/2));
+  // Rim
+  group.add(new THREE.Mesh(
+    new THREE.CylinderGeometry(0.9,0.9,0.85,20),
+    new THREE.MeshStandardMaterial({color:0xaaaaaa, metalness:0.95, roughness:0.08})
+  ).rotateZ(Math.PI/2));
+  car.add(group);
+  return group;
+}
+const wheels = [
+  createWheel(-2.5, 3.6), createWheel(2.5, 3.6),
+  createWheel(-2.5,-3.6), createWheel(2.5,-3.6)
+];
+
+// Headlights
+const hlMat = new THREE.MeshStandardMaterial({color:0xf0f8ff, emissive:0xe0f0ff, emissiveIntensity:2.2});
+const hl = new THREE.Mesh(new THREE.BoxGeometry(1.2,0.6,0.3), hlMat);
+hl.position.set(-1.6,1.4,5.3); car.add(hl);
+car.add(hl.clone().translateX(3.2));
+
+// ─── CONTROLS ──────────────────────────────────────────────────
+let left = false, right = false;
+let touchLeftActive = false, touchRightActive = false;
+
+window.addEventListener('keydown', e => {
+  if (['ArrowLeft','a','A'].includes(e.key)) left = true;
+  if (['ArrowRight','d','D'].includes(e.key)) right = true;
+});
+window.addEventListener('keyup', e => {
+  if (['ArrowLeft','a','A'].includes(e.key)) left = false;
+  if (['ArrowRight','d','D'].includes(e.key)) right = false;
+});
+
+const tl = document.getElementById('touchLeft');
+const tr = document.getElementById('touchRight');
+
+['touchstart','mousedown'].forEach(e => {
+  tl.addEventListener(e, ev => { ev.preventDefault(); touchLeftActive = true; tl.classList.add('active'); });
+  tr.addEventListener(e, ev => { ev.preventDefault(); touchRightActive = true; tr.classList.add('active'); });
+});
+['touchend','touchcancel','mouseup'].forEach(e => {
+  tl.addEventListener(e, ev => { ev.preventDefault(); touchLeftActive = false; tl.classList.remove('active'); });
+  tr.addEventListener(e, ev => { ev.preventDefault(); touchRightActive = false; tr.classList.remove('active'); });
+});
+
+// ─── GAME LOGIC ────────────────────────────────────────────────
+const lanes = [-11, 0, 11];
+let targetLane = 0;
+const obstacles = [], coins = [];
+
+for(let i=0;i<12;i++){
+  const o = new THREE.Mesh(
+    new THREE.BoxGeometry(3.5+Math.random()*4.5, 2.2+Math.random()*3.5, 4.8),
+    new THREE.MeshLambertMaterial({color:0xff4444})
+  );
+  o.castShadow = true; o.visible = false; scene.add(o); obstacles.push(o);
+}
+
+for(let i=0;i<25;i++){
+  const g = new THREE.Group();
+  const c = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.4,1.4,0.35,20),
+    new THREE.MeshStandardMaterial({color:0xffff77, emissive:0xffff44, emissiveIntensity:1.1})
+  );
+  c.rotation.x = Math.PI/2; g.add(c); g.visible = false; scene.add(g); coins.push(g);
+}
+
+let distance = 0, coinsCollected = 0, speed = 0.015;
+const MAX_SPEED = 0.045;
+const WIN_COINS = 20;
+let gameActive = false;
+let gameWon = false;
+
+const els = {
+  dist: document.getElementById('dist'),
+  coins: document.getElementById('coinCount'),
+  finalDist: document.getElementById('finalDist'),
+  finalCoins: document.getElementById('finalCoins'),
+  winCoins: document.getElementById('winCoins'),
+  gameover: document.getElementById('gameover'),
+  winscreen: document.getElementById('winscreen'),
+  start: document.getElementById('startScreen'),
+  info: document.getElementById('controlsInfo'),
+  hit: document.getElementById('hitFlash'),
+  coin: document.getElementById('coinFlash'),
+  touchControls: document.getElementById('touchControls')
+};
+
+function startGame() {
+  gameActive = true; gameWon = false;
+  els.start.style.display = 'none';
+  els.touchControls.style.display = 'flex';
+  els.info.style.display = 'block';
+  distance = coinsCollected = 0; speed = 0.015; targetLane = 0;
+  car.position.x = 0; car.rotation.z = 0;
+  obstacles.forEach(o=>o.visible=false);
+  coins.forEach(c=>c.visible=false);
+  els.dist.textContent = '0'; els.coins.textContent = '0';
+  els.gameover.style.display = 'none'; els.winscreen.style.display = 'none';
+  setTimeout(()=>els.info.style.display='none', 3800);
+}
+
+function restartGame() {
+  els.gameover.style.display = 'none';
+  els.winscreen.style.display = 'none';
+  startGame();
+}
+
+function checkWin() {
+  if (coinsCollected >= WIN_COINS && !gameWon) {
+    gameWon = true; gameActive = false;
+    els.winCoins.textContent = coinsCollected;
+    els.winscreen.style.display = 'flex';
+    els.touchControls.style.display = 'none';
+  }
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (!gameActive) { renderer.render(scene, camera); return; }
+
+  speed = Math.min(MAX_SPEED, speed + 0.000008);
+  distance += speed;
+
+  const move = 0.145, snap = 0.092;
+  const isLeft = left || touchLeftActive;
+  const isRight = right || touchRightActive;
+
+  if (isLeft && !isRight) targetLane -= move;
+  else if (isRight && !isLeft) targetLane += move;
+  else targetLane *= (1 - snap);
+
+  targetLane = Math.max(-1, Math.min(1, targetLane));
+  const targetX = lanes[Math.round(targetLane + 1)];
+
+  car.position.x = THREE.MathUtils.lerp(car.position.x, targetX, 0.185);
+  car.rotation.z = THREE.MathUtils.lerp(car.rotation.z, -targetLane * 0.38, 0.26);
+  car.position.z -= speed * 60;
+  roadGroup.position.z = car.position.z % 1200;
+
+  if (Math.random() < 0.0022) {
+    const o = obstacles.find(o=>!o.visible);
+    if (o) o.position.set(lanes[Math.floor(Math.random()*3)], 1.5, car.position.z - 240 - Math.random()*120), o.visible = true;
+  }
+
+  if (Math.random() < 0.0055) {
+    const c = coins.find(c=>!c.visible);
+    if (c) c.position.set(lanes[Math.floor(Math.random()*3)] + (Math.random()-0.5)*5, 3.5, car.position.z - 270 - Math.random()*140), c.visible = true;
+  }
+
+  obstacles.forEach(o => {
+    if (!o.visible) return;
+    o.position.z += speed * 60;
+    if (o.position.z > car.position.z + 50) o.visible = false;
+    if (Math.abs(o.position.x - car.position.x) < 6.5 && Math.abs(o.position.z - car.position.z) < 13) {
+      els.hit.classList.add('active'); setTimeout(()=>els.hit.classList.remove('active'), 1300);
+      gameActive = false;
+      els.finalDist.textContent = Math.floor(distance);
+      els.finalCoins.textContent = coinsCollected;
+      els.gameover.style.display = 'flex';
+      els.touchControls.style.display = 'none';
+    }
+  });
+
+  coins.forEach(c => {
+    if (!c.visible) return;
+    c.position.z += speed * 60; c.rotation.y += 0.022;
+    if (c.position.z > car.position.z + 60) c.visible = false;
+    else if (c.position.distanceTo(car.position) < 9.5) {
+      coinsCollected++; c.visible = false;
+      els.coin.classList.add('active'); setTimeout(()=>els.coin.classList.remove('active'), 1000);
+      els.coins.textContent = coinsCollected;
+      checkWin();
+    }
+  });
+
+  els.dist.textContent = Math.floor(distance);
+
+  camera.position.x = THREE.MathUtils.lerp(camera.position.x, car.position.x * 0.4, 0.055);
+  camera.position.z = car.position.z + 24;
+  camera.position.y = 9 + Math.sin(distance * 0.009) * 0.8;
+  camera.lookAt(car.position.x, 3, car.position.z - 45);
+
+  wheels.forEach(w => w.rotation.x += speed * 1.2);
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+window.onload = () => {
+  document.getElementById('startScreen').style.display = 'flex';
+  document.getElementById('touchControls').style.display = 'none';
+};
+</script>
+</body>
+</html>
