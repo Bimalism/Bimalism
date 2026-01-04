@@ -95,6 +95,7 @@ h1 {
 .game-card.cargame::before { background: linear-gradient(90deg, #0a0a0a 0%, #333333 100%); }
 .game-card.sudoku::before { background: linear-gradient(90deg, #9C27B0 0%, #E91E63 100%); }
 .game-card.coincollect::before { background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); }
+.game-card.cookiecrush::before { background: linear-gradient(90deg, #FF6B8B 0%, #FF8E53 100%); }
 .game-card.redirect::before { background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%); }
 
 .game-icon {
@@ -361,7 +362,7 @@ footer {
             <button class="play-btn" onclick="showRedirect('neon.html', 'Neon Pong')">Play</button>
         </div>
         
-        <!-- Super Slow Car (4th Game - Special Redirect) -->
+        <!-- Super Slow Car -->
         <div class="game-card cargame">
             <div class="game-icon">🐌🏎️</div>
             <h2 class="game-title">Super Slow Car</h2>
@@ -390,7 +391,17 @@ footer {
             </div>
             <button class="play-btn" onclick="showRedirect('dashboard.html', '3D Coin Collector')">Play 🏎️</button>
         </div>
-    </div>
+        
+        <!-- Cookie Crush -->
+        <div class="game-card cookiecrush">
+            <div class="game-icon"><i class="fas fa-cookie"></i><i class="fas fa-candy-cane"></i></div>
+            <h2 class="game-title">Cookie Crush</h2>
+            <div class="game-description">
+                Match 3+ cookies to score points! Challenging Level 1 with limited moves. Beat 1000 points in 15 moves!
+            </div>
+            <button class="play-btn" onclick="showRedirect('cook.html', 'Cookie Crush')">Play 🍪</button>
+        </div>
+        
     
     <div class="features">
         <div class="feature"><h3>🎯 Multiplayer</h3><p>Play with friends or AI</p></div>
@@ -424,14 +435,36 @@ footer {
 </div>
 
 <script>
-// Game redirect URLs mapping
+// Game redirect URLs mapping - UPDATED WITH COOKIE CRUSH
 const gameRedirects = {
-    'Tic Tac Toe': { url: 'game.html', description: 'Classic 3×3 strategy game' },
-    'Chain Reaction': { url: 'game1.html', description: 'Strategic chain reaction board game' },
-    'Neon Pong': { url: 'neon.html', description: 'Neon-themed Pong arcade game' },
-    '3D Coin Collector': { url: 'dashboard.html', description: '3D racing coin collection game' },
-    'Super Slow Car': { url: 'Temd.html', description: 'Relaxing 3D endless runner' },
-    'Sudoku': { url: 'sudoku.html', description: 'Professional Sudoku puzzle game' }
+    'Tic Tac Toe': { 
+        url: 'game.html', 
+        description: 'Classic 3×3 strategy game. Play against a friend or challenge our smart AI.' 
+    },
+    'Chain Reaction': { 
+        url: 'game1.html', 
+        description: 'Strategic board game with up to 10 players! Create chain reactions to win.' 
+    },
+    'Neon Pong': { 
+        url: 'neon.html', 
+        description: 'Classic Pong with neon glow! Battle the AI in this arcade classic.' 
+    },
+    '3D Coin Collector': { 
+        url: 'dashboard.html', 
+        description: '3D racing game! Collect coins, avoid obstacles, and enjoy the fast-paced action.' 
+    },
+    'Super Slow Car': { 
+        url: 'Temd.html', 
+        description: 'Relaxing 3D endless runner! Take your time dodging obstacles in your sleek black car.' 
+    },
+    'Sudoku': { 
+        url: 'sudoku.html', 
+        description: 'Professional 9×9 Sudoku with hints, timer, auto-save & 4 difficulty levels!' 
+    },
+    'Cookie Crush': { 
+        url: 'cook.html', 
+        description: 'Match 3+ cookies to score points! Challenging Level 1: Beat 1000 points in just 15 moves!' 
+    }
 };
 
 let currentRedirect = null;
@@ -444,7 +477,8 @@ function showRedirect(url, gameName) {
     
     document.getElementById('redirectGameName').textContent = gameName;
     document.getElementById('redirectMessage').innerHTML = 
-        `You are about to be redirected to <strong>${gameName}</strong><br><br>${gameInfo.description}`;
+        `<strong>${gameName}</strong><br><br>${gameInfo.description}<br><br>
+         <span style="color: #4CAF50; font-size: 0.9rem;">Redirecting to: ${url}</span>`;
     
     document.getElementById('redirectOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -453,46 +487,76 @@ function showRedirect(url, gameName) {
 // Confirm redirect
 function confirmRedirect() {
     if (currentRedirect) {
-        // Special handling for the 4th game (Super Slow Car)
-        if (currentRedirect.gameName === 'Super Slow Car') {
-            window.location.href = 'Temd.html';
-        } else {
+        // Add loading animation
+        const redirectBtn = document.querySelector('.redirect-btn');
+        const originalText = redirectBtn.textContent;
+        redirectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+        redirectBtn.disabled = true;
+        
+        // Redirect after short delay
+        setTimeout(() => {
             window.location.href = currentRedirect.url;
-        }
+        }, 500);
     }
 }
 
 // Cancel redirect
 function cancelRedirect() {
-    // Special handling for the 4th game (Super Slow Car)
-    if (currentRedirect && currentRedirect.gameName === 'Super Slow Car') {
-        window.location.href = 'g.html';
-        return;
-    }
-    
     document.getElementById('redirectOverlay').classList.remove('show');
     document.body.style.overflow = 'auto';
     currentRedirect = null;
+    
+    // Reset button text
+    const redirectBtn = document.querySelector('.redirect-btn');
+    redirectBtn.textContent = 'Yes, Redirect Now';
+    redirectBtn.disabled = false;
 }
 
 // Show all games in a summary
 function showAllGames() {
-    let allGamesHTML = '<h3>All Games & Redirects</h3><ul style="text-align: left; margin: 20px 0; list-style: none;">';
+    let allGamesHTML = '<h3 style="color: #00dbde; margin-bottom: 20px;">All Games & Redirect URLs</h3>';
+    allGamesHTML += '<div style="max-height: 300px; overflow-y: auto; padding-right: 10px;">';
     
+    let gameNumber = 1;
     for (const [gameName, gameInfo] of Object.entries(gameRedirects)) {
-        allGamesHTML += `<li style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px;">
-            <strong>${gameName}</strong><br>
-            <small>Redirects to: ${gameInfo.url}</small><br>
-            <button onclick="showRedirect('${gameInfo.url}', '${gameName}')" 
-                    style="margin-top: 5px; padding: 5px 15px; background: #4CAF50; border: none; border-radius: 5px; color: white; cursor: pointer;">
-                Play ${gameName}
-            </button>
-        </li>`;
+        allGamesHTML += `
+        <div style="
+            margin: 15px 0; 
+            padding: 15px; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 12px;
+            border-left: 4px solid #00dbde;
+            text-align: left;
+        ">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.1rem; color: #fff;">${gameNumber}. ${gameName}</strong><br>
+                    <small style="color: #aaa;">${gameInfo.description}</small>
+                </div>
+                <button onclick="showRedirect('${gameInfo.url}', '${gameName}')" 
+                        style="
+                            padding: 8px 20px; 
+                            background: linear-gradient(90deg, #4CAF50, #2E7D32); 
+                            border: none; 
+                            border-radius: 25px; 
+                            color: white; 
+                            cursor: pointer;
+                            font-weight: bold;
+                            white-space: nowrap;
+                        ">
+                    Play Now
+                </button>
+            </div>
+            <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                <small style="color: #00dbde; font-family: monospace;">${gameInfo.url}</small>
+            </div>
+        </div>`;
+        gameNumber++;
     }
     
-    allGamesHTML += '</ul>';
+    allGamesHTML += '</div>';
     
-    document.getElementById('redirectGameName').textContent = 'All Games';
+    document.getElementById('redirectGameName').textContent = 'Game Directory';
     document.getElementById('redirectMessage').innerHTML = allGamesHTML;
     document.getElementById('redirectOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -562,11 +626,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 transform: translateY(0);
             }
         }
+        
+        /* Cookie Crush card special animation */
+        .game-card.cookiecrush:hover {
+            animation: cookiePulse 1s infinite;
+        }
+        
+        @keyframes cookiePulse {
+            0% { box-shadow: 0 15px 30px rgba(255, 107, 139, 0.3); }
+            50% { box-shadow: 0 15px 30px rgba(255, 142, 83, 0.5); }
+            100% { box-shadow: 0 15px 30px rgba(255, 107, 139, 0.3); }
+        }
     `;
     document.head.appendChild(style);
+    
+    // Add cookie icon animation to Cookie Crush card
+    const cookieCard = document.querySelector('.game-card.cookiecrush .game-icon');
+    if (cookieCard) {
+        const icons = cookieCard.querySelectorAll('i');
+        icons.forEach((icon, i) => {
+            icon.style.animation = `float ${2 + i * 0.5}s ease-in-out infinite`;
+        });
+        
+        const floatStyle = document.createElement('style');
+        floatStyle.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(floatStyle);
+    }
 });
 </script>
 </body>
 </html>
-
-
