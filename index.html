@@ -9,6 +9,13 @@
     <meta name="author" content="Bimalism Education">
     <meta name="google-adsense-account" content="ca-pub-7551440219345789">
     <meta name="google-site-verification" content="FYrkd9AMwMRRvQnfwzWQzQrNosPpMQbKwzfwttKUiFA" />
+    
+    <!-- PWA REQUIREMENTS -->
+    <meta name="theme-color" content="#2563eb">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <link rel="icon" type="image/png" href="Bimalismlogo.png">
     <title>Bimalism - NEET & JEE Coaching</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,27 +31,27 @@
             --neet: #3b82f6;
             --jee: #ef4444;
         }
-        
+       
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+       
         body {
             background-color: #f9fafb;
             color: var(--dark);
             line-height: 1.6;
         }
-        
+       
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+       
         /* Loading Spinner */
         .loading-spinner {
             display: none;
@@ -60,11 +67,69 @@
             font-weight: bold;
             text-align: center;
         }
-
         .loading-spinner.active {
             display: block;
         }
-        
+       
+        /* Install App Button */
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 999;
+            transition: all 0.3s ease;
+            display: none;
+        }
+       
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+       
+        .install-btn i {
+            font-size: 1.2rem;
+        }
+       
+        /* PWA Install Instructions */
+        .pwa-instructions {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 1001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+       
+        .pwa-instructions.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+       
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+       
         /* Name Verification Modal */
         .modal-overlay {
             position: fixed;
@@ -81,12 +146,12 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
-        
+       
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
+       
         .verification-modal {
             background-color: white;
             border-radius: 15px;
@@ -100,11 +165,11 @@
             transition: transform 0.3s ease;
             position: relative;
         }
-        
+       
         .modal-overlay.active .verification-modal {
             transform: translateY(0);
         }
-        
+       
         .close-btn {
             position: absolute;
             top: 15px;
@@ -116,11 +181,11 @@
             cursor: pointer;
             transition: color 0.3s;
         }
-        
+       
         .close-btn:hover {
             color: var(--primary);
         }
-        
+       
         .modal-logo {
             font-size: 2.5rem;
             font-weight: 700;
@@ -130,19 +195,19 @@
             margin-bottom: 20px;
             color: var(--primary);
         }
-        
+       
         .modal-logo .logo-img {
             height: 60px;
             margin-right: 12px;
         }
-        
+       
         /* NEW: Logo image styling */
         .logo-img {
             height: 40px;
             width: auto;
             vertical-align: middle;
         }
-        
+       
         /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -153,47 +218,46 @@
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+       
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+       
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
         }
-        
+       
         .nav-links {
             display: flex;
             list-style: none;
             align-items: center;
         }
-        
+       
         .nav-links li {
             margin-left: 1.5rem;
         }
-        
+       
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+       
         .nav-links a:hover {
             color: #ffd700;
         }
-        
+       
         /* Language Switcher Styles */
         .language-switcher {
             position: relative;
             margin-left: 1rem;
         }
-
         .language-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -207,12 +271,10 @@
             transition: all 0.3s;
             font-weight: 500;
         }
-
         .language-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
-
         .language-dropdown {
             position: absolute;
             top: 100%;
@@ -227,12 +289,10 @@
             display: none;
             z-index: 1000;
         }
-
         .language-dropdown.active {
             display: block;
             animation: fadeIn 0.3s ease;
         }
-
         .language-option {
             padding: 0.8rem 1rem;
             color: var(--dark);
@@ -247,22 +307,19 @@
             text-align: left;
             cursor: pointer;
         }
-
         .language-option:hover {
             background: var(--light);
             color: var(--primary);
         }
-
         .language-option.active {
             background: var(--light);
             color: var(--primary);
             font-weight: 600;
         }
-
         .flag-icon {
             font-size: 1.2rem;
         }
-        
+       
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
@@ -275,29 +332,29 @@
             border: none;
             cursor: pointer;
         }
-        
+       
         .btn:hover {
             background-color: #be185d;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
+       
         .btn-neet {
             background-color: var(--neet);
         }
-        
+       
         .btn-neet:hover {
             background-color: #2563eb;
         }
-        
+       
         .btn-jee {
             background-color: var(--jee);
         }
-        
+       
         .btn-jee:hover {
             background-color: #dc2626;
         }
-        
+       
         /* Hero Section */
         .hero {
             padding: 5rem 0;
@@ -305,19 +362,19 @@
             color: white;
             text-align: center;
         }
-        
+       
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+       
         .hero p {
             font-size: 1.5rem;
             max-width: 800px;
             margin: 0 auto 2rem;
         }
-        
+       
         .hero-buttons {
             display: flex;
             justify-content: center;
@@ -325,36 +382,36 @@
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-        
+       
         /* Features Section */
         .features {
             padding: 5rem 0;
             background-color: white;
         }
-        
+       
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+       
         .section-title h2 {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
-        
+       
         .section-title p {
             color: var(--dark);
             max-width: 700px;
             margin: 0 auto;
         }
-        
+       
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+       
         .feature-card {
             background-color: var(--light);
             border-radius: 10px;
@@ -362,37 +419,37 @@
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+       
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+       
         .feature-card i {
             font-size: 3rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
         }
-        
+       
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--dark);
         }
-        
+       
         /* Exam Sections */
         .exams {
             padding: 5rem 0;
             background-color: var(--light);
         }
-        
+       
         .exam-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin-top: 2rem;
         }
-        
+       
         .exam-card {
             flex: 1;
             min-width: 300px;
@@ -401,109 +458,109 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+       
         .exam-header {
             padding: 1.5rem;
             color: white;
             text-align: center;
         }
-        
+       
         .neet-header {
             background: linear-gradient(135deg, var(--neet), #1d4ed8);
         }
-        
+       
         .jee-header {
             background: linear-gradient(135deg, var(--jee), #b91c1c);
         }
-        
+       
         .exam-body {
             padding: 2rem;
         }
-        
+       
         .exam-body ul {
             list-style: none;
             margin: 1.5rem 0;
         }
-        
+       
         .exam-body ul li {
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
         }
-        
+       
         .exam-body ul li:before {
             content: "✓";
             color: var(--success);
             position: absolute;
             left: 0;
         }
-        
+       
         .exam-advantages {
             margin: 1.5rem 0;
         }
-        
+       
         /* Results Section */
         .results {
             padding: 5rem 0;
             background-color: white;
         }
-        
+       
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-        
+       
         .result-card {
             text-align: center;
             padding: 2rem;
             border-radius: 10px;
             background-color: var(--light);
         }
-        
+       
         .result-card i {
             font-size: 3rem;
             color: var(--success);
             margin-bottom: 1rem;
         }
-        
+       
         .result-card .number {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary);
             margin: 1rem 0;
         }
-        
+       
         /* Testimonials */
         .testimonials {
             padding: 5rem 0;
             background-color: var(--light);
         }
-        
+       
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+       
         .testimonial-card {
             background-color: white;
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+       
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
         }
-        
+       
         .testimonial-author {
             display: flex;
             align-items: center;
         }
-        
+       
         .author-avatar {
             width: 50px;
             height: 50px;
@@ -516,7 +573,7 @@
             font-weight: bold;
             margin-right: 1rem;
         }
-        
+       
         /* CTA Section */
         .cta {
             padding: 5rem 0;
@@ -524,39 +581,39 @@
             color: white;
             text-align: center;
         }
-        
+       
         .cta h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-        
+       
         .cta p {
             max-width: 700px;
             margin: 0 auto 2rem;
             font-size: 1.2rem;
         }
-        
+       
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
             padding: 3rem 0 1rem;
         }
-        
+       
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+       
         .footer-column h3 {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
         }
-        
+       
         .footer-column h3::after {
             content: '';
             position: absolute;
@@ -566,31 +623,31 @@
             height: 3px;
             background-color: var(--accent);
         }
-        
+       
         .footer-column ul {
             list-style: none;
         }
-        
+       
         .footer-column ul li {
             margin-bottom: 0.8rem;
         }
-        
+       
         .footer-column a {
             color: #d1d5db;
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+       
         .footer-column a:hover {
             color: white;
         }
-        
+       
         .social-links {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+       
         .social-links a {
             display: inline-flex;
             align-items: center;
@@ -601,11 +658,11 @@
             border-radius: 50%;
             transition: background-color 0.3s;
         }
-        
+       
         .social-links a:hover {
             background-color: var(--accent);
         }
-        
+       
         .copyright {
             text-align: center;
             padding-top: 2rem;
@@ -613,7 +670,7 @@
             color: #9ca3af;
             font-size: 0.9rem;
         }
-        
+       
         /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
@@ -623,7 +680,7 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        
+       
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -637,64 +694,70 @@
                 padding: 1rem 0;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-            
+           
             .nav-links.active {
                 display: flex;
             }
-            
+           
             .nav-links li {
                 margin: 0.5rem 0;
                 text-align: center;
             }
-
             .language-switcher {
                 margin: 0.5rem 0;
             }
-
             .language-dropdown {
                 position: static;
                 margin-top: 0.5rem;
                 box-shadow: none;
                 border: 1px solid rgba(255, 255, 255, 0.3);
             }
-            
+           
             .mobile-menu-btn {
                 display: block;
             }
-            
+           
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
+           
             .hero p {
                 font-size: 1.2rem;
             }
-            
+           
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+           
             .features-grid,
             .testimonial-grid,
             .results-grid {
                 grid-template-columns: 1fr;
             }
-            
+           
             .exam-container {
                 flex-direction: column;
             }
-            
+           
             .verification-modal {
                 padding: 30px 20px;
                 margin: 0 20px;
             }
-            
+           
             .modal-title {
                 font-size: 1.7rem;
             }
+            
+            /* Mobile install button adjustments */
+            .install-btn {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                justify-content: center;
+            }
         }
-        
+       
         /* Animation */
         @keyframes fadeIn {
             from {
@@ -706,49 +769,59 @@
                 transform: translateY(0);
             }
         }
-        
+       
         .animated {
             animation: fadeIn 1s ease-out;
         }
     </style>
 </head>
 <body>
+    <!-- PWA Install Instructions -->
+    <div class="pwa-instructions" id="pwaInstructions">
+        <p><i class="fas fa-mobile-alt"></i> Install Bimalism App: Tap <i class="fas fa-share"></i> then "Add to Home Screen"</p>
+    </div>
+    
+    <!-- Install App Button -->
+    <button class="install-btn" id="installBtn">
+        <i class="fas fa-download"></i> Install App
+    </button>
+    
     <!-- Loading Spinner -->
     <div class="loading-spinner" id="loadingSpinner">
         <i class="fas fa-spinner fa-spin fa-2x"></i>
         <p>Redirecting to language page...</p>
     </div>
-
+    
     <!-- Name Verification Modal -->
     <div class="modal-overlay" id="nameModal">
         <div class="verification-modal">
             <button class="close-btn" id="closeModal">
                 <i class="fas fa-times"></i>
             </button>
-            
+           
             <!-- LOGO WITH PNG -->
             <div class="modal-logo">
                 <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
             </div>
-            
+           
             <h2 class="modal-title">Welcome to Bimalism</h2>
             <p class="modal-text">Please enter your name to personalize your experience</p>
-            
+           
             <form id="nameForm">
                 <div class="input-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
-                
+               
                 <button type="submit" class="modal-btn">
                     <i class="fas fa-check-circle"></i> Continue
                 </button>
             </form>
-            
+           
             <div id="modalMessage" class="modal-message"></div>
         </div>
     </div>
-
+    
     <!-- Header -->
     <header>
         <div class="container">
@@ -794,7 +867,7 @@
             </nav>
         </div>
     </header>
-
+    
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -810,7 +883,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
@@ -842,7 +915,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Exam Sections -->
     <section class="exams" id="exams">
         <div class="container">
@@ -894,7 +967,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Results Section -->
     <section class="results" id="results">
         <div class="container">
@@ -926,7 +999,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -974,7 +1047,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- CTA Section -->
     <section class="cta" id="contact">
         <div class="container">
@@ -986,7 +1059,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1010,7 +1083,7 @@
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
-                
+               
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
@@ -1027,6 +1100,72 @@
     </footer>
 
     <script>
+        // ===== PWA FUNCTIONALITY =====
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const pwaInstructions = document.getElementById('pwaInstructions');
+        
+        // Check if app is already installed
+        window.addEventListener('appinstalled', () => {
+            console.log('Bimalism app was installed');
+            installBtn.style.display = 'none';
+            localStorage.setItem('bimalismAppInstalled', 'true');
+        });
+        
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            installBtn.style.display = 'flex';
+            
+            // Show instructions for iOS users
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                showIOSInstructions();
+            }
+            
+            // Install button click handler
+            installBtn.addEventListener('click', async () => {
+                installBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Installing...';
+                installBtn.disabled = true;
+                
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    installBtn.style.display = 'none';
+                } else {
+                    console.log('User dismissed the install prompt');
+                    installBtn.innerHTML = '<i class="fas fa-download"></i> Install App';
+                    installBtn.disabled = false;
+                }
+                deferredPrompt = null;
+            });
+        });
+        
+        // Show iOS instructions
+        function showIOSInstructions() {
+            if (!localStorage.getItem('bimalismIOSInstructionsShown')) {
+                setTimeout(() => {
+                    pwaInstructions.classList.add('show');
+                    localStorage.setItem('bimalismIOSInstructionsShown', 'true');
+                    
+                    setTimeout(() => {
+                        pwaInstructions.classList.remove('show');
+                    }, 10000);
+                }, 5000);
+            }
+        }
+        
+        // Check if app is in standalone mode (already installed)
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Running in standalone mode');
+            installBtn.style.display = 'none';
+        }
+        
+        // ===== EXISTING CODE =====
         // Name Verification System
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('nameModal');
@@ -1035,10 +1174,10 @@
             const messageDiv = document.getElementById('modalMessage');
             const closeBtn = document.getElementById('closeModal');
             const loadingSpinner = document.getElementById('loadingSpinner');
-            
+           
             // Check if user has already entered their name
             const userName = localStorage.getItem('bimalismUserName');
-            
+           
             if (userName) {
                 console.log(`Welcome back, ${userName}!`);
             } else {
@@ -1046,109 +1185,107 @@
                     modal.classList.add('active');
                 }, 2000);
             }
-            
+           
             // Close modal when X button is clicked
             closeBtn.addEventListener('click', function() {
                 modal.classList.remove('active');
                 localStorage.setItem('bimalismModalClosed', 'true');
             });
-            
+           
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+               
                 const enteredName = nameInput.value.trim();
-                
+               
                 // Clear previous message
                 messageDiv.style.display = 'none';
                 messageDiv.className = 'modal-message';
-                
+               
                 if (!enteredName) {
                     showMessage('Please enter your name', 'modal-error');
                     nameInput.classList.add('shake');
                     setTimeout(() => nameInput.classList.remove('shake'), 500);
                     return;
                 }
-                
+               
                 // Store the name in localStorage
                 localStorage.setItem('bimalismUserName', enteredName);
-                
+               
                 // All names are accepted
                 showMessage(`Welcome ${enteredName}! Redirecting to settings...`, 'modal-success');
-                
+               
                 // Redirect to settings.html after a short delay
                 setTimeout(() => {
                     window.location.href = 'settings.html';
                 }, 1500);
             });
-            
+           
             function showMessage(text, type) {
                 messageDiv.textContent = text;
                 messageDiv.className = `modal-message ${type}`;
                 messageDiv.style.display = 'block';
             }
-            
+           
             // Language Switcher Functionality
             const languageBtn = document.querySelector('.language-btn');
             const languageDropdown = document.querySelector('.language-dropdown');
             const languageOptions = document.querySelectorAll('.language-option');
             const languageText = document.querySelector('.language-btn span');
-            
+           
             // Toggle language dropdown
             languageBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 languageDropdown.classList.toggle('active');
             });
-            
+           
             // Close dropdown when clicking outside
             document.addEventListener('click', function() {
                 languageDropdown.classList.remove('active');
             });
-            
+           
             // Language selection with redirection
             languageOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     const selectedLang = this.getAttribute('data-lang');
                     const selectedPage = this.getAttribute('data-page');
                     const selectedText = this.textContent.trim();
-                    
+                   
                     // Show loading spinner
                     loadingSpinner.classList.add('active');
-                    
+                   
                     // Update active state
                     languageOptions.forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
-                    
+                   
                     // Update button text
                     languageText.textContent = selectedText.split(' ')[0];
-                    
+                   
                     // Close dropdown
                     languageDropdown.classList.remove('active');
-                    
+                   
                     // Store language preference
                     localStorage.setItem('bimalismLanguage', selectedLang);
-                    
+                   
                     // Redirect to the selected language page after a short delay
                     setTimeout(() => {
                         window.location.href = selectedPage;
                     }, 1000);
                 });
             });
-            
+           
             // Mobile menu toggle
             document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
                 document.querySelector('.nav-links').classList.toggle('active');
             });
-
             // Close mobile menu when clicking on a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     document.querySelector('.nav-links').classList.remove('active');
                 });
             });
-
             // Add animation on scroll
             const animatedElements = document.querySelectorAll('.animated');
-            
+           
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1157,13 +1294,94 @@
                     }
                 });
             }, { threshold: 0.1 });
-            
+           
             animatedElements.forEach(el => {
                 el.style.animationPlayState = 'paused';
                 observer.observe(el);
             });
+            
+            // Register Service Worker for PWA
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registered:', registration);
+                        })
+                        .catch(error => {
+                            console.log('ServiceWorker registration failed:', error);
+                        });
+                });
+            }
         });
     </script>
+    
+    <!-- Service Worker Script -->
+    <script>
+        // Service Worker Registration (inline for convenience)
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'bimalism-v1.0';
+                const urlsToCache = [
+                    '/',
+                    'index.html',
+                    'neet.html',
+                    'jee.html',
+                    'settings.html',
+                    'tips.html',
+                    'table.html',
+                    'calculator.html',
+                    'bio-data-pop-up.html',
+                    'g.html',
+                    'h.html',
+                    't.html',
+                    'logo1.png',
+                    'Bimalismlogo.png'
+                ];
+
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                });
+
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                if (response) {
+                                    return response;
+                                }
+                                return fetch(event.request);
+                            })
+                    );
+                });
+
+                self.addEventListener('activate', event => {
+                    event.waitUntil(
+                        caches.keys().then(cacheNames => {
+                            return Promise.all(
+                                cacheNames.map(cacheName => {
+                                    if (cacheName !== CACHE_NAME) {
+                                        return caches.delete(cacheName);
+                                    }
+                                })
+                            );
+                        })
+                    );
+                });
+            `;
+
+            // Create and register service worker
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swURL = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swURL)
+                .then(registration => console.log('SW Registered'))
+                .catch(error => console.log('SW Registration failed:', error));
+        }
+    </script>
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
      crossorigin="anonymous"></script>
 <!-- Ad sense unit 1 -->
@@ -1178,20 +1396,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
