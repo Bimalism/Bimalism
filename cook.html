@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candy Crush - Challenging Level 1</title>
+    <title>Candy Crush - Coin Collection Challenge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -130,8 +130,8 @@
             color: #f72585;
         }
 
-        .score-value {
-            color: #4cc9f0;
+        .coins-value {
+            color: #FFD700;
         }
 
         .target-value {
@@ -232,6 +232,28 @@
 
         .candy.matched {
             animation: pop 0.5s forwards;
+        }
+
+        .candy.coin {
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .candy.coin::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            animation: coinGlow 2s infinite linear;
+        }
+
+        @keyframes coinGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes pop {
@@ -452,6 +474,21 @@
             box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
         }
 
+        .coin-collect-animation {
+            position: fixed;
+            font-size: 2rem;
+            color: #FFD700;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            animation: coinFly 1s ease-out;
+        }
+
+        @keyframes coinFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--target-x), var(--target-y)) scale(0.2); opacity: 0; }
+        }
+
         @media (max-width: 768px) {
             .game-board {
                 max-width: 400px;
@@ -498,22 +535,22 @@
                     <i class="fas fa-candy-cane"></i>
                     <h1>Candy Crush</h1>
                     <div class="difficulty-badge">
-                        <i class="fas fa-skull"></i>
-                        CHALLENGING LEVEL 1
+                        <i class="fas fa-coins"></i>
+                        COIN COLLECTION
                     </div>
                 </div>
                 <div class="stats-container">
-                    <div class="stat-box" id="score-box">
-                        <div class="stat-value score-value" id="score">0</div>
-                        <div class="stat-label">SCORE</div>
+                    <div class="stat-box" id="coins-box">
+                        <div class="stat-value coins-value" id="coins">0</div>
+                        <div class="stat-label">COINS COLLECTED</div>
                     </div>
                     <div class="stat-box" id="moves-box">
                         <div class="stat-value moves-left" id="moves">15</div>
                         <div class="stat-label">MOVES LEFT</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value target-value" id="target-score">1000</div>
-                        <div class="stat-label">TARGET SCORE</div>
+                        <div class="stat-value target-value" id="target-coins">10</div>
+                        <div class="stat-label">COINS NEEDED</div>
                     </div>
                 </div>
             </div>
@@ -545,8 +582,9 @@
         
         <div class="game-footer">
             <p class="instructions">
-                <strong>HOW TO PLAY:</strong> Swap adjacent candies to match 3 or more of the same color. 
-                You have <strong>15 moves</strong> to reach <strong>1000 points</strong>. Make every move count!
+                <strong>HOW TO PLAY:</strong> Match 3 or more candies to collect coins. 
+                Only matches that include <strong style="color:#FFD700">GOLD COIN CANDIES</strong> will give you coins. 
+                You have <strong>15 moves</strong> to collect <strong>10 coins</strong>!
             </p>
         </div>
         
@@ -557,8 +595,8 @@
         <div class="game-over-overlay" id="game-over-overlay">
             <div class="game-over-modal">
                 <h2 id="game-over-title">Game Over</h2>
-                <p>You scored:</p>
-                <div class="final-score" id="final-score">0</div>
+                <p>You collected:</p>
+                <div class="final-score" id="final-coins">0 coins</div>
                 <p id="game-over-message">Better luck next time!</p>
                 <button class="modal-btn" id="play-again-btn">
                     <i class="fas fa-play-circle"></i> PLAY AGAIN
@@ -568,23 +606,23 @@
     </div>
 
     <script>
-        // CHALLENGING LEVEL 1 CONFIGURATION
+        // COIN COLLECTION CHALLENGE CONFIGURATION
         const config = {
             boardSize: 8,
-            candyTypes: 5,
-            initialMoves: 15,          // Limited moves for challenge
-            targetScore: 1000,         // Higher target for difficulty
+            candyTypes: 6,             // 5 normal candies + 1 coin candy
+            initialMoves: 15,
+            targetCoins: 10,           // Changed from targetScore
             minMatchLength: 3,
-            scorePerCandy: 50,         // Reduced points per candy
-            shufflePenalty: 2,         // Moves lost when shuffling
-            hintPenalty: 1,            // Moves lost when using hint
-            movesWarningThreshold: 5,  // Show warning at 5 moves
-            movesCriticalThreshold: 3  // Show critical warning at 3 moves
+            coinProbability: 0.15,     // 15% chance for a coin candy
+            shufflePenalty: 2,
+            hintPenalty: 1,
+            movesWarningThreshold: 5,
+            movesCriticalThreshold: 3
         };
 
         // Game State
         const gameState = {
-            score: 0,
+            coins: 0,
             movesLeft: config.initialMoves,
             selectedCandy: null,
             isSwapping: false,
@@ -595,15 +633,16 @@
                 {color: "#4361EE", icon: "fa-star"},
                 {color: "#4CC9F0", icon: "fa-gem"},
                 {color: "#7209B7", icon: "fa-cookie"},
-                {color: "#3A0CA3", icon: "fa-ice-cream"}
+                {color: "#3A0CA3", icon: "fa-ice-cream"},
+                {color: "#FFD700", icon: "fa-coins", isCoin: true}  // Coin candy
             ]
         };
 
         // DOM Elements
         const gameBoard = document.getElementById('game-board');
-        const scoreElement = document.getElementById('score');
+        const coinsElement = document.getElementById('coins');
         const movesElement = document.getElementById('moves');
-        const targetScoreElement = document.getElementById('target-score');
+        const targetCoinsElement = document.getElementById('target-coins');
         const hintBtn = document.getElementById('hint-btn');
         const shuffleBtn = document.getElementById('shuffle-btn');
         const resetBtn = document.getElementById('reset-btn');
@@ -613,10 +652,10 @@
         const gameOverOverlay = document.getElementById('game-over-overlay');
         const gameOverTitle = document.getElementById('game-over-title');
         const gameOverMessage = document.getElementById('game-over-message');
-        const finalScoreElement = document.getElementById('final-score');
+        const finalCoinsElement = document.getElementById('final-coins');
         const playAgainBtn = document.getElementById('play-again-btn');
         const movesBox = document.getElementById('moves-box');
-        const scoreBox = document.getElementById('score-box');
+        const coinsBox = document.getElementById('coins-box');
 
         // Initialize Game
         function initGame() {
@@ -665,7 +704,7 @@
             
             // Create patterns that require more strategic thinking
             if ((row + col) % 3 === 0) {
-                candy = (row + col) % config.candyTypes;
+                candy = (row + col) % (config.candyTypes - 1); // Exclude coin candy from pattern
             } else {
                 candy = getRandomCandy();
             }
@@ -696,9 +735,12 @@
             return false;
         }
 
-        // Get Random Candy
+        // Get Random Candy (with chance for coin candy)
         function getRandomCandy() {
-            return Math.floor(Math.random() * config.candyTypes);
+            if (Math.random() < config.coinProbability) {
+                return config.candyTypes - 1; // Coin candy is last in array
+            }
+            return Math.floor(Math.random() * (config.candyTypes - 1)); // Regular candies
         }
 
         // Render Board
@@ -713,6 +755,11 @@
                     candy.dataset.row = row;
                     candy.dataset.col = col;
                     candy.style.backgroundColor = gameState.candyColors[candyIndex].color;
+                    
+                    // Add coin class for coin candies
+                    if (gameState.candyColors[candyIndex].isCoin) {
+                        candy.classList.add('coin');
+                    }
                     
                     const icon = document.createElement('i');
                     icon.className = `fas ${gameState.candyColors[candyIndex].icon}`;
@@ -788,20 +835,27 @@
             const matches = findMatches();
             
             if (matches.length > 0) {
+                // Count coin candies in the match
+                const coinMatches = matches.filter(match => 
+                    gameState.candyColors[gameState.board[match.row][match.col]].isCoin
+                );
+                
                 // Remove matched candies
                 removeMatches(matches);
                 
-                // Calculate score with reduced points per candy
-                const points = matches.length * config.scorePerCandy;
-                gameState.score += points;
-                
-                // Show combo notifications
-                if (matches.length >= 6) {
-                    showComboNotification("MEGA COMBO!");
-                    gameState.score += 300; // Bonus points
-                } else if (matches.length >= 4) {
-                    showComboNotification("COMBO!");
-                    gameState.score += 150; // Bonus points
+                // Add coins for coin candies in the match
+                if (coinMatches.length > 0) {
+                    gameState.coins += coinMatches.length;
+                    
+                    // Show coin collection animation for each coin
+                    coinMatches.forEach(match => {
+                        showCoinCollection(match.row, match.col);
+                    });
+                    
+                    // Show combo notifications for multiple coins
+                    if (coinMatches.length >= 3) {
+                        showComboNotification("COIN BONUS!");
+                    }
                 }
                 
                 // Update UI
@@ -814,7 +868,7 @@
                 setTimeout(checkForMatches, 700);
                 
                 // Check if target reached
-                if (gameState.score >= config.targetScore) {
+                if (gameState.coins >= config.targetCoins) {
                     setTimeout(() => gameWin(), 1000);
                 }
             } else {
@@ -824,11 +878,39 @@
                     updateUI();
                     
                     // Check if game over
-                    if (gameState.movesLeft <= 0 && gameState.score < config.targetScore) {
+                    if (gameState.movesLeft <= 0 && gameState.coins < config.targetCoins) {
                         setTimeout(() => gameOver(), 500);
                     }
                 }
             }
+        }
+
+        // Show coin collection animation
+        function showCoinCollection(row, col) {
+            const candyElement = document.querySelector(`.candy[data-row="${row}"][data-col="${col}"]`);
+            if (!candyElement) return;
+            
+            const rect = candyElement.getBoundingClientRect();
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+            
+            const coinsBoxRect = coinsBox.getBoundingClientRect();
+            const targetX = coinsBoxRect.left + coinsBoxRect.width / 2 - startX;
+            const targetY = coinsBoxRect.top + coinsBoxRect.height / 2 - startY;
+            
+            const coinAnim = document.createElement('div');
+            coinAnim.className = 'coin-collect-animation';
+            coinAnim.innerHTML = '<i class="fas fa-coins"></i>';
+            coinAnim.style.left = startX + 'px';
+            coinAnim.style.top = startY + 'px';
+            coinAnim.style.setProperty('--target-x', targetX + 'px');
+            coinAnim.style.setProperty('--target-y', targetY + 'px');
+            
+            document.body.appendChild(coinAnim);
+            
+            setTimeout(() => {
+                coinAnim.remove();
+            }, 1000);
         }
 
         // Find all matches on the board
@@ -947,18 +1029,18 @@
 
         // Update UI elements
         function updateUI() {
-            scoreElement.textContent = gameState.score;
+            coinsElement.textContent = gameState.coins;
             movesElement.textContent = gameState.movesLeft;
-            targetScoreElement.textContent = config.targetScore;
+            targetCoinsElement.textContent = config.targetCoins;
             
-            // Update score box gradient based on progress
-            const progress = Math.min((gameState.score / config.targetScore) * 100, 100);
+            // Update coins box gradient based on progress
+            const progress = Math.min((gameState.coins / config.targetCoins) * 100, 100);
             if (progress >= 100) {
-                scoreBox.style.background = 'linear-gradient(to right, rgba(0, 255, 136, 0.2), rgba(0, 200, 83, 0.2))';
-                scoreBox.style.borderColor = '#00ff88';
+                coinsBox.style.background = 'linear-gradient(to right, rgba(0, 255, 136, 0.2), rgba(0, 200, 83, 0.2))';
+                coinsBox.style.borderColor = '#00ff88';
             } else if (progress >= 70) {
-                scoreBox.style.background = 'linear-gradient(to right, rgba(255, 158, 0, 0.2), rgba(255, 193, 7, 0.2))';
-                scoreBox.style.borderColor = '#ff9e00';
+                coinsBox.style.background = 'linear-gradient(to right, rgba(255, 158, 0, 0.2), rgba(255, 193, 7, 0.2))';
+                coinsBox.style.borderColor = '#ff9e00';
             }
             
             // Update moves box based on remaining moves
@@ -1008,7 +1090,7 @@
             gameState.movesLeft -= config.hintPenalty;
             updateUI();
             
-            // Find a possible move
+            // Find a possible move that creates a match with coin candies if possible
             for (let row = 0; row < config.boardSize; row++) {
                 for (let col = 0; col < config.boardSize; col++) {
                     // Check right swap
@@ -1146,9 +1228,9 @@
         // Game Win
         function gameWin() {
             gameState.isGameOver = true;
-            gameOverTitle.textContent = "Level Complete!";
-            gameOverMessage.textContent = "Congratulations! You reached the target score!";
-            finalScoreElement.textContent = gameState.score;
+            gameOverTitle.textContent = "Challenge Complete!";
+            gameOverMessage.textContent = "Congratulations! You collected all 10 coins!";
+            finalCoinsElement.textContent = gameState.coins + " coins";
             gameOverOverlay.classList.add('show');
         }
 
@@ -1157,7 +1239,7 @@
             gameState.isGameOver = true;
             gameOverTitle.textContent = "Game Over";
             gameOverMessage.textContent = "You ran out of moves! Try again.";
-            finalScoreElement.textContent = gameState.score;
+            finalCoinsElement.textContent = gameState.coins + " coins";
             gameOverOverlay.classList.add('show');
         }
 
@@ -1165,15 +1247,15 @@
         function resetGame() {
             gameOverOverlay.classList.remove('show');
             
-            gameState.score = 0;
+            gameState.coins = 0;
             gameState.movesLeft = config.initialMoves;
             gameState.selectedCandy = null;
             gameState.isSwapping = false;
             gameState.isGameOver = false;
             
             // Reset UI styles
-            scoreBox.style.background = '';
-            scoreBox.style.borderColor = '';
+            coinsBox.style.background = '';
+            coinsBox.style.borderColor = '';
             movesBox.classList.remove('critical');
             movesWarning.classList.remove('show');
             
