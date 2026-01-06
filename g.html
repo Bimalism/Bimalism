@@ -209,97 +209,6 @@ footer {
     background: rgba(255,255,255,0.2);
 }
 
-/* Redirect Overlay */
-.redirect-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 2000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-}
-
-.redirect-overlay.show {
-    display: flex;
-}
-
-.redirect-content {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    padding: 40px;
-    border-radius: 20px;
-    max-width: 600px;
-    width: 90%;
-    border: 2px solid #00dbde;
-    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
-}
-
-.redirect-content h2 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #4CAF50;
-    background: linear-gradient(90deg, #4CAF50, #8BC34A);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.redirect-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #ccc;
-}
-
-.redirect-btn {
-    background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px;
-}
-
-.redirect-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-}
-
-.cancel-btn {
-    background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px;
-}
-
-.cancel-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 20px;
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
@@ -309,8 +218,6 @@ footer {
     .game-title { font-size: 1.6rem; }
     .features { flex-direction: column; align-items: center; }
     .feature { width: 100%; max-width: 250px; }
-    .redirect-content { padding: 20px; }
-    .redirect-content h2 { font-size: 2rem; }
 }
 
 @media (max-width: 480px) {
@@ -318,8 +225,6 @@ footer {
     .game-icon { font-size: 2.5rem; }
     .game-title { font-size: 1.4rem; }
     .play-btn { padding: 10px 20px; font-size: 0.9rem; }
-    .button-group { flex-direction: column; }
-    .redirect-btn, .cancel-btn { width: 100%; margin: 5px 0; }
 }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -339,7 +244,7 @@ footer {
             <div class="game-description">
                 The classic 3×3 strategy game. Play against a friend or challenge our smart AI.
             </div>
-            <button class="play-btn" onclick="showRedirect('game.html', 'Tic Tac Toe')">Play</button>
+            <button class="play-btn" onclick="playGame('game.html')">Play</button>
         </div>
         
         <!-- Chain Reaction -->
@@ -349,7 +254,7 @@ footer {
             <div class="game-description">
                 Strategic board game with up to 10 players! Create chain reactions to win.
             </div>
-            <button class="play-btn" onclick="showRedirect('game1.html', 'Chain Reaction')">Play</button>
+            <button class="play-btn" onclick="playGame('game1.html')">Play</button>
         </div>
         
         <!-- Neon Pong -->
@@ -359,7 +264,7 @@ footer {
             <div class="game-description">
                 Classic Pong with neon glow! Battle the AI in this arcade classic.
             </div>
-            <button class="play-btn" onclick="showRedirect('neon.html', 'Neon Pong')">Play</button>
+            <button class="play-btn" onclick="playGame('neon.html')">Play</button>
         </div>
         
         <!-- Super Slow Car -->
@@ -369,7 +274,7 @@ footer {
             <div class="game-description">
                 Relaxing 3D endless runner! Take your time dodging obstacles in your sleek black car 🖤
             </div>
-            <button class="play-btn" onclick="showRedirect('Temd.html', 'Super Slow Car')">Play 🐌</button>
+            <button class="play-btn" onclick="playGame('Temd.html')">Play 🐌</button>
         </div>
 
         <!-- Sudoku -->
@@ -379,7 +284,7 @@ footer {
             <div class="game-description">
                 Professional 9×9 Sudoku with hints, timer, auto-save & 4 difficulty levels!
             </div>
-            <button class="play-btn" onclick="showRedirect('sudoku.html', 'Sudoku')">Play</button>
+            <button class="play-btn" onclick="playGame('sudoku.html')">Play</button>
         </div>
         
         <!-- 3D Car Game (Coin Collector) -->
@@ -389,7 +294,7 @@ footer {
             <div class="game-description">
                 3D racing game! Collect coins, avoid obstacles, and enjoy the fast-paced action.
             </div>
-            <button class="play-btn" onclick="showRedirect('dashboard.html', '3D Coin Collector')">Play 🏎️</button>
+            <button class="play-btn" onclick="playGame('dashboard.html')">Play 🏎️</button>
         </div>
         
         <!-- Cookie Crush -->
@@ -399,9 +304,10 @@ footer {
             <div class="game-description">
                 Match 3+ cookies to score points! Challenging Level 1 with limited moves. Beat 1000 points in 15 moves!
             </div>
-            <button class="play-btn" onclick="showRedirect('cook.html', 'Cookie Crush')">Play 🍪</button>
+            <button class="play-btn" onclick="playGame('cook.html')">Play 🍪</button>
         </div>
         
+    </div>
     
     <div class="features">
         <div class="feature"><h3>🎯 Multiplayer</h3><p>Play with friends or AI</p></div>
@@ -415,19 +321,6 @@ footer {
     </footer>
 </div>
 
-<!-- Redirect Overlay -->
-<div id="redirectOverlay" class="redirect-overlay">
-    <div class="redirect-content">
-        <h2>Redirecting...</h2>
-        <p id="redirectMessage">You are about to be redirected to <span id="redirectGameName">Game</span></p>
-        <div id="redirectDestination"></div>
-        <div class="button-group">
-            <button class="redirect-btn" onclick="confirmRedirect()">Yes, Redirect Now</button>
-            <button class="cancel-btn" onclick="cancelRedirect()">Cancel</button>
-        </div>
-    </div>
-</div>
-
 <!-- Fullscreen Game Overlay (for embedded games if needed) -->
 <div id="gameOverlay" class="game-overlay">
     <button class="back-btn" onclick="hideGame()">← Back to Games</button>
@@ -435,131 +328,16 @@ footer {
 </div>
 
 <script>
-// Game redirect URLs mapping - UPDATED WITH COOKIE CRUSH
-const gameRedirects = {
-    'Tic Tac Toe': { 
-        url: 'Tic Tac Toe', 
-        description: 'Classic 3×3 strategy game. Play against a friend or challenge our smart AI.' 
-    },
-    'Chain Reaction': { 
-        url: 'Chain Reaction', 
-        description: 'Strategic board game with up to 10 players! Create chain reactions to win.' 
-    },
-    'Neon Pong': { 
-        url: 'Neon pong', 
-        description: 'Classic Pong with neon glow! Battle the AI in this arcade classic.' 
-    },
-    '3D Coin Collector': { 
-        url: '3D coin collector', 
-        description: '3D racing game! Collect coins, avoid obstacles, and enjoy the fast-paced action.' 
-    },
-    'Super Slow Car': { 
-        url: '3D Car Game', 
-        description: 'Relaxing 3D endless runner! Take your time dodging obstacles in your sleek black car.' 
-    },
-    'Sudoku': { 
-        url: 'Sudoku', 
-        description: 'Professional 9×9 Sudoku with hints, timer, auto-save & 4 difficulty levels!' 
-    },
-    'Cookie Crush': { 
-        url: 'Cookie crush', 
-        description: 'Match 3+ cookies to score points! Challenging Level 1: Beat 1000 points in just 15 moves!' 
-    }
-};
-
-let currentRedirect = null;
-
-// Show redirect confirmation
-function showRedirect(url, gameName) {
-    currentRedirect = { url, gameName };
+// Direct game play function - NO REDIRECT CONFIRMATION
+function playGame(url) {
+    // Add loading animation to button
+    event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    event.target.disabled = true;
     
-    const gameInfo = gameRedirects[gameName] || { url, description: 'Fun game' };
-    
-    document.getElementById('redirectGameName').textContent = gameName;
-    document.getElementById('redirectMessage').innerHTML = 
-        `<strong>${gameName}</strong><br><br>${gameInfo.description}<br><br>
-         <span style="color: #4CAF50; font-size: 0.9rem;">Redirecting to: ${url}</span>`;
-    
-    document.getElementById('redirectOverlay').classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-// Confirm redirect
-function confirmRedirect() {
-    if (currentRedirect) {
-        // Add loading animation
-        const redirectBtn = document.querySelector('.redirect-btn');
-        const originalText = redirectBtn.textContent;
-        redirectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
-        redirectBtn.disabled = true;
-        
-        // Redirect after short delay
-        setTimeout(() => {
-            window.location.href = currentRedirect.url;
-        }, 500);
-    }
-}
-
-// Cancel redirect
-function cancelRedirect() {
-    document.getElementById('redirectOverlay').classList.remove('show');
-    document.body.style.overflow = 'auto';
-    currentRedirect = null;
-    
-    // Reset button text
-    const redirectBtn = document.querySelector('.redirect-btn');
-    redirectBtn.textContent = 'Yes, Redirect Now';
-    redirectBtn.disabled = false;
-}
-
-// Show all games in a summary
-function showAllGames() {
-    let allGamesHTML = '<h3 style="color: #00dbde; margin-bottom: 20px;">All Games & Redirect URLs</h3>';
-    allGamesHTML += '<div style="max-height: 300px; overflow-y: auto; padding-right: 10px;">';
-    
-    let gameNumber = 1;
-    for (const [gameName, gameInfo] of Object.entries(gameRedirects)) {
-        allGamesHTML += `
-        <div style="
-            margin: 15px 0; 
-            padding: 15px; 
-            background: rgba(255,255,255,0.05); 
-            border-radius: 12px;
-            border-left: 4px solid #00dbde;
-            text-align: left;
-        ">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong style="font-size: 1.1rem; color: #fff;">${gameNumber}. ${gameName}</strong><br>
-                    <small style="color: #aaa;">${gameInfo.description}</small>
-                </div>
-                <button onclick="showRedirect('${gameInfo.url}', '${gameName}')" 
-                        style="
-                            padding: 8px 20px; 
-                            background: linear-gradient(90deg, #4CAF50, #2E7D32); 
-                            border: none; 
-                            border-radius: 25px; 
-                            color: white; 
-                            cursor: pointer;
-                            font-weight: bold;
-                            white-space: nowrap;
-                        ">
-                    Play Now
-                </button>
-            </div>
-            <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
-                <small style="color: #00dbde; font-family: monospace;">${gameInfo.url}</small>
-            </div>
-        </div>`;
-        gameNumber++;
-    }
-    
-    allGamesHTML += '</div>';
-    
-    document.getElementById('redirectGameName').textContent = 'Game Directory';
-    document.getElementById('redirectMessage').innerHTML = allGamesHTML;
-    document.getElementById('redirectOverlay').classList.add('show');
-    document.body.style.overflow = 'hidden';
+    // Redirect immediately after short delay for visual feedback
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300);
 }
 
 // For embedded games overlay (if needed)
@@ -568,7 +346,6 @@ function showGame(gameId) {
     const frame = document.getElementById('gameFrame');
     
     // If you want to embed games directly, you can add them here
-    // For now, we're using redirects
     overlay.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
@@ -589,18 +366,10 @@ document.querySelectorAll('.play-btn').forEach(btn => {
     });
 });
 
-// ESC key to cancel redirect
+// ESC key to cancel
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        cancelRedirect();
         hideGame();
-    }
-});
-
-// Close redirect overlay when clicking outside
-document.getElementById('redirectOverlay').addEventListener('click', function(e) {
-    if (e.target === this) {
-        cancelRedirect();
     }
 });
 
