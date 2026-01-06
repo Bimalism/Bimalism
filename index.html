@@ -1364,81 +1364,93 @@
         </div>
     </div>
 
-    <!-- Registration Form -->
-    <div class="registration-form-overlay" id="registrationForm">
-        <div class="registration-form">
-            <button class="form-close-btn" id="closeRegistrationForm">
-                <i class="fas fa-times"></i>
-            </button>
-           
-            <div class="challenge-logo" style="color: var(--primary);">
-                <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
-                <span>Challenge Registration</span>
+   <!-- Registration Form -->
+<div class="registration-form-overlay" id="registrationForm">
+    <div class="registration-form">
+        <button class="form-close-btn" id="closeRegistrationForm">
+            <i class="fas fa-times"></i>
+        </button>
+       
+        <div class="challenge-logo" style="color: var(--primary);">
+            <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
+            <span>Challenge Registration</span>
+        </div>
+       
+        <h2 class="form-title">Register for Bimalism Challenge</h2>
+       
+        <!-- GOOGLE FORM INTEGRATION -->
+        <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" 
+              method="POST" 
+              target="_blank"
+              id="challengeRegistrationForm">
+            
+            <!-- Hidden field to track source -->
+            <input type="hidden" name="entry.000000000" value="Bimalism Website">
+            
+            <div class="form-group">
+                <label for="fullName" class="form-label">Full Name *</label>
+                <input type="text" id="fullName" name="entry.1234567890" class="form-input" placeholder="Enter your full name" required>
             </div>
            
-            <h2 class="form-title">Register for Bimalism Challenge</h2>
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="entry.1234567891" class="form-input" placeholder="Enter your email" required>
+            </div>
            
-            <form id="challengeRegistrationForm">
-                <div class="form-group">
-                    <label for="fullName" class="form-label">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address *</label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="dob" class="form-label">Date of Birth *</label>
-                    <input type="date" id="dob" name="dob" class="form-input" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="phone" class="form-label">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="address" class="form-label">Delivery Address *</label>
-                    <textarea id="address" name="address" class="form-input" rows="3" placeholder="Full address for gift delivery" required></textarea>
-                </div>
-               
-                <div class="form-group">
-                    <label for="city" class="form-label">City *</label>
-                    <input type="text" id="city" name="city" class="form-input" placeholder="Enter your city" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="pincode" class="form-label">PIN Code *</label>
-                    <input type="text" id="pincode" name="pincode" class="form-input" placeholder="Enter PIN code" required>
-                </div>
-               
-                <div class="form-requirements">
-                    <h4>📦 Door Delivery Requirements:</h4>
-                    <ul>
-                        <li>Valid phone number for delivery confirmation</li>
-                        <li>Complete address with landmark</li>
-                        <li>Someone must be available to receive the gift</li>
-                        <li>Delivery within 7-10 days after reaching 30 coins</li>
-                        <li>Free shipping across India</li>
-                    </ul>
-                </div>
-               
-                <div class="form-group">
-                    <label class="form-label">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <a href="policy.html">I agree to the Terms & Conditions</a> *
-                    </label>
-
-                </div>
-               
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Register & Start Challenge
-                </button>
-            </form>
-        </div>
+            <div class="form-group">
+                <label for="dob" class="form-label">Date of Birth *</label>
+                <input type="date" id="dob" name="entry.1234567892" class="form-input" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone Number *</label>
+                <input type="tel" id="phone" name="entry.1234567893" class="form-input" placeholder="Enter your phone number" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="address" class="form-label">Delivery Address *</label>
+                <textarea id="address" name="entry.1234567894" class="form-input" rows="3" placeholder="Full address for gift delivery" required></textarea>
+            </div>
+           
+            <div class="form-group">
+                <label for="city" class="form-label">City *</label>
+                <input type="text" id="city" name="entry.1234567895" class="form-input" placeholder="Enter your city" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="state" class="form-label">State</label>
+                <input type="text" id="state" name="entry.1234567896" class="form-input" placeholder="Enter your state">
+            </div>
+           
+            <div class="form-group">
+                <label for="pincode" class="form-label">PIN Code *</label>
+                <input type="text" id="pincode" name="entry.1234567897" class="form-input" placeholder="Enter PIN code" required>
+            </div>
+           
+            <div class="form-requirements">
+                <h4>📦 Door Delivery Requirements:</h4>
+                <ul>
+                    <li>Valid phone number for delivery confirmation</li>
+                    <li>Complete address with landmark</li>
+                    <li>Someone must be available to receive the gift</li>
+                    <li>Delivery within 7-10 days after reaching 30 coins</li>
+                    <li>Free shipping across India</li>
+                </ul>
+            </div>
+           
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" id="terms" name="entry.1234567898" required>
+                    <a href="policy.html">I agree to the Terms & Conditions</a> *
+                </label>
+            </div>
+           
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Register & Start Challenge
+            </button>
+        </form>
     </div>
+</div>
 
     <!-- Coin Counter -->
     <div class="coin-counter" id="coinCounter">
@@ -1887,52 +1899,39 @@
                 registrationForm.classList.remove('active');
             });
 
-            // Handle registration form submission
-            challengeRegistrationForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = {
-                    fullName: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    dob: document.getElementById('dob').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    city: document.getElementById('city').value,
-                    pincode: document.getElementById('pincode').value,
-                    registrationDate: new Date().toISOString()
-                };
+           // Handle registration form submission - SIMPLIFIED
+challengeRegistrationForm.addEventListener('submit', function(e) {
+    // DON'T prevent default - let Google Form handle it
+    // e.preventDefault(); // REMOVE or COMMENT this line
+    
+    // Just show loading and success
+    loadingSpinner.classList.add('active');
+    
+    // Store basic registration status in localStorage
+    localStorage.setItem('bimalismChallengeRegistered', 'true');
+    localStorage.setItem('bimalismChallengeAccepted', 'true');
+    
+    // Initialize coins if not exists
+    if (!localStorage.getItem('bimalismCoins')) {
+        localStorage.setItem('bimalismCoins', '0');
+    }
 
-                // Show loading
-                loadingSpinner.classList.add('active');
-
-                // Simulate registration process
-                setTimeout(() => {
-                    // Store registration data
-                    localStorage.setItem('bimalismChallengeRegistered', 'true');
-                    localStorage.setItem('bimalismChallengeAccepted', 'true');
-                    localStorage.setItem('bimalismUserData', JSON.stringify(formData));
-                    
-                    // Initialize coins if not exists
-                    if (!localStorage.getItem('bimalismCoins')) {
-                        localStorage.setItem('bimalismCoins', '0');
-                    }
-
-                    // Hide registration form
-                    registrationForm.classList.remove('active');
-                    
-                    // Show coin counter and progress
-                    coinCounter.classList.add('active');
-                    progressContainer.classList.add('active');
-                    updateCoinDisplay(0);
-
-                    // Show success message
-                    alert('🎉 Registration Successful!\n\nYou are now enrolled in the Bimalism Challenge!\n\nStart studying to earn coins and reach your gift!');
-                    
-                    // Hide loading
-                    loadingSpinner.classList.remove('active');
-                }, 2000);
-            });
+    // Hide loading after 2 seconds
+    setTimeout(() => {
+        loadingSpinner.classList.remove('active');
+        
+        // Hide registration form
+        registrationForm.classList.remove('active');
+        
+        // Show coin counter and progress
+        coinCounter.classList.add('active');
+        progressContainer.classList.add('active');
+        updateCoinDisplay(0);
+        
+        // Data is already sent to Google Forms
+        // User sees Google's confirmation page in new tab
+    }, 2000);
+});
 
             // Update coin display
             function updateCoinDisplay(coins) {
@@ -2298,6 +2297,49 @@ The app will work offline!`;
         
         // In your index.html script, add this line in the registration form submission:
 localStorage.setItem('bimalismUserData', JSON.stringify(formData));
+        // Replace the form submit handler with:
+challengeRegistrationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        dob: document.getElementById('dob').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        pincode: document.getElementById('pincode').value
+    };
+
+    // Create WhatsApp message
+    const whatsappMessage = `
+*NEW BIMALISM REGISTRATION*
+    
+👤 Name: ${formData.fullName}
+📧 Email: ${formData.email}
+📱 Phone: ${formData.phone}
+🎂 DOB: ${formData.dob}
+📍 Address: ${formData.address}
+🏙️ City: ${formData.city}
+📮 PIN: ${formData.pincode}
+⏰ Time: ${new Date().toLocaleString()}
+    `.trim();
+
+    // Encode for WhatsApp URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/919876543210?text=${encodedMessage}`, '_blank');
+    
+    // Also save locally
+    localStorage.setItem('bimalismChallengeRegistered', 'true');
+    localStorage.setItem('bimalismUserData', JSON.stringify(formData));
+    
+    // Show success
+    registrationForm.classList.remove('active');
+    coinCounter.classList.add('active');
+    alert('✅ Registration sent to Aalif/Dharunesh on WhatsApp!');
+});
     </script>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
@@ -2313,6 +2355,7 @@ localStorage.setItem('bimalismUserData', JSON.stringify(formData));
     </script>
 </body>
 </html>
+
 
 
 
