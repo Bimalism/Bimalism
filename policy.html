@@ -173,6 +173,230 @@
             color: #3b5aa6;
             text-decoration: underline;
         }
+        
+        /* Admin Access Panel Styles */
+        .admin-panel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: white;
+            text-align: center;
+            display: none;
+        }
+        
+        .admin-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .admin-header {
+            margin-bottom: 20px;
+        }
+        
+        .admin-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .admin-header p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .admin-access-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+        
+        .admin-btn {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .admin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-admin-btn {
+            background: #4a6fc7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        
+        .toggle-admin-btn:hover {
+            background: #3b5aa6;
+        }
+        
+        .admin-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .admin-message.success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+            display: block;
+        }
+        
+        .admin-message.error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+            display: block;
+        }
+        
+        .admin-users {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-user {
+            text-align: center;
+        }
+        
+        .admin-user i {
+            font-size: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        
+        .admin-user h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .admin-user p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .access-granted {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .access-granted.active {
+            display: block;
+        }
+        
+        .access-btn {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        .access-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .security-note {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        .security-note i {
+            color: #ffd700;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -323,7 +547,138 @@
                 <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
             </div>
             
+            <div class="section" id="contact">
+                <h2>10. Contact Us</h2>
+                <p>If you have any questions or concerns about this Privacy Policy, please contact us:</p>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> privacy@studentportal.com</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Address:</strong> 123 Privacy Lane, Security City, SC 12345</p>
+                    <p>We will respond to your inquiry within 48 hours.</p>
+                </div>
+            </div>
+
+            <div class="section" id="door-delivery">
+                <h2>11. Door Delivery Information</h2>
+                <p>As part of our challenge reward system, we collect specific information required for door delivery of gifts and prizes. This information is collected only when you participate in and qualify for our reward programs.</p>
+                
+                <h3>Information Required for Door Delivery</h3>
+                <p>When you qualify for a door delivery reward, we collect the following mandatory information:</p>
+                <ul>
+                    <li><strong>Complete Delivery Address:</strong> Including house number, street, area, landmark</li>
+                    <li><strong>City and State:</strong> For geographical location verification</li>
+                    <li><strong>PIN Code:</strong> For accurate delivery routing</li>
+                    <li><strong>Contact Phone Number:</strong> For delivery coordination and confirmation</li>
+                    <li><strong>Recipient Name:</strong> The person who will receive the delivery</li>
+                </ul>
+                
+                <h3>How We Use Door Delivery Information</h3>
+                <p>Your door delivery information is used exclusively for:</p>
+                <ul>
+                    <li>Processing and delivering your earned rewards</li>
+                    <li>Coordinating with our delivery partners</li>
+                    <li>Providing delivery updates and tracking information</li>
+                    <li>Verifying delivery completion</li>
+                    <li>Resolving any delivery-related issues</li>
+                </ul>
+                
+                <div class="delivery-highlight">
+                    <p><strong>Important Delivery Information:</strong></p>
+                    <ul>
+                        <li>Delivery addresses are verified for accuracy before processing</li>
+                        <li>Someone must be available at the delivery address to receive the package</li>
+                        <li>Valid phone number is required for delivery confirmation</li>
+                        <li>Delivery typically occurs within 7-10 working days after qualification</li>
+                        <li>Free shipping is provided across India for all qualified rewards</li>
+                    </ul>
+                </div>
+                
+                <h3>Delivery Partners and Third-Party Sharing</h3>
+                <p>We work with trusted delivery partners to fulfill rewards. When sharing your delivery information with these partners, we:</p>
+                <ul>
+                    <li>Only share the minimum information necessary for delivery</li>
+                    <li>Require partners to maintain confidentiality</li>
+                    <li>Ensure partners comply with data protection standards</li>
+                    <li>Limit information sharing to delivery purposes only</li>
+                </ul>
+                
+                <h3>Data Retention for Delivery Information</h3>
+                <p>Your door delivery information is retained for:</p>
+                <ul>
+                    <li><strong>Active Delivery Period:</strong> Until delivery is confirmed complete</li>
+                    <li><strong>Post-Delivery:</strong> 30 days for any potential delivery issues or claims</li>
+                    <li><strong>Archival:</strong> Basic delivery records may be kept for 1 year for program analytics</li>
+                </ul>
+                
+                <div class="highlight">
+                    <p><strong>Security Note:</strong> All door delivery information is encrypted and stored securely. We never use your delivery address for marketing purposes or share it with unauthorized third parties.</p>
+                </div>
+                
+                <h3>Delivery Address Updates</h3>
+                <p>If you need to update your delivery address or information:</p>
+                <ul>
+                    <li>Contact us immediately if your address changes before delivery</li>
+                    <li>Updates can only be made before the delivery is dispatched</li>
+                    <li>Address verification may be required for changes</li>
+                </ul>
+            </div
             
+            <!-- Admin Access Panel -->
+            <button class="toggle-admin-btn" id="toggleAdminBtn">
+                <i class="fas fa-lock"></i> Admin Access (Aalif & Dharunesh Only)
+            </button>
+            
+            <div class="admin-panel" id="adminPanel">
+                <div class="admin-header">
+                    <h2><i class="fas fa-user-shield"></i> Secure Admin Access</h2>
+                    <p>Restricted access for authorized administrators only</p>
+                </div>
+                
+                <div class="admin-users">
+                    <div class="admin-user">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Aalif</h4>
+                        <p>Co-Founder</p>
+                    </div>
+                    <div class="admin-user">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Dharunesh</h4>
+                        <p>Co-Founder</p>
+                    </div>
+                </div>
+                
+                <form class="admin-access-form" id="adminAccessForm">
+                    <div class="form-group">
+                        <label for="adminUsername"><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adminPassword"><i class="fas fa-key"></i> Password</label>
+                        <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                    </div>
+                    
+                    <div class="security-note">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>Security Notice:</strong> This area is restricted to authorized personnel only. All access attempts are logged.</p>
+                    </div>
+                    
+                    <button type="submit" class="admin-btn">
+                        <i class="fas fa-sign-in-alt"></i> Verify & Access Storage
+                    </button>
+                </form>
+                
+                <div class="admin-message" id="adminMessage"></div>
+                
+                <div class="access-granted" id="accessGranted">
+                    <h3><i class="fas fa-check-circle"></i> Access Granted!</h3>
+                    <p>Welcome, authorized administrator. You can now access the delivery information storage.</p>
+                    <a href="storage.html" class="access-btn">
+                        <i class="fas fa-database"></i> Access Storage Panel
+                    </a>
+                </div>
+            </div>
             
             <a href="settings.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Settings</a>
         </div>
@@ -347,6 +702,120 @@
                     behavior: 'smooth'
                 });
             });
+        });
+        
+        // Admin Access Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminPanel = document.getElementById('adminPanel');
+            const toggleBtn = document.getElementById('toggleAdminBtn');
+            const adminForm = document.getElementById('adminAccessForm');
+            const adminMessage = document.getElementById('adminMessage');
+            const accessGranted = document.getElementById('accessGranted');
+            
+            // Toggle admin panel
+            toggleBtn.addEventListener('click', function() {
+                adminPanel.classList.toggle('active');
+                if (adminPanel.classList.contains('active')) {
+                    toggleBtn.innerHTML = '<i class="fas fa-times"></i> Close Admin Panel';
+                } else {
+                    toggleBtn.innerHTML = '<i class="fas fa-lock"></i> Admin Access (Aalif & Dharunesh Only)';
+                    adminMessage.className = 'admin-message';
+                    adminMessage.style.display = 'none';
+                    accessGranted.classList.remove('active');
+                    adminForm.reset();
+                }
+            });
+            
+            // Handle admin login
+            adminForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('adminUsername').value.trim();
+                const password = document.getElementById('adminPassword').value;
+                
+                // Hardcoded credentials for Aalif and Dharunesh
+                const validCredentials = [
+                    { username: 'aalif', password: 'aal1fd33n' },
+                    { username: 'dharunesh', password: 'aal1fd33n' },
+                    { username: 'Aalif', password: 'aal1fd33n' },
+                    { username: 'Dharunesh', password: 'aal1fd33n' }
+                ];
+                
+                // Check if credentials match
+                const isValid = validCredentials.some(cred => 
+                    cred.username.toLowerCase() === username.toLowerCase() && 
+                    cred.password === password
+                );
+                
+                if (isValid) {
+                    // Success
+                    adminMessage.className = 'admin-message success';
+                    adminMessage.innerHTML = '<i class="fas fa-check"></i> Access verified! Redirecting...';
+                    adminMessage.style.display = 'block';
+                    
+                    // Store admin session
+                    localStorage.setItem('adminAuthenticated', 'true');
+                    localStorage.setItem('adminUser', username);
+                    localStorage.setItem('adminLoginTime', new Date().toISOString());
+                    
+                    // Show access granted section
+                    setTimeout(() => {
+                        accessGranted.classList.add('active');
+                        adminForm.style.display = 'none';
+                        
+                        // Auto-redirect after 3 seconds
+                        setTimeout(() => {
+                            window.location.href = 'storage.html';
+                        }, 3000);
+                    }, 1000);
+                    
+                } else {
+                    // Failure
+                    adminMessage.className = 'admin-message error';
+                    adminMessage.innerHTML = '<i class="fas fa-times"></i> Invalid credentials. Access denied.';
+                    adminMessage.style.display = 'block';
+                    
+                    // Clear form
+                    document.getElementById('adminPassword').value = '';
+                    
+                    // Shake animation
+                    adminForm.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        adminForm.style.animation = '';
+                    }, 500);
+                }
+            });
+            
+            // Add shake animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Check if already authenticated
+            if (localStorage.getItem('adminAuthenticated') === 'true') {
+                const loginTime = new Date(localStorage.getItem('adminLoginTime'));
+                const now = new Date();
+                const hoursDiff = Math.abs(now - loginTime) / 36e5; // hours
+                
+                // Auto-login if within 24 hours
+                if (hoursDiff < 24) {
+                    adminPanel.classList.add('active');
+                    toggleBtn.innerHTML = '<i class="fas fa-times"></i> Close Admin Panel';
+                    accessGranted.classList.add('active');
+                    adminForm.style.display = 'none';
+                } else {
+                    // Clear expired session
+                    localStorage.removeItem('adminAuthenticated');
+                    localStorage.removeItem('adminUser');
+                    localStorage.removeItem('adminLoginTime');
+                }
+            }
         });
     </script>
 </body>
