@@ -941,6 +941,31 @@
                 window.location.href = 'policy.html';
                 return;
             }
+            // DEBUG: Force authentication and add test data
+localStorage.setItem('adminAuthenticated', 'true');
+localStorage.setItem('adminUser', 'debug');
+localStorage.setItem('adminLoginTime', new Date().toISOString());
+
+// Add test data if none exists
+if (!localStorage.getItem('bimalismDeliveryData')) {
+    const testData = [
+        {
+            id: 'DEBUG001',
+            fullName: 'DEBUG User',
+            email: 'debug@example.com',
+            phone: '9999999999',
+            address: 'Debug Address',
+            city: 'Debug City',
+            pincode: '000000',
+            coinsEarned: '15',
+            deliveryStatus: 'pending',
+            registrationDate: '2024-01-01',
+            timestamp: new Date().toISOString()
+        }
+    ];
+    localStorage.setItem('bimalismDeliveryData', JSON.stringify(testData));
+    console.log('DEBUG: Added test data to localStorage');
+}
             
             // Set logged in user
             document.getElementById('loggedInUser').textContent = adminUser.charAt(0).toUpperCase() + adminUser.slice(1);
@@ -1842,4 +1867,5 @@
     </script>
 </body>
 </html>
+
 
