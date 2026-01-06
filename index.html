@@ -1835,267 +1835,267 @@
     </footer>
 
     <script>
-        // Challenge System Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const challengeModal = document.getElementById('challengeModal');
-            const closeChallengeBtn = document.getElementById('closeChallengeModal');
-            const acceptChallengeBtn = document.getElementById('acceptChallenge');
-            const declineChallengeBtn = document.getElementById('declineChallenge');
-            const registrationForm = document.getElementById('registrationForm');
-            const closeRegistrationBtn = document.getElementById('closeRegistrationForm');
-            const challengeRegistrationForm = document.getElementById('challengeRegistrationForm');
-            const coinCounter = document.getElementById('coinCounter');
-            const coinCount = document.getElementById('coinCount');
-            const progressContainer = document.getElementById('progressContainer');
-            const progressFill = document.getElementById('progressFill');
-            const progressText = document.getElementById('progressText');
-            const viewProgressBtn = document.getElementById('viewProgressBtn');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const floatingBtn = document.getElementById('floatingDownloadBtn');
-            const downloadWinBtn = document.getElementById('downloadForWindows');
-            const downloadAndroidBtn = document.getElementById('downloadForAndroid');
-            const saveIOSBtn = document.getElementById('saveForIOS');
+    // Challenge System Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const challengeModal = document.getElementById('challengeModal');
+        const closeChallengeBtn = document.getElementById('closeChallengeModal');
+        const acceptChallengeBtn = document.getElementById('acceptChallenge');
+        const declineChallengeBtn = document.getElementById('declineChallenge');
+        const registrationForm = document.getElementById('registrationForm');
+        const closeRegistrationBtn = document.getElementById('closeRegistrationForm');
+        const challengeRegistrationForm = document.getElementById('challengeRegistrationForm');
+        const coinCounter = document.getElementById('coinCounter');
+        const coinCount = document.getElementById('coinCount');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const viewProgressBtn = document.getElementById('viewProgressBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const floatingBtn = document.getElementById('floatingDownloadBtn');
+        const downloadWinBtn = document.getElementById('downloadForWindows');
+        const downloadAndroidBtn = document.getElementById('downloadForAndroid');
+        const saveIOSBtn = document.getElementById('saveForIOS');
 
-            // Check if user has already accepted challenge
-            const hasAcceptedChallenge = localStorage.getItem('bimalismChallengeAccepted');
-            const userCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
-            const userRegistered = localStorage.getItem('bimalismChallengeRegistered');
+        // Check if user has already accepted challenge
+        const hasAcceptedChallenge = localStorage.getItem('bimalismChallengeAccepted');
+        const userCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+        const userRegistered = localStorage.getItem('bimalismChallengeRegistered');
 
-            // Show challenge modal on first visit
-            if (!hasAcceptedChallenge && !userRegistered) {
-                setTimeout(() => {
-                    challengeModal.classList.add('active');
-                }, 1500);
+        // Show challenge modal on first visit
+        if (!hasAcceptedChallenge && !userRegistered) {
+            setTimeout(() => {
+                challengeModal.classList.add('active');
+            }, 1500);
+        }
+
+        // Show coin counter and progress if user accepted challenge
+        if (hasAcceptedChallenge || userRegistered) {
+            updateCoinDisplay(userCoins);
+            coinCounter.classList.add('active');
+            progressContainer.classList.add('active');
+        }
+
+        // Close challenge modal
+        closeChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            localStorage.setItem('bimalismChallengeClosed', 'true');
+        });
+
+        // Decline challenge
+        declineChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            localStorage.setItem('bimalismChallengeDeclined', 'true');
+        });
+
+        // Accept challenge
+        acceptChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            registrationForm.classList.add('active');
+        });
+
+        // Close registration form
+        closeRegistrationBtn.addEventListener('click', function() {
+            registrationForm.classList.remove('active');
+        });
+
+        // Handle registration form submission - SIMPLIFIED
+        challengeRegistrationForm.addEventListener('submit', function(e) {
+            // DON'T prevent default - let Google Form handle it
+            // e.preventDefault(); // REMOVE or COMMENT this line
+            
+            // Just show loading and success
+            loadingSpinner.classList.add('active');
+            
+            // Store basic registration status in localStorage
+            localStorage.setItem('bimalismChallengeRegistered', 'true');
+            localStorage.setItem('bimalismChallengeAccepted', 'true');
+            
+            // Initialize coins if not exists
+            if (!localStorage.getItem('bimalismCoins')) {
+                localStorage.setItem('bimalismCoins', '0');
             }
 
-            // Show coin counter and progress if user accepted challenge
-            if (hasAcceptedChallenge || userRegistered) {
-                updateCoinDisplay(userCoins);
+            // Hide loading after 2 seconds
+            setTimeout(() => {
+                loadingSpinner.classList.remove('active');
+                
+                // Hide registration form
+                registrationForm.classList.remove('active');
+                
+                // Show coin counter and progress
                 coinCounter.classList.add('active');
                 progressContainer.classList.add('active');
-            }
-
-            // Close challenge modal
-            closeChallengeBtn.addEventListener('click', function() {
-                challengeModal.classList.remove('active');
-                localStorage.setItem('bimalismChallengeClosed', 'true');
-            });
-
-            // Decline challenge
-            declineChallengeBtn.addEventListener('click', function() {
-                challengeModal.classList.remove('active');
-                localStorage.setItem('bimalismChallengeDeclined', 'true');
-            });
-
-            // Accept challenge
-            acceptChallengeBtn.addEventListener('click', function() {
-                challengeModal.classList.remove('active');
-                registrationForm.classList.add('active');
-            });
-
-            // Close registration form
-            closeRegistrationBtn.addEventListener('click', function() {
-                registrationForm.classList.remove('active');
-            });
-
-           // Handle registration form submission - SIMPLIFIED
-challengeRegistrationForm.addEventListener('submit', function(e) {
-    // DON'T prevent default - let Google Form handle it
-    // e.preventDefault(); // REMOVE or COMMENT this line
-    
-    // Just show loading and success
-    loadingSpinner.classList.add('active');
-    
-    // Store basic registration status in localStorage
-    localStorage.setItem('bimalismChallengeRegistered', 'true');
-    localStorage.setItem('bimalismChallengeAccepted', 'true');
-    
-    // Initialize coins if not exists
-    if (!localStorage.getItem('bimalismCoins')) {
-        localStorage.setItem('bimalismCoins', '0');
-    }
-
-    // Hide loading after 2 seconds
-    setTimeout(() => {
-        loadingSpinner.classList.remove('active');
-        
-        // Hide registration form
-        registrationForm.classList.remove('active');
-        
-        // Show coin counter and progress
-        coinCounter.classList.add('active');
-        progressContainer.classList.add('active');
-        updateCoinDisplay(0);
-        
-        // Data is already sent to Google Forms
-        // User sees Google's confirmation page in new tab
-    }, 2000);
-});
-
-            // Update coin display
-            function updateCoinDisplay(coins) {
-                coinCount.textContent = coins;
-                const progress = (coins / 30) * 100;
-                progressFill.style.width = `${progress}%`;
-                progressText.textContent = `${coins}/30 Coins Collected`;
-                
-                // Check if user reached 30 coins
-                if (coins >= 30) {
-                    showGiftClaimModal();
-                }
-            }
-
-            // Simulate earning coins (In real implementation, this would be triggered by study timer)
-            function earnCoin() {
-                if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
-                    let currentCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
-                    currentCoins += 1;
-                    localStorage.setItem('bimalismCoins', currentCoins.toString());
-                    updateCoinDisplay(currentCoins);
-                    
-                    // Show notification
-                    showNotification(`🎉 You earned 1 coin! Total: ${currentCoins} coins`);
-                    
-                    return currentCoins;
-                }
-                return 0;
-            }
-
-            // Show gift claim modal when reaching 30 coins
-            function showGiftClaimModal() {
-                const userData = JSON.parse(localStorage.getItem('bimalismUserData') || '{}');
-                
-                alert(`🎁 CONGRATULATIONS! 🎁\n\nYou have reached 30 coins!\n\nA special gift from Bimalism will be delivered to:\n\n${userData.fullName}\n${userData.address}\n${userData.city} - ${userData.pincode}\n\nDelivery will be processed within 7-10 working days.\n\nThank you for your dedication to studying!`);
-                
-                // Reset coins for next challenge
-                localStorage.setItem('bimalismCoins', '0');
                 updateCoinDisplay(0);
-            }
-
-            // View progress button
-            viewProgressBtn.addEventListener('click', function() {
-                if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
-                    const coins = parseInt(localStorage.getItem('bimalismCoins') || '0');
-                    alert(`📊 Your Challenge Progress:\n\nCoins Earned: ${coins}\nCoins Remaining: ${30 - coins}\nProgress: ${((coins / 30) * 100).toFixed(1)}%\n\nKeep studying to reach 30 coins!`);
-                } else {
-                    challengeModal.classList.add('active');
-                }
-            });
-
-            // Show notification
-            function showNotification(message) {
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #10b981, #059669);
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 10px;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                    z-index: 10000;
-                    animation: slideIn 0.5s ease;
-                `;
-                notification.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
-                document.body.appendChild(notification);
                 
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
+                // Data is already sent to Google Forms
+                // User sees Google's confirmation page in new tab
+            }, 2000);
+        });
+
+        // Update coin display
+        function updateCoinDisplay(coins) {
+            coinCount.textContent = coins;
+            const progress = (coins / 30) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${coins}/30 Coins Collected`;
+            
+            // Check if user reached 30 coins
+            if (coins >= 30) {
+                showGiftClaimModal();
             }
+        }
 
-            // Simulate study timer (for demo purposes)
-            // In real implementation, this would be triggered by actual study timer
-            setInterval(() => {
-                // For demo: Randomly add coins (remove in production)
-                if (Math.random() < 0.01 && localStorage.getItem('bimalismChallengeAccepted') === 'true') {
-                    earnCoin();
-                }
-            }, 60000); // Check every minute
+        // Simulate earning coins (In real implementation, this would be triggered by study timer)
+        function earnCoin() {
+            if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                let currentCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+                currentCoins += 1;
+                localStorage.setItem('bimalismCoins', currentCoins.toString());
+                updateCoinDisplay(currentCoins);
+                
+                // Show notification
+                showNotification(`🎉 You earned 1 coin! Total: ${currentCoins} coins`);
+                
+                return currentCoins;
+            }
+            return 0;
+        }
 
-            // ===== EXISTING CODE (Name Verification) =====
-            const modal = document.getElementById('nameModal');
-            const form = document.getElementById('nameForm');
-            const nameInput = document.getElementById('name');
-            const messageDiv = document.getElementById('modalMessage');
-            const closeBtn = document.getElementById('closeModal');
-           
-            // Check if user has already entered their name
-            const userName = localStorage.getItem('bimalismUserName');
-           
-            if (userName) {
-                console.log(`Welcome back, ${userName}!`);
+        // Show gift claim modal when reaching 30 coins
+        function showGiftClaimModal() {
+            const userData = JSON.parse(localStorage.getItem('bimalismUserData') || '{}');
+            
+            alert(`🎁 CONGRATULATIONS! 🎁\n\nYou have reached 30 coins!\n\nA special gift from Bimalism will be delivered to:\n\n${userData.fullName}\n${userData.address}\n${userData.city} - ${userData.pincode}\n\nDelivery will be processed within 7-10 working days.\n\nThank you for your dedication to studying!`);
+            
+            // Reset coins for next challenge
+            localStorage.setItem('bimalismCoins', '0');
+            updateCoinDisplay(0);
+        }
+
+        // View progress button
+        viewProgressBtn.addEventListener('click', function() {
+            if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                const coins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+                alert(`📊 Your Challenge Progress:\n\nCoins Earned: ${coins}\nCoins Remaining: ${30 - coins}\nProgress: ${((coins / 30) * 100).toFixed(1)}%\n\nKeep studying to reach 30 coins!`);
             } else {
-                setTimeout(() => {
-                    modal.classList.add('active');
-                }, 2000);
+                challengeModal.classList.add('active');
             }
-           
-            // Close modal when X button is clicked
-            closeBtn.addEventListener('click', function() {
-                modal.classList.remove('active');
-                localStorage.setItem('bimalismModalClosed', 'true');
-            });
-           
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-               
-                const enteredName = nameInput.value.trim();
-               
-                // Clear previous message
-                messageDiv.style.display = 'none';
-                messageDiv.className = 'modal-message';
-               
-                if (!enteredName) {
-                    showMessage('Please enter your name', 'modal-error');
-                    nameInput.classList.add('shake');
-                    setTimeout(() => nameInput.classList.remove('shake'), 500);
-                    return;
-                }
-               
-                // Store the name in localStorage
-                localStorage.setItem('bimalismUserName', enteredName);
-               
-                // All names are accepted
-                showMessage(`Welcome ${enteredName}!`, 'modal-success');
-               
-                // Redirect to settings.html after a short delay
-                setTimeout(() => {
-                    window.location.href = 'settings.html';
-                }, 1500);
-            });
-           
-            function showMessage(text, type) {
-                messageDiv.textContent = text;
-                messageDiv.className = `modal-message ${type}`;
-                messageDiv.style.display = 'block';
-            }
+        });
 
-            // ===== EXISTING DOWNLOAD FUNCTIONALITY =====
-            // Create downloadable ZIP function
-            function createDownloadableFiles() {
-                // Create a manifest.json file content
-                const manifestContent = JSON.stringify({
-                    "name": "Bimalism NEET & JEE Coaching",
-                    "short_name": "Bimalism",
-                    "description": "Premier NEET and JEE coaching institute",
-                    "start_url": "index.html",
-                    "display": "standalone",
-                    "background_color": "#2563eb",
-                    "theme_color": "#2563eb",
-                    "icons": [
-                        {
-                            "src": "logo1.png",
-                            "sizes": "192x192",
-                            "type": "image/png"
-                        }
-                    ]
-                }, null, 2);
-                
-                // Create README file
-                const readmeContent = `BIMALISM NEET & JEE COACHING APP
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+            `;
+            notification.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Simulate study timer (for demo purposes)
+        // In real implementation, this would be triggered by actual study timer
+        setInterval(() => {
+            // For demo: Randomly add coins (remove in production)
+            if (Math.random() < 0.01 && localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                earnCoin();
+            }
+        }, 60000); // Check every minute
+
+        // ===== EXISTING CODE (Name Verification) =====
+        const modal = document.getElementById('nameModal');
+        const form = document.getElementById('nameForm');
+        const nameInput = document.getElementById('name');
+        const messageDiv = document.getElementById('modalMessage');
+        const closeBtn = document.getElementById('closeModal');
+       
+        // Check if user has already entered their name
+        const userName = localStorage.getItem('bimalismUserName');
+       
+        if (userName) {
+            console.log(`Welcome back, ${userName}!`);
+        } else {
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 2000);
+        }
+       
+        // Close modal when X button is clicked
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            localStorage.setItem('bimalismModalClosed', 'true');
+        });
+       
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+           
+            const enteredName = nameInput.value.trim();
+           
+            // Clear previous message
+            messageDiv.style.display = 'none';
+            messageDiv.className = 'modal-message';
+           
+            if (!enteredName) {
+                showMessage('Please enter your name', 'modal-error');
+                nameInput.classList.add('shake');
+                setTimeout(() => nameInput.classList.remove('shake'), 500);
+                return;
+            }
+           
+            // Store the name in localStorage
+            localStorage.setItem('bimalismUserName', enteredName);
+           
+            // All names are accepted
+            showMessage(`Welcome ${enteredName}!`, 'modal-success');
+           
+            // Redirect to settings.html after a short delay
+            setTimeout(() => {
+                window.location.href = 'settings.html';
+            }, 1500);
+        });
+       
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `modal-message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+
+        // ===== EXISTING DOWNLOAD FUNCTIONALITY =====
+        // Create downloadable ZIP function
+        function createDownloadableFiles() {
+            // Create a manifest.json file content
+            const manifestContent = JSON.stringify({
+                "name": "Bimalism NEET & JEE Coaching",
+                "short_name": "Bimalism",
+                "description": "Premier NEET and JEE coaching institute",
+                "start_url": "index.html",
+                "display": "standalone",
+                "background_color": "#2563eb",
+                "theme_color": "#2563eb",
+                "icons": [
+                    {
+                        "src": "logo1.png",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    }
+                ]
+            }, null, 2);
+            
+            // Create README file
+            const readmeContent = `BIMALISM NEET & JEE COACHING APP
 ================================
 
 HOW TO INSTALL:
@@ -2121,43 +2121,43 @@ iPhone: Open in Safari → Share → Add to Home Screen
 
 Created by Aalif and Dharunesh
 Contact: bimalism01@gmail.com`;
-                
-                return { manifestContent, readmeContent };
-            }
             
-            // Download as ZIP for Windows/Mac
-            downloadWinBtn.addEventListener('click', function() {
-                loadingSpinner.classList.add('active');
-                
-                setTimeout(() => {
-                    // Create a ZIP file download using JSZip library (simulated)
-                    alert('📦 Preparing Bimalism App Package...\n\nThis would create a downloadable ZIP file containing:\n- All HTML files\n- Images and resources\n- README instructions\n- Offline app configuration\n\nFor now, save this page (Ctrl+S) and extract to use as app.');
-                    
-                    // Create a fake download link
-                    const blob = new Blob(['Bimalism App Package - Save this page and extract all files to use as app'], 
-                                          { type: 'text/plain' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'Bimalism-App-Readme.txt';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                    
-                    loadingSpinner.classList.remove('active');
-                }, 1000);
-            });
+            return { manifestContent, readmeContent };
+        }
+        
+        // Download as ZIP for Windows/Mac
+        downloadWinBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
             
-            // Download APK for Android (simulated)
-            downloadAndroidBtn.addEventListener('click', function() {
-                loadingSpinner.classList.add('active');
+            setTimeout(() => {
+                // Create a ZIP file download using JSZip library (simulated)
+                alert('📦 Preparing Bimalism App Package...\n\nThis would create a downloadable ZIP file containing:\n- All HTML files\n- Images and resources\n- README instructions\n- Offline app configuration\n\nFor now, save this page (Ctrl+S) and extract to use as app.');
                 
-                setTimeout(() => {
-                    alert('📱 Android Installation:\n\n1. Save this HTML file and all linked files in a folder\n2. Install "PWA to APK" converter from Play Store\n3. Convert this website to APK\n4. Install the APK on your device\n\nOR simply:\n- Open in Chrome\n- Tap menu (⋮)\n- Select "Install app" or "Add to Home Screen"');
-                    
-                    // Create instructions file
-                    const instructions = `ANDROID INSTALLATION INSTRUCTIONS
+                // Create a fake download link
+                const blob = new Blob(['Bimalism App Package - Save this page and extract all files to use as app'], 
+                                      { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Bimalism-App-Readme.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
+        });
+        
+        // Download APK for Android (simulated)
+        downloadAndroidBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
+            
+            setTimeout(() => {
+                alert('📱 Android Installation:\n\n1. Save this HTML file and all linked files in a folder\n2. Install "PWA to APK" converter from Play Store\n3. Convert this website to APK\n4. Install the APK on your device\n\nOR simply:\n- Open in Chrome\n- Tap menu (⋮)\n- Select "Install app" or "Add to Home Screen"');
+                
+                // Create instructions file
+                const instructions = `ANDROID INSTALLATION INSTRUCTIONS
 ====================================
 
 Method 1: Add to Home Screen (Easiest)
@@ -2175,144 +2175,144 @@ Method 2: Convert to APK
 4. Install the generated APK
 
 The app will work offline!`;
-                    
-                    const blob = new Blob([instructions], { type: 'text/plain' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'Android-Install-Instructions.txt';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                    
-                    loadingSpinner.classList.remove('active');
-                }, 1000);
-            });
-            
-            // Save to Home Screen for iOS
-            saveIOSBtn.addEventListener('click', function() {
-                loadingSpinner.classList.add('active');
                 
-                setTimeout(() => {
-                    alert('📱 iPhone/iPad Installation:\n\n1. Open this page in Safari (not Chrome)\n2. Tap the Share button (📤)\n3. Scroll down and tap "Add to Home Screen"\n4. Name it "Bimalism" and tap "Add"\n\nNote: You must use Safari browser for this to work.');
-                    
-                    // Check if iOS
-                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                    
-                    if (isIOS) {
-                        alert('📱 iOS Detected!\n\nNow please:\n1. Tap the Share button at the bottom\n2. Scroll down in the share sheet\n3. Tap "Add to Home Screen"\n4. Name it "Bimalism" and tap ADD');
-                    }
-                    
-                    loadingSpinner.classList.remove('active');
-                }, 1000);
-            });
-            
-            // Floating button
-            floatingBtn.addEventListener('click', function() {
-                // Scroll to download section
-                document.getElementById('download-section').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-
-            // ===== EXISTING LANGUAGE SWITCHER =====
-            const languageBtn = document.querySelector('.language-btn');
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageOptions = document.querySelectorAll('.language-option');
-            const languageText = document.querySelector('.language-btn span');
-           
-            // Toggle language dropdown
-            languageBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                languageDropdown.classList.toggle('active');
-            });
-           
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                languageDropdown.classList.remove('active');
-            });
-           
-            // Language selection with redirection
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const selectedLang = this.getAttribute('data-lang');
-                    const selectedPage = this.getAttribute('data-page');
-                    const selectedText = this.textContent.trim();
-                   
-                    // Show loading spinner
-                    loadingSpinner.classList.add('active');
-                   
-                    // Update active state
-                    languageOptions.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                   
-                    // Update button text
-                    languageText.textContent = selectedText.split(' ')[0];
-                   
-                    // Close dropdown
-                    languageDropdown.classList.remove('active');
-                   
-                    // Store language preference
-                    localStorage.setItem('bimalismLanguage', selectedLang);
-                   
-                    // Redirect to the selected language page after a short delay
-                    setTimeout(() => {
-                        window.location.href = selectedPage;
-                    }, 1000);
-                });
-            });
-           
-            // Mobile menu toggle
-            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.toggle('active');
-            });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    document.querySelector('.nav-links').classList.remove('active');
-                });
-            });
-            
-            // Add animation on scroll
-            const animatedElements = document.querySelectorAll('.animated');
-           
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-           
-            animatedElements.forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-
-            // Removed the "Add Demo Coin" button that was previously here
+                const blob = new Blob([instructions], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Android-Install-Instructions.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
         });
         
-        // In your index.html script, add this line in the registration form submission:
-localStorage.setItem('bimalismUserData', JSON.stringify(formData));
-        // Replace the form submit handler with:
-challengeRegistrationForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        fullName: document.getElementById('fullName').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        dob: document.getElementById('dob').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        pincode: document.getElementById('pincode').value
-    };
+        // Save to Home Screen for iOS
+        saveIOSBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
+            
+            setTimeout(() => {
+                alert('📱 iPhone/iPad Installation:\n\n1. Open this page in Safari (not Chrome)\n2. Tap the Share button (📤)\n3. Scroll down and tap "Add to Home Screen"\n4. Name it "Bimalism" and tap "Add"\n\nNote: You must use Safari browser for this to work.');
+                
+                // Check if iOS
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                
+                if (isIOS) {
+                    alert('📱 iOS Detected!\n\nNow please:\n1. Tap the Share button at the bottom\n2. Scroll down in the share sheet\n3. Tap "Add to Home Screen"\n4. Name it "Bimalism" and tap ADD');
+                }
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
+        });
+        
+        // Floating button
+        floatingBtn.addEventListener('click', function() {
+            // Scroll to download section
+            document.getElementById('download-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
 
-    // Create WhatsApp message
-    const whatsappMessage = `
+        // ===== EXISTING LANGUAGE SWITCHER =====
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const languageText = document.querySelector('.language-btn span');
+       
+        // Toggle language dropdown
+        languageBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+        });
+       
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            languageDropdown.classList.remove('active');
+        });
+       
+        // Language selection with redirection
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                const selectedPage = this.getAttribute('data-page');
+                const selectedText = this.textContent.trim();
+               
+                // Show loading spinner
+                loadingSpinner.classList.add('active');
+               
+                // Update active state
+                languageOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+               
+                // Update button text
+                languageText.textContent = selectedText.split(' ')[0];
+               
+                // Close dropdown
+                languageDropdown.classList.remove('active');
+               
+                // Store language preference
+                localStorage.setItem('bimalismLanguage', selectedLang);
+               
+                // Redirect to the selected language page after a short delay
+                setTimeout(() => {
+                    window.location.href = selectedPage;
+                }, 1000);
+            });
+        });
+       
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Add animation on scroll
+        const animatedElements = document.querySelectorAll('.animated');
+       
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+       
+        animatedElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Removed the "Add Demo Coin" button that was previously here
+    });
+    
+    // In your index.html script, add this line in the registration form submission:
+    localStorage.setItem('bimalismUserData', JSON.stringify(formData));
+    // Replace the form submit handler with:
+    challengeRegistrationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            dob: document.getElementById('dob').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            pincode: document.getElementById('pincode').value
+        };
+
+        // Create WhatsApp message
+        const whatsappMessage = `
 *NEW BIMALISM REGISTRATION*
     
 👤 Name: ${formData.fullName}
@@ -2323,38 +2323,39 @@ challengeRegistrationForm.addEventListener('submit', function(e) {
 🏙️ City: ${formData.city}
 📮 PIN: ${formData.pincode}
 ⏰ Time: ${new Date().toLocaleString()}
-    `.trim();
+        `.trim();
 
-    // Encode for WhatsApp URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    
-    // Open WhatsApp with pre-filled message
-    window.open(`https://wa.me/919876543210?text=${encodedMessage}`, '_blank');
-    
-    // Also save locally
-    localStorage.setItem('bimalismChallengeRegistered', 'true');
-    localStorage.setItem('bimalismUserData', JSON.stringify(formData));
-    
-    // Show success
-    registrationForm.classList.remove('active');
-    coinCounter.classList.add('active');
-    alert('✅ Registration sent to Aalif/Dharunesh on WhatsApp!');
-});
-    </script>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
-     crossorigin="anonymous"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-7551440219345789"
-         data-ad-slot="1681833398"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+        // Encode for WhatsApp URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        
+        // Open WhatsApp with pre-filled message - ONLY CHANGE MADE HERE
+        window.open(`https://wa.me/919597339180?text=${encodedMessage}`, '_blank');
+        
+        // Also save locally
+        localStorage.setItem('bimalismChallengeRegistered', 'true');
+        localStorage.setItem('bimalismUserData', JSON.stringify(formData));
+        
+        // Show success
+        registrationForm.classList.remove('active');
+        coinCounter.classList.add('active');
+        alert('✅ Registration sent to Aalif/Dharunesh on WhatsApp!');
+    });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
+ crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7551440219345789"
+     data-ad-slot="1681833398"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </body>
 </html>
+
 
 
 
