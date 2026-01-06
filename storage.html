@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door Delivery Information - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .header-left h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header-left p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Navigation */
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Main Content */
+        .content-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .section-header h2 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .action-btn.success {
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+        }
+        
+        .action-btn.danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        }
+        
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .data-table td {
+            padding: 16px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+        
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .data-table .actions-cell {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .table-action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .table-action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .table-action-btn.view {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .table-action-btn.edit {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+        
+        .table-action-btn.delete {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+        }
+        
+        .status-processing {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+        
+        .status-delivered {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .status-failed {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: white;
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .admin-footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-container {
+                padding: 15px;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-left {
+                text-align: center;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .modal {
+                padding: 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-nav {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+                padding: 12px 20px;
+            }
+            
+            .action-btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1><i class="fas fa-truck"></i> Door Delivery Information</h1>
+                <p>Manage all delivery information collected from the Bimalism Challenge registrations</p>
+            </div>
+            
+            <div class="header-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalRegistrations">0</div>
+                    <div class="stat-label">Total Registrations</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="pendingDeliveries">0</div>
+                    <div class="stat-label">Pending Delivery</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="completedDeliveries">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalCoins">0</div>
+                    <div class="stat-label">Total Coins Earned</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <button class="nav-btn active" onclick="showSection('all-records')">
+                <i class="fas fa-list"></i> All Records
+            </button>
+            <button class="nav-btn" onclick="showSection('pending-delivery')">
+                <i class="fas fa-clock"></i> Pending Delivery
+            </button>
+            <button class="nav-btn" onclick="showSection('delivered')">
+                <i class="fas fa-check-circle"></i> Delivered
+            </button>
+            <button class="nav-btn" onclick="showSection('add-new')">
+                <i class="fas fa-plus-circle"></i> Add New
+            </button>
+            <button class="nav-btn" onclick="showSection('analytics')">
+                <i class="fas fa-chart-bar"></i> Analytics
+            </button>
+            <button class="nav-btn" onclick="logout()" style="margin-left: auto; background: rgba(255, 255, 255, 0.1);">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </nav>
+        
+        <!-- All Records Section -->
+        <section id="all-records" class="content-section active">
+            <div class="section-header">
+                <h2><i class="fas fa-table"></i> All Delivery Records</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="exportData()">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                    <button class="action-btn" onclick="refreshData()">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                    <button class="action-btn primary" onclick="showAddForm()">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                </div>
+            </div>
+            
+            <div id="records-table-container">
+                <!-- Records table will be loaded here -->
+                <div class="empty-state" id="empty-records">
+                    <i class="fas fa-database"></i>
+                    <h3>No Delivery Records Found</h3>
+                    <p>No door delivery information has been collected yet from challenge registrations.</p>
+                    <button class="action-btn primary" onclick="showSection('add-new')">
+                        <i class="fas fa-plus"></i> Add First Record
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pending Delivery Section -->
+        <section id="pending-delivery" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Pending Deliveries</h2>
+                <div class="action-buttons">
+                    <button class="action-btn success" onclick="markAllAsDelivered()">
+                        <i class="fas fa-check-double"></i> Mark All as Delivered
+                    </button>
+                </div>
+            </div>
+            
+            <div id="pending-table-container">
+                <!-- Pending deliveries table will be loaded here -->
+                <div class="empty-state">
+                    <i class="fas fa-clock"></i>
+                    <h3>No Pending Deliveries</h3>
+                    <p>All deliveries have been processed or there are no pending deliveries.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Delivered Section -->
+        <section id="delivered" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-check-circle"></i> Delivered Items</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="exportDeliveredData()">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                </div>
+            </div>
+            
+            <div id="delivered-table-container">
+                <!-- Delivered items table will be loaded here -->
+                <div class="empty-state">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>No Completed Deliveries</h3>
+                    <p>No deliveries have been marked as completed yet.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Add New Section -->
+        <section id="add-new" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Delivery Record</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="showSection('all-records')">
+                        <i class="fas fa-arrow-left"></i> Back to Records
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-container">
+                <form id="add-record-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-input" name="fullName" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-input" name="email" placeholder="Enter email address" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-input" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-input" name="dob">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Complete Address *</label>
+                        <textarea class="form-input form-textarea" name="address" placeholder="Full address with landmark" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">City *</label>
+                            <input type="text" class="form-input" name="city" placeholder="Enter city" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">State</label>
+                            <input type="text" class="form-input" name="state" placeholder="Enter state">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">PIN Code *</label>
+                            <input type="text" class="form-input" name="pincode" placeholder="Enter PIN code" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Coins Earned</label>
+                            <input type="number" class="form-input" name="coinsEarned" placeholder="Enter coins earned" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Registration Date</label>
+                            <input type="date" class="form-input" name="registrationDate" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Delivery Status</label>
+                        <select class="form-input" name="deliveryStatus">
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-input form-textarea" name="notes" placeholder="Any additional notes or information"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="reset" class="action-btn">Clear Form</button>
+                        <button type="submit" class="action-btn success">
+                            <i class="fas fa-save"></i> Save Record
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Analytics Section -->
+        <section id="analytics" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> Delivery Analytics</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="refreshAnalytics()">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 20px;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-city"></i> Top Cities
+                    </h3>
+                    <div id="top-cities-list" style="min-height: 200px;">
+                        <!-- Top cities list will be loaded here -->
+                        <p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-chart-pie"></i> Status Distribution
+                    </h3>
+                    <div id="status-distribution" style="min-height: 200px;">
+                        <!-- Status distribution will be loaded here -->
+                        <p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-coins"></i> Coins Statistics
+                    </h3>
+                    <div id="coins-stats" style="min-height: 200px;">
+                        <!-- Coins statistics will be loaded here -->
+                        <p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <p>&copy; 2024 Bimalism Admin Panel. Authorized access only. All activity is logged.</p>
+        <p style="margin-top: 5px; font-size: 12px; opacity: 0.7;">
+            Logged in as: <span id="loggedInUser">Administrator</span> | 
+            Last Updated: <span id="lastUpdatedTime"><?php echo date('Y-m-d H:i:s'); ?></span>
+        </p>
+    </footer>
+    
+    <!-- View Details Modal -->
+    <div class="modal-overlay" id="viewModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-eye"></i> Delivery Details</h2>
+                <button class="close-modal" onclick="closeModal('viewModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="viewModalBody">
+                <!-- Details will be loaded here -->
+            </div>
+            <div class="form-actions">
+                <button class="action-btn" onclick="closeModal('viewModal')">Close</button>
+                <button class="action-btn edit" onclick="editRecord()">
+                    <i class="fas fa-edit"></i> Edit Record
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Record Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Delivery Record</h2>
+                <button class="close-modal" onclick="closeModal('editModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-record-form">
+                    <input type="hidden" id="edit-record-id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-input" id="edit-fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-input" id="edit-email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-input" id="edit-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-input" id="edit-dob">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Complete Address *</label>
+                        <textarea class="form-input form-textarea" id="edit-address" required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">City *</label>
+                            <input type="text" class="form-input" id="edit-city" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">State</label>
+                            <input type="text" class="form-input" id="edit-state">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">PIN Code *</label>
+                            <input type="text" class="form-input" id="edit-pincode" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Coins Earned</label>
+                            <input type="number" class="form-input" id="edit-coinsEarned" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Delivery Status</label>
+                            <select class="form-input" id="edit-deliveryStatus">
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-input form-textarea" id="edit-notes"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="form-actions">
+                <button class="action-btn" onclick="closeModal('editModal')">Cancel</button>
+                <button class="action-btn danger" onclick="deleteRecord()">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="action-btn success" onclick="saveEditedRecord()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is authenticated
+            const isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
+            const adminUser = localStorage.getItem('adminUser');
+            
+            if (!isAuthenticated || !adminUser) {
+                // Redirect to privacy policy page for authentication
+                window.location.href = 'policy.html';
+                return;
+            }
+            
+            // Set logged in user
+            document.getElementById('loggedInUser').textContent = adminUser.charAt(0).toUpperCase() + adminUser.slice(1);
+            
+            // Load data from localStorage
+            loadDeliveryData();
+            updateStats();
+            loadAnalytics();
+            
+            // Set up event listeners
+            document.getElementById('add-record-form').addEventListener('submit', handleAddRecord);
+            document.getElementById('lastUpdatedTime').textContent = new Date().toLocaleString();
+            
+            // Auto-refresh data every 30 seconds
+            setInterval(() => {
+                refreshData();
+            }, 30000);
+        });
+        
+        // Delivery data storage
+        let deliveryData = [];
+        let currentViewingId = null;
+        
+        // Load data from localStorage
+        function loadDeliveryData() {
+            const savedData = localStorage.getItem('bimalismDeliveryData');
+            if (savedData) {
+                deliveryData = JSON.parse(savedData);
+                renderRecordsTable();
+                renderPendingTable();
+                renderDeliveredTable();
+            }
+        }
+        
+        // Save data to localStorage
+        function saveDeliveryData() {
+            localStorage.setItem('bimalismDeliveryData', JSON.stringify(deliveryData));
+            updateStats();
+            loadAnalytics();
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const total = deliveryData.length;
+            const pending = deliveryData.filter(item => item.deliveryStatus === 'pending').length;
+            const delivered = deliveryData.filter(item => item.deliveryStatus === 'delivered').length;
+            const totalCoins = deliveryData.reduce((sum, item) => sum + (parseInt(item.coinsEarned) || 0), 0);
+            
+            document.getElementById('totalRegistrations').textContent = total;
+            document.getElementById('pendingDeliveries').textContent = pending;
+            document.getElementById('completedDeliveries').textContent = delivered;
+            document.getElementById('totalCoins').textContent = totalCoins;
+        }
+        
+        // Show section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Find and activate corresponding nav button
+            const navBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => 
+                btn.getAttribute('onclick')?.includes(`'${sectionId}'`)
+            );
+            if (navBtn) {
+                navBtn.classList.add('active');
+            }
+            
+            // Load section-specific data
+            if (sectionId === 'all-records') {
+                renderRecordsTable();
+            } else if (sectionId === 'pending-delivery') {
+                renderPendingTable();
+            } else if (sectionId === 'delivered') {
+                renderDeliveredTable();
+            } else if (sectionId === 'analytics') {
+                loadAnalytics();
+            }
+        }
+        
+        // Render all records table
+        function renderRecordsTable() {
+            const container = document.getElementById('records-table-container');
+            
+            if (deliveryData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" id="empty-records">
+                        <i class="fas fa-database"></i>
+                        <h3>No Delivery Records Found</h3>
+                        <p>No door delivery information has been collected yet from challenge registrations.</p>
+                        <button class="action-btn primary" onclick="showSection('add-new')">
+                            <i class="fas fa-plus"></i> Add First Record
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by registration date (newest first)
+            const sortedData = [...deliveryData].sort((a, b) => 
+                new Date(b.registrationDate || b.timestamp) - new Date(a.registrationDate || a.timestamp)
+            );
+            
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Coins</th>
+                            <th>Status</th>
+                            <th>Registration Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            sortedData.forEach((record, index) => {
+                const statusClass = getStatusClass(record.deliveryStatus);
+                const statusText = getStatusText(record.deliveryStatus);
+                
+                tableHTML += `
+                    <tr>
+                        <td>${record.id || index + 1}</td>
+                        <td>${record.fullName}</td>
+                        <td>${record.phone}</td>
+                        <td>${record.city}</td>
+                        <td>${record.coinsEarned || '0'}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${formatDate(record.registrationDate || record.timestamp)}</td>
+                        <td class="actions-cell">
+                            <button class="table-action-btn view" onclick="viewRecord(${index})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="table-action-btn edit" onclick="editRecord(${index})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="table-action-btn delete" onclick="deleteRecord(${index})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+        
+        // Render pending deliveries table
+        function renderPendingTable() {
+            const container = document.getElementById('pending-table-container');
+            const pendingData = deliveryData.filter(item => 
+                item.deliveryStatus === 'pending' || item.deliveryStatus === 'processing'
+            );
+            
+            if (pendingData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-clock"></i>
+                        <h3>No Pending Deliveries</h3>
+                        <p>All deliveries have been processed or there are no pending deliveries.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Coins</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            pendingData.forEach((record, index) => {
+                // Find actual index in deliveryData
+                const actualIndex = deliveryData.findIndex(item => 
+                    item.fullName === record.fullName && 
+                    item.phone === record.phone
+                );
+                
+                tableHTML += `
+                    <tr>
+                        <td>${record.fullName}</td>
+                        <td title="${record.address}">${truncateText(record.address, 30)}</td>
+                        <td>${record.phone}</td>
+                        <td>${record.city}</td>
+                        <td>${record.coinsEarned || '0'}</td>
+                        <td class="actions-cell">
+                            <button class="table-action-btn view" onclick="viewRecord(${actualIndex})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="table-action-btn success" onclick="markAsDelivered(${actualIndex})" title="Mark as Delivered">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+        
+        // Render delivered items table
+        function renderDeliveredTable() {
+            const container = document.getElementById('delivered-table-container');
+            const deliveredData = deliveryData.filter(item => item.deliveryStatus === 'delivered');
+            
+            if (deliveredData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>No Completed Deliveries</h3>
+                        <p>No deliveries have been marked as completed yet.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>City</th>
+                            <th>Phone</th>
+                            <th>Coins Earned</th>
+                            <th>Delivery Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            deliveredData.forEach((record, index) => {
+                // Find actual index in deliveryData
+                const actualIndex = deliveryData.findIndex(item => 
+                    item.fullName === record.fullName && 
+                    item.phone === record.phone
+                );
+                
+                tableHTML += `
+                    <tr>
+                        <td>${record.fullName}</td>
+                        <td>${record.city}</td>
+                        <td>${record.phone}</td>
+                        <td>${record.coinsEarned || '0'}</td>
+                        <td>${formatDate(record.deliveryDate || record.updatedDate || record.timestamp)}</td>
+                        <td class="actions-cell">
+                            <button class="table-action-btn view" onclick="viewRecord(${actualIndex})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+        
+        // Load analytics
+        function loadAnalytics() {
+            // Top Cities
+            const cityCounts = {};
+            deliveryData.forEach(record => {
+                const city = record.city || 'Unknown';
+                cityCounts[city] = (cityCounts[city] || 0) + 1;
+            });
+            
+            const sortedCities = Object.entries(cityCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+            
+            let citiesHTML = '<ul style="list-style: none; padding: 0;">';
+            sortedCities.forEach(([city, count]) => {
+                citiesHTML += `
+                    <li style="margin-bottom: 10px; padding: 8px; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>${city}</span>
+                            <span style="color: #667eea; font-weight: bold;">${count}</span>
+                        </div>
+                        <div style="margin-top: 5px; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px;">
+                            <div style="height: 100%; width: ${(count / deliveryData.length) * 100}%; background: #667eea; border-radius: 3px;"></div>
+                        </div>
+                    </li>
+                `;
+            });
+            citiesHTML += '</ul>';
+            
+            document.getElementById('top-cities-list').innerHTML = sortedCities.length > 0 ? citiesHTML : 
+                '<p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>';
+            
+            // Status Distribution
+            const statusCounts = {
+                pending: deliveryData.filter(item => item.deliveryStatus === 'pending').length,
+                processing: deliveryData.filter(item => item.deliveryStatus === 'processing').length,
+                delivered: deliveryData.filter(item => item.deliveryStatus === 'delivered').length,
+                failed: deliveryData.filter(item => item.deliveryStatus === 'failed').length
+            };
+            
+            let statusHTML = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">';
+            Object.entries(statusCounts).forEach(([status, count]) => {
+                if (count > 0) {
+                    const percentage = deliveryData.length > 0 ? (count / deliveryData.length * 100).toFixed(1) : '0';
+                    statusHTML += `
+                        <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: ${getStatusColor(status)}; margin-bottom: 5px;">
+                                ${count}
+                            </div>
+                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
+                                ${status}
+                            </div>
+                            <div style="font-size: 11px; opacity: 0.7; margin-top: 5px;">
+                                ${percentage}%
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            statusHTML += '</div>';
+            
+            document.getElementById('status-distribution').innerHTML = Object.values(statusCounts).some(count => count > 0) ? 
+                statusHTML : '<p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>';
+            
+            // Coins Statistics
+            const totalCoins = deliveryData.reduce((sum, item) => sum + (parseInt(item.coinsEarned) || 0), 0);
+            const avgCoins = deliveryData.length > 0 ? (totalCoins / deliveryData.length).toFixed(1) : '0';
+            const maxCoins = deliveryData.length > 0 ? 
+                Math.max(...deliveryData.map(item => parseInt(item.coinsEarned) || 0)) : '0';
+            
+            document.getElementById('coins-stats').innerHTML = deliveryData.length > 0 ? `
+                <div style="text-align: center;">
+                    <div style="font-size: 42px; font-weight: bold; color: #FFD700; margin: 20px 0;">
+                        ${totalCoins}
+                    </div>
+                    <div style="font-size: 14px; opacity: 0.8; margin-bottom: 30px;">Total Coins Earned</div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+                        <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 18px; font-weight: bold;">${avgCoins}</div>
+                            <div style="font-size: 12px; opacity: 0.8;">Average</div>
+                        </div>
+                        <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 18px; font-weight: bold;">${maxCoins}</div>
+                            <div style="font-size: 12px; opacity: 0.8;">Maximum</div>
+                        </div>
+                    </div>
+                </div>
+            ` : '<p style="text-align: center; opacity: 0.5; padding: 40px 0;">No data available</p>';
+        }
+        
+        // Handle add record form submission
+        function handleAddRecord(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const record = Object.fromEntries(formData);
+            
+            // Generate unique ID
+            record.id = 'DEL' + Date.now();
+            record.timestamp = new Date().toISOString();
+            record.updatedDate = record.timestamp;
+            
+            // If registration date not provided, use current date
+            if (!record.registrationDate) {
+                record.registrationDate = new Date().toISOString().split('T')[0];
+            }
+            
+            deliveryData.push(record);
+            saveDeliveryData();
+            
+            // Reset form and show success message
+            form.reset();
+            showNotification('Record added successfully!', 'success');
+            
+            // Switch to all records view
+            showSection('all-records');
+        }
+        
+        // View record details
+        function viewRecord(index) {
+            const record = deliveryData[index];
+            currentViewingId = index;
+            
+            const modalBody = document.getElementById('viewModalBody');
+            modalBody.innerHTML = `
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">${record.fullName}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value">${record.email}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone Number</div>
+                        <div class="info-value">${record.phone}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Date of Birth</div>
+                        <div class="info-value">${record.dob || 'Not specified'}</div>
+                    </div>
+                </div>
+                
+                <div class="info-item" style="margin-top: 20px;">
+                    <div class="info-label">Complete Address</div>
+                    <div class="info-value">${record.address}</div>
+                </div>
+                
+                <div class="info-grid" style="margin-top: 20px;">
+                    <div class="info-item">
+                        <div class="info-label">City</div>
+                        <div class="info-value">${record.city}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">State</div>
+                        <div class="info-value">${record.state || 'Not specified'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">PIN Code</div>
+                        <div class="info-value">${record.pincode}</div>
+                    </div>
+                </div>
+                
+                <div class="info-grid" style="margin-top: 20px;">
+                    <div class="info-item">
+                        <div class="info-label">Coins Earned</div>
+                        <div class="info-value">${record.coinsEarned || '0'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Delivery Status</div>
+                        <div class="info-value">
+                            <span class="status-badge ${getStatusClass(record.deliveryStatus)}">
+                                ${getStatusText(record.deliveryStatus)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Registration Date</div>
+                        <div class="info-value">${formatDate(record.registrationDate || record.timestamp)}</div>
+                    </div>
+                </div>
+                
+                ${record.notes ? `
+                    <div class="info-item" style="margin-top: 20px;">
+                        <div class="info-label">Notes</div>
+                        <div class="info-value">${record.notes}</div>
+                    </div>
+                ` : ''}
+            `;
+            
+            openModal('viewModal');
+        }
+        
+        // Edit record
+        function editRecord(index) {
+            if (index === undefined) {
+                index = currentViewingId;
+            }
+            
+            if (index === null || index === undefined) {
+                showNotification('Please select a record to edit', 'error');
+                return;
+            }
+            
+            const record = deliveryData[index];
+            currentViewingId = index;
+            
+            // Populate edit form
+            document.getElementById('edit-record-id').value = index;
+            document.getElementById('edit-fullName').value = record.fullName;
+            document.getElementById('edit-email').value = record.email;
+            document.getElementById('edit-phone').value = record.phone;
+            document.getElementById('edit-dob').value = record.dob || '';
+            document.getElementById('edit-address').value = record.address;
+            document.getElementById('edit-city').value = record.city;
+            document.getElementById('edit-state').value = record.state || '';
+            document.getElementById('edit-pincode').value = record.pincode;
+            document.getElementById('edit-coinsEarned').value = record.coinsEarned || '';
+            document.getElementById('edit-deliveryStatus').value = record.deliveryStatus;
+            document.getElementById('edit-notes').value = record.notes || '';
+            
+            closeModal('viewModal');
+            openModal('editModal');
+        }
+        
+        // Save edited record
+        function saveEditedRecord() {
+            const index = document.getElementById('edit-record-id').value;
+            
+            if (index === '' || index === null) {
+                showNotification('Invalid record ID', 'error');
+                return;
+            }
+            
+            const record = deliveryData[index];
+            
+            // Update record with form values
+            record.fullName = document.getElementById('edit-fullName').value;
+            record.email = document.getElementById('edit-email').value;
+            record.phone = document.getElementById('edit-phone').value;
+            record.dob = document.getElementById('edit-dob').value;
+            record.address = document.getElementById('edit-address').value;
+            record.city = document.getElementById('edit-city').value;
+            record.state = document.getElementById('edit-state').value;
+            record.pincode = document.getElementById('edit-pincode').value;
+            record.coinsEarned = document.getElementById('edit-coinsEarned').value;
+            record.deliveryStatus = document.getElementById('edit-deliveryStatus').value;
+            record.notes = document.getElementById('edit-notes').value;
+            record.updatedDate = new Date().toISOString();
+            
+            // If marked as delivered, set delivery date
+            if (record.deliveryStatus === 'delivered' && !record.deliveryDate) {
+                record.deliveryDate = new Date().toISOString().split('T')[0];
+            }
+            
+            saveDeliveryData();
+            closeModal('editModal');
+            showNotification('Record updated successfully!', 'success');
+            
+            // Refresh current view
+            const activeSection = document.querySelector('.content-section.active').id;
+            if (activeSection === 'all-records') {
+                renderRecordsTable();
+            } else if (activeSection === 'pending-delivery') {
+                renderPendingTable();
+            } else if (activeSection === 'delivered') {
+                renderDeliveredTable();
+            }
+        }
+        
+        // Delete record
+        function deleteRecord(index) {
+            if (index === undefined) {
+                index = currentViewingId;
+            }
+            
+            if (index === null || index === undefined) {
+                showNotification('Please select a record to delete', 'error');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete this record? This action cannot be undone.')) {
+                deliveryData.splice(index, 1);
+                saveDeliveryData();
+                
+                closeModal('editModal');
+                closeModal('viewModal');
+                showNotification('Record deleted successfully!', 'success');
+                
+                // Refresh current view
+                const activeSection = document.querySelector('.content-section.active').id;
+                if (activeSection === 'all-records') {
+                    renderRecordsTable();
+                } else if (activeSection === 'pending-delivery') {
+                    renderPendingTable();
+                } else if (activeSection === 'delivered') {
+                    renderDeliveredTable();
+                }
+            }
+        }
+        
+        // Mark as delivered
+        function markAsDelivered(index) {
+            if (index === null || index === undefined) {
+                showNotification('Invalid record', 'error');
+                return;
+            }
+            
+            const record = deliveryData[index];
+            record.deliveryStatus = 'delivered';
+            record.deliveryDate = new Date().toISOString().split('T')[0];
+            record.updatedDate = new Date().toISOString();
+            
+            saveDeliveryData();
+            renderPendingTable();
+            showNotification('Marked as delivered successfully!', 'success');
+        }
+        
+        // Mark all as delivered
+        function markAllAsDelivered() {
+            const pendingRecords = deliveryData.filter(item => 
+                item.deliveryStatus === 'pending' || item.deliveryStatus === 'processing'
+            );
+            
+            if (pendingRecords.length === 0) {
+                showNotification('No pending deliveries to mark', 'info');
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to mark all ${pendingRecords.length} pending deliveries as delivered?`)) {
+                const today = new Date().toISOString().split('T')[0];
+                
+                deliveryData.forEach(record => {
+                    if (record.deliveryStatus === 'pending' || record.deliveryStatus === 'processing') {
+                        record.deliveryStatus = 'delivered';
+                        record.deliveryDate = today;
+                        record.updatedDate = new Date().toISOString();
+                    }
+                });
+                
+                saveDeliveryData();
+                renderPendingTable();
+                renderRecordsTable();
+                showNotification(`Marked ${pendingRecords.length} deliveries as delivered!`, 'success');
+            }
+        }
+        
+        // Export data as CSV
+        function exportData() {
+            if (deliveryData.length === 0) {
+                showNotification('No data to export', 'info');
+                return;
+            }
+            
+            const headers = ['Name', 'Email', 'Phone', 'DOB', 'Address', 'City', 'State', 'PIN Code', 'Coins Earned', 'Status', 'Registration Date'];
+            const csvRows = [
+                headers.join(','),
+                ...deliveryData.map(record => [
+                    `"${record.fullName}"`,
+                    `"${record.email}"`,
+                    `"${record.phone}"`,
+                    `"${record.dob || ''}"`,
+                    `"${record.address.replace(/"/g, '""')}"`,
+                    `"${record.city}"`,
+                    `"${record.state || ''}"`,
+                    `"${record.pincode}"`,
+                    `"${record.coinsEarned || '0'}"`,
+                    `"${record.deliveryStatus}"`,
+                    `"${record.registrationDate || record.timestamp}"`
+                ].join(','))
+            ];
+            
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bimalism-delivery-data-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Data exported successfully!', 'success');
+        }
+        
+        // Export delivered data
+        function exportDeliveredData() {
+            const deliveredData = deliveryData.filter(item => item.deliveryStatus === 'delivered');
+            
+            if (deliveredData.length === 0) {
+                showNotification('No delivered data to export', 'info');
+                return;
+            }
+            
+            const headers = ['Name', 'Phone', 'Address', 'City', 'PIN Code', 'Coins Earned', 'Delivery Date'];
+            const csvRows = [
+                headers.join(','),
+                ...deliveredData.map(record => [
+                    `"${record.fullName}"`,
+                    `"${record.phone}"`,
+                    `"${record.address.replace(/"/g, '""')}"`,
+                    `"${record.city}"`,
+                    `"${record.pincode}"`,
+                    `"${record.coinsEarned || '0'}"`,
+                    `"${record.deliveryDate || record.updatedDate}"`
+                ].join(','))
+            ];
+            
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bimalism-delivered-data-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Delivered data exported successfully!', 'success');
+        }
+        
+        // Refresh data
+        function refreshData() {
+            // In a real application, this would fetch from a server
+            // For now, just reload from localStorage
+            loadDeliveryData();
+            updateStats();
+            
+            const activeSection = document.querySelector('.content-section.active').id;
+            if (activeSection === 'all-records') {
+                renderRecordsTable();
+            } else if (activeSection === 'pending-delivery') {
+                renderPendingTable();
+            } else if (activeSection === 'delivered') {
+                renderDeliveredTable();
+            } else if (activeSection === 'analytics') {
+                loadAnalytics();
+            }
+            
+            document.getElementById('lastUpdatedTime').textContent = new Date().toLocaleString();
+            showNotification('Data refreshed successfully!', 'success');
+        }
+        
+        // Refresh analytics
+        function refreshAnalytics() {
+            loadAnalytics();
+            showNotification('Analytics refreshed!', 'success');
+        }
+        
+        // Show add form
+        function showAddForm() {
+            showSection('add-new');
+        }
+        
+        // Open modal
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentViewingId = null;
+        }
+        
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminAuthenticated');
+                localStorage.removeItem('adminUser');
+                localStorage.removeItem('adminLoginTime');
+                window.location.href = 'policy.html';
+            }
+        }
+        
+        // Helper functions
+        function getStatusClass(status) {
+            switch(status) {
+                case 'pending': return 'status-pending';
+                case 'processing': return 'status-processing';
+                case 'delivered': return 'status-delivered';
+                case 'failed': return 'status-failed';
+                default: return 'status-pending';
+            }
+        }
+        
+        function getStatusText(status) {
+            switch(status) {
+                case 'pending': return 'Pending';
+                case 'processing': return 'Processing';
+                case 'delivered': return 'Delivered';
+                case 'failed': return 'Failed';
+                default: return 'Pending';
+            }
+        }
+        
+        function getStatusColor(status) {
+            switch(status) {
+                case 'pending': return '#FFC107';
+                case 'processing': return '#2196F3';
+                case 'delivered': return '#4CAF50';
+                case 'failed': return '#f44336';
+                default: return '#FFC107';
+            }
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        }
+        
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+            
+            // Add animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Close modals on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('viewModal');
+                closeModal('editModal');
+            }
+        });
+        
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    const modalId = overlay.id;
+                    closeModal(modalId);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
