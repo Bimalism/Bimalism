@@ -1899,9 +1899,9 @@
             registrationForm.classList.remove('active');
         });
 
-        // Handle registration form submission - MODIFIED FOR WHATSAPP
+        // Handle registration form submission - IMMEDIATE WHATSAPP REDIRECT
         challengeRegistrationForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form submission to Google Forms
+            e.preventDefault(); // Prevent form submission
             
             // Get form data
             const formData = {
@@ -1915,13 +1915,10 @@
             };
 
             // Validate required fields
-            if (!formData.fullName || !formData.phone || !formData.email) {
-                alert('Please fill in all required fields: Name, Phone, and Email');
+            if (!formData.fullName || !formData.phone) {
+                alert('Please enter your Name and Phone number');
                 return;
             }
-
-            // Show loading
-            loadingSpinner.classList.add('active');
 
             // Create WhatsApp message
             const whatsappMessage = `
@@ -1956,26 +1953,17 @@ ${formData.city} - ${formData.pincode}
             if (!localStorage.getItem('bimalismCoins')) {
                 localStorage.setItem('bimalismCoins', '0');
             }
-
-            // Hide loading after 1 second
-            setTimeout(() => {
-                loadingSpinner.classList.remove('active');
-                
-                // Hide registration form
-                registrationForm.classList.remove('active');
-                
-                // Show coin counter and progress
-                coinCounter.classList.add('active');
-                progressContainer.classList.add('active');
-                updateCoinDisplay(0);
-                
-                // Show success message
-                alert('✅ Registration successful! Opening WhatsApp to send your details...');
-                
-                // Open WhatsApp with pre-filled message in new tab
-                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-                
-            }, 1000);
+            
+            // Hide registration form
+            registrationForm.classList.remove('active');
+            
+            // Show coin counter and progress
+            coinCounter.classList.add('active');
+            progressContainer.classList.add('active');
+            updateCoinDisplay(0);
+            
+            // IMMEDIATELY OPEN WHATSAPP
+            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
         });
 
         // Update coin display
@@ -2352,10 +2340,9 @@ The app will work offline!`;
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-</script>
 </body>
 </html>
+
 
 
 
