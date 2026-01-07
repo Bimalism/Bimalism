@@ -1899,24 +1899,65 @@
             registrationForm.classList.remove('active');
         });
 
-        // Handle registration form submission - SIMPLIFIED
+        // Handle registration form submission - MODIFIED FOR WHATSAPP
         challengeRegistrationForm.addEventListener('submit', function(e) {
-            // DON'T prevent default - let Google Form handle it
-            // e.preventDefault(); // REMOVE or COMMENT this line
+            e.preventDefault(); // Prevent form submission to Google Forms
             
-            // Just show loading and success
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                dob: document.getElementById('dob').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                pincode: document.getElementById('pincode').value
+            };
+
+            // Validate required fields
+            if (!formData.fullName || !formData.phone || !formData.email) {
+                alert('Please fill in all required fields: Name, Phone, and Email');
+                return;
+            }
+
+            // Show loading
             loadingSpinner.classList.add('active');
+
+            // Create WhatsApp message
+            const whatsappMessage = `
+*NEW BIMALISM CHALLENGE REGISTRATION*
+
+🎯 *Challenge Participant Details:*
+👤 Name: ${formData.fullName}
+📧 Email: ${formData.email}
+📱 Phone: ${formData.phone}
+🎂 Date of Birth: ${formData.dob}
+
+📍 *Delivery Address:*
+${formData.address}
+${formData.city} - ${formData.pincode}
+
+⏰ Registered at: ${new Date().toLocaleString()}
+🎮 Ready to start the 30-coin challenge!
+            `.trim();
+
+            // Encode for WhatsApp URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
             
-            // Store basic registration status in localStorage
+            // WhatsApp number (9597339180 with country code)
+            const whatsappNumber = '919597339180';
+            
+            // Store registration status in localStorage
             localStorage.setItem('bimalismChallengeRegistered', 'true');
             localStorage.setItem('bimalismChallengeAccepted', 'true');
+            localStorage.setItem('bimalismUserData', JSON.stringify(formData));
             
             // Initialize coins if not exists
             if (!localStorage.getItem('bimalismCoins')) {
                 localStorage.setItem('bimalismCoins', '0');
             }
 
-            // Hide loading after 2 seconds
+            // Hide loading after 1 second
             setTimeout(() => {
                 loadingSpinner.classList.remove('active');
                 
@@ -1928,9 +1969,13 @@
                 progressContainer.classList.add('active');
                 updateCoinDisplay(0);
                 
-                // Data is already sent to Google Forms
-                // User sees Google's confirmation page in new tab
-            }, 2000);
+                // Show success message
+                alert('✅ Registration successful! Opening WhatsApp to send your details...');
+                
+                // Open WhatsApp with pre-filled message in new tab
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                
+            }, 1000);
         });
 
         // Update coin display
@@ -2294,52 +2339,6 @@ The app will work offline!`;
 
         // Removed the "Add Demo Coin" button that was previously here
     });
-    
-    // In your index.html script, add this line in the registration form submission:
-    localStorage.setItem('bimalismUserData', JSON.stringify(formData));
-    // Replace the form submit handler with:
-    challengeRegistrationForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            dob: document.getElementById('dob').value,
-            address: document.getElementById('address').value,
-            city: document.getElementById('city').value,
-            pincode: document.getElementById('pincode').value
-        };
-
-        // Create WhatsApp message
-        const whatsappMessage = `
-*NEW BIMALISM REGISTRATION*
-    
-👤 Name: ${formData.fullName}
-📧 Email: ${formData.email}
-📱 Phone: ${formData.phone}
-🎂 DOB: ${formData.dob}
-📍 Address: ${formData.address}
-🏙️ City: ${formData.city}
-📮 PIN: ${formData.pincode}
-⏰ Time: ${new Date().toLocaleString()}
-        `.trim();
-
-        // Encode for WhatsApp URL
-        const encodedMessage = encodeURIComponent(whatsappMessage);
-        
-        // Open WhatsApp with pre-filled message - ONLY CHANGE MADE HERE
-        window.open(`https://wa.me/919597339180?text=${encodedMessage}`, '_blank');
-        
-        // Also save locally
-        localStorage.setItem('bimalismChallengeRegistered', 'true');
-        localStorage.setItem('bimalismUserData', JSON.stringify(formData));
-        
-        // Show success
-        registrationForm.classList.remove('active');
-        coinCounter.classList.add('active');
-        alert('✅ Registration sent to Aalif/Dharunesh on WhatsApp!');
-    });
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
@@ -2353,8 +2352,11 @@ The app will work offline!`;
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+</script>
 </body>
 </html>
+
 
 
 
