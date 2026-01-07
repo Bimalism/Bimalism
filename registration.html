@@ -1,73 +1,341 @@
-<div class="registration-form-overlay" id="registrationForm">
-        <div class="registration-form">
-            <button class="form-close-btn" id="closeRegistrationForm">
-                <i class="fas fa-times"></i>
-            </button>
-           
-            <div class="challenge-logo" style="color: var(--primary);">
-                <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
-                <span>Challenge Registration</span>
-            </div>
-           
-            <h2 class="form-title">Register for Bimalism Challenge</h2>
-           
-            <form id="challengeRegistrationForm">
-                <div class="form-group">
-                    <label for="fullName" class="form-label">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address *</label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="dob" class="form-label">Date of Birth *</label>
-                    <input type="date" id="dob" name="dob" class="form-input" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="phone" class="form-label">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="address" class="form-label">Delivery Address *</label>
-                    <textarea id="address" name="address" class="form-input" rows="3" placeholder="Full address for gift delivery" required></textarea>
-                </div>
-               
-                <div class="form-group">
-                    <label for="city" class="form-label">City *</label>
-                    <input type="text" id="city" name="city" class="form-input" placeholder="Enter your city" required>
-                </div>
-               
-                <div class="form-group">
-                    <label for="pincode" class="form-label">PIN Code *</label>
-                    <input type="text" id="pincode" name="pincode" class="form-input" placeholder="Enter PIN code" required>
-                </div>
-               
-                <div class="form-requirements">
-                    <h4>📦 Door Delivery Requirements:</h4>
-                    <ul>
-                        <li>Valid phone number for delivery confirmation</li>
-                        <li>Complete address with landmark</li>
-                        <li>Someone must be available to receive the gift</li>
-                        <li>Delivery within 7-10 days after reaching 30 coins</li>
-                        <li>Free shipping across India</li>
-                    </ul>
-                </div>
-               
-                <div class="form-group">
-                    <label class="form-label">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <a href="policy.html">I agree to the Terms & Conditions</a> *
-                    </label>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bimalism Progress Tracker</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  padding:20px;
+  color:#111;
+  min-height:100vh;
+  margin:0;
+}
+.container{
+  max-width:600px;
+  margin:0 auto;
+  background:rgba(255,255,255,0.95);
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+h1{
+  color:#2563eb;
+  text-align:center;
+  margin-bottom:10px;
+}
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:25px 0;
+}
+.stat-box{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  border:2px solid #e5e7eb;
+}
+.stat-value{
+  font-size:2rem;
+  font-weight:bold;
+  color:#2563eb;
+}
+.progress{
+  height:20px;
+  background:#e5e7eb;
+  border-radius:10px;
+  overflow:hidden;
+  margin:20px 0;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#10b981,#34d399);
+  width:0%;
+  transition:width 0.5s;
+}
+.timer{
+  font-size:2.5rem;
+  font-family:'Courier New', monospace;
+  text-align:center;
+  margin:25px 0;
+  padding:15px;
+  background:#f8fafc;
+  border-radius:10px;
+  border:2px solid #e5e7eb;
+}
+.controls{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:25px 0;
+}
+.btn{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-start{background:#10b981;color:white;}
+.btn-stop{background:#ef4444;color:white;}
+.btn-reset{background:#f59e0b;color:white;}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+.status{
+  text-align:center;
+  padding:10px;
+  background:#f8fafc;
+  border-radius:10px;
+  margin-top:20px;
+  font-size:0.9rem;
+  color:#4b5563;
+}
+.always-on{
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.7;}
+  100%{opacity:1;}
+}
+</style>
+</head>
 
-                </div>
-               
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Register & Start Challenge
-                </button>
-            </form>
-        </div>
+<body>
+
+<div class="container">
+  <h1><i class="fas fa-trophy"></i> Bimalism Challenge</h1>
+  
+  <div class="stats">
+    <div class="stat-box">
+      <div>Coins</div>
+      <div class="stat-value" id="coins">0</div>
+      <div>Goal: 30</div>
+    </div>
+    <div class="stat-box">
+      <div>Study Hours</div>
+      <div class="stat-value" id="hours">0</div>
+      <div>Total: <span id="totalHours">0</span></div>
+    </div>
+  </div>
+  
+  <div class="progress">
+    <div class="progress-fill" id="bar"></div>
+  </div>
+  
+  <div class="timer" id="timer">00:00:00</div>
+  
+  <div class="controls">
+    <button class="btn btn-start" onclick="startTimer()" id="startBtn">
+      <i class="fas fa-play"></i> Start
+    </button>
+    <button class="btn btn-stop" onclick="stopTimer()" id="stopBtn" disabled>
+      <i class="fas fa-stop"></i> Stop
+    </button>
+    <button class="btn btn-reset" onclick="resetTimer()">
+      <i class="fas fa-redo"></i> Reset
+    </button>
+  </div>
+  
+  <div class="status always-on" id="status">
+    <i class="fas fa-sync-alt fa-spin"></i> Timer runs continuously across all pages
+  </div>
+</div>
+
+<script>
+// ⚡ UNSTOPPABLE TIMER SYSTEM ⚡
+// Uses timestamp-based calculation instead of intervals
+
+let coins = parseInt(localStorage.getItem('bimalism_coins') || '0');
+let totalSeconds = parseInt(localStorage.getItem('bimalism_seconds') || '0');
+let startTime = parseInt(localStorage.getItem('bimalism_startTime') || '0');
+let timerRunning = localStorage.getItem('bimalism_running') === 'true';
+
+// Initialize
+function init() {
+  updateDisplay();
+  
+  // Calculate elapsed time if timer was running
+  if(timerRunning && startTime > 0) {
+    const now = Math.floor(Date.now() / 1000);
+    const elapsed = now - startTime;
+    totalSeconds += elapsed;
+    
+    // Update coins based on elapsed time
+    const earnedCoins = Math.floor(totalSeconds / 7200) - Math.floor((totalSeconds - elapsed) / 7200);
+    if(earnedCoins > 0) {
+      coins += earnedCoins;
+      if(coins > 30) coins = 30;
+      localStorage.setItem('bimalism_coins', coins);
+    }
+    
+    localStorage.setItem('bimalism_seconds', totalSeconds);
+    startTime = now;
+    localStorage.setItem('bimalism_startTime', startTime);
+  }
+  
+  // Start the update loop
+  setInterval(updateDisplay, 1000);
+}
+
+// Start timer
+function startTimer() {
+  timerRunning = true;
+  startTime = Math.floor(Date.now() / 1000);
+  
+  localStorage.setItem('bimalism_running', 'true');
+  localStorage.setItem('bimalism_startTime', startTime);
+  
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+  
+  updateDisplay();
+}
+
+// Stop timer
+function stopTimer() {
+  timerRunning = false;
+  
+  // Save current progress
+  if(startTime > 0) {
+    const now = Math.floor(Date.now() / 1000);
+    totalSeconds += (now - startTime);
+    startTime = 0;
+    
+    localStorage.setItem('bimalism_seconds', totalSeconds);
+    localStorage.setItem('bimalism_startTime', '0');
+  }
+  
+  localStorage.setItem('bimalism_running', 'false');
+  
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+  
+  updateDisplay();
+}
+
+// Reset timer
+function resetTimer() {
+  if(confirm('Reset timer? This will keep your coins.')) {
+    totalSeconds = 0;
+    startTime = 0;
+    timerRunning = false;
+    
+    localStorage.setItem('bimalism_seconds', '0');
+    localStorage.setItem('bimalism_startTime', '0');
+    localStorage.setItem('bimalism_running', 'false');
+    
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('stopBtn').disabled = true;
+    
+    updateDisplay();
+  }
+}
+
+// Update display
+function updateDisplay() {
+  // Calculate current time
+  let currentSeconds = totalSeconds;
+  
+  if(timerRunning && startTime > 0) {
+    const now = Math.floor(Date.now() / 1000);
+    currentSeconds += (now - startTime);
+  }
+  
+  // Update coins if needed
+  const newCoins = Math.floor(currentSeconds / 7200);
+  if(newCoins > coins) {
+    coins = newCoins;
+    if(coins > 30) coins = 30;
+    localStorage.setItem('bimalism_coins', coins);
+    
+    // Show coin notification
+    if(coins > 0) {
+      document.getElementById('status').innerHTML = 
+        `<i class="fas fa-coins"></i> Earned ${coins} coins! Keep studying!`;
+    }
+  }
+  
+  // Update display
+  const hours = Math.floor(currentSeconds / 3600);
+  const minutes = Math.floor((currentSeconds % 3600) / 60);
+  const seconds = currentSeconds % 60;
+  
+  document.getElementById('timer').textContent = 
+    `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  
+  document.getElementById('coins').textContent = coins;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('totalHours').textContent = Math.floor(totalSeconds / 3600);
+  
+  const progress = (coins / 30) * 100;
+  document.getElementById('bar').style.width = `${progress}%`;
+  
+  // Auto-save every minute
+  if(currentSeconds % 60 === 0) {
+    saveState();
+  }
+}
+
+// Save state
+function saveState() {
+  localStorage.setItem('bimalism_coins', coins);
+  localStorage.setItem('bimalism_seconds', totalSeconds);
+  localStorage.setItem('bimalism_running', timerRunning);
+  if(startTime > 0) {
+    localStorage.setItem('bimalism_startTime', startTime);
+  }
+}
+
+// Handle page visibility
+document.addEventListener('visibilitychange', function() {
+  if(document.hidden) {
+    // Page hidden - save current state
+    if(timerRunning && startTime > 0) {
+      const now = Math.floor(Date.now() / 1000);
+      totalSeconds += (now - startTime);
+      startTime = now;
+      localStorage.setItem('bimalism_seconds', totalSeconds);
+      localStorage.setItem('bimalism_startTime', startTime);
+    }
+  } else {
+    // Page visible again - resume calculation
+    if(timerRunning && startTime > 0) {
+      startTime = Math.floor(Date.now() / 1000);
+      localStorage.setItem('bimalism_startTime', startTime);
+    }
+  }
+});
+
+// Handle page unload
+window.addEventListener('beforeunload', function() {
+  if(timerRunning && startTime > 0) {
+    const now = Math.floor(Date.now() / 1000);
+    totalSeconds += (now - startTime);
+    startTime = now;
+    
+    localStorage.setItem('bimalism_seconds', totalSeconds);
+    localStorage.setItem('bimalism_startTime', startTime);
+    localStorage.setItem('bimalism_coins', coins);
+  }
+});
+
+// Start on load
+window.addEventListener('load', init);
+
+// Check if timer should be running
+if(timerRunning) {
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+}
+</script>
+
+</body>
+</html>
