@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary-color: #4a6fc7;
@@ -180,7 +182,7 @@
             transform: translateX(26px);
         }
        
-        select, input[type="range"], input[type="text"], input[type="date"], input[type="number"] {
+        select, input[type="range"], input[type="text"], input[type="date"], input[type="number"], input[type="password"] {
             width: 100%;
             padding: 8px;
             border-radius: 5px;
@@ -189,7 +191,7 @@
             font-size: 14px;
         }
        
-        body.dark select, body.dark input[type="range"], body.dark input[type="text"], body.dark input[type="date"], body.dark input[type="number"] {
+        body.dark select, body.dark input[type="range"], body.dark input[type="text"], body.dark input[type="date"], body.dark input[type="number"], body.dark input[type="password"] {
             border-color: #555;
             background: #3a3a4a;
             color: #e0e0e0;
@@ -266,7 +268,7 @@
         }
        
         .hidden {
-            display: none;
+            display: none !important;
         }
        
         footer {
@@ -352,6 +354,103 @@
             flex: 1;
         }
        
+        .vip-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B4513;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+       
+        /* VIP Welcome Modal - Neat Design */
+        .vip-welcome-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .vip-welcome-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 50px 40px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            border: 3px solid #FFD700;
+            animation: modalSlideIn 0.5s ease-out;
+        }
+
+        .vip-icon {
+            font-size: 80px;
+            color: #FFD700;
+            margin-bottom: 25px;
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+
+        .vip-welcome-content h2 {
+            color: #FFD700;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+
+        .vip-welcome-content h3 {
+            color: #ffffff;
+            font-size: 2.2em;
+            margin: 25px 0;
+            padding: 15px 30px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .vip-welcome-content p {
+            color: #e0e0e0;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .continue-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B4513;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @keyframes modalSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -365,6 +464,20 @@
     </style>
 </head>
 <body>
+    <!-- VIP Welcome Modal -->
+    <div class="vip-welcome-modal hidden" id="vipWelcomeModal">
+        <div class="vip-welcome-content">
+            <div class="vip-icon"><i class="fas fa-crown"></i></div>
+            <h2>🎉 VIP ACCESS GRANTED! 🎉</h2>
+            <h3 id="vipUserName">Welcome, VIP!</h3>
+            <p>You have successfully activated VIP privileges!</p>
+            <p>Thank you for being a valued member!</p>
+            <button class="continue-btn" onclick="closeVIPWelcome()">
+                <i class="fas fa-check-circle"></i> Continue to Settings
+            </button>
+        </div>
+    </div>
+
     <header>
         <h1>Website Settings</h1>
         <p>Customize your experience and preferences</p>
@@ -379,7 +492,7 @@
                 <div class="account-details">
                     <h3 id="accountName">User Account</h3>
                     <!-- VIP Badge will appear here -->
-                    <span id="vipBadge" style="display:none; color:#ffd700; font-weight:bold; margin-left:8px;">VIP</span>
+                    <span id="vipBadge" class="vip-badge" style="display:none;">VIP</span>
                 </div>
             </div>
            
@@ -406,16 +519,17 @@
             </div>
 
             <!-- VIP Passcode Section (only shown when all VIP conditions are met) -->
-            <div class="settings-section" id="vipSection" style="display:none; border:2px solid gold; background:rgba(255,215,0,0.1);">
+            <div class="settings-section hidden" id="vipSection" style="border:2px solid gold; background:rgba(255,215,0,0.1);">
                 <h2>VIP Access</h2>
                 <div class="setting-item">
                     <div class="setting-info">
                         <h3>Enter VIP Passcode</h3>
                         <p>Only for Aalif & Dharunesh (specific criteria)</p>
+                        <p><small>Aalif: DOB 19-02-2012 | Dharunesh: DOB 09-10-2011 | Both: Achariya Karaikal, Grade 10, Male</small></p>
                     </div>
                     <div class="setting-control">
-                        <input type="password" id="vipPasscode" placeholder="Secret code">
-                        <button class="btn" style="margin-top:10px;" onclick="checkVIP()">Activate VIP</button>
+                        <input type="password" id="vipPasscode" placeholder="Enter: The passcode">
+                        <button class="btn" style="margin-top:10px; background: #FFD700; color: #8B4513;" onclick="checkVIP()">Activate VIP</button>
                     </div>
                 </div>
             </div>
@@ -669,29 +783,37 @@
 
     <script>
         // === VIP SYSTEM START ===
-        const VIP_PASSCODE = "aal1fd33n"; // Keep your existing passcode
+        const VIP_PASSCODE = "aal1fd33n";
 
         function isVIPEligible() {
-            const name = (localStorage.getItem('name') || '').trim().toLowerCase().replace(/[^a-z]/g, '');
+            const name = (localStorage.getItem('name') || '').trim().toLowerCase();
             const gender = localStorage.getItem('gender');
             const isStudent = localStorage.getItem('isStudent');
             const grade = localStorage.getItem('grade');
             const dob = localStorage.getItem('dob');
 
+            // Debug info
+            console.log("VIP Check:", { name, gender, isStudent, grade, dob });
+
+            // Check name contains aalif or dharunesh
             const nameMatch = name.includes('aalif') || name.includes('dharunesh');
             const genderMatch = gender === 'Male';
             const schoolMatch = isStudent === 'yes';
-            const gradeMatch = grade === '9';
-            const dobMatch = dob === '2012-02-19';
+            const gradeMatch = grade === '10';
+            
+            // Check DOB for Aalif OR Dharunesh
+            const aalifDOBMatch = dob === '2012-02-19'; // Aalif's DOB
+            const dharuneshDOBMatch = dob === '2011-10-09'; // Dharunesh's DOB
+            const dobMatch = aalifDOBMatch || dharuneshDOBMatch;
 
             return nameMatch && genderMatch && schoolMatch && gradeMatch && dobMatch;
         }
 
         function updateVIPSection() {
             if (isVIPEligible()) {
-                document.getElementById("vipSection").style.display = "block";
+                document.getElementById("vipSection").classList.remove("hidden");
             } else {
-                document.getElementById("vipSection").style.display = "none";
+                document.getElementById("vipSection").classList.add("hidden");
                 // Hide badge if not eligible
                 if (localStorage.getItem("isVIP") === "true" && !isVIPEligible()) {
                     localStorage.removeItem("isVIP");
@@ -702,18 +824,61 @@
 
         function checkVIP() {
             if (!isVIPEligible()) {
-                alert("You do not meet the VIP criteria.");
+                alert("You do not meet the VIP criteria.\n\nRequirements:\n• Name containing 'aalif' or 'dharunesh'\n• Gender: Male\n• From Achariya Karaikal: Yes\n• Grade: 10\n• DOB: 2012-02-19 (Aalif) or 2011-10-09 (Dharunesh)");
                 return;
             }
+            
             const entered = document.getElementById("vipPasscode").value;
             if (entered === VIP_PASSCODE) {
                 localStorage.setItem("isVIP", "true");
                 document.getElementById("vipBadge").style.display = "inline";
-                alert("VIP Access Granted! Welcome Aalif/Dharunesh ");
-                document.getElementById("vipSection").innerHTML = "<h2>VIP Activated Successfully!</h2><p>You now have special access.</p>";
+                
+                // Get user's name for welcome message
+                const fullName = localStorage.getItem('name') || 'VIP User';
+                const firstName = fullName.split(' ')[0];
+                document.getElementById('vipUserName').textContent = `Welcome, ${firstName}!`;
+                
+                // Show modal
+                document.getElementById('vipWelcomeModal').classList.remove('hidden');
+                
+                // Fire confetti!
+                fireConfetti();
+                
+                // Clear passcode field
+                document.getElementById("vipPasscode").value = "";
             } else {
-                alert("Incorrect passcode.");
+                alert("Incorrect passcode. The correct passcode is: something you would not guess!");
             }
+        }
+
+        function closeVIPWelcome() {
+            document.getElementById('vipWelcomeModal').classList.add('hidden');
+        }
+
+        function fireConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    angle: 60,
+                    spread: 80,
+                    origin: { x: 0 }
+                });
+            }, 250);
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    angle: 120,
+                    spread: 80,
+                    origin: { x: 1 }
+                });
+            }, 500);
         }
         // === VIP SYSTEM END ===
 
@@ -971,8 +1136,6 @@
             alert('Cookie management functionality to be implemented.');
         }
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
-     crossorigin="anonymous"></script>
 </body>
 </html>
 
