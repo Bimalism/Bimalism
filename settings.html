@@ -780,363 +780,430 @@
     <footer>
         <p>© 2025 Student Portal. All rights reserved.</p>
     </footer>
-
     <script>
-        // === VIP SYSTEM START ===
-        const VIP_PASSCODE = "aal1fd33n";
+    // === APP INITIALIZATION ===
+    const VIP_PASSCODE = "aal1f";
+    let isMobileMenuOpen = false;
 
-        function isVIPEligible() {
-            const name = (localStorage.getItem('name') || '').trim().toLowerCase();
-            const gender = localStorage.getItem('gender');
-            const isStudent = localStorage.getItem('isStudent');
-            const grade = localStorage.getItem('grade');
-            const dob = localStorage.getItem('dob');
+    // Initialize mobile menu
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+        isMobileMenuOpen = !isMobileMenuOpen;
+        this.innerHTML = isMobileMenuOpen ? 
+            '<i class="fas fa-times"></i>' : 
+            '<i class="fas fa-bars"></i>';
+    });
 
-            // Debug info
-            console.log("VIP Check:", { name, gender, isStudent, grade, dob });
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menuToggle');
+        
+        if (isMobileMenuOpen && 
+            !sidebar.contains(event.target) && 
+            !menuToggle.contains(event.target)) {
+            sidebar.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            isMobileMenuOpen = false;
+        }
+    });
 
-            // Check name contains aalif or dharunesh
-            const nameMatch = name.includes('aalif') || name.includes('dharunesh');
-            const genderMatch = gender === 'Male';
-            const schoolMatch = isStudent === 'yes';
-            const gradeMatch = grade === '10';
+    // === VIP SYSTEM ===
+    function isVIPEligible() {
+        const name = (localStorage.getItem('name') || '').trim().toLowerCase();
+        const gender = localStorage.getItem('gender');
+        const isStudent = localStorage.getItem('isStudent');
+        const grade = localStorage.getItem('grade');
+        const dob = localStorage.getItem('dob');
+        
+        // Check for Aalif
+        const isAalif = name.includes('aalif');
+        const genderMatch = gender === 'Male';
+        const schoolMatch = isStudent === 'yes';
+        const gradeMatch = grade === '10';
+        const aalifDOBMatch = dob === '2012-02-19';
+        const aalifMatch = isAalif && genderMatch && schoolMatch && gradeMatch && aalifDOBMatch;
+        
+        // Check for Dharunesh
+        const isDharunesh = name.includes('dharunesh');
+        const dharuneshDOBMatch = dob === '2011-10-09';
+        const dharuneshMatch = isDharunesh && genderMatch && schoolMatch && gradeMatch && dharuneshDOBMatch;
+        
+        return aalifMatch || dharuneshMatch;
+    }
+
+    function updateVIPSection() {
+        if (isVIPEligible()) {
+            document.getElementById("vipSection").classList.remove("hidden");
+        } else {
+            document.getElementById("vipSection").classList.add("hidden");
+            if (localStorage.getItem("isVIP") === "true" && !isVIPEligible()) {
+                localStorage.removeItem("isVIP");
+                document.getElementById("vipBadge").style.display = "none";
+            }
+        }
+    }
+
+    function checkVIP() {
+        if (!isVIPEligible()) {
+            alert("You do not meet the VIP criteria.\n\nRequirements:\n• Name containing 'aalif' or 'dharunesh'\n• Gender: Male\n• From Achariya Karaikal: Yes\n• Grade: 10\n• DOB: 2012-02-19 (Aalif) or 2011-10-09 (Dharunesh)");
+            return;
+        }
+        
+        const entered = document.getElementById("vipPasscode").value;
+        if (entered === VIP_PASSCODE) {
+            localStorage.setItem("isVIP", "true");
+            document.getElementById("vipBadge").style.display = "inline";
             
-            // Check DOB for Aalif OR Dharunesh
-            const aalifDOBMatch = dob === '2012-02-19'; // Aalif's DOB
-            const dharuneshDOBMatch = dob === '2011-10-09'; // Dharunesh's DOB
-            const dobMatch = aalifDOBMatch || dharuneshDOBMatch;
-
-            return nameMatch && genderMatch && schoolMatch && gradeMatch && dobMatch;
-        }
-
-        function updateVIPSection() {
-            if (isVIPEligible()) {
-                document.getElementById("vipSection").classList.remove("hidden");
-            } else {
-                document.getElementById("vipSection").classList.add("hidden");
-                // Hide badge if not eligible
-                if (localStorage.getItem("isVIP") === "true" && !isVIPEligible()) {
-                    localStorage.removeItem("isVIP");
-                    document.getElementById("vipBadge").style.display = "none";
-                }
-            }
-        }
-
-        function checkVIP() {
-            if (!isVIPEligible()) {
-                alert("You do not meet the VIP criteria.\n\nRequirements:\n• Name containing 'aalif' or 'dharunesh'\n• Gender: Male\n• From Achariya Karaikal: Yes\n• Grade: 10\n• DOB: 2012-02-19 (Aalif) or 2011-10-09 (Dharunesh)");
-                return;
-            }
+            const fullName = localStorage.getItem('name') || 'VIP User';
+            const firstName = fullName.split(' ')[0];
+            document.getElementById('vipUserName').textContent = `Welcome, ${firstName}!`;
             
-            const entered = document.getElementById("vipPasscode").value;
-            if (entered === VIP_PASSCODE) {
-                localStorage.setItem("isVIP", "true");
-                document.getElementById("vipBadge").style.display = "inline";
-                
-                // Get user's name for welcome message
-                const fullName = localStorage.getItem('name') || 'VIP User';
-                const firstName = fullName.split(' ')[0];
-                document.getElementById('vipUserName').textContent = `Welcome, ${firstName}!`;
-                
-                // Show modal
-                document.getElementById('vipWelcomeModal').classList.remove('hidden');
-                
-                // Fire confetti!
-                fireConfetti();
-                
-                // Clear passcode field
-                document.getElementById("vipPasscode").value = "";
-            } else {
-                alert("Incorrect passcode. The correct passcode is: something you would not guess!");
-            }
+            document.getElementById('vipWelcomeModal').classList.remove('hidden');
+            fireConfetti();
+            document.getElementById("vipPasscode").value = "";
+        } else {
+            alert("Incorrect passcode.");
         }
+    }
 
-        function closeVIPWelcome() {
-            document.getElementById('vipWelcomeModal').classList.add('hidden');
-        }
+    function closeVIPWelcome() {
+        document.getElementById('vipWelcomeModal').classList.add('hidden');
+    }
 
-        function fireConfetti() {
+    function fireConfetti() {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+        
+        setTimeout(() => {
             confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
+                particleCount: 100,
+                angle: 60,
+                spread: 80,
+                origin: { x: 0 }
             });
+        }, 250);
+        
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                angle: 120,
+                spread: 80,
+                origin: { x: 1 }
+            });
+        }, 500);
+    }
+
+    // === USER BLOCKING ===
+    function isBlockedUser(name, isStudent, grade, dob) {
+        if (!name && !dob) return false;
+
+        // Block specific date of birth
+        if (dob === '2012-06-08') {
+            return true;
+        }
+
+        const normalizedName = (name || '').toLowerCase().replace(/[^a-z]/g, '');
+       
+        const isHariharan = normalizedName.includes('hariharan');
+        const isFromAchariya = isStudent === 'yes';
+        const isGrade9 = grade === '9';
+       
+        // Only block Hariharan from Achariya in grade 9
+        return (isHariharan && isFromAchariya && isGrade9);
+    }
+
+    // === LOAD SAVED SETTINGS ===
+    window.onload = function() {
+        const name = localStorage.getItem('name');
+        const gender = localStorage.getItem('gender');
+        const isStudent = localStorage.getItem('isStudent');
+        const grade = localStorage.getItem('grade');
+        const dob = localStorage.getItem('dob');
+        const theme = localStorage.getItem('theme') || 'light';
+        const fontSize = localStorage.getItem('fontSize') || '16';
+        const compactMode = localStorage.getItem('compactMode') === 'true';
+        const accentColor = localStorage.getItem('accentColor') || '#4a6fc7';
+
+        // Block check on load
+        if (isBlockedUser(name, isStudent, grade, dob)) {
+            if (dob === '2012-06-08') {
+                alert('Access denied due to restricted date of birth.');
+            } else {
+                alert('Access denied: User not authorized.');
+            }
+            document.body.innerHTML = '<div style="padding: 40px; text-align: center;"><h1>Access Denied</h1><p>You do not have permission to use this app.</p></div>';
+            return;
+        }
+
+        // VIP Check on load
+        if (localStorage.getItem("isVIP") === "true" && isVIPEligible()) {
+            document.getElementById("vipBadge").style.display = "inline";
+        }
+        updateVIPSection();
+
+        // Load user data
+        if (name) {
+            document.getElementById('name').value = name;
+            document.getElementById('accountName').textContent = name;
+        }
+        if (gender) {
+            const genderRadio = document.querySelector(`input[name="gender"][value="${gender}"]`);
+            if (genderRadio) genderRadio.checked = true;
+        }
+        if (isStudent) {
+            const studentRadio = document.querySelector(`input[name="student"][value="${isStudent}"]`);
+            if (studentRadio) studentRadio.checked = true;
+            if (isStudent === 'yes') {
+                document.getElementById('gradeSection').classList.remove('hidden');
+            }
+        }
+        if (grade) document.getElementById('grade').value = grade;
+        if (dob) document.getElementById('dob').value = dob;
+
+        // Load app settings
+        document.getElementById('themeSelect').value = theme;
+        document.getElementById('fontSize').value = fontSize;
+        document.getElementById('compactMode').checked = compactMode;
+        applyTheme(theme);
+        applyFontSize(fontSize);
+        applyCompactMode(compactMode);
+        applyAccentColor(accentColor);
+
+        // Initialize color options
+        const activeColor = accentColor || '#4a6fc7';
+        document.querySelectorAll('.color-option').forEach(option => {
+            if (option.getAttribute('data-color') === activeColor) {
+                option.classList.add('active');
+            }
+        });
+    };
+
+    // === EVENT LISTENERS ===
+    document.querySelectorAll('input[name="student"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const gradeSection = document.getElementById('gradeSection');
+            gradeSection.classList.toggle('hidden', this.value !== 'yes');
+            if (this.value !== 'yes') {
+                document.getElementById('grade').value = '';
+            }
+        });
+    });
+
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.settings-section').forEach(section => section.classList.add('hidden'));
+            const targetId = this.getAttribute('data-target');
+            document.getElementById(targetId).classList.remove('hidden');
             
+            // Close mobile menu on navigation (mobile only)
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const menuToggle = document.getElementById('menuToggle');
+                sidebar.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                isMobileMenuOpen = false;
+            }
+        });
+    });
+
+    // Theme
+    document.getElementById('themeSelect').addEventListener('change', function() {
+        const theme = this.value;
+        localStorage.setItem('theme', theme);
+        applyTheme(theme);
+    });
+
+    function applyTheme(theme) {
+        if (theme === 'auto') {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.body.classList.toggle('dark', prefersDark);
+        } else {
+            document.body.classList.toggle('dark', theme === 'dark');
+        }
+    }
+
+    // Accent color
+    document.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            const color = this.getAttribute('data-color');
+            localStorage.setItem('accentColor', color);
+            applyAccentColor(color);
+        });
+    });
+
+    function applyAccentColor(color) {
+        document.documentElement.style.setProperty('--primary-color', color);
+    }
+
+    // Font size
+    document.getElementById('fontSize').addEventListener('input', function() {
+        const fontSize = this.value;
+        localStorage.setItem('fontSize', fontSize);
+        applyFontSize(fontSize);
+    });
+
+    function applyFontSize(size) {
+        document.documentElement.style.fontSize = `${size}px`;
+    }
+
+    // Compact mode
+    document.getElementById('compactMode').addEventListener('change', function() {
+        const compactMode = this.checked;
+        localStorage.setItem('compactMode', compactMode);
+        applyCompactMode(compactMode);
+    });
+
+    function applyCompactMode(compact) {
+        const settingItems = document.querySelectorAll('.setting-item');
+        const sections = document.querySelectorAll('.settings-section');
+        
+        if (compact) {
+            settingItems.forEach(item => {
+                item.style.padding = '8px 0';
+            });
+            sections.forEach(section => {
+                section.style.padding = '12px';
+            });
+        } else {
+            settingItems.forEach(item => {
+                item.style.padding = '12px 0';
+            });
+            sections.forEach(section => {
+                section.style.padding = '20px';
+            });
+        }
+    }
+
+    // High contrast mode
+    document.getElementById('highContrast').addEventListener('change', function() {
+        const highContrast = this.checked;
+        localStorage.setItem('highContrast', highContrast);
+        applyHighContrast(highContrast);
+    });
+
+    function applyHighContrast(highContrast) {
+        if (highContrast) {
+            document.body.style.filter = 'contrast(1.5)';
+        } else {
+            document.body.style.filter = 'none';
+        }
+    }
+
+    // === SETTINGS MANAGEMENT ===
+    function saveSettings() {
+        const name = document.getElementById('name').value.trim();
+        const gender = document.querySelector('input[name="gender"]:checked')?.value;
+        const isStudent = document.querySelector('input[name="student"]:checked')?.value;
+        const grade = document.getElementById('grade').value;
+        const dob = document.getElementById('dob').value;
+
+        if (!name || !gender || !isStudent || !dob) {
+            alert('Please fill in all profile fields');
+            return;
+        }
+        if (isStudent === 'yes' && !grade) {
+            alert('Please select your grade');
+            return;
+        }
+
+        // Block check before saving
+        if (isBlockedUser(name, isStudent, grade, dob)) {
+            if (dob === '2012-06-08') {
+                alert('Access denied due to restricted date of birth.');
+            } else {
+                alert('Access denied: User not authorized.');
+            }
+            return;
+        }
+
+        localStorage.setItem('name', name);
+        localStorage.setItem('gender', gender);
+        localStorage.setItem('isStudent', isStudent);
+        localStorage.setItem('grade', grade);
+        localStorage.setItem('dob', dob);
+        localStorage.setItem('formSubmitted', 'true');
+        document.getElementById('accountName').textContent = name;
+        
+        // Show success message
+        const successMsg = document.getElementById('successMessage');
+        successMsg.style.display = 'block';
+        successMsg.style.animation = 'none';
+        setTimeout(() => {
+            successMsg.style.animation = 'fadeIn 0.5s';
+        }, 10);
+        
+        setTimeout(() => {
+            successMsg.style.display = 'none';
+        }, 2000);
+
+        // Update VIP eligibility
+        updateVIPSection();
+        if (localStorage.getItem("isVIP") === "true" && isVIPEligible()) {
+            document.getElementById("vipBadge").style.display = "inline";
+        }
+    }
+
+    function cancelSettings() {
+        const name = localStorage.getItem('name') || '';
+        const gender = localStorage.getItem('gender');
+        const isStudent = localStorage.getItem('isStudent');
+        const grade = localStorage.getItem('grade') || '';
+        const dob = localStorage.getItem('dob') || '';
+        
+        document.getElementById('name').value = name;
+        
+        if (gender) {
+            const genderRadio = document.querySelector(`input[name="gender"][value="${gender}"]`);
+            if (genderRadio) genderRadio.checked = true;
+        }
+        
+        if (isStudent) {
+            const studentRadio = document.querySelector(`input[name="student"][value="${isStudent}"]`);
+            if (studentRadio) studentRadio.checked = true;
+            document.getElementById('gradeSection').classList.toggle('hidden', isStudent !== 'yes');
+        }
+        
+        document.getElementById('grade').value = grade;
+        document.getElementById('dob').value = dob;
+    }
+
+    function clearFormData() {
+        if (confirm('Are you sure you want to clear all data? This will reset your profile to default settings.')) {
+            localStorage.clear();
+            alert('All data cleared. The app will now refresh.');
             setTimeout(() => {
-                confetti({
-                    particleCount: 100,
-                    angle: 60,
-                    spread: 80,
-                    origin: { x: 0 }
-                });
-            }, 250);
-            
-            setTimeout(() => {
-                confetti({
-                    particleCount: 100,
-                    angle: 120,
-                    spread: 80,
-                    origin: { x: 1 }
-                });
+                window.location.reload();
             }, 500);
         }
-        // === VIP SYSTEM END ===
+    }
 
-        // Enhanced user blocking function
-        function isBlockedUser(name, isStudent, grade, dob) {
-            if (!name && !dob) return false;
+    function managePrivacy() {
+        alert('Privacy settings is opening...');
+        // Placeholder for actual privacy management functionality
+    }
 
-            // Block anyone with DOB 08-06-2012
-            if (dob === '2012-06-08') {
-                return true;
-            }
-
-            const normalizedName = (name || '').toLowerCase().replace(/[^a-z]/g, '');
-           
-            const isHariharan = normalizedName.includes('hariharan');
-            const isBhavik = normalizedName.includes('bhavik');
-            const isFromAchariya = isStudent === 'yes';
-            const isGrade9 = grade === '9';
-           
-            return (isHariharan && isFromAchariya && isGrade9) || isBhavik;
+    // Add CSS animation for success message
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        // Load saved settings
-        window.onload = function() {
-            const name = localStorage.getItem('name');
-            const gender = localStorage.getItem('gender');
-            const isStudent = localStorage.getItem('isStudent');
-            const grade = localStorage.getItem('grade');
-            const dob = localStorage.getItem('dob');
-            const theme = localStorage.getItem('theme') || 'light';
-            const fontSize = localStorage.getItem('fontSize') || '16';
-            const compactMode = localStorage.getItem('compactMode') === 'true';
-            const accentColor = localStorage.getItem('accentColor') || '#4a6fc7';
-
-            // Block check on load
-            if (isBlockedUser(name, isStudent, grade, dob)) {
-                if ((name || '').toLowerCase().includes('bhavik')) {
-                    alert('Bhavik is not allowed.');
-                } else if (dob === '2012-06-08') {
-                    alert('We dont allow you.');
-                } else {
-                    alert('We dont allow you');
-                }
-                window.location.href = 'b.html';
-                return;
-            }
-
-            // VIP Check on load
-            if (localStorage.getItem("isVIP") === "true" && isVIPEligible()) {
-                document.getElementById("vipBadge").style.display = "inline";
-            }
-            updateVIPSection();
-
-            if (name) {
-                document.getElementById('name').value = name;
-                document.getElementById('accountName').textContent = name;
-            }
-            if (gender) {
-                const genderRadio = document.querySelector(`input[name="gender"][value="${gender}"]`);
-                if (genderRadio) genderRadio.checked = true;
-            }
-            if (isStudent) {
-                const studentRadio = document.querySelector(`input[name="student"][value="${isStudent}"]`);
-                if (studentRadio) studentRadio.checked = true;
-                if (isStudent === 'yes') {
-                    document.getElementById('gradeSection').classList.remove('hidden');
-                }
-            }
-            if (grade) document.getElementById('grade').value = grade;
-            if (dob) document.getElementById('dob').value = dob;
-
-            document.getElementById('themeSelect').value = theme;
-            document.getElementById('fontSize').value = fontSize;
-            document.getElementById('compactMode').checked = compactMode;
-            applyTheme(theme);
-            applyFontSize(fontSize);
-            applyCompactMode(compactMode);
-            applyAccentColor(accentColor);
-        };
-
-        // Show/hide grade section based on Achariya selection
-        document.querySelectorAll('input[name="student"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const gradeSection = document.getElementById('gradeSection');
-                gradeSection.classList.toggle('hidden', this.value !== 'yes');
-                if (this.value !== 'yes') {
-                    document.getElementById('grade').value = '';
-                }
-            });
-        });
-
-        // Navigation functionality
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-                document.querySelectorAll('.settings-section').forEach(section => section.classList.add('hidden'));
-                const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.remove('hidden');
-            });
-        });
-
-        // Theme functionality
-        document.getElementById('themeSelect').addEventListener('change', function() {
-            const theme = this.value;
-            localStorage.setItem('theme', theme);
-            applyTheme(theme);
-        });
-        function applyTheme(theme) {
-            if (theme === 'auto') {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.body.classList.toggle('dark', prefersDark);
-            } else {
-                document.body.classList.toggle('dark', theme === 'dark');
-            }
-        }
-
-        // Accent color functionality
-        document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                const color = this.getAttribute('data-color');
-                localStorage.setItem('accentColor', color);
-                applyAccentColor(color);
-            });
-        });
-        function applyAccentColor(color) {
-            document.documentElement.style.setProperty('--primary-color', color);
-        }
-
-        // Font size functionality
-        document.getElementById('fontSize').addEventListener('input', function() {
-            const fontSize = this.value;
-            localStorage.setItem('fontSize', fontSize);
-            applyFontSize(fontSize);
-        });
-        function applyFontSize(size) {
-            document.documentElement.style.setProperty('--font-size', `${size}px`);
-            document.querySelectorAll('p, label, input, select, button').forEach(el => {
-                el.style.fontSize = `${size}px`;
-            });
-        }
-
-        // Compact mode functionality
-        document.getElementById('compactMode').addEventListener('change', function() {
-            const compactMode = this.checked;
-            localStorage.setItem('compactMode', compactMode);
-            applyCompactMode(compactMode);
-        });
-        function applyCompactMode(compact) {
-            document.querySelectorAll('.setting-item').forEach(item => {
-                item.style.padding = compact ? '8px 0' : '15px 0';
-            });
-            document.querySelectorAll('.settings-section').forEach(section => {
-                section.style.padding = compact ? '15px' : '30px';
-            });
-        }
-
-        // High contrast mode
-        document.getElementById('highContrast').addEventListener('change', function() {
-            const highContrast = this.checked;
-            localStorage.setItem('highContrast', highContrast);
-            applyHighContrast(highContrast);
-        });
-        function applyHighContrast(highContrast) {
-            if (highContrast) {
-                document.body.style.filter = 'contrast(1.5)';
-            } else {
-                document.body.style.filter = 'none';
-            }
-        }
-
-        // Save settings
-        function saveSettings() {
-            const name = document.getElementById('name').value.trim();
-            const gender = document.querySelector('input[name="gender"]:checked')?.value;
-            const isStudent = document.querySelector('input[name="student"]:checked')?.value;
-            const grade = document.getElementById('grade').value;
-            const dob = document.getElementById('dob').value;
-
-            if (!name || !gender || !isStudent || !dob) {
-                alert('Please fill in all profile fields');
-                return;
-            }
-            if (isStudent === 'yes' && !grade) {
-                alert('Please select your grade');
-                return;
-            }
-
-            // Block check before saving
-            if (isBlockedUser(name, isStudent, grade, dob)) {
-                if (name.toLowerCase().includes('bhavik')) {
-                    alert('Bhavik is not allowed.');
-                } else if (dob === '2012-06-08') {
-                    alert('Access denied due to restricted date of birth.');
-                } else {
-                    alert('We dont allow u because you are detected as enemy for BIMALISM FOUNDERS');
-                }
-                window.location.href = 'b.html';
-                return;
-            }
-
-            localStorage.setItem('name', name);
-            localStorage.setItem('gender', gender);
-            localStorage.setItem('isStudent', isStudent);
-            localStorage.setItem('grade', grade);
-            localStorage.setItem('dob', dob);
-            localStorage.setItem('formSubmitted', 'true');
-            document.getElementById('accountName').textContent = name;
-            document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 2000);
-
-            // Update VIP eligibility after saving
-            updateVIPSection();
-            if (localStorage.getItem("isVIP") === "true" && isVIPEligible()) {
-                document.getElementById("vipBadge").style.display = "inline";
-            }
-        }
-
-        // Cancel settings
-        function cancelSettings() {
-            const name = localStorage.getItem('name') || '';
-            const gender = localStorage.getItem('gender');
-            const isStudent = localStorage.getItem('isStudent');
-            const grade = localStorage.getItem('grade') || '';
-            const dob = localStorage.getItem('dob') || '';
-            document.getElementById('name').value = name;
-            if (gender) {
-                const genderRadio = document.querySelector(`input[name="gender"][value="${gender}"]`);
-                if (genderRadio) genderRadio.checked = true;
-            }
-            if (isStudent) {
-                const studentRadio = document.querySelector(`input[name="student"][value="${isStudent}"]`);
-                if (studentRadio) studentRadio.checked = true;
-                document.getElementById('gradeSection').classList.toggle('hidden', isStudent !== 'yes');
-            }
-            document.getElementById('grade').value = grade;
-            document.getElementById('dob').value = dob;
-        }
-
-        // Clear form data
-        function clearFormData() {
-            if (confirm('Are you sure you want to clear all form data? This will reset your profile and allow you to re-submit the form on the main page.')) {
-                localStorage.clear();
-                alert('Form data cleared. You can now re-submit the form on the main page.');
-                window.location.href = 'settings.html';
-            }
-        }
-
-        // Placeholder for manageCookies
-        function manageCookies() {
-            alert('Cookie management functionality to be implemented.');
-        }
-    </script>
+    `;
+    document.head.appendChild(style);
+</script>
 </body>
 </html>
+
 
 
