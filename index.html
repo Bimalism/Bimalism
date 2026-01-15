@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="33MVfLbupQdh7gMotWJ0SIXwX93Su6FDIqm04Y64qtg" />
+    <meta name="description" content="Bimalism - Premier NEET and JEE coaching institute with expert faculty, comprehensive study materials, and proven results.">
+    <meta name="keywords" content="Bimalism, NEET coaching, JEE coaching, medical entrance, engineering entrance, NEET preparation, JEE preparation">
+    <meta name="author" content="Bimalism Education">
+    <meta name="google-adsense-account" content="ca-pub-7551440219345789">
+    <meta name="google-site-verification" content="FYrkd9AMwMRRvQnfwzWQzQrNosPpMQbKwzfwttKUiFA" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="Bimalismlogo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="icon" type="image/png" href="Bimalismlogo.png">
+    <title>Bimalism - NEET & JEE Coaching</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+    :root {
+        --primary: #2563eb;
+        --secondary: #4f46e5;
+        --accent: #ec4899;
+        --light: #f3f4f6;
+        --dark: #1f2937;
+        --success: #10b981;
+        --neet: #3b82f6;
+        --jee: #ef4444;
+    }
+   
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+   
+    body {
+        background-color: #f9fafb;
+        color: var(--dark);
+        line-height: 1.6;
+    }
+   
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Bimalism Challenge Modal - COMPACT VERSION */
+    .challenge-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 15px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+   
+    .challenge-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+   
+    .challenge-modal {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        padding: 25px;
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        color: white;
+        position: relative;
+        transform: translateY(20px);
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+   
+    .challenge-modal-overlay.active .challenge-modal {
+        transform: translateY(0);
+    }
+   
+    .challenge-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        z-index: 2;
+    }
+   
+    .challenge-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+    }
+   
+    .challenge-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+   
+    .challenge-logo .logo-img {
+        height: 50px;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+   
+    .challenge-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+   
+    .challenge-description {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+   
+    .challenge-highlight {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px;
+        border-radius: 8px;
+        margin: 15px 0;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        font-size: 0.9rem;
+    }
+   
+    .challenge-rules {
+        text-align: left;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        border-radius: 8px;
+        margin: 15px 0;
+    }
+   
+    .challenge-rules h4 {
+        margin-bottom: 8px;
+        color: #ffd700;
+        font-size: 1rem;
+    }
+   
+    .challenge-rules ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+   
+    .challenge-rules li {
+        margin-bottom: 6px;
+        padding-left: 20px;
+        position: relative;
+        font-size: 0.9rem;
+    }
+   
+    .challenge-rules li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #ffd700;
+        font-weight: bold;
+    }
+   
+    .challenge-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+    }
+   
+    .challenge-btn {
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+    }
+   
+    .challenge-accept {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+   
+    .challenge-accept:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+        background: linear-gradient(135deg, #059669, #047857);
+    }
+   
+    .challenge-decline {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+   
+    .challenge-decline:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Registration Form Styles - COMPACT VERSION */
+    .registration-form-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000000;
+        padding: 15px;
+    }
+   
+    .registration-form-overlay.active {
+        display: flex;
+    }
+   
+    .registration-form {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+        animation: slideIn 0.5s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+   
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+   
+    .form-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #6b7280;
+        cursor: pointer;
+        transition: color 0.3s;
+        z-index: 2;
+    }
+   
+    .form-close-btn:hover {
+        color: var(--primary);
+    }
+   
+    .form-title {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+   
+    .form-group {
+        margin-bottom: 15px;
+    }
+   
+    .form-label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: var(--dark);
+        font-size: 0.9rem;
+    }
+   
+    .form-input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 2px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+   
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+   
+    .form-requirements {
+        background: var(--light);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        border-left: 4px solid var(--primary);
+    }
+   
+    .form-requirements h4 {
+        color: var(--primary);
+        margin-bottom: 8px;
+        font-size: 1rem;
+    }
+   
+    .form-requirements ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+   
+    .form-requirements li {
+        margin-bottom: 6px;
+        padding-left: 20px;
+        position: relative;
+        font-size: 0.85rem;
+    }
+   
+    .form-requirements li:before {
+        content: "✓";
+        color: var(--success);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+   
+    .submit-btn {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s;
+        margin-top: 15px;
+        min-height: 44px;
+    }
+   
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Coin Counter */
+    .coin-counter {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        animation: bounce 2s infinite;
+        border: 2px solid white;
+        font-size: 14px;
+    }
+   
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+    }
+   
+    .coin-counter.active {
+        display: flex;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        position: fixed;
+        top: 160px;
+        right: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+        width: 250px;
+    }
+   
+    .progress-container.active {
+        display: block;
+    }
+   
+    .progress-title {
+        font-size: 13px;
+        color: var(--dark);
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+   
+    .progress-bar {
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 8px;
+    }
+   
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #34d399);
+        width: 0%;
+        transition: width 0.5s ease;
+    }
+   
+    .progress-text {
+        font-size: 11px;
+        color: #6b7280;
+        text-align: center;
+    }
+
+    /* Download App Section */
+    .download-section {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        margin: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    }
+   
+    .download-section h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+   
+    .download-section p {
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto 25px;
+        opacity: 0.9;
+    }
+   
+    .download-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+   
+    .download-btn {
+        background: white;
+        color: var(--primary);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        min-width: 220px;
+        justify-content: center;
+    }
+   
+    .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        background: #f8fafc;
+    }
+   
+    .download-btn i {
+        font-size: 20px;
+    }
+   
+    .instructions {
+        background: var(--light);
+        padding: 25px;
+        border-radius: 10px;
+        margin: 25px 20px;
+        text-align: left;
+    }
+   
+    .instructions h3 {
+        color: var(--primary);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+   
+    .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+   
+    .step {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 5px solid var(--primary);
+    }
+   
+    .step-number {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 25px;
+        font-weight: bold;
+        margin-right: 8px;
+        font-size: 0.9rem;
+    }
+   
+    /* Floating Download Button */
+    .floating-download {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 9999;
+        transition: all 0.3s;
+        animation: pulse 2s infinite;
+        font-size: 14px;
+        border: 2px solid white;
+    }
+   
+    .floating-download:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.6);
+    }
+   
+    @keyframes pulse {
+        0% { box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
+        50% { box-shadow: 0 8px 25px rgba(37, 99, 235, 0.8); }
+        100% { box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); }
+    }
+   
+    /* Loading Spinner */
+    .loading-spinner {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        background: rgba(0,0,0,0.8);
+        padding: 1.5rem;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+    .loading-spinner.active {
+        display: block;
+    }
+   
+    /* Name Verification Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+   
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+   
+    .verification-modal {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 25px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        color: var(--dark);
+        transform: translateY(-15px);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+   
+    .modal-overlay.active .verification-modal {
+        transform: translateY(0);
+    }
+   
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #6b7280;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+   
+    .close-btn:hover {
+        color: var(--primary);
+    }
+   
+    .modal-logo {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        color: var(--primary);
+    }
+   
+    .modal-logo .logo-img {
+        height: 50px;
+        margin-right: 10px;
+    }
+   
+    /* Logo image styling */
+    .logo-img {
+        height: 40px;
+        width: auto;
+        vertical-align: middle;
+    }
+   
+    /* Header Styles */
+    header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+   
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+   
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+    }
+   
+    .nav-links {
+        display: flex;
+        list-style: none;
+        align-items: center;
+    }
+   
+    .nav-links li {
+        margin-left: 1.2rem;
+    }
+   
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        font-size: 0.9rem;
+    }
+   
+    .nav-links a:hover {
+        color: #ffd700;
+    }
+   
+    /* Language Switcher Styles */
+    .language-switcher {
+        position: relative;
+        margin-left: 1rem;
+    }
+    .language-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+    .language-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    .language-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        min-width: 140px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000;
+    }
+    .language-dropdown.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    .language-option {
+        padding: 0.7rem 1rem;
+        color: var(--dark);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .language-option:hover {
+        background: var(--light);
+        color: var(--primary);
+    }
+    .language-option.active {
+        background: var(--light);
+        color: var(--primary);
+        font-weight: 600;
+    }
+    .flag-icon {
+        font-size: 1.1rem;
+    }
+   
+    .btn {
+        display: inline-block;
+        padding: 0.7rem 1.2rem;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+   
+    .btn:hover {
+        background-color: #be185d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+   
+    .btn-neet {
+        background-color: var(--neet);
+    }
+   
+    .btn-neet:hover {
+        background-color: #2563eb;
+    }
+   
+    .btn-jee {
+        background-color: var(--jee);
+    }
+   
+    .btn-jee:hover {
+        background-color: #dc2626;
+    }
+
+    /* ===== VIEW CHALLENGE PROGRESS BUTTON STYLES ===== */
+    /* Style the "View Challenge Progress" link as a button */
+    .hero-buttons a[href="registration.html"] {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white !important;
+        border: none;
+        padding: 0.7rem 1.2rem !important;
+        border-radius: 50px;
+        text-decoration: none !important;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: inline-block;
+        text-align: center;
+        min-width: 180px;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .hero-buttons a[href="registration.html"]:hover {
+        background: linear-gradient(135deg, #d97706, #b45309);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(245, 158, 11, 0.5);
+        color: white !important;
+    }
+
+    .hero-buttons a[href="registration.html"] i {
+        margin-right: 8px;
+    }
+
+    /* ===== VIEW PROGRESS MODAL STYLES ===== */
+    /* Progress View Modal Overlay */
+    .progress-view-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        padding: 15px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+   
+    .progress-view-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+   
+    /* Progress View Modal */
+    .progress-view-modal {
+        background: linear-gradient(135deg, #1e40af, #1e3a8a);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        padding: 25px;
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        color: white;
+        position: relative;
+        transform: translateY(20px);
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+   
+    .progress-view-modal-overlay.active .progress-view-modal {
+        transform: translateY(0);
+    }
+   
+    /* Progress View Modal Header */
+    .progress-view-header {
+        margin-bottom: 20px;
+    }
+   
+    .progress-view-header h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        color: #ffd700;
+    }
+   
+    .progress-view-header p {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+   
+    /* Progress Status Container */
+    .progress-status-container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+   
+    /* Progress Stats Grid */
+    .progress-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+   
+    .progress-stat-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+    }
+   
+    .progress-stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffd700;
+        margin-bottom: 5px;
+    }
+   
+    .progress-stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+   
+    /* Progress Message */
+    .progress-message {
+        font-size: 1rem;
+        margin-top: 15px;
+        padding: 10px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid #10b981;
+    }
+   
+    .progress-message.warning {
+        background: rgba(245, 158, 11, 0.1);
+        border-left-color: #f59e0b;
+    }
+   
+    .progress-message.success {
+        background: rgba(16, 185, 129, 0.1);
+        border-left-color: #10b981;
+    }
+   
+    /* User Info Card */
+    .user-info-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+   
+    .user-info-card h4 {
+        margin-bottom: 15px;
+        color: #ffd700;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+   
+    .user-info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+   
+    .user-info-row:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+   
+    .info-label {
+        font-weight: 600;
+        color: #ffd700;
+        min-width: 120px;
+    }
+   
+    .info-value {
+        text-align: right;
+        flex: 1;
+        word-break: break-word;
+    }
+   
+    /* Progress Actions */
+    .progress-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+   
+    .progress-actions .challenge-btn {
+        flex: 1;
+    }
+   
+    /* Edit Registration Button */
+    .edit-registration-btn {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        width: 100%;
+        margin-top: 10px;
+    }
+   
+    .edit-registration-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+    }
+   
+    /* Reset Progress Button */
+    .reset-progress-btn {
+        background: rgba(239, 68, 68, 0.2);
+        color: #fca5a5;
+        border: 2px solid rgba(239, 68, 68, 0.4);
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        width: 100%;
+        margin-top: 10px;
+    }
+   
+    .reset-progress-btn:hover {
+        background: rgba(239, 68, 68, 0.3);
+        transform: translateY(-2px);
+    }
+   
+    /* Hero Section */
+    .hero {
+        padding: 4rem 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400"><rect fill="%232563eb" width="800" height="400"/><path fill="%233b82f6" fill-opacity="0.2" d="M0 192L26.7 202.7C53.3 213 107 235 160 234.7C213.3 235 267 213 320 197.3C373.3 181 427 171 480 186.7C533.3 203 587 245 640 250.7C693.3 256 747 224 773.3 208L800 192L800 401L773.3 401C746.7 401 693 401 640 401C586.7 401 533 401 480 401C426.7 401 373 401 320 401C266.7 401 213 401 160 401C106.7 401 53 401 27 401L0 401Z"></path></svg>') center/cover no-repeat;
+        color: white;
+        text-align: center;
+    }
+   
+    .hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+   
+    .hero p {
+        font-size: 1.3rem;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+    }
+   
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+    }
+   
+    /* Features Section */
+    .features {
+        padding: 4rem 0;
+        background-color: white;
+    }
+   
+    .section-title {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+   
+    .section-title h2 {
+        font-size: 2.2rem;
+        color: var(--primary);
+        margin-bottom: 0.8rem;
+    }
+   
+    .section-title p {
+        color: var(--dark);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+   
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+   
+    .feature-card {
+        background-color: var(--light);
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+   
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+   
+    .feature-card i {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+   
+    .feature-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: var(--dark);
+    }
+   
+    /* Exam Sections */
+    .exams {
+        padding: 4rem 0;
+        background-color: var(--light);
+    }
+   
+    .exam-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+   
+    .exam-card {
+        flex: 1;
+        min-width: 280px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+   
+    .exam-header {
+        padding: 1.2rem;
+        color: white;
+        text-align: center;
+    }
+   
+    .neet-header {
+        background: linear-gradient(135deg, var(--neet), #1d4ed8);
+    }
+   
+    .jee-header {
+        background: linear-gradient(135deg, var(--jee), #b91c1c);
+    }
+   
+    .exam-body {
+        padding: 1.5rem;
+    }
+   
+    .exam-body ul {
+        list-style: none;
+        margin: 1.2rem 0;
+    }
+   
+    .exam-body ul li {
+        margin-bottom: 0.6rem;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+   
+    .exam-body ul li:before {
+        content: "✓";
+        color: var(--success);
+        position: absolute;
+        left: 0;
+    }
+   
+    .exam-advantages {
+        margin: 1.2rem 0;
+    }
+   
+    /* Results Section */
+    .results {
+        padding: 4rem 0;
+        background-color: white;
+    }
+   
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+    }
+   
+    .result-card {
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 10px;
+        background-color: var(--light);
+    }
+   
+    .result-card i {
+        font-size: 2.5rem;
+        color: var(--success);
+        margin-bottom: 1rem;
+    }
+   
+    .result-card .number {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 0.8rem 0;
+    }
+   
+    /* Testimonials */
+    .testimonials {
+        padding: 4rem 0;
+        background-color: var(--light);
+    }
+   
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+   
+    .testimonial-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+   
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1.2rem;
+    }
+   
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+    }
+   
+    .author-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+   
+    /* CTA Section */
+    .cta {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        color: white;
+        text-align: center;
+    }
+   
+    .cta h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
+    }
+   
+    .cta p {
+        max-width: 700px;
+        margin: 0 auto 1.5rem;
+        font-size: 1.1rem;
+    }
+   
+    /* Footer */
+    footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 2.5rem 0 1rem;
+    }
+   
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+   
+    .footer-column h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+   
+    .footer-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: var(--accent);
+    }
+   
+    .footer-column ul {
+        list-style: none;
+    }
+   
+    .footer-column ul li {
+        margin-bottom: 0.6rem;
+    }
+   
+    .footer-column a {
+        color: #d1d5db;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+   
+    .footer-column a:hover {
+        color: white;
+    }
+   
+    .social-links {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+   
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background-color: #374151;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+    }
+   
+    .social-links a:hover {
+        background-color: var(--accent);
+    }
+   
+    .copyright {
+        text-align: center;
+        padding-top: 1.5rem;
+        border-top: 1px solid #374151;
+        color: #9ca3af;
+        font-size: 0.8rem;
+    }
+   
+    /* Mobile Menu */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+   
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+       
+        .nav-links.active {
+            display: flex;
+        }
+       
+        .nav-links li {
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+        .language-switcher {
+            margin: 0.5rem 0;
+        }
+        .language-dropdown {
+            position: static;
+            margin-top: 0.5rem;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+       
+        .mobile-menu-btn {
+            display: block;
+        }
+       
+        .hero h1 {
+            font-size: 2.2rem;
+        }
+       
+        .hero p {
+            font-size: 1.1rem;
+        }
+       
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+       
+        .features-grid,
+        .testimonial-grid,
+        .results-grid {
+            grid-template-columns: 1fr;
+        }
+       
+        .exam-container {
+            flex-direction: column;
+        }
+       
+        .verification-modal {
+            padding: 20px 15px;
+            margin: 0 15px;
+        }
+       
+        .modal-title {
+            font-size: 1.5rem;
+        }
+        
+        .download-section {
+            margin: 10px;
+            padding: 25px 15px;
+        }
+        
+        .download-section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .download-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .download-btn {
+            width: 100%;
+            max-width: 280px;
+            min-width: auto;
+            padding: 10px 20px;
+        }
+        
+        .floating-download {
+            bottom: 15px;
+            right: 15px;
+            padding: 10px 15px;
+            font-size: 12px;
+        }
+        
+        .challenge-modal {
+            margin: 15px;
+            padding: 20px;
+            max-width: 95%;
+        }
+        
+        .challenge-title {
+            font-size: 1.6rem;
+        }
+        
+        .challenge-buttons {
+            flex-direction: column;
+        }
+        
+        .challenge-btn {
+            width: 100%;
+        }
+        
+        .registration-form {
+            margin: 15px;
+            padding: 20px;
+            max-width: 95%;
+        }
+        
+        .coin-counter {
+            top: 70px;
+            right: 10px;
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+        
+        .progress-container {
+            top: 120px;
+            right: 10px;
+            width: 200px;
+            padding: 12px;
+        }
+
+        /* Responsive styles for View Progress Modal */
+        .progress-view-modal {
+            margin: 15px;
+            padding: 20px;
+            max-width: 95%;
+        }
+        
+        .progress-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .user-info-row {
+            flex-direction: column;
+        }
+        
+        .info-label {
+            min-width: auto;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            text-align: left;
+        }
+        
+        .progress-actions {
+            flex-direction: column;
+        }
+        
+        .progress-actions .challenge-btn {
+            width: 100%;
+        }
+    }
+   
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+   
+    .animated {
+        animation: fadeIn 1s ease-out;
+    }
+</style>
+</head>
+<body>
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-7551440219345789">
+</amp-auto-ads>
+    <!-- Bimalism Challenge Modal -->
+    <div class="challenge-modal-overlay" id="challengeModal">
+        <div class="challenge-modal">
+            <button class="challenge-close-btn" id="closeChallengeModal">
+                <i class="fas fa-times"></i>
+            </button>
+           
+            <div class="challenge-logo">
+                <img src="Bimalismlogo.png" alt="Bimalism Logo" class="logo-img">
+                <span>Bimalism Challenge</span>
+            </div>
+           
+            <h2 class="challenge-title">🎯 Accept the Bimalism Challenge!</h2>
+           
+            <div class="challenge-description">
+                <p>Join our exclusive learning challenge and earn rewards for your dedication!</p>
+            </div>
+           
+            <div class="challenge-highlight">
+                <h3>🏆 CHALLENGE REWARDS:</h3>
+                <p>Study for <strong>2 hours</strong> → Earn <strong>1 Coin</strong></p>
+                <p>Collect <strong>30 Coins</strong> → Get a <strong>Special Gift from Bimalism!</strong></p>
+            </div>
+           
+            <div class="challenge-rules">
+                <h4>📋 Challenge Rules:</h4>
+                <ul>
+                    <li>Track your study time using our timer</li>
+                    <li>Every 2 hours of focused study = 1 Coin</li>
+                    <li>Reach 30 Coins to claim your gift</li>
+                    <li>Gifts delivered to your doorstep</li>
+                    <li>Valid for all NEET & JEE students</li>
+                </ul>
+            </div>
+           
+            <div class="challenge-buttons">
+                <button class="challenge-btn challenge-accept" id="acceptChallenge">
+                    <i class="fas fa-check-circle"></i> Yes, I Accept the Challenge!
+                </button>
+                <button class="challenge-btn challenge-decline" id="declineChallenge">
+                    <i class="fas fa-times-circle"></i> Maybe Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+   <!-- Registration Form -->
+<div class="registration-form-overlay" id="registrationForm">
+    <div class="registration-form">
+        <button class="form-close-btn" id="closeRegistrationForm">
+            <i class="fas fa-times"></i>
+        </button>
+       
+        <div class="challenge-logo" style="color: var(--primary);">
+            <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
+            <span>Challenge Registration</span>
+        </div>
+       
+        <h2 class="form-title">Register for Bimalism Challenge</h2>
+       
+        <!-- GOOGLE FORM INTEGRATION -->
+        <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" 
+              method="POST" 
+              target="_blank"
+              id="challengeRegistrationForm">
+            
+            <!-- Hidden field to track source -->
+            <input type="hidden" name="entry.000000000" value="Bimalism Website">
+            
+            <div class="form-group">
+                <label for="fullName" class="form-label">Full Name *</label>
+                <input type="text" id="fullName" name="entry.1234567890" class="form-input" placeholder="Enter your full name" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="entry.1234567891" class="form-input" placeholder="Enter your email" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="dob" class="form-label">Date of Birth *</label>
+                <input type="date" id="dob" name="entry.1234567892" class="form-input" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone Number *</label>
+                <input type="tel" id="phone" name="entry.1234567893" class="form-input" placeholder="Enter your phone number" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="address" class="form-label">Delivery Address *</label>
+                <textarea id="address" name="entry.1234567894" class="form-input" rows="3" placeholder="Full address for gift delivery" required></textarea>
+            </div>
+           
+            <div class="form-group">
+                <label for="city" class="form-label">City *</label>
+                <input type="text" id="city" name="entry.1234567895" class="form-input" placeholder="Enter your city" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="state" class="form-label">State</label>
+                <input type="text" id="state" name="entry.1234567896" class="form-input" placeholder="Enter your state">
+            </div>
+           
+            <div class="form-group">
+                <label for="pincode" class="form-label">PIN Code *</label>
+                <input type="text" id="pincode" name="entry.1234567897" class="form-input" placeholder="Enter PIN code" required>
+            </div>
+           
+            <div class="form-requirements">
+                <h4>📦 Door Delivery Requirements:</h4>
+                <ul>
+                    <li>Valid phone number for delivery confirmation</li>
+                    <li>Complete address with landmark</li>
+                    <li>Someone must be available to receive the gift</li>
+                    <li>Delivery within 7-10 days after reaching 30 coins</li>
+                    <li>Free shipping across India</li>
+                </ul>
+            </div>
+           
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" id="terms" name="entry.1234567898" required>
+                    <a href="policy.html">I agree to the Terms & Conditions</a> *
+                </label>
+            </div>
+           
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Register & Start Challenge
+            </button>
+        </form>
+    </div>
+</div>
+
+    <!-- Coin Counter -->
+    <div class="coin-counter" id="coinCounter">
+        <i class="fas fa-coins"></i>
+        <span id="coinCount">0</span> Coins
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-title">Challenge Progress</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0/30 Coins Collected</div>
+    </div>
+
+    <!-- Floating Download Button -->
+    <button class="floating-download" id="floatingDownloadBtn">
+        <i class="fas fa-download"></i> Download App
+    </button>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+        <p>Processing...</p>
+    </div>
+    
+    <!-- Name Verification Modal -->
+    <div class="modal-overlay" id="nameModal">
+        <div class="verification-modal">
+            <button class="close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+           
+            <!-- LOGO WITH PNG -->
+            <div class="modal-logo">
+                <img src="logo1.png" alt="Bimalism Logo" class="logo-img">
+            </div>
+           
+            <h2 class="modal-title">Welcome to Bimalism</h2>
+            <p class="modal-text">Please enter your name to personalize your experience</p>
+           
+            <form id="nameForm">
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+               
+                <button type="submit" class="modal-btn">
+                    <i class="fas fa-check-circle"></i> Continue
+                </button>
+            </form>
+           
+            <div id="modalMessage" class="modal-message"></div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <!-- LOGO WITH PNG -->
+                <div class="logo">
+                    <span>Bimalism</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="bio-data-pop-up.html">Bio data</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="neet.html">NEeT</a></li>
+                    <li><a href="jee.html">JEE</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="g.html">Game</a></li>
+                    <li><a href="#download-section" class="btn">Download App</a></li>
+                    <li class="language-switcher">
+                        <button class="language-btn">
+                            <i class="fas fa-globe"></i>
+                            <span>English</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown">
+                            <button class="language-option active" data-lang="en" data-page="index.html">
+                                <span class="flag-icon">USA</span>
+                                English
+                            </button>
+                            <button class="language-option" data-lang="hi" data-page="h.html">
+                                <span class="flag-icon">India</span>
+                                हिंदी
+                            </button>
+                            <button class="language-option" data-lang="ta" data-page="t.html">
+                                <span class="flag-icon">India</span>
+                                தமிழ்
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bimalism NEET & JEE Coaching</h1>
+            <p>Transform your dreams into reality with India's premier coaching institute for NEET and JEE examinations</p>
+            <div class="hero-buttons">
+                <a href="neet.html" class="btn btn-neet">NEET Go <i class="fas fa-arrow-right"></i></a>
+                <a href="jee.html" class="btn btn-jee">JEE Go <i class="fas fa-arrow-right"></i></a>
+                <a href="settings.html" class="btn btn-neet">Settings <i class="fas fa-cog"></i></a>
+                <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
+                <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
+                <a href="calculator.html" class="btn btn-jee">Calculator <i class="fas fa-file-alt"></i></a>
+                <button class="btn btn-neet" id="viewProgressBtn">
+                <a href="registration.html" class="btn btn-neet">View Challenge Progress</a>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Download Section -->
+    <section class="download-section" id="download-section">
+        <div class="container">
+            <h2><i class="fas fa-download"></i> Download Bimalism App</h2>
+            <p>Get the complete NEET & JEE coaching experience on your device. Works offline once downloaded!</p>
+            
+            <div class="download-buttons">
+                <button class="download-btn" id="downloadForWindows">
+                    <i class="fab fa-windows"></i> Download for Windows
+                </button>
+                <button class="download-btn" id="downloadForAndroid">
+                    <i class="fab fa-android"></i> Download APK for Android
+                </button>
+                <button class="download-btn" id="saveForIOS">
+                    <i class="fab fa-apple"></i> Save to Home Screen (iOS)
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <div class="instructions">
+        <div class="container">
+            <h3><i class="fas fa-info-circle"></i> How to Use as App</h3>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>For Windows/Mac:</strong> Click "Download for Windows" and extract the ZIP file. Open index.html in any browser.
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>For Android:</strong> Click "Download APK" and install. Allow installation from unknown sources if prompted.
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>For iPhone/iPad:</strong> Click "Save to Home Screen" then tap Share → Add to Home Screen.
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>For All Devices:</strong> Works offline! No internet needed after first download.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Bimalism?</h2>
+                <p>Our proven methodology and expert faculty have helped thousands of students achieve their dreams</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animated">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Expert Faculty</h3>
+                    <p>Learn from experienced educators with a track record of success in NEET and JEE.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-book"></i>
+                    <h3>Comprehensive Study Material</h3>
+                    <p>Curated content designed to cover all topics with practice questions.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Regular Assessments</h3>
+                    <p>Weekly tests and performance analysis to track your progress.</p>
+                </div>
+                <div class="feature-card animated">
+                    <i class="fas fa-users"></i>
+                    <h3>Personalized Attention</h3>
+                    <p>Small batch sizes to ensure individual attention for every student.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rest of your existing sections (exams, results, testimonials, cta, footer) -->
+    <!-- Exam Sections -->
+    <section class="exams" id="exams">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Programs</h2>
+                <p>Specialized coaching programs designed for maximum effectiveness</p>
+            </div>
+            <div class="exam-container">
+                <div class="exam-card">
+                    <div class="exam-header neet-header">
+                        <h3>NEET Coaching</h3>
+                        <p>National Eligibility cum Entrance Test</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>Comprehensive program for medical aspirants targeting top medical colleges</p>
+                        <div class="exam-advantages">
+                            <h4>Key Advantages:</h4>
+                            <ul>
+                                <li>Biology-focused curriculum with NCERT alignment</li>
+                                <li>Expert faculty from medical background</li>
+                                <li>Regular mock tests based on latest pattern</li>
+                                <li>Dedicated doubt clearing sessions</li>
+                                <li>Previous year question analysis</li>
+                            </ul>
+                        </div>
+                        <a href="neet.html" class="btn btn-neet">Explore NEET Program</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-header jee-header">
+                        <h3>JEE Coaching</h3>
+                        <p>Joint Entrance Examination</p>
+                    </div>
+                    <div class="exam-body">
+                        <p>Rigorous training program for engineering aspirants targeting IITs and NITs</p>
+                        <div class="exam-advantages">
+                            <h4>Key Advantages:</h4>
+                            <ul>
+                                <li>Focus on Physics, Chemistry & Mathematics</li>
+                                <li>IIT alumni faculty with proven track record</li>
+                                <li>Problem-solving techniques and shortcuts</li>
+                                <li>Chapter-wise practice problems</li>
+                                <li>Full-length mock test series</li>
+                            </ul>
+                        </div>
+                        <a href="jee.html" class="btn btn-jee">Explore JEE Program</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Results</h2>
+                <p>Consistent excellence year after year</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card animated">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="number">2500+</div>
+                    <p>Selections in NEET</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-medal"></i>
+                    <div class="number">1200+</div>
+                    <p>Selections in JEE</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-award"></i>
+                    <div class="number">98%</div>
+                    <p>Success Rate</p>
+                </div>
+                <div class="result-card animated">
+                    <i class="fas fa-star"></i>
+                    <div class="number">150+</div>
+                    <p>Top 100 Rankers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Success Stories</h2>
+                <p>Hear from our students who achieved their dream ranks</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "Bimalism's NEET program helped me secure AIR 124. Their study material and test series were exactly what I needed to crack the exam."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PA</div>
+                        <div>
+                            <h4>Priya Agarwal</h4>
+                            <p>NEET AIR 124</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "The JEE coaching at Bimalism transformed my preparation. The faculty's approach to problem solving helped me secure a seat at IIT Bombay."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div>
+                            <h4>Rahul Sharma</h4>
+                            <p>IIT Bombay</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animated">
+                    <div class="testimonial-text">
+                        "The regular tests and detailed performance analysis helped me identify my weak areas and improve my score aalif"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div>
+                            <h4>Anjali Singh</h4>
+                            <p>NEET AIR 89</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Begin Your Journey to Success</h2>
+            <p>Join thousands of students who have achieved their dreams with Bimalism</p>
+            <div class="hero-buttons">
+                <a href="neet.html" class="btn btn-neet">Start NEET Preparation</a>
+                <a href="jee.html" class="btn btn-jee">Start JEE Preparation</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Bimalism Education</h3>
+                    <p>Premier coaching institute for NEET and JEE preparations with a proven track record of success.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61580274216320"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/aali.fif7271/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#exams">Programs</a></li>
+                        <li><a href="#results">Results</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="game.html">Game</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#download-section">Download App</a></li>
+                    </ul>
+                </div>
+               
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> bimalism01@gmail.com</li>
+                        <li>Created by Aalif and Dharunesh of Achariya 9th</li>
+                        <li>Inspired by our class teacher Mr. Khageswararao Sir</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy;© 2025 Bimalism . All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Challenge System Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const challengeModal = document.getElementById('challengeModal');
+        const closeChallengeBtn = document.getElementById('closeChallengeModal');
+        const acceptChallengeBtn = document.getElementById('acceptChallenge');
+        const declineChallengeBtn = document.getElementById('declineChallenge');
+        const registrationForm = document.getElementById('registrationForm');
+        const closeRegistrationBtn = document.getElementById('closeRegistrationForm');
+        const challengeRegistrationForm = document.getElementById('challengeRegistrationForm');
+        const coinCounter = document.getElementById('coinCounter');
+        const coinCount = document.getElementById('coinCount');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const viewProgressBtn = document.getElementById('viewProgressBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const floatingBtn = document.getElementById('floatingDownloadBtn');
+        const downloadWinBtn = document.getElementById('downloadForWindows');
+        const downloadAndroidBtn = document.getElementById('downloadForAndroid');
+        const saveIOSBtn = document.getElementById('saveForIOS');
+
+        // Check if user has already accepted challenge
+        const hasAcceptedChallenge = localStorage.getItem('bimalismChallengeAccepted');
+        const userCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+        const userRegistered = localStorage.getItem('bimalismChallengeRegistered');
+
+        // Show challenge modal on first visit
+        if (!hasAcceptedChallenge && !userRegistered) {
+            setTimeout(() => {
+                challengeModal.classList.add('active');
+            }, 1500);
+        }
+
+        // Show coin counter and progress if user accepted challenge
+        if (hasAcceptedChallenge || userRegistered) {
+            updateCoinDisplay(userCoins);
+            coinCounter.classList.add('active');
+            progressContainer.classList.add('active');
+        }
+
+        // Close challenge modal
+        closeChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            localStorage.setItem('bimalismChallengeClosed', 'true');
+        });
+
+        // Decline challenge
+        declineChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            localStorage.setItem('bimalismChallengeDeclined', 'true');
+        });
+
+        // Accept challenge
+        acceptChallengeBtn.addEventListener('click', function() {
+            challengeModal.classList.remove('active');
+            registrationForm.classList.add('active');
+        });
+
+        // Close registration form
+        closeRegistrationBtn.addEventListener('click', function() {
+            registrationForm.classList.remove('active');
+        });
+
+        // Handle registration form submission - IMMEDIATE WHATSAPP REDIRECT
+        challengeRegistrationForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                dob: document.getElementById('dob').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                pincode: document.getElementById('pincode').value
+            };
+
+            // Validate required fields
+            if (!formData.fullName || !formData.phone) {
+                alert('Please enter your Name and Phone number');
+                return;
+            }
+
+            // Create WhatsApp message
+            const whatsappMessage = `
+*NEW BIMALISM CHALLENGE REGISTRATION*
+
+🎯 *Challenge Participant Details:*
+👤 Name: ${formData.fullName}
+📧 Email: ${formData.email}
+📱 Phone: ${formData.phone}
+🎂 Date of Birth: ${formData.dob}
+
+📍 *Delivery Address:*
+${formData.address}
+${formData.city} - ${formData.pincode}
+
+⏰ Registered at: ${new Date().toLocaleString()}
+🎮 Ready to start the 30-coin challenge!
+            `.trim();
+
+            // Encode for WhatsApp URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // WhatsApp number (9597339180 with country code)
+            const whatsappNumber = '919597339180';
+            
+            // Store registration status in localStorage
+            localStorage.setItem('bimalismChallengeRegistered', 'true');
+            localStorage.setItem('bimalismChallengeAccepted', 'true');
+            localStorage.setItem('bimalismUserData', JSON.stringify(formData));
+            
+            // Initialize coins if not exists
+            if (!localStorage.getItem('bimalismCoins')) {
+                localStorage.setItem('bimalismCoins', '0');
+            }
+            
+            // Hide registration form
+            registrationForm.classList.remove('active');
+            
+            // Show coin counter and progress
+            coinCounter.classList.add('active');
+            progressContainer.classList.add('active');
+            updateCoinDisplay(0);
+            
+            // IMMEDIATELY OPEN WHATSAPP
+            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        });
+
+        // Update coin display
+        function updateCoinDisplay(coins) {
+            coinCount.textContent = coins;
+            const progress = (coins / 30) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${coins}/30 Coins Collected`;
+            
+            // Check if user reached 30 coins
+            if (coins >= 30) {
+                showGiftClaimModal();
+            }
+        }
+
+        // Simulate earning coins (In real implementation, this would be triggered by study timer)
+        function earnCoin() {
+            if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                let currentCoins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+                currentCoins += 1;
+                localStorage.setItem('bimalismCoins', currentCoins.toString());
+                updateCoinDisplay(currentCoins);
+                
+                // Show notification
+                showNotification(`🎉 You earned 1 coin! Total: ${currentCoins} coins`);
+                
+                return currentCoins;
+            }
+            return 0;
+        }
+
+        // Show gift claim modal when reaching 30 coins
+        function showGiftClaimModal() {
+            const userData = JSON.parse(localStorage.getItem('bimalismUserData') || '{}');
+            
+            alert(`🎁 CONGRATULATIONS! 🎁\n\nYou have reached 30 coins!\n\nA special gift from Bimalism will be delivered to:\n\n${userData.fullName}\n${userData.address}\n${userData.city} - ${userData.pincode}\n\nDelivery will be processed within 7-10 working days.\n\nThank you for your dedication to studying!`);
+            
+            // Reset coins for next challenge
+            localStorage.setItem('bimalismCoins', '0');
+            updateCoinDisplay(0);
+        }
+
+        // View progress button
+        viewProgressBtn.addEventListener('click', function() {
+            if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                const coins = parseInt(localStorage.getItem('bimalismCoins') || '0');
+                alert(`📊 Your Challenge Progress:\n\nCoins Earned: ${coins}\nCoins Remaining: ${30 - coins}\nProgress: ${((coins / 30) * 100).toFixed(1)}%\n\nKeep studying to reach 30 coins!`);
+            } else {
+                challengeModal.classList.add('active');
+            }
+        });
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+            `;
+            notification.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Simulate study timer (for demo purposes)
+        // In real implementation, this would be triggered by actual study timer
+        setInterval(() => {
+            // For demo: Randomly add coins (remove in production)
+            if (Math.random() < 0.01 && localStorage.getItem('bimalismChallengeAccepted') === 'true') {
+                earnCoin();
+            }
+        }, 60000); // Check every minute
+
+        // ===== EXISTING CODE (Name Verification) =====
+        const modal = document.getElementById('nameModal');
+        const form = document.getElementById('nameForm');
+        const nameInput = document.getElementById('name');
+        const messageDiv = document.getElementById('modalMessage');
+        const closeBtn = document.getElementById('closeModal');
+       
+        // Check if user has already entered their name
+        const userName = localStorage.getItem('bimalismUserName');
+       
+        if (userName) {
+            console.log(`Welcome back, ${userName}!`);
+        } else {
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 2000);
+        }
+       
+        // Close modal when X button is clicked
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            localStorage.setItem('bimalismModalClosed', 'true');
+        });
+       
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+           
+            const enteredName = nameInput.value.trim();
+           
+            // Clear previous message
+            messageDiv.style.display = 'none';
+            messageDiv.className = 'modal-message';
+           
+            if (!enteredName) {
+                showMessage('Please enter your name', 'modal-error');
+                nameInput.classList.add('shake');
+                setTimeout(() => nameInput.classList.remove('shake'), 500);
+                return;
+            }
+           
+            // Store the name in localStorage
+            localStorage.setItem('bimalismUserName', enteredName);
+           
+            // All names are accepted
+            showMessage(`Welcome ${enteredName}!`, 'modal-success');
+           
+            // Redirect to settings.html after a short delay
+            setTimeout(() => {
+                window.location.href = 'settings.html';
+            }, 1500);
+        });
+       
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `modal-message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+
+        // ===== EXISTING DOWNLOAD FUNCTIONALITY =====
+        // Create downloadable ZIP function
+        function createDownloadableFiles() {
+            // Create a manifest.json file content
+            const manifestContent = JSON.stringify({
+                "name": "Bimalism NEET & JEE Coaching",
+                "short_name": "Bimalism",
+                "description": "Premier NEET and JEE coaching institute",
+                "start_url": "index.html",
+                "display": "standalone",
+                "background_color": "#2563eb",
+                "theme_color": "#2563eb",
+                "icons": [
+                    {
+                        "src": "logo1.png",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    }
+                ]
+            }, null, 2);
+            
+            // Create README file
+            const readmeContent = `BIMALISM NEET & JEE COACHING APP
+================================
+
+HOW TO INSTALL:
+---------------
+1. Extract this folder to your desired location
+2. Open index.html in your web browser
+3. For best experience, use Chrome, Firefox, or Edge
+
+FEATURES:
+---------
+- Complete NEET preparation materials
+- Complete JEE preparation materials
+- Study tips and motivation
+- Practice papers and resources
+- Calculator tools
+- Works offline after first load
+- Bimalism Challenge with rewards
+
+FOR MOBILE:
+-----------
+Android: Open in Chrome → Menu → Add to Home Screen
+iPhone: Open in Safari → Share → Add to Home Screen
+
+Created by Aalif and Dharunesh
+Contact: bimalism01@gmail.com`;
+            
+            return { manifestContent, readmeContent };
+        }
+        
+        // Download as ZIP for Windows/Mac
+        downloadWinBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
+            
+            setTimeout(() => {
+                // Create a ZIP file download using JSZip library (simulated)
+                alert('📦 Preparing Bimalism App Package...\n\nThis would create a downloadable ZIP file containing:\n- All HTML files\n- Images and resources\n- README instructions\n- Offline app configuration\n\nFor now, save this page (Ctrl+S) and extract to use as app.');
+                
+                // Create a fake download link
+                const blob = new Blob(['Bimalism App Package - Save this page and extract all files to use as app'], 
+                                      { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Bimalism-App-Readme.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
+        });
+        
+        // Download APK for Android (simulated)
+        downloadAndroidBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
+            
+            setTimeout(() => {
+                alert('📱 Android Installation:\n\n1. Save this HTML file and all linked files in a folder\n2. Install "PWA to APK" converter from Play Store\n3. Convert this website to APK\n4. Install the APK on your device\n\nOR simply:\n- Open in Chrome\n- Tap menu (⋮)\n- Select "Install app" or "Add to Home Screen"');
+                
+                // Create instructions file
+                const instructions = `ANDROID INSTALLATION INSTRUCTIONS
+====================================
+
+Method 1: Add to Home Screen (Easiest)
+--------------------------------------
+1. Open this file in Chrome browser
+2. Tap the menu (⋮) at top right
+3. Select "Add to Home Screen"
+4. Name it "Bimalism" and tap ADD
+
+Method 2: Convert to APK
+------------------------
+1. Install "PWA Builder" or "Web2Apk" from Play Store
+2. Open the app and enter: file://[path-to-this-folder]
+3. Follow app instructions to build APK
+4. Install the generated APK
+
+The app will work offline!`;
+                
+                const blob = new Blob([instructions], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Android-Install-Instructions.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
+        });
+        
+        // Save to Home Screen for iOS
+        saveIOSBtn.addEventListener('click', function() {
+            loadingSpinner.classList.add('active');
+            
+            setTimeout(() => {
+                alert('📱 iPhone/iPad Installation:\n\n1. Open this page in Safari (not Chrome)\n2. Tap the Share button (📤)\n3. Scroll down and tap "Add to Home Screen"\n4. Name it "Bimalism" and tap "Add"\n\nNote: You must use Safari browser for this to work.');
+                
+                // Check if iOS
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                
+                if (isIOS) {
+                    alert('📱 iOS Detected!\n\nNow please:\n1. Tap the Share button at the bottom\n2. Scroll down in the share sheet\n3. Tap "Add to Home Screen"\n4. Name it "Bimalism" and tap ADD');
+                }
+                
+                loadingSpinner.classList.remove('active');
+            }, 1000);
+        });
+        
+        // Floating button
+        floatingBtn.addEventListener('click', function() {
+            // Scroll to download section
+            document.getElementById('download-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // ===== EXISTING LANGUAGE SWITCHER =====
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const languageText = document.querySelector('.language-btn span');
+       
+        // Toggle language dropdown
+        languageBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+        });
+       
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            languageDropdown.classList.remove('active');
+        });
+       
+        // Language selection with redirection
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                const selectedPage = this.getAttribute('data-page');
+                const selectedText = this.textContent.trim();
+               
+                // Show loading spinner
+                loadingSpinner.classList.add('active');
+               
+                // Update active state
+                languageOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+               
+                // Update button text
+                languageText.textContent = selectedText.split(' ')[0];
+               
+                // Close dropdown
+                languageDropdown.classList.remove('active');
+               
+                // Store language preference
+                localStorage.setItem('bimalismLanguage', selectedLang);
+               
+                // Redirect to the selected language page after a short delay
+                setTimeout(() => {
+                    window.location.href = selectedPage;
+                }, 1000);
+            });
+        });
+       
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Add animation on scroll
+        const animatedElements = document.querySelectorAll('.animated');
+       
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+       
+        animatedElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Removed the "Add Demo Coin" button that was previously here
+    });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789"
+ crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7551440219345789"
+     data-ad-slot="1681833398"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+</body>
+</html>
