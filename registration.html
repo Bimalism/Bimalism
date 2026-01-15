@@ -87,6 +87,7 @@ h1{
 .btn-start{background:#10b981;color:white;}
 .btn-stop{background:#ef4444;color:white;}
 .btn-reset{background:#f59e0b;color:white;}
+.btn-reset-coins{background:#dc2626;color:white;}
 .btn:disabled{opacity:0.5;cursor:not-allowed;}
 .status{
   text-align:center;
@@ -100,15 +101,79 @@ h1{
 .always-on{
   animation:pulse 2s infinite;
 }
+.reset-section{
+  display:flex;
+  justify-content:center;
+  margin:15px 0;
+}
 @keyframes pulse{
   0%{opacity:1;}
   50%{opacity:0.7;}
   100%{opacity:1;}
 }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.modal h3 {
+  color: #dc2626;
+  margin-bottom: 15px;
+}
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+.modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.modal-btn.confirm {
+  background: #dc2626;
+  color: white;
+}
+.modal-btn.cancel {
+  background: #6b7280;
+  color: white;
+}
 </style>
 </head>
 
 <body>
+
+<!-- Reset Confirmation Modal -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal">
+    <h3><i class="fas fa-exclamation-triangle"></i> Reset Coins</h3>
+    <p>Are you sure you want to reset all coins to 0?</p>
+    <p><strong>This action cannot be undone!</strong></p>
+    <div class="modal-buttons">
+      <button class="modal-btn confirm" onclick="confirmResetCoins()">Yes, Reset Coins</button>
+      <button class="modal-btn cancel" onclick="closeResetModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <h1><i class="fas fa-trophy"></i> Bimalism Challenge</h1>
@@ -140,7 +205,13 @@ h1{
       <i class="fas fa-stop"></i> Stop
     </button>
     <button class="btn btn-reset" onclick="resetTimer()">
-      <i class="fas fa-redo"></i> Reset
+      <i class="fas fa-redo"></i> Reset Timer
+    </button>
+  </div>
+  
+  <div class="reset-section">
+    <button class="btn btn-reset-coins" onclick="openResetModal()">
+      <i class="fas fa-trash-alt"></i> Reset Coins
     </button>
   </div>
   
@@ -239,6 +310,37 @@ function resetTimer() {
   }
 }
 
+// Reset coins functions
+function openResetModal() {
+  document.getElementById('resetModal').style.display = 'flex';
+}
+
+function closeResetModal() {
+  document.getElementById('resetModal').style.display = 'none';
+}
+
+function confirmResetCoins() {
+  // Reset coins to 0
+  coins = 0;
+  localStorage.setItem('bimalism_coins', '0');
+  
+  // Update display
+  updateDisplay();
+  
+  // Show confirmation message
+  document.getElementById('status').innerHTML = 
+    `<i class="fas fa-check-circle"></i> Coins have been reset to 0`;
+  
+  // Close modal
+  closeResetModal();
+  
+  // Reset message after 3 seconds
+  setTimeout(() => {
+    document.getElementById('status').innerHTML = 
+      `<i class="fas fa-sync-alt fa-spin"></i> Timer runs continuously across all pages`;
+  }, 3000);
+}
+
 // Update display
 function updateDisplay() {
   // Calculate current time
@@ -335,6 +437,20 @@ if(timerRunning) {
   document.getElementById('startBtn').disabled = true;
   document.getElementById('stopBtn').disabled = false;
 }
+
+// Close modal when clicking outside
+document.getElementById('resetModal').addEventListener('click', function(e) {
+  if(e.target === this) {
+    closeResetModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape') {
+    closeResetModal();
+  }
+});
 </script>
 
 </body>
