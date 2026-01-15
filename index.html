@@ -51,6 +51,145 @@
         padding: 0 20px;
     }
 
+    /* ===== HAMBURGER MENU STYLES ===== */
+    .hamburger-menu-container {
+        position: relative;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+    .hamburger-menu-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        font-size: 1.2rem;
+    }
+
+    .hamburger-menu-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .hamburger-menu-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 10px 0;
+        margin-top: 10px;
+        min-width: 250px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        display: none;
+        z-index: 1000;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .hamburger-menu-dropdown.active {
+        display: block;
+        animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hamburger-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: var(--dark);
+        text-decoration: none;
+        transition: all 0.3s;
+        border-left: 4px solid transparent;
+        font-weight: 500;
+    }
+
+    .hamburger-menu-item:hover {
+        background: var(--light);
+        color: var(--primary);
+        border-left: 4px solid var(--primary);
+        padding-left: 24px;
+    }
+
+    .hamburger-menu-item i {
+        width: 24px;
+        margin-right: 12px;
+        color: var(--primary);
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .hamburger-menu-item span {
+        flex: 1;
+        font-size: 0.9rem;
+    }
+
+    /* Add special colors for specific menu items */
+    .hamburger-menu-item[href="neet.html"] {
+        border-left: 4px solid var(--neet);
+    }
+
+    .hamburger-menu-item[href="neet.html"] i {
+        color: var(--neet);
+    }
+
+    .hamburger-menu-item[href="jee.html"] {
+        border-left: 4px solid var(--jee);
+    }
+
+    .hamburger-menu-item[href="jee.html"] i {
+        color: var(--jee);
+    }
+
+    .hamburger-menu-item[href="registration.html"] {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+        border-left: 4px solid #f59e0b;
+        color: #b45309;
+        font-weight: 600;
+    }
+
+    .hamburger-menu-item[href="registration.html"]:hover {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+    }
+
+    .hamburger-menu-item[href="registration.html"] i {
+        color: #f59e0b;
+    }
+
+    .hamburger-menu-item[href="g.html"] {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+        border-left: 4px solid #8b5cf6;
+        color: #7c3aed;
+    }
+
+    .hamburger-menu-item[href="g.html"]:hover {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+    }
+
+    .hamburger-menu-item[href="g.html"] i {
+        color: #8b5cf6;
+    }
+
     /* Bimalism Challenge Modal - COMPACT VERSION */
     .challenge-modal-overlay {
         position: fixed;
@@ -1419,6 +1558,24 @@
    
     /* Responsive Design */
     @media (max-width: 768px) {
+        .hamburger-menu-container {
+            margin-right: 10px;
+        }
+
+        .hamburger-menu-dropdown {
+            position: fixed;
+            top: 70px;
+            right: 10px;
+            left: 10px;
+            max-height: 80vh;
+            width: auto;
+            min-width: auto;
+        }
+
+        .hamburger-menu-item {
+            padding: 15px 20px;
+        }
+
         .nav-links {
             display: none;
             flex-direction: column;
@@ -1803,14 +1960,65 @@
                 <div class="logo">
                     <span>Bimalism</span>
                 </div>
+                
+                <!-- Hamburger Menu Button (3 dots) -->
+                <div class="hamburger-menu-container">
+                    <button class="hamburger-menu-btn" id="hamburgerMenuBtn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="hamburger-menu-dropdown" id="hamburgerMenuDropdown">
+                        <a href="neet.html" class="hamburger-menu-item">
+                            <i class="fas fa-stethoscope"></i>
+                            <span>NEET</span>
+                        </a>
+                        <a href="jee.html" class="hamburger-menu-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>JEE</span>
+                        </a>
+                        <a href="settings.html" class="hamburger-menu-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="tips.html" class="hamburger-menu-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Motivation & Tips</span>
+                        </a>
+                        <a href="table.html" class="hamburger-menu-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Papers & Resources</span>
+                        </a>
+                        <a href="calculator.html" class="hamburger-menu-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>Calculator</span>
+                        </a>
+                        <a href="registration.html" class="hamburger-menu-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>View Challenge Progress</span>
+                        </a>
+                        <a href="bio-data-pop-up.html" class="hamburger-menu-item">
+                            <i class="fas fa-user"></i>
+                            <span>Bio data</span>
+                        </a>
+                        <a href="#features" class="hamburger-menu-item">
+                            <i class="fas fa-star"></i>
+                            <span>Features</span>
+                        </a>
+                        <a href="#results" class="hamburger-menu-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Results</span>
+                        </a>
+                        <a href="#testimonials" class="hamburger-menu-item">
+                            <i class="fas fa-comment"></i>
+                            <span>Testimonials</span>
+                        </a>
+                        <a href="g.html" class="hamburger-menu-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Game</span>
+                        </a>
+                    </div>
+                </div>
+                
                 <ul class="nav-links">
-                    <li><a href="bio-data-pop-up.html">Bio data</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="neet.html">NEeT</a></li>
-                    <li><a href="jee.html">JEE</a></li>
-                    <li><a href="#results">Results</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="g.html">Game</a></li>
                     <li><a href="#download-section" class="btn">Download App</a></li>
                     <li class="language-switcher">
                         <button class="language-btn">
@@ -2143,6 +2351,37 @@
         const downloadWinBtn = document.getElementById('downloadForWindows');
         const downloadAndroidBtn = document.getElementById('downloadForAndroid');
         const saveIOSBtn = document.getElementById('saveForIOS');
+
+        // ===== HAMBURGER MENU FUNCTIONALITY =====
+        const hamburgerMenuBtn = document.getElementById('hamburgerMenuBtn');
+        const hamburgerMenuDropdown = document.getElementById('hamburgerMenuDropdown');
+        
+        // Toggle hamburger menu
+        hamburgerMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hamburgerMenuDropdown.classList.toggle('active');
+        });
+        
+        // Close hamburger menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburgerMenuBtn.contains(e.target) && !hamburgerMenuDropdown.contains(e.target)) {
+                hamburgerMenuDropdown.classList.remove('active');
+            }
+        });
+        
+        // Close hamburger menu when clicking on a menu item
+        document.querySelectorAll('.hamburger-menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                hamburgerMenuDropdown.classList.remove('active');
+            });
+        });
+        
+        // Close hamburger menu when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hamburgerMenuDropdown.classList.remove('active');
+            }
+        });
 
         // Check if user has already accepted challenge
         const hasAcceptedChallenge = localStorage.getItem('bimalismChallengeAccepted');
@@ -2632,3 +2871,5 @@ The app will work offline!`;
 </script>
 </body>
 </html>
+
+
