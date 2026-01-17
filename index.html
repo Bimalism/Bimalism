@@ -122,6 +122,11 @@
         transition: all 0.3s;
         border-left: 4px solid transparent;
         font-weight: 500;
+        width: 100%;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
     }
 
     .hamburger-menu-item:hover {
@@ -142,6 +147,66 @@
     .hamburger-menu-item span {
         flex: 1;
         font-size: 0.9rem;
+    }
+
+    /* Hamburger Language Item */
+    .language-hamburger-item {
+        position: relative;
+    }
+
+    .language-hamburger-item .fa-chevron-down {
+        margin-left: auto;
+        margin-right: 0;
+        font-size: 0.8rem;
+        transition: transform 0.3s;
+    }
+
+    .language-hamburger-item.active .fa-chevron-down {
+        transform: rotate(180deg);
+    }
+
+    /* Hamburger Language Dropdown */
+    .hamburger-language-dropdown {
+        display: none;
+        background: #f8fafc;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 5px 0;
+    }
+
+    .hamburger-language-dropdown.active {
+        display: block;
+    }
+
+    .hamburger-language-option {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px 10px 56px;
+        color: var(--dark);
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    .hamburger-language-option:hover {
+        background: #f1f5f9;
+        color: var(--primary);
+    }
+
+    .hamburger-language-option.active {
+        background: #e0f2fe;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    .flag-icon {
+        margin-right: 10px;
+        font-size: 1rem;
     }
 
     /* Add special colors for specific menu items */
@@ -188,6 +253,15 @@
 
     .hamburger-menu-item[href="g.html"] i {
         color: #8b5cf6;
+    }
+
+    /* More of Us item */
+    .hamburger-menu-item[href="about.html"] {
+        border-left: 4px solid var(--success);
+    }
+
+    .hamburger-menu-item[href="about.html"] i {
+        color: var(--success);
     }
 
     /* Bimalism Challenge Modal - COMPACT VERSION */
@@ -873,75 +947,6 @@
         color: #ffd700;
     }
    
-    /* Language Switcher Styles */
-    .language-switcher {
-        position: relative;
-        margin-left: 1rem;
-    }
-    .language-btn {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 0.4rem 0.8rem;
-        border-radius: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s;
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-    .language-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-    }
-    .language-dropdown {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 0.5rem 0;
-        margin-top: 0.5rem;
-        min-width: 140px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: none;
-        z-index: 1000;
-    }
-    .language-dropdown.active {
-        display: block;
-        animation: fadeIn 0.3s ease;
-    }
-    .language-option {
-        padding: 0.7rem 1rem;
-        color: var(--dark);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s;
-        border: none;
-        background: none;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        font-size: 0.9rem;
-    }
-    .language-option:hover {
-        background: var(--light);
-        color: var(--primary);
-    }
-    .language-option.active {
-        background: var(--light);
-        color: var(--primary);
-        font-weight: 600;
-    }
-    .flag-icon {
-        font-size: 1.1rem;
-    }
-   
     .btn {
         display: inline-block;
         padding: 0.7rem 1.2rem;
@@ -1596,15 +1601,6 @@
             margin: 0.5rem 0;
             text-align: center;
         }
-        .language-switcher {
-            margin: 0.5rem 0;
-        }
-        .language-dropdown {
-            position: static;
-            margin-top: 0.5rem;
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
        
         .mobile-menu-btn {
             display: block;
@@ -2015,36 +2011,41 @@
                             <i class="fas fa-gamepad"></i>
                             <span>Game</span>
                         </a>
-                    </div>
-                </div>
-                
-                <ul class="nav-links">
-                    <li><a href="#download-section" class="btn">Download App</a></li>
-                    <li class="language-switcher">
-                        <button class="language-btn">
+                        
+                        <!-- Download App option in hamburger -->
+                        <a href="#download-section" class="hamburger-menu-item">
+                            <i class="fas fa-download"></i>
+                            <span>Download App</span>
+                        </a>
+                        
+                        <!-- Language Switcher in hamburger -->
+                        <button class="hamburger-menu-item language-hamburger-item" id="languageHamburgerBtn">
                             <i class="fas fa-globe"></i>
-                            <span>English</span>
+                            <span>Language (English)</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="language-dropdown">
-                            <button class="language-option active" data-lang="en" data-page="index.html">
-                                <span class="flag-icon">USA</span>
-                                English
+                        
+                        <!-- Language dropdown for hamburger -->
+                        <div class="hamburger-language-dropdown" id="hamburgerLanguageDropdown">
+                            <button class="hamburger-language-option active" data-lang="en" data-page="index.html">
+                                <span class="flag-icon">🇺🇸</span> English
                             </button>
-                            <button class="language-option" data-lang="hi" data-page="h.html">
-                                <span class="flag-icon">India</span>
-                                हिंदी
+                            <button class="hamburger-language-option" data-lang="hi" data-page="h.html">
+                                <span class="flag-icon">🇮🇳</span> हिंदी
                             </button>
-                            <button class="language-option" data-lang="ta" data-page="t.html">
-                                <span class="flag-icon">India</span>
-                                தமிழ்
+                            <button class="hamburger-language-option" data-lang="ta" data-page="t.html">
+                                <span class="flag-icon">🇮🇳</span> தமிழ்
                             </button>
                         </div>
-                    </li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                        
+                        <!-- More of Us option -->
+                        <a href="about.html" class="hamburger-menu-item">
+                            <i class="fas fa-users"></i>
+                            <span>More of Us</span>
+                        </a>
+                        <a href="#contact" class="btn">Contact Us</a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -2061,9 +2062,7 @@
                 <a href="tips.html" class="btn btn-neet">Motivation & Tips <i class="fas fa-lightbulb"></i></a>
                 <a href="table.html" class="btn btn-jee">Papers & Resources <i class="fas fa-file-alt"></i></a>
                 <a href="calculator.html" class="btn btn-jee">Calculator <i class="fas fa-file-alt"></i></a>
-                <button class="btn btn-neet" id="viewProgressBtn">
                 <a href="registration.html" class="btn btn-neet">View Challenge Progress</a>
-                </button>
             </div>
         </div>
     </section>
@@ -2263,7 +2262,7 @@
                 </div>
                 <div class="testimonial-card animated">
                     <div class="testimonial-text">
-                        "The regular tests and detailed performance analysis helped me identify my weak areas and improve my score aalif"
+                        "The regular tests and detailed performance analysis helped me identify my weak areas and improve my score significantly."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">AS</div>
@@ -2311,6 +2310,7 @@
                         <li><a href="game.html">Game</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                         <li><a href="#download-section">Download App</a></li>
+                        <li><a href="about.html">More of Us</a></li>
                     </ul>
                 </div>
                
@@ -2345,7 +2345,6 @@
         const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
-        const viewProgressBtn = document.getElementById('viewProgressBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const floatingBtn = document.getElementById('floatingDownloadBtn');
         const downloadWinBtn = document.getElementById('downloadForWindows');
@@ -2355,6 +2354,10 @@
         // ===== HAMBURGER MENU FUNCTIONALITY =====
         const hamburgerMenuBtn = document.getElementById('hamburgerMenuBtn');
         const hamburgerMenuDropdown = document.getElementById('hamburgerMenuDropdown');
+        const languageHamburgerBtn = document.getElementById('languageHamburgerBtn');
+        const hamburgerLanguageDropdown = document.getElementById('hamburgerLanguageDropdown');
+        const hamburgerLanguageOptions = document.querySelectorAll('.hamburger-language-option');
+        const languageHamburgerText = languageHamburgerBtn ? languageHamburgerBtn.querySelector('span') : null;
         
         // Toggle hamburger menu
         hamburgerMenuBtn.addEventListener('click', function(e) {
@@ -2362,17 +2365,37 @@
             hamburgerMenuDropdown.classList.toggle('active');
         });
         
+        // Toggle language dropdown inside hamburger
+        if (languageHamburgerBtn) {
+            languageHamburgerBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                this.classList.toggle('active');
+                hamburgerLanguageDropdown.classList.toggle('active');
+            });
+        }
+        
         // Close hamburger menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!hamburgerMenuBtn.contains(e.target) && !hamburgerMenuDropdown.contains(e.target)) {
                 hamburgerMenuDropdown.classList.remove('active');
+                if (languageHamburgerBtn) {
+                    languageHamburgerBtn.classList.remove('active');
+                }
+                hamburgerLanguageDropdown.classList.remove('active');
             }
         });
         
         // Close hamburger menu when clicking on a menu item
         document.querySelectorAll('.hamburger-menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                hamburgerMenuDropdown.classList.remove('active');
+            item.addEventListener('click', function(e) {
+                if (!this.classList.contains('language-hamburger-item')) {
+                    hamburgerMenuDropdown.classList.remove('active');
+                    if (languageHamburgerBtn) {
+                        languageHamburgerBtn.classList.remove('active');
+                    }
+                    hamburgerLanguageDropdown.classList.remove('active');
+                }
             });
         });
         
@@ -2380,7 +2403,47 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 hamburgerMenuDropdown.classList.remove('active');
+                if (languageHamburgerBtn) {
+                    languageHamburgerBtn.classList.remove('active');
+                }
+                hamburgerLanguageDropdown.classList.remove('active');
             }
+        });
+        
+        // Language selection inside hamburger
+        hamburgerLanguageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                const selectedPage = this.getAttribute('data-page');
+                const selectedText = this.textContent.trim();
+               
+                // Show loading spinner
+                loadingSpinner.classList.add('active');
+               
+                // Update active state
+                hamburgerLanguageOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+               
+                // Update button text
+                if (languageHamburgerText) {
+                    languageHamburgerText.textContent = `Language (${selectedText.split(' ')[0]})`;
+                }
+               
+                // Store language preference
+                localStorage.setItem('bimalismLanguage', selectedLang);
+               
+                // Close dropdowns
+                hamburgerLanguageDropdown.classList.remove('active');
+                if (languageHamburgerBtn) {
+                    languageHamburgerBtn.classList.remove('active');
+                }
+                hamburgerMenuDropdown.classList.remove('active');
+               
+                // Redirect to the selected language page after a short delay
+                setTimeout(() => {
+                    window.location.href = selectedPage;
+                }, 1000);
+            });
         });
 
         // Check if user has already accepted challenge
@@ -2531,16 +2594,6 @@ ${formData.city} - ${formData.pincode}
             localStorage.setItem('bimalismCoins', '0');
             updateCoinDisplay(0);
         }
-
-        // View progress button
-        viewProgressBtn.addEventListener('click', function() {
-            if (localStorage.getItem('bimalismChallengeAccepted') === 'true') {
-                const coins = parseInt(localStorage.getItem('bimalismCoins') || '0');
-                alert(`📊 Your Challenge Progress:\n\nCoins Earned: ${coins}\nCoins Remaining: ${30 - coins}\nProgress: ${((coins / 30) * 100).toFixed(1)}%\n\nKeep studying to reach 30 coins!`);
-            } else {
-                challengeModal.classList.add('active');
-            }
-        });
 
         // Show notification
         function showNotification(message) {
@@ -2775,53 +2828,6 @@ The app will work offline!`;
             });
         });
 
-        // ===== EXISTING LANGUAGE SWITCHER =====
-        const languageBtn = document.querySelector('.language-btn');
-        const languageDropdown = document.querySelector('.language-dropdown');
-        const languageOptions = document.querySelectorAll('.language-option');
-        const languageText = document.querySelector('.language-btn span');
-       
-        // Toggle language dropdown
-        languageBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            languageDropdown.classList.toggle('active');
-        });
-       
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            languageDropdown.classList.remove('active');
-        });
-       
-        // Language selection with redirection
-        languageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
-                const selectedPage = this.getAttribute('data-page');
-                const selectedText = this.textContent.trim();
-               
-                // Show loading spinner
-                loadingSpinner.classList.add('active');
-               
-                // Update active state
-                languageOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-               
-                // Update button text
-                languageText.textContent = selectedText.split(' ')[0];
-               
-                // Close dropdown
-                languageDropdown.classList.remove('active');
-               
-                // Store language preference
-                localStorage.setItem('bimalismLanguage', selectedLang);
-               
-                // Redirect to the selected language page after a short delay
-                setTimeout(() => {
-                    window.location.href = selectedPage;
-                }, 1000);
-            });
-        });
-       
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
@@ -2850,8 +2856,6 @@ The app will work offline!`;
             el.style.animationPlayState = 'paused';
             observer.observe(el);
         });
-
-        // Removed the "Add Demo Coin" button that was previously here
     });
 </script>
 
@@ -2871,5 +2875,4 @@ The app will work offline!`;
 </script>
 </body>
 </html>
-
 
