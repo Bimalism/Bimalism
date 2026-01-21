@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hub | Three Projects</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon - Replace with your Bimalismlogo.png -->
+    <link rel="icon" href="Bimalismlogo.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -33,16 +35,35 @@
             color: white;
             border-radius: 0 0 20px 20px;
             margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-right: 20px;
+        }
+
+        .logo-text {
+            text-align: left;
         }
 
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
 
         .subtitle {
@@ -285,12 +306,29 @@
             gap: 10px;
         }
 
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
         .copyright {
             text-align: center;
             padding-top: 20px;
             border-top: 1px solid #374151;
             color: #9ca3af;
             font-size: 0.9rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
         }
 
         /* Floating Button */
@@ -319,6 +357,26 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-img {
+                margin-right: 0;
+                margin-bottom: 15px;
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
             .projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -339,6 +397,16 @@
                 height: 50px;
                 font-size: 1.3rem;
             }
+            
+            .footer-brand {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -353,13 +421,16 @@
             </p>
         </div>
 
-        <!-- Header -->
+        <!-- Header with Bimalismlogo.png Logo -->
         <header>
-            <div class="logo">
-                <i class="fas fa-project-diagram"></i>
+            <div class="logo-container">
+                <!-- Replace with your actual Bimalismlogo.png -->
+                <img src="Bimalismlogo.png" alt="Bimalism Logo" class="logo-img" id="bimalismLogo">
+                <div class="logo-text">
+                    <h1>Project Hub</h1>
+                    <p class="subtitle">Three useful projects for different needs</p>
+                </div>
             </div>
-            <h1>Project Hub</h1>
-            <p class="subtitle">Three useful projects for different needs</p>
         </header>
 
         <!-- Projects Grid -->
@@ -488,10 +559,15 @@
         <footer>
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Contact Information</h3>
+                    <div class="footer-brand">
+                        <!-- Footer Logo -->
+                        <img src="Bimalismlogo.png" alt="Bimalism Logo" class="footer-logo">
+                        <h3>Project Hub</h3>
+                    </div>
                     <ul class="contact-info">
                         <li><i class="fas fa-map-marker-alt"></i> Karaikal, India</li>
                         <li><i class="fas fa-envelope"></i> bimalism01@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +91 9443745823</li>
                     </ul>
                 </div>
                 
@@ -502,7 +578,6 @@
             </div>
         </footer>
     </div>
-
     <script>
         // Check URL parameters for redirect requests
         document.addEventListener('DOMContentLoaded', function() {
@@ -547,6 +622,26 @@
                 });
             }
             
+            // Handle image error for Bimalismlogo.png
+            const bimalismLogo = document.getElementById('bimalismLogo');
+            if (bimalismLogo) {
+                bimalismLogo.onerror = function() {
+                    console.warn('Bimalismlogo.png not found. Using placeholder instead.');
+                    this.src = 'https://via.placeholder.com/100/667eea/ffffff?text=Bimalism';
+                    this.alt = 'Bimalism Logo Placeholder';
+                };
+            }
+            
+            // Handle footer logo error
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                logo.onerror = function() {
+                    console.warn('Bimalismlogo.png not found for footer. Using placeholder instead.');
+                    this.src = 'https://via.placeholder.com/60/667eea/ffffff?text=BH';
+                    this.alt = 'Bimalism Logo Placeholder';
+                };
+            });
+            
             // Add fade-in animation to cards
             const cards = document.querySelectorAll('.project-card');
             cards.forEach((card, index) => {
@@ -564,8 +659,10 @@
             console.log('Redirect URLs available:');
             console.log('1. For Karisma Foods Noodles: ?redirect=karisma-foods-noodles');
             console.log('2. For Master Chemicals: ?redirect=master-chemicals');
+            console.log('Note: Make sure Bimalismlogo.png is in the same directory as this HTML file.');
         });
     </script>
 </body>
 </html>
+
 
