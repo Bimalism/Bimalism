@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Mosquito Prevention Guide - Community Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #2e7d32;
+            --danger: #d32f2f;
+            --warning: #f57c00;
+            --info: #0288d1;
+            --light: #f8f9fa;
+            --dark: #212121;
+            --gray: #5f6368;
+            --border: #dadce0;
+            --success: #388e3c;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #3c4043;
+            line-height: 1.6;
+            background-image: 
+                linear-gradient(to bottom, rgba(255,255,255,0.97), rgba(255,255,255,0.97)),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a73e8' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 800;
+            background: linear-gradient(120deg, rgba(26, 115, 232, 0.1) 0%, rgba(26, 115, 232, 0.1) 100%);
+            padding: 0 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h3 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 25px auto 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Two Column Layout */
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+        
+        .column-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .column-title i {
+            font-size: 1.8rem;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .column-title h3 {
+            font-size: 1.6rem;
+            color: var(--dark);
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .info-box.danger {
+            background-color: #ffebee;
+            border-left-color: var(--danger);
+        }
+        
+        .info-box.success {
+            background-color: #e8f5e9;
+            border-left-color: var(--success);
+        }
+        
+        .info-box.warning {
+            background-color: #fff3e0;
+            border-left-color: var(--warning);
+        }
+        
+        .info-box h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Lifecycle Timeline */
+        .lifecycle-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .lifecycle-timeline::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background-color: var(--primary);
+            z-index: 1;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-dot {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        /* Diseases Grid */
+        .diseases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .disease-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .disease-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .disease-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--danger);
+        }
+        
+        .disease-card h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .disease-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .mosquito-type {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        /* Comparison Table */
+        .comparison-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .comparison-table thead {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table th {
+            padding: 20px;
+            text-align: left;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .incorrect-cell {
+            color: var(--danger);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .incorrect-cell::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .correct-cell {
+            color: var(--success);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .correct-cell::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Mosquito Types Section */
+        .mosquito-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .mosquito-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+        
+        .mosquito-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .mosquito-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .aedes-icon {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+        
+        .anopheles-icon {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+        
+        .culex-icon {
+            background: linear-gradient(135deg, #ffd166, #ffb347);
+        }
+        
+        .mosquito-header h4 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+        
+        .mosquito-details {
+            list-style-type: none;
+        }
+        
+        .mosquito-details li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .mosquito-details li i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        /* Prevention Checklist */
+        .checklist-container {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            margin: 40px 0;
+            border: 1px solid var(--border);
+        }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .checklist-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #e8f5e9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        
+        /* Statistics Section */
+        .stats-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .stat-card h4 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        /* Action Plan */
+        .action-plan {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            margin: 50px 0;
+            border: 1px solid var(--border);
+        }
+        
+        .plan-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .plan-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30px;
+            width: 3px;
+            background-color: var(--border);
+            z-index: 1;
+        }
+        
+        .plan-step {
+            display: flex;
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+        
+        .step-content {
+            padding-top: 12px;
+        }
+        
+        .step-content h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .contact-info {
+            list-style-type: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #b0b0b0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .column {
+                padding: 25px;
+            }
+            
+            .stats-section {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .lifecycle-timeline {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .lifecycle-timeline::before {
+                display: none;
+            }
+            
+            .plan-steps::before {
+                display: none;
+            }
+            
+            .plan-step {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Complete Mosquito Control</h1>
+                    <p>Community Health & Prevention Initiative</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#overview" class="active">Overview</a>
+                <a href="#lifecycle">Lifecycle</a>
+                <a href="#diseases">Diseases</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#prevention">Prevention</a>
+                <a href="#resources">Resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>If we leave it for <span class="highlight">7 days</span>,<br>it will live for <span class="highlight">30 days</span></h2>
+            <p class="hero-subtitle">A single week of stagnant water allows mosquitoes to complete their lifecycle, creating a month-long threat to your family's health. Learn comprehensive prevention strategies.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Days from egg to adult</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Days adult mosquitoes live</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Diseases they can spread</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1.5mm</div>
+                    <div class="stat-label">Gap enough for breeding</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <div class="container" id="overview">
+        <div class="section-header">
+            <h3>The Mosquito Threat</h3>
+            <p>Water is essential for human life, but when stagnant, it becomes a breeding ground for disease-carrying mosquitoes that threaten our families.</p>
+        </div>
+        
+        <div class="two-columns">
+            <div class="column">
+                <div class="column-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Critical Problem</h3>
+                </div>
+                
+                <p>We live not only with our families but also with mosquitoes that breed in our immediate surroundings. Proper water management is not just about convenience—it's a matter of public health.</p>
+                
+                <div class="info-box danger">
+                    <h4><i class="fas fa-biohazard"></i> Key Fact</h4>
+                    <p>Water stored for more than 7 days provides the perfect environment for mosquitoes to multiply. Even a 1.5mm gap in water containers is enough for mosquitoes to enter and lay eggs.</p>
+                </div>
+                
+                <h4>Common Breeding Sites:</h4>
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li style="margin-bottom: 10px;">Coconut shells, disposable cups, and plastic containers</li>
+                    <li style="margin-bottom: 10px;">Water collection in flower pots, plant saucers, and ornamental vases</li>
+                    <li style="margin-bottom: 10px;">Stagnant water in blocked drains, gutters, and window sunshades</li>
+                    <li style="margin-bottom: 10px;">Uncovered water tanks, sumps, and storage containers</li>
+                    <li style="margin-bottom: 10px;">Discarded tires, buckets, and any water-holding debris</li>
+                </ul>
+            </div>
+            
+            <div class="column">
+                <div class="column-title">
+                    <i class="fas fa-hand-holding-water"></i>
+                    <h3>From Your Documents</h3>
+                </div>
+                
+                <p>Based on the official health department materials, here are the essential points every community member should know:</p>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-clock"></i> The 7-Day Rule</h4>
+                    <p>Mosquitoes take approximately 7 days to develop from egg to adult. If you eliminate standing water every 7 days, you break their lifecycle.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-calendar-alt"></i> The 30-Day Impact</h4>
+                    <p>Adult mosquitoes live for about 30 days. During this time, a single mosquito can infect multiple people with serious diseases.</p>
+                </div>
+                
+                <div class="info-box warning">
+                    <h4><i class="fas fa-sun"></i> Day Biter Alert</h4>
+                    <p>Aedes mosquitoes, which spread Dengue and Chikungunya, bite during daytime. Protection is needed even during the day, not just at night.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lifecycle Section -->
+    <div class="container" id="lifecycle">
+        <div class="section-header">
+            <h3>Mosquito Lifecycle Timeline</h3>
+            <p>Understanding the mosquito lifecycle is key to effective prevention and control</p>
+        </div>
+        
+        <div class="lifecycle-timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">Day 1</div>
+                <div class="timeline-label">Egg Stage</div>
+                <div class="timeline-desc">Female lays eggs in stagnant water</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Day 2-3</div>
+                <div class="timeline-label">Larva Stage</div>
+                <div class="timeline-desc">Eggs hatch into larvae (wrigglers)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Day 4-5</div>
+                <div class="timeline-label">Pupa Stage</div>
+                <div class="timeline-desc">Larvae transform into pupae (tumblers)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Day 6-7</div>
+                <div class="timeline-label">Adult Emerges</div>
+                <div class="timeline-desc">Fully developed mosquito emerges</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Day 8-30</div>
+                <div class="timeline-label">Adult Stage</div>
+                <div class="timeline-desc">Seeks blood meals and reproduces</div>
+            </div>
+        </div>
+        
+        <div class="info-box" style="margin-top: 40px;">
+            <h4><i class="fas fa-lightbulb"></i> Critical Intervention Point</h4>
+            <p>The first 7 days are the most critical for intervention. If standing water is eliminated within this period, the mosquito lifecycle is broken and adults never emerge to spread disease.</p>
+        </div>
+    </div>
+
+    <!-- Diseases Section -->
+    <div class="container" id="diseases">
+        <div class="section-header">
+            <h3>Diseases Spread by Mosquitoes</h3>
+            <p>Mosquitoes are vectors for multiple serious diseases that affect millions worldwide</p>
+        </div>
+        
+        <div class="diseases-grid">
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-fever"></i>
+                </div>
+                <h4>Malaria</h4>
+                <p>Caused by Plasmodium parasites transmitted through bites of infected female Anopheles mosquitoes. Symptoms include fever, headache, chills, and vomiting.</p>
+                <div class="mosquito-type">Anopheles mosquito</div>
+            </div>
+            
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-bone-break"></i>
+                </div>
+                <h4>Dengue</h4>
+                <p>Viral infection causing severe flu-like illness. Can develop into potentially lethal dengue hemorrhagic fever. Also known as "breakbone fever" due to severe muscle and joint pain.</p>
+                <div class="mosquito-type">Aedes mosquito</div>
+            </div>
+            
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-person-cane"></i>
+                </div>
+                <h4>Chikungunya</h4>
+                <p>Viral disease transmitted by Aedes mosquitoes. Causes fever and severe joint pain that can persist for months or years. The name means "to become contorted" describing stooped posture of sufferers.</p>
+                <div class="mosquito-type">Aedes mosquito</div>
+            </div>
+            
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-swelling"></i>
+                </div>
+                <h4>Filaria (Lymphatic Filariasis)</h4>
+                <p>Parasitic disease caused by microscopic worms transmitted by Culex mosquitoes. Can lead to abnormal enlargement of body parts (lymphedema) causing pain and disability.</p>
+                <div class="mosquito-type">Culex mosquito</div>
+            </div>
+            
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>Japanese Encephalitis</h4>
+                <p>Viral brain infection transmitted by Culex mosquitoes. Can cause inflammation of the brain (encephalitis) leading to high fever, headache, disorientation, coma, and death.</p>
+                <div class="mosquito-type">Culex mosquito</div>
+            </div>
+            
+            <div class="disease-card">
+                <div class="disease-icon">
+                    <i class="fas fa-virus"></i>
+                </div>
+                <h4>Zika Virus</h4>
+                <p>Additional mosquito-borne disease transmitted by Aedes mosquitoes. Can cause birth defects in pregnant women and is linked to Guillain-Barré syndrome.</p>
+                <div class="mosquito-type">Aedes mosquito</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solutions Section -->
+    <div class="container" id="solutions">
+        <div class="section-header">
+            <h3>Correct vs Incorrect Practices</h3>
+            <p>Based on Health Department guidelines from your documents</p>
+        </div>
+        
+        <div class="comparison-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th width="50%">Incorrect Practices (To Avoid)</th>
+                        <th width="50%">Correct Practices (To Implement)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="incorrect-cell">Leaving coconut shells upright where rainwater can collect</td>
+                        <td class="correct-cell">Keep coconut shells turned upside down to prevent water collection</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Using disposable plastic cups that can collect water</td>
+                        <td class="correct-cell">Properly dispose of or store disposable containers</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Leaving water containers uncovered and open</td>
+                        <td class="correct-cell">Keep all water pots closed with proper fitting lids</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Allowing old tires to collect rainwater</td>
+                        <td class="correct-cell">Make holes in tires for water drainage or store them properly</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Letting water stagnate in ornamental vases for weeks</td>
+                        <td class="correct-cell">Change water in vases and decorative containers once a week</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Not maintaining soak pits and septic tanks properly</td>
+                        <td class="correct-cell">Ensure proper maintenance without 1.5mm gaps, cover vent pipes with nets</td>
+                    </tr>
+                    <tr>
+                        <td class="incorrect-cell">Leaving sumps and overhead tanks unsealed</td>
+                        <td class="correct-cell">Properly seal all water storage without leaving 1.5mm gaps</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mosquito-types">
+            <div class="mosquito-card">
+                <div class="mosquito-header">
+                    <div class="mosquito-icon aedes-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h4>Aedes Mosquito</h4>
+                </div>
+                <ul class="mosquito-details">
+                    <li><i class="fas fa-clock"></i> <strong>Biting Time:</strong> Day biter (especially early morning and late afternoon)</li>
+                    <li><i class="fas fa-tint"></i> <strong>Breeding Site:</strong> Clean stagnant water in containers, flower pots, coconut shells</li>
+                    <li><i class="fas fa-disease"></i> <strong>Diseases:</strong> Dengue, Chikungunya, Zika, Yellow Fever</li>
+                    <li><i class="fas fa-home"></i> <strong>Habitat:</strong> Urban areas, inside and around homes</li>
+                    <li><i class="fas fa-ruler"></i> <strong>Identification:</strong> Black with white stripes on legs and body</li>
+                </ul>
+            </div>
+            
+            <div class="mosquito-card">
+                <div class="mosquito-header">
+                    <div class="mosquito-icon anopheles-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h4>Anopheles Mosquito</h4>
+                </div>
+                <ul class="mosquito-details">
+                    <li><i class="fas fa-clock"></i> <strong>Biting Time:</strong> Most active at dusk and dawn</li>
+                    <li><i class="fas fa-tint"></i> <strong>Breeding Site:</strong> Clean water, ponds, puddles, uncovered tanks</li>
+                    <li><i class="fas fa-disease"></i> <strong>Diseases:</strong> Malaria</li>
+                    <li><i class="fas fa-home"></i> <strong>Habitat:</strong> Rural and urban areas, prefers shaded breeding sites</li>
+                    <li><i class="fas fa-ruler"></i> <strong>Identification:</strong> Pale and dark marks on wings, sits at 45-degree angle</li>
+                </ul>
+            </div>
+            
+            <div class="mosquito-card">
+                <div class="mosquito-header">
+                    <div class="mosquito-icon culex-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Culex Mosquito</h4>
+                </div>
+                <ul class="mosquito-details">
+                    <li><i class="fas fa-clock"></i> <strong>Biting Time:</strong> Night biter</li>
+                    <li><i class="fas fa-tint"></i> <strong>Breeding Site:</strong> Polluted water, drains, septic tanks, cesspools</li>
+                    <li><i class="fas fa-disease"></i> <strong>Diseases:</strong> Filaria, Japanese Encephalitis, West Nile Virus</li>
+                    <li><i class="fas fa-home"></i> <strong>Habitat:</strong> Urban areas with poor sanitation</li>
+                    <li><i class="fas fa-ruler"></i> <strong>Identification:</strong> Brownish with unmarked wings, sits parallel to surface</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prevention Section -->
+    <div class="container" id="prevention">
+        <div class="section-header">
+            <h3>Complete Prevention Strategy</h3>
+            <p>A multi-layered approach to protect your family and community</p>
+        </div>
+        
+        <div class="checklist-container">
+            <h3 style="color: var(--dark); margin-bottom: 25px; font-size: 1.8rem;">Weekly Prevention Checklist</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Inspect Property</h4>
+                        <p>Check all potential water collection sites around your home</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Empty Containers</h4>
+                        <p>Drain water from flower pots, plant saucers, pet bowls</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Cover Water Storage</h4>
+                        <p>Ensure all water containers have tight-fitting lids</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Clean Gutters & Drains</h4>
+                        <p>Remove debris that can cause water stagnation</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Dispose of Trash</h4>
+                        <p>Properly discard containers that can hold water</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4>Maintain Swimming Pools</h4>
+                        <p>Keep properly chlorinated or covered when not in use</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h3 style="text-align: center; color: var(--dark); margin-bottom: 20px; font-size: 1.8rem;">Impact Statistics</h3>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">Understanding the scale of the mosquito problem helps motivate community action</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-globe-asia"></i>
+                    <h4>400M+</h4>
+                    <p>Dengue infections annually worldwide</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-hospital-user"></i>
+                    <h4>229M</h4>
+                    <p>Malaria cases worldwide (2020)</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-skull-crossbones"></i>
+                    <h4>405,000</h4>
+                    <p>Malaria deaths annually</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-home"></i>
+                    <h4>80%</h4>
+                    <p>Mosquitoes breed within 100m of homes</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-plan">
+            <h3 style="color: var(--dark); margin-bottom: 20px; font-size: 1.8rem;">7-Day Community Action Plan</h3>
+            <p style="color: var(--gray); margin-bottom: 30px;">A step-by-step guide to implementing mosquito control in your community</p>
+            
+            <div class="plan-steps">
+                <div class="plan-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Awareness Campaign</h4>
+                        <p>Educate community members about the 7-day lifecycle and 30-day impact. Distribute informational materials.</p>
+                    </div>
+                </div>
+                
+                <div class="plan-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Community Cleanup</h4>
+                        <p>Organize a neighborhood cleanup to remove potential breeding sites like discarded containers and tires.</p>
+                    </div>
+                </div>
+                
+                <div class="plan-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Water Management</h4>
+                        <p>Implement proper water storage practices and ensure all containers are covered or emptied weekly.</p>
+                    </div>
+                </div>
+                
+                <div class="plan-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Monitoring System</h4>
+                        <p>Establish a community monitoring system to check for breeding sites and report stagnant water.</p>
+                    </div>
+                </div>
+                
+                <div class="plan-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Ongoing Maintenance</h4>
+                        <p>Create a schedule for weekly inspections and maintenance to prevent mosquito breeding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="resources">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Community Health Initiative</h4>
+                    <p>A comprehensive community-driven program to combat mosquito-borne diseases through education, prevention, and community action.</p>
+                    <p style="margin-top: 15px; color: #b0b0b0;"><strong>Remember:</strong> Water is essential for life. Let's keep it safe for humans, not mosquitoes.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Key Resources</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-calendar-check"></i> Weekly Inspection Checklist</li>
+                        <li><i class="fas fa-map-marked-alt"></i> Community Action Plan Template</li>
+                        <li><i class="fas fa-phone-alt"></i> Health Helpline: 2243228</li>
+                    </ul>
+                    <a href="#overview" class="cta-button">Start Protecting Your Community</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone-alt"></i> Emergency Health Line: 2243237</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Community Health Center</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Prevention Hotline</li>
+                        <li><i class="fas fa-envelope"></i> health@communityinitiative.org</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Community Mosquito Prevention Initiative. All information based on Health Department guidelines and WHO recommendations.</p>
+                <p style="margin-top: 15px;">Let's work together for healthier, mosquito-free communities. Prevention is everyone's responsibility.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Update mobile menu display on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 992) {
+                        navLinks.style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, div[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if(window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state
+            document.querySelector('.nav-links a').classList.add('active');
+            
+            // Set correct mobile menu display
+            if (window.innerWidth <= 992) {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
