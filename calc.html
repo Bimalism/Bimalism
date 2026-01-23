@@ -970,39 +970,22 @@
                             <div id="gpa-output"></div>
                         </div>
                     </div>
-                    
-                    <!-- FINANCE CALCULATOR -->
+                                        <!-- FINANCE CALCULATOR -->
                     <div id="finance-tool" class="hidden">
                         <h2 class="tool-title"><i class="fas fa-coins"></i> FINANCE CALCULATOR</h2>
                         <div class="form-group">
                             <label>Calculation Type:</label>
                             <select id="finance-type" class="form-select">
-                                <option value="emi">EMI Calculator</option>
+                                <option value="emi-manual">EMI Calculator</option>
+                                <option value="emi-auto">EMI Calculator (Auto Calculate)</option>
                                 <option value="simple-interest">Simple Interest</option>
                                 <option value="compound-interest">Compound Interest</option>
-                                <option value="loan-repayment">Loan Repayment</option>
                             </select>
                         </div>
-                        <div id="emi-calculator">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <div class="form-group">
-                                    <label>Loan Amount (₹)</label>
-                                    <input type="number" id="loan-amount" class="form-input" value="100000">
-                                </div>
-                                <div class="form-group">
-                                    <label>Interest Rate (% p.a.)</label>
-                                    <input type="number" id="interest-rate" class="form-input" value="8.5" step="0.1">
-                                </div>
-                                <div class="form-group">
-                                    <label>Loan Tenure (years)</label>
-                                    <input type="number" id="loan-tenure" class="form-input" value="5">
-                                </div>
-                                <div class="form-group">
-                                    <label>Monthly EMI (₹)</label>
-                                    <div id="emi-result" style="padding: 12px; background: var(--light); border-radius: 6px; border: 2px solid var(--border);">-</div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        <!-- Dynamic form will be loaded here -->
+                        <div id="finance-form-container"></div>
+                        
                         <button class="btn" onclick="calculateFinance()" style="margin-top: 20px; width: 100%;">
                             <i class="fas fa-calculator"></i> CALCULATE
                         </button>
@@ -2153,35 +2136,455 @@
             document.getElementById('gpa-result').classList.remove('hidden');
         }
 
+                    // Initialize finance calculator
+            // Create form container if it doesn't exist
+            const financeTool = document.getElementById('finance-tool');
+            if (financeTool && !financeTool.querySelector('#finance-form-container')) {
+                const formContainer = document.createElement('div');
+                formContainer.id = 'finance-form-container';
+                const existingContent = financeTool.querySelector('.form-group');
+                if (existingContent) {
+                    existingContent.parentNode.insertBefore(formContainer, existingContent.nextSibling);
+                }
+            }
+            updateFinanceForm();
+                        // ============================================
+        // 11. FINANCE CALCULATOR - WITH MANUAL EMI INPUT
         // ============================================
-        // 11. FINANCE CALCULATOR - WORKS
-        // ============================================
+        document.getElementById('finance-type').addEventListener('change', function() {
+            updateFinanceForm();
+        });
+
+        function updateFinanceForm() {
+            const type = document.getElementById('finance-type').value;
+            const formContainer = document.getElementById('finance-form-container');
+            
+            let formHTML = '';
+            
+            switch(type) {
+                case 'emi-manual':
+                    formHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                            <div class="form-group">
+                                <label>Loan Amount (₹)</label>
+                                <input type="number" id="loan-amount" class="form-input" value="100000" min="1000" step="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Monthly EMI (₹)</label>
+                                <input type="number" id="monthly-emi" class="form-input" value="2500" min="100" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Loan Tenure (months)</label>
+                                <input type="number" id="loan-months" class="form-input" value="48" min="1" max="360" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Interest (₹)</label>
+                                <div id="total-interest-result" style="padding: 12px; background: var(--light); border-radius: 6px; border: 2px solid var(--border); font-weight: bold; color: var(--primary);">-</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Total Interest = (Monthly EMI × Months) - Loan Amount
+                        </p>
+                    `;
+                    break;
+                    
+                case 'emi-auto':
+                    formHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                            <div class="form-group">
+                                <label>Loan Amount (₹)</label>
+                                <input type="number" id="loan-amount-auto" class="form-input" value="100000" min="1000" step="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Annual Interest Rate (%)</label>
+                                <input type="number" id="interest-rate" class="form-input" value="8.5" min="0.1" max="50" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Loan Tenure (years)</label>
+                                <input type="number" id="loan-years" class="form-input" value="5" min="1" max="30" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Monthly EMI (₹)</label>
+                                <div id="emi-result-auto" style="padding: 12px; background: var(--light); border-radius: 6px; border: 2px solid var(--border); font-weight: bold; color: var(--primary);">-</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> EMI = [P × r × (1+r)^n] / [(1+r)^n - 1]
+                        </p>
+                    `;
+                    break;
+                    
+                case 'simple-interest':
+                    formHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                            <div class="form-group">
+                                <label>Principal Amount (₹)</label>
+                                <input type="number" id="principal" class="form-input" value="50000" min="1000" step="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Interest Rate (% per year)</label>
+                                <input type="number" id="si-rate" class="form-input" value="7.5" min="0.1" max="50" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Time Period (years)</label>
+                                <input type="number" id="si-time" class="form-input" value="3" min="0.25" max="100" step="0.25">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Interest (₹)</label>
+                                <div id="si-result" style="padding: 12px; background: var(--light); border-radius: 6px; border: 2px solid var(--border); font-weight: bold; color: var(--primary);">-</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Simple Interest = (P × r × t) / 100
+                        </p>
+                    `;
+                    break;
+                    
+                case 'compound-interest':
+                    formHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                            <div class="form-group">
+                                <label>Principal Amount (₹)</label>
+                                <input type="number" id="ci-principal" class="form-input" value="50000" min="1000" step="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Annual Interest Rate (%)</label>
+                                <input type="number" id="ci-rate" class="form-input" value="8.0" min="0.1" max="50" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Time Period (years)</label>
+                                <input type="number" id="ci-time" class="form-input" value="5" min="1" max="100" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Compounding Frequency</label>
+                                <select id="ci-frequency" class="form-input">
+                                    <option value="1">Annually</option>
+                                    <option value="2">Semi-annually</option>
+                                    <option value="4">Quarterly</option>
+                                    <option value="12">Monthly</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> A = P(1 + r/n)^(nt)
+                        </p>
+                    `;
+                    break;
+            }
+            
+            formContainer.innerHTML = formHTML;
+            
+            // Add event listeners to inputs for auto-calculation
+            const inputs = formContainer.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', calculateFinance);
+            });
+            
+            // Calculate immediately after form update
+            setTimeout(calculateFinance, 100);
+        }
+
         function calculateFinance() {
             const type = document.getElementById('finance-type').value;
             
-            if (type === 'emi') {
-                const principal = parseFloat(document.getElementById('loan-amount').value);
-                const rate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
-                const months = parseFloat(document.getElementById('loan-tenure').value) * 12;
-                
-                if (principal && rate && months) {
-                    const emi = principal * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
-                    const totalPayable = emi * months;
-                    const totalInterest = totalPayable - principal;
-                    
-                    document.getElementById('emi-result').textContent = `₹${emi.toFixed(2)}`;
-                    
-                    document.getElementById('finance-output').innerHTML = `
-                        <p><strong>Monthly EMI:</strong> ₹${emi.toFixed(2)}</p>
-                        <p><strong>Total Amount Payable:</strong> ₹${totalPayable.toFixed(2)}</p>
-                        <p><strong>Total Interest:</strong> ₹${totalInterest.toFixed(2)}</p>
-                        <p><strong>Principal Amount:</strong> ₹${principal.toFixed(2)}</p>
-                    `;
-                    document.getElementById('finance-result').classList.remove('hidden');
-                }
+            switch(type) {
+                case 'emi-manual':
+                    calculateEMIManual();
+                    break;
+                case 'emi-auto':
+                    calculateEMIAuto();
+                    break;
+                case 'simple-interest':
+                    calculateSimpleInterest();
+                    break;
+                case 'compound-interest':
+                    calculateCompoundInterest();
+                    break;
             }
         }
 
+        function calculateEMIManual() {
+            const principal = parseFloat(document.getElementById('loan-amount').value) || 0;
+            const monthlyEMI = parseFloat(document.getElementById('monthly-emi').value) || 0;
+            const months = parseFloat(document.getElementById('loan-months').value) || 0;
+            
+            if (principal <= 0 || monthlyEMI <= 0 || months <= 0) {
+                document.getElementById('total-interest-result').textContent = '-';
+                document.getElementById('finance-result').classList.add('hidden');
+                return;
+            }
+            
+            // Calculate total interest from manual EMI
+            const totalPayment = monthlyEMI * months;
+            const totalInterest = totalPayment - principal;
+            const interestPercentage = (totalInterest / principal) * 100;
+            const effectiveAnnualRate = calculateEffectiveRate(principal, monthlyEMI, months);
+            
+            document.getElementById('total-interest-result').textContent = `₹${totalInterest.toFixed(2)}`;
+            
+            document.getElementById('finance-output').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                        <div style="font-size: 0.9rem; color: #666;">Total Payment</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">₹${totalPayment.toFixed(2)}</div>
+                    </div>
+                    <div style="background: #fff0f0; padding: 15px; border-radius: 6px; border-left: 4px solid var(--danger);">
+                        <div style="font-size: 0.9rem; color: #666;">Total Interest (${interestPercentage.toFixed(2)}%)</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--danger);">₹${totalInterest.toFixed(2)}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Loan Details</h4>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Loan Amount</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${principal.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Monthly EMI</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${monthlyEMI.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Loan Tenure</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">${months} months (${(months/12).toFixed(1)} years)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Total Payments</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">${months}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Effective Annual Rate</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">${effectiveAnnualRate.toFixed(2)}%</td>
+                        </tr>
+                        <tr style="font-weight: bold;">
+                            <td style="padding: 8px; background: var(--light);">Total Amount Payable</td>
+                            <td style="padding: 8px; background: var(--light); text-align: right;">₹${totalPayment.toFixed(2)}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Repayment Schedule (First 12 Months)</h4>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="background: var(--light);">
+                                    <th style="padding: 8px; text-align: left;">Month</th>
+                                    <th style="padding: 8px; text-align: right;">EMI</th>
+                                    <th style="padding: 8px; text-align: right;">Principal</th>
+                                    <th style="padding: 8px; text-align: right;">Interest</th>
+                                    <th style="padding: 8px; text-align: right;">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${generateRepaymentSchedule(principal, monthlyEMI, months)}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            document.getElementById('finance-result').classList.remove('hidden');
+        }
+
+        function calculateEffectiveRate(principal, emi, months) {
+            // Simplified effective rate calculation
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - principal;
+            return (totalInterest / principal) * (12 / months) * 100;
+        }
+
+        function generateRepaymentSchedule(principal, emi, months) {
+            let scheduleHTML = '';
+            let remaining = principal;
+            const monthlyRate = calculateEffectiveRate(principal, emi, months) / 100 / 12;
+            
+            for (let month = 1; month <= Math.min(months, 12); month++) {
+                const interest = remaining * monthlyRate;
+                const principalPaid = emi - interest;
+                remaining -= principalPaid;
+                
+                if (remaining < 0) remaining = 0;
+                
+                scheduleHTML += `
+                    <tr>
+                        <td style="padding: 6px; border-bottom: 1px solid var(--border);">${month}</td>
+                        <td style="padding: 6px; border-bottom: 1px solid var(--border); text-align: right;">₹${emi.toFixed(2)}</td>
+                        <td style="padding: 6px; border-bottom: 1px solid var(--border); text-align: right;">₹${principalPaid.toFixed(2)}</td>
+                        <td style="padding: 6px; border-bottom: 1px solid var(--border); text-align: right;">₹${interest.toFixed(2)}</td>
+                        <td style="padding: 6px; border-bottom: 1px solid var(--border); text-align: right;">₹${remaining.toFixed(2)}</td>
+                    </tr>
+                `;
+            }
+            
+            if (months > 12) {
+                scheduleHTML += `
+                    <tr>
+                        <td colspan="5" style="padding: 8px; text-align: center; font-style: italic; color: #666;">
+                            ... and ${months - 12} more months
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            return scheduleHTML;
+        }
+
+        function calculateEMIAuto() {
+            const principal = parseFloat(document.getElementById('loan-amount-auto').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const years = parseFloat(document.getElementById('loan-years').value) || 0;
+            
+            if (principal <= 0 || annualRate <= 0 || years <= 0) {
+                document.getElementById('emi-result-auto').textContent = '-';
+                document.getElementById('finance-result').classList.add('hidden');
+                return;
+            }
+            
+            // Monthly interest rate
+            const monthlyRate = annualRate / 100 / 12;
+            const months = years * 12;
+            
+            // EMI formula: [P × r × (1+r)^n] / [(1+r)^n - 1]
+            const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / 
+                        (Math.pow(1 + monthlyRate, months) - 1);
+            
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - principal;
+            
+            document.getElementById('emi-result-auto').textContent = `₹${emi.toFixed(2)}`;
+            
+            document.getElementById('finance-output').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                        <div style="font-size: 0.9rem; color: #666;">Monthly EMI</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">₹${emi.toFixed(2)}</div>
+                    </div>
+                    <div style="background: #fff0f0; padding: 15px; border-radius: 6px; border-left: 4px solid var(--danger);">
+                        <div style="font-size: 0.9rem; color: #666;">Total Interest</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--danger);">₹${totalInterest.toFixed(2)}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Payment Breakdown</h4>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Principal Amount</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${principal.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border);">Total Interest</td>
+                            <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${totalInterest.toFixed(2)}</td>
+                        </tr>
+                        <tr style="font-weight: bold;">
+                            <td style="padding: 8px; background: var(--light);">Total Amount Payable</td>
+                            <td style="padding: 8px; background: var(--light); text-align: right;">₹${totalPayment.toFixed(2)}</td>
+                        </tr>
+                    </table>
+                </div>
+            `;
+            document.getElementById('finance-result').classList.remove('hidden');
+        }
+
+        function calculateSimpleInterest() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const rate = parseFloat(document.getElementById('si-rate').value) || 0;
+            const time = parseFloat(document.getElementById('si-time').value) || 0;
+            
+            if (principal <= 0 || rate <= 0 || time <= 0) {
+                document.getElementById('si-result').textContent = '-';
+                document.getElementById('finance-result').classList.add('hidden');
+                return;
+            }
+            
+            // Simple Interest formula: (P × r × t) / 100
+            const interest = (principal * rate * time) / 100;
+            const totalAmount = principal + interest;
+            
+            document.getElementById('si-result').textContent = `₹${interest.toFixed(2)}`;
+            
+            document.getElementById('finance-output').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                        <div style="font-size: 0.9rem; color: #666;">Simple Interest</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">₹${interest.toFixed(2)}</div>
+                    </div>
+                    <div style="background: #f0fff0; padding: 15px; border-radius: 6px; border-left: 4px solid var(--success);">
+                        <div style="font-size: 0.9rem; color: #666;">Total Amount</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--success);">₹${totalAmount.toFixed(2)}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Calculation Details</h4>
+                    <p><strong>Formula:</strong> SI = (P × r × t) / 100</p>
+                    <p><strong>Principal (P):</strong> ₹${principal.toFixed(2)}</p>
+                    <p><strong>Rate (r):</strong> ${rate}% per year</p>
+                    <p><strong>Time (t):</strong> ${time} years</p>
+                    <p><strong>Calculation:</strong> (${principal} × ${rate} × ${time}) / 100 = ₹${interest.toFixed(2)}</p>
+                </div>
+            `;
+            document.getElementById('finance-result').classList.remove('hidden');
+        }
+
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('ci-principal').value) || 0;
+            const annualRate = parseFloat(document.getElementById('ci-rate').value) || 0;
+            const years = parseFloat(document.getElementById('ci-time').value) || 0;
+            const frequency = parseInt(document.getElementById('ci-frequency').value) || 1;
+            
+            if (principal <= 0 || annualRate <= 0 || years <= 0) {
+                document.getElementById('finance-result').classList.add('hidden');
+                return;
+            }
+            
+            // Compound Interest formula: A = P(1 + r/n)^(nt)
+            const rate = annualRate / 100;
+            const amount = principal * Math.pow(1 + rate / frequency, frequency * years);
+            const interest = amount - principal;
+            
+            document.getElementById('finance-output').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div style="background: #f0f9ff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                        <div style="font-size: 0.9rem; color: #666;">Principal</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary);">₹${principal.toFixed(2)}</div>
+                    </div>
+                    <div style="background: #fff0f0; padding: 15px; border-radius: 6px; border-left: 4px solid var(--danger);">
+                        <div style="font-size: 0.9rem; color: #666;">Interest Earned</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--danger);">₹${interest.toFixed(2)}</div>
+                    </div>
+                    <div style="background: #f0fff0; padding: 15px; border-radius: 6px; border-left: 4px solid var(--success);">
+                        <div style="font-size: 0.9rem; color: #666;">Total Amount</div>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--success);">₹${amount.toFixed(2)}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Growth Over Time</h4>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="background: var(--light);">
+                                <th style="padding: 10px; text-align: left;">Year</th>
+                                <th style="padding: 10px; text-align: right;">Amount</th>
+                                <th style="padding: 10px; text-align: right;">Interest</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Array.from({length: Math.min(years, 10)}, (_, i) => {
+                                const year = i + 1;
+                                const yearAmount = principal * Math.pow(1 + rate / frequency, frequency * year);
+                                const yearInterest = yearAmount - principal;
+                                return `
+                                    <tr>
+                                        <td style="padding: 8px; border-bottom: 1px solid var(--border);">${year}</td>
+                                        <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${yearAmount.toFixed(2)}</td>
+                                        <td style="padding: 8px; border-bottom: 1px solid var(--border); text-align: right;">₹${yearInterest.toFixed(2)}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                    ${years > 10 ? `<p style="margin-top: 10px; font-style: italic;">Showing first 10 years of ${years} total years</p>` : ''}
+                </div>
+            `;
+            document.getElementById('finance-result').classList.remove('hidden');
+        }
         // ============================================
         // 12. MATRIX CALCULATOR - WORKS
         // ============================================
@@ -2438,4 +2841,7 @@
         });
     </script>
 </body>
+
 </html>
+
+
