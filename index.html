@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fixed: Only one viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="google-site-verification" content="33MVfLbupQdh7gMotWJ0SIXwX93Su6FDIqm04Y64qtg" />
     <meta name="description" content="Bimalism - Premier NEET and JEE coaching institute with expert faculty, comprehensive study materials, and proven results.">
     <meta name="keywords" content="Bimalism, NEET coaching, JEE coaching, medical entrance, engineering entrance, NEET preparation, JEE preparation, physics, chemistry, biology">
@@ -12,17 +13,29 @@
     <meta name="google-adsense-account" content="ca-pub-7551440219345789">
     <meta name="google-site-verification" content="FYrkd9AMwMRRvQnfwzWQzQrNosPpMQbKwzfwttKUiFA" />
     
-    <!-- Performance Optimizations -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0066cc">
     <link rel="apple-touch-icon" href="Bimalismlogo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bimalism">
+    <link rel="manifest" href="/manifest.json">
     
     <link rel="icon" type="image/png" href="Bimalismlogo.png">
     <title>Bimalism - NEET & JEE Coaching | Essential Concepts</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Source+Serif+Pro:wght@400;600;700&display=swap" as="style">
+    
+    <!-- DNS prefetch -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     
     <!-- Google FAQ Schema -->
     <script type="application/ld+json">
@@ -193,21 +206,32 @@
       ]
     }
     </script>
-    <!-- Fonts -->
+    
+    <!-- Fonts with display swap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Improved Service Worker -->
     <script>
         if ("serviceWorker" in navigator) {
-            window.addEventListener("load", () => {
-                navigator.serviceWorker.register("/sw.js");
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("/sw.js")
+                    .then(function(registration) {
+                        console.log("ServiceWorker registration successful");
+                    })
+                    .catch(function(err) {
+                        console.log("ServiceWorker registration failed: ", err);
+                    });
             });
         }
     </script>
 
     <style>
+        /* Font import with display swap */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+        
         :root {
             /* Professional Color Palette */
             --primary-blue: #0066cc;
@@ -235,6 +259,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+        }
+        
+        /* CRITICAL MOBILE FIXES */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            visibility: visible;
+            opacity: 1;
         }
         
         body {
@@ -242,7 +277,19 @@
             color: var(--dark-charcoal);
             line-height: 1.6;
             font-weight: 400;
-            overflow-x: hidden;
+        }
+        
+        /* Safe area insets for modern phones */
+        @supports(padding: max(0px)) {
+            .container {
+                padding-left: max(1rem, env(safe-area-inset-left, 1rem));
+                padding-right: max(1rem, env(safe-area-inset-right, 1rem));
+            }
+            
+            .floating-button {
+                bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
+                right: max(2rem, env(safe-area-inset-right, 2rem));
+            }
         }
         
         .container {
@@ -257,6 +304,8 @@
             font-weight: 700;
             line-height: 1.2;
             color: var(--dark-charcoal);
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         
         h1 {
@@ -286,6 +335,13 @@
             max-width: 800px;
             margin: 0 auto 3rem;
             text-align: center;
+        }
+        
+        /* ===== IMAGES ===== */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
         
         /* ===== HEADER & NAVIGATION ===== */
@@ -335,7 +391,7 @@
             color: var(--primary-blue);
         }
         
-        /* ===== HAMBURGER MENU - PROFESSIONAL VERSION ===== */
+        /* ===== HAMBURGER MENU ===== */
         .menu-container {
             position: relative;
         }
@@ -442,6 +498,22 @@
         
         .menu-item:hover i {
             color: var(--primary-blue);
+        }
+        
+        /* MOBILE TOUCH TARGETS */
+        @media (max-width: 768px) {
+            .menu-item, .btn, .faq-question {
+                min-height: 44px; /* Apple's recommended touch target */
+            }
+            
+            .subject-nav-item, .badge {
+                min-height: 48px;
+            }
+            
+            /* Prevent zoom on mobile inputs */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
         }
         
         /* Language Switcher */
@@ -756,6 +828,20 @@
             color: var(--dark-charcoal);
         }
         
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            border-collapse: collapse;
+        }
+        
+        @media (max-width: 768px) {
+            table {
+                white-space: nowrap;
+            }
+        }
+        
         /* ===== NEET FAQ SECTION ===== */
         .neet-faq-section {
             padding: 6rem 0;
@@ -1030,6 +1116,70 @@
             background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
         }
         
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .verification-modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .verification-modal {
+            transform: translateY(0);
+        }
+        
+        /* ===== FLOATING BUTTON ===== */
+        .floating-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 999;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .floating-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.4);
+        }
+        
         /* ===== FOOTER ===== */
         footer {
             background: var(--dark-charcoal);
@@ -1102,68 +1252,42 @@
             font-size: 0.875rem;
         }
         
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .verification-modal {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            transform: translateY(20px);
-            transition: transform 0.3s;
-        }
-        
-        .modal-overlay.active .verification-modal {
-            transform: translateY(0);
-        }
-        
-        /* ===== FLOATING BUTTON ===== */
-        .floating-button {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--primary-blue);
-            color: var(--white);
-            border: none;
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            z-index: 999;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
-            transition: all 0.3s;
-        }
-        
-        .floating-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.4);
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            .floating-button,
+            .menu-trigger,
+            .cta-buttons,
+            .download-section,
+            .social-links {
+                display: none !important;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.5;
+                background: white !important;
+                color: black !important;
+            }
+            
+            a {
+                color: black !important;
+                text-decoration: underline !important;
+            }
+            
+            .faq-item.active .faq-answer {
+                display: block !important;
+                max-height: none !important;
+            }
+            
+            .hero {
+                background: white !important;
+                padding: 2rem 0 !important;
+            }
+            
+            .container {
+                max-width: 100% !important;
+                padding: 0 1rem !important;
+            }
         }
         
         /* ===== RESPONSIVE DESIGN ===== */
@@ -1238,6 +1362,12 @@
                 right: 1rem;
                 left: 1rem;
                 max-width: none;
+            }
+            
+            .verification-modal {
+                width: 95%;
+                margin: 1rem;
+                padding: 1.5rem;
             }
             
             .floating-button {
@@ -2653,7 +2783,7 @@
                             <i class="fas fa-envelope"></i> bimalism01@gmail.com
                         </li>
                         <li style="color: #a0aec0; margin-bottom: 0.75rem;">
-                            Created by Aalif and Dharunesh of Achariya (Grade 9)
+                            Created by Aalif and Dharunesh of Achariya (Grade 10)
                         </li>
                         <li style="color: #a0aec0;">
                             Inspired by Mr. Khageswararao Sir
@@ -2667,237 +2797,335 @@
             </div>
         </div>
     </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Main JavaScript -->
     <script>
-document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            /* =========================
+               HAMBURGER MENU
+            ========================== */
+            const menuTrigger = document.querySelector('.menu-trigger');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
 
-    /* =========================
-       HAMBURGER MENU
-    ========================== */
-    const menuTrigger = document.querySelector('.menu-trigger');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+            if (menuTrigger && dropdownMenu) {
+                menuTrigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('active');
+                });
 
-    if (menuTrigger && dropdownMenu) {
-        menuTrigger.addEventListener('click', function (e) {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('active');
-        });
-
-        document.addEventListener('click', function (e) {
-            if (!menuTrigger.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.remove('active');
-            }
-        });
-    }
-
-    /* =========================
-       SUBJECT NAVIGATION
-    ========================== */
-    const subjectNavItems = document.querySelectorAll('.subject-nav-item');
-    const subjectContents = document.querySelectorAll('.subject-content');
-
-    subjectNavItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const subject = this.dataset.subject;
-
-            subjectNavItems.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-
-            subjectContents.forEach(content => {
-                content.classList.remove('active');
-                if (content.classList.contains(subject + '-content')) {
-                    content.classList.add('active');
-                }
-            });
-        });
-    });
-
-    /* =========================
-       FAQ ACCORDION
-    ========================== */
-    const faqQuestions = document.querySelectorAll('.faq-question');
-
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function () {
-            const faqItem = this.closest('.faq-item');
-            const container = this.closest('.subject-content');
-
-            if (container) {
-                container.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) item.classList.remove('active');
+                document.addEventListener('click', function (e) {
+                    if (!menuTrigger.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.classList.remove('active');
+                    }
                 });
             }
 
-            faqItem.classList.toggle('active');
-        });
-    });
+            /* =========================
+               SUBJECT NAVIGATION
+            ========================== */
+            const subjectNavItems = document.querySelectorAll('.subject-nav-item');
+            const subjectContents = document.querySelectorAll('.subject-content');
 
-    /* =========================
-       NAME VERIFICATION MODAL
-    ========================== */
-    const modal = document.getElementById('nameModal');
-    const form = document.getElementById('nameForm');
-    const nameInput = document.getElementById('name');
-    const message = document.getElementById('modalMessage');
-    const closeModal = document.getElementById('closeModal');
+            subjectNavItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const subject = this.dataset.subject;
 
-    if (modal && form) {
-        const savedName = localStorage.getItem('bimalismUserName');
-        const closed = localStorage.getItem('bimalismModalClosed');
+                    subjectNavItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
 
-        if (!savedName && !closed) {
-            setTimeout(() => modal.classList.add('active'), 1500);
-        }
-
-        closeModal?.addEventListener('click', () => {
-            modal.classList.remove('active');
-            localStorage.setItem('bimalismModalClosed', 'true');
-        });
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const value = nameInput.value.trim();
-
-            if (!value) {
-                message.textContent = 'Please enter your name';
-                message.style.color = '#ef4444';
-                return;
-            }
-
-            localStorage.setItem('bimalismUserName', value);
-            message.textContent = `Welcome ${value}! Redirecting...`;
-            message.style.color = '#00a86b';
-
-            setTimeout(() => {
-                modal.classList.remove('active');
-                window.location.href = 'settings.html';
-            }, 1200);
-        });
-    }
-
-    /* =========================
-       LANGUAGE SELECTOR
-    ========================== */
-    const languageSelect = document.getElementById('languageSelect');
-
-    if (languageSelect) {
-        languageSelect.value = localStorage.getItem('bimalismLanguage') || 'en';
-
-        languageSelect.addEventListener('change', function () {
-            localStorage.setItem('bimalismLanguage', this.value);
-
-            if (this.value === 'ta') location.href = 't.html';
-            if (this.value === 'hi') location.href = 'h.html';
-            if (this.value === 'en') location.href = 'index.html';
-        });
-    }
-
-    /* =========================
-       LOADING SPINNER
-    ========================== */
-    const loadingSpinner = document.getElementById('loadingSpinner');
-
-    function showLoading() {
-        if (!loadingSpinner) return;
-        loadingSpinner.style.display = 'block';
-        setTimeout(() => loadingSpinner.style.display = 'none', 1400);
-    }
-
-    /* =========================
-       FLOATING BUTTON
-    ========================== */
-    const floatingBtn = document.getElementById('floatingDownloadBtn');
-
-    floatingBtn?.addEventListener('click', function () {
-        document.querySelector('.download-section')?.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    /* =========================
-       PROFESSIONAL PDF DOWNLOAD
-    ========================== */
-    const downloadBtn = document.getElementById('downloadNEETNotes');
-
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', function () {
-
-            showLoading();
-
-            setTimeout(() => {
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF("p", "mm", "a4");
-
-                let y = 20;
-                const x = 15;
-
-                pdf.setFont("Times", "Bold");
-                pdf.setFontSize(20);
-                pdf.text("BIMALISM", 105, y, { align: "center" });
-
-                y += 8;
-                pdf.setFontSize(12);
-                pdf.text("NEET Biology – PYQ High Yield Notes", 105, y, { align: "center" });
-
-                y += 10;
-                pdf.line(x, y, 195, y);
-
-                function section(title, points) {
-                    y += 8;
-                    pdf.setFont("Times", "Bold");
-                    pdf.setFontSize(14);
-                    pdf.text(title, x, y);
-
-                    y += 6;
-                    pdf.setFont("Times", "Normal");
-                    pdf.setFontSize(11);
-
-                    points.forEach(p => {
-                        if (y > 270) {
-                            pdf.addPage();
-                            y = 20;
+                    subjectContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.classList.contains(subject + '-content')) {
+                            content.classList.add('active');
                         }
-                        pdf.text("• " + p, x + 3, y);
-                        y += 6;
                     });
+                });
+            });
+
+            /* =========================
+               FAQ ACCORDION
+            ========================== */
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function () {
+                    const faqItem = this.closest('.faq-item');
+                    const container = this.closest('.subject-content');
+
+                    if (container) {
+                        container.querySelectorAll('.faq-item').forEach(item => {
+                            if (item !== faqItem) item.classList.remove('active');
+                        });
+                    }
+
+                    faqItem.classList.toggle('active');
+                });
+            });
+
+            /* =========================
+               NAME VERIFICATION MODAL
+            ========================== */
+            const modal = document.getElementById('nameModal');
+            const form = document.getElementById('nameForm');
+            const nameInput = document.getElementById('name');
+            const message = document.getElementById('modalMessage');
+            const closeModal = document.getElementById('closeModal');
+
+            if (modal && form) {
+                const savedName = localStorage.getItem('bimalismUserName');
+                const closed = localStorage.getItem('bimalismModalClosed');
+
+                if (!savedName && !closed) {
+                    setTimeout(() => modal.classList.add('active'), 1500);
                 }
 
-                section("Cell Division", [
-                    "Mitosis is for growth and repair",
-                    "Meiosis forms gametes",
-                    "Chromosome number halves in meiosis"
-                ]);
+                closeModal?.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    localStorage.setItem('bimalismModalClosed', 'true');
+                });
 
-                section("Genetics", [
-                    "Law of Segregation",
-                    "Independent Assortment",
-                    "Genotype differs from phenotype"
-                ]);
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const value = nameInput.value.trim();
 
-                section("Photosynthesis", [
-                    "Light reaction occurs in thylakoid",
-                    "Produces ATP and NADPH",
-                    "Oxygen released from water splitting"
-                ]);
+                    if (!value) {
+                        message.textContent = 'Please enter your name';
+                        message.style.color = '#ef4444';
+                        return;
+                    }
 
-                section("Human Physiology", [
-                    "Nephron is kidney’s functional unit",
-                    "Alveoli enable gas exchange",
-                    "Hormones act as chemical messengers"
-                ]);
+                    localStorage.setItem('bimalismUserName', value);
+                    message.textContent = `Welcome ${value}! Redirecting...`;
+                    message.style.color = '#00a86b';
 
-                pdf.setFontSize(9);
-                pdf.text("© Bimalism Education", 105, 290, { align: "center" });
+                    setTimeout(() => {
+                        modal.classList.remove('active');
+                        window.location.href = 'settings.html';
+                    }, 1200);
+                });
+            }
 
-                pdf.save("Bimalism_NEET_Biology_PYQ_Notes.pdf");
+            /* =========================
+               LANGUAGE SELECTOR
+            ========================== */
+            const languageSelect = document.getElementById('languageSelect');
 
-            }, 1200);
+            if (languageSelect) {
+                languageSelect.value = localStorage.getItem('bimalismLanguage') || 'en';
+
+                languageSelect.addEventListener('change', function () {
+                    localStorage.setItem('bimalismLanguage', this.value);
+
+                    if (this.value === 'ta') location.href = 't.html';
+                    if (this.value === 'hi') location.href = 'h.html';
+                    if (this.value === 'en') location.href = 'index.html';
+                });
+            }
+
+            /* =========================
+               LOADING SPINNER
+            ========================== */
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            function showLoading() {
+                if (!loadingSpinner) return;
+                loadingSpinner.style.display = 'block';
+                setTimeout(() => loadingSpinner.style.display = 'none', 1400);
+            }
+
+            /* =========================
+               FLOATING BUTTON
+            ========================== */
+            const floatingBtn = document.getElementById('floatingDownloadBtn');
+
+            floatingBtn?.addEventListener('click', function () {
+                document.querySelector('.download-section')?.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            /* =========================
+               PROFESSIONAL PDF DOWNLOAD
+            ========================== */
+            const downloadBtn = document.getElementById('downloadNEETNotes');
+
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function () {
+                    showLoading();
+
+                    setTimeout(() => {
+                        const { jsPDF } = window.jspdf;
+                        const pdf = new jsPDF("p", "mm", "a4");
+
+                        let y = 20;
+                        const x = 15;
+
+                        pdf.setFont("Times", "Bold");
+                        pdf.setFontSize(20);
+                        pdf.text("BIMALISM", 105, y, { align: "center" });
+
+                        y += 8;
+                        pdf.setFontSize(12);
+                        pdf.text("NEET Biology – PYQ High Yield Notes", 105, y, { align: "center" });
+
+                        y += 10;
+                        pdf.line(x, y, 195, y);
+
+                        function section(title, points) {
+                            y += 8;
+                            pdf.setFont("Times", "Bold");
+                            pdf.setFontSize(14);
+                            pdf.text(title, x, y);
+
+                            y += 6;
+                            pdf.setFont("Times", "Normal");
+                            pdf.setFontSize(11);
+
+                            points.forEach(p => {
+                                if (y > 270) {
+                                    pdf.addPage();
+                                    y = 20;
+                                }
+                                pdf.text("• " + p, x + 3, y);
+                                y += 6;
+                            });
+                        }
+
+                        section("Cell Division", [
+                            "Mitosis is for growth and repair",
+                            "Meiosis forms gametes",
+                            "Chromosome number halves in meiosis"
+                        ]);
+
+                        section("Genetics", [
+                            "Law of Segregation",
+                            "Independent Assortment",
+                            "Genotype differs from phenotype"
+                        ]);
+
+                        section("Photosynthesis", [
+                            "Light reaction occurs in thylakoid",
+                            "Produces ATP and NADPH",
+                            "Oxygen released from water splitting"
+                        ]);
+
+                        section("Human Physiology", [
+                            "Nephron is kidney’s functional unit",
+                            "Alveoli enable gas exchange",
+                            "Hormones act as chemical messengers"
+                        ]);
+
+                        pdf.setFontSize(9);
+                        pdf.text("© Bimalism Education", 105, 290, { align: "center" });
+
+                        pdf.save("Bimalism_NEET_Biology_PYQ_Notes.pdf");
+
+                    }, 1200);
+                });
+            }
+
+            /* =========================
+               IMAGE LAZY LOADING
+            ========================== */
+            const images = document.querySelectorAll('img');
+            if (images.length > 0) {
+                const config = {
+                    rootMargin: '50px 0px',
+                    threshold: 0.01
+                };
+                
+                let observer = new IntersectionObserver(function(entries, self) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            const src = image.getAttribute('data-src');
+                            if (src) {
+                                image.src = src;
+                            }
+                            self.unobserve(image);
+                        }
+                    });
+                }, config);
+                
+                images.forEach(image => {
+                    if (!image.src.includes('data:')) {
+                        image.setAttribute('data-src', image.src);
+                        image.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f7ff"/></svg>';
+                        observer.observe(image);
+                    }
+                });
+            }
+
+            /* =========================
+               LAZY LOAD FAQ CONTENT
+            ========================== */
+            const faqObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                    }
+                });
+            }, { rootMargin: '50px' });
+
+            document.querySelectorAll('.faq-item').forEach(item => {
+                faqObserver.observe(item);
+            });
+
+            /* =========================
+               DOWNLOAD BUTTONS FUNCTIONALITY
+            ========================== */
+            const downloadWindows = document.getElementById('downloadWindows');
+            const downloadAndroid = document.getElementById('downloadAndroid');
+            const saveIOS = document.getElementById('saveIOS');
+
+            if (downloadWindows) {
+                downloadWindows.addEventListener('click', function() {
+                    showLoading();
+                    setTimeout(() => {
+                        alert('Windows download will start shortly. For now, please visit our website for the latest version.');
+                    }, 1000);
+                });
+            }
+
+            if (downloadAndroid) {
+                downloadAndroid.addEventListener('click', function() {
+                    showLoading();
+                    setTimeout(() => {
+                        alert('Android APK download will start shortly. For now, please visit our website for the latest version.');
+                    }, 1000);
+                });
+            }
+
+            if (saveIOS) {
+                saveIOS.addEventListener('click', function() {
+                    if (window.navigator.standalone) {
+                        alert('Already installed as PWA!');
+                    } else {
+                        alert('To install: Tap Share → Add to Home Screen');
+                    }
+                });
+            }
         });
-    }
 
-});
-</script>
+        /* =========================
+           SERVICE WORKER ERROR HANDLING
+        ========================== */
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/sw.js")
+                    .then(registration => console.log("ServiceWorker registered: ", registration.scope))
+                    .catch(err => console.log("ServiceWorker registration failed: ", err));
+            });
+        }
+    </script>
 
-
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789" crossorigin="anonymous"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7551440219345789" crossorigin="anonymous"></script>
 
 <ins class="adsbygoogle"
@@ -2910,10 +3138,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-</script>
 </body>
 </html>
+
 
 
 
