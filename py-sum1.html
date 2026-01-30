@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; }
+        body { background: linear-gradient(135deg, #f4f7f5, #e8f5e9); color: #333; line-height: 1.7; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1300px; margin: 0 auto; background-color: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 15px; overflow: hidden; }
         header { background: linear-gradient(to right, #2e7d32, #66bb6a); color: white; padding: 30px 40px; text-align: center; position: relative; }
-        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
+        .chapter-badge { position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(5px); }
         h1 { font-size: 2.4rem; margin-bottom: 10px; font-weight: 700; }
         .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 15px; }
         .importance { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 10px; }
@@ -18,10 +18,10 @@
         h2 { color: #2e7d32; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #66bb6a; display: flex; align-items: center; }
         h2 i { margin-right: 10px; background: #e8f5e9; padding: 10px; border-radius: 50%; color: #2e7d32; }
         .formula { background-color: #e8f5e9; padding: 18px 22px; margin: 18px 0; border-radius: 8px; border-left: 5px solid #43a047; font-size: 1.25rem; text-align: center; font-weight: bold; line-height: 2; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); border-radius: 8px; overflow: hidden; }
         th { background: linear-gradient(to right, #2e7d32, #66bb6a); color: white; padding: 15px; text-align: center; }
         td { padding: 14px; text-align: center; border-bottom: 1px solid #e0e0e0; }
-        tr:nth-child(even) { background-color: #f1f8e9; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
         .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin: 25px 0; }
         .topic-card { background: linear-gradient(to bottom right, #ffffff, #e8f5e9); border: 1px solid #c8e6c9; border-radius: 10px; padding: 22px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s; position: relative; }
         .topic-card:before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, #66bb6a, #43a047); border-radius: 10px 0 0 10px; }
@@ -36,8 +36,14 @@
         .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
         ul { margin-left: 20px; list-style: disc; }
+        li { margin-bottom: 6px; }
+        .point-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; margin: 15px 0; }
+        .point-item { background: #f8f9fa; padding: 12px 15px; border-radius: 6px; border-left: 4px solid #4caf50; }
+        .highlight-box { background: #e3f2fd; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 5px solid #2196f3; }
+        .derivation { background: #f1f8e9; padding: 15px; margin: 15px 0; border-radius: 8px; font-size: 0.95rem; border-left: 4px solid #8bc34a; }
+        .comparison-table { background: #fff8e1; margin: 20px 0; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+        @media (max-width: 768px) { .topic-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .nav-tabs { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -45,8 +51,8 @@
         <header>
             <div class="chapter-badge">JEE Main • Physics</div>
             <h1>Physical World & Measurement</h1>
-            <p class="subtitle">Super Complete Summary with Extra Points | JEE Main 2025–26</p>
-            <div class="importance">2–4 Questions Every Year • Must Revise Fully</div>
+            <p class="subtitle">Super Complete Summary with 100+ Extra Points | JEE Main 2025–26</p>
+            <div class="importance">2–4 Questions Every Year • Must Revise Fully • 100+ Unique Points Added</div>
         </header>
 
         <div class="content">
@@ -59,28 +65,53 @@
                 <div class="nav-tab" data-tab="errors">Errors</div>
                 <div class="nav-tab" data-tab="sig">Significant Figures</div>
                 <div class="nav-tab" data-tab="dim">Dimensions</div>
+                <div class="nav-tab" data-tab="extra">Extra 100+ Points</div>
             </div>
 
             <!-- Need of Measurement -->
             <div class="tab-content active" id="need">
                 <h2><i class="fas fa-question-circle"></i> Need of Measurement</h2>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
                         <div class="topic-title">Why do we measure?</div>
-                        <ul>
-                            <li>To express laws of physics quantitatively</li>
-                            <li>To compare unknown quantity with standard</li>
-                            <li>For prediction, verification and technology</li>
-                            <li>Example: Without measuring speed, we cannot design cars or rockets</li>
-                            <li>Measurement is the foundation of all science</li>
-                            <li>Helps in trade, construction, medicine, sports</li>
-                        </ul>
+                        <div class="point-grid">
+                            <div class="point-item">To express laws of physics quantitatively</div>
+                            <div class="point-item">To compare unknown quantity with standard</div>
+                            <div class="point-item">For prediction, verification and technology development</div>
+                            <div class="point-item">Example: Without measuring speed, we cannot design cars or rockets</div>
+                            <div class="point-item">Measurement is the foundation of all empirical science</div>
+                            <div class="point-item">Essential for trade, construction, medicine, sports</div>
+                            <div class="point-item">Enables reproducibility of experiments globally</div>
+                            <div class="point-item">Forms basis for international standards and agreements</div>
+                        </div>
                     </div>
+                    
                     <div class="topic-card">
                         <div class="topic-title">Physical Quantity = n × u</div>
                         <div class="formula">Q = n × u</div>
                         <p>If unit u₁ becomes u₂ = k u₁ → n₂ = n₁/k</p>
                         <p>Example: 1 kg = 1000 g → 5 kg = 5000 g</p>
+                        
+                        <div class="derivation">
+                            <h4>Unit Conversion Derivation:</h4>
+                            <p>Let Q = n₁ u₁ = n₂ u₂</p>
+                            <p>Given u₂ = k u₁</p>
+                            <p>Then n₁ u₁ = n₂ (k u₁)</p>
+                            <p>n₁ = k n₂ → n₂ = n₁/k</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Historical Measurement Systems</div>
+                        <div class="point-grid">
+                            <div class="point-item">Egyptian cubit: length of forearm (≈52.5 cm)</div>
+                            <div class="point-item">Roman mile: 1000 paces (≈1.48 km)</div>
+                            <div class="point-item">Indian hasta: length from elbow to fingertip (≈45.7 cm)</div>
+                            <div class="point-item">British Imperial System: foot, pound, gallon</div>
+                            <div class="point-item">Metric system introduced during French Revolution (1795)</div>
+                            <div class="point-item">SI system established in 1960, updated in 2019</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,39 +119,61 @@
             <!-- Scope & Excitement -->
             <div class="tab-content" id="scope">
                 <h2><i class="fas fa-rocket"></i> Scope and Excitement of Physics</h2>
+                
                 <div class="important-points">
-                    Physics describes everything from motion of electron to motion of galaxies!
+                    <strong>Physics describes everything from motion of electron to motion of galaxies!</strong><br>
+                    Scale range: 10⁻¹⁵ m (quarks) to 10²⁶ m (observable universe)
                 </div>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Macroscopic</div>
-                        <ul>
-                            <li>Mechanics, Thermodynamics</li>
-                            <li>Electromagnetism, Optics</li>
-                            <li>Everyday phenomena</li>
-                        </ul>
+                        <div class="topic-title">Macroscopic Domains</div>
+                        <div class="point-grid">
+                            <div class="point-item">Classical Mechanics: Newton's laws, planetary motion</div>
+                            <div class="point-item">Thermodynamics: Heat, engines, entropy</div>
+                            <div class="point-item">Electromagnetism: Maxwell's equations</div>
+                            <div class="point-item">Optics: Reflection, refraction, interference</div>
+                            <div class="point-item">Acoustics: Sound waves, music, ultrasound</div>
+                            <div class="point-item">Fluid Dynamics: Bernoulli's principle, viscosity</div>
+                        </div>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Microscopic</div>
-                        <ul>
-                            <li>Atomic, Nuclear, Particle Physics</li>
-                            <li>Quantum Mechanics</li>
-                        </ul>
+                        <div class="topic-title">Microscopic Domains</div>
+                        <div class="point-grid">
+                            <div class="point-item">Atomic Physics: Bohr model, electron transitions</div>
+                            <div class="point-item">Nuclear Physics: Radioactivity, fission, fusion</div>
+                            <div class="point-item">Particle Physics: Quarks, leptons, bosons</div>
+                            <div class="point-item">Quantum Mechanics: Wave-particle duality</div>
+                            <div class="point-item">Condensed Matter Physics: Semiconductors, superconductors</div>
+                            <div class="point-item">Quantum Field Theory: Standard Model of particle physics</div>
+                        </div>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">10 Exciting Technologies from Physics</div>
-                        <ul>
-                            <li>Steam Engine → Thermodynamics</li>
-                            <li>Radio/TV/Mobile → Electromagnetic waves</li>
-                            <li>Computers → Semiconductors</li>
-                            <li>LASER → Quantum Physics</li>
-                            <li>GPS → General Relativity</li>
-                            <li>MRI → Nuclear Magnetic Resonance</li>
-                            <li>Internet → Optical Fibre</li>
-                            <li>Solar Cell → Photoelectric Effect</li>
-                            <li>Superconductors → Zero resistance</li>
-                            <li>Nuclear Reactor → Nuclear Fission</li>
-                        </ul>
+                        <div class="topic-title">20 Exciting Technologies from Physics</div>
+                        <div class="point-grid">
+                            <div class="point-item">Steam Engine → Thermodynamics laws</div>
+                            <div class="point-item">Radio/TV/Mobile → Electromagnetic wave theory</div>
+                            <div class="point-item">Computers → Semiconductor physics</div>
+                            <div class="point-item">LASER → Stimulated emission (Quantum)</div>
+                            <div class="point-item">GPS → General Relativity time correction</div>
+                            <div class="point-item">MRI → Nuclear Magnetic Resonance</div>
+                            <div class="point-item">Internet → Optical Fibre communication</div>
+                            <div class="point-item">Solar Cell → Photoelectric Effect</div>
+                            <div class="point-item">Superconductors → Zero resistance at low T</div>
+                            <div class="point-item">Nuclear Reactor → Controlled fission chain reaction</div>
+                            <div class="point-item">LED Lights → Semiconductor band gaps</div>
+                            <div class="point-item">Digital Cameras → CCD sensors (Photoelectric)</div>
+                            <div class="point-item">Touchscreens → Capacitive sensing</div>
+                            <div class="point-item">Microwave Oven → Dielectric heating</div>
+                            <div class="point-item">Hydroelectric Power → Energy conversion</div>
+                            <div class="point-item">Wind Turbines → Bernoulli's principle</div>
+                            <div class="point-item">Satellite Communication → Orbital mechanics</div>
+                            <div class="point-item">PET Scan → Positron emission</div>
+                            <div class="point-item">LED/LCD Displays → Liquid crystal physics</div>
+                            <div class="point-item">Quantum Computers → Superposition & entanglement</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,31 +181,78 @@
             <!-- SI Units -->
             <div class="tab-content" id="si">
                 <h2><i class="fas fa-globe"></i> Latest SI Units (2019 Definitions)</h2>
+                
+                <div class="highlight-box">
+                    <strong>2019 Redefinition:</strong> All SI units now defined by fundamental constants rather than physical artifacts.
+                </div>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Metre</div>
+                        <div class="topic-title">Metre (m)</div>
                         <p>Distance travelled by light in vacuum in 1/299,792,458 second</p>
+                        <p>Based on: Speed of light c = 299,792,458 m/s (exact)</p>
+                        <p>Old definition: 1 m = distance between two marks on Pt-Ir bar</p>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Kilogram</div>
-                        <p>Based on Planck’s constant h = 6.62607015 × 10⁻³⁴ J s</p>
+                        <div class="topic-title">Kilogram (kg)</div>
+                        <p>Based on Planck's constant h = 6.62607015 × 10⁻³⁴ J s</p>
+                        <p>Defined via Kibble balance or X-ray crystal density</p>
+                        <p>Old definition: Mass of International Prototype Kilogram (IPK)</p>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Second</div>
+                        <div class="topic-title">Second (s)</div>
                         <p>9192631770 periods of radiation of Cesium-133 atom</p>
+                        <p>Based on: Hyperfine transition frequency of Cs-133</p>
+                        <p>Accuracy: 1 part in 10¹⁶ (loses 1 second in 300 million years)</p>
                     </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Ampere (A)</div>
+                        <p>Based on elementary charge e = 1.602176634 × 10⁻¹⁹ C</p>
+                        <p>1 A = flow of 1/(1.602176634×10⁻¹⁹) elementary charges per second</p>
+                        <p>Old definition: Force between two parallel wires</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Kelvin (K)</div>
+                        <p>Based on Boltzmann constant k = 1.380649 × 10⁻²³ J/K</p>
+                        <p>Triple point of water now 273.16 K exactly (not definition)</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Mole (mol)</div>
+                        <p>Based on Avogadro constant Nₐ = 6.02214076 × 10²³ mol⁻¹</p>
+                        <p>1 mole contains exactly Nₐ elementary entities</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Candela (cd)</div>
+                        <p>Based on luminous efficacy K_cd = 683 lm/W at 540 THz</p>
+                        <p>Monochromatic radiation at 540×10¹² Hz</p>
+                    </div>
+                    
                     <div class="topic-card">
                         <div class="topic-title">Common Prefixes</div>
                         <table>
-                            <tr><th>Prefix</th><th>Symbol</th><th>Value</th></tr>
-                            <tr><td>tera</td><td>T</td><td>10¹²</td></tr>
-                            <tr><td>giga</td><td>G</td><td>10⁹</td></tr>
-                            <tr><td>mega</td><td>M</td><td>10⁶</td></tr>
-                            <tr><td>kilo</td><td>k</td><td>10³</td></tr>
-                            <tr><td>milli</td><td>m</td><td>10⁻³</td></tr>
-                            <tr><td>micro</td><td>μ</td><td>10⁻⁶</td></tr>
-                            <tr><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
-                            <tr><td>pico</td><td>p</td><td>10⁻¹²</td></tr>
+                            <tr><th>Prefix</th><th>Symbol</th><th>Value</th><th>Example</th></tr>
+                            <tr><td>yotta</td><td>Y</td><td>10²⁴</td><td>Yottameter (Ym)</td></tr>
+                            <tr><td>zetta</td><td>Z</td><td>10²¹</td><td>Zettabyte (ZB)</td></tr>
+                            <tr><td>exa</td><td>E</td><td>10¹⁸</td><td>Exajoule (EJ)</td></tr>
+                            <tr><td>peta</td><td>P</td><td>10¹⁵</td><td>Petawatt (PW)</td></tr>
+                            <tr><td>tera</td><td>T</td><td>10¹²</td><td>Terabyte (TB)</td></tr>
+                            <tr><td>giga</td><td>G</td><td>10⁹</td><td>Gigahertz (GHz)</td></tr>
+                            <tr><td>mega</td><td>M</td><td>10⁶</td><td>Megawatt (MW)</td></tr>
+                            <tr><td>kilo</td><td>k</td><td>10³</td><td>Kilometer (km)</td></tr>
+                            <tr><td>milli</td><td>m</td><td>10⁻³</td><td>Millimeter (mm)</td></tr>
+                            <tr><td>micro</td><td>μ</td><td>10⁻⁶</td><td>Microsecond (μs)</td></tr>
+                            <tr><td>nano</td><td>n</td><td>10⁻⁹</td><td>Nanometer (nm)</td></tr>
+                            <tr><td>pico</td><td>p</td><td>10⁻¹²</td><td>Picofarad (pF)</td></tr>
+                            <tr><td>femto</td><td>f</td><td>10⁻¹⁵</td><td>Femtosecond (fs)</td></tr>
+                            <tr><td>atto</td><td>a</td><td>10⁻¹⁸</td><td>Attometer (am)</td></tr>
+                            <tr><td>zepto</td><td>z</td><td>10⁻²¹</td><td>Zeptosecond (zs)</td></tr>
+                            <tr><td>yocto</td><td>y</td><td>10⁻²⁴</td><td>Yoctogram (yg)</td></tr>
                         </table>
                     </div>
                 </div>
@@ -161,27 +261,48 @@
             <!-- Length Measurement -->
             <div class="tab-content" id="length">
                 <h2><i class="fas fa-ruler-horizontal"></i> Measurement of Length</h2>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Small Distances</div>
-                        <ul>
-                            <li>Atomic size (10⁻¹⁰ m) → X-ray diffraction</li>
-                            <li>Nuclear size (10⁻¹⁵ m) → Particle accelerators</li>
-                            <li>Vernier Callipers LC = 0.01 cm</li>
-                            <li>Screw Gauge LC = 0.001 cm</li>
-                        </ul>
+                        <div class="topic-title">Small Distances (< 1 mm)</div>
+                        <div class="point-grid">
+                            <div class="point-item">Vernier Callipers: LC = 0.01 cm, 0.02 mm, 0.05 mm</div>
+                            <div class="point-item">Screw Gauge: LC = 0.001 cm = 0.01 mm</div>
+                            <div class="point-item">Spherometer: Measures radius of curvature</div>
+                            <div class="point-item">Optical Lever: Magnifies small displacements</div>
+                            <div class="point-item">Atomic size (10⁻¹⁰ m): X-ray diffraction, STM</div>
+                            <div class="point-item">Nuclear size (10⁻¹⁵ m): Rutherford scattering</div>
+                            <div class="point-item">Electron microscope: Up to 0.1 nm resolution</div>
+                            <div class="point-item">AFM (Atomic Force Microscope): Atomic resolution</div>
+                        </div>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Large Distances</div>
-                        <ul>
-                            <li>Parallax method: d = b / θ (b = baseline, θ in radian)</li>
-                            <li>Triangulation method for height of mountain</li>
-                            <li>Radar: distance = (c × t)/2</li>
-                            <li>LASER ranging to Moon: 3.84 × 10⁸ m</li>
-                            <li>1 AU = 1.496 × 10¹¹ m</li>
-                            <li>1 light year = 9.46 × 10¹⁵ m</li>
-                            <li>1 parsec = 3.26 light year</li>
-                        </ul>
+                        <div class="topic-title">Large Distances (Astronomical)</div>
+                        <div class="point-grid">
+                            <div class="point-item">Parallax method: d = b / θ (b = baseline, θ in radian)</div>
+                            <div class="point-item">Triangulation: For mountains, buildings</div>
+                            <div class="point-item">Radar: distance = (c × t)/2 (c = speed of light)</div>
+                            <div class="point-item">LASER ranging: To Moon (3.84 × 10⁸ m)</div>
+                            <div class="point-item">1 Astronomical Unit (AU) = 1.496 × 10¹¹ m</div>
+                            <div class="point-item">1 light year = 9.46 × 10¹⁵ m</div>
+                            <div class="point-item">1 parsec = 3.26 light years = 3.086 × 10¹⁶ m</div>
+                            <div class="point-item">Hubble's law: v = H₀d (cosmological distances)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Special Measurement Techniques</div>
+                        <div class="point-grid">
+                            <div class="point-item">Laser Interferometry: λ/2 precision</div>
+                            <div class="point-item">Fizeau's rotating mirror: Speed of light</div>
+                            <div class="point-item">Michelson interferometer: Ether drift</div>
+                            <div class="point-item">Stellar parallax: For nearby stars</div>
+                            <div class="point-item">Redshift measurement: For distant galaxies</div>
+                            <div class="point-item">Cepheid variables: Standard candles</div>
+                            <div class="point-item">Type Ia supernovae: Cosmic distance ladder</div>
+                            <div class="point-item">Gravitational lensing: Mass distribution</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -189,25 +310,56 @@
             <!-- Mass & Time -->
             <div class="tab-content" id="mass">
                 <h2><i class="fas fa-weight-hanging"></i> Mass & Time Measurement</h2>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Mass</div>
-                        <ul>
-                            <li>Lab: Physical/Electronic balance</li>
-                            <li>Planet mass → Kepler’s law</li>
-                            <li>Sun mass → Gravitational force on Earth</li>
-                            <li>Electron mass = 9.1 × 10⁻³¹ kg</li>
-                            <li>Inertial mass = Gravitational mass (Equivalence)</li>
-                        </ul>
+                        <div class="topic-title">Mass Measurement</div>
+                        <div class="point-grid">
+                            <div class="point-item">Physical balance: Comparison with known masses</div>
+                            <div class="point-item">Electronic balance: Strain gauge/electromagnetic</div>
+                            <div class="point-item">Spring balance: Hooke's law (F = kx)</div>
+                            <div class="point-item">Inertial balance: Period of oscillation method</div>
+                            <div class="point-item">Planet mass: Kepler's 3rd law + Newton's law</div>
+                            <div class="point-item">Sun mass: From Earth's orbital parameters</div>
+                            <div class="point-item">Electron mass = 9.1093837 × 10⁻³¹ kg</div>
+                            <div class="point-item">Proton mass = 1.6726219 × 10⁻²⁷ kg</div>
+                            <div class="point-item">Neutron mass = 1.6749275 × 10⁻²⁷ kg</div>
+                            <div class="point-item">Inertial mass = Gravitational mass (Equivalence principle)</div>
+                            <div class="point-item">Mass spectrometry: For atomic/molecular masses</div>
+                            <div class="point-item">Weighing in air vs vacuum: Buoyancy correction</div>
+                        </div>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Time</div>
-                        <ul>
-                            <li>Quartz clock: 1 part in 10⁸</li>
-                            <li>Atomic clock (Cs-133): 1 second in 300 million years</li>
-                            <li>Leap second added to UTC</li>
-                            <li>1 day = 86400 seconds</li>
-                        </ul>
+                        <div class="topic-title">Time Measurement</div>
+                        <div class="point-grid">
+                            <div class="point-item">Pendulum clock: Galileo's discovery</div>
+                            <div class="point-item">Quartz clock: Crystal oscillation (32,768 Hz)</div>
+                            <div class="point-item">Atomic clock (Cs-133): 9,192,631,770 Hz</div>
+                            <div class="point-item">Rubidium clock: Less accurate but cheaper</div>
+                            <div class="point-item">Hydrogen maser: Most stable short-term</div>
+                            <div class="point-item">Optical lattice clocks: Future standard</div>
+                            <div class="point-item">Leap second: Added to UTC to match Earth's rotation</div>
+                            <div class="point-item">1 solar day = 24 hours = 86400 seconds</div>
+                            <div class="point-item">1 sidereal day = 23h 56m 4.09s (relative to stars)</div>
+                            <div class="point-item">Geological time: Radiometric dating</div>
+                            <div class="point-item">Cosmic time: From Big Bang (~13.8 billion years)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Historical Time Measurement</div>
+                        <div class="point-grid">
+                            <div class="point-item">Sundial: Shadow position</div>
+                            <div class="point-item">Water clock (Clepsydra): Flow rate</div>
+                            <div class="point-item">Hourglass: Sand flow</div>
+                            <div class="point-item">Candle clock: Burn rate</div>
+                            <div class="point-item">Mechanical clocks: 14th century Europe</div>
+                            <div class="point-item">Marine chronometer: Longitude determination</div>
+                            <div class="point-item">Railway time: Standardization necessity</div>
+                            <div class="point-item">Time zones: 24 zones, each 15° longitude</div>
+                            <div class="point-item">International Date Line: 180° meridian</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,49 +367,124 @@
             <!-- Errors -->
             <div class="tab-content" id="errors">
                 <h2><i class="fas fa-exclamation-triangle"></i> Errors in Measurement</h2>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Types of Errors</div>
-                        <table>
-                            <tr><th>Type</th><th>Example</th></tr>
-                            <tr><td>Constant (Systematic)</td><td>Zero error in screw gauge</td></tr>
-                            <tr><td>Personal</td><td>Parallax error</td></tr>
-                            <tr><td>Random</td><td>Least count error</td></tr>
-                            <tr><td>Gross</td><td>Wrong reading</td></tr>
+                        <div class="topic-title">Classification of Errors</div>
+                        <table class="comparison-table">
+                            <tr><th>Type</th><th>Cause</th><th>Example</th><th>Reduction Method</th></tr>
+                            <tr><td>Systematic (Determinate)</td><td>Instrument, method, personal bias</td><td>Zero error, calibration error</td><td>Calibration, better instruments</td></tr>
+                            <tr><td>Random (Indeterminate)</td><td>Uncontrollable fluctuations</td><td>Least count error, temperature variation</td><td>Repeat measurements, statistics</td></tr>
+                            <tr><td>Gross (Mistakes)</td><td>Carelessness, wrong procedure</td><td>Wrong reading, calculation error</td><td>Careful work, double-checking</td></tr>
+                            <tr><td>Instrumental</td><td>Limitations of instrument</td><td>Least count, backlash error</td><td>Use better instrument</td></tr>
+                            <tr><td>Environmental</td><td>External conditions</td><td>Temperature, pressure, humidity</td><td>Control environment</td></tr>
+                            <tr><td>Observational (Personal)</td><td>Observer's limitations</td><td>Parallax error, reaction time</td><td>Proper technique, averaging</td></tr>
                         </table>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Error Formulas</div>
-                        <div class="formula">Absolute error Δa = |measured − true|</div>
-                        <div class="formula">Mean absolute error = average of Δaᵢ</div>
-                        <div class="formula">Relative error = Δa / a_mean</div>
-                        <div class="formula">Percentage error = Relative error × 100%</div>
-                        <p>Addition: Δz = Δx + Δy</p>
-                        <p>Multiplication: Δz/z = Δx/x + Δy/y</p>
-                        <p>Power: Δz/z = n Δx/x</p>
-                        <p>Example: R = 10.2 ± 0.2 Ω, L = 5.0 ± 0.1 cm</p>
+                        <div class="topic-title">Error Formulas & Calculations</div>
+                        <div class="formula">Absolute error: Δa = |aᵢ - ā|</div>
+                        <div class="formula">Mean absolute error: Δā = (Σ|aᵢ - ā|)/n</div>
+                        <div class="formula">Relative error: Δā/ā</div>
+                        <div class="formula">Percentage error: (Δā/ā) × 100%</div>
+                        
+                        <div class="derivation">
+                            <h4>Combination of Errors:</h4>
+                            <p><strong>Addition/Subtraction:</strong> Z = A ± B → ΔZ = ΔA + ΔB</p>
+                            <p><strong>Multiplication:</strong> Z = A × B → ΔZ/Z = ΔA/A + ΔB/B</p>
+                            <p><strong>Division:</strong> Z = A/B → ΔZ/Z = ΔA/A + ΔB/B</p>
+                            <p><strong>Power:</strong> Z = Aⁿ → ΔZ/Z = n(ΔA/A)</p>
+                            <p><strong>General function:</strong> Z = f(A,B) → ΔZ = |∂f/∂A|ΔA + |∂f/∂B|ΔB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Statistical Treatment of Errors</div>
+                        <div class="point-grid">
+                            <div class="point-item">Mean: ā = (Σaᵢ)/n</div>
+                            <div class="point-item">Variance: σ² = Σ(aᵢ - ā)²/(n-1)</div>
+                            <div class="point-item">Standard deviation: σ = √variance</div>
+                            <div class="point-item">Standard error of mean: σ/√n</div>
+                            <div class="point-item">Gaussian/Normal distribution: Bell curve</div>
+                            <div class="point-item">68-95-99.7 rule for normal distribution</div>
+                            <div class="point-item">Confidence intervals: 95% CI = ā ± 1.96σ/√n</div>
+                            <div class="point-item">Weighted mean: When measurements have different precision</div>
+                            <div class="point-item">χ² (Chi-squared) test: Goodness of fit</div>
+                            <div class="point-item">Least squares fitting: For linear relationships</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Significant Figures -->
             <div class="tab-content" id="sig">
-                <h2><i class="fas fa-calculator"></i> Significant Figures (15 Examples)</h2>
+                <h2><i class="fas fa-calculator"></i> Significant Figures (30+ Examples)</h2>
+                
                 <div class="important-points">
-                    Rules: All non-zero digits significant • Zeros between significant • Trailing zeros after decimal significant • Leading zeros never significant
+                    <strong>Golden Rules:</strong><br>
+                    1. All non-zero digits are significant<br>
+                    2. Zeros between significant digits are significant<br>
+                    3. Trailing zeros after decimal are significant<br>
+                    4. Leading zeros are never significant<br>
+                    5. Exact numbers (counting, defined constants) have infinite significant figures
                 </div>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">Examples</div>
-                        <ul>
-                            <li>2500 → 2 sig figs</li>
-                            <li>2500. → 4 sig figs</li>
-                            <li>2.500 → 4 sig figs</li>
-                            <li>0.0025 → 2 sig figs</li>
-                            <li>5.0 × 10³ → 2 sig figs</li>
-                            <li>Addition: 12.1 + 3.28 = 15.4 (1 decimal)</li>
-                            <li>Multiplication: 2.1 × 3.00 = 6.3 (2 sig figs)</li>
-                        </ul>
+                        <div class="topic-title">Determination Examples</div>
+                        <table>
+                            <tr><th>Number</th><th>Significant Figures</th><th>Reason</th></tr>
+                            <tr><td>2500</td><td>2</td><td>Trailing zeros without decimal</td></tr>
+                            <tr><td>2500.</td><td>4</td><td>Decimal point indicates significance</td></tr>
+                            <tr><td>2.500</td><td>4</td><td>Trailing zeros after decimal</td></tr>
+                            <tr><td>0.0025</td><td>2</td><td>Leading zeros not significant</td></tr>
+                            <tr><td>5.0 × 10³</td><td>2</td><td>Only coefficient matters</td></tr>
+                            <tr><td>100.00</td><td>5</td><td>Decimal, zeros between and after</td></tr>
+                            <tr><td>0.00500</td><td>3</td><td>Leading zeros not, trailing after decimal yes</td></tr>
+                            <tr><td>1.200 × 10⁴</td><td>4</td><td>All digits in coefficient</td></tr>
+                            <tr><td>π = 3.14159</td><td>6</td><td>All digits significant</td></tr>
+                            <tr><td>Avogadro's number</td><td>∞</td><td>Defined constant (exact)</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Operations with Significant Figures</div>
+                        <div class="point-grid">
+                            <div class="point-item">Addition/Subtraction: Least decimal places</div>
+                            <div class="point-item">Multiplication/Division: Least significant figures</div>
+                            <div class="point-item">Logarithms: Decimal places in result = sig figs in input</div>
+                            <div class="point-item">Trig functions: Match input precision</div>
+                            <div class="point-item">Mixed operations: Apply step-by-step</div>
+                        </div>
+                        
+                        <div class="derivation">
+                            <h4>Examples:</h4>
+                            <p><strong>Addition:</strong> 12.11 (2 decimal) + 3.2 (1 decimal) = 15.3 (1 decimal)</p>
+                            <p><strong>Multiplication:</strong> 2.1 (2 sf) × 3.00 (3 sf) = 6.3 (2 sf)</p>
+                            <p><strong>Division:</strong> 10.0 (3 sf) ÷ 2.0 (2 sf) = 5.0 (2 sf)</p>
+                            <p><strong>Mixed:</strong> (12.1 + 3.28) × 2.0 = (15.4) × 2.0 = 31 (2 sf)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Rounding Rules</div>
+                        <div class="point-grid">
+                            <div class="point-item">If digit to be dropped < 5: Leave preceding digit unchanged</div>
+                            <div class="point-item">If digit to be dropped > 5: Increase preceding digit by 1</div>
+                            <div class="point-item">If digit to be dropped = 5: Make preceding digit even</div>
+                            <div class="point-item">Round only at final answer, not intermediate steps</div>
+                            <div class="point-item">For scientific notation: Round coefficient, adjust exponent</div>
+                        </div>
+                        
+                        <div class="derivation">
+                            <h4>Rounding Examples:</h4>
+                            <p>3.14159 to 3 sf → 3.14 (next digit 1 < 5)</p>
+                            <p>2.71828 to 3 sf → 2.72 (next digit 8 > 5)</p>
+                            <p>4.65 to 2 sf → 4.6 (next digit 5, make preceding even)</p>
+                            <p>4.75 to 2 sf → 4.8 (next digit 5, make preceding even)</p>
+                            <p>123456 to 3 sf → 1.23 × 10⁵</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,44 +492,248 @@
             <!-- Dimensions -->
             <div class="tab-content" id="dim">
                 <h2><i class="fas fa-expand-arrows-alt"></i> Dimensions of Physical Quantities</h2>
+                
                 <div class="topic-grid">
                     <div class="topic-card">
-                        <div class="topic-title">25 Common Quantities</div>
+                        <div class="topic-title">40 Common Physical Quantities</div>
                         <table>
-                            <tr><th>Quantity</th><th>Dimension</th></tr>
-                            <tr><td>Area</td><td>[L²]</td></tr>
-                            <tr><td>Volume</td><td>[L³]</td></tr>
-                            <tr><td>Density</td><td>[ML⁻³]</td></tr>
-                            <tr><td>Velocity</td><td>[LT⁻¹]</td></tr>
-                            <tr><td>Acceleration</td><td>[LT⁻²]</td></tr>
-                            <tr><td>Momentum</td><td>[MLT⁻¹]</td></tr>
-                            <tr><td>Force</td><td>[MLT⁻²]</td></tr>
-                            <tr><td>Energy</td><td>[ML²T⁻²]</td></tr>
-                            <tr><td>Power</td><td>[ML²T⁻³]</td></tr>
-                            <tr><td>Pressure</td><td>[ML⁻¹T⁻²]</td></tr>
-                            <tr><td>Surface Tension</td><td>[MT⁻²]</td></tr>
-                            <tr><td>Viscosity</td><td>[ML⁻¹T⁻¹]</td></tr>
-                            <tr><td>Frequency</td><td>[T⁻¹]</td></tr>
-                            <tr><td>Angle</td><td>[M⁰L⁰T⁰]</td></tr>
-                            <tr><td>Strain</td><td>[M⁰L⁰T⁰]</td></tr>
+                            <tr><th>Quantity</th><th>Dimension</th><th>SI Unit</th></tr>
+                            <tr><td>Length</td><td>[L]</td><td>metre (m)</td></tr>
+                            <tr><td>Mass</td><td>[M]</td><td>kilogram (kg)</td></tr>
+                            <tr><td>Time</td><td>[T]</td><td>second (s)</td></tr>
+                            <tr><td>Area</td><td>[L²]</td><td>m²</td></tr>
+                            <tr><td>Volume</td><td>[L³]</td><td>m³</td></tr>
+                            <tr><td>Density</td><td>[ML⁻³]</td><td>kg/m³</td></tr>
+                            <tr><td>Velocity</td><td>[LT⁻¹]</td><td>m/s</td></tr>
+                            <tr><td>Acceleration</td><td>[LT⁻²]</td><td>m/s²</td></tr>
+                            <tr><td>Momentum</td><td>[MLT⁻¹]</td><td>kg·m/s</td></tr>
+                            <tr><td>Force</td><td>[MLT⁻²]</td><td>newton (N)</td></tr>
+                            <tr><td>Energy</td><td>[ML²T⁻²]</td><td>joule (J)</td></tr>
+                            <tr><td>Power</td><td>[ML²T⁻³]</td><td>watt (W)</td></tr>
+                            <tr><td>Pressure</td><td>[ML⁻¹T⁻²]</td><td>pascal (Pa)</td></tr>
+                            <tr><td>Surface Tension</td><td>[MT⁻²]</td><td>N/m</td></tr>
+                            <tr><td>Viscosity</td><td>[ML⁻¹T⁻¹]</td><td>Pa·s</td></tr>
+                            <tr><td>Frequency</td><td>[T⁻¹]</td><td>hertz (Hz)</td></tr>
+                            <tr><td>Angular velocity</td><td>[T⁻¹]</td><td>rad/s</td></tr>
+                            <tr><td>Torque</td><td>[ML²T⁻²]</td><td>N·m</td></tr>
+                            <tr><td>Angular momentum</td><td>[ML²T⁻¹]</td><td>kg·m²/s</td></tr>
+                            <tr><td>Moment of inertia</td><td>[ML²]</td><td>kg·m²</td></tr>
+                            <tr><td>Work</td><td>[ML²T⁻²]</td><td>J</td></tr>
+                            <tr><td>Heat</td><td>[ML²T⁻²]</td><td>J</td></tr>
+                            <tr><td>Temperature</td><td>[θ] or [K]</td><td>kelvin (K)</td></tr>
+                            <tr><td>Specific heat</td><td>[L²T⁻²θ⁻¹]</td><td>J/(kg·K)</td></tr>
+                            <tr><td>Latent heat</td><td>[L²T⁻²]</td><td>J/kg</td></tr>
+                            <tr><td>Thermal conductivity</td><td>[MLT⁻³θ⁻¹]</td><td>W/(m·K)</td></tr>
+                            <tr><td>Electric charge</td><td>[TI]</td><td>coulomb (C)</td></tr>
+                            <tr><td>Electric current</td><td>[I]</td><td>ampere (A)</td></tr>
+                            <tr><td>Electric field</td><td>[MLT⁻³I⁻¹]</td><td>V/m or N/C</td></tr>
+                            <tr><td>Electric potential</td><td>[ML²T⁻³I⁻¹]</td><td>volt (V)</td></tr>
+                            <tr><td>Resistance</td><td>[ML²T⁻³I⁻²]</td><td>ohm (Ω)</td></tr>
+                            <tr><td>Capacitance</td><td>[M⁻¹L⁻²T⁴I²]</td><td>farad (F)</td></tr>
+                            <tr><td>Inductance</td><td>[ML²T⁻²I⁻²]</td><td>henry (H)</td></tr>
+                            <tr><td>Magnetic field</td><td>[MT⁻²I⁻¹]</td><td>tesla (T)</td></tr>
+                            <tr><td>Magnetic flux</td><td>[ML²T⁻²I⁻¹]</td><td>weber (Wb)</td></tr>
+                            <tr><td>Planck's constant</td><td>[ML²T⁻¹]</td><td>J·s</td></tr>
+                            <tr><td>Boltzmann constant</td><td>[ML²T⁻²θ⁻¹]</td><td>J/K</td></tr>
+                            <tr><td>Gravitational constant</td><td>[M⁻¹L³T⁻²]</td><td>N·m²/kg²</td></tr>
+                            <tr><td>Angle</td><td>[M⁰L⁰T⁰]</td><td>radian (rad)</td></tr>
+                            <tr><td>Strain</td><td>[M⁰L⁰T⁰]</td><td>dimensionless</td></tr>
+                            <tr><td>Refractive index</td><td>[M⁰L⁰T⁰]</td><td>dimensionless</td></tr>
                         </table>
                     </div>
+                    
                     <div class="topic-card">
-                        <div class="topic-title">Applications</div>
-                        <ul>
-                            <li>Check equation: v² = u² + 2as → correct</li>
-                            <li>Find formula for time period of pendulum</li>
-                            <li>Unit conversion formula</li>
-                        </ul>
-                        <div class="formula">n₂ = n₁ (M₁/M₂)ᵃ (L₁/L₂)ᵇ (T₁/T₂)ᶜ</div>
+                        <div class="topic-title">Applications of Dimensional Analysis</div>
+                        <div class="point-grid">
+                            <div class="point-item">Check equation consistency: Both sides same dimensions</div>
+                            <div class="point-item">Derive formulas: Time period of pendulum, etc.</div>
+                            <div class="point-item">Unit conversion: n₂ = n₁ (M₁/M₂)ᵃ (L₁/L₂)ᵇ (T₁/T₂)ᶜ</div>
+                            <div class="point-item">Find dimensions of constants: G, h, k, ε₀, μ₀</div>
+                            <div class="point-item">Predict relationship between variables</div>
+                            <div class="point-item">Identify dimensionless quantities: Reynolds number, etc.</div>
+                            <div class="point-item">Scale modeling: Similitude in engineering</div>
+                            <div class="point-item">Buckingham π theorem: For complex systems</div>
+                        </div>
+                        
+                        <div class="derivation">
+                            <h4>Dimensional Formula Derivation:</h4>
+                            <p><strong>Force:</strong> F = ma → [F] = [M][LT⁻²] = [MLT⁻²]</p>
+                            <p><strong>Energy:</strong> E = Fd → [E] = [MLT⁻²][L] = [ML²T⁻²]</p>
+                            <p><strong>Pressure:</strong> P = F/A → [P] = [MLT⁻²]/[L²] = [ML⁻¹T⁻²]</p>
+                            <p><strong>Gravitational constant:</strong> F = Gm₁m₂/r²</p>
+                            <p>[MLT⁻²] = [G][M][M]/[L²] → [G] = [M⁻¹L³T⁻²]</p>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Limitations of Dimensional Analysis</div>
+                        <div class="point-grid">
+                            <div class="point-item">Cannot determine dimensionless constants</div>
+                            <div class="point-item">Cannot distinguish between quantities with same dimensions</div>
+                            <div class="point-item">Cannot derive formulas involving trigonometric, exponential functions</div>
+                            <div class="point-item">Cannot determine if a physical quantity is scalar or vector</div>
+                            <div class="point-item">Cannot derive exact form when multiple combinations possible</div>
+                            <div class="point-item">Cannot account for dimensionless parameters</div>
+                            <div class="point-item">Doesn't work for equations with more than 3 fundamental quantities without additional info</div>
+                        </div>
+                        
+                        <div class="derivation">
+                            <h4>Examples of Same Dimensions:</h4>
+                            <p>Work & Torque: Both [ML²T⁻²]</p>
+                            <p>Frequency & Angular velocity: Both [T⁻¹]</p>
+                            <p>Surface tension & Spring constant: Both [MT⁻²]</p>
+                            <p>Impulse & Linear momentum: Both [MLT⁻¹]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extra 100+ Points -->
+            <div class="tab-content" id="extra">
+                <h2><i class="fas fa-plus-circle"></i> Extra 100+ Unique Points</h2>
+                
+                <div class="important-points">
+                    <strong>Collection of additional important facts, tricks, and concepts for JEE</strong>
+                </div>
+                
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <div class="topic-title">Measurement Techniques & Facts</div>
+                        <div class="point-grid">
+                            <div class="point-item">1 fermi = 10⁻¹⁵ m (nuclear physics)</div>
+                            <div class="point-item">1 angstrom = 10⁻¹⁰ m (atomic physics)</div>
+                            <div class="point-item">1 micron = 10⁻⁶ m = 1 micrometer</div>
+                            <div class="point-item">1 barn = 10⁻²⁸ m² (nuclear cross-section)</div>
+                            <div class="point-item">1 shake = 10⁻⁸ s (nuclear physics)</div>
+                            <div class="point-item">1 astronomical unit = mean Earth-Sun distance</div>
+                            <div class="point-item">Parsec = distance at which 1 AU subtends 1 arcsecond</div>
+                            <div class="point-item">Hubble constant H₀ ≈ 70 km/s/Mpc</div>
+                            <div class="point-item">Age of universe ≈ 1/H₀ ≈ 13.8 billion years</div>
+                            <div class="point-item">Smallest measurable length: Planck length ≈ 1.6×10⁻³⁵ m</div>
+                            <div class="point-item">Smallest measurable time: Planck time ≈ 5.4×10⁻⁴⁴ s</div>
+                            <div class="point-item">Largest measurable mass: Observable universe ≈ 10⁵³ kg</div>
+                            <div class="point-item">Accuracy vs Precision: Accuracy = closeness to true value, Precision = reproducibility</div>
+                            <div class="point-item">Resolution: Smallest detectable change in measured quantity</div>
+                            <div class="point-item">Sensitivity: Ratio of output signal to input measured quantity</div>
+                            <div class="point-item">Hysteresis: Output depends on direction of input change</div>
+                            <div class="point-item">Dead zone: Range of input for no output</div>
+                            <div class="point-item">Drift: Slow change in output with constant input</div>
+                            <div class="point-item">Linearity: Output proportional to input</div>
+                            <div class="point-item">Repeatability: Same result under same conditions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Dimensional Analysis Special Cases</div>
+                        <div class="point-grid">
+                            <div class="point-item">Strain, refractive index, angle: Dimensionless</div>
+                            <div class="point-item">Reynolds number: [M⁰L⁰T⁰] (dimensionless)</div>
+                            <div class="point-item">Mach number: [M⁰L⁰T⁰] (dimensionless)</div>
+                            <div class="point-item">Froude number: [M⁰L⁰T⁰] (dimensionless)</div>
+                            <div class="point-item">Weber number: [M⁰L⁰T⁰] (dimensionless)</div>
+                            <div class="point-item">Euler number: [M⁰L⁰T⁰] (dimensionless)</div>
+                            <div class="point-item">All trigonometric, exponential, logarithmic arguments must be dimensionless</div>
+                            <div class="point-item">sin(ωt), e⁻ᵏᵗ, ln(x/a) require ωt, kt, x/a to be dimensionless</div>
+                            <div class="point-item">Dimensional homogeneity: Each term in equation must have same dimensions</div>
+                            <div class="point-item">Principle of similitude: Models scaled by dimensionless numbers</div>
+                            <div class="point-item">Rayleigh's method: Express dependent variable as product of powers</div>
+                            <div class="point-item">Buckingham π theorem: n variables, m dimensions → n-m dimensionless groups</div>
+                            <div class="point-item">Time period of pendulum: T ∝ √(l/g) → T = 2π√(l/g)</div>
+                            <div class="point-item">Time period of spring: T ∝ √(m/k) → T = 2π√(m/k)</div>
+                            <div class="point-item">Speed of sound in gas: v ∝ √(P/ρ) → v = √(γP/ρ)</div>
+                            <div class="point-item">Stokes' law: F ∝ ηrv → F = 6πηrv</div>
+                            <div class="point-item">Poiseuille's law: Q ∝ (πr⁴ΔP)/(ηL)</div>
+                            <div class="point-item">Stefan's law: P ∝ AT⁴ → P = σAT⁴</div>
+                            <div class="point-item">Planck's law: I(λ,T) dimensions: [MT⁻³]</div>
+                            <div class="point-item">Schrödinger equation: [ψ] = [L]⁻³/² for 3D</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Error Analysis Advanced</div>
+                        <div class="point-grid">
+                            <div class="point-item">Propagation of errors for correlated variables: Covariance terms</div>
+                            <div class="point-item">Error in mean: σ/√n (reduces with more measurements)</div>
+                            <div class="point-item">Systematic error doesn't reduce with averaging</div>
+                            <div class="point-item">Random error reduces as 1/√n</div>
+                            <div class="point-item">Weighted average: when measurements have different uncertainties</div>
+                            <div class="point-item">χ² minimization: For fitting parameters to data</div>
+                            <div class="point-item">Error bars: Graphical representation of uncertainty</div>
+                            <div class="point-item">Confidence level: Probability that true value lies within interval</div>
+                            <div class="point-item">Student's t-distribution: For small sample sizes</div>
+                            <div class="point-item">Outliers: Data points far from others, may be excluded with justification</div>
+                            <div class="point-item">Relative error often more meaningful than absolute error</div>
+                            <div class="point-item">Percentage error = (|experimental - accepted|/accepted)×100%</div>
+                            <div class="point-item">Combined standard uncertainty: Root sum square of uncertainties</div>
+                            <div class="point-item">Type A evaluation: Statistical analysis of measurements</div>
+                            <div class="point-item">Type B evaluation: From specifications, certificates, etc.</div>
+                            <div class="point-item">Coverage factor k: For expanded uncertainty (k=2 for 95%)</div>
+                            <div class="point-item">Uncertainty budget: Table of uncertainty contributions</div>
+                            <div class="point-item">Sensitivity coefficients: ∂f/∂xᵢ in error propagation</div>
+                            <div class="point-item">Error in logarithms: If y = ln x, Δy = Δx/x</div>
+                            <div class="point-item">Error in exponentials: If y = eˣ, Δy/y = Δx</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Unit Systems & Conversions</div>
+                        <div class="point-grid">
+                            <div class="point-item">CGS system: cm, g, s (still used in some fields)</div>
+                            <div class="point-item">MKS system: m, kg, s (basis of SI)</div>
+                            <div class="point-item">FPS system: foot, pound, second (US customary)</div>
+                            <div class="point-item">Natural units: ħ = c = k = 1 (theoretical physics)</div>
+                            <div class="point-item">Atomic units: e = mₑ = ħ = 4πε₀ = 1 (atomic physics)</div>
+                            <div class="point-item">Planck units: G = ħ = c = k = 1 (quantum gravity)</div>
+                            <div class="point-item">1 inch = 2.54 cm (exact)</div>
+                            <div class="point-item">1 foot = 12 inches = 30.48 cm</div>
+                            <div class="point-item">1 mile = 5280 feet = 1.609344 km</div>
+                            <div class="point-item">1 pound = 0.45359237 kg (exact)</div>
+                            <div class="point-item">1 gallon (US) = 3.78541 liters</div>
+                            <div class="point-item">1 atmosphere = 101325 Pa (exact)</div>
+                            <div class="point-item">1 calorie = 4.184 J (thermochemical)</div>
+                            <div class="point-item">1 electronvolt = 1.602176634×10⁻¹⁹ J</div>
+                            <div class="point-item">1 unified atomic mass unit = 1.660539×10⁻²⁷ kg</div>
+                            <div class="point-item">1 Tesla = 10⁴ Gauss (CGS unit)</div>
+                            <div class="point-item">1 Debye = 3.336×10⁻³⁰ C·m (dipole moment)</div>
+                            <div class="point-item">1 Curie = 3.7×10¹⁰ decays/s (radioactivity)</div>
+                            <div class="point-item">1 Becquerel = 1 decay/s (SI unit)</div>
+                            <div class="point-item">1 radian = 180/π degrees ≈ 57.2958°</div>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <div class="topic-title">Important Constants & Values</div>
+                        <div class="point-grid">
+                            <div class="point-item">Speed of light: c = 299792458 m/s (exact)</div>
+                            <div class="point-item">Gravitational constant: G = 6.67430×10⁻¹¹ N·m²/kg²</div>
+                            <div class="point-item">Planck's constant: h = 6.62607015×10⁻³⁴ J·s (exact)</div>
+                            <div class="point-item">Boltzmann constant: k = 1.380649×10⁻²³ J/K (exact)</div>
+                            <div class="point-item">Avogadro constant: Nₐ = 6.02214076×10²³ mol⁻¹ (exact)</div>
+                            <div class="point-item">Elementary charge: e = 1.602176634×10⁻¹⁹ C (exact)</div>
+                            <div class="point-item">Electron mass: mₑ = 9.1093837×10⁻³¹ kg</div>
+                            <div class="point-item">Proton mass: mₚ = 1.6726219×10⁻²⁷ kg</div>
+                            <div class="point-item">Neutron mass: mₙ = 1.6749275×10⁻²⁷ kg</div>
+                            <div class="point-item">Vacuum permittivity: ε₀ = 8.8541878×10⁻¹² F/m</div>
+                            <div class="point-item">Vacuum permeability: μ₀ = 4π×10⁻⁷ N/A² (exact)</div>
+                            <div class="point-item">Stefan-Boltzmann constant: σ = 5.670374×10⁻⁸ W/m²K⁴</div>
+                            <div class="point-item">Rydberg constant: R∞ = 1.097373×10⁷ m⁻¹</div>
+                            <div class="point-item">Bohr radius: a₀ = 5.291772×10⁻¹¹ m</div>
+                            <div class="point-item">Fine structure constant: α ≈ 1/137.036</div>
+                            <div class="point-item">Gas constant: R = 8.314462618 J/mol·K</div>
+                            <div class="point-item">Standard gravity: g = 9.80665 m/s² (defined)</div>
+                            <div class="point-item">Standard atmosphere: 101325 Pa (defined)</div>
+                            <div class="point-item">Water density at 4°C: 1000 kg/m³ (maximum)</div>
+                            <div class="point-item">Mercury density at 0°C: 13595.1 kg/m³</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <div>JEE Main Physics • Physical World & Measurement | Extra Points Complete Summary 2025–26</div>
-            <p>Made with ❤ for JEE Aspirants • Print & Revise Daily!</p>
+            <div>JEE Main Physics • Physical World & Measurement | 200+ Points Complete Summary 2026</div>
+            <p>Made with ❤ for JEE Aspirants • Print & Revise Daily! • Total Unique Points: 200+</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Includes: Measurement Fundamentals (30+) • SI Units (40+) • Errors (30+) • Dimensions (40+) • Extra Points (60+)</p>
         </footer>
     </div>
 
