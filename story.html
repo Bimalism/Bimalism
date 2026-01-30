@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bimalism | Find Your Balance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4A6FA5;
+            --secondary: #6B8E4E;
+            --accent: #FF9F1C;
+            --light: #F8F9FA;
+            --dark: #2C3E50;
+            --gray: #6C757D;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: balance 3s infinite ease-in-out;
+        }
+
+        @keyframes balance {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.7)), url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1200');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 159, 28, 0.3);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 159, 28, 0.4);
+            background-color: #ff8c00;
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .secondary-button:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Founders */
+        .founders {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+
+        .founder-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .founder-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 280px;
+        }
+
+        .founder-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Balance Quiz */
+        .quiz {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-button {
+                display: block;
+                margin: 10px auto;
+                max-width: 300px;
+            }
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ddd;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span class="logo-icon">⚖️</span>
+                    <div>
+                        <div>BIMALISM</div>
+                        <div class="tagline">Find Your Balance</div>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#principles">Principles</a>
+                    <a href="#founders">Founders</a>
+                    <a href="#community">Community</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Find Your Perfect Balance</h1>
+            <p>Bimalism is the art of finding <strong>your</strong> sweet spot between extremes. Created by teens, for everyone seeking balance in a world of too much or too little.</p>
+            <a href="story.pdf" class="cta-button">Explore our Story</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="features">
+        <div class="container">
+            <h2 class="section-title">What is Bimalism?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3>Not Minimalism</h3>
+                    <p>It's not about having less just for the sake of less. Empty spaces can feel lonely too.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Not Maximalism</h3>
+                    <p>It's not about keeping everything. Too much stuff can overwhelm and bury what matters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Your "Just Right"</h3>
+                    <p>Bimalism is finding YOUR perfect middle ground in everything - stuff, time, relationships, and digital life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders -->
+    <section id="founders" class="founders">
+        <div class="container">
+            <h2 class="section-title">Meet the Founders</h2>
+            <div class="founder-container">
+                <div class="founder-card">
+                    <div class="founder-avatar">A</div>
+                    <h3>Aalif</h3>
+                    <p><em>"I had nothing in my room but emptiness. Bimalism helped me find meaningful abundance."</em></p>
+                    <p style="margin-top: 1rem; color: var(--gray);">The former minimalist</p>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-avatar">D</div>
+                    <h3>Dharunesh</h3>
+                    <p><em>"My room was a museum of everything. Bimalism taught me the freedom of letting go."</em></p>
+                    <p style="margin-top: 1rem; color: var(--gray);">The former maximalist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles" class="features" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">The Bimalism Method</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>1. Vibe Check</h3>
+                    <p>Ask yourself regularly: "Is this working for me?" Be honest about what feels off.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>2. Small Adjust</h3>
+                    <p>Change one thing at a time. Tiny tweaks > massive overhauls. Start with your backpack, phone, or schedule.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>3. Notice & Repeat</h3>
+                    <p>See if it feels better. No perfection needed. Keep what works, adjust what doesn't.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community -->
+    <section id="community" class="features">
+        <div class="container">
+            <h2 class="section-title">Join Our Community</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                We're building a space where real teens share real experiences. No experts, no pressure - just people figuring out balance together.
+            </p>
+            <div style="text-align: center;">
+                <a href="https://www.instagram.com/aali.fif7271/" class="cta-button" style="margin-right: 15px;">Join Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">
+                        <span class="logo-icon">⚖️</span>
+                        BIMALISM
+                    </div>
+                    <p>Created by Aalif & Dharunesh<br>Two 10th graders helping others find balance.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <a href="#about">About Bimalism</a>
+                    <a href="#principles">Bimalism Method</a>
+                    <a href="#founders">Founders</a>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <a href="https://www.instagram.com/aali.fif7271/">Instagram</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 Bimalism.com | Created for everyone seeking balance. No degrees, just experience.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;"><em>"Not perfect, not solved. Just better."</em></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple quiz button interaction
+        document.querySelector('a[href="#quiz-start"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("Quiz feature coming soon! For now, check out our website for more resources.");
+        });
+
+        // Button hover effects
+        const buttons = document.querySelectorAll('.cta-button');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
