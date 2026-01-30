@@ -7,7 +7,7 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
         body { background:#fff8f8; padding:20px; }
-        .container { max-width:1300px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
+        .container { max-width:1400px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
         header { background:linear-gradient(135deg,#c62828,#d32f2f,#e53935); color:white; padding:45px; text-align:center; }
         h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
         .subtitle { font-size:1.45rem; opacity:0.96; }
@@ -31,179 +31,536 @@
         tr:nth-child(even) { background:#fff9f9; }
         .imp { background:#fff8e1; border-left:8px solid #ffa000; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
         .imp h4 { color:#ff6f00; font-size:1.4rem; margin-bottom:15px; }
+        .section { background:#f9f9f9; padding:25px; margin:30px 0; border-radius:12px; border:1px solid #e0e0e0; }
+        .point-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:15px; margin:20px 0; }
+        .point { background:#f0f8ff; padding:14px 18px; border-radius:8px; border-left:5px solid #2196f3; }
+        .highlight { background:#fff9c4; padding:12px 16px; border-radius:8px; margin:15px 0; border-left:5px solid #ffc107; }
+        .derivation { background:#f1f8e9; padding:18px; margin:20px 0; border-radius:10px; font-size:0.95rem; border-left:5px solid #7cb342; }
+        .example { background:#f5f5f5; padding:20px; margin:25px 0; border-radius:10px; border-left:5px solid #9c27b0; }
+        .tip { background:#e3f2fd; padding:15px; margin:15px 0; border-radius:8px; border-left:5px solid #2196f3; }
+        .comparison-table { background:#fff8e1; margin:20px 0; }
         footer { background:#b71c1c; color:white; text-align:center; padding:35px; font-size:1.2rem; }
-        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} }
+        ul { margin-left:25px; line-height:1.8; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} .point-grid{grid-template-columns:1fr;} }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
         <h1>LAWS OF MOTION</h1>
-        <p class="subtitle">Complete Theory + Formulas • Class 11 • JEE Main + Advanced • NEET 2025-26</p>
+        <p class="subtitle">Complete Theory + 100+ Unique Points • Class 11 • JEE Main + Advanced • NEET 2025-26</p>
     </header>
 
     <nav class="nav">
-        <div class="tab active" data-tab="t1">Newton’s 1st Law</div>
-        <div class="tab" data-tab="t2">Newton’s 2nd Law</div>
-        <div class="tab" data-tab="t3">Newton’s 3rd Law</div>
-        <div class="tab" data-tab="t4">Conservation of Momentum</div>
+        <div class="tab active" data-tab="t1">Newton's 1st Law</div>
+        <div class="tab" data-tab="t2">Newton's 2nd Law</div>
+        <div class="tab" data-tab="t3">Newton's 3rd Law</div>
+        <div class="tab" data-tab="t4">Momentum Conservation</div>
         <div class="tab" data-tab="t5">Friction</div>
-        <div class="tab" data-tab="t6">Centripetal Force & UCM</div>
-        <div class="tab" data-tab="t7">Equilibrium & Concurrent Forces</div>
-        <div class="tab" data-tab="t8">Quick Revision</div>
+        <div class="tab" data-tab="t6">Circular Motion</div>
+        <div class="tab" data-tab="t7">Equilibrium</div>
+        <div class="tab" data-tab="t8">Applications</div>
+        <div class="tab" data-tab="t9">Quick Revision</div>
     </nav>
 
     <div class="content">
 
-        <!-- 1. Newton’s First Law -->
+        <!-- 1. Newton's First Law -->
         <div class="pane active" id="t1">
-            <h2>1. Newton’s First Law of Motion</h2>
+            <h2>1. Newton's First Law of Motion</h2>
+            
             <div class="law">
                 <div class="law-title">Statement</div>
                 <p>Every body continues to be in its state of rest or of uniform motion in a straight line unless compelled by an external unbalanced force to change that state.</p>
             </div>
-            <div class="def"><strong>Law of Inertia</strong> → Inertia is the tendency of a body to oppose change in its state of motion.</div>
-            <table>
-                <tr><th>Type of Inertia</th><th>Example</th></tr>
-                <tr><td>Inertia of Rest</td><td>Dust falls off when a carpet is beaten</td></tr>
-                <tr><td>Inertia of Motion</td><td>Passenger jerks forward when bus stops suddenly</td></tr>
-                <tr><td>Inertia of Direction</td><td>Mud flies off tangentially from a spinning wheel</td></tr>
-            </table>
-            <div class="imp">
-                <h4>Inertial vs Non-Inertial Frames</h4>
-                <p>Inertial: Newton’s laws hold (constant velocity or rest)<br>
-                   Non-inertial: Accelerating → Pseudo force = −m a_frame</p>
+            
+            <div class="def">
+                <strong>Law of Inertia:</strong> Inertia is the inherent property of a body to oppose any change in its state of rest or uniform motion.
+            </div>
+            
+            <div class="section">
+                <h3>25+ Unique Points on Inertia</h3>
+                <div class="point-grid">
+                    <div class="point">Mass is the quantitative measure of inertia</div>
+                    <div class="point">Greater mass → Greater inertia → More difficult to change state</div>
+                    <div class="point">Inertia is not a force but a property of matter</div>
+                    <div class="point">Inertia depends only on mass, not on velocity</div>
+                    <div class="point">Inertia of rest: Body resists change from rest to motion</div>
+                    <div class="point">Example: Dust remains on beaten carpet due to inertia of rest</div>
+                    <div class="point">Coin on card trick demonstrates inertia of rest</div>
+                    <div class="point">Inertia of motion: Body resists change from motion to rest</div>
+                    <div class="point">Example: Passengers jerk forward when bus stops suddenly</div>
+                    <div class="point">Seat belts work based on inertia of motion principle</div>
+                    <div class="point">Inertia of direction: Body resists change in direction of motion</div>
+                    <div class="point">Example: Mud flies tangentially from rotating wheel</div>
+                    <div class="point">Stone from sling moves tangent to circular path when released</div>
+                    <div class="point">First law defines force: Force is that which changes state of motion</div>
+                    <div class="point">Aristotle's fallacy: Force needed to maintain motion (incorrect)</div>
+                    <div class="point">Galileo's experiments led to concept of inertia</div>
+                    <div class="point">On frictionless surface, body moves forever with constant velocity</div>
+                    <div class="point">First law holds only in inertial reference frames</div>
+                    <div class="point">No distinction between rest and uniform motion in physics</div>
+                    <div class="point">Equilibrium when net force = 0 (static or dynamic)</div>
+                    <div class="point">Body at rest has zero velocity, not necessarily zero acceleration</div>
+                    <div class="point">Body in uniform motion has zero acceleration</div>
+                    <div class="point">First law provides qualitative definition of force</div>
+                    <div class="point">Momentum conservation derived from first law symmetry</div>
+                    <div class="point">Rotational inertia (moment of inertia) is rotational analog</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Reference Frames</h3>
+                <table>
+                    <tr><th>Frame Type</th><th>Definition</th><th>Newton's Laws</th><th>Example</th></tr>
+                    <tr><td>Inertial</td><td>Zero acceleration or constant velocity</td><td>Valid</td><td>Earth (approximately), moving train with constant speed</td></tr>
+                    <tr><td>Non-inertial</td><td>Accelerating or rotating</td><td>Not valid (need pseudo forces)</td><td>Accelerating car, rotating merry-go-round</td></tr>
+                </table>
+                
+                <div class="derivation">
+                    <h4>Pseudo Force Concept:</h4>
+                    <p>In non-inertial frame with acceleration A:</p>
+                    <p>F_pseudo = -m A (applied to all bodies in frame)</p>
+                    <p>Example: In accelerating elevator, apparent weight = m(g + a)</p>
+                </div>
             </div>
         </div>
 
-        <!-- 2. Newton’s Second Law -->
+        <!-- 2. Newton's Second Law -->
         <div class="pane" id="t2">
-            <h2>2. Newton’s Second Law of Motion</h2>
+            <h2>2. Newton's Second Law of Motion</h2>
+            
             <div class="law">
                 <div class="law-title">Statement</div>
-                <p>The rate of change of linear momentum is directly proportional to the applied force and takes place in the direction of force.</p>
+                <p>The rate of change of linear momentum of a body is directly proportional to the applied external force and takes place in the direction of force.</p>
             </div>
+            
             <div class="form">
-                F⃗ = dp⃗/dt<br>
-                If m constant → F⃗ = m a⃗<br>
+                F = dp/dt = d(mv)/dt<br>
+                If mass constant: F = m a<br>
                 1 Newton = 1 kg·m/s²
             </div>
-            <h3>Important Applications</h3>
-            <ul style="margin:20px 0; padding-left:30px; line-height:2;">
-                <li>Impulse: J = Δp = FΔt</li>
-                <li>Variable mass system (Rocket): F_ext + v_rel(dm/dt) = m dv/dt</li>
-                <li>Rocket velocity: v = v₀ + v_rel ln(m₀/m)</li>
-            </ul>
+            
+            <div class="section">
+                <h3>20+ Key Points on Second Law</h3>
+                <div class="point-grid">
+                    <div class="point">Second law gives quantitative measure of force</div>
+                    <div class="point">Force causes acceleration, not velocity</div>
+                    <div class="point">Acceleration is directly proportional to net force</div>
+                    <div class="point">Acceleration is inversely proportional to mass</div>
+                    <div class="point">Direction of acceleration same as direction of net force</div>
+                    <div class="point">For constant force, acceleration is constant</div>
+                    <div class="point">F = ma is vector equation → apply component-wise</div>
+                    <div class="point">Mass in F = ma is inertial mass (not gravitational)</div>
+                    <div class="point">Principle of superposition: Net force = vector sum</div>
+                    <div class="point">Impulse: J = ∫F dt = Δp = m(v - u)</div>
+                    <div class="point">Impulse-momentum theorem more fundamental than F = ma</div>
+                    <div class="point">For variable mass systems: F_ext + v_rel(dm/dt) = m(dv/dt)</div>
+                    <div class="point">Rocket equation: v = u + v_rel ln(m₀/m)</div>
+                    <div class="point">Second law holds only in inertial reference frames</div>
+                    <div class="point">Force measured in Newtons (N) in SI system</div>
+                    <div class="point">1 N = force that gives 1 kg mass 1 m/s² acceleration</div>
+                    <div class="point">Dyne is CGS unit: 1 N = 10⁵ dyne</div>
+                    <div class="point">Weight: W = mg (g varies with location)</div>
+                    <div class="point">Apparent weight differs in accelerating elevators</div>
+                    <div class="point">Free-body diagrams essential for problem solving</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Variable Mass Systems</h3>
+                <div class="example">
+                    <h4>Rocket Propulsion:</h4>
+                    <p>Thrust force: F_thrust = v_rel (dm/dt)</p>
+                    <p>Velocity gained: v = v₀ + v_rel ln(m₀/m)</p>
+                    <p>Burnout velocity depends only on exhaust speed and mass ratio</p>
+                    <p>Multi-stage rockets discard empty mass to improve efficiency</p>
+                </div>
+                
+                <div class="example">
+                    <h4>Chain Falling on Scale:</h4>
+                    <p>For chain of length L, density ρ falling on scale:</p>
+                    <p>Force = weight of fallen portion + impulse due to impacting links</p>
+                    <p>F = ρgx + ρv² where x is fallen length, v = √(2gx)</p>
+                </div>
+            </div>
         </div>
 
-        <!-- 3. Newton’s Third Law -->
+        <!-- 3. Newton's Third Law -->
         <div class="pane" id="t3">
-            <h2>3. Newton’s Third Law of Motion</h2>
+            <h2>3. Newton's Third Law of Motion</h2>
+            
             <div class="law">
                 <div class="law-title">Statement</div>
                 <p>To every action, there is always an equal and opposite reaction.</p>
             </div>
-            <div class="form">F⃗_AB = −F⃗_BA</div>
-            <div class="imp">
-                <h4>Key Points</h4>
-                <ul>
-                    <li>Action and reaction act on <strong>different bodies</strong></li>
-                    <li>They never cancel each other</li>
-                    <li>Examples: Recoil of gun, Swimming, Rocket propulsion, Walking</li>
-                </ul>
+            
+            <div class="form">F_AB = -F_BA (Action-Reaction Pair)</div>
+            
+            <div class="section">
+                <h3>15+ Crucial Points on Action-Reaction</h3>
+                <div class="point-grid">
+                    <div class="point">Action and reaction forces act on different bodies</div>
+                    <div class="point">They are always equal in magnitude</div>
+                    <div class="point">They are always opposite in direction</div>
+                    <div class="point">They act simultaneously (no time delay)</div>
+                    <div class="point">They never cancel each other (different bodies)</div>
+                    <div class="point">Nature of forces can be different (contact, field)</div>
+                    <div class="point">Example: Book on table: weight (action) → normal (reaction)</div>
+                    <div class="point">Example: Earth attracts apple → apple attracts Earth</div>
+                    <div class="point">Walking: Push ground backward → ground pushes forward</div>
+                    <div class="point">Swimming: Push water backward → water pushes forward</div>
+                    <div class="point">Rocket: Expel gas backward → gas pushes rocket forward</div>
+                    <div class="point">Recoil of gun: Bullet forward → gun backward</div>
+                    <div class="point">Horse-cart problem: Internal forces don't move system</div>
+                    <div class="point">Tension in rope: Equal at both ends if massless rope</div>
+                    <div class="point">Third law holds for all types of forces</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Common Misconceptions Clarified</h3>
+                <div class="highlight">
+                    <p><strong>Horse-Cart Problem:</strong> Horse pushes ground backward, ground pushes horse forward. This force moves entire system (horse+cart). Force horse exerts on cart and cart exerts on horse are internal.</p>
+                    <p><strong>Why doesn't action-reaction cancel?</strong> They act on different bodies, so each body experiences net force.</p>
+                    <p><strong>Tension in rope:</strong> For massless rope, tension same throughout. For rope with mass, tension varies.</p>
+                </div>
             </div>
         </div>
 
-        <!-- 4. Law of Conservation of Linear Momentum -->
+        <!-- 4. Conservation of Momentum -->
         <div class="pane" id="t4">
-            <h2>4. Law of Conservation of Linear Momentum</h2>
+            <h2>4. Conservation of Linear Momentum</h2>
+            
             <div class="def">
-                If net external force on a system is zero, then its total linear momentum remains constant.
+                <strong>Law:</strong> If the net external force on a system is zero, the total linear momentum of the system remains constant.
             </div>
+            
             <div class="form">
-                m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂<br>
-                (For two bodies in collision)
+                For isolated system: Σp_initial = Σp_final<br>
+                For two-body collision: m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂
             </div>
-            <table>
-                <tr><th>Type</th><th>Condition</th><th>Momentum</th><th>Kinetic Energy</th></tr>
-                <tr><td>Elastic</td><td>e = 1</td><td>Conserved</td><td>Conserved</td></tr>
-                <tr><td>Inelastic</td><td>e < 1</td><td>Conserved</td><td>Not conserved</td></tr>
-                <tr><td>Perfectly Inelastic</td><td>e = 0 (stick together)</td><td>Conserved</td><td>Maximum loss</td></tr>
-            </table>
-            <div class="imp">
-                <h4>Coefficient of Restitution</h4>
-                e = (v₂ − v₁)/(u₁ − u₂) = Relative speed after / Relative speed before
+            
+            <div class="section">
+                <h3>Collision Types & Properties</h3>
+                <table class="comparison-table">
+                    <tr><th>Collision Type</th><th>Coefficient of Restitution (e)</th><th>Momentum</th><th>Kinetic Energy</th><th>Special Cases</th></tr>
+                    <tr><td>Perfectly Elastic</td><td>e = 1</td><td>Conserved</td><td>Conserved</td><td>Ideal gas molecules, superballs</td></tr>
+                    <tr><td>Inelastic</td><td>0 < e < 1</td><td>Conserved</td><td>Not conserved</td><td>Most real collisions</td></tr>
+                    <tr><td>Perfectly Inelastic</td><td>e = 0</td><td>Conserved</td><td>Max loss</td><td>Objects stick together</td></tr>
+                    <tr><td>Explosion</td><td>N/A</td><td>Conserved</td><td>Increases</td><td>Internal energy converted to KE</td></tr>
+                </table>
+                
+                <div class="form">
+                    Coefficient of restitution: e = (v₂ - v₁)/(u₁ - u₂)<br>
+                    = Relative speed after / Relative speed before<br>
+                    0 ≤ e ≤ 1 (e=0: perfectly inelastic, e=1: perfectly elastic)
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>15+ Applications of Momentum Conservation</h3>
+                <div class="point-grid">
+                    <div class="point">Recoil of gun: m_gun v_gun = -m_bullet v_bullet</div>
+                    <div class="point">Rocket propulsion: Momentum conservation in exhaust system</div>
+                    <div class="point">Ballistic pendulum: For bullet speed measurement</div>
+                    <div class="point">Collisions in particle physics: Track momentum to identify particles</div>
+                    <div class="point">Air track experiments: Nearly frictionless collisions</div>
+                    <div class="point">Newton's cradle: Demonstrates elastic collisions</div>
+                    <div class="point">Ice skater pulling arms in: Angular momentum conservation</div>
+                    <div class="point">Jumping off boat: Boat moves backward</div>
+                    <div class="point">Firing from moving platform: Add platform velocity</div>
+                    <div class="point">Breaking glass vs rubber ball: e different</div>
+                    <div class="point">Car crashes: Crumple zones increase collision time</div>
+                    <div class="point">Tennis ball vs cricket ball: Different e values</div>
+                    <div class="point">Bouncing ball: Height reduces by factor e² each bounce</div>
+                    <div class="point">Center of mass motion unaffected by internal forces</div>
+                    <div class="point">Variable mass systems: Use momentum conservation approach</div>
+                </div>
+            </div>
+            
+            <div class="derivation">
+                <h4>One-Dimensional Elastic Collision Formulas:</h4>
+                <p>For masses m₁, m₂ with initial velocities u₁, u₂:</p>
+                <p>v₁ = [(m₁ - m₂)u₁ + 2m₂u₂] / (m₁ + m₂)</p>
+                <p>v₂ = [(m₂ - m₁)u₂ + 2m₁u₁] / (m₁ + m₂)</p>
+                <p>Special cases: m₁ = m₂ → velocities exchange</p>
             </div>
         </div>
 
-        <!-- 5. Static and Kinetic Friction -->
+        <!-- 5. Friction -->
         <div class="pane" id="t5">
             <h2>5. Static and Kinetic Friction</h2>
-            <table>
-                <tr><th>Type</th><th>Formula</th><th>Nature</th></tr>
-                <tr><td>Static Friction</td><td>f_s ≤ μ_s N</td><td>Self-adjusting (0 to μ_s N)</td></tr>
-                <tr><td>Limiting Friction</td><td>f_L = μ_s N</td><td>Maximum static friction</td></tr>
-                <tr><td>Kinetic Friction</td><td>f_k = μ_k N</td><td>Constant (μ_k < μ_s)</td></tr>
-            </table>
-            <div class="form">
-                Angle of friction: tan λ = μ_s<br>
-                Angle of repose: θ = λ → tan θ = μ_s
+            
+            <div class="section">
+                <h3>Types of Friction</h3>
+                <table>
+                    <tr><th>Type</th><th>Formula</th><th>Characteristics</th><th>Direction</th></tr>
+                    <tr><td>Static Friction</td><td>f_s ≤ μ_s N</td><td>Self-adjusting, prevents motion</td><td>Opposes impending motion</td></tr>
+                    <tr><td>Limiting Friction</td><td>f_L = μ_s N</td><td>Maximum static friction</td><td>At threshold of motion</td></tr>
+                    <tr><td>Kinetic Friction</td><td>f_k = μ_k N</td><td>Constant during motion</td><td>Opposes relative motion</td></tr>
+                    <tr><td>Rolling Friction</td><td>f_r = μ_r N</td><td>Smallest, due to deformation</td><td>Opposes rolling motion</td></tr>
+                </table>
+                
+                <div class="form">
+                    μ_s > μ_k > μ_r (Generally)<br>
+                    Angle of friction: tan λ = μ_s<br>
+                    Angle of repose: θ = λ (tan θ = μ_s)
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>20+ Friction Facts & Applications</h3>
+                <div class="point-grid">
+                    <div class="point">Static friction adjusts from 0 to μ_sN to prevent motion</div>
+                    <div class="point">Kinetic friction constant during motion (μ_kN)</div>
+                    <div class="point">μ_s typically 20-30% greater than μ_k</div>
+                    <div class="point">Friction independent of contact area (for hard surfaces)</div>
+                    <div class="point">Friction depends on nature of surfaces, not weight</div>
+                    <div class="point">Lubrication reduces μ by introducing fluid layer</div>
+                    <div class="point">Static friction can act even when no relative motion</div>
+                    <div class="point">Walking possible due to static friction</div>
+                    <div class="point">Braking: Static friction for maximum deceleration</div>
+                    <div class="point">Skidding occurs when kinetic friction takes over</div>
+                    <div class="point">Angle of repose = maximum slope without sliding</div>
+                    <div class="point">Sand heaps naturally at angle of repose</div>
+                    <div class="point">Rolling friction much smaller than sliding friction</div>
+                    <div class="point">Ball bearings reduce friction by replacing sliding with rolling</div>
+                    <div class="point">Friction causes heating and wear</div>
+                    <div class="point">Friction necessary for acceleration (car tires)</div>
+                    <div class="point">Ice has low μ (≈0.03) making slipping easy</div>
+                    <div class="point">Friction force parallel to surface, normal force perpendicular</div>
+                    <div class="point">On inclined plane: f = mg sinθ at angle of repose</div>
+                    <div class="point">Fluid friction (drag) depends on velocity, shape</div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Block on Inclined Plane:</h4>
+                <p>For block on incline at angle θ:</p>
+                <p>If tan θ < μ_s: Block doesn't slide (f = mg sinθ)</p>
+                <p>If tan θ > μ_s: Block slides with a = g(sinθ - μ_k cosθ)</p>
+                <p>Critical angle: θ_c = tan⁻¹(μ_s) = angle of repose</p>
             </div>
         </div>
 
-        <!-- 6. Centripetal Force & Dynamics of UCM -->
+        <!-- 6. Circular Motion Dynamics -->
         <div class="pane" id="t6">
-            <h2>6. Centripetal Force & Dynamics of Uniform Circular Motion</h2>
+            <h2>6. Dynamics of Circular Motion</h2>
+            
             <div class="form">
-                Centripetal Force: F_c = mv²/r = mω²r = m(4π²r)/T²<br>
-                Direction: Always towards centre
+                Centripetal Force: F_c = m v²/r = m ω²r = m (4π²r)/T²<br>
+                Always directed toward center of circle
             </div>
-            <h3>Important Cases</h3>
-            <table>
-                <tr><th>Situation</th><th>Formula</th></tr>
-                <tr><td>Banked Road (no friction)</td><td>tan θ = v²/rg</td></tr>
-                <tr><td>Banked Road (with friction)</td><td>v_max = √[rg (μ + tanθ)/(1 − μ tanθ)]</td></tr>
-                <tr><td>Conical Pendulum</td><td>T cosθ = mg, T sinθ = mv²/r → cosθ = g/(ω²r)</td></tr>
-                <tr><td>Vertical Circle (top)</td><td>T + mg = mv²/r → v_min = √gr</td></tr>
-                <tr><td>Vertical Circle (bottom)</td><td>T − mg = mv²/r → T_max = mg + mv²/r</td></tr>
-                <tr><td>To complete loop</td><td>v_bottom ≥ √(5gr)</td></tr>
-            </table>
+            
+            <div class="section">
+                <h3>Important Circular Motion Cases</h3>
+                <table>
+                    <tr><th>Situation</th><th>Force Providing F_c</th><th>Key Formula</th></tr>
+                    <tr><td>Stone in horizontal circle (string)</td><td>Tension</td><td>T = mω²r</td></tr>
+                    <tr><td>Car on level road</td><td>Friction</td><td>v_max = √(μrg)</td></tr>
+                    <tr><td>Banked road (no friction)</td><td>Normal component</td><td>tan θ = v²/(rg)</td></tr>
+                    <tr><td>Banked road (with friction)</td><td>Normal + friction</td><td>v_max = √[rg(μ+tanθ)/(1-μtanθ)]</td></tr>
+                    <tr><td>Conical pendulum</td><td>Tension horizontal component</td><td>T = 2π√(L cosθ/g)</td></tr>
+                    <tr><td>Vertical circle (top)</td><td>Tension + gravity</td><td>v_min = √(gr), T_min = 0</td></tr>
+                    <tr><td>Vertical circle (bottom)</td><td>Tension - gravity</td><td>T_max = mg + mv²/r</td></tr>
+                    <tr><td>Death well (motorcycle)</td><td>Normal reaction</td><td>v_min = √(gr)</td></tr>
+                    <tr><td>Satellite in orbit</td><td>Gravity</td><td>v = √(GM/r)</td></tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>15+ Circular Motion Concepts</h3>
+                <div class="point-grid">
+                    <div class="point">Centripetal force is not a new force but net radial inward force</div>
+                    <div class="point">Centrifugal force is pseudo-force in rotating frame</div>
+                    <div class="point">For UCM, speed constant but velocity changes (direction changes)</div>
+                    <div class="point">Acceleration directed toward center (centripetal acceleration)</div>
+                    <div class="point">Angular velocity ω = dθ/dt = v/r (constant for UCM)</div>
+                    <div class="point">Time period T = 2πr/v = 2π/ω</div>
+                    <div class="point">Frequency f = 1/T = ω/(2π)</div>
+                    <div class="point">Vertical circle: Speed varies due to gravity</div>
+                    <div class="point">Minimum speed at top: v_min = √(gr) for complete circle</div>
+                    <div class="point">Minimum speed at bottom: v_bottom = √(5gr) for complete loop</div>
+                    <div class="point">Tension difference top-bottom = 6mg for complete loop</div>
+                    <div class="point">Conical pendulum period independent of bob mass</div>
+                    <div class="point">Banking allows higher speeds without relying on friction</div>
+                    <div class="point">Centripetal acceleration a_c = v²/r = ω²r</div>
+                    <div class="point">Non-uniform circular motion: Tangential acceleration present</div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Vertical Circle Energy Analysis:</h4>
+                <p>Using energy conservation: ½mv_bottom² = ½mv_top² + mg(2r)</p>
+                <p>At top: T_top + mg = mv_top²/r</p>
+                <p>Minimum at top: T_top = 0 → v_top = √(gr)</p>
+                <p>Then v_bottom = √(v_top² + 4gr) = √(5gr)</p>
+                <p>T_bottom = mg + mv_bottom²/r = 6mg</p>
+            </div>
         </div>
 
-        <!-- 7. Equilibrium and Concurrent Forces -->
+        <!-- 7. Equilibrium -->
         <div class="pane" id="t7">
-            <h2>7. Equilibrium and Concurrent Forces</h2>
+            <h2>7. Equilibrium of Forces</h2>
+            
             <div class="def">
-                A body is in equilibrium if ΣF = 0 and Στ = 0
+                <strong>Conditions for Equilibrium:</strong><br>
+                1. ΣF = 0 (Translational equilibrium)<br>
+                2. Στ = 0 (Rotational equilibrium)
             </div>
-            <h3>Types of Equilibrium</h3>
-            <table>
-                <tr><th>Type</th><th>Condition</th><th>Example</th></tr>
-                <tr><td>Stable</td><td>COM lowers on displacement</td><td>Ball in a bowl</td></tr>
-                <tr><td>Unstable</td><td>COM rises</td><td>Ball on a hill</td></tr>
-                <tr><td>Neutral</td><td>COM neither rises nor lowers</td><td>Ball on plane surface</td></tr>
-            </table>
-            <div class="form">
-                Lami’s Theorem (for 3 concurrent forces in equilibrium):<br>
-                F₁/sinα = F₂/sinβ = F₃/sinγ
+            
+            <div class="section">
+                <h3>Types of Equilibrium</h3>
+                <table>
+                    <tr><th>Type</th><th>Condition</th><th>Potential Energy</th><th>Example</th></tr>
+                    <tr><td>Stable</td><td>Returns to original after displacement</td><td>Minimum</td><td>Ball at bottom of bowl</td></tr>
+                    <tr><td>Unstable</td><td>Moves away after displacement</td><td>Maximum</td><td>Ball on hill top</td></tr>
+                    <tr><td>Neutral</td><td>Stays in new position</td><td>Constant</td><td>Ball on flat surface</td></tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>Force Resolution Methods</h3>
+                <div class="point-grid">
+                    <div class="point">Component method: Resolve forces along x, y, z axes</div>
+                    <div class="point">ΣF_x = 0, ΣF_y = 0, ΣF_z = 0 for translational equilibrium</div>
+                    <div class="point">Lami's theorem: For 3 concurrent forces in equilibrium</div>
+                    <div class="point">F₁/sinα = F₂/sinβ = F₃/sinγ where α,β,γ are angles between forces</div>
+                    <div class="point">Polygon law: Vector sum of forces forms closed polygon</div>
+                    <div class="point">Triangle law: For 3 forces, they form closed triangle</div>
+                    <div class="point">Free body diagram essential for problem solving</div>
+                    <div class="point">Tension in string: Along string direction</div>
+                    <div class="point">Normal force: Perpendicular to surface</div>
+                    <div class="point">Friction: Parallel to surface, opposes motion</div>
+                </div>
+                
+                <div class="form">
+                    Lami's Theorem (3 concurrent forces):<br>
+                    F₁/sin(π - α) = F₂/sin(π - β) = F₃/sin(π - γ)<br>
+                    or F₁/sinα = F₂/sinβ = F₃/sinγ
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Ladder Problem:</h4>
+                <p>Ladder of length L, mass m leaning against wall at angle θ:</p>
+                <p>Forces: Weight (mg down at center), Normal from wall (N_w horizontal), Normal from floor (N_f vertical), Friction from floor (f horizontal)</p>
+                <p>Equations: ΣF_x = 0: f = N_w; ΣF_y = 0: N_f = mg</p>
+                <p>Στ = 0 about bottom: mg(L/2 cosθ) = N_w(L sinθ)</p>
+                <p>Condition for no slipping: f ≤ μ N_f</p>
+                <p>Minimum angle: θ_min = tan⁻¹(1/(2μ))</p>
             </div>
         </div>
 
-        <!-- 8. Quick Revision -->
+        <!-- 8. Advanced Applications -->
         <div class="pane" id="t8">
-            <h2>Quick Revision – Must Remember</h2>
+            <h2>8. Advanced Applications & Problem Types</h2>
+            
+            <div class="section">
+                <h3>Pulley Systems</h3>
+                <div class="point-grid">
+                    <div class="point">Massless, frictionless pulley: Tension same on both sides</div>
+                    <div class="point">With pulley mass or friction: Tensions different</div>
+                    <div class="point">Atwood machine: a = (m₁ - m₂)g/(m₁ + m₂)</div>
+                    <div class="point">Tension in Atwood: T = 2m₁m₂g/(m₁ + m₂)</div>
+                    <div class="point">Multiple pulley systems: Mechanical advantage</div>
+                    <div class="point">Movable pulley: Tension supports half the load</div>
+                    <div class="point">Constraint relation: Length of string constant</div>
+                    <div class="point">Acceleration relation from string constraint</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Variable Acceleration Problems</h3>
+                <div class="point-grid">
+                    <div class="point">Force as function of time: F(t) → integrate for v, x</div>
+                    <div class="point">Force as function of velocity: F(v) → separate variables</div>
+                    <div class="point">Force as function of position: F(x) → use work-energy</div>
+                    <div class="point">Air resistance: F = -kv (linear) or F = -kv² (quadratic)</div>
+                    <div class="point">Terminal velocity when net force = 0</div>
+                    <div class="point">Simple harmonic motion: F = -kx → a = -ω²x</div>
+                    <div class="point">Damped oscillations: F = -kx - bv</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Non-Inertial Frame Problems</h3>
+                <div class="point-grid">
+                    <div class="point">Add pseudo force F_pseudo = -ma_frame</div>
+                    <div class="point">Direction opposite to frame acceleration</div>
+                    <div class="point">Examples: Accelerating elevator, rotating frame</div>
+                    <div class="point">Rotating frame: Centrifugal + Coriolis forces</div>
+                    <div class="point">Centrifugal force: F_cf = mω²r outward</div>
+                    <div class="point">Coriolis force: F_cor = 2mv × ω</div>
+                    <div class="point">Apparent gravity: g_eff = g - a (vector difference)</div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Accelerating Elevator:</h4>
+                <p>Elevator accelerating upward with acceleration a:</p>
+                <p>Apparent weight: W' = m(g + a)</p>
+                <p>If accelerating downward: W' = m(g - a)</p>
+                <p>Free fall (a = g): Weightless (W' = 0)</p>
+                <p>Pendulum in elevator: T = 2π√(L/g_eff) where g_eff = g ± a</p>
+            </div>
+        </div>
+
+        <!-- 9. Quick Revision -->
+        <div class="pane" id="t9">
+            <h2>9. Quick Revision & Must-Know Facts</h2>
+            
             <div class="imp">
+                <h4>Core Laws in One Place</h4>
                 <ul style="line-height:2.2; font-size:1.15rem;">
-                    <li>F = ma | Impulse = Δp</li>
-                    <li>Action ≠ Reaction on same body</li>
-                    <li>Momentum conserved only if F_ext = 0</li>
-                    <li>e = 1 → Elastic | e = 0 → Perfectly inelastic</li>
-                    <li>f_max = μ_s N > f_k = μ_k N</li>
-                    <li>Centripetal force is NOT a new force</li>
-                    <li>Pseudo force = −m a_frame</li>
-                    <li>v_min at top of loop = √gr | v_min at bottom = √(5gr)</li>
-                    <li>tanθ = v²/rg (banking)</li>
-                    <li>Rocket: v = v_rel ln(m₀/m)</li>
+                    <li><strong>1st Law:</strong> Inertia - No force → constant velocity</li>
+                    <li><strong>2nd Law:</strong> F = dp/dt = ma (for constant m)</li>
+                    <li><strong>3rd Law:</strong> Action = -Reaction (different bodies)</li>
+                    <li><strong>Momentum Conservation:</strong> If F_ext = 0, Σp = constant</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3>Formula Summary</h3>
+                <div class="form">
+                    • Impulse: J = Δp = F_avg Δt<br>
+                    • Friction: f_s ≤ μ_s N, f_k = μ_k N<br>
+                    • Centripetal force: F_c = mv²/r = mω²r<br>
+                    • Banking angle: tan θ = v²/(rg) (no friction)<br>
+                    • Vertical circle: v_top_min = √(gr), v_bottom_min = √(5gr)<br>
+                    • Coefficient of restitution: e = (v₂ - v₁)/(u₁ - u₂)<br>
+                    • Rocket: v = u + v_rel ln(m₀/m)<br>
+                    • Atwood machine: a = (m₁ - m₂)g/(m₁ + m₂)<br>
+                    • Tension in Atwood: T = 2m₁m₂g/(m₁ + m₂)<br>
+                    • Angle of repose: tan θ = μ_s
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Problem Solving Strategy</h3>
+                <div class="point-grid">
+                    <div class="point">1. Identify all forces (draw free-body diagram)</div>
+                    <div class="point">2. Choose coordinate system (often along acceleration)</div>
+                    <div class="point">3. Apply ΣF = ma component-wise</div>
+                    <div class="point">4. Solve equations simultaneously</div>
+                    <div class="point">5. Check units and reasonableness</div>
+                    <div class="point">6. For systems: Consider constraints</div>
+                    <div class="point">7. For collisions: Use momentum conservation</div>
+                    <div class="point">8. For circular motion: Radial F_net = mv²/r</div>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <h4>Common Pitfalls to Avoid:</h4>
+                <ul>
+                    <li>Action-reaction act on different bodies (don't cancel)</li>
+                    <li>Normal force not always equal to mg</li>
+                    <li>Static friction adjusts (not always μ_sN)</li>
+                    <li>Centripetal force is net radial force, not separate force</li>
+                    <li>Tension in massless rope same throughout</li>
+                    <li>Weightlessness means N = 0, not g = 0</li>
+                    <li>In elastic collisions, relative speed same before/after</li>
                 </ul>
             </div>
         </div>
@@ -211,7 +568,7 @@
     </div>
 
     <footer>
-        Laws of Motion – Full Summary with Conservation of Momentum • JEE/NEET 2025-26 • Made for Future IITians
+        Laws of Motion – Complete Summary with 100+ Unique Points • JEE/NEET 2025-26 • Total Points: 150+
     </footer>
 </div>
 
