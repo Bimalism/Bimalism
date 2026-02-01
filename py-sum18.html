@@ -7,12 +7,12 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#fff0e0;padding:20px;}
-        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
         header{background:linear-gradient(135deg,#e65100,#f57c00,#ff8f00);color:white;padding:50px;text-align:center;}
         h1{font-size:3.4rem;margin-bottom:10px;}
         .subtitle{font-size:1.5rem;opacity:0.95;}
-        .nav{display:flex;background:#bf360c;flex-wrap:wrap;}
-        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;}
+        .nav{display:flex;background:#bf360c;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:20px 28px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;min-width:170px;text-align:center;}
         .tab:hover{background:rgba(255,255,255,0.2);}
         .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffcc80;}
         .content{padding:60px;}
@@ -20,10 +20,14 @@
         .pane.active{display:block;animation:fade 0.7s;}
         @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
         h2{color:#e65100;font-size:2.5rem;margin:45px 0 25px;border-bottom:5px solid #f57c00;padding-bottom:12px;}
-        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
-        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        .box{background:#fff0e0;border-left:8px solid #ffcc80;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:1.9;columns:2;column-gap:60px;}
+        li{margin-bottom:14px;break-inside:avoid;padding-right:20px;}
+        .counter{display:inline-block;width:30px;color:#e65100;font-weight:bold;margin-right:8px;}
+        .points-total{text-align:center;background:#ffcc80;padding:15px;border-radius:10px;margin:30px 0;font-weight:bold;font-size:1.2rem;}
         footer{background:#bf360c;color:white;text-align:center;padding:38px;font-size:1.25rem;}
-        @media(max-width:768px){.tab{flex:1;padding:16px;text-align:center;font-size:1rem;}}
+        @media(max-width:1100px){ul{columns:1;}}
+        @media(max-width:768px){.tab{flex:1;padding:16px;font-size:1rem;min-width:130px;}}
     </style>
 </head>
 <body>
@@ -35,7 +39,7 @@
 
     <nav class="nav">
         <div class="tab active" data-tab="t1">Energy Bands</div>
-        <div class="tab" data-tab="t2">Conductors/Insulators/Semiconductors</div>
+        <div class="tab" data-tab="t2">Semiconductors</div>
         <div class="tab" data-tab="t3">p-n Junction Diode</div>
         <div class="tab" data-tab="t4">I-V Characteristics</div>
         <div class="tab" data-tab="t5">Diode as Rectifier</div>
@@ -44,236 +48,384 @@
         <div class="tab" data-tab="t8">Zener Diode</div>
         <div class="tab" data-tab="t9">Junction Transistor</div>
         <div class="tab" data-tab="t10">Transistor Characteristics</div>
-        <div class="tab" data-tab="t11">Transistor as Amplifier/Oscillator</div>
-        <div class="tab" data-tab="t12">Logic Gates & Switch</div>
+        <div class="tab" data-tab="t11">Transistor Amplifier</div>
+        <div class="tab" data-tab="t12">Logic Gates</div>
+        <div class="tab" data-tab="t13">Integrated Circuits</div>
+        <div class="tab" data-tab="t14">Communication Systems</div>
     </nav>
 
     <div class="content">
 
-        <!-- 1 -->
+        <!-- 1. Energy Bands -->
         <div class="pane active" id="t1">
             <h2>1. Energy Bands in Solids</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Energy levels split into bands due to interatomic interaction</li>
-                    <li>Valence band: occupied by valence electrons</li>
-                    <li>Conduction band: allows free movement of electrons</li>
-                    <li>Forbidden gap (E_g): energy difference between VB & CB</li>
-                    <li>Overlapping bands → conductor</li>
-                    <li>Large E_g (>3 eV) → insulator</li>
-                    <li>Small E_g (≤1 eV) → semiconductor</li>
-                    <li>At 0 K, semiconductors behave as insulators</li>
-                    <li>Thermal excitation promotes electrons to CB</li>
-                    <li>Fermi level lies in middle of band gap in intrinsic semiconductor</li>
+                    <li><span class="counter">1</span>Energy levels split into bands due to interatomic interaction</li>
+                    <li><span class="counter">2</span>Valence band: occupied by valence electrons (highest occupied)</li>
+                    <li><span class="counter">3</span>Conduction band: allows free movement of electrons</li>
+                    <li><span class="counter">4</span>Forbidden gap (E_g): energy difference between VB & CB</li>
+                    <li><span class="counter">5</span>Fermi level: energy level with 50% occupation probability</li>
+                    <li><span class="counter">6</span>In conductors, Fermi level lies within conduction band</li>
+                    <li><span class="counter">7</span>In semiconductors, Fermi level lies in middle of band gap</li>
+                    <li><span class="counter">8</span>In insulators, Fermi level lies near valence band</li>
+                    <li><span class="counter">9</span>Overlapping bands → conductor (no forbidden gap)</li>
+                    <li><span class="counter">10</span>Large E_g (>3 eV) → insulator</li>
+                    <li><span class="counter">11</span>Small E_g (≤1 eV) → semiconductor</li>
+                    <li><span class="counter">12</span>At 0 K, semiconductors behave as insulators</li>
+                    <li><span class="counter">13</span>Thermal excitation promotes electrons to CB</li>
+                    <li><span class="counter">14</span>Hole: vacancy created when electron leaves VB</li>
+                    <li><span class="counter">15</span>Electron-hole pair generation increases with temperature</li>
+                    <li><span class="counter">16</span>Recombination: electron falls back to VB</li>
+                    <li><span class="counter">17</span>Donor levels near conduction band (n-type)</li>
+                    <li><span class="counter">18</span>Acceptor levels near valence band (p-type)</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 2 -->
+        <!-- 2. Semiconductors -->
         <div class="pane" id="t2">
             <h2>2. Conductors, Insulators & Semiconductors</h2>
+            <div class="points-total">19 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Conductors: E_g = 0, huge free electrons (Cu, Ag)</li>
-                    <li>Insulators: E_g > 3 eV, no conduction (diamond, glass)</li>
-                    <li>Semiconductors: E_g ≈ 0.7–1.1 eV (Si: 1.1 eV, Ge: 0.7 eV)</li>
-                    <li>Intrinsic: pure, n_e = n_h</li>
-                    <li>Extrinsic: doped (n-type or p-type)</li>
-                    <li>n-type: pentavalent impurity (P, As) → donor levels</li>
-                    <li>p-type: trivalent impurity (B, Ga) → acceptor levels</li>
-                    <li>Conductivity increases with temperature in semiconductors</li>
-                    <li>Majority & minority carriers</li>
-                    <li>Mobility μ = v_d / E</li>
+                    <li><span class="counter">1</span>Conductors: E_g = 0, huge free electrons (Cu, Ag, Al)</li>
+                    <li><span class="counter">2</span>Insulators: E_g > 3 eV, no conduction (diamond, glass, rubber)</li>
+                    <li><span class="counter">3</span>Semiconductors: E_g ≈ 0.7–1.1 eV (Si: 1.1 eV, Ge: 0.7 eV)</li>
+                    <li><span class="counter">4</span>Intrinsic semiconductor: pure, n_e = n_h (Si, Ge)</li>
+                    <li><span class="counter">5</span>Extrinsic semiconductor: doped (n-type or p-type)</li>
+                    <li><span class="counter">6</span>n-type: pentavalent impurity (P, As, Sb) → donor levels</li>
+                    <li><span class="counter">7</span>p-type: trivalent impurity (B, Ga, In) → acceptor levels</li>
+                    <li><span class="counter">8</span>Conductivity increases with temperature in semiconductors</li>
+                    <li><span class="counter">9</span>Conductivity decreases with temperature in conductors</li>
+                    <li><span class="counter">10</span>Majority carriers: electrons in n-type, holes in p-type</li>
+                    <li><span class="counter">11</span>Minority carriers: holes in n-type, electrons in p-type</li>
+                    <li><span class="counter">12</span>Mobility μ = v_d / E (electrons > holes in Si)</li>
+                    <li><span class="counter">13</span>Drift current: due to applied electric field</li>
+                    <li><span class="counter">14</span>Diffusion current: due to concentration gradient</li>
+                    <li><span class="counter">15</span>Resistivity of Si ≈ 2300 Ω·m (intrinsic at 300K)</li>
+                    <li><span class="counter">16</span>Carrier concentration: n_i² = n_e × n_h (law of mass action)</li>
+                    <li><span class="counter">17</span>Fermi level shifts with doping</li>
+                    <li><span class="counter">18</span>Compound semiconductors: GaAs, InP (direct band gap)</li>
+                    <li><span class="counter">19</span>Temperature coefficient negative for semiconductors</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 3 -->
+        <!-- 3. p-n Junction -->
         <div class="pane" id="t3">
             <h2>3. Semiconductor Diode (p-n Junction)</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Formed by joining p-type and n-type semiconductors</li>
-                    <li>Depletion region: immobile ions, no free carriers</li>
-                    <li>Potential barrier: 0.7 V (Si), 0.3 V (Ge)</li>
-                    <li>Forward bias: p-side +ve → reduces barrier → high current</li>
-                    <li>Reverse bias: p-side –ve → increases barrier → very low current</li>
-                    <li>Diode acts as one-way valve for current</li>
-                    <li>Knee voltage: minimum voltage for conduction</li>
-                    <li>Dynamic resistance r_d = ΔV/ΔI</li>
-                    <li>Breakdown in reverse bias at high voltage</li>
-                    <li>Symbol: arrow shows conventional current direction</li>
+                    <li><span class="counter">1</span>Formed by joining p-type and n-type semiconductors</li>
+                    <li><span class="counter">2</span>Depletion region: immobile ions, no free carriers</li>
+                    <li><span class="counter">3</span>Potential barrier: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li><span class="counter">4</span>Built-in potential prevents further diffusion</li>
+                    <li><span class="counter">5</span>Forward bias: p-side +ve → reduces barrier → high current</li>
+                    <li><span class="counter">6</span>Reverse bias: p-side –ve → increases barrier → very low current</li>
+                    <li><span class="counter">7</span>Diode acts as one-way valve for current</li>
+                    <li><span class="counter">8</span>Knee voltage: minimum voltage for conduction</li>
+                    <li><span class="counter">9</span>Dynamic resistance r_d = ΔV/ΔI (small in forward bias)</li>
+                    <li><span class="counter">10</span>Breakdown in reverse bias at high voltage</li>
+                    <li><span class="counter">11</span>Symbol: arrow shows conventional current direction</li>
+                    <li><span class="counter">12</span>Space charge region width ~ √V (reverse bias)</li>
+                    <li><span class="counter">13</span>Minority carrier injection in forward bias</li>
+                    <li><span class="counter">14</span>Reverse saturation current depends on temperature</li>
+                    <li><span class="counter">15</span>Junction capacitance: C_j = εA/W (depletion capacitance)</li>
+                    <li><span class="counter">16</span>Diffusion capacitance in forward bias (stored charge)</li>
+                    <li><span class="counter">17</span>Temperature coefficient ≈ -2 mV/°C for forward voltage</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 4 -->
+        <!-- 4. I-V Characteristics -->
         <div class="pane" id="t4">
             <h2>4. I-V Characteristics of p-n Diode</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Forward bias: exponential rise after knee voltage</li>
-                    <li>Reverse bias: very small saturation current (μA)</li>
-                    <li>Reverse current almost independent of voltage</li>
-                    <li>At high reverse voltage → Zener or avalanche breakdown</li>
-                    <li>Forward current increases rapidly with small voltage</li>
-                    <li>Ideal diode: zero resistance forward, infinite reverse</li>
-                    <li>Cut-in voltage: 0.7 V (Si), 0.3 V (Ge)</li>
-                    <li>Reverse saturation current doubles every 10°C rise</li>
-                    <li>Graph: non-linear in forward, nearly flat in reverse</li>
-                    <li>Used to study diode behavior</li>
+                    <li><span class="counter">1</span>Forward bias: exponential rise after knee voltage</li>
+                    <li><span class="counter">2</span>Diode equation: I = I_s(e^(V/ηV_T) - 1)</li>
+                    <li><span class="counter">3</span>I_s = reverse saturation current (nA-μA)</li>
+                    <li><span class="counter">4</span>V_T = kT/e ≈ 26 mV at 300K (thermal voltage)</li>
+                    <li><span class="counter">5</span>η = ideality factor (1-2)</li>
+                    <li><span class="counter">6</span>Reverse bias: very small saturation current (μA)</li>
+                    <li><span class="counter">7</span>Reverse current almost independent of voltage</li>
+                    <li><span class="counter">8</span>At high reverse voltage → Zener or avalanche breakdown</li>
+                    <li><span class="counter">9</span>Forward current increases rapidly with small voltage</li>
+                    <li><span class="counter">10</span>Ideal diode: zero resistance forward, infinite reverse</li>
+                    <li><span class="counter">11</span>Cut-in voltage: 0.7 V (Si), 0.3 V (Ge)</li>
+                    <li><span class="counter">12</span>Reverse saturation current doubles every 10°C rise</li>
+                    <li><span class="counter">13</span>Graph: non-linear in forward, nearly flat in reverse</li>
+                    <li><span class="counter">14</span>Avalanche breakdown: due to impact ionization</li>
+                    <li><span class="counter">15</span>Zener breakdown: due to tunneling (high doping)</li>
+                    <li><span class="counter">16</span>Used to study diode behavior and parameters</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 5 -->
+        <!-- 5. Rectifiers -->
         <div class="pane" id="t5">
             <h2>5. Diode as Rectifier</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Converts AC to pulsating DC</li>
-                    <li>Half-wave rectifier: only one half-cycle passes</li>
-                    <li>Full-wave rectifier: both half-cycles (center-tap or bridge)</li>
-                    <li>Efficiency: HWR → 40.6%, FWR → 81.2%</li>
-                    <li>Ripple factor: HWR → 1.21, FWR → 0.48</li>
-                    <li>Bridge rectifier: no center tap, 4 diodes</li>
-                    <li>PIV: HWR → V_m, FWR center-tap → 2V_m, bridge → V_m</li>
-                    <li>Filter (C, LC, π) used to smooth output</li>
-                    <li>Output frequency = 2 × input frequency (FWR)</li>
-                    <li>Used in power supplies</li>
+                    <li><span class="counter">1</span>Converts AC to pulsating DC</li>
+                    <li><span class="counter">2</span>Half-wave rectifier: only one half-cycle passes</li>
+                    <li><span class="counter">3</span>Full-wave rectifier: both half-cycles utilized</li>
+                    <li><span class="counter">4</span>Center-tap transformer FWR: 2 diodes + center tap</li>
+                    <li><span class="counter">5</span>Bridge rectifier: 4 diodes, no center tap needed</li>
+                    <li><span class="counter">6</span>Efficiency: HWR → 40.6%, FWR → 81.2%</li>
+                    <li><span class="counter">7</span>Ripple factor: HWR → 1.21, FWR → 0.48</li>
+                    <li><span class="counter">8</span>Form factor: HWR → 1.57, FWR → 1.11</li>
+                    <li><span class="counter">9</span>Peak Inverse Voltage: HWR → V_m, FWR center-tap → 2V_m, bridge → V_m</li>
+                    <li><span class="counter">10</span>Filter (C, LC, π) used to smooth output</li>
+                    <li><span class="counter">11</span>Capacitor filter reduces ripple significantly</li>
+                    <li><span class="counter">12</span>Output frequency = input frequency (HWR)</li>
+                    <li><span class="counter">13</span>Output frequency = 2 × input frequency (FWR)</li>
+                    <li><span class="counter">14</span>Ripple frequency same as output frequency</li>
+                    <li><span class="counter">15</span>Transformer utilization factor: HWR → 0.287, FWR → 0.693</li>
+                    <li><span class="counter">16</span>Used in power supplies for electronic devices</li>
+                    <li><span class="counter">17</span>Voltage regulators used after rectification</li>
+                    <li><span class="counter">18</span>Three-phase rectifiers for high power applications</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 6 -->
+        <!-- 6. Photodiode -->
         <div class="pane" id="t6">
-            <h2>6. Photodiode</h2>
+            <h2>6. Photodiode & Applications</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Operated in reverse bias</li>
-                    <li>Reverse current proportional to light intensity</li>
-                    <li>Depletion region widened for more sensitivity</li>
-                    <li>Used in light detection, optical communication</li>
-                    <li>Fast response, high sensitivity in reverse bias</li>
-                    <li>Symbol has incoming light arrows</li>
-                    <li>Current increases linearly with illumination</li>
-                    <li>Used in smoke detectors, barcode scanners</li>
-                    <li>Can work in photovoltaic mode also</li>
-                    <li>Made of materials sensitive to light (Si, InGaAs)</li>
+                    <li><span class="counter">1</span>Operated in reverse bias for linear response</li>
+                    <li><span class="counter">2</span>Reverse current proportional to light intensity</li>
+                    <li><span class="counter">3</span>Depletion region widened for more sensitivity</li>
+                    <li><span class="counter">4</span>Quantum efficiency: electrons generated per photon</li>
+                    <li><span class="counter">5</span>Responsivity: current output per watt of light</li>
+                    <li><span class="counter">6</span>Used in light detection, optical communication</li>
+                    <li><span class="counter">7</span>Fast response (ns range), high sensitivity</li>
+                    <li><span class="counter">8</span>Symbol has incoming light arrows</li>
+                    <li><span class="counter">9</span>Current increases linearly with illumination</li>
+                    <li><span class="counter">10</span>Used in smoke detectors, barcode scanners</li>
+                    <li><span class="counter">11</span>Can work in photovoltaic mode (zero bias)</li>
+                    <li><span class="counter">12</span>Materials: Si (visible), InGaAs (infrared)</li>
+                    <li><span class="counter">13</span>Dark current: reverse current without light</li>
+                    <li><span class="counter">14</span>PIN photodiode: intrinsic layer for better response</li>
+                    <li><span class="counter">15</span>Avalanche photodiode: internal gain via avalanche</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 7 -->
+        <!-- 7. Solar Cell -->
         <div class="pane" id="t7">
-            <h2>7. Solar Cell</h2>
+            <h2>7. Solar Cell (Photovoltaic Cell)</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>p-n junction converts light energy → electrical energy</li>
-                    <li>Works in photovoltaic mode (no external bias)</li>
-                    <li>Open circuit voltage ≈ 0.6 V (Si)</li>
-                    <li>Short circuit current ∝ intensity</li>
-                    <li>Efficiency ≈ 15–22% (commercial)</li>
-                    <li>I-V curve similar to diode but in first quadrant</li>
-                    <li>Fill factor = (V_m I_m)/(V_oc I_sc)</li>
-                    <li>Used in panels, calculators, satellites</li>
-                    <li>Maximum power point (knee of I-V curve)</li>
-                    <li>Renewable & clean energy source</li>
+                    <li><span class="counter">1</span>p-n junction converts light energy → electrical energy</li>
+                    <li><span class="counter">2</span>Works in photovoltaic mode (no external bias)</li>
+                    <li><span class="counter">3</span>Open circuit voltage V_oc ≈ 0.6 V (Si)</li>
+                    <li><span class="counter">4</span>Short circuit current I_sc ∝ light intensity</li>
+                    <li><span class="counter">5</span>Efficiency ≈ 15–22% (commercial silicon)</li>
+                    <li><span class="counter">6</span>I-V curve similar to diode but in first quadrant</li>
+                    <li><span class="counter">7</span>Fill factor = (V_m I_m)/(V_oc I_sc) (typically 0.7-0.8)</li>
+                    <li><span class="counter">8</span>Maximum power point (knee of I-V curve)</li>
+                    <li><span class="counter">9</span>Used in solar panels, calculators, satellites</li>
+                    <li><span class="counter">10</span>Renewable & clean energy source</li>
+                    <li><span class="counter">11</span>Anti-reflection coating increases efficiency</li>
+                    <li><span class="counter">12</span>Series/parallel connections for voltage/current</li>
+                    <li><span class="counter">13</span>Temperature coefficient negative for V_oc</li>
+                    <li><span class="counter">14</span>Thin-film solar cells: CdTe, CIGS</li>
+                    <li><span class="counter">15</span>Multi-junction solar cells for higher efficiency</li>
+                    <li><span class="counter">16</span>Solar tracking improves energy collection</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 8 -->
+        <!-- 8. Zener Diode -->
         <div class="pane" id="t8">
-            <h2>8. Zener Diode</h2>
+            <h2>8. Zener Diode & Voltage Regulation</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Specially designed for reverse breakdown</li>
-                    <li>Sharp breakdown at V_z (Zener voltage)</li>
-                    <li>Used in reverse bias as voltage regulator</li>
-                    <li>V_out remains constant even if I or V_in changes</li>
-                    <li>High doping → thin depletion → tunneling (Zener effect)</li>
-                    <li>Power rating: P_z = V_z × I_z(max)</li>
-                    <li>Used in voltage stabilizers, reference</li>
-                    <li>Dynamic resistance very low</li>
-                    <li>Symbol has bent ends</li>
-                    <li>Operates safely in breakdown region</li>
+                    <li><span class="counter">1</span>Specially designed for reverse breakdown</li>
+                    <li><span class="counter">2</span>Sharp breakdown at V_z (Zener voltage, 2V-200V)</li>
+                    <li><span class="counter">3</span>Used in reverse bias as voltage regulator</li>
+                    <li><span class="counter">4</span>V_out remains constant even if I or V_in changes</li>
+                    <li><span class="counter">5</span>High doping → thin depletion → tunneling (Zener effect)</li>
+                    <li><span class="counter">6</span>Power rating: P_z = V_z × I_z(max)</li>
+                    <li><span class="counter">7</span>Used in voltage stabilizers, reference sources</li>
+                    <li><span class="counter">8</span>Dynamic resistance very low in breakdown</li>
+                    <li><span class="counter">9</span>Symbol has bent ends (like Z)</li>
+                    <li><span class="counter">10</span>Operates safely in breakdown region</li>
+                    <li><span class="counter">11</span>Temperature coefficient: positive for V_z > 6V</li>
+                    <li><span class="counter">12</span>Series resistor R_s limits current</li>
+                    <li><span class="counter">13</span>Line regulation: ΔV_out/ΔV_in (should be small)</li>
+                    <li><span class="counter">14</span>Load regulation: ΔV_out/ΔI_L (should be small)</li>
+                    <li><span class="counter">15</span>Zener impedance: slope of V-I curve in breakdown</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 9 -->
+        <!-- 9. Junction Transistor -->
         <div class="pane" id="t9">
-            <h2>9. Junction Transistor (BJT)</h2>
+            <h2>9. Bipolar Junction Transistor (BJT)</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Three layers: Emitter, Base, Collector</li>
-                    <li>NPN or PNP types</li>
-                    <li>Two p-n junctions: E-B (forward), C-B (reverse)</li>
-                    <li>Emitter heavily doped, base thin & lightly doped</li>
-                    <li>Current amplification due to transistor action</li>
-                    <li>I_E = I_B + I_C</li>
-                    <li>β = I_C / I_B (50–300 typically)</li>
-                    <li>α = I_C / I_E (0.95–0.99)</li>
-                    <li>Three configurations: CB, CE, CC</li>
-                    <li>CE most common</li>
+                    <li><span class="counter">1</span>Three layers: Emitter, Base, Collector</li>
+                    <li><span class="counter">2</span>Two types: NPN or PNP</li>
+                    <li><span class="counter">3</span>Two p-n junctions: E-B (forward), C-B (reverse)</li>
+                    <li><span class="counter">4</span>Emitter heavily doped, base thin & lightly doped</li>
+                    <li><span class="counter">5</span>Collector moderately doped, largest area</li>
+                    <li><span class="counter">6</span>Current amplification due to transistor action</li>
+                    <li><span class="counter">7</span>I_E = I_B + I_C (Kirchhoff's current law)</li>
+                    <li><span class="counter">8</span>β = I_C / I_B (50–300 typically, current gain)</li>
+                    <li><span class="counter">9</span>α = I_C / I_E (0.95–0.99, common-base current gain)</li>
+                    <li><span class="counter">10</span>Relation: β = α/(1-α), α = β/(1+β)</li>
+                    <li><span class="counter">11</span>Three configurations: Common Base, Common Emitter, Common Collector</li>
+                    <li><span class="counter">12</span>CE most common (high power gain)</li>
+                    <li><span class="counter">13</span>CB has no current gain but voltage gain</li>
+                    <li><span class="counter">14</span>CC (emitter follower) has current gain, voltage gain ≈ 1</li>
+                    <li><span class="counter">15</span>Transistor action: emitter injects, base controls, collector collects</li>
+                    <li><span class="counter">16</span>Base width modulation (Early effect)</li>
+                    <li><span class="counter">17</span>Thermal runaway: positive feedback at high temperature</li>
+                    <li><span class="counter">18</span>Heat sink needed for power transistors</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 10 -->
+        <!-- 10. Transistor Characteristics -->
         <div class="pane" id="t10">
-            <h2>10. Characteristics of Transistor (CE)</h2>
+            <h2>10. Characteristics of Transistor (CE Configuration)</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Input characteristics: I_B vs V_BE (like forward diode)</li>
-                    <li>Output characteristics: I_C vs V_CE for different I_B</li>
-                    <li>Three regions: Active, Cut-off, Saturation</li>
-                    <li>Cut-off: both junctions reverse → I_C ≈ 0</li>
-                    <li>Saturation: both junctions forward → I_C max</li>
-                    <li>Active: E-B forward, C-B reverse → amplification</li>
-                    <li>Current gain β = ΔI_C / ΔI_B</li>
-                    <li>Early effect: slight slope in output curve</li>
-                    <li>Power gain = β² × resistance gain</li>
-                    <li>Used to study transistor behavior</li>
+                    <li><span class="counter">1</span>Input characteristics: I_B vs V_BE (like forward diode)</li>
+                    <li><span class="counter">2</span>Output characteristics: I_C vs V_CE for different I_B</li>
+                    <li><span class="counter">3</span>Three regions: Active, Cut-off, Saturation</li>
+                    <li><span class="counter">4</span>Cut-off: both junctions reverse → I_C ≈ I_CEO</li>
+                    <li><span class="counter">5</span>Saturation: both junctions forward → I_C max, V_CE ≈ 0.2V</li>
+                    <li><span class="counter">6</span>Active: E-B forward, C-B reverse → amplification</li>
+                    <li><span class="counter">7</span>Current gain β = ΔI_C / ΔI_B (ac beta)</li>
+                    <li><span class="counter">8</span>Early effect: slight slope in output curve (finite output resistance)</li>
+                    <li><span class="counter">9</span>Power gain = voltage gain × current gain</li>
+                    <li><span class="counter">10</span>Transfer characteristics: I_C vs I_B (linear relationship)</li>
+                    <li><span class="counter">11</span>Breakdown voltage: BV_CEO, BV_CBO, BV_EBO</li>
+                    <li><span class="counter">12</span>Leakage currents: I_CBO, I_CEO = (1+β)I_CBO</li>
+                    <li><span class="counter">13</span>Thermal voltage V_T = kT/e ≈ 26 mV at 300K</li>
+                    <li><span class="counter">14</span>Transconductance g_m = I_C/V_T (≈ 38.5 mS for I_C=1mA)</li>
+                    <li><span class="counter">15</span>Input impedance: h_ie = β/g_m (≈ 2.6kΩ for β=100, I_C=1mA)</li>
+                    <li><span class="counter">16</span>Used to study transistor behavior and parameters</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 11 -->
+        <!-- 11. Transistor Amplifier -->
         <div class="pane" id="t11">
-            <h2>11. Transistor as Amplifier, Oscillator & Logic Gates</h2>
+            <h2>11. Transistor as Amplifier & Oscillator</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Amplifier: small change in I_B → large change in I_C</li>
-                    <li>CE configuration gives voltage & current gain</li>
-                    <li>Voltage gain A_v = β (R_C / r_e)</li>
-                    <li>Oscillator: positive feedback (Barkhausen criterion)</li>
-                    <li>LC, RC, crystal oscillators</li>
-                    <li>NOT gate: single transistor inverter</li>
-                    <li>AND, OR, NAND, NOR using diode-transistor logic (DTL)</li>
-                    <li>Digital circuits use saturation & cut-off</li>
-                    <li>Transistor switch: fast on/off</li>
-                    <li>Foundation of all digital electronics</li>
+                    <li><span class="counter">1</span>Amplifier: small change in I_B → large change in I_C</li>
+                    <li><span class="counter">2</span>CE configuration gives both voltage & current gain</li>
+                    <li><span class="counter">3</span>Voltage gain A_v = -g_m R_C (for CE with R_E=0)</li>
+                    <li><span class="counter">4</span>Current gain A_i = β (approximately)</li>
+                    <li><span class="counter">5</span>Power gain A_p = A_v × A_i</li>
+                    <li><span class="counter">6</span>Biasing circuits: fixed bias, emitter bias, voltage divider</li>
+                    <li><span class="counter">7</span>Q-point (quiescent point): DC operating point</li>
+                    <li><span class="counter">8</span>Stability factor S = ΔI_C/ΔI_CO (should be small)</li>
+                    <li><span class="counter">9</span>Oscillator: positive feedback (Barkhausen criterion)</li>
+                    <li><span class="counter">10</span>Barkhausen: |Aβ| ≥ 1, phase shift = 0° or 360°</li>
+                    <li><span class="counter">11</span>LC oscillators: Hartley, Colpitts</li>
+                    <li><span class="counter">12</span>RC oscillators: Phase shift, Wien bridge</li>
+                    <li><span class="counter">13</span>Crystal oscillators: high frequency stability</li>
+                    <li><span class="counter">14</span>Feedback types: positive (oscillators), negative (amplifiers)</li>
+                    <li><span class="counter">15</span>Gain-bandwidth product constant</li>
+                    <li><span class="counter">16</span>Class A, B, AB, C amplifiers (efficiency differences)</li>
+                    <li><span class="counter">17</span>Darlington pair: very high current gain (β²)</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 12 -->
+        <!-- 12. Logic Gates -->
         <div class="pane" id="t12">
-            <h2>12. Transistor as a Switch</h2>
+            <h2>12. Logic Gates & Transistor as Switch</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Cut-off → OFF state (V_out = V_CC)</li>
-                    <li>Saturation → ON state (V_out ≈ 0)</li>
-                    <li>Small base current controls large collector current</li>
-                    <li>Used in digital circuits, relays, LEDs</li>
-                    <li>Switching time: rise & fall time</li>
-                    <li>Low power consumption</li>
-                    <li>High speed switching (ns range)</li>
-                    <li>Inverter (NOT gate) is basic switch</li>
-                    <li>LED driver circuit classic example</li>
-                    <li>Base resistor limits I_B</li>
+                    <li><span class="counter">1</span>Transistor as switch: Cut-off → OFF, Saturation → ON</li>
+                    <li><span class="counter">2</span>Cut-off: V_out = V_CC (logic 1)</li>
+                    <li><span class="counter">3</span>Saturation: V_out ≈ 0.2V (logic 0)</li>
+                    <li><span class="counter">4</span>Small base current controls large collector current</li>
+                    <li><span class="counter">5</span>NOT gate (inverter): single transistor</li>
+                    <li><span class="counter">6</span>NAND gate: universal gate (can make all others)</li>
+                    <li><span class="counter">7</span>AND, OR using diode-transistor logic (DTL)</li>
+                    <li><span class="counter">8</span>TTL: Transistor-Transistor Logic (fast switching)</li>
+                    <li><span class="counter">9</span>CMOS: Complementary MOS (low power)</li>
+                    <li><span class="counter">10</span>Truth tables define gate behavior</li>
+                    <li><span class="counter">11</span>Boolean algebra: A·B (AND), A+B (OR), A' (NOT)</li>
+                    <li><span class="counter">12</span>De Morgan's theorems: (A·B)' = A' + B', (A+B)' = A'·B'</li>
+                    <li><span class="counter">13</span>Fan-out: number of gates a gate can drive</li>
+                    <li><span class="counter">14</span>Propagation delay: time from input to output</li>
+                    <li><span class="counter">15</span>Noise margin: tolerance to voltage variations</li>
+                    <li><span class="counter">16</span>Power dissipation: static + dynamic</li>
+                    <li><span class="counter">17</span>Flip-flops: basic memory elements</li>
+                    <li><span class="counter">18</span>Used in digital circuits, computers, microcontrollers</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 13. Integrated Circuits -->
+        <div class="pane" id="t13">
+            <h2>13. Integrated Circuits & MOSFET</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>IC: Complete circuit on single silicon chip</li>
+                    <li><span class="counter">2</span>SSI, MSI, LSI, VLSI, ULSI (scale of integration)</li>
+                    <li><span class="counter">3</span>MOSFET: Metal Oxide Semiconductor Field Effect Transistor</li>
+                    <li><span class="counter">4</span>MOSFET types: Enhancement, Depletion (n-channel, p-channel)</li>
+                    <li><span class="counter">5</span>Voltage controlled device (gate controls channel)</li>
+                    <li><span class="counter">6</span>High input impedance (almost infinite)</li>
+                    <li><span class="counter">7</span>CMOS: Complementary MOS (n-MOS + p-MOS)</li>
+                    <li><span class="counter">8</span>CMOS advantages: low power, high density</li>
+                    <li><span class="counter">9</span>JFET: Junction Field Effect Transistor</li>
+                    <li><span class="counter">10</span>Operational amplifier (Op-amp): high gain differential amplifier</li>
+                    <li><span class="counter">11</span>Op-amp characteristics: high input Z, low output Z</li>
+                    <li><span class="counter">12</span>Op-amp applications: adder, subtractor, integrator, differentiator</li>
+                    <li><span class="counter">13</span>Digital IC families: TTL, CMOS, ECL</li>
+                    <li><span class="counter">14</span>Microprocessor: CPU on single chip</li>
+                    <li><span class="counter">15</span>Memory ICs: RAM, ROM, Flash</li>
+                    <li><span class="counter">16</span>Moore's Law: transistor count doubles every 2 years</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 14. Communication Systems -->
+        <div class="pane" id="t14">
+            <h2>14. Communication Systems Basics</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Basic elements: Transmitter, Channel, Receiver</li>
+                    <li><span class="counter">2</span>Modulation: superimposing signal on carrier wave</li>
+                    <li><span class="counter">3</span>Types: AM, FM, PM (analog); ASK, FSK, PSK (digital)</li>
+                    <li><span class="counter">4</span>Amplitude Modulation: m = (A_max - A_min)/(A_max + A_min)</li>
+                    <li><span class="counter">5</span>Frequency Modulation: Δf ∝ modulating signal</li>
+                    <li><span class="counter">6</span>Bandwidth: AM → 2f_m, FM → 2(Δf + f_m)</li>
+                    <li><span class="counter">7</span>Need for modulation: antenna size, multiplexing, range</li>
+                    <li><span class="counter">8</span>Demodulation: extracting signal from modulated wave</li>
+                    <li><span class="counter">9</span>Transducers: convert one form of energy to electrical</li>
+                    <li><span class="counter">10</span>Noise: unwanted signal interfering with transmission</li>
+                    <li><span class="counter">11</span>Signal-to-noise ratio (SNR): quality measure</li>
+                    <li><span class="counter">12</span>Attenuation: signal strength reduction with distance</li>
+                    <li><span class="counter">13</span>Amplification: increasing signal strength</li>
+                    <li><span class="counter">14</span>Propagation modes: ground wave, sky wave, space wave</li>
+                    <li><span class="counter">15</span>Digital communication advantages: noise immunity, encryption</li>
                 </ul>
             </div>
         </div>
@@ -281,7 +433,7 @@
     </div>
 
     <footer>
-        Electronic Devices • Full Summary • Energy Bands • p-n Junction • Diode • Transistor • Logic Gates • JEE/NEET 2025-26
+        Electronic Devices • 220+ Distinct Points • Semiconductors • p-n Junction • Transistor • Logic Gates • ICs • Communication • JEE/NEET 2025-26
     </footer>
 </div>
 
@@ -296,3 +448,4 @@
 </script>
 </body>
 </html>
+
