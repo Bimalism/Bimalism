@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual Nature of Radiation & Matter – Summary</title>
+    <title>Dual Nature of Radiation & Matter – Complete Summary</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
         body { background:#f3e5f5; padding:20px; }
-        .container { max-width:1150px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
+        .container { max-width:1350px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
         header { background:linear-gradient(135deg,#6a1b9a,#7b1fa2,#8e24aa); color:white; padding:45px; text-align:center; }
         h1 { font-size:3rem; margin-bottom:10px; }
         .subtitle { font-size:1.4rem; opacity:0.95; }
-        .nav { display:flex; background:#4a148c; flex-wrap:wrap; }
-        .tab { flex:1; padding:20px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; }
+        .nav { display:flex; background:#4a148c; flex-wrap:wrap; justify-content:center; }
+        .tab { padding:20px 30px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; min-width:200px; }
         .tab:hover { background:rgba(255,255,255,0.15); }
         .tab.active { background:rgba(255,255,255,0.3); border-bottom:5px solid #ba68c8; }
         .content { padding:50px; }
@@ -20,119 +20,304 @@
         .pane.active { display:block; animation:fade 0.6s; }
         @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
         h2 { color:#6a1b9a; font-size:2.3rem; margin:40px 0 25px; border-bottom:4px solid #8e24aa; padding-bottom:10px; }
-        .box { background:#f3e5f5; border-left:8px solid #ba68c8; padding:25px; border-radius:0 12px 12px 0; line-height:2.2; }
-        ul { padding-left:40px; font-size:1.15rem; }
+        .box { background:#f3e5f5; border-left:8px solid #ba68c8; padding:30px; border-radius:0 12px 12px 0; line-height:1.8; }
+        ul { padding-left:40px; font-size:1.15rem; columns:2; column-gap:60px; }
+        li { margin-bottom:12px; break-inside:avoid; padding-right:20px; }
+        .counter { display:inline-block; width:30px; color:#6a1b9a; font-weight:bold; margin-right:8px; }
+        .points-total { text-align:center; background:#e1bee7; padding:15px; border-radius:10px; margin:30px 0; font-weight:bold; font-size:1.2rem; }
         footer { background:#4a148c; color:white; text-align:center; padding:30px; font-size:1.2rem; }
+        @media(max-width:1100px){ul{columns:1;}}
+        @media(max-width:768px){
+            .tab{padding:16px; min-width:150px; font-size:0.95rem;}
+            h1{font-size:2.3rem;}
+            .content{padding:30px;}
+            ul{padding-left:25px;}
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
         <h1>DUAL NATURE OF RADIATION & MATTER</h1>
-        <p class="subtitle">Complete Short Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+        <p class="subtitle">Complete Chapter Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
     </header>
 
     <nav class="nav">
         <div class="tab active" data-tab="t1">Photoelectric Effect</div>
-        <div class="tab" data-tab="t2">Hertz & Lenard’s Observations</div>
-        <179> <div class="tab" data-tab="t3">Einstein’s Equation</div>
+        <div class="tab" data-tab="t2">Hertz & Lenard's Observations</div>
+        <div class="tab" data-tab="t3">Einstein's Equation</div>
         <div class="tab" data-tab="t4">Matter Waves & de Broglie</div>
         <div class="tab" data-tab="t5">Davisson-Germer Experiment</div>
+        <div class="tab" data-tab="t6">Wave-Particle Duality</div>
+        <div class="tab" data-tab="t7">Photon Properties</div>
+        <div class="tab" data-tab="t8">Electron Properties</div>
+        <div class="tab" data-tab="t9">Applications</div>
+        <div class="tab" data-tab="t10">Numerical Relations</div>
     </nav>
 
     <div class="content">
 
-        <!-- 1 -->
+        <!-- 1. Photoelectric Effect -->
         <div class="pane active" id="t1">
-            <h2>1. Photoelectric Effect</h2>
+            <h2>1. Photoelectric Effect - Fundamental Concepts</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Ejection of electrons from metal surface by light</li>
-                    <li>Occurs only if frequency > threshold frequency (ν₀)</li>
-                    <li>Threshold frequency depends on metal (work function)</li>
-                    <li>Photoelectrons emitted almost instantaneously (<10⁻⁹ s)</li>
-                    <li>Maximum KE of electrons independent of intensity</li>
-                    <li>Number of photoelectrons ∝ intensity of light</li>
-                    <li>Stopping potential (V₀) stops fastest electrons</li>
-                    <li>KE_max = e V₀</li>
-                    <li>Failed to be explained by wave theory of light</li>
-                    <li>Proved particle nature of light (photons)</li>
+                    <li><span class="counter">1</span>Ejection of electrons from metal surface by electromagnetic radiation</li>
+                    <li><span class="counter">2</span>Occurs only if incident frequency > threshold frequency (ν₀)</li>
+                    <li><span class="counter">3</span>Threshold frequency depends on metal's work function</li>
+                    <li><span class="counter">4</span>Photoelectrons emitted almost instantaneously (<10⁻⁹ s)</li>
+                    <li><span class="counter">5</span>Maximum kinetic energy independent of radiation intensity</li>
+                    <li><span class="counter">6</span>Number of photoelectrons ∝ intensity of incident radiation</li>
+                    <li><span class="counter">7</span>Stopping potential (V₀) required to stop fastest photoelectrons</li>
+                    <li><span class="counter">8</span>Maximum kinetic energy: KE_max = e V₀</li>
+                    <li><span class="counter">9</span>Completely unexplained by classical wave theory of light</li>
+                    <li><span class="counter">10</span>Established particle nature of light (photons)</li>
+                    <li><span class="counter">11</span>Saturation current reached at high intensity</li>
+                    <li><span class="counter">12</span>No time lag even at very low intensities</li>
+                    <li><span class="counter">13</span>Work function φ = hν₀ (minimum energy needed)</li>
+                    <li><span class="counter">14</span>Photoelectric current increases with accelerating voltage</li>
+                    <li><span class="counter">15</span>Frequency dependence stronger than intensity dependence</li>
+                    <li><span class="counter">16</span>Monochromatic light produces electrons with energy distribution</li>
+                    <li><span class="counter">17</span>Different metals have different threshold frequencies</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 2 -->
+        <!-- 2. Hertz and Lenard's Observations -->
         <div class="pane" id="t2">
-            <h2>2. Hertz and Lenard’s Observations</h2>
+            <h2>2. Hertz & Lenard's Experimental Observations</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Hertz (1887): UV light helps spark discharge easier</li>
-                    <li>UV light ejects electrons from negative plate</li>
-                    <li>Lenard (1900): Studied photoelectric effect systematically</li>
-                    <li>Observed photocurrent ∝ intensity</li>
-                    <li>Found stopping potential independent of intensity</li>
-                    <li>Observed threshold frequency phenomenon</li>
-                    <li>Electrons emitted only above certain frequency</li>
-                    <li>KE increases with frequency, not intensity</li>
-                    <li>Instantaneous emission (no time lag)</li>
-                    <li>Wave theory could not explain these results</li>
+                    <li><span class="counter">1</span>Hertz (1887): UV light facilitates spark discharge across gap</li>
+                    <li><span class="counter">2</span>UV light ejects electrons from negative electrode (cathode)</li>
+                    <li><span class="counter">3</span>Lenard (1900): Systematic study with evacuated tube</li>
+                    <li><span class="counter">4</span>Observed photocurrent directly proportional to light intensity</li>
+                    <li><span class="counter">5</span>Found stopping potential independent of light intensity</li>
+                    <li><span class="counter">6</span>Discovered threshold frequency phenomenon</li>
+                    <li><span class="counter">7</span>Electrons emitted only above certain frequency (ν > ν₀)</li>
+                    <li><span class="counter">8</span>Maximum kinetic energy increases linearly with frequency</li>
+                    <li><span class="counter">9</span>KE independent of intensity (contradicted wave theory)</li>
+                    <li><span class="counter">10</span>No measurable time lag for electron emission</li>
+                    <li><span class="counter">11</span>Classical wave theory predicted energy accumulation over time</li>
+                    <li><span class="counter">12</span>Wave theory couldn't explain frequency threshold</li>
+                    <li><span class="counter">13</span>Experiments conducted with different metal surfaces</li>
+                    <li><span class="counter">14</span>Used variable voltage to measure stopping potential</li>
+                    <li><span class="counter">15</span>Observations provided crucial data for Einstein's theory</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 3 -->
+        <!-- 3. Einstein's Photoelectric Equation -->
         <div class="pane" id="t3">
-            <h2>3. Einstein’s Photoelectric Equation & Particle Nature</h2>
+            <h2>3. Einstein's Photoelectric Equation & Quantum Theory</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Light consists of photons: E = hν</li>
-                    <li>Einstein (1905): One photon ejects one electron</li>
-                    <li>hν = φ + KE_max (φ = work function)</li>
-                    <li>KE_max = hν – hν₀ = h(ν – ν₀)</li>
-                    <li>Stopping potential: eV₀ = h(ν – ν₀)</li>
-                    <li>V₀ vs ν graph is straight line with slope h/e</li>
-                    <li>Intercept on frequency axis = ν₀</li>
-                    <li>Explained all observations of photoelectric effect</li>
-                    <li>Proved light has particle nature (photon)</li>
-                    <li>Einstein got Nobel Prize in 1921 for this</li>
+                    <li><span class="counter">1</span>Light consists of discrete energy packets: photons</li>
+                    <li><span class="counter">2</span>Photon energy: E = hν (h = Planck's constant)</li>
+                    <li><span class="counter">3</span>Einstein (1905): One photon ejects one electron</li>
+                    <li><span class="counter">4</span>Einstein's equation: hν = φ + KE_max</li>
+                    <li><span class="counter">5</span>φ = hν₀ (work function = minimum energy needed)</li>
+                    <li><span class="counter">6</span>KE_max = h(ν - ν₀) = hν - φ</li>
+                    <li><span class="counter">7</span>Stopping potential relation: e V₀ = h(ν - ν₀)</li>
+                    <li><span class="counter">8</span>V₀ vs ν graph is straight line with slope = h/e</li>
+                    <li><span class="counter">9</span>X-intercept gives threshold frequency (ν₀)</li>
+                    <li><span class="counter">10</span>Y-intercept gives -φ/e (negative)</li>
+                    <li><span class="counter">11</span>Successfully explained all photoelectric observations</li>
+                    <li><span class="counter">12</span>Confirmed light has particle nature (photon concept)</li>
+                    <li><span class="counter">13</span>Einstein received Nobel Prize in 1921 for this work</li>
+                    <li><span class="counter">14</span>Millikan's experiments (1916) verified Einstein's equation</li>
+                    <li><span class="counter">15</span>Photoelectric effect demonstrated quantum nature of light</li>
+                    <li><span class="counter">16</span>Bridge between classical and quantum physics</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 4 -->
+        <!-- 4. Matter Waves & de Broglie Relation -->
         <div class="pane" id="t4">
-            <h2>4. Matter Waves & de Broglie Relation</h2>
+            <h2>4. Matter Waves & de Broglie Hypothesis</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>de Broglie (1924): Matter has wave nature</li>
-                    <li>Wavelength λ = h / p = h / (m v)</li>
-                    <li>h = Planck’s constant = 6.626 × 10⁻³⁴ J·s</li>
-                    <li>Duality: All particles have both wave & particle nature</li>
-                    <li>Macroscopic objects: λ very small → wave nature not seen</li>
-                    <li>Electrons, protons: λ significant → wave nature observable</li>
-                    <li>Faster particle → smaller wavelength</li>
-                    <li>Explained Bohr’s quantization (standing waves)</li>
-                    <li>Foundation of wave mechanics/quantum mechanics</li>
-                    <li>λ = h / √(2 m E) for non-relativistic particles</li>
+                    <li><span class="counter">1</span>de Broglie (1924): Matter exhibits wave nature</li>
+                    <li><span class="counter">2</span>de Broglie wavelength: λ = h/p = h/(m v)</li>
+                    <li><span class="counter">3</span>h = Planck's constant = 6.626 × 10⁻³⁴ J·s</li>
+                    <li><span class="counter">4</span>Wave-particle duality: All entities have both properties</li>
+                    <li><span class="counter">5</span>Macroscopic objects: λ extremely small → wave nature negligible</li>
+                    <li><span class="counter">6</span>Electrons, protons: λ significant → observable wave effects</li>
+                    <li><span class="counter">7</span>Faster moving particle → smaller de Broglie wavelength</li>
+                    <li><span class="counter">8</span>Explained Bohr's quantization: electron orbits as standing waves</li>
+                    <li><span class="counter">9</span>Condition: nλ = 2πr (standing wave around nucleus)</li>
+                    <li><span class="counter">10</span>Foundation of wave mechanics and quantum mechanics</li>
+                    <li><span class="counter">11</span>For non-relativistic particles: λ = h/√(2mE)</li>
+                    <li><span class="counter">12</span>Thermal de Broglie wavelength at temperature T</li>
+                    <li><span class="counter">13</span>Applied to electrons in crystals → energy bands</li>
+                    <li><span class="counter">14</span>Matter waves are probability waves (Born interpretation)</li>
+                    <li><span class="counter">15</span>Group velocity of matter wave = particle velocity</li>
+                    <li><span class="counter">16</span>Phase velocity > speed of light (not physically significant)</li>
+                    <li><span class="counter">17</span>Concept extended to all particles: neutrons, atoms, molecules</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 5 -->
+        <!-- 5. Davisson-Germer Experiment -->
         <div class="pane" id="t5">
             <h2>5. Davisson-Germer Experiment (1927)</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Confirmed wave nature of electrons</li>
-                    <li>Electrons accelerated through V volts → λ = h/√(2meV)</li>
-                    <li>Scattered from nickel crystal (natural diffraction grating)</li>
-                    <li>Observed diffraction pattern with maxima</li>
-                    <li>Maxima at same angle as X-ray diffraction</li>
-                    <li>Measured wavelength matched de Broglie formula</li>
-                    <li>Experimental wavelength = 0.165 nm (theory = 0.167 nm)</li>
-                    <li>Proved electrons behave as waves</li>
-                    <li>Direct evidence of de Broglie hypothesis</li>
-                    <li>Established wave-particle duality for matter</li>
+                    <li><span class="counter">1</span>First direct experimental confirmation of electron waves</li>
+                    <li><span class="counter">2</span>Electrons accelerated through potential difference V</li>
+                    <li><span class="counter">3</span>Theoretical wavelength: λ = h/√(2m_e eV)</li>
+                    <li><span class="counter">4</span>Scattered from nickel crystal (natural diffraction grating)</li>
+                    <li><span class="counter">5</span>Observed diffraction pattern with intensity maxima</li>
+                    <li><span class="counter">6</span>Maxima at same angles as X-ray diffraction patterns</li>
+                    <li><span class="counter">7</span>Peak intensity at specific angle (54V, 50° scattering)</li>
+                    <li><span class="counter">8</span>Experimental wavelength = 0.165 nm</li>
+                    <li><span class="counter">9</span>Theoretical de Broglie wavelength = 0.167 nm</li>
+                    <li><span class="counter">10</span>Excellent agreement confirmed wave nature of electrons</li>
+                    <li><span class="counter">11</span>Proved electrons behave as waves under suitable conditions</li>
+                    <li><span class="counter">12</span>Direct evidence supporting de Broglie hypothesis</li>
+                    <li><span class="counter">13</span>Established wave-particle duality for matter particles</li>
+                    <li><span class="counter">14</span>Davisson and Germer shared Nobel Prize (1937)</li>
+                    <li><span class="counter">15</span>Independent confirmation by G.P. Thomson (1928)</li>
+                    <li><span class="counter">16</span>Foundation for electron microscopy and diffraction techniques</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. Wave-Particle Duality -->
+        <div class="pane" id="t6">
+            <h2>6. Wave-Particle Duality Concepts</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Complementarity principle (Bohr): Both wave and particle aspects</li>
+                    <li><span class="counter">2</span>Cannot observe both aspects simultaneously in single experiment</li>
+                    <li><span class="counter">3</span>Light: Shows wave nature in diffraction/interference</li>
+                    <li><span class="counter">4</span>Light: Shows particle nature in photoelectric effect</li>
+                    <li><span class="counter">5</span>Matter: Shows particle nature in track detectors</li>
+                    <li><span class="counter">6</span>Matter: Shows wave nature in diffraction experiments</li>
+                    <li><span class="counter">7</span>De Broglie relation connects wave and particle properties</li>
+                    <li><span class="counter">8</span>Wavefunction ψ describes quantum state</li>
+                    <li><span class="counter">9</span>Probability density = |ψ|² (Born interpretation)</li>
+                    <li><span class="counter">10</span>Uncertainty principle consequence of duality</li>
+                    <li><span class="counter">11</span>Matter waves are not electromagnetic waves</li>
+                    <li><span class="counter">12</span>Matter waves are probability amplitude waves</li>
+                    <li><span class="counter">13</span>Dual behavior depends on experimental setup</li>
+                    <li><span class="counter">14</span>Macroscopic objects: Particle behavior dominates</li>
+                    <li><span class="counter">15</span>Quantum objects: Both behaviors significant</li>
+                    <li><span class="counter">16</span>Wave packets used to represent localized particles</li>
+                    <li><span class="counter">17</span>Superposition principle for matter waves</li>
+                    <li><span class="counter">18</span>Foundation of quantum field theory</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Photon Properties -->
+        <div class="pane" id="t7">
+            <h2>7. Photon Properties & Characteristics</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Quantum of electromagnetic radiation</li>
+                    <li><span class="counter">2</span>Zero rest mass, always moves at speed c</li>
+                    <li><span class="counter">3</span>Energy: E = hν = hc/λ</li>
+                    <li><span class="counter">4</span>Momentum: p = h/λ = E/c</li>
+                    <li><span class="counter">5</span>Spin = 1 (integer spin → boson)</li>
+                    <li><span class="counter">6</span>Electrically neutral</li>
+                    <li><span class="counter">7</span>Can be created/absorbed in interactions</li>
+                    <li><span class="counter">8</span>Exhibits both wave and particle properties</li>
+                    <li><span class="counter">9</span>Photon number not conserved</li>
+                    <li><span class="counter">10</span>Different types: radio, microwave, IR, visible, UV, X-ray, gamma</li>
+                    <li><span class="counter">11</span>Higher frequency → higher energy per photon</li>
+                    <li><span class="counter">12</span>Intensity = photon flux × energy per photon</li>
+                    <li><span class="counter">13</span>Photon can transfer entire energy to electron</li>
+                    <li><span class="counter">14</span>Photon in medium has reduced speed but same frequency</li>
+                    <li><span class="counter">15</span>Virtual photons mediate electromagnetic force</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. Electron Properties -->
+        <div class="pane" id="t8">
+            <h2>8. Electron Properties & Wave Nature</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Rest mass: m_e = 9.109 × 10⁻³¹ kg</li>
+                    <li><span class="counter">2</span>Charge: e = 1.602 × 10⁻¹⁹ C (negative)</li>
+                    <li><span class="counter">3</span>Spin = 1/2 (half-integer → fermion)</li>
+                    <li><span class="counter">4</span>De Broglie wavelength for V volts: λ = 12.27/√V Å</li>
+                    <li><span class="counter">5</span>Thermal wavelength at temperature T</li>
+                    <li><span class="counter">6</span>Electron diffraction used to study crystal structure</li>
+                    <li><span class="counter">7</span>Electron microscope uses wave nature for high resolution</li>
+                    <li><span class="counter">8</span>Electron interference in double-slit experiment</li>
+                    <li><span class="counter">9</span>Wave nature explains energy bands in solids</li>
+                    <li><span class="counter">10</span>Electrons in atoms described by wavefunctions</li>
+                    <li><span class="counter">11</span>Quantum tunneling due to wave nature</li>
+                    <li><span class="counter">12</span>Electron diffraction patterns similar to X-ray patterns</li>
+                    <li><span class="counter">13</span>Low-energy electron diffraction (LEED) for surface studies</li>
+                    <li><span class="counter">14</span>Transmission electron microscopy (TEM)</li>
+                    <li><span class="counter">15</span>Scanning electron microscopy (SEM)</li>
+                    <li><span class="counter">16</span>Electron waves used in holography</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9. Applications -->
+        <div class="pane" id="t9">
+            <h2>9. Applications & Technological Implications</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Photocells based on photoelectric effect</li>
+                    <li><span class="counter">2</span>Solar cells convert light to electricity</li>
+                    <li><span class="counter">3</span>Photomultiplier tubes for low-light detection</li>
+                    <li><span class="counter">4</span>Digital cameras and image sensors (CCD/CMOS)</li>
+                    <li><span class="counter">5</span>Burglar alarms and light sensors</li>
+                    <li><span class="counter">6</span>Electron microscopes (TEM, SEM)</li>
+                    <li><span class="counter">7</span>Low-energy electron diffraction (LEED)</li>
+                    <li><span class="counter">8</span>Photoelectric spectroscopy for material analysis</li>
+                    <li><span class="counter">9</span>X-ray photoelectron spectroscopy (XPS)</li>
+                    <li><span class="counter">10</span>Ultraviolet photoelectron spectroscopy (UPS)</li>
+                    <li><span class="counter">11</span>Photoelectric effect in vacuum tubes</li>
+                    <li><span class="counter">12</span>Automatic doors and counters</li>
+                    <li><span class="counter">13</span>Sound reproduction from film tracks</li>
+                    <li><span class="counter">14</span>Smoke detectors using photoelectric principle</li>
+                    <li><span class="counter">15</span>Night vision devices</li>
+                    <li><span class="counter">16</span>Photovoltaic power generation</li>
+                    <li><span class="counter">17</span>Quantum computing utilizing wave properties</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10. Numerical Relations -->
+        <div class="pane" id="t10">
+            <h2>10. Important Numerical Relations & Constants</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Planck's constant: h = 6.626 × 10⁻³⁴ J·s</li>
+                    <li><span class="counter">2</span>Reduced Planck constant: ħ = h/(2π) = 1.055 × 10⁻³⁴ J·s</li>
+                    <li><span class="counter">3</span>Electron charge: e = 1.602 × 10⁻¹⁹ C</li>
+                    <li><span class="counter">4</span>Electron mass: m_e = 9.109 × 10⁻³¹ kg</li>
+                    <li><span class="counter">5</span>Speed of light: c = 3 × 10⁸ m/s</li>
+                    <li><span class="counter">6</span>h/e = 4.14 × 10⁻¹⁵ V·s (slope of V₀ vs ν graph)</li>
+                    <li><span class="counter">7</span>de Broglie λ for electron: λ = h/√(2m_e eV) = 12.27/√V Å</li>
+                    <li><span class="counter">8</span>Photon energy in eV: E(eV) = 1240/λ(nm)</li>
+                    <li><span class="counter">9</span>Work function typically 1-6 eV for metals</li>
+                    <li><span class="counter">10</span>Threshold frequency: ν₀ = φ/h</li>
+                    <li><span class="counter">11</span>Threshold wavelength: λ₀ = hc/φ</li>
+                    <li><span class="counter">12</span>1 eV = 1.602 × 10⁻¹⁹ J</li>
+                    <li><span class="counter">13</span>Stopping potential: V₀ = (h/e)(ν - ν₀)</li>
+                    <li><span class="counter">14</span>Maximum photoelectron speed: v_max = √[2(hν - φ)/m_e]</li>
+                    <li><span class="counter">15</span>Photoelectric current: I = ne (n = number of electrons/s)</li>
+                    <li><span class="counter">16</span>Photon momentum: p = E/c = h/λ</li>
+                    <li><span class="counter">17</span>de Broglie λ for thermal neutrons: λ = h/√(3mkT)</li>
+                    <li><span class="counter">18</span>Compton wavelength of electron: λ_c = h/(m_e c) = 2.43 pm</li>
                 </ul>
             </div>
         </div>
@@ -140,7 +325,7 @@
     </div>
 
     <footer>
-        Dual Nature of Radiation & Matter • Photoelectric Effect • Einstein Equation • de Broglie Waves • Davisson-Germer • JEE/NEET 2025-26
+        Dual Nature of Radiation & Matter • 165+ Distinct Points • Photoelectric Effect • Einstein Equation • de Broglie Waves • Davisson-Germer • JEE/NEET 2025-26
     </footer>
 </div>
 
