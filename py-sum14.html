@@ -5,113 +5,598 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electromagnetic Waves – Complete Summary</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        /* COMMON STYLES */
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Times New Roman', serif; }
         body { background:#e0f2f1; padding:20px; }
-        .container { max-width:1100px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
+        .container { max-width:1400px; margin:auto; background:white; border-radius:16px; overflow:hidden; box-shadow:0 15px 45px rgba(0,0,0,0.18); }
         header { background:linear-gradient(135deg,#00695c,#00897b,#009688); color:white; padding:45px; text-align:center; }
-        h1 { font-size:3rem; margin-bottom:10px; }
-        .subtitle { font-size:1.4rem; opacity:0.95; }
-        .nav { display:flex; background:#004d40; }
-        .tab { flex:1; padding:20px; color:white; text-align:center; cursor:pointer; font-weight:600; transition:0.3s; }
-        .tab:hover { background:rgba(255,255,255,0.15); }
-        .tab.active { background:rgba(255,255,255,0.3); border-bottom:5px solid #4db6ac; }
-        .content { padding:50px; }
+        h1 { font-size:3.2rem; margin-bottom:12px; letter-spacing:1px; }
+        .subtitle { font-size:1.45rem; opacity:0.96; }
+        .nav { display:flex; background:#004d40; flex-wrap:wrap; }
+        .tab { padding:20px 35px; color:white; cursor:pointer; font-weight:600; transition:0.3s; font-size:1.1rem; }
+        .tab:hover { background:rgba(255,255,255,0.2); }
+        .tab.active { background:rgba(255,255,255,0.3); border-bottom:6px solid #4db6ac; }
+        .content { padding:55px; }
         .pane { display:none; }
-        .pane.active { display:block; animation:fade 0.6s; }
+        .pane.active { display:block; animation:fade 0.7s; }
         @keyframes fade { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
-        h2 { color:#00695c; font-size:2.4rem; margin:40px 0 25px; border-bottom:4px solid #00897b; padding-bottom:10px; }
-        .box { background:#e0f2f1; border-left:8px solid #4db6ac; padding:25px; border-radius:0 12px 12px 0; line-height:2.2; }
-        ul { padding-left:40px; font-size:1.15rem; }
-        footer { background:#004d40; color:white; text-align:center; padding:30px; font-size:1.2rem; }
+        h2 { color:#00695c; font-size:2.4rem; margin:40px 0 25px; border-bottom:5px solid #00897b; padding-bottom:12px; }
+        h3 { color:#00897b; font-size:1.8rem; margin:30px 0 15px; }
+        .def { background:#e0f2f1; border-left:8px solid #4db6ac; padding:22px; margin:30px 0; border-radius:0 12px 12px 0; line-height:1.8; }
+        .law { background:#fff3e0; border-left:8px solid #ff8f00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .law-title { font-size:1.5rem; font-weight:bold; color:#e65100; margin-bottom:12px; }
+        .form { background:#e8f5e9; padding:25px; margin:30px 0; border-radius:12px; border-left:8px solid #2e7d32; font-family:'Consolas'; font-size:1.25rem; line-height:1.9; }
+        table { width:100%; border-collapse:collapse; margin:35px 0; box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+        th { background:#00695c; color:white; padding:18px; font-size:1.15rem; }
+        td { padding:16px 20px; border-bottom:1px solid #eee; text-align:center; }
+        tr:nth-child(even) { background:#e0f2f1; }
+        .imp { background:#fff3e0; border-left:8px solid #ff8f00; padding:25px; margin:35px 0; border-radius:0 12px 12px 0; }
+        .imp h4 { color:#e65100; font-size:1.4rem; margin-bottom:15px; }
+        .section { background:#f9f9f9; padding:25px; margin:30px 0; border-radius:12px; border:1px solid #e0e0e0; }
+        .point-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:15px; margin:20px 0; }
+        .point { background:#f0f8ff; padding:14px 18px; border-radius:8px; border-left:5px solid #2196f3; }
+        .highlight { background:#fff9c4; padding:12px 16px; border-radius:8px; margin:15px 0; border-left:5px solid #ffc107; }
+        .derivation { background:#f1f8e9; padding:18px; margin:20px 0; border-radius:10px; font-size:0.95rem; border-left:5px solid #7cb342; }
+        .example { background:#f5f5f5; padding:20px; margin:25px 0; border-radius:10px; border-left:5px solid #9c27b0; }
+        .tip { background:#e3f2fd; padding:15px; margin:15px 0; border-radius:8px; border-left:5px solid #2196f3; }
+        .comparison-table { background:#fff8e1; margin:20px 0; }
+        footer { background:#004d40; color:white; text-align:center; padding:35px; font-size:1.2rem; }
+        ul { margin-left:25px; line-height:1.8; }
+        @media(max-width:768px){ .tab{flex:1; text-align:center; padding:15px;} .content{padding:30px;} h1{font-size:2.5rem;} .point-grid{grid-template-columns:1fr;} }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
         <h1>ELECTROMAGNETIC WAVES</h1>
-        <p class="subtitle">Complete Short Summary • Class 12 Physics • JEE Main + Advanced • NEET 2025-26</p>
+        <p class="subtitle">Complete Chapter Summary • 150+ Unique Points • Maxwell's Equations • EM Spectrum • JEE Main + Advanced • NEET 2025-26</p>
     </header>
 
     <nav class="nav">
         <div class="tab active" data-tab="t1">Displacement Current</div>
-        <div class="tab" data-tab="t2">EM Waves Characteristics</div>
-        <div class="tab" data-tab="t3">EM Spectrum</div>
+        <div class="tab" data-tab="t2">Maxwell's Equations</div>
+        <div class="tab" data-tab="t3">EM Wave Characteristics</div>
+        <div class="tab" data-tab="t4">Energy & Momentum</div>
+        <div class="tab" data-tab="t5">EM Spectrum - Radio to IR</div>
+        <div class="tab" data-tab="t6">EM Spectrum - Visible to Gamma</div>
+        <div class="tab" data-tab="t7">Production & Detection</div>
+        <div class="tab" data-tab="t8">Quick Revision</div>
     </nav>
 
     <div class="content">
 
-        <!-- Topic 1 -->
+        <!-- 1. Displacement Current -->
         <div class="pane active" id="t1">
-            <h2>1. Need of Displacement Current</h2>
-            <div class="box">
-                <ul>
-                    <li>Ampere’s law ∮ B·dl = μ₀ I was inconsistent between capacitor plates (I = 0)</li>
-                    <li>Changing electric field produces magnetic field → need extra term</li>
-                    <li>Maxwell introduced displacement current I_d = ε₀ dΦ_E/dt</li>
-                    <li>Total current = conduction current + displacement current</li>
-                    <li>Modified Ampere’s law: ∮ B·dl = μ₀ (I_c + I_d) = μ₀ (I_c + ε₀ dΦ_E/dt)</li>
-                    <li>Displacement current exists only where E is changing with time</li>
-                    <li>In capacitor, I_d = I (conduction current in wires)</li>
-                    <li>Displacement current has no flow of charge, only changing E</li>
-                    <li>Essential for continuity of magnetic field and EM wave propagation</li>
-                    <li>Made Maxwell’s equations symmetric and complete</li>
-                </ul>
+            <h2>1. Displacement Current • Maxwell's Correction</h2>
+            
+            <div class="section">
+                <h3>Need for Displacement Current</h3>
+                <div class="law">
+                    <div class="law-title">Ampere-Maxwell Law</div>
+                    <p>Maxwell introduced displacement current to resolve inconsistency in Ampere's circuital law for time-varying electric fields, particularly between capacitor plates.</p>
+                    <div class="form">∮ B·dl = μ₀(I_c + I_d) = μ₀(I_c + ε₀ dΦ_E/dt)</div>
+                </div>
+                
+                <div class="point-grid">
+                    <div class="point">Ampere's law ∮ B·dl = μ₀I inconsistent for capacitor charging/discharging</div>
+                    <div class="point">Between capacitor plates: Conduction current I_c = 0 but magnetic field exists</div>
+                    <div class="point">Displacement current I_d = ε₀ dΦ_E/dt = ε₀ A dE/dt (for parallel plate)</div>
+                    <div class="point">I_d arises from changing electric field, not from flow of charge</div>
+                    <div class="point">During capacitor charging: I_d between plates = I_c in wires</div>
+                    <div class="point">Displacement current density: J_d = ε₀ ∂E/∂t</div>
+                    <div class="point">Total current density: J_total = J_c + J_d</div>
+                    <div class="point">I_d produces magnetic field just like conduction current</div>
+                    <div class="point">Essential for electromagnetic wave propagation in vacuum</div>
+                    <div class="point">Made Maxwell's equations symmetric between E and B fields</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Physical Significance & Examples</h3>
+                <table>
+                    <tr><th>Situation</th><th>Conduction Current (I_c)</th><th>Displacement Current (I_d)</th><th>Total Current</th></tr>
+                    <tr><td>Steady current in wire</td><td>I</td><td>0</td><td>I</td></tr>
+                    <tr><td>Capacitor charging</td><td>I in wires, 0 between plates</td><td>0 in wires, I between plates</td><td>I everywhere</td></tr>
+                    <tr><td>AC circuit with capacitor</td><td>Varies sinusoidally</td><td>I_d = I_c (in phase)</td><td>Continuous</td></tr>
+                    <tr><td>EM wave in vacuum</td><td>0</td><td>Only I_d exists</td><td>I_d</td></tr>
+                    <tr><td>Dielectric in capacitor</td><td>0 (ideally)</td><td>I_d due to changing polarization</td><td>I_d</td></tr>
+                </table>
+                
+                <div class="example">
+                    <h4>Displacement Current Calculations:</h4>
+                    <p><strong>Parallel plate capacitor:</strong> A=0.01 m², dE/dt=10¹² V/m·s → I_d = ε₀ A dE/dt = 8.85×10⁻¹² × 0.01 × 10¹² = 0.0885 A</p>
+                    <p><strong>Capacitor charging:</strong> C=1μF, dV/dt=1000 V/s → I_d = C dV/dt = 10⁻⁶ × 1000 = 0.001 A</p>
+                    <p><strong>Sinusoidal field:</strong> E = E₀ sin(ωt) → I_d = ε₀ A ω E₀ cos(ωt)</p>
+                    <p><strong>Between spherical capacitor plates:</strong> I_d same at all radii (due to conservation)</p>
+                </div>
             </div>
         </div>
 
-        <!-- Topic 2 -->
+        <!-- 2. Maxwell's Equations -->
         <div class="pane" id="t2">
-            <h2>2. Electromagnetic Waves & Their Characteristics</h2>
-            <div class="box">
-                <ul>
-                    <li>EM waves are transverse waves produced by accelerating charges</li>
-                    <li>E and B fields are perpendicular to each other and to direction of propagation</li>
-                    <li>E × B gives direction of propagation (right-hand rule)</li>
-                    <li>In free space, E₀/B₀ = c = 3 × 10⁸ m/s (speed of light)</li>
-                    <li>Speed c = 1/√(μ₀ε₀), proves light is EM wave</li>
-                    <li>Energy density: u_E = (1/2)ε₀E², u_B = B²/(2μ₀), average u_E = u_B</li>
-                    <li>Poynting vector S = (1/μ₀) E × B → represents energy flow</li>
-                    <li>Intensity I = average |S| = (1/2) c ε₀ E₀²</li>
-                    <li>EM waves carry both energy and momentum</li>
-                    <li>No medium required → travel in vacuum</li>
-                </ul>
+            <h2>2. Maxwell's Equations • Integral & Differential Forms</h2>
+            
+            <div class="section">
+                <h3>The Four Maxwell Equations</h3>
+                <div class="form">
+                    1. Gauss's Law for Electricity: ∮ E·dA = Q/ε₀  →  ∇·E = ρ/ε₀<br>
+                    2. Gauss's Law for Magnetism: ∮ B·dA = 0  →  ∇·B = 0<br>
+                    3. Faraday's Law: ∮ E·dl = -dΦ_B/dt  →  ∇×E = -∂B/∂t<br>
+                    4. Ampere-Maxwell Law: ∮ B·dl = μ₀(I_c + ε₀ dΦ_E/dt)  →  ∇×B = μ₀J + μ₀ε₀ ∂E/∂t
+                </div>
+                
+                <div class="point-grid">
+                    <div class="point">Gauss's law for E: Electric field lines begin on +ve charges, end on -ve charges</div>
+                    <div class="point">Gauss's law for B: No magnetic monopoles exist (field lines closed)</div>
+                    <div class="point">Faraday's law: Changing magnetic field induces electric field</div>
+                    <div class="point">Ampere-Maxwell law: Current AND changing electric field produce magnetic field</div>
+                    <div class="point">In vacuum (ρ=0, J=0): ∇·E=0, ∇·B=0, ∇×E=-∂B/∂t, ∇×B=μ₀ε₀ ∂E/∂t</div>
+                    <div class="point">From these, wave equation derived: ∇²E = μ₀ε₀ ∂²E/∂t²</div>
+                    <div class="point">Speed of EM waves: c = 1/√(μ₀ε₀) = 3×10⁸ m/s</div>
+                    <div class="point">Maxwell's equations are relativistic invariant (Lorentz invariant)</div>
+                    <div class="point">They unified electricity, magnetism, and optics</div>
+                    <div class="point">Predict existence of EM waves propagating at speed of light</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Symmetry & Physical Interpretation</h3>
+                <div class="law">
+                    <div class="law-title">Symmetry in Maxwell's Equations</div>
+                    <p>Maxwell's equations exhibit beautiful symmetry between electric and magnetic fields, broken only by the absence of magnetic monopoles.</p>
+                </div>
+                
+                <table>
+                    <tr><th>Equation</th><th>Electric Field Analog</th><th>Magnetic Field Analog</th><th>If Magnetic Monopoles Existed</th></tr>
+                    <tr><td>Gauss's Law</td><td>∮ E·dA = Q/ε₀</td><td>∮ B·dA = 0</td><td>∮ B·dA = μ₀Q_m</td></tr>
+                    <tr><td>Faraday/Ampere</td><td>∮ E·dl = -dΦ_B/dt</td><td>∮ B·dl = μ₀I + μ₀ε₀ dΦ_E/dt</td><td>∮ E·dl = -μ₀I_m - dΦ_B/dt</td></tr>
+                    <tr><td>Source</td><td>Electric charges (ρ)</td><td>No magnetic charges</td><td>Magnetic charges (ρ_m)</td></tr>
+                    <tr><td>Field Lines</td><td>Begin/end on charges</td><td>Always closed loops</td><td>Begin/end on magnetic charges</td></tr>
+                </table>
+                
+                <div class="example">
+                    <h4>Maxwell's Equations Applications:</h4>
+                    <p><strong>Wave equation derivation:</strong> Take curl of ∇×E = -∂B/∂t and use ∇×B = μ₀ε₀ ∂E/∂t → ∇²E = μ₀ε₀ ∂²E/∂t²</p>
+                    <p><strong>Continuity equation:</strong> From ∇·(∇×B) = 0 and Ampere-Maxwell → ∇·J + ∂ρ/∂t = 0 (charge conservation)</p>
+                    <p><strong>Boundary conditions:</strong> At interface: E_tangential continuous, D_normal discontinuous by σ, etc.</p>
+                    <p><strong>Poynting theorem:</strong> From Maxwell's equations: ∇·S + ∂u/∂t = -J·E (energy conservation)</p>
+                </div>
             </div>
         </div>
 
-        <!-- Topic 3 -->
+        <!-- 3. EM Wave Characteristics -->
         <div class="pane" id="t3">
-            <h2>3. Electromagnetic Spectrum</h2>
-            <div class="box">
-                <ul>
-                    <li>EM spectrum: Radio → Microwave → IR → Visible → UV → X-ray → γ-ray</li>
-                    <li>Radio waves (> 0.1 m): produced by LC oscillations, used in communication</li>
-                    <li>Microwaves (1 mm – 0.1 m): radar, microwave oven, 5G</li>
-                    <li>Infrared (700 nm – 1 mm): heat radiation, remote controls</li>
-                    <li>Visible light (400–700 nm): only part detected by human eye</li>
-                    <li>Ultraviolet (10–400 nm): from sun, causes tanning, harmful</li>
-                    <li>X-rays (0.01–10 nm): produced by bombarding metal, used in medical imaging</li>
-                    <li>Gamma rays (< 0.01 nm): from radioactive decay, highly penetrating</li>
-                    <li>All EM waves have same speed c in vacuum</li>
-                    <li>Frequency order: γ > X-ray > UV > Visible > IR > Microwave > Radio</li>
-                </ul>
+            <h2>3. EM Wave Characteristics • Wave Equation • Polarization</h2>
+            
+            <div class="section">
+                <h3>Properties of EM Waves</h3>
+                <div class="point-grid">
+                    <div class="point">EM waves are transverse: E and B perpendicular to propagation direction</div>
+                    <div class="point">E and B are perpendicular to each other: E ⊥ B</div>
+                    <div class="point">Direction of propagation given by E × B (right-hand rule)</div>
+                    <div class="point">E and B oscillate in phase (reach max/min together)</div>
+                    <div class="point">In vacuum: E₀/B₀ = c = 3×10⁸ m/s</div>
+                    <div class="point">Speed in vacuum: c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s (exact: 299,792,458 m/s)</div>
+                    <div class="point">Speed in medium: v = c/n, where n = √(με/μ₀ε₀) = √(μ_r ε_r)</div>
+                    <div class="point">For non-magnetic media: n = √ε_r = √(κ) (κ = dielectric constant)</div>
+                    <div class="point">Frequency remains same in different media, wavelength changes</div>
+                    <div class="point">No medium required: Can propagate in vacuum (unlike mechanical waves)</div>
+                </div>
+                
+                <div class="form">
+                    Wave equations: ∇²E = με ∂²E/∂t², ∇²B = με ∂²B/∂t²<br>
+                    Plane wave solutions: E = E₀ sin(k·r - ωt), B = B₀ sin(k·r - ωt)<br>
+                    Relation: E₀ = c B₀ (in vacuum), k = ω/v = 2π/λ, ω = 2πf<br>
+                    Impedance of free space: Z₀ = E₀/H₀ = √(μ₀/ε₀) ≈ 377 Ω
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Polarization of EM Waves</h3>
+                <table>
+                    <tr><th>Polarization Type</th><th>Description</th><th>E-field Orientation</th><th>Examples</th></tr>
+                    <tr><td>Linear</td><td>E oscillates in fixed direction</td><td>Constant plane</td><td>Most laser light, radio waves</td></tr>
+                    <tr><td>Circular</td><td>E rotates, constant magnitude</td><td>Right/left circular</td><td>Quarter-wave plate output</td></tr>
+                    <tr><td>Elliptical</td><td>E rotates, magnitude varies</td><td>Ellipse traced</td><td>General case</td></tr>
+                    <tr><td>Unpolarized</td><td>Random E orientations</td><td>All directions equally</td><td>Sunlight, incandescent bulbs</td></tr>
+                    <tr><td>Partially polarized</td><td>Mix of polarized + unpolarized</td><td>Preferential direction</td><td>Sky light, reflections</td></tr>
+                </table>
+                
+                <div class="point-grid">
+                    <div class="point">Polarization direction defined by E-field orientation</div>
+                    <div class="point">Polarizers transmit component along transmission axis</div>
+                    <div class="point">Malus's law: I = I₀ cos²θ (for ideal polarizer)</div>
+                    <div class="point">Brewster's angle: tan θ_B = n₂/n₁ → reflected light completely polarized</div>
+                    <div class="point">Polarization by: Reflection, scattering, dichroism, birefringence</div>
+                    <div class="point">Circular polarization: E_x and E_y equal amplitude, ±90° phase difference</div>
+                    <div class="point">Optical activity: Rotation of polarization plane by chiral substances</div>
+                    <div class="point">LCD displays use polarization to control light transmission</div>
+                    <div class="point">Polaroid sunglasses reduce glare from horizontal surfaces</div>
+                    <div class="point">Polarization proves transverse nature of EM waves</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Energy & Momentum -->
+        <div class="pane" id="t4">
+            <h2>4. Energy • Momentum • Radiation Pressure</h2>
+            
+            <div class="section">
+                <h3>Energy in EM Waves</h3>
+                <div class="law">
+                    <div class="law-title">Poynting Vector & Energy Density</div>
+                    <p>The Poynting vector S represents the directional energy flux density of an electromagnetic field.</p>
+                    <div class="form">Poynting vector: S = (1/μ₀) E × B (W/m²)<br>
+                    Energy density: u = u_E + u_B = ½ ε₀ E² + ½ B²/μ₀<br>
+                    For plane wave: u_E = u_B, u = ε₀ E² = B²/μ₀<br>
+                    Intensity: I = ⟨S⟩ = ½ c ε₀ E₀² = ½ (E₀ B₀)/μ₀
+                    </div>
+                </div>
+                
+                <div class="point-grid">
+                    <div class="point">Energy density equally divided between E and B fields</div>
+                    <div class="point">Instantaneous energy flux: S = energy crossing unit area per unit time</div>
+                    <div class="point">Time-averaged intensity for sinusoidal wave: I = ½ c ε₀ E₀²</div>
+                    <div class="point">For spherical wave from point source: I ∝ 1/r² (inverse square law)</div>
+                    <div class="point">Total power through area A: P = ∫ S·dA</div>
+                    <div class="point">Poynting theorem: ∇·S + ∂u/∂t = -J·E (energy conservation)</div>
+                    <div class="point">In conducting medium, energy dissipated as Joule heat</div>
+                    <div class="point">For standing EM waves, net energy flow = 0 (S averages to 0)</div>
+                    <div class="point">Momentum density: g = S/c² = u/c (for plane wave in vacuum)</div>
+                    <div class="point">EM waves carry both energy and momentum</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Radiation Pressure & Momentum Transfer</h3>
+                <table>
+                    <tr><th>Surface Type</th><th>Momentum Transfer</th><th>Radiation Pressure</th><th>Example</th></tr>
+                    <tr><td>Perfectly absorbing</td><td>p = U/c</td><td>P_rad = I/c</td><td>Black surface</td></tr>
+                    <tr><td>Perfectly reflecting</td><td>p = 2U/c</td><td>P_rad = 2I/c</td><td>Mirror</td></tr>
+                    <tr><td>Partially reflecting</td><td>p = (1+R)U/c</td><td>P_rad = (1+R)I/c</td><td>Real surface (R=reflectivity)</td></tr>
+                    <tr><td>At oblique angle θ</td><td>p = (U/c) cosθ (absorbing)</td><td>P_rad = (I/c) cos²θ</td><td>Solar sail tilted</td></tr>
+                </table>
+                
+                <div class="form">
+                    Radiation force: F = dP/dt = (1/c) dU/dt (absorbing)<br>
+                    For power P_incident: F = P_incident/c (absorbing), F = 2P_incident/c (reflecting)<br>
+                    Solar constant at Earth: S ≈ 1360 W/m² → Radiation pressure ≈ 4.5 μPa (absorbing)
+                </div>
+                
+                <div class="example">
+                    <h4>Radiation Pressure Calculations:</h4>
+                    <p><strong>Solar sail:</strong> Area 1000 m², reflectivity 0.9, solar constant 1360 W/m² → F = (1+0.9)×1360×1000/(3×10⁸) ≈ 0.0086 N</p>
+                    <p><strong>Laser propulsion:</strong> 1 MW laser on perfectly reflecting sail → F = 2×10⁶/(3×10⁸) ≈ 0.0067 N</p>
+                    <p><strong>Light bulb:</strong> 100W isotropic, at 1m distance: I = 100/(4π×1²) ≈ 7.96 W/m², P_rad = I/c ≈ 2.65×10⁻⁸ Pa (negligible)</p>
+                    <p><strong>Comet tail:</strong> Radiation pressure pushes dust tail away from Sun</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. EM Spectrum - Radio to IR -->
+        <div class="pane" id="t5">
+            <h2>5. EM Spectrum - Radio • Microwave • Infrared</h2>
+            
+            <div class="section">
+                <h3>Radio Waves (λ > 0.1 m, f < 3 GHz)</h3>
+                <div class="point-grid">
+                    <div class="point">Longest wavelength, lowest frequency EM waves</div>
+                    <div class="point">Produced by: Accelerating electrons in antennas (LC circuits)</div>
+                    <div class="point">Propagation: Ground wave (long λ), sky wave (ionosphere reflection), space wave (line-of-sight)</div>
+                    <div class="point">AM radio: 530-1710 kHz (medium wave), propagates as ground wave at night</div>
+                    <div class="point">FM radio: 88-108 MHz (VHF), line-of-sight propagation</div>
+                    <div class="point">TV broadcast: VHF (54-216 MHz) and UHF (470-890 MHz)</div>
+                    <div class="point">Modulation: AM (amplitude), FM (frequency), PM (phase)</div>
+                    <div class="point">Antennas: Dipole (λ/2), monopole (λ/4), parabolic dish (directional)</div>
+                    <div class="point">Applications: Broadcasting, communication, radar, GPS, Wi-Fi</div>
+                    <div class="point">Harmless at normal intensities (non-ionizing)</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Microwaves (1 mm - 0.1 m, 300 MHz - 300 GHz)</h3>
+                <table>
+                    <tr><th>Band</th><th>Frequency Range</th><th>Wavelength</th><th>Applications</th></tr>
+                    <tr><td>L</td><td>1-2 GHz</td><td>30-15 cm</td><td>GPS, mobile phones</td></tr>
+                    <tr><td>S</td><td>2-4 GHz</td><td>15-7.5 cm</td><td>Wi-Fi, microwave ovens, radar</td></tr>
+                    <tr><td>C</td><td>4-8 GHz</td><td>7.5-3.75 cm</td><td>Satellite communications</td></tr>
+                    <tr><td>X</td><td>8-12 GHz</td><td>3.75-2.5 cm</td><td>Weather radar, police radar</td></tr>
+                    <tr><td>Ku</td><td>12-18 GHz</td><td>2.5-1.67 cm</td><td>Direct broadcast satellite</td></tr>
+                    <tr><td>K</td><td>18-27 GHz</td><td>1.67-1.11 cm</td><td>Radar, astronomy</td></tr>
+                    <tr><td>Ka</td><td>27-40 GHz</td><td>1.11-0.75 cm</td><td>Satellite communications</td></tr>
+                </table>
+                
+                <div class="point-grid">
+                    <div class="point">Microwave oven: 2.45 GHz, heats water via dipole rotation</div>
+                    <div class="point">Radar: Radio Detection And Ranging, uses pulse-echo principle</div>
+                    <div class="point">Doppler radar: Measures velocity from frequency shift</div>
+                    <div class="point">Satellite communication: Geostationary (36,000 km) vs LEO</div>
+                    <div class="point">5G cellular: Uses millimeter waves (24-86 GHz) for high speed</div>
+                    <div class="point">Wi-Fi: 2.4 GHz and 5 GHz bands</div>
+                    <div class="point">Bluetooth: 2.4 GHz band</div>
+                    <div class="point">Attenuation by water vapor, oxygen absorption bands</div>
+                    <div class="point">Cosmic microwave background: 2.725 K blackbody radiation, λ~1.9 mm</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Infrared (700 nm - 1 mm, 300 GHz - 430 THz)</h3>
+                <div class="point-grid">
+                    <div class="point">IR divided: Near IR (0.7-1.4 μm), Mid IR (1.4-3 μm), Far IR (3 μm-1 mm)</div>
+                    <div class="point">Thermal radiation: All bodies emit IR proportional to T⁴ (Stefan-Boltzmann)</div>
+                    <div class="point">Blackbody spectrum peak: λ_max T = 2.9×10⁻³ m·K (Wien's law)</div>
+                    <div class="point">Human body: T≈310K → λ_max ≈ 9.4 μm (far IR)</div>
+                    <div class="point">Atmospheric windows: 3-5 μm and 8-14 μm (transparent to IR)</div>
+                    <div class="point">Greenhouse effect: IR trapped by CO₂, H₂O, CH₄, etc.</div>
+                    <div class="point">Applications: Night vision, thermal imaging, remote controls, fiber optics</div>
+                    <div class="point">IR spectroscopy: Molecular vibrations absorb specific IR frequencies</div>
+                    <div class="point">IR LEDs and lasers: Used in optical communications</div>
+                    <div class="point">Earth's energy balance: Absorbs visible from Sun, emits IR to space</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. EM Spectrum - Visible to Gamma -->
+        <div class="pane" id="t6">
+            <h2>6. EM Spectrum - Visible • UV • X-rays • Gamma Rays</h2>
+            
+            <div class="section">
+                <h3>Visible Light (400-700 nm, 430-750 THz)</h3>
+                <table>
+                    <tr><th>Color</th><th>Wavelength (nm)</th><th>Frequency (THz)</th><th>Photon Energy (eV)</th></tr>
+                    <tr><td>Violet</td><td>380-450</td><td>668-789</td><td>2.75-3.26</td></tr>
+                    <tr><td>Blue</td><td>450-495</td><td>606-668</td><td>2.50-2.75</td></tr>
+                    <tr><td>Green</td><td>495-570</td><td>526-606</td><td>2.17-2.50</td></tr>
+                    <tr><td>Yellow</td><td>570-590</td><td>508-526</td><td>2.10-2.17</td></tr>
+                    <tr><td>Orange</td><td>590-620</td><td>484-508</td><td>2.00-2.10</td></tr>
+                    <tr><td>Red</td><td>620-750</td><td>400-484</td><td>1.65-2.00</td></tr>
+                </table>
+                
+                <div class="point-grid">
+                    <div class="point">Human eye sensitivity peak: ~555 nm (green-yellow)</div>
+                    <div class="point">Sun's spectrum peaks ~500 nm (green) at Earth's surface</div>
+                    <div class="point">Rayleigh scattering: ∝ 1/λ⁴ → blue sky, red sunset</div>
+                    <div class="point">Refraction: n = c/v, dispersion: n varies with λ (prism separates colors)</div>
+                    <div class="point">Photopic vision: Cone cells, bright light, color vision</div>
+                    <div class="point">Scotopic vision: Rod cells, dim light, no color, peak ~507 nm</div>
+                    <div class="point">Additive color mixing: RGB primaries (light)</div>
+                    <div class="point">Subtractive color mixing: CMYK primaries (pigments)</div>
+                    <div class="point">Photosynthesis: Chlorophyll absorbs blue and red, reflects green</div>
+                    <div class="point">Lasers: Coherent, monochromatic, directional light</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Ultraviolet (10-400 nm, 750 THz - 30 PHz)</h3>
+                <div class="point-grid">
+                    <div class="point">UV-A (315-400 nm): Black light, tanning, least harmful</div>
+                    <div class="point">UV-B (280-315 nm): Sunburn, skin cancer, vitamin D synthesis</div>
+                    <div class="point">UV-C (100-280 nm): Germicidal, absorbed by ozone layer</div>
+                    <div class="point">Vacuum UV (<200 nm): Absorbed by air, requires vacuum apparatus</div>
+                    <div class="point">Solar UV mostly absorbed by ozone layer (O₃) in stratosphere</div>
+                    <div class="point">Ozone hole: CFCs destroy O₃, increase UV reaching surface</div>
+                    <div class="point">Fluorescence: Absorption of UV, emission of visible light</div>
+                    <div class="point">Phosphorescence: Delayed emission after UV removed</div>
+                    <div class="point">Applications: Sterilization, forensic analysis, photolithography</div>
+                    <div class="point">Harmful effects: DNA damage, skin aging, cataracts</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>X-rays (0.01-10 nm, 30 PHz - 30 EHz)</h3>
+                <table>
+                    <tr><th>Type</th><th>Energy Range</th><th>Production Method</th><th>Applications</th></tr>
+                    <tr><td>Soft X-rays</td><td>0.1-10 keV</td><td>Low energy electrons on target</td><td>Mammography, material science</td></tr>
+                    <tr><td>Hard X-rays</td><td>10-100 keV</td><td>High energy electrons on heavy target</td><td>Radiography, CT scans</td></tr>
+                    <tr><td>Grenz rays</td><td>5-20 keV</td><td>Very soft, shallow penetration</td><td>Skin therapy</td></tr>
+                    <tr><td>Synchrotron</td><td>Broad spectrum</td><td>Accelerated electrons in magnetic field</td><td>Research, crystallography</td></tr>
+                </table>
+                
+                <div class="point-grid">
+                    <div class="point">Produced by: Bombarding metal target with high-energy electrons</div>
+                    <div class="point">Two components: Continuous spectrum (bremsstrahlung) + characteristic lines</div>
+                    <div class="point">Bremsstrahlung: "braking radiation" from decelerating electrons</div>
+                    <div class="point">Characteristic X-rays: Electron transitions in inner shells (Kα, Kβ, etc.)</div>
+                    <div class="point">Attenuation: I = I₀ e^(-μx), μ depends on material and λ</div>
+                    <div class="point">Photoelectric effect dominant at lower energies</div>
+                    <div class="point">Compton scattering dominant at medium energies</div>
+                    <div class="point">Pair production dominant above 1.022 MeV</div>
+                    <div class="point">Medical imaging: Different tissues attenuate differently (bone vs soft tissue)</div>
+                    <div class="point">Radiography: 2D projection, CT: 3D reconstruction from multiple angles</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Gamma Rays (<0.01 nm, >30 EHz)</h3>
+                <div class="point-grid">
+                    <div class="point">Highest energy, shortest wavelength EM radiation</div>
+                    <div class="point">Produced by: Nuclear transitions, radioactive decay, particle annihilation</div>
+                    <div class="point">Sources: Natural (cosmic rays, radioactive elements), artificial (nuclear reactors)</div>
+                    <div class="point">Gamma vs X-ray: Origin different (nuclear vs electronic), energy overlap</div>
+                    <div class="point">Penetrating power: Highest, requires thick lead or concrete shielding</div>
+                    <div class="point">Pair production: γ → e⁺ + e⁻ (requires E > 1.022 MeV)</div>
+                    <div class="point">Applications: Cancer treatment (radiotherapy), sterilization, tracers</div>
+                    <div class="point">Gamma-ray astronomy: Studies most energetic processes in universe</div>
+                    <div class="point">Gamma-ray bursts: Most energetic events known, from collapsing stars</div>
+                    <div class="point">Harmful: Ionizing radiation, can cause DNA damage, radiation sickness</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Production & Detection -->
+        <div class="pane" id="t7">
+            <h2>7. Production • Detection • Applications of EM Waves</h2>
+            
+            <div class="section">
+                <h3>Production Methods for Different EM Waves</h3>
+                <table>
+                    <tr><th>EM Wave Type</th><th>Production Method</th><th>Typical Source</th><th>Energy Source</th></tr>
+                    <tr><td>Radio waves</td><td>LC oscillators, antennas</td><td>Oscillating electrons in wire</td><td>Electronic circuits</td></tr>
+                    <tr><td>Microwaves</td><td>Magnetron, klystron, Gunn diode</td><td>Cavity resonators</td><td>High voltage DC</td></tr>
+                    <tr><td>Infrared</td><td>Thermal radiation, IR LEDs</td><td>Hot bodies, semiconductors</td><td>Heat, electric current</td></tr>
+                    <tr><td>Visible light</td><td>Incandescence, luminescence</td><td>Sun, bulbs, LEDs, lasers</td><td>Heat, electricity</td></tr>
+                    <tr><td>Ultraviolet</td><td>Gas discharge, UV LEDs</td><td>Mercury vapor, deuterium lamps</td><td>Electric discharge</td></tr>
+                    <tr><td>X-rays</td><td>Bremsstrahlung, characteristic</td><td>X-ray tube, synchrotron</td><td>High energy electrons</td></tr>
+                    <tr><td>Gamma rays</td><td>Nuclear transitions</td><td>Radioactive decay, accelerators</td><td>Nuclear reactions</td></tr>
+                </table>
+                
+                <div class="point-grid">
+                    <div class="point">Accelerating charges radiate EM waves</div>
+                    <div class="point">Dipole antenna: Charges oscillating up/down wire produce radiation</div>
+                    <div class="point">Half-wave dipole: Length = λ/2, most common antenna</div>
+                    <div class="point">Blackbody radiation: Continuous spectrum depending only on temperature</div>
+                    <div class="point">Lasers: Stimulated emission produces coherent, monochromatic light</div>
+                    <div class="point">LEDs: Electron-hole recombination in semiconductors produces light</div>
+                    <div class="point">X-ray tube: Electrons accelerated by high voltage, hit metal target</div>
+                    <div class="point">Synchrotron radiation: Charged particles accelerated in circular path</div>
+                    <div class="point">Cherenkov radiation: Charged particles moving faster than light in medium</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Detection Methods</h3>
+                <div class="point-grid">
+                    <div class="point">Radio/Microwave: Antenna (dipole, dish), crystal detector, bolometer</div>
+                    <div class="point">Infrared: Thermopile, pyroelectric detector, bolometer, IR photodiode</div>
+                    <div class="point">Visible: Human eye, photodiode, CCD, photomultiplier tube, photographic film</div>
+                    <div class="point">UV: Photomultiplier tube, photodiode, photographic film</div>
+                    <div class="point">X-ray/Gamma: Geiger-Müller tube, scintillation detector, semiconductor detector</div>
+                    <div class="point">Photoelectric effect basis for many detectors: Light ejects electrons</div>
+                    <div class="point">CCD (Charge-Coupled Device): Array of photodiodes, used in digital cameras</div>
+                    <div class="point">Bolometer: Measures radiation by temperature rise of absorbing material</div>
+                    <div class="point">Spectrometer: Measures intensity vs wavelength</div>
+                    <div class="point">Interferometer: Measures waves by interference patterns</div>
+                </div>
+                
+                <div class="example">
+                    <h4>Applications in Technology:</h4>
+                    <p><strong>Communication:</strong> Radio/TV broadcast, satellite, fiber optics (IR), mobile phones (microwave)</p>
+                    <p><strong>Medicine:</strong> X-ray imaging, MRI (radio waves), UV therapy, gamma knife surgery</p>
+                    <p><strong>Industry:</strong> Microwave heating, IR thermography, UV curing, gamma sterilization</p>
+                    <p><strong>Research:</strong> Spectroscopy, astronomy across all bands, crystallography (X-rays)</p>
+                    <p><strong>Daily life:</strong> Remote controls (IR), Wi-Fi (microwave), vision (visible), tanning (UV)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Quick Revision -->
+        <div class="pane" id="t8">
+            <h2>8. Quick Revision • Formulas • Important Facts</h2>
+            
+            <div class="imp">
+                <h4>Core Formula Summary</h4>
+                <div class="form">
+                    • Displacement current: I_d = ε₀ dΦ_E/dt<br>
+                    • Maxwell's equations: ∇·E=ρ/ε₀, ∇·B=0, ∇×E=-∂B/∂t, ∇×B=μ₀J+μ₀ε₀∂E/∂t<br>
+                    • Speed of light: c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s<br>
+                    • In medium: v = c/n, n = √(μ_r ε_r)<br>
+                    • Wave relation: c = fλ, E₀ = c B₀<br>
+                    • Energy density: u = ½ ε₀ E² + ½ B²/μ₀ = ε₀ E² = B²/μ₀ (for plane wave)<br>
+                    • Poynting vector: S = (1/μ₀) E × B, Intensity I = ⟨S⟩ = ½ c ε₀ E₀²<br>
+                    • Radiation pressure: P_rad = I/c (absorbing), 2I/c (reflecting)<br>
+                    • Photon energy: E = hf = hc/λ<br>
+                    • Wien's law: λ_max T = 2.9×10⁻³ m·K<br>
+                    • Malus's law: I = I₀ cos²θ<br>
+                    • Brewster's angle: tan θ_B = n₂/n₁
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Problem Solving Strategy</h3>
+                <div class="point-grid">
+                    <div class="point">Displacement current: Identify changing E-field, use I_d = ε₀ dΦ_E/dt</div>
+                    <div class="point">EM wave problems: Use c = fλ, E₀/B₀ = c, energy ∝ E₀²</div>
+                    <div class="point">Intensity calculations: I = P/A, I ∝ 1/r² for point source</div>
+                    <div class="point">Radiation pressure: Determine if surface absorbs or reflects</div>
+                    <div class="point">Spectrum problems: Remember order (radio→γ), know approximate λ, f ranges</div>
+                    <div class="point">Polarization: Use Malus's law I = I₀ cos²θ</div>
+                    <div class="point">Photon calculations: E = hf = hc/λ, 1 eV = 1.6×10⁻¹⁹ J</div>
+                    <div class="point">Check units: Hz, m, J, W/m², Pa (for pressure)</div>
+                    <div class="point">Boundary conditions: For reflection/transmission at interface</div>
+                    <div class="point">Conservation laws: Energy, momentum in radiation interactions</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Common Pitfalls & Important Facts</h3>
+                <div class="highlight">
+                    <ul>
+                        <li>Displacement current is NOT actual current flow, but changing E-field</li>
+                        <li>EM waves are transverse: E ⊥ B ⊥ direction of propagation</li>
+                        <li>In vacuum, all EM waves travel at same speed c regardless of frequency</li>
+                        <li>Frequency remains constant when wave enters different medium, wavelength changes</li>
+                        <li>Ionizing radiation: UV, X-rays, γ-rays (can remove electrons from atoms)</li>
+                        <li>Non-ionizing: Radio, microwave, IR, visible (generally less harmful)</li>
+                        <li>Polarization only possible for transverse waves, proves light is transverse</li>
+                        <li>EM waves carry momentum → radiation pressure (tiny but measurable)</li>
+                        <li>Maxwell's equations predict EM waves, Hertz experimentally confirmed</li>
+                        <li>EM spectrum is continuous, boundaries between regions are approximate</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <h4>JEE Focus Areas:</h4>
+                <p>• Displacement current concept and calculation</p>
+                <p>• Maxwell's equations (integral form) and their significance</p>
+                <p>• EM wave characteristics: E ⊥ B, E₀/B₀ = c, transverse nature</p>
+                <p>• Energy and momentum of EM waves: Poynting vector, radiation pressure</p>
+                <p>• EM spectrum: Order, approximate ranges, production/detection methods</p>
+                <p>• Polarization: Malus's law, Brewster's angle, applications</p>
+                <p>• Photon concept: E = hf, photoelectric effect connection</p>
+                <p>• Applications: Communication, medical, industrial uses of different EM waves</p>
             </div>
         </div>
 
     </div>
 
     <footer>
-        Electromagnetic Waves • Displacement Current • Characteristics • Full Spectrum • JEE/NEET 2025-26
+        Electromagnetic Waves • Complete Summary with 150+ Unique Points • JEE Main + Advanced • NEET 2025-26
     </footer>
 </div>
 
 <script>
-    document.querySelectorAll('.tab').forEach(t => {
-        t.onclick = () => {
-            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-            document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
-            t.classList.add('active');
-            document.getElementById(t.dataset.tab).classList.add('active');
+    // Tab switching functionality
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            
+            // Remove active class from all panes
+            document.querySelectorAll('.pane').forEach(pane => pane.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding pane
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Optional: Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        const tabs = document.querySelectorAll('.tab');
+        const activeTab = document.querySelector('.tab.active');
+        if (!activeTab) return;
+        
+        const tabsArray = Array.from(tabs);
+        const currentIndex = tabsArray.indexOf(activeTab);
+        
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            const nextIndex = (currentIndex + 1) % tabsArray.length;
+            tabsArray[nextIndex].click();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            const prevIndex = (currentIndex - 1 + tabsArray.length) % tabsArray.length;
+            tabsArray[prevIndex].click();
         }
+    });
+    
+    // Optional: Smooth scroll to top when switching tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     });
 </script>
 </body>
