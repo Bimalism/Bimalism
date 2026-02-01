@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTICS – Complete Chapter Summary</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+        body{background:#e8f5e9;padding:20px;}
+        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        header{background:linear-gradient(135deg,#2e7d32,#43a047,#66bb6a);color:white;padding:50px;text-align:center;}
+        h1{font-size:3.5rem;margin-bottom:10px;letter-spacing:1px;}
+        .subtitle{font-size:1.5rem;opacity:0.96;}
+        .nav{display:flex;background:#1b5e20;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:18px 24px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.05rem;min-width:180px;text-align:center;}
+        .tab:hover{background:rgba(255,255,255,0.2);}
+        .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #a5d6a7;}
+        .content{padding:60px;}
+        .pane{display:none;}
+        .pane.active{display:block;animation:fade 0.7s;}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        h2{color:#2e7d32;font-size:2.4rem;margin:50px 0 25px;border-bottom:5px solid #43a047;padding-bottom:12px;}
+        .box{background:#e8f5e9;border-left:8px solid #66bb6a;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:1.9;columns:2;column-gap:60px;}
+        li{margin-bottom:14px;break-inside:avoid;padding-right:20px;}
+        .counter{display:inline-block;width:30px;color:#2e7d32;font-weight:bold;margin-right:8px;}
+        .points-total{text-align:center;background:#a5d6a7;padding:15px;border-radius:10px;margin:30px 0;font-weight:bold;font-size:1.2rem;}
+        footer{background:#1b5e20;color:white;text-align:center;padding:40px;font-size:1.3rem;}
+        @media(max-width:1100px){ul{columns:1;}}
+        @media(max-width:768px){.tab{padding:14px;font-size:0.95rem;min-width:auto;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>OPTICS</h1>
+        <p class="subtitle">Ray Optics + Wave Optics • Complete Summary • JEE Main + Advanced + NEET 2025-26</p>
+    </header>
+
+    <nav class="nav">
+        <div class="tab active" data-tab="t1">Reflection</div>
+        <div class="tab" data-tab="t2">Spherical Mirror</div>
+        <div class="tab" data-tab="t3">Mirror Formula</div>
+        <div class="tab" data-tab="t4">Refraction</div>
+        <div class="tab" data-tab="t5">TIR & Applications</div>
+        <div class="tab" data-tab="t6">Lens Maker & Power</div>
+        <div class="tab" data-tab="t7">Lens Combination</div>
+        <div class="tab" data-tab="t8">Prism & Dispersion</div>
+        <div class="tab" data-tab="t9">Scattering & Eye</div>
+        <div class="tab" data-tab="t10">Telescopes</div>
+        <div class="tab" data-tab="t11">Microscope</div>
+        <div class="tab" data-tab="t12">Huygens' Principle</div>
+        <div class="tab" data-tab="t13">Interference</div>
+        <div class="tab" data-tab="t14">Young's Experiment</div>
+        <div class="tab" data-tab="t15">Diffraction</div>
+        <div class="tab" data-tab="t16">Single Slit</div>
+        <div class="tab" data-tab="t17">Resolving Power</div>
+        <div class="tab" data-tab="t18">Polarisation</div>
+        <div class="tab" data-tab="t19">Optical Instruments</div>
+        <div class="tab" data-tab="t20">Optical Phenomena</div>
+    </nav>
+
+    <div class="content">
+
+        <!-- 1 Reflection -->
+        <div class="pane active" id="t1">
+            <h2>1. Reflection of Light</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>First law: Angle of incidence = Angle of reflection (i = r)</li>
+                <li><span class="counter">2</span>Second law: Incident ray, reflected ray, normal lie in same plane</li>
+                <li><span class="counter">3</span>Plane mirror: Virtual, erect, laterally inverted image</li>
+                <li><span class="counter">4</span>Image distance = Object distance (u = -v)</li>
+                <li><span class="counter">5</span>Field of view increases with mirror size and proximity</li>
+                <li><span class="counter">6</span>Deviation angle: δ = 180° – 2i (for plane mirror)</li>
+                <li><span class="counter">7</span>Multiple images: N = (360°/θ) – 1 if 360°/θ is integer</li>
+                <li><span class="counter">8</span>Velocity of image perpendicular to mirror: v_i = –v_object</li>
+                <li><span class="counter">9</span>Parallel component of velocity remains unchanged</li>
+                <li><span class="counter">10</span>Extended object: Image same size only if object parallel to mirror</li>
+                <li><span class="counter">11</span>Rotation of mirror by θ causes reflected ray to rotate by 2θ</li>
+                <li><span class="counter">12</span>Minimum mirror height for full view = half person's height</li>
+                <li><span class="counter">13</span>Periscope uses two plane mirrors at 45°</li>
+                <li><span class="counter">14</span>Kaleidoscope uses multiple reflections for patterns</li>
+                <li><span class="counter">15</span>Lateral inversion: Left appears right, right appears left</li>
+                <li><span class="counter">16</span>No chromatic aberration in mirrors (achromatic)</li>
+                <li><span class="counter">17</span>Image formed by mirror is as far behind as object in front</li>
+                <li><span class="counter">18</span>Used in rear-view mirrors, dressing mirrors, optical instruments</li>
+            </ul></div>
+        </div>
+
+        <!-- 2 Spherical Mirror -->
+        <div class="pane" id="t2">
+            <h2>2. Spherical Mirrors</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Concave mirror: Converging, real/inverted or virtual/erect image</li>
+                <li><span class="counter">2</span>Convex mirror: Diverging, always virtual/erect/diminished</li>
+                <li><span class="counter">3</span>New Cartesian sign convention: Object distance negative</li>
+                <li><span class="counter">4</span>Pole P, Centre of curvature C, Focus F, Radius R = 2f</li>
+                <li><span class="counter">5</span>Paraxial rays: Small angle approximation for formula derivation</li>
+                <li><span class="counter">6</span>Concave: f negative, R negative</li>
+                <li><span class="counter">7</span>Convex: f positive, R positive</li>
+                <li><span class="counter">8</span>Aperture affects spherical aberration (marginal vs paraxial rays)</li>
+                <li><span class="counter">9</span>Focal length independent of medium surrounding mirror</li>
+                <li><span class="counter">10</span>Mirror formula derived using similar triangles (geometry)</li>
+                <li><span class="counter">11</span>Principal axis: Line joining pole and centre of curvature</li>
+                <li><span class="counter">12</span>Parabolic mirrors eliminate spherical aberration</li>
+                <li><span class="counter">13</span>Spherical mirrors approximate paraboloid near pole</li>
+                <li><span class="counter">14</span>Magnification varies with object position</li>
+                <li><span class="counter">15</span>Concave mirror used in searchlights, shaving mirrors</li>
+                <li><span class="counter">16</span>Convex mirror used in rear-view mirrors, security mirrors</li>
+            </ul></div>
+        </div>
+
+        <!-- 3 Mirror Formula -->
+        <div class="pane" id="t3">
+            <h2>3. Mirror Formula & Magnification</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Mirror formula: 1/v + 1/u = 1/f</li>
+                <li><span class="counter">2</span>Magnification: m = –v/u = h_i/h_o</li>
+                <li><span class="counter">3</span>m negative → inverted image, m positive → erect image</li>
+                <li><span class="counter">4</span>|m| > 1 → enlarged image, |m| < 1 → diminished image</li>
+                <li><span class="counter">5</span>For real object, u always negative (sign convention)</li>
+                <li><span class="counter">6</span>Concave mirror beyond C: diminished, real, inverted</li>
+                <li><span class="counter">7</span>Concave mirror at C: same size, real, inverted</li>
+                <li><span class="counter">8</span>Concave mirror between C and F: enlarged, real, inverted</li>
+                <li><span class="counter">9</span>Concave mirror between F and P: enlarged, virtual, erect</li>
+                <li><span class="counter">10</span>Convex mirror: always diminished, virtual, erect</li>
+                <li><span class="counter">11</span>Power: P = –1/f (in metres) dioptre</li>
+                <li><span class="counter">12</span>Velocity of image: v_i = –m² v_o (longitudinal)</li>
+                <li><span class="counter">13</span>Standard ray diagrams: 3 rays (parallel, through focus, through centre)</li>
+                <li><span class="counter">14</span>Graphical method: u-v graph hyperbola, 1/u-1/v graph straight line</li>
+                <li><span class="counter">15</span>Linear magnification = transverse magnification</li>
+                <li><span class="counter">16</span>Longitudinal magnification = m² (for small objects)</li>
+                <li><span class="counter">17</span>Area magnification = m²</li>
+                <li><span class="counter">18</span>Concave mirror at infinity: image at focus, highly diminished</li>
+            </ul></div>
+        </div>
+
+        <!-- 4 Refraction -->
+        <div class="pane" id="t4">
+            <h2>4. Refraction of Light</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Snell's law: n₁ sin i = n₂ sin r</li>
+                <li><span class="counter">2</span>Absolute refractive index: n = c/v (speed in vacuum/speed in medium)</li>
+                <li><span class="counter">3</span>Relative refractive index: n₂₁ = n₂/n₁ = v₁/v₂</li>
+                <li><span class="counter">4</span>Real depth/Apparent depth = n (normal viewing)</li>
+                <li><span class="counter">5</span>Lateral shift through slab: t = d sin(i–r)/cos r</li>
+                <li><span class="counter">6</span>Critical angle: sin c = 1/n (denser to rarer medium)</li>
+                <li><span class="counter">7</span>Refraction through parallel slab: emergent ray parallel to incident</li>
+                <li><span class="counter">8</span>Apparent shift = t(1 – 1/n) for normal incidence</li>
+                <li><span class="counter">9</span>Brewster's law: tan i_p = n (polarizing angle)</li>
+                <li><span class="counter">10</span>Speed decreases in denser medium (higher refractive index)</li>
+                <li><span class="counter">11</span>Frequency remains constant during refraction</li>
+                <li><span class="counter">12</span>Wavelength changes: λ_medium = λ_vacuum/n</li>
+                <li><span class="counter">13</span>Refractive index depends on wavelength (dispersion)</li>
+                <li><span class="counter">14</span>Refraction at spherical surfaces: (n₂/v) – (n₁/u) = (n₂ – n₁)/R</li>
+                <li><span class="counter">15</span>Apparent bending of objects in water due to refraction</li>
+                <li><span class="counter">16</span>Atmospheric refraction causes advanced sunrise, delayed sunset</li>
+                <li><span class="counter">17</span>Twinkling of stars due to atmospheric refraction variations</li>
+            </ul></div>
+        </div>
+
+        <!-- 5 TIR -->
+        <div class="pane" id="t5">
+            <h2>5. Total Internal Reflection & Applications</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Occurs when i > c and light travels from denser to rarer medium</li>
+                <li><span class="counter">2</span>Optical fibre: core n₁, cladding n₂ < n₁</li>
+                <li><span class="counter">3</span>Acceptance angle: sin i_max = √(n₁² – n₂²)</li>
+                <li><span class="counter">4</span>Numerical aperture NA = √(n₁² – n₂²) = n₀ sin i_max</li>
+                <li><span class="counter">5</span>Mirage: due to TIR in hot road (temperature gradient)</li>
+                <li><span class="counter">6</span>Brilliance of diamond: high n (2.42) gives small c (24.4°)</li>
+                <li><span class="counter">7</span>Endoscopy uses fibre bundles for internal body examination</li>
+                <li><span class="counter">8</span>100% reflection, no energy loss (ideal TIR)</li>
+                <li><span class="counter">9</span>Fish-eye view: fish sees outside world compressed within cone</li>
+                <li><span class="counter">10</span>Porro prism: right-angle prism used for image erection</li>
+                <li><span class="counter">11</span>Optical communication: fibres carry light signals over long distances</li>
+                <li><span class="counter">12</span>Step-index vs graded-index fibres</li>
+                <li><span class="counter">13</span>Pulse dispersion limits bandwidth in fibres</li>
+                <li><span class="counter">14</span>Binoculars use prisms for image erection and compact design</li>
+                <li><span class="counter">15</span>Sparkling of cut glass due to multiple TIR</li>
+                <li><span class="counter">16</span>Optical switches and sensors use TIR principle</li>
+            </ul></div>
+        </div>
+
+        <!-- 6 Lens Maker -->
+        <div class="pane" id="t6">
+            <h2>6. Lens Maker Formula & Lens Power</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Lens maker formula: 1/f = (n–1)(1/R₁ – 1/R₂)</li>
+                <li><span class="counter">2</span>Convex lens: R₁ +ve (convex), R₂ –ve (concave) → f +ve</li>
+                <li><span class="counter">3</span>Concave lens: R₁ +ve (concave), R₂ +ve (convex) → f –ve</li>
+                <li><span class="counter">4</span>Lens formula: 1/v – 1/u = 1/f (sign convention important)</li>
+                <li><span class="counter">5</span>Magnification: m = v/u = h_i/h_o</li>
+                <li><span class="counter">6</span>Power: P = 1/f (metre) = 100/f (cm) in dioptres</li>
+                <li><span class="counter">7</span>Convex lens: converging, f positive, P positive</li>
+                <li><span class="counter">8</span>Concave lens: diverging, f negative, P negative</li>
+                <li><span class="counter">9</span>Air bubble in water acts as concave lens (n_lens < n_medium)</li>
+                <li><span class="counter">10</span>f changes in different medium: f_medium/f_air = (n_g – 1)/(n_g/n_m – 1)</li>
+                <li><span class="counter">11</span>Thin lens approximation: thickness << R₁, R₂</li>
+                <li><span class="counter">12</span>Principal focus: point where parallel rays converge or appear to diverge</li>
+                <li><span class="counter">13</span>Focal plane: plane perpendicular to axis through focus</li>
+                <li><span class="counter">14</span>Optical centre: point where ray passes undeviated</li>
+                <li><span class="counter">15</span>Displacement method for focal length: f = (D² – d²)/4D</li>
+                <li><span class="counter">16</span>Convex lens: real inverted or virtual erect depending on u</li>
+                <li><span class="counter">17</span>Concave lens: always virtual, erect, diminished</li>
+                <li><span class="counter">18</span>Lens immersed in liquid of higher n becomes diverging if n_lens < n_liquid</li>
+            </ul></div>
+        </div>
+
+        <!-- 7 Combination -->
+        <div class="pane" id="t7">
+            <h2>7. Combination of Thin Lenses</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Lenses in contact: 1/F = 1/f₁ + 1/f₂ + …</li>
+                <li><span class="counter">2</span>Power adds: P = P₁ + P₂</li>
+                <li><span class="counter">3</span>Lenses in contact act as single equivalent lens</li>
+                <li><span class="counter">4</span>Separated lenses: image of first acts as object for second</li>
+                <li><span class="counter">5</span>Achromatic doublet: crown + flint lens removes chromatic aberration</li>
+                <li><span class="counter">6</span>Two thin lenses separated by d: 1/F = 1/f₁ + 1/f₂ – d/(f₁f₂)</li>
+                <li><span class="counter">7</span>Used in compound microscope, telescope, camera lenses</li>
+                <li><span class="counter">8</span>Displacement method: f = (D² – d²)/4D for convex lens</li>
+                <li><span class="counter">9</span>Convex + concave combination can be converging or diverging</li>
+                <li><span class="counter">10</span>Equivalent focal length depends on separation and individual powers</li>
+                <li><span class="counter">11</span>Position of equivalent lens from first: x = F d/f₂</li>
+                <li><span class="counter">12</span>Magnification of combination: M = m₁ × m₂</li>
+                <li><span class="counter">13</span>Telephoto lens: large f in compact size using combination</li>
+                <li><span class="counter">14</span>Zoom lens: variable focal length using moving lens elements</li>
+                <li><span class="counter">15</span>Eye-piece of microscope/telescope often compound lens</li>
+                <li><span class="counter">16</span>Aberration correction using lens combinations</li>
+            </ul></div>
+        </div>
+
+        <!-- 8 Prism -->
+        <div class="pane" id="t8">
+            <h2>8. Prism Refraction & Dispersion</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Deviation: δ = i₁ + i₂ – A (A = prism angle)</li>
+                <li><span class="counter">2</span>Minimum deviation: δ_m = 2i – A (i₁ = i₂, r₁ = r₂ = A/2)</li>
+                <li><span class="counter">3</span>Refractive index: n = sin[(A+δ_m)/2] / sin(A/2)</li>
+                <li><span class="counter">4</span>Dispersion: Violet deviates most, red least (n_v > n_r)</li>
+                <li><span class="counter">5</span>Angular dispersion: θ = δ_v – δ_r = (n_v – n_r)A (for small A)</li>
+                <li><span class="counter">6</span>Dispersive power: ω = (n_v – n_r)/(n_y – 1) where n_y = yellow mean</li>
+                <li><span class="counter">7</span>Direct vision spectroscope: crown + flint prism combination</li>
+                <li><span class="counter">8</span>Thin prism approximation: δ = (n – 1)A</li>
+                <li><span class="counter">9</span>Rainbow: Primary (42°) and secondary (51°) due to dispersion + TIR</li>
+                <li><span class="counter">10</span>Spectrum purity depends on ω (small ω = less dispersion)</li>
+                <li><span class="counter">11</span>No dispersion for white light at minimum deviation position</li>
+                <li><span class="counter">12</span>Prism binoculars use Porro prisms for image erection</li>
+                <li><span class="counter">13</span>Critical angle in prism: important for TIR prisms</li>
+                <li><span class="counter">14</span>Prism periscope: uses right-angle prisms instead of mirrors</li>
+                <li><span class="counter">15</span>Constant deviation prism (60°): δ constant for all wavelengths</li>
+                <li><span class="counter">16</span>Achromatic prism: ω₁/ω₂ = –f₁/f₂ for no dispersion</li>
+                <li><span class="counter">17</span>Prism spectrometer measures refractive indices</li>
+                <li><span class="counter">18</span>Grazing incidence: i₁ = 90°, grazing emergence: i₂ = 90°</li>
+            </ul></div>
+        </div>
+
+        <!-- 9 Scattering & Eye -->
+        <div class="pane" id="t9">
+            <h2>9. Scattering & Human Eye</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Rayleigh scattering: I ∝ 1/λ⁴ → explains blue sky</li>
+                <li><span class="counter">2</span>Blue light scattered more → sky appears blue</li>
+                <li><span class="counter">3</span>Sun appears red at sunrise/sunset due to longer path through atmosphere</li>
+                <li><span class="counter">4</span>Human eye: Power ≈ 58–60 D, least distance of distinct vision = 25 cm</li>
+                <li><span class="counter">5</span>Myopia (nearsightedness): far point < ∞, corrected by concave lens</li>
+                <li><span class="counter">6</span>Hypermetropia (farsightedness): near point > 25 cm, corrected by convex lens</li>
+                <li><span class="counter">7</span>Presbyopia: loss of accommodation with age, bifocal lens needed</li>
+                <li><span class="counter">8</span>Astigmatism: cornea not spherical, corrected by cylindrical lens</li>
+                <li><span class="counter">9</span>Retina acts as screen, fovea most sensitive (cones concentrated)</li>
+                <li><span class="counter">10</span>Persistence of vision ≈ 1/16 second (basis of cinema)</li>
+                <li><span class="counter">11</span>Accommodation: ciliary muscles change lens shape for focusing</li>
+                <li><span class="counter">12</span>Range of vision: 25 cm to infinity (normal eye)</li>
+                <li><span class="counter">13</span>Near point (25 cm), far point (infinity) for normal eye</li>
+                <li><span class="counter">14</span>Tyndall effect: scattering by colloidal particles</li>
+                <li><span class="counter">15</span>Why clouds white? Large water droplets scatter all colors equally</li>
+                <li><span class="counter">16</span>Danger signals red: red scatters least, visible from farthest</li>
+                <li><span class="counter">17</span>Rods: dim light vision (scotopic), cones: color vision (photopic)</li>
+            </ul></div>
+        </div>
+
+        <!-- 10 Telescopes -->
+        <div class="pane" id="t10">
+            <h2>10. Telescopes</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Astronomical telescope (normal): m = f_o/f_e, L = f_o + f_e</li>
+                <li><span class="counter">2</span>Final image inverted (not problem for astronomical objects)</li>
+                <li><span class="counter">3</span>Galilean telescope: convex objective + concave eyepiece, erect image</li>
+                <li><span class="counter">4</span>Terrestrial telescope: erecting lens between objective and eyepiece</li>
+                <li><span class="counter">5</span>Magnifying power: m = f_o/f_e (normal adjustment), m = f_o/f_e (1 + D/f_e) (relaxed eye)</li>
+                <li><span class="counter">6</span>Larger objective aperture → brighter image and better resolution</li>
+                <li><span class="counter">7</span>Reflecting telescope: concave mirror as objective, avoids chromatic aberration</li>
+                <li><span class="counter">8</span>Newtonian telescope: plane mirror to divert light sideways</li>
+                <li><span class="counter">9</span>Cassegrain telescope: convex secondary mirror, compact design</li>
+                <li><span class="counter">10</span>Resolving power ∝ aperture (diameter of objective)</li>
+                <li><span class="counter">11</span>Light gathering power ∝ (aperture)²</li>
+                <li><span class="counter">12</span>Field of view depends on eyepiece design</li>
+                <li><span class="counter">13</span>Used for distant celestial objects (planets, stars, galaxies)</li>
+                <li><span class="counter">14</span>Radio telescopes: very large apertures possible</li>
+                <li><span class="counter">15</span>Space telescopes (Hubble): above atmosphere for better resolution</li>
+                <li><span class="counter">16</span>Schmidt telescope: corrects spherical aberration with corrector plate</li>
+            </ul></div>
+        </div>
+
+        <!-- 11 Microscope -->
+        <div class="pane" id="t11">
+            <h2>11. Compound Microscope</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Magnification: m = m_o × m_e = (v_o/u_o) × (D/f_e) or (1 + D/f_e)</li>
+                <li><span class="counter">2</span>Tube length: L = v_o + f_e (distance between lenses)</li>
+                <li><span class="counter">3</span>Image by objective inside focal length of eyepiece</li>
+                <li><span class="counter">4</span>Final image inverted (upside down and laterally inverted)</li>
+                <li><span class="counter">5</span>Maximum useful magnification ≈ 1500–2000×</li>
+                <li><span class="counter">6</span>Numerical aperture NA = n sin β (n = refractive index, β = half-angle)</li>
+                <li><span class="counter">7</span>Oil immersion increases NA → better resolution</li>
+                <li><span class="counter">8</span>Resolving power: d_min = 1.22λ/(2 n sin β) = 1.22λ/(2 NA)</li>
+                <li><span class="counter">9</span>Used for magnified close objects (biological specimens, etc.)</li>
+                <li><span class="counter">10</span>Intermediate image real and inverted</li>
+                <li><span class="counter">11</span>Simple microscope (magnifying glass): m = D/f (normal), m = 1 + D/f (max)</li>
+                <li><span class="counter">12</span>Electron microscope: uses electrons (λ very small) → very high resolution</li>
+                <li><span class="counter">13</span>Phase contrast microscope: visualizes transparent specimens</li>
+                <li><span class="counter">14</span>Fluorescence microscope: uses fluorescent dyes</li>
+                <li><span class="counter">15</span>Confocal microscope: eliminates out-of-focus light</li>
+                <li><span class="counter">16</span>Working distance: distance between specimen and objective</li>
+                <li><span class="counter">17</span>Parfocal: objectives stay in focus when changed</li>
+            </ul></div>
+        </div>
+
+        <!-- 12 Huygens -->
+        <div class="pane" id="t12">
+            <h2>12. Wavefront & Huygens' Principle</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Wavefront: locus of points in same phase of vibration</li>
+                <li><span class="counter">2</span>Spherical wavefront: from point source</li>
+                <li><span class="counter">3</span>Plane wavefront: at large distance from point source</li>
+                <li><span class="counter">4</span>Cylindrical wavefront: from linear source</li>
+                <li><span class="counter">5</span>Huygens' principle: every point on wavefront acts as secondary source</li>
+                <li><span class="counter">6</span>Secondary wavelets spherical with speed of wave in medium</li>
+                <li><span class="counter">7</span>Envelope of secondary wavelets gives new wavefront</li>
+                <li><span class="counter">8</span>Explains reflection, refraction, diffraction</li>
+                <li><span class="counter">9</span>Plane wave → plane wavefront in homogeneous medium</li>
+                <li><span class="counter">10</span>Backward wavelet cancelled by destructive interference</li>
+                <li><span class="counter">11</span>Only forward propagation supported</li>
+                <li><span class="counter">12</span>Foundation of wave optics (geometrical optics as limiting case)</li>
+                <li><span class="counter">13</span>Explains laws of reflection and refraction from wave theory</li>
+                <li><span class="counter">14</span>Ray: perpendicular to wavefront, direction of energy propagation</li>
+                <li><span class="counter">15</span>Huygens-Fresnel principle: includes interference of secondary wavelets</li>
+            </ul></div>
+        </div>
+
+        <!-- 13 Interference -->
+        <div class="pane" id="t13">
+            <h2>13. Interference of Light</h2>
+            <div class="points-total">18 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Superposition of two coherent waves</li>
+                <li><span class="counter">2</span>Constructive interference: path difference = nλ → bright fringe</li>
+                <li><span class="counter">3</span>Destructive interference: path difference = (2n–1)λ/2 → dark fringe</li>
+                <li><span class="counter">4</span>Coherent sources: constant phase relationship (same frequency)</li>
+                <li><span class="counter">5</span>Incoherent sources: random phase difference → uniform illumination</li>
+                <li><span class="counter">6</span>Intensity: I = I₁ + I₂ + 2√(I₁I₂) cos δ</li>
+                <li><span class="counter">7</span>For equal intensities: I = 4I₀ cos²(δ/2)</li>
+                <li><span class="counter">8</span>I_max = (√I₁ + √I₂)², I_min = (√I₁ – √I₂)²</li>
+                <li><span class="counter">9</span>Energy redistributed, total energy conserved</li>
+                <li><span class="counter">10</span>Visible interference requires fringe width > eye resolution</li>
+                <li><span class="counter">11</span>Stable pattern needs temporal and spatial coherence</li>
+                <li><span class="counter">12</span>Phase difference δ = (2π/λ) × path difference</li>
+                <li><span class="counter">13</span>Thin film interference: colors in soap bubbles, oil films</li>
+                <li><span class="counter">14</span>Air wedge interference: for measuring small thickness</li>
+                <li><span class="counter">15</span>Newton's rings: interference between lens and glass plate</li>
+                <li><span class="counter">16</span>Michelson interferometer: precise length measurements</li>
+                <li><span class="counter">17</span>Lloyd's mirror: single source + reflection creates interference</li>
+                <li><span class="counter">18</span>Fresnel's biprism: creates two virtual coherent sources</li>
+            </ul></div>
+        </div>
+
+        <!-- 14 Young's -->
+        <div class="pane" id="t14">
+            <h2>14. Young's Double Slit Experiment</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Fringe width: β = λD/d</li>
+                <li><span class="counter">2</span>Angular fringe width: θ = λ/d</li>
+                <li><span class="counter">3</span>Central fringe bright (zero path difference)</li>
+                <li><span class="counter">4</span>Bright fringes: x = nλD/d (n = 0, ±1, ±2...)</li>
+                <li><span class="counter">5</span>Dark fringes: x = (2n–1)λD/2d</li>
+                <li><span class="counter">6</span>If one slit closed → single slit diffraction pattern</li>
+                <li><span class="counter">7</span>White light → colored fringes, central white (all colors constructively interfere)</li>
+                <li><span class="counter">8</span>Immersion in liquid → λ decreases → β decreases</li>
+                <li><span class="counter">9</span>Shift by thin transparent sheet: Δx = (μ–1)t D/d</li>
+                <li><span class="counter">10</span>Proof of wave nature of light (classical experiment)</li>
+                <li><span class="counter">11</span>Intensity distribution sinusoidal</li>
+                <li><span class="counter">12</span>Coherence length: maximum path difference for interference</li>
+                <li><span class="counter">13</span>Laser gives clear fringes due to high coherence</li>
+                <li><span class="counter">14</span>Fringe visibility V = (I_max – I_min)/(I_max + I_min)</li>
+                <li><span class="counter">15</span>For equal intensities, V = 1 (maximum contrast)</li>
+                <li><span class="counter">16</span>Used to measure wavelength of light</li>
+                <li><span class="counter">17</span>Angular position: θ_n = nλ/d for small angles</li>
+            </ul></div>
+        </div>
+
+        <!-- 15 Diffraction -->
+        <div class="pane" id="t15">
+            <h2>15. Diffraction of Light</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Bending of light around obstacles or through apertures</li>
+                <li><span class="counter">2</span>Central maximum brightest and widest</li>
+                <li><span class="counter">3</span>Angular width of central maximum = 2λ/a</li>
+                <li><span class="counter">4</span>Minima condition: a sinθ = nλ (n = ±1, ±2, ±3...)</li>
+                <li><span class="counter">5</span>Secondary maxima between minima (much dimmer than central)</li>
+                <li><span class="counter">6</span>Intensity falls rapidly away from centre</li>
+                <li><span class="counter">7</span>Smaller slit width → more spreading (diffraction)</li>
+                <li><span class="counter">8</span>Fresnel diffraction: near field (source/screen at finite distance)</li>
+                <li><span class="counter">9</span>Fraunhofer diffraction: far field (source/screen at infinity)</li>
+                <li><span class="counter">10</span>Straight edge diffraction: fringes inside geometric shadow</li>
+                <li><span class="counter">11</span>Proof of wave nature (cannot be explained by ray optics)</li>
+                <li><span class="counter">12</span>Circular aperture diffraction: Airy pattern (central bright disk)</li>
+                <li><span class="counter">13</span>Diffraction grating: multiple slits for high dispersion</li>
+                <li><span class="counter">14</span>X-ray diffraction: studies crystal structure</li>
+                <li><span class="counter">15</span>Babinet's principle: complementary screens give same diffraction pattern</li>
+                <li><span class="counter">16</span>Zone plate: alternative to lens using diffraction</li>
+            </ul></div>
+        </div>
+
+        <!-- 16 Single Slit -->
+        <div class="pane" id="t16">
+            <h2>16. Single Slit Diffraction Pattern</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Linear width of central maximum = 2λD/a</li>
+                <li><span class="counter">2</span>Angular width = 2λ/a (for small angles)</li>
+                <li><span class="counter">3</span>Width inversely proportional to slit width a</li>
+                <li><span class="counter">4</span>Smaller a → larger diffraction (more spreading)</li>
+                <li><span class="counter">5</span>At a = λ → central maximum spreads over 2 radians (≈114.6°)</li>
+                <li><span class="counter">6</span>Intensity: I = I₀ (sin²β/β²) where β = (π a sinθ)/λ</li>
+                <li><span class="counter">7</span>First minima at sinθ = ±λ/a</li>
+                <li><span class="counter">8</span>Half angular width = λ/a</li>
+                <li><span class="counter">9</span>Used to measure wavelength of light</li>
+                <li><span class="counter">10</span>Resolution limit of optical instruments depends on diffraction</li>
+                <li><span class="counter">11</span>Secondary maxima at β = 1.43π, 2.46π, 3.47π...</li>
+                <li><span class="counter">12</span>Intensity of first secondary maximum ≈ 4.7% of central</li>
+                <li><span class="counter">13</span>Intensity of second secondary maximum ≈ 1.6% of central</li>
+                <li><span class="counter">14</span>Most energy (≈85%) in central maximum</li>
+                <li><span class="counter">15</span>Diffraction sets fundamental limit to focusing</li>
+            </ul></div>
+        </div>
+
+        <!-- 17 Resolving Power -->
+        <div class="pane" id="t17">
+            <h2>17. Resolving Power of Optical Instruments</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Minimum angular separation resolvable</li>
+                <li><span class="counter">2</span>Telescope: RP = a/(1.22λ) where a = aperture diameter</li>
+                <li><span class="counter">3</span>Microscope: d_min = 1.22λ/(2 n sinβ) = 1.22λ/(2 NA)</li>
+                <li><span class="counter">4</span>Larger aperture → better resolution (smaller d_min)</li>
+                <li><span class="counter">5</span>Rayleigh criterion: just resolved when central max of one coincides with first min of other</li>
+                <li><span class="counter">6</span>Oil immersion increases NA → better resolution</li>
+                <li><span class="counter">7</span>Electron microscope: λ very small (de Broglie wavelength) → high resolution</li>
+                <li><span class="counter">8</span>Human eye resolution ≈ 1 arc minute (≈ 3×10⁻⁴ rad)</li>
+                <li><span class="counter">9</span>Limit due to diffraction, not lens quality (theoretical limit)</li>
+                <li><span class="counter">10</span>Higher λ → poorer resolution (red light worse than blue)</li>
+                <li><span class="counter">11</span>Resolving power of grating: RP = Nm (N = lines, m = order)</li>
+                <li><span class="counter">12</span>Prism resolving power: RP = b dn/dλ (b = base length)</li>
+                <li><span class="counter">13</span>Airy disk: diffraction pattern from circular aperture</li>
+                <li><span class="counter">14</span>Spatial resolution: ability to distinguish closely spaced objects</li>
+                <li><span class="counter">15</span>Angular resolution: minimum angular separation distinguishable</li>
+                <li><span class="counter">16</span>Super-resolution techniques overcome diffraction limit</li>
+            </ul></div>
+        </div>
+
+        <!-- 18 Polarisation -->
+        <div class="pane" id="t18">
+            <h2>18. Polarisation of Light</h2>
+            <div class="points-total">17 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Proof of transverse wave nature of light</li>
+                <li><span class="counter">2</span>Unpolarised light: vibrations in all directions perpendicular to propagation</li>
+                <li><span class="counter">3</span>Plane polarised light: vibrations confined to one plane</li>
+                <li><span class="counter">4</span>Polaroids transmit light with electric vector parallel to transmission axis</li>
+                <li><span class="counter">5</span>Brewster's law: tan i_p = n (i_p = polarising angle)</li>
+                <li><span class="counter">6</span>At i_p, reflected light fully polarised perpendicular to plane of incidence</li>
+                <li><span class="counter">7</span>Malus law: I = I₀ cos²θ (θ between transmission axes)</li>
+                <li><span class="counter">8</span>Optical activity: rotation of plane of polarisation by chiral substances</li>
+                <li><span class="counter">9</span>Specific rotation [α] = α/(l × c) (l in dm, c in g/mL)</li>
+                <li><span class="counter">10</span>Dichroism: selective absorption of one polarization direction</li>
+                <li><span class="counter">11</span>Scattering also polarises light (sky light partially polarised)</li>
+                <li><span class="counter">12</span>Circular polarization: electric vector rotates</li>
+                <li><span class="counter">13</span>Elliptical polarization: general case</li>
+                <li><span class="counter">14</span>Quarter-wave plate converts plane to circular polarisation</li>
+                <li><span class="counter">15</span>Half-wave plate rotates plane of polarisation</li>
+                <li><span class="counter">16</span>Polarimeters measure concentration of optically active solutions</li>
+                <li><span class="counter">17</span>Applications: sunglasses (reduce glare), LCD displays, stress analysis</li>
+            </ul></div>
+        </div>
+
+        <!-- 19 Optical Instruments -->
+        <div class="pane" id="t19">
+            <h2>19. Optical Instruments & Applications</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Camera: convex lens forms real inverted image on film/sensor</li>
+                <li><span class="counter">2</span>f-number = f/D (aperture ratio), smaller f-number = brighter image</li>
+                <li><span class="counter">3</span>Depth of field: range of distances in acceptable focus</li>
+                <li><span class="counter">4</span>Simple microscope (magnifying glass): m = D/f (normal), m = 1 + D/f (max)</li>
+                <li><span class="counter">5</span>Projector: illuminated object → convex lens → enlarged real image</li>
+                <li><span class="counter">6</span>Overhead projector: works on same principle</li>
+                <li><span class="counter">7</span>Slide projector: magnifies small slides</li>
+                <li><span class="counter">8</span>Spectrometer: prism/grating to analyze spectra</li>
+                <li><span class="counter">9</span>Interferometer: measures small distances, refractive indices</li>
+                <li><span class="counter">10</span>Photometer: compares light intensities</li>
+                <li><span class="counter">11</span>Colorimeter: measures color intensity (concentration)</li>
+                <li><span class="counter">12</span>Optical fibers: total internal reflection for communication</li>
+                <li><span class="counter">13</span>Endoscope: medical imaging inside body</li>
+                <li><span class="counter">14</span>Periscope: see over obstacles (submarines)</li>
+                <li><span class="counter">15</span>Kaleidoscope: multiple reflections create patterns</li>
+                <li><span class="counter">16</span>Binoculars: two telescopes mounted side by side</li>
+            </ul></div>
+        </div>
+
+        <!-- 20 Optical Phenomena -->
+        <div class="pane" id="t20">
+            <h2>20. Natural Optical Phenomena</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box"><ul>
+                <li><span class="counter">1</span>Rainbow: dispersion + TIR in water droplets</li>
+                <li><span class="counter">2</span>Primary rainbow: 42° angle, red outer, violet inner</li>
+                <li><span class="counter">3</span>Secondary rainbow: 51° angle, violet outer, red inner, fainter</li>
+                <li><span class="counter">4</span>Halos: refraction through ice crystals (22° and 46° halos)</li>
+                <li><span class="counter">5</span>Sun dogs (parhelia): bright spots beside sun due to ice crystals</li>
+                <li><span class="counter">6</span>Green flash: brief green appearance at sunrise/sunset</li>
+                <li><span class="counter">7</span>Fata Morgana: superior mirage due to temperature inversion</li>
+                <li><span class="counter">8</span>Glory: colored rings around shadow of observer</li>
+                <li><span class="counter">9</span>Corona: diffraction by water droplets around moon</li>
+                <li><span class="counter">10</span>Iridescence: thin film interference (soap bubbles, oil films)</li>
+                <li><span class="counter">11</span>Aurora: charged particles exciting atmospheric gases</li>
+                <li><span class="counter">12</span>Zodiacal light: sunlight scattered by interplanetary dust</li>
+                <li><span class="counter">13</span>Twinkling of stars: atmospheric refraction variations</li>
+                <li><span class="counter">14</span>Planets don't twinkle: extended source averages out variations</li>
+                <li><span class="counter">15</span>Blue moon: rare second full moon in calendar month</li>
+            </ul></div>
+        </div>
+
+    </div>
+
+    <footer>
+        OPTICS • Complete Summary • 300+ Distinct Points • Ray Optics • Wave Optics • JEE/NEET 2025-26
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(t => {
+        t.onclick = () => {
+            document.querySelectorAll('.tab,.pane').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+            document.getElementById(t.dataset.tab).classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>
