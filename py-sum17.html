@@ -7,23 +7,27 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#e8eaf6;padding:20px;}
-        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
         header{background:linear-gradient(135deg,#1a237e,#3949ab,#3f51b5);color:white;padding:50px;text-align:center;}
         h1{font-size:3.4rem;margin-bottom:10px;}
         .subtitle{font-size:1.5rem;opacity:0.95;}
-        .nav{display:flex;background:#0d47a1;flex-wrap:wrap;}
-        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;}
+        .nav{display:flex;background:#0d47a1;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 30px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.1rem;min-width:170px;text-align:center;}
         .tab:hover{background:rgba(255,255,255,0.2);}
         .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #7986cb;}
         .content{padding:60px;}
         .pane{display:none;}
         .pane.active{display:block;animation:fade 0.7s;}
-        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1; atransform:none}}
+        @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
         h2{color:#1a237e;font-size:2.5rem;margin:45px 0 25px;border-bottom:5px solid #3949ab;padding-bottom:12px;}
-        .box{background:#e8eaf6;border-left:8px solid #7986cb;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
-        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        .box{background:#e8eaf6;border-left:8px solid #7986cb;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;}
+        ul{padding-left:45px;font-size:1.18rem;line-height:1.9;columns:2;column-gap:60px;}
+        li{margin-bottom:14px;break-inside:avoid;padding-right:20px;}
+        .counter{display:inline-block;width:30px;color:#1a237e;font-weight:bold;margin-right:8px;}
+        .points-total{text-align:center;background:#c5cae9;padding:15px;border-radius:10px;margin:30px 0;font-weight:bold;font-size:1.2rem;}
         footer{background:#0d47a1;color:white;text-align:center;padding:38px;font-size:1.25rem;}
-        @media(max-width:768px){.tab{flex:1;padding:16px;text-align:center;font-size:1rem;}}
+        @media(max-width:1100px){ul{columns:1;}}
+        @media(max-width:768px){.tab{flex:1;padding:16px;font-size:1rem;min-width:130px;}}
     </style>
 </head>
 <body>
@@ -36,7 +40,7 @@
     <nav class="nav">
         <div class="tab active" data-tab="t1">Alpha Scattering</div>
         <div class="tab" data-tab="t2">Rutherford Model</div>
-        <div class="tab" data-tab="t3">Bohr’s Model</div>
+        <div class="tab" data-tab="t3">Bohr's Model</div>
         <div class="tab" data-tab="t4">Energy Levels</div>
         <div class="tab" data-tab="t5">Hydrogen Spectrum</div>
         <div class="tab" data-tab="t6">Isotopes/Isobars/Isotones</div>
@@ -45,215 +49,350 @@
         <div class="tab" data-tab="t9">Mass-Energy Relation</div>
         <div class="tab" data-tab="t10">Binding Energy Curve</div>
         <div class="tab" data-tab="t11">Nuclear Fission & Fusion</div>
+        <div class="tab" data-tab="t12">Nuclear Reactions</div>
+        <div class="tab" data-tab="t13">Particle Physics</div>
     </nav>
 
     <div class="content">
 
-        <!-- 1 -->
+        <!-- 1. Alpha-Particle Scattering -->
         <div class="pane active" id="t1">
-            <h2>1. Alpha-Particle Scattering Experiment</h2>
+            <h2>1. Alpha-Particle Scattering Experiment (1909)</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Geiger-Marsden experiment (1909) under Rutherford</li>
-                    <li>Alpha particles (He²⁺) from radium bombarded thin gold foil</li>
-                    <li>Most α-particles passed straight (empty space)</li>
-                    <li>Few deflected by large angles (>90°)</li>
-                    <li>Very few (1 in 20,000) bounced back</li>
-                    <li>Concluded positive charge & mass concentrated in tiny nucleus</li>
-                    <li>Distance of closest approach ≈ 10⁻¹⁴ m</li>
-                    <li>Impact parameter b = (Ze² cot(θ/2))/(4πε₀ E)</li>
-                    <li>Smaller b → larger scattering angle</li>
-                    <li>Proved existence of atomic nucleus</li>
+                    <li><span class="counter">1</span>Geiger-Marsden experiment directed by Rutherford</li>
+                    <li><span class="counter">2</span>Alpha particles (He²⁺ nuclei) from radium source</li>
+                    <li><span class="counter">3</span>Thin gold foil (≈ 0.00004 cm) as target</li>
+                    <li><span class="counter">4</span>Most α-particles passed straight through (≈99.9%)</li>
+                    <li><span class="counter">5</span>Few deflected by moderate angles (0.1°-90°)</li>
+                    <li><span class="counter">6</span>Very few (1 in 20,000) scattered back (>90°)</li>
+                    <li><span class="counter">7</span>Conclusion: Positive charge concentrated in tiny nucleus</li>
+                    <li><span class="counter">8</span>Distance of closest approach: r₀ ≈ 10⁻¹⁴ m</li>
+                    <li><span class="counter">9</span>Impact parameter: b = (Ze² cot(θ/2))/(4πε₀ K)</li>
+                    <li><span class="counter">10</span>Smaller impact parameter → larger scattering angle</li>
+                    <li><span class="counter">11</span>Scattering follows Coulomb's law (inverse square)</li>
+                    <li><span class="counter">12</span>Fraction scattered ∝ 1/sin⁴(θ/2) (Rutherford formula)</li>
+                    <li><span class="counter">13</span>Disproved Thomson's plum pudding model</li>
+                    <li><span class="counter">14</span>Established nuclear model of the atom</li>
+                    <li><span class="counter">15</span>Nucleus contains >99.9% of atomic mass</li>
+                    <li><span class="counter">16</span>Electrons occupy most of atomic volume</li>
+                    <li><span class="counter">17</span>Foundation for modern atomic physics</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 2 -->
+        <!-- 2. Rutherford Atomic Model -->
         <div class="pane" id="t2">
-            <h2>2. Rutherford Atomic Model</h2>
+            <h2>2. Rutherford Atomic Model (1911)</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Atom has tiny, massive, positively charged nucleus</li>
-                    <li>Nucleus size ≈ 10⁻¹⁵ m, atom ≈ 10⁻¹⁰ m</li>
-                    <li>Electrons revolve around nucleus like planets</li>
-                    <li>Centrifugal force balances Coulomb attraction</li>
-                    <li>Could not explain stability of atom</li>
-                    <li>Predicted continuous radiation → energy loss → collapse</li>
-                    <li>Failed to explain discrete line spectra</li>
-                    <li>Success: Explained large angle scattering</li>
-                    <li>Drawback: Violated classical electromagnetism</li>
-                    <li>Paved way for Bohr’s quantized model</li>
+                    <li><span class="counter">1</span>Tiny, massive, positively charged nucleus at center</li>
+                    <li><span class="counter">2</span>Nucleus size ≈ 10⁻¹⁵ m (femtometer scale)</li>
+                    <li><span class="counter">3</span>Atomic size ≈ 10⁻¹⁰ m (angstrom scale)</li>
+                    <li><span class="counter">4</span>Electrons revolve around nucleus in circular orbits</li>
+                    <li><span class="counter">5</span>Centrifugal force balances Coulomb attraction</li>
+                    <li><span class="counter">6</span>Failed to explain atomic stability (classical EM)</li>
+                    <li><span class="counter">7</span>Accelerated electrons should radiate continuously</li>
+                    <li><span class="counter">8</span>Energy loss would cause spiral collapse into nucleus</li>
+                    <li><span class="counter">9</span>Could not explain discrete line spectra</li>
+                    <li><span class="counter">10</span>Should produce continuous emission spectrum</li>
+                    <li><span class="counter">11</span>Successfully explained large-angle scattering</li>
+                    <li><span class="counter">12</span>Correctly predicted existence of nucleus</li>
+                    <li><span class="counter">13</span>Violated Maxwell's electromagnetic theory</li>
+                    <li><span class="counter">14</span>Laid groundwork for Bohr's quantum model</li>
+                    <li><span class="counter">15</span>Electrostatic model (no strong nuclear force)</li>
+                    <li><span class="counter">16</span>Planetary model analogy (sun and planets)</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 3 -->
+        <!-- 3. Bohr's Model of Atom -->
         <div class="pane" id="t3">
-            <h2>3. Bohr’s Model of Atom (1913)</h2>
+            <h2>3. Bohr's Model of Hydrogen Atom (1913)</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Electrons revolve in stationary circular orbits</li>
-                    <li>Angular momentum quantized: m v r = n h/(2π)</li>
-                    <li>Only orbits where L = n ħ are allowed</li>
-                    <li>No radiation in stationary orbits</li>
-                    <li>Radiation when electron jumps between levels</li>
-                    <li>Centripetal force = Coulomb force</li>
-                    <li>Radius rₙ = n² a₀ (a₀ = 0.529 Å for H)</li>
-                    <li>Velocity vₙ = α c / n (α ≈ 1/137)</li>
-                    <li>Explained stability and line spectrum</li>
-                    <li>Applicable mainly to hydrogen-like atoms</li>
+                    <li><span class="counter">1</span>Electrons revolve in stationary circular orbits</li>
+                    <li><span class="counter">2</span>Angular momentum quantized: L = nħ = nh/(2π)</li>
+                    <li><span class="counter">3</span>n = principal quantum number (1, 2, 3...)</li>
+                    <li><span class="counter">4</span>No radiation emitted in stationary orbits</li>
+                    <li><span class="counter">5</span>Radiation occurs during quantum jumps between orbits</li>
+                    <li><span class="counter">6</span>Centripetal force: mv²/r = Ze²/(4πε₀r²)</li>
+                    <li><span class="counter">7</span>Radius of nth orbit: rₙ = n²a₀/Z (a₀ = 0.529 Å)</li>
+                    <li><span class="counter">8</span>Bohr radius a₀ = 4πε₀ħ²/(m_e e²) = 0.529 × 10⁻¹⁰ m</li>
+                    <li><span class="counter">9</span>Velocity: vₙ = αcZ/n (α = fine structure constant ≈ 1/137)</li>
+                    <li><span class="counter">10</span>Frequency condition: hν = |E_f - E_i|</li>
+                    <li><span class="counter">11</span>Explained stability of hydrogen atom</li>
+                    <li><span class="counter">12</span>Successfully predicted hydrogen spectrum</li>
+                    <li><span class="counter">13</span>Applicable to hydrogen-like ions (He⁺, Li²⁺)</li>
+                    <li><span class="counter">14</span>Limitations: Couldn't explain fine structure</li>
+                    <li><span class="counter">15</span>Couldn't explain Zeeman/Stark effects</li>
+                    <li><span class="counter">16</span>Not applicable to multi-electron atoms</li>
+                    <li><span class="counter">17</span>Bridge between classical and quantum physics</li>
+                    <li><span class="counter">18</span>Nobel Prize to Bohr in 1922</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 4 -->
+        <!-- 4. Energy Levels -->
         <div class="pane" id="t4">
             <h2>4. Energy Levels in Bohr Model</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Total energy Eₙ = – (13.6 Z²)/n² eV</li>
-                    <li>E₁ = –13.6 eV (ground state for H)</li>
-                    <li>Eₙ ∝ –1/n² (negative → bound state)</li>
-                    <li>n = ∞ → E = 0 (ionization)</li>
-                    <li>Ionization energy of H = 13.6 eV</li>
-                    <li>Energy difference ΔE = hν (photon energy)</li>
-                    <li>KEₙ = –Eₙ, PEₙ = 2 Eₙ</li>
-                    <li>KE decreases, PE becomes more negative with n</li>
-                    <li>Binding energy = |Eₙ|</li>
-                    <li>Energy level diagram crucial for spectrum</li>
+                    <li><span class="counter">1</span>Energy of nth level: Eₙ = -13.6 Z²/n² eV</li>
+                    <li><span class="counter">2</span>Ground state (n=1): E₁ = -13.6 eV for hydrogen</li>
+                    <li><span class="counter">3</span>Energy inversely proportional to n²</li>
+                    <li><span class="counter">4</span>Negative energy indicates bound state</li>
+                    <li><span class="counter">5</span>n = ∞ corresponds to E = 0 (ionization limit)</li>
+                    <li><span class="counter">6</span>Ionization energy = |E₁| = 13.6 eV for H</li>
+                    <li><span class="counter">7</span>Kinetic energy: Kₙ = |Eₙ| = +13.6 Z²/n² eV</li>
+                    <li><span class="counter">8</span>Potential energy: Uₙ = 2Eₙ = -27.2 Z²/n² eV</li>
+                    <li><span class="counter">9</span>U = 2E, K = -E (virial theorem for 1/r potential)</li>
+                    <li><span class="counter">10</span>Energy difference ΔE = hν = hc/λ</li>
+                    <li><span class="counter">11</span>Binding energy = |Eₙ| (energy needed to remove electron)</li>
+                    <li><span class="counter">12</span>Energy levels become closer as n increases</li>
+                    <li><span class="counter">13</span>Energy in joules: Eₙ = -2.18 × 10⁻¹⁸ Z²/n² J</li>
+                    <li><span class="counter">14</span>For He⁺ (Z=2): Eₙ = -54.4/n² eV</li>
+                    <li><span class="counter">15</span>For Li²⁺ (Z=3): Eₙ = -122.4/n² eV</li>
+                    <li><span class="counter">16</span>Rydberg constant R = 13.6 eV/hc</li>
+                    <li><span class="counter">17</span>Energy level diagram shows allowed transitions</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 5 -->
+        <!-- 5. Hydrogen Spectrum -->
         <div class="pane" id="t5">
             <h2>5. Hydrogen Spectrum Series</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>1/λ = R (1/n₁² – 1/n₂²) (R = Rydberg constant)</li>
-                    <li>Lyman: UV (n₁=1, n₂>1)</li>
-                    <li>Balmer: Visible (n₁=2, n₂>2)</li>
-                    <li>Paschen: IR (n₁=3, n₂>3)</li>
-                    <li>Brackett: IR (n₁=4), Pfund (n₁=5)</li>
-                    <li>Series limit: n₂ → ∞ (maximum frequency)</li>
-                    <li>R = 1.097 × 10⁷ m⁻¹</li>
-                    <li>H-alpha: 656.3 nm (red), H-beta: 486.1 nm (blue-green)</li>
-                    <li>Explained perfectly by Bohr model</li>
-                    <li>Proof of quantized energy levels</li>
+                    <li><span class="counter">1</span>Rydberg formula: 1/λ = R(1/n₁² - 1/n₂²)</li>
+                    <li><span class="counter">2</span>R = Rydberg constant = 1.097 × 10⁷ m⁻¹</li>
+                    <li><span class="counter">3</span>Lyman series: UV, n₁=1, n₂≥2</li>
+                    <li><span class="counter">4</span>Balmer series: Visible, n₁=2, n₂≥3</li>
+                    <li><span class="counter">5</span>Paschen series: IR, n₁=3, n₂≥4</li>
+                    <li><span class="counter">6</span>Brackett series: IR, n₁=4, n₂≥5</li>
+                    <li><span class="counter">7</span>Pfund series: IR, n₁=5, n₂≥6</li>
+                    <li><span class="counter">8</span>Humphreys series: IR, n₁=6, n₂≥7</li>
+                    <li><span class="counter">9</span>Series limit (n₂→∞): λ_limit = n₁²/R</li>
+                    <li><span class="counter">10</span>H-alpha line: 656.3 nm (red, Balmer n=3→2)</li>
+                    <li><span class="counter">11</span>H-beta: 486.1 nm (blue-green, n=4→2)</li>
+                    <li><span class="counter">12</span>H-gamma: 434.1 nm (violet, n=5→2)</li>
+                    <li><span class="counter">13</span>First Lyman line: 121.6 nm (UV)</li>
+                    <li><span class="counter">14</span>Perfect match with Bohr model predictions</li>
+                    <li><span class="counter">15</span>R = m_e e⁴/(8ε₀² h³ c) (theoretical expression)</li>
+                    <li><span class="counter">16</span>Used in astronomy to identify hydrogen in stars</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 6 -->
+        <!-- 6. Isotopes, Isobars, Isotones -->
         <div class="pane" id="t6">
-            <h2>6. Isotopes, Isobars, Isotones</h2>
+            <h2>6. Isotopes, Isobars & Isotones</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Isotopes: Same Z, different A (e.g., ₁H¹, ₁H², ₁H³)</li>
-                    <li>Isobars: Same A, different Z (e.g., ₆C¹⁴, ₇N¹⁴)</li>
-                    <li>Isotones: Same N (neutrons), different Z (e.g., ₆C¹³, ₇N¹⁴)</li>
-                    <li>Isotopes have same chemical properties</li>
-                    <li>Used in radiocarbon dating (C-14)</li>
-                    <li>U-235 and U-238 are isotopes</li>
-                    <li>Deuterium (H-2) used in heavy water moderator</li>
-                    <li>Isobars lie on diagonal in N vs Z plot</li>
-                    <li>Most elements have multiple stable isotopes</li>
-                    <li>Mass number determines isotope name</li>
+                    <li><span class="counter">1</span>Isotopes: Same Z, different A (₁H¹, ₁H², ₁H³)</li>
+                    <li><span class="counter">2</span>Isobars: Same A, different Z (₆C¹⁴, ₇N¹⁴)</li>
+                    <li><span class="counter">3</span>Isotones: Same N (neutrons), different Z (₆C¹³, ₇N¹⁴)</li>
+                    <li><span class="counter">4</span>Isomers: Same A and Z, different nuclear states</li>
+                    <li><span class="counter">5</span>Isotopes have identical chemical properties</li>
+                    <li><span class="counter">6</span>Isotopes differ in physical properties (density, radioactivity)</li>
+                    <li><span class="counter">7</span>Hydrogen isotopes: Protium (¹H), Deuterium (²H), Tritium (³H)</li>
+                    <li><span class="counter">8</span>Carbon dating uses C-14 (T₁/₂=5730 years)</li>
+                    <li><span class="counter">9</span>Uranium isotopes: U-235 (0.7%), U-238 (99.3%)</li>
+                    <li><span class="counter">10</span>Stable isotopes mostly even-even nuclei</li>
+                    <li><span class="counter">11</span>Magic numbers: 2,8,20,28,50,82,126 (extra stability)</li>
+                    <li><span class="counter">12</span>Isotope separation by mass spectrometry</li>
+                    <li><span class="counter">13</span>Isotopes used in medicine (Tc-99m, I-131)</li>
+                    <li><span class="counter">14</span>Isotopes used in industrial tracers</li>
+                    <li><span class="counter">15</span>N/Z ratio increases with atomic number</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 7 -->
+        <!-- 7. Radioactivity -->
         <div class="pane" id="t7">
-            <h2>7. Radioactivity – α, β, γ</h2>
+            <h2>7. Radioactive Decay Types</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Alpha (α): ₂He⁴ nucleus, +2e charge, highly ionizing</li>
-                    <li>Beta-minus (β⁻): electron, moderate penetration</li>
-                    <li>Beta-plus (β⁺): positron</li>
-                    <li>Gamma (γ): EM radiation, highly penetrating</li>
-                    <li>α changes A by –4, Z by –2</li>
-                    <li>β⁻ changes Z by +1, A unchanged</li>
-                    <li>γ: no change in A or Z</li>
-                    <li>α stopped by paper, β by Al foil, γ by thick lead</li>
-                    <li>Discovered by Becquerel (1896)</li>
-                    <li>Natural for A > 209</li>
+                    <li><span class="counter">1</span>Alpha decay: ₂He⁴ nucleus emission</li>
+                    <li><span class="counter">2</span>α-decay: A→A-4, Z→Z-2</li>
+                    <li><span class="counter">3</span>β⁻ decay: neutron → proton + electron + anti-neutrino</li>
+                    <li><span class="counter">4</span>β⁻ decay: Z→Z+1, A unchanged</li>
+                    <li><span class="counter">5</span>β⁺ decay: proton → neutron + positron + neutrino</li>
+                    <li><span class="counter">6</span>β⁺ decay: Z→Z-1, A unchanged</li>
+                    <li><span class="counter">7</span>Electron capture: proton + electron → neutron + neutrino</li>
+                    <li><span class="counter">8</span>Gamma decay: EM radiation from excited nucleus</li>
+                    <li><span class="counter">9</span>γ-decay: No change in A or Z</li>
+                    <li><span class="counter">10</span>α particles: +2e charge, 4-8 MeV energy</li>
+                    <li><span class="counter">11</span>β particles: Continuous energy spectrum</li>
+                    <li><span class="counter">12</span>γ rays: Discrete energies, high penetration</li>
+                    <li><span class="counter">13</span>Penetration: α stopped by paper, β by Al, γ by Pb</li>
+                    <li><span class="counter">14</span>Ionizing power: α > β > γ</li>
+                    <li><span class="counter">15</span>Discovered by Becquerel (1896) with uranium salts</li>
+                    <li><span class="counter">16</span>Natural radioactivity for Z>82 (lead)</li>
+                    <li><span class="counter">17</span>Artificial radioactivity induced by bombardment</li>
+                    <li><span class="counter">18</span>Internal conversion: γ energy transfers to electron</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 8 -->
+        <!-- 8. Radioactive Decay Law -->
         <div class="pane" id="t8">
-            <h2>8. Radioactive Decay Law</h2>
+            <h2>8. Radioactive Decay Law & Half-Life</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>N = N₀ e^{–λt} (exponential decay)</li>
-                    <li>Activity A = λ N = A₀ e^{–λt}</li>
-                    <li>Half-life T₁/₂ = ln2 / λ ≈ 0.693 / λ</li>
-                    <li>Mean life τ = 1/λ</li>
-                    <li>Unit of activity: becquerel (Bq), curie (Ci)</li>
-                    <li>1 Ci = 3.7 × 10¹⁰ Bq</li>
-                    <li>After n half-lives: N = N₀ / 2ⁿ</li>
-                    <li>Decay constant λ independent of external conditions</li>
-                    <li>Successive decay: Bateman equations</li>
-                    <li>Carbon dating uses C-14 half-life ≈ 5730 years</li>
+                    <li><span class="counter">1</span>Decay law: N = N₀e^{-λt} (exponential decay)</li>
+                    <li><span class="counter">2</span>Activity: A = -dN/dt = λN = A₀e^{-λt}</li>
+                    <li><span class="counter">3</span>Decay constant λ: probability per unit time</li>
+                    <li><span class="counter">4</span>Half-life: T₁/₂ = ln2/λ ≈ 0.693/λ</li>
+                    <li><span class="counter">5</span>Mean life: τ = 1/λ = T₁/₂/ln2 ≈ 1.44 T₁/₂</li>
+                    <li><span class="counter">6</span>After n half-lives: N = N₀/2ⁿ</li>
+                    <li><span class="counter">7</span>Unit of activity: Becquerel (Bq) = 1 decay/s</li>
+                    <li><span class="counter">8</span>Curie (Ci) = 3.7 × 10¹⁰ Bq (activity of 1g Ra-226)</li>
+                    <li><span class="counter">9</span>λ independent of temperature, pressure, chemical state</li>
+                    <li><span class="counter">10</span>Carbon-14 dating: T₁/₂ = 5730 years</li>
+                    <li><span class="counter">11</span>Uranium-238: T₁/₂ = 4.5 × 10⁹ years</li>
+                    <li><span class="counter">12</span>Iodine-131: T₁/₂ = 8 days (medical use)</li>
+                    <li><span class="counter">13</span>Successive decays: Bateman equations</li>
+                    <li><span class="counter">14</span>Secular equilibrium when T₁(parent) >> T₁/₂(daughter)</li>
+                    <li><span class="counter">15</span>Transient equilibrium when T₁/₂(parent) > T₁/₂(daughter)</li>
+                    <li><span class="counter">16</span>Geiger-Muller counter measures activity</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 9 -->
+        <!-- 9. Mass-Energy Equivalence -->
         <div class="pane" id="t9">
-            <h2>9. Mass-Energy Equivalence</h2>
+            <h2>9. Mass-Energy Equivalence & Nuclear Mass</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>E = mc² (Einstein, 1905)</li>
-                    <li>1 u = 931.5 MeV/c²</li>
-                    <li>1 kg mass ≡ 9 × 10¹⁶ J</li>
-                    <li>Mass and energy are equivalent</li>
-                    <li>Mass defect Δm converted to energy</li>
-                    <li>Explains energy release in nuclear reactions</li>
-                    <li>Used in pair production & annihilation</li>
-                    <li>Rest mass energy of proton ≈ 938 MeV</li>
-                    <li>Fundamental principle of nuclear physics</li>
-                    <li>Verified in every nuclear reaction</li>
+                    <li><span class="counter">1</span>Einstein's equation: E = mc² (1905)</li>
+                    <li><span class="counter">2</span>1 atomic mass unit (u) = 1.66054 × 10⁻²⁷ kg</li>
+                    <li><span class="counter">3</span>1 u = 931.5 MeV/c² (energy equivalent)</li>
+                    <li><span class="counter">4</span>Proton mass: 1.007276 u = 938.272 MeV/c²</li>
+                    <li><span class="counter">5</span>Neutron mass: 1.008665 u = 939.565 MeV/c²</li>
+                    <li><span class="counter">6</span>Electron mass: 0.00054858 u = 0.511 MeV/c²</li>
+                    <li><span class="counter">7</span>Mass defect Δm = (Zm_p + Nm_n) - M_nucleus</li>
+                    <li><span class="counter">8</span>Binding energy B = Δm c²</li>
+                    <li><span class="counter">9</span>Q-value = (initial mass - final mass)c²</li>
+                    <li><span class="counter">10</span>Positive Q-value → exothermic reaction</li>
+                    <li><span class="counter">11</span>Negative Q-value → endothermic reaction</li>
+                    <li><span class="counter">12</span>Pair production: γ → e⁺ + e⁻ (E_γ > 1.022 MeV)</li>
+                    <li><span class="counter">13</span>Annihilation: e⁺ + e⁻ → 2γ (each 0.511 MeV)</li>
+                    <li><span class="counter">14</span>Mass-energy conserved in nuclear reactions</li>
+                    <li><span class="counter">15</span>Verified in nuclear reactors and particle accelerators</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 10 -->
+        <!-- 10. Binding Energy Curve -->
         <div class="pane" id="t10">
             <h2>10. Binding Energy per Nucleon Curve</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Binding energy B = [Z m_p + (A–Z) m_n – M] c²</li>
-                    <li>B/A maximum near A = 56 (Fe-56 most stable)</li>
-                    <li>Curve rises sharply till A ≈ 30, then slowly to peak</li>
-                    <li>Falls slowly for heavier nuclei</li>
-                    <li>High B/A → more stable nucleus</li>
-                    <li>He-4, C-12, O-16 have high B/A</li>
-                    <li>Fission: heavy nucleus → two medium (energy release)</li>
-                    <li>Fusion: light nuclei → heavier (up to Fe)</li>
-                    <li>Plateau around 8.8 MeV/nucleon for A=50–60</li>
-                    <li>Key to understanding nuclear power</li>
+                    <li><span class="counter">1</span>B.E./A maximum at A ≈ 56 (iron peak)</li>
+                    <li><span class="counter">2</span>Fe-56 most stable: B.E./A ≈ 8.8 MeV</li>
+                    <li><span class="counter">3</span>Rapid rise for light nuclei (A < 30)</li>
+                    <li><span class="counter">4</span>Plateau region A = 40-120 (B.E./A ≈ 8.5 MeV)</li>
+                    <li><span class="counter">5</span>Slow decrease for heavy nuclei (A > 120)</li>
+                    <li><span class="counter">6</span>U-235: B.E./A ≈ 7.6 MeV</li>
+                    <li><span class="counter">7</span>H-2: B.E./A ≈ 1.1 MeV</li>
+                    <li><span class="counter">8</span>He-4 exceptionally stable: B.E./A ≈ 7.1 MeV</li>
+                    <li><span class="counter">9</span>Even-even nuclei more stable than odd-odd</li>
+                    <li><span class="counter">10</span>Fission: Heavy → medium (energy release)</li>
+                    <li><span class="counter">11</span>Fusion: Light → medium (up to Fe, energy release)</li>
+                    <li><span class="counter">12</span>Nuclear stability favored by N ≈ Z for light nuclei</li>
+                    <li><span class="counter">13</span>For heavy nuclei: N > Z (Coulomb repulsion)</li>
+                    <li><span class="counter">14</span>Semi-empirical mass formula (Weizsäcker)</li>
+                    <li><span class="counter">15</span>Curve explains energy sources of stars</li>
+                    <li><span class="counter">16</span>Basis for nuclear power and weapons</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 11 -->
+        <!-- 11. Nuclear Fission & Fusion -->
         <div class="pane" id="t11">
-            <h2>11. Nuclear Fission & Fusion</h2>
+            <h2>11. Nuclear Fission & Fusion Processes</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box">
                 <ul>
-                    <li>Fission: Heavy nucleus splits into two + neutrons + energy</li>
-                    <li>U-235 + n → Ba + Kr + 3n + ~200 MeV</li>
-                    <li>Chain reaction possible (k>1 critical)</li>
-                    <li>Atom bomb: uncontrolled chain reaction</li>
-                    <li>Nuclear reactor: controlled with moderator & control rods</li>
-                    <li>Fusion: Light nuclei combine → heavier + energy</li>
-                    <li>H-2 + H-3 → He-4 + n + 17.6 MeV</li>
-                    <li>Sun & stars powered by fusion</li>
-                    <li>H-bomb: uncontrolled fusion</li>
-                    <li>Fusion needs extremely high temperature (10⁷ K)</li>
+                    <li><span class="counter">1</span>Fission: Heavy nucleus splits into medium + neutrons</li>
+                    <li><span class="counter">2</span>U-235 + n → Ba-141 + Kr-92 + 3n + ~200 MeV</li>
+                    <li><span class="counter">3</span>Chain reaction: n produced → causes more fission</li>
+                    <li><span class="counter">4</span>Critical mass: Minimum for sustained chain reaction</li>
+                    <li><span class="counter">5</span>Moderator (graphite, D₂O) slows neutrons</li>
+                    <li><span class="counter">6</span>Control rods (Cd, B) absorb excess neutrons</li>
+                    <li><span class="counter">7</span>Atom bomb: Uncontrolled chain reaction</li>
+                    <li><span class="counter">8</span>Nuclear reactor: Controlled chain reaction</li>
+                    <li><span class="counter">9</span>Fusion: Light nuclei combine to form heavier</li>
+                    <li><span class="counter">10</span>Deuterium-tritium: ²H + ³H → ⁴He + n + 17.6 MeV</li>
+                    <li><span class="counter">11</span>Proton-proton chain in Sun: 4¹H → ⁴He + 2e⁺ + 2ν + 26.7 MeV</li>
+                    <li><span class="counter">12</span>Fusion requires high temperature (≈10⁷ K) for Coulomb barrier</li>
+                    <li><span class="counter">13</span>Plasma confinement needed (magnetic or inertial)</li>
+                    <li><span class="counter">14</span>H-bomb: Uncontrolled fusion (thermonuclear)</li>
+                    <li><span class="counter">15</span>ITER: International experimental fusion reactor</li>
+                    <li><span class="counter">16</span>Cold fusion: Unverified at room temperature</li>
+                    <li><span class="counter">17</span>Fission products radioactive, fusion products stable</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 12. Nuclear Reactions -->
+        <div class="pane" id="t12">
+            <h2>12. Nuclear Reactions & Applications</h2>
+            <div class="points-total">15 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>First artificial transmutation: Rutherford (1919)</li>
+                    <li><span class="counter">2</span>¹⁴N + α → ¹⁷O + p (first induced nuclear reaction)</li>
+                    <li><span class="counter">3</span>Neutron discovered by Chadwick (1932)</li>
+                    <li><span class="counter">4</span>⁹Be + α → ¹²C + n</li>
+                    <li><span class="counter">5</span>Nuclear cross section: Probability of reaction</li>
+                    <li><span class="counter">6</span>Barn = 10⁻²⁸ m² (unit of cross section)</li>
+                    <li><span class="counter">7</span>Radioisotopes in medicine: Tc-99m, I-131, Co-60</li>
+                    <li><span class="counter">8</span>Radiotherapy: Cancer treatment with radiation</li>
+                    <li><span class="counter">9</span>Food irradiation: Preservation using γ-rays</li>
+                    <li><span class="counter">10</span>Industrial radiography: Non-destructive testing</li>
+                    <li><span class="counter">11</span>Smoke detectors: α-source (Am-241)</li>
+                    <li><span class="counter">12</span>Nuclear batteries: Long-lived isotopes (Pu-238)</li>
+                    <li><span class="counter">13</span>Neutron activation analysis: Element detection</li>
+                    <li><span class="counter">14</span>PET scan: Positron emission tomography</li>
+                    <li><span class="counter">15</span>Carbon dating: Archaeology and geology</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 13. Particle Physics -->
+        <div class="pane" id="t13">
+            <h2>13. Particle Physics & Fundamental Forces</h2>
+            <div class="points-total">16 Key Points</div>
+            <div class="box">
+                <ul>
+                    <li><span class="counter">1</span>Four fundamental forces: Strong, electromagnetic, weak, gravity</li>
+                    <li><span class="counter">2</span>Strong force: Binds nucleons, range ≈ 1 fm</li>
+                    <li><span class="counter">3</span>Weak force: Responsible for β-decay, very short range</li>
+                    <li><span class="counter">4</span>Electromagnetic force: Infinite range, binds atoms</li>
+                    <li><span class="counter">5</span>Gravity: Weakest, cosmic scale</li>
+                    <li><span class="counter">6</span>Hadrons: Subject to strong force (baryons, mesons)</li>
+                    <li><span class="counter">7</span>Baryons: Half-integer spin (proton, neutron)</li>
+                    <li><span class="counter">8</span>Mesons: Integer spin (pions, kaons)</li>
+                    <li><span class="counter">9</span>Leptons: Not subject to strong force (electron, neutrino)</li>
+                    <li><span class="counter">10</span>Quarks: Fundamental constituents of hadrons</li>
+                    <li><span class="counter">11</span>Proton = uud, Neutron = udd</li>
+                    <li><span class="counter">12</span>Pions: π⁺(ud̄), π⁰(uū/dd̄), π⁻(dū)</li>
+                    <li><span class="counter">13</span>Exchange particles: Gluons (strong), photons (EM), W/Z (weak)</li>
+                    <li><span class="counter">14</span>Antiparticles: Same mass, opposite charge</li>
+                    <li><span class="counter">15</span>Standard Model: Current theory of particle physics</li>
+                    <li><span class="counter">16</span>Large Hadron Collider (LHC): Studies fundamental particles</li>
                 </ul>
             </div>
         </div>
@@ -261,7 +400,7 @@
     </div>
 
     <footer>
-        Atoms & Nuclei • Full Summary • Rutherford • Bohr • Hydrogen Spectrum • Radioactivity • Binding Energy • Fission & Fusion • JEE/NEET 2025-26
+        Atoms & Nuclei • 200+ Distinct Points • Rutherford • Bohr • Quantum Theory • Radioactivity • Nuclear Physics • JEE/NEET 2025-26
     </footer>
 </div>
 
