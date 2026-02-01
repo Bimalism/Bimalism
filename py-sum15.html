@@ -7,12 +7,12 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
         body{background:#fff3e0;padding:20px;}
-        .container{max-width:1350px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
+        .container{max-width:1400px;margin:auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,0.25);}
         header{background:linear-gradient(135deg,#ff6f00,#ff8f00,#ffa726);color:white;padding:50px;text-align:center;}
         h1{font-size:3.5rem;margin-bottom:10px;}
         .subtitle{font-size:1.5rem;opacity:0.96;}
-        .nav{display:flex;background:#e65100;flex-wrap:wrap;}
-        .tab{padding:22px 35px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.15rem;}
+        .nav{display:flex;background:#e65100;flex-wrap:wrap;justify-content:center;}
+        .tab{padding:22px 35px;color:white;cursor:pointer;font-weight:600;transition:0.3s;font-size:1.15rem;min-width:150px;text-align:center;}
         .tab:hover{background:rgba(255,255,255,0.2);}
         .tab.active{background:rgba(255,255,255,0.3);border-bottom:6px solid #ffb74d;}
         .content{padding:60px;}
@@ -20,10 +20,19 @@
         .pane.active{display:block;animation:fade 0.7s;}
         @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
         h2{color:#e65100;font-size:2.5rem;margin:50px 0 28px;border-bottom:5px solid #ff8f00;padding-bottom:14px;}
-        .box{background:#fff3e0;border-left:8px solid #ffb74d;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;line-height:2.3;}
-        ul{padding-left:45px;font-size:1.18rem;line-height:2.4;}
+        .box{background:#fff3e0;border-left:8px solid #ffb74d;padding:28px;margin:35px 0;border-radius:0 12px 12px 0;}
+        ul{padding-left:45px;font-size:1.15rem;line-height:1.9;columns:2;column-gap:60px;}
+        li{margin-bottom:12px;break-inside:avoid;padding-right:15px;}
+        .counter{display:inline-block;width:30px;color:#e65100;font-weight:bold;margin-right:8px;}
+        .points-total{text-align:center;background:#ffcc80;padding:15px;border-radius:10px;margin:30px 0;font-weight:bold;font-size:1.2rem;}
         footer{background:#e65100;color:white;text-align:center;padding:40px;font-size:1.3rem;}
-        @media(max-width:768px){.tab{padding:16px;font-size:1rem;flex:1;text-align:center;}}
+        @media(max-width:1100px){ul{columns:1;}}
+        @media(max-width:768px){
+            .tab{padding:16px;font-size:1rem;flex:1;min-width:120px;}
+            h1{font-size:2.5rem;}
+            .content{padding:30px;}
+            ul{padding-left:25px;}
+        }
     </style>
 </head>
 <body>
@@ -35,8 +44,8 @@
 
     <nav class="nav">
         <div class="tab active" data-tab="t1">Electromagnetic Induction</div>
-        <div class="tab" data-tab="t2">Faraday’s Law</div>
-        <div class="tab" data-tab="t3">Lenz’s Law</div>
+        <div class="tab" data-tab="t2">Faraday's Laws</div>
+        <div class="tab" data-tab="t3">Lenz's Law</div>
         <div class="tab" data-tab="t4">Eddy Currents</div>
         <div class="tab" data-tab="t5">Self & Mutual Inductance</div>
         <div class="tab" data-tab="t6">AC Values & Reactance</div>
@@ -48,180 +57,250 @@
 
     <div class="content">
 
-        <!-- 1 -->
+        <!-- 1. Electromagnetic Induction -->
         <div class="pane active" id="t1">
             <h2>1. Electromagnetic Induction</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box"><ul>
-                <li>Production of induced emf due to change in magnetic flux</li>
-                <li>Discovered by Faraday (1831) & Henry</li>
-                <li>Occurs when Φ_B through a circuit changes</li>
-                <li>Flux change: motion of magnet/coil or changing current</li>
-                <li>Induced emf exists only while flux is changing</li>
-                <li>Closed loop required for induced current</li>
-                <li>Two types: self-induction and mutual induction</li>
-                <li>Basis of generators, transformers, inductors</li>
-                <li>No contact needed between source and circuit</li>
-                <li>Foundation of AC technology</li>
+                <li><span class="counter">1</span>Production of induced emf due to change in magnetic flux</li>
+                <li><span class="counter">2</span>Discovered independently by Faraday (1831) and Henry</li>
+                <li><span class="counter">3</span>Requires change in magnetic flux (Φ) through a circuit</li>
+                <li><span class="counter">4</span>Flux change occurs via motion of magnet, coil, or changing current</li>
+                <li><span class="counter">5</span>Induced emf exists only while magnetic flux is changing</li>
+                <li><span class="counter">6</span>Closed conducting loop needed for induced current to flow</li>
+                <li><span class="counter">7</span>Two main types: self-induction and mutual induction</li>
+                <li><span class="counter">8</span>Basis for electric generators, transformers, inductors</li>
+                <li><span class="counter">9</span>No physical contact required between magnetic source and circuit</li>
+                <li><span class="counter">10</span>Foundation of alternating current (AC) power technology</li>
+                <li><span class="counter">11</span>Magnetic flux linkage = NΦ (for N turns)</li>
+                <li><span class="counter">12</span>Relative motion between magnet and coil induces emf</li>
+                <li><span class="counter">13</span>Induced emf magnitude depends on rate of flux change</li>
+                <li><span class="counter">14</span>Works in both directions - moving magnet or moving coil</li>
+                <li><span class="counter">15</span>First experimental evidence linking electricity and magnetism</li>
             </ul></div>
         </div>
 
-        <!-- 2 -->
+        <!-- 2. Faraday's Laws -->
         <div class="pane" id="t2">
-            <h2>2. Faraday’s Laws</h2>
+            <h2>2. Faraday's Laws of Electromagnetic Induction</h2>
+            <div class="points-total">16 Key Points</div>
             <div class="box"><ul>
-                <li>First law: Changing magnetic flux induces emf</li>
-                <li>Second law: ε = – dΦ_B/dt</li>
-                <li>For N turns: ε = –N dΦ/dt</li>
-                <li>Magnetic flux Φ_B = B⋅A = B A cosθ</li>
-                <li>Unit of flux: weber (Wb), 1 Wb = 1 T m²</li>
-                <li>1 volt = 1 Wb/s</li>
-                <li>Negative sign shows opposition (Lenz’s law)</li>
-                <li>Flux change due to B, A, or θ variation</li>
-                <li>Motional emf: ε = B l v (rod moving ⊥ B)</li>
-                <li>Faraday’s law is fundamental EMI law</li>
+                <li><span class="counter">1</span>First law: Changing magnetic flux induces emf in a circuit</li>
+                <li><span class="counter">2</span>Second law: ε = -dΦ/dt (instantaneous induced emf)</li>
+                <li><span class="counter">3</span>For N turns: ε = -N dΦ/dt</li>
+                <li><span class="counter">4</span>Magnetic flux Φ = B⋅A = BA cosθ (scalar product)</li>
+                <li><span class="counter">5</span>Unit of magnetic flux: weber (Wb)</li>
+                <li><span class="counter">6</span>1 Wb = 1 tesla × 1 m²</li>
+                <li><span class="counter">7</span>1 volt = 1 weber/second</li>
+                <li><span class="counter">8</span>Negative sign indicates opposition (Lenz's law)</li>
+                <li><span class="counter">9</span>Flux change possible through: B change, A change, θ change</li>
+                <li><span class="counter">10</span>Motional emf formula: ε = Blv (conductor moving ⊥ to B)</li>
+                <li><span class="counter">11</span>General form includes both transformer and motional emf</li>
+                <li><span class="counter">12</span>Differential form: ∮E·dl = -dΦ/dt (integral around loop)</li>
+                <li><span class="counter">13</span>Average emf = -N ΔΦ/Δt</li>
+                <li><span class="counter">14</span>Flux can be changed by changing current in nearby circuit</li>
+                <li><span class="counter">15</span>Time-varying magnetic field creates electric field</li>
+                <li><span class="counter">16</span>Faraday's law is one of Maxwell's four equations</li>
             </ul></div>
         </div>
 
-        <!-- 3 -->
+        <!-- 3. Lenz's Law -->
         <div class="pane" id="t3">
-            <h2>3. Lenz’s Law</h2>
+            <h2>3. Lenz's Law & Direction of Induced Current</h2>
+            <div class="points-total">14 Key Points</div>
             <div class="box"><ul>
-                <li>Induced current opposes the cause producing it</li>
-                <li>Conservation of energy statement</li>
-                <li>Gives direction of induced emf/current</li>
-                <li>Negative sign in Faraday’s law represents Lenz</li>
-                <li>Magnet approaching coil → current repels magnet</li>
-                <li>Magnet receding → current attracts magnet</li>
-                <li>Prevents perpetual motion</li>
-                <li>Explains electromagnetic braking</li>
-                <li>Always opposes change in flux</li>
-                <li>Combined with Faraday gives complete law</li>
+                <li><span class="counter">1</span>Induced current flows to oppose the change producing it</li>
+                <li><span class="counter">2</span>Statement of conservation of energy for EMI</li>
+                <li><span class="counter">3</span>Determines direction of induced emf/current</li>
+                <li><span class="counter">4</span>Negative sign in Faraday's law represents Lenz's law</li>
+                <li><span class="counter">5</span>Magnet approaching coil → induced current creates repelling pole</li>
+                <li><span class="counter">6</span>Magnet receding from coil → induced current creates attracting pole</li>
+                <li><span class="counter">7</span>Prevents perpetual motion machines (energy conservation)</li>
+                <li><span class="counter">8</span>Explains electromagnetic braking systems</li>
+                <li><span class="counter">9</span>Always opposes the change in magnetic flux</li>
+                <li><span class="counter">10</span>Applied to determine current direction in moving conductors</li>
+                <li><span class="counter">11</span>Right-hand rule variations for different configurations</li>
+                <li><span class="counter">12</span>Induced magnetic field opposes change in original B-field</li>
+                <li><span class="counter">13</span>Makes electromagnetic systems inherently stable</li>
+                <li><span class="counter">14</span>Combined with Faraday gives complete EMI description</li>
             </ul></div>
         </div>
 
-        <!-- 4 -->
+        <!-- 4. Eddy Currents -->
         <div class="pane" id="t4">
-            <h2>4. Eddy Currents</h2>
+            <h2>4. Eddy Currents & Applications</h2>
+            <div class="points-total">13 Key Points</div>
             <div class="box"><ul>
-                <li>Circulating currents in conductor due to changing B</li>
-                <li>Flow in closed loops ⊥ to magnetic field</li>
-                <li>Cause heating (I²R loss)</li>
-                <li>Reduced by laminating core with insulation</li>
-                <li>Useful in induction furnace, electromagnetic damping</li>
-                <li>Used in dead-beat galvanometer, metal detectors</li>
-                <li>Energy loss in transformer minimized by lamination</li>
-                <li>Direction opposes flux change (Lenz)</li>
-                <li>Also called Foucault currents</li>
-                <li>Stronger in solid core than laminated</li>
+                <li><span class="counter">1</span>Circulating currents induced in bulk conductors by changing B</li>
+                <li><span class="counter">2</span>Flow in closed loops perpendicular to magnetic field</li>
+                <li><span class="counter">3</span>Cause I²R heating losses (eddy current losses)</li>
+                <li><span class="counter">4</span>Reduced by laminating core with insulating layers</li>
+                <li><span class="counter">5</span>Used in induction heating furnaces for metals</li>
+                <li><span class="counter">6</span>Applied in electromagnetic damping (dead-beat galvanometers)</li>
+                <li><span class="counter">7</span>Basis of metal detectors and security systems</li>
+                <li><span class="counter">8</span>Energy loss in transformer cores minimized by lamination</li>
+                <li><span class="counter">9</span>Direction opposes flux change (follows Lenz's law)</li>
+                <li><span class="counter">10</span>Also called Foucault currents after discoverer</li>
+                <li><span class="counter">11</span>Stronger in solid conductive cores than laminated</li>
+                <li><span class="counter">12</span>Used in eddy current brakes for trains and rollercoasters</li>
+                <li><span class="counter">13</span>Can cause unwanted heating in motors and transformers</li>
             </ul></div>
         </div>
 
-        <!-- 5 -->
+        <!-- 5. Self and Mutual Inductance -->
         <div class="pane" id="t5">
             <h2>5. Self and Mutual Inductance</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box"><ul>
-                <li>Self inductance L = Φ/I, unit henry (H)</li>
-                <li>Back emf ε = –L dI/dt</li>
-                <li>For solenoid: L = μ₀ N² A / l</li>
-                <li>Energy stored = (1/2) L I²</li>
-                <li>Mutual inductance M = Φ₂₁/I₁</li>
-                <li>Induced emf ε₂ = –M dI₁/dt</li>
-                <li>M = μ₀ N₁ N₂ A / l (coaxial solenoids)</li>
-                <li>M ≤ √(L₁ L₂), max when coupling coefficient k=1</li>
-                <li>Inductor opposes sudden current change</li>
-                <li>Time constant τ = L/R in RL circuit</li>
+                <li><span class="counter">1</span>Self inductance: L = NΦ/I (henry)</li>
+                <li><span class="counter">2</span>Back emf: ε = -L dI/dt</li>
+                <li><span class="counter">3</span>For solenoid: L = μ₀N²A/l</li>
+                <li><span class="counter">4</span>Energy stored in inductor: U = ½LI²</li>
+                <li><span class="counter">5</span>Mutual inductance: M = N₂Φ₂₁/I₁</li>
+                <li><span class="counter">6</span>Induced emf in secondary: ε₂ = -M dI₁/dt</li>
+                <li><span class="counter">7</span>For coaxial solenoids: M = μ₀N₁N₂A/l</li>
+                <li><span class="counter">8</span>Relation: M ≤ √(L₁L₂)</li>
+                <li><span class="counter">9</span>Coefficient of coupling: k = M/√(L₁L₂)</li>
+                <li><span class="counter">10</span>Inductor opposes sudden changes in current</li>
+                <li><span class="counter">11</span>Time constant in RL circuit: τ = L/R</li>
+                <li><span class="counter">12</span>Self inductance depends on geometry and core material</li>
+                <li><span class="counter">13</span>Mutual inductance depends on relative position/orientation</li>
+                <li><span class="counter">14</span>Energy density in magnetic field: u = B²/(2μ₀)</li>
+                <li><span class="counter">15</span>Inductors store energy in magnetic field</li>
+                <li><span class="counter">16</span>Mutual inductance symmetric: M₁₂ = M₂₁</li>
+                <li><span class="counter">17</span>Inductance in series: L_eq = L₁ + L₂ ± 2M</li>
             </ul></div>
         </div>
 
-        <!-- 6 -->
+        <!-- 6. AC, Peak/RMS, Reactance & Impedance -->
         <div class="pane" id="t6">
-            <h2>6. AC, Peak/RMS, Reactance & Impedance</h2>
+            <h2>6. Alternating Current Fundamentals</h2>
+            <div class="points-total">18 Key Points</div>
             <div class="box"><ul>
-                <li>i = I₀ sin(ωt + φ), v = V₀ sin(ωt + φ)</li>
-                <li>RMS value: I_rms = I₀/√2 ≈ 0.707 I₀</li>
-                <li>Peak value I₀, domestic 220 V is RMS</li>
-                <li>Inductive reactance X_L = ωL</li>
-                <li>Capacitive reactance X_C = 1/(ωC)</li>
-                <li>Impedance Z = √(R² + (X_L – X_C)²)</li>
-                <li>Current lags voltage by 90° in pure L</li>
-                <li>Current leads voltage by 90° in pure C</li>
-                <li>Phase angle φ = tan⁻¹((X_L – X_C)/R)</li>
-                <li>Power factor cosφ = R/Z</li>
+                <li><span class="counter">1</span>Instantaneous current: i = I₀ sin(ωt + φ)</li>
+                <li><span class="counter">2</span>Instantaneous voltage: v = V₀ sin(ωt + φ)</li>
+                <li><span class="counter">3</span>RMS value: I_rms = I₀/√2 ≈ 0.707I₀</li>
+                <li><span class="counter">4</span>Average value over full cycle = 0</li>
+                <li><span class="counter">5</span>Domestic supply: 220V RMS, 311V peak, 50Hz frequency</li>
+                <li><span class="counter">6</span>Inductive reactance: X_L = ωL = 2πfL</li>
+                <li><span class="counter">7</span>Capacitive reactance: X_C = 1/(ωC) = 1/(2πfC)</li>
+                <li><span class="counter">8</span>Impedance: Z = √[R² + (X_L - X_C)²]</li>
+                <li><span class="counter">9</span>In pure L: Current lags voltage by 90° (π/2)</li>
+                <li><span class="counter">10</span>In pure C: Current leads voltage by 90° (π/2)</li>
+                <li><span class="counter">11</span>Phase angle: φ = tan⁻¹[(X_L - X_C)/R]</li>
+                <li><span class="counter">12</span>Power factor: cosφ = R/Z</li>
+                <li><span class="counter">13</span>Form factor = RMS/Average = 1.11 for sine wave</li>
+                <li><span class="counter">14</span>Peak factor = Peak/RMS = √2 = 1.414 for sine wave</li>
+                <li><span class="counter">15</span>AC can be stepped up/down using transformers</li>
+                <li><span class="counter">16</span>Phasor representation simplifies AC circuit analysis</li>
+                <li><span class="counter">17</span>Average power: P_avg = V_rms I_rms cosφ</li>
+                <li><span class="counter">18</span>AC meters read RMS values</li>
             </ul></div>
         </div>
 
-        <!-- 7 -->
+        <!-- 7. LC Oscillations -->
         <div class="pane" id="t7">
-            <h2>7. LC Oscillations</h2>
+            <h2>7. LC Oscillations & Tank Circuit</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box"><ul>
-                <li>Energy oscillates between L and C</li>
-                <li>Frequency f = 1/(2π√(LC))</li>
-                <li>Angular frequency ω = 1/√(LC)</li>
-                <li>Charge q = Q₀ cos(ωt + φ)</li>
-                <li>Current i = –ω Q₀ sin(ωt + φ)</li>
-                <li>Total energy constant = (1/2)Q₀²/C</li>
-                <li>Ideal (no R) → undamped oscillations</li>
-                <li>Analogous to mechanical SHM</li>
-                <li>Used in radio tuning circuits</li>
-                <li>Resonance frequency of tank circuit</li>
+                <li><span class="counter">1</span>Energy oscillates between L (magnetic) and C (electric)</li>
+                <li><span class="counter">2</span>Natural frequency: f = 1/(2π√LC)</li>
+                <li><span class="counter">3</span>Angular frequency: ω = 1/√LC</li>
+                <li><span class="counter">4</span>Charge oscillation: q = Q₀ cos(ωt + φ)</li>
+                <li><span class="counter">5</span>Current oscillation: i = -ωQ₀ sin(ωt + φ) = I₀ sin(ωt + φ)</li>
+                <li><span class="counter">6</span>Total energy constant: U = ½Q₀²/C = ½LI₀²</li>
+                <li><span class="counter">7</span>Ideal LC circuit (no R) → undamped oscillations</li>
+                <li><span class="counter">8</span>Analogous to mechanical SHM: L↔m, 1/C↔k</li>
+                <li><span class="counter">9</span>Used in radio tuning circuits (resonant frequency)</li>
+                <li><span class="counter">10</span>Differential equation: d²q/dt² + (1/LC)q = 0</li>
+                <li><span class="counter">11</span>Phase difference between q and i = 90°</li>
+                <li><span class="counter">12</span>When q = max, i = 0; when q = 0, i = max</li>
+                <li><span class="counter">13</span>Energy in capacitor: U_C = q²/(2C)</li>
+                <li><span class="counter">14</span>Energy in inductor: U_L = ½Li²</li>
+                <li><span class="counter">15</span>With resistance → damped oscillations</li>
             </ul></div>
         </div>
 
-        <!-- 8 -->
+        <!-- 8. LCR Series Circuit -->
         <div class="pane" id="t8">
-            <h2>8. LCR Series Circuit</h2>
+            <h2>8. LCR Series Circuit Analysis</h2>
+            <div class="points-total">17 Key Points</div>
             <div class="box"><ul>
-                <li>Impedance Z = √(R² + (X_L – X_C)²)</li>
-                <li>Current I = V/Z</li>
-                <li>Voltage drops: V_R in phase, V_L leads 90°, V_C lags 90°</li>
-                <li>Phasor diagram: V_R, V_L, V_C, V vector sum</li>
-                <li>Power P = V I cosφ = I² R</li>
-                <li>Average power zero in pure L or C</li>
-                <li>Power factor = cosφ = R/Z</li>
-                <li>At resonance Z = R minimum → I maximum</li>
-                <li>V_L and V_C can be > V (voltage magnification)</li>
-                <li>Wattless current in pure L/C</li>
+                <li><span class="counter">1</span>Impedance: Z = √[R² + (X_L - X_C)²]</li>
+                <li><span class="counter">2</span>Circuit current: I = V/Z</li>
+                <li><span class="counter">3</span>Voltage across R: V_R = IR (in phase with I)</li>
+                <li><span class="counter">4</span>Voltage across L: V_L = IX_L (leads I by 90°)</li>
+                <li><span class="counter">5</span>Voltage across C: V_C = IX_C (lags I by 90°)</li>
+                <li><span class="counter">6</span>Phasor diagram: V = V_R + V_L + V_C (vector sum)</li>
+                <li><span class="counter">7</span>Average power: P = VI cosφ = I²R</li>
+                <li><span class="counter">8</span>Power factor: cosφ = R/Z</li>
+                <li><span class="counter">9</span>At resonance: Z_min = R, I_max = V/R</li>
+                <li><span class="counter">10</span>Voltage magnification: V_L and V_C can exceed source V</li>
+                <li><span class="counter">11</span>Wattless current in purely reactive components</li>
+                <li><span class="counter">12</span>Apparent power: S = VI (VA)</li>
+                <li><span class="counter">13</span>Real power: P = VI cosφ (W)</li>
+                <li><span class="counter">14</span>Reactive power: Q = VI sinφ (VAR)</li>
+                <li><span class="counter">15</span>Complex impedance approach simplifies analysis</li>
+                <li><span class="counter">16</span>Admittance: Y = 1/Z (siemens)</li>
+                <li><span class="counter">17</span>Phase angle φ positive for inductive, negative for capacitive</li>
             </ul></div>
         </div>
 
-        <!-- 9 -->
+        <!-- 9. Resonance in LCR -->
         <div class="pane" id="t9">
-            <h2>9. Resonance in LCR</h2>
+            <h2>9. Resonance in LCR Circuits</h2>
+            <div class="points-total">15 Key Points</div>
             <div class="box"><ul>
-                <li>Occurs when X_L = X_C → Z = R (minimum)</li>
-                <li>Resonant frequency ω₀ = 1/√(LC)</li>
-                <li>f₀ = 1/(2π√(LC))</li>
-                <li>Current maximum, power factor = 1</li>
-                <li>V_L = V_C, 180° out of phase</li>
-                <li>Quality factor Q = ω₀L/R = 1/(ω₀CR)</li>
-                <li>Higher Q → sharper resonance</li>
-                <li>Bandwidth = R/(2πL) = f₀/Q</li>
-                <li>Used in radio/TV tuning</li>
-                <li>Voltage amplification Q times at resonance</li>
+                <li><span class="counter">1</span>Occurs when X_L = X_C → Z_min = R</li>
+                <li><span class="counter">2</span>Resonant frequency: ω₀ = 1/√LC</li>
+                <li><span class="counter">3</span>Resonant frequency: f₀ = 1/(2π√LC)</li>
+                <li><span class="counter">4</span>At resonance: current maximum, power factor = 1</li>
+                <li><span class="counter">5</span>V_L and V_C equal in magnitude, 180° out of phase</li>
+                <li><span class="counter">6</span>Quality factor: Q = ω₀L/R = 1/(ω₀CR)</li>
+                <li><span class="counter">7</span>Higher Q → sharper resonance peak</li>
+                <li><span class="counter">8</span>Bandwidth: Δω = R/L or Δf = f₀/Q</li>
+                <li><span class="counter">9</span>Half-power frequencies: ω₁, ω₂ = ω₀ ± R/(2L)</li>
+                <li><span class="counter">10</span>Used in radio/TV tuning circuits</li>
+                <li><span class="counter">11</span>Voltage magnification factor = Q at resonance</li>
+                <li><span class="counter">12</span>Series resonance → voltage amplification</li>
+                <li><span class="counter">13</span>Parallel resonance → current amplification</li>
+                <li><span class="counter">14</span>Resonance curve shows response vs frequency</li>
+                <li><span class="counter">15</span>Selectivity ∝ Q (higher Q = more selective)</li>
             </ul></div>
         </div>
 
-        <!-- 10 -->
+        <!-- 10. AC Generator & Transformer -->
         <div class="pane" id="t10">
-            <h2>10. AC Generator & Transformer</h2>
+            <h2>10. AC Generator & Transformer Principles</h2>
+            <div class="points-total">20 Key Points</div>
             <div class="box"><ul>
-                <li>AC generator: ε = N B A ω sinωt</li>
-                <li>Slip rings give AC output</li>
-                <li>Transformer works on mutual induction</li>
-                <li>V_s/V_p = N_s/N_p = I_p/I_s = k</li>
-                <li>Step-up: N_s > N_p → V_s > V_p</li>
-                <li>Step-down: N_s < N_p</li>
-                <li>Ideal efficiency 100%, P_s = P_p</li>
-                <li>Core laminated to reduce eddy loss</li>
-                <li>Copper loss I²R, hysteresis loss</li>
-                <li>High voltage transmission reduces I²R loss</li>
+                <li><span class="counter">1</span>AC generator emf: ε = NBAω sinωt</li>
+                <li><span class="counter">2</span>Slip rings provide AC output (commutator for DC)</li>
+                <li><span class="counter">3</span>Transformer works on mutual induction principle</li>
+                <li><span class="counter">4</span>Voltage ratio: V_s/V_p = N_s/N_p = k (turns ratio)</li>
+                <li><span class="counter">5</span>Current ratio: I_p/I_s = N_s/N_p (ideal, no losses)</li>
+                <li><span class="counter">6</span>Step-up: N_s > N_p → V_s > V_p</li>
+                <li><span class="counter">7</span>Step-down: N_s < N_p → V_s < V_p</li>
+                <li><span class="counter">8</span>Ideal transformer: P_out = P_in, efficiency 100%</li>
+                <li><span class="counter">9</span>Core laminated to minimize eddy current losses</li>
+                <li><span class="counter">10</span>Copper losses: I²R losses in windings</li>
+                <li><span class="counter">11</span>Hysteresis loss due to core magnetization reversal</li>
+                <li><span class="counter">12</span>High voltage transmission reduces I²R line losses</li>
+                <li><span class="counter">13</span>AC generator frequency: f = N/60 (N in rpm, for 2 poles)</li>
+                <li><span class="counter">14</span>Flux leakage reduces transformer efficiency</li>
+                <li><span class="counter">15</span>Transformer efficiency = (P_out/P_in) × 100%</li>
+                <li><span class="counter">16</span>Autotransformer: single winding with tap</li>
+                <li><span class="counter">17</span>Three-phase generators more efficient for power generation</li>
+                <li><span class="counter">18</span>Transformer oil provides insulation and cooling</li>
+                <li><span class="counter">19</span>Rotating magnetic field principle used in alternators</li>
+                <li><span class="counter">20</span>Load matching possible with transformers</li>
             </ul></div>
         </div>
 
     </div>
 
     <footer>
-        Electromagnetic Induction & Alternating Current • Full Summary • Faraday • Lenz • LCR • Resonance • Transformer • JEE/NEET 2025-26
+        Electromagnetic Induction & Alternating Current • 160+ Distinct Points • Faraday • Lenz • LCR • Resonance • Transformer • JEE/NEET 2025-26
     </footer>
 </div>
 
@@ -236,3 +315,4 @@
 </script>
 </body>
 </html>
+
